@@ -1,0 +1,29 @@
+.aquela{
+	width: auto;
+	height: 100px;
+}
+button{
+	background-color: #f19800;
+	border-radius: 4px;
+	color: white;
+	 padding: 16px 32px;
+	 border: none;
+}
+select{
+	size: 100%;
+}
+b{
+	font-variant: small-caps;
+	font-size: 27px;
+	color: #e78b4d;
+}
+.some{
+	padding: 0px;
+}
+.branco{
+	color: white;
+	font-variant: small-caps;
+}
+.letra{
+	font-variant: small-caps;
+}
