@@ -10,7 +10,10 @@
 
 
 		public function index(){
+
+			$this->load->view("common/header");
 			$this->load->view("inicio/index");
+			$this->load->view("common/footer");
 		}
 
 		public function programacao(){
@@ -30,11 +33,15 @@
 		}
 
 		public function submissao(){
-			echo 'Área de submissão';
+			$this->load->view('common/header');
+			$this->load->view('inicio/submissao');
+			$this->load->view('common/footer');
 		}
 
 		public function cadastro(){
+			$this->load->view('common/header');
 			$this->load->view('inicio/cadastro');
+			$this->load->view('common/footer');
 		}
 
 		public function submitCadastro(){

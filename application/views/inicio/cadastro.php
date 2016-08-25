@@ -1,18 +1,5 @@
 
 
-
-    <script>
-        function aparece(ahhhh){
-        if(document.getElementById(ahhhh).style.display== "none"){
-        document.getElementById(ahhhh).style.display = "block";
-        }
-        else {
-        document.getElementById(ahhhh).style.display = "none"
-        }
-    }
-    </script>
-
-<br>
                  <div class="container">
                         <div class="row">
                             <div class="col-lg-12 text-center">
