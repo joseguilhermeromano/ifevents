@@ -1,9 +1,4 @@
 
-     <!-- Header -->
-    <section class="header">            
-            <img class="img-responsive"src="<?php echo base_url('assets/img/semcitec01.jpg');?>" align="center" width="2900px" height="1500px">            
-    </section>
-
 <section id="apresentacao">
     <br>
         <div class="container">

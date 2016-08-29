@@ -4,13 +4,23 @@
         <title>5ª Semana de Ciência e Tecnologia de Guarulhos</title>
         <meta charset="UTF-8">
 
-        <script src="<?php echo base_url('assets/js/jquery.js');?>"></script>    	
+        
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
+        <link href="<?php echo base_url('font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url ('assets/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('assets/css/new.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('assets/css/freelancer.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('assets/css/bootstrap.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('http://fonts.googleapis.com/css?family=Montserrat:400,700'); ?>" rel="stylesheet" type="text/css">
 
     	<!-- assetststrap Core JavaScript -->
     	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-
+        <script src="<?php echo base_url('assets/js/jquery.js');?>"></script>       
     	<!-- Plugin JavaScript -->
-    	<script src="<?php echo site_url('http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js');?>"></script>
+    	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js');?>"></script>
     	<script src="<?php echo base_url('assets/js/classie.js');?>"></script>
     	<script src="<?php echo base_url('assets/js/cbpAnimatedHeader.js');?>"></script> 
 
@@ -21,13 +31,9 @@
     	<!-- Custom Theme JavaScript -->
     	<script src="<?php echo base_url('assets/js/freelancer.js');?>"></script>
 
-        <link href="<?php echo base_url ('assets/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url ('assets/css/new.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url ('assets/css/freelancer.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url ('assets/css/bootstrap.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url ('http://fonts.googleapis.com/css?family=Montserrat:400,700'); ?>" rel="stylesheet" type="text/css">
-        <link href="<?php echo site_url('http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic');?>" rel="stylesheet" type="text/css">
-        <!--<link rel="shortcut icon" <?php echo base_url('href="/favicon.ico"');?> type="image/x-icon">-->
+        
+        
+        <!--<link rel="shortcut icon" <?php //echo base_url('href="/favicon.ico"');?> type="image/x-icon">-->
 
         <img src="<?php echo base_url ('assets/img/favicon.ico');?>" rel="icon" type="image/x-icon">
 
@@ -53,7 +59,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#so">
-                    <span class="sr-only"><a class="navbar-brand" <?php echo anchor('InicioControl', 'SEMCITEC'); ?> </a></span>
+                    <span class="sr-only"><a class="navbar-brand" href=""></a></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -61,7 +67,7 @@
                 
             </div>
 
-
+            <?php echo anchor('InicioControl', 'SEMCITEC');?>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="so">
                 <ul class="nav navbar-nav navbar-right">
@@ -77,6 +83,7 @@
                     <li class="page-scroll">
                         <?php echo anchor('InicioControl/cadastro', 'Cadastro'); ?>                        
                     </li>
+                
                     <li class="page-scroll">
                         <a href="/#page-down">Informações</a>
                     </li>
@@ -89,3 +96,6 @@
         <!-- /.container-fluid -->
     </nav>
 
+ <section class="header">            
+            <img class="img-responsive"src="<?php echo base_url('assets/img/semcitec01.jpg');?>" align="center" width="2900px" height="1500px">            
+    </section>

@@ -26,6 +26,7 @@
                                 <br><br><br><br><br><br><br>
                             </div>
                         </div>
+                      
         <section id="formularioParticipante" style="display: none;">
             <div class="container">
                         <div class="row">

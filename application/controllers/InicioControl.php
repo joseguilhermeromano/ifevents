@@ -6,6 +6,7 @@
 			parent::__construct();
 
 			$this->load->helper('url');
+			$this->load->library('upload');
 		}
 
 
@@ -48,5 +49,9 @@
 			echo '<h1>Calma ainda não está pronto</h1>';
 		}
 
-		
+		public function upload(){
+			$this->load->view('common/header');
+			$this->load->view('inicio/testUpload');
+			$this->load->view('common/footer');
+		}		
 	}
