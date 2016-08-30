@@ -6,7 +6,8 @@
 			parent::__construct();
 
 			$this->load->helper('url');
-			$this->load->library('upload');
+			$this->load->model('SubmitModel');
+			
 		}
 
 
@@ -33,20 +34,23 @@
 			echo 'Área do participante';
 		}
 
-		public function submissao(){
-			$this->load->view('common/header');
-			$this->load->view('inicio/submissao');
-			$this->load->view('common/footer');
-		}
-
 		public function cadastro(){
 			$this->load->view('common/header');
 			$this->load->view('inicio/cadastro');
 			$this->load->view('common/footer');
 		}
 
-		public function submitCadastro(){
-			echo '<h1>Calma ainda não está pronto</h1>';
+		public function submissao(){
+			$this->load->view('common/header');
+			$this->load->view('inicio/submissao');
+			$this->load->view('common/footer');
+		}
+
+
+		public function formSubmit(){
+			$this->load->view('common/header');
+			$this->load->view('inicio/formSubmit');
+			$this->load->view('common/footer');
 		}
 
 		public function upload(){

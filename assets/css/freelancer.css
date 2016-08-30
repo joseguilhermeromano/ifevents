@@ -23,18 +23,48 @@ input[type=password]{
     margin: 8px 0;
     outline: none;
 }
+/*
+select {
+    width:100px;    
+    font-size:14px;
+    margin: 8px 0;    
+    padding:12px 20px;
+    outline: none;            
+}*/
+
+
+.styled-select select {
+   background: transparent;
+   width: 268px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   -webkit-appearance: none;
+}
+
+.styled-select {
+   width: 240px;
+   height: 34px;
+   overflow: hidden;
+   background: url(assets/new_arrow.png) no-repeat right #ddd;
+   border: 1px solid #ccc;
+}
+
+
+
+
+option {
+
+} 
+
 
 body {
     overflow-x: hidden;
 }
 
-option{
-
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    outline: none;
-}
 
 p {
     font-size: 20px;
@@ -70,7 +100,7 @@ p{
 }
 
 .text{
-    color:#95a5a6;;
+    color:#95a5a6;
 }
 
 h3.cor{
