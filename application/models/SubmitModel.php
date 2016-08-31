@@ -9,9 +9,9 @@
 			$this->SubmitDAO->create_table_Submission();
 		}
 
-		//Função faz a verificação e validação dos campos
+		//Função faz a validação dos campos e chama a função cadastrar na model submitDAO
 		public function Verifica(){
-			
+			/*
 			$this->form_validation->set_rules('subm_ra', 'RA', 'trim|required|max_length[7]');
 			$this->form_validation->set_rules('subm_titulo','Título', 'trim|required|max_length[50]|ucwords');		
 			$this->form_validation->set_rules('subm_autor', 'Autor(es)', 'trim|required|max_length[50]|ucwords');
@@ -21,7 +21,7 @@
 			$this->form_validation->set_rules('subm_orienta', 'Orientedor', 'trim|required|max_length[50]|ucwords');
 			$this->form_validation->set_rules('subm_apoio', 'Patrocínio', 'trim|max_length[50]|ucwords');			
 			//$this->form_validation->set_rules('subm_article', 'Artigo', 'trim|required');
-
+			*/
 
 			if($this->form_validation->run() == TRUE){
 				$this->SubmitDAO->Cadastrar();					 		

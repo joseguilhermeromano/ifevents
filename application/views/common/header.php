@@ -64,10 +64,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
+                <a class="navbar-brand">SEMCITEC</a>
             </div>
-
-            <?php echo anchor('InicioControl', 'SEMCITEC');?>
+            
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="so">
                 <ul class="nav navbar-nav navbar-right">

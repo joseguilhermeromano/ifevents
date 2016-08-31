@@ -2,6 +2,9 @@
 
 	class InicioControl extends CI_Controller{
 
+		/*Método construtor faz o carregamento de vários componentes
+		necessários ao funcionamento do sistema*/
+
 		public function __construct(){
 			parent::__construct();
 
@@ -10,7 +13,7 @@
 			
 		}
 
-
+		//Método chama a view principal do sistema (Home)
 		public function index(){
 
 			$this->load->view("common/header");
@@ -18,27 +21,38 @@
 			$this->load->view("common/footer");
 		}
 
+
+
 		public function programacao(){
 			echo 'programação do evento';
 		}
+
 
 		public function gerenciar(){
 			echo 'Área de gerenciamento';
 		}
 
+
 		public function avaliador(){
 			echo 'Área do avaliador';
 		}
+
 
 		public function participante(){
 			echo 'Área do participante';
 		}
 
+		//Método chama a view que contém formulário de cadastro para participantes e avaliadores
 		public function cadastro(){
 			$this->load->view('common/header');
 			$this->load->view('inicio/cadastro');
 			$this->load->view('common/footer');
 		}
+
+
+
+		/*Método chama a view que contém links para documentos
+		com as regras para submissão de artigos*/
 
 		public function submissao(){
 			$this->load->view('common/header');
@@ -47,6 +61,7 @@
 		}
 
 
+		//Método chama a view que contém formulário para upload do artigo
 		public function formSubmit(){
 			$this->load->view('common/header');
 			$this->load->view('inicio/formSubmit');

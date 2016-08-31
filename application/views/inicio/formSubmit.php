@@ -11,29 +11,35 @@
 
                         <div class="error"><?php echo validation_errors(); ?></div>
 
-                <?php $msg1 = $this->session->flashdata('submited');            
-                 if (isset($msg1) && $msg1!=''){?>
+                <?php if($this->session->flashdata('success')==TRUE){ ?>                           
                     <div class="panel panel-heading alert-info" role="alert">
-                        <?php echo $msg1;?>
+                        <?php echo $this->session->flashdata('success');?>
                     </div>
-                <?php }?>
+                    
+                    <?php }else{ ?>
+                        <div class="panel panel-heading alert-info" role="alert">
+                        <?php echo $this->session->flashdata('error');?>
+                    </div>
+                        
+                    <?php } ?>
 
 
             <?php echo form_open_multipart('DataControl/submitCadastro', 'role="form" class="formsignin" enctype="multipart/form-data"'); ?>
                         <div class="row text">
                             <div class="col-lg-8 col-lg-offset-2">
-                       <!-- <div class="row control-group">
+                        <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <input type="file" class="form-control" name="subm_article" placeholder="Escolha o Arquivo" autofocus>
                                 </br>
                             </div>
-                        </div>-->   
+                        </div>   
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                             	<input type="text" class="form-control" name="subm_ra" placeholder="Registro Acadêmico" autofocus>
                                 </br>
                             </div>
                         </div>
+                        <!--
                          <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <input type="text" class="form-control" name="subm_titulo" placeholder="Título" autofocus>
@@ -86,7 +92,7 @@
                                 <input type="text" class="form-control" name="subm_apoio" placeholder="Apoio Financeiro" autofocus>
                                 </br>
                             </div>
-                        </div>
+                        </div>-->
                                                 
                         <br>
                         <div>
@@ -97,6 +103,3 @@
             </div>
             
     </section>
-
-         
-<?php echo "nao funciona";?>
