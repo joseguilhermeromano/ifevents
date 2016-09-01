@@ -13,6 +13,10 @@
 			$this->load->model('SubmitModel');
 		}
 
+		public function index(){
+			$this->SubmitModel->Create();
+		}
+
 
 
 		/*Método chama o função verifica na model submitCadastro*/

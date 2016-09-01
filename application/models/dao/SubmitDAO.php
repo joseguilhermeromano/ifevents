@@ -9,22 +9,24 @@
 
 
 		//Função cria a tabela Submission no banco de dados
+		
+		/*
 		function create_table_Submission(){				
 			$sql = "CREATE TABLE IF NOT EXISTS Submission(
 				       subm_cd int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY
 			          ,subm_ra int(7) NOT NULL
-			        /*  ,subm_titulo varchar(50) NOT NULL	
+			          ,subm_titulo varchar(50) NOT NULL	
 			          ,subm_autor varchar(50) NOT NULL		          			          		          
 			          ,subm_instituicao varchar(50) NOT NULL
 			          ,subm_resumo varchar(100) NOT NULL
 			          ,subm_area varchar(50) NOT NULL			          
 			          ,subm_orienta varchar(50) NOT NULL				          	
-			          ,subm_apoio varchar(50)*/
+			          ,subm_apoio varchar(50)
 			          ,subm_article mediumblob NOT NULL
 			          
 		    	    )";
 			$this->db->query($sql);
-		}
+		}*/
 
 
 		//Função insere dados na tabela Submission do banco de dados
@@ -42,7 +44,7 @@
 			'subm_apoio' => $this->input->post('subm_apoio'),						
 			$subm_article = $_FILES['subm_article']['subm_article']
 			
-           );*/
+           );
 			 	$this->upload->do_upload('Submission', $subm_article);			
 				if($this->db->insert('Submission', $dados)){
 					$this->session->set_flashdata('submited','Artigo enviado para avaliação');				
@@ -52,6 +54,7 @@
 				}	
 				redirect('InicioControl/formSubmit');
 			
-		}	   
+		}*/	   
 
 	}
+}

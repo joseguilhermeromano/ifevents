@@ -6,9 +6,17 @@
 			parent::__construct();
 
 			$this->load->model('dao/SubmitDAO');
-			$this->SubmitDAO->create_table_Submission();
+			$this->load->model('dao/DataBaseDAO');
+			$this->DataBaseDAO->create_table_avaliacao();
+			$this->DataBaseDAO->create_table_avaliador();
+			$this->DataBaseDAO->create_table_participante();			
+			$this->DataBaseDAO->create_table_Submissao();
+			$this->DataBaseDAO->create_table_users();
+
 		}
 
+	
+	
 		//Função faz a validação dos campos e chama a função cadastrar na model submitDAO
 		public function Verifica(){
 			/*
