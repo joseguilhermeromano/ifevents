@@ -1,6 +1,6 @@
 
 
-<section id="formSubmissao" style="display: ;">
+<section id="formSubmissao" style="">
             <div class="container">
                         <div class="row">
                             <div class="col-lg-12 text-center">
