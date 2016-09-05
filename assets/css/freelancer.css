@@ -537,6 +537,7 @@ p.color {
 .portfolio-modal .modal-backdrop {
     display: none;
     opacity: 0;
+}
 
 .alou{
     text-decoration-color: black;

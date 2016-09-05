@@ -82,9 +82,12 @@
                     <li class="page-scroll">
                         <?php echo anchor('InicioControl/cadastro', 'Cadastro'); ?>                        
                     </li>
-                
+                    
                     <li class="page-scroll">
                         <a href="/#page-down">Informações</a>
+                    </li>
+                    <li class="page-scroll">
+                        <?php echo anchor('InicioControl/login', 'Login'); ?>                        
                     </li>
                 </ul>
             </div>
