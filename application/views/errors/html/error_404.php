@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>404 Page Not Found</title>
+<title>Página não encontrada</title>
 <style type="text/css">
 
 ::selection { background-color: #E13300; color: white; }
@@ -57,8 +57,10 @@ p {
 </head>
 <body>
 	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<h1>Ops. :-(</h1><br>
+		<h1>A página solicitada não foi encontrada</h1><br>
+
+		<h1><a href="javascript:history.go(-1)">Voltar</a>|<?php echo anchor('InicioControl', 'Página Inicial');?></h1>
 	</div>
 </body>
 </html>

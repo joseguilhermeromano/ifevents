@@ -1,4 +1,4 @@
-<?php
+<?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
 	class DataControl extends CI_Controller{
 
@@ -7,21 +7,19 @@
 		necessários ao funcionamento do sistema*/
 
 		public function __construct(){
-			parent::__construct();
-
-			$this->load->library('upload');
+			parent::__construct();	
 			$this->load->model('SubmitModel');
 		}
 
 		public function index(){
-			$this->SubmitModel->Create();
+			//
 		}
-
 
 
 		/*Método chama o função verifica na model submitCadastro*/
 
 		public function submitCadastro(){
+			$this->SubmitModel->upload_arquivo();
 			$this->SubmitModel->Verifica();
 
 			$this->load->view('common/header');

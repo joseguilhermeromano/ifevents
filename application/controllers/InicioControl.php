@@ -1,4 +1,4 @@
-<?php
+<?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
 	class InicioControl extends CI_Controller{
 
@@ -73,4 +73,8 @@
 			$this->load->view('inicio/testUpload');
 			$this->load->view('common/footer');
 		}		
+
+		public function error_404(){
+			$this->load->view('errors/html/error_404');
+		}
 	}

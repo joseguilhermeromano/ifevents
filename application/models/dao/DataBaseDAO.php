@@ -1,10 +1,10 @@
-<?php
+<?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
 	class DataBaseDAO extends CI_Model{
 
 		public function __construct(){
 
-			parent::__construct('DataBaseDAO');
+			parent::__construct();
 
 		}
 
@@ -81,21 +81,17 @@
 		//Método cria a tabela submissão
 		public function create_table_submissao(){
 			$sql = "CREATE TABLE IF NOT EXISTS submissao(
-					 	 subm_id     int(10)      NOT NULL  
-					   	,subm_semtec varchar(11)  NOT NULL
-						,subm_autor1 varchar(50)  NOT NULL
-						,subm_autor2 varchar(50)  NOT NULL 
-						,subm_autor3 varchar(50)  NOT NULL 
-						,subm_orient varchar(50)  NOT NULL  
-						,subm_tipo   varchar(10)  NOT NULL 
-						,subm_area   varchar(30)  NOT NULL 
-						,subm_perio  varchar(30)  NOT NULL 
-						,subm_titulo varchar(50)  NOT NULL 
-						,subm_hipot  varchar(500) NOT NULL 
-						,subm_proced varchar(500) NOT NULL 
-						,subm_biblio varchar(200) NOT NULL 
-						,subm_resum  varchar(200) NOT NULL 
-					
+					 	 subm_id          int(10)      NOT NULL  
+					   	,subm_ra 	      varchar(11)  NOT NULL
+						,subm_titulo   	  varchar(50)  NOT NULL
+						,subm_autor 	  varchar(50)  NOT NULL 
+						,subm_instituicao varchar(50)  NOT NULL 
+						,subm_resumo      varchar(50)  NOT NULL  
+						,subm_area        varchar(10)  NOT NULL 
+						,subm_orientador  varchar(30)  NOT NULL 
+						,subm_apoio       varchar(30)  NOT NULL 
+						,subm_artigo      varchar(30)  NOT NULL 
+						
 					)";
 
 			$this->db->query($sql);		
@@ -104,8 +100,8 @@
 
 		//Método cria a tabela users
 		public function create_table_users(){
-			$sql = "CREATE TABLE IF NULL EXISTS users(
-						,user_id  		int(10)      NOT NULL 
+			$sql = "CREATE TABLE IF NOT EXISTS users(
+						 user_id  		int(10)      NOT NULL 
 						,user_cpf 		varchar(15)  NOT NULL
 						,user_rg        varchar(20)  NOT NULL
 						,user_nm        varchar(50)  NOT NULL
@@ -127,9 +123,8 @@
 						,user_eventos 	TEXT(10000)  NOT NULL
 						 
 					)";
+			$this->db->query($sql);		
 
 		}
 
-
-
-	}
+}
