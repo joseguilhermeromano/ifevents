@@ -8,7 +8,7 @@
 
 		public function __construct(){
 			parent::__construct();	
-			$this->load->model('SubmitModel');
+			$this->load->model( 'SubmitModel' );
 		}
 
 		public function index(){
@@ -22,9 +22,23 @@
 			$this->SubmitModel->upload_arquivo();
 			$this->SubmitModel->Verifica();
 
-			$this->load->view('common/header');
-			$this->load->view('inicio/formSubmit');
-			$this->load->view('common/footer');
+			$this->load->view( 'common/header' );
+			$this->load->view( 'inicio/formSubmit' );
+			$this->load->view( 'common/footer' );
+
+		}
+
+		public function sucesso(){
+			$this->load->view( 'common/header' );
+			$this->load->view( 'mensagens/sucesso' );
+			$this->load->view( 'common/footer' );
+
+		}
+
+		public function erros(){
+			$this->load->view( 'common/header' );
+			$this->load->view( 'mensagens/erros' );
+			$this->load->view( 'common/footer' );
 
 		}
 

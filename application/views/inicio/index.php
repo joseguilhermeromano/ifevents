@@ -7,6 +7,8 @@
                     <h2> Apresentação</h2>
                     <hr class="star-primary">
 
+                    
+
                     <p>SEMCITEC é a Semana da Ciência Tecnologia Inovação e Desenvolvimento de Guarulhos, que celebra a ciência e a inovação, com o objetivo de incentivar alunos do ensino superior a buscar, através da ciência e tecnologia, soluções para os problemas do cotidiano, além de dar acesso à população ao conhecimento produzido no município. </p>
 
                     <p>Realizada desde 2012, recebe inscrição de trabalhos na modelidade de pesquisa científica e relato de experiência, segundo eixos temáticos específicos para cada edição. </p>

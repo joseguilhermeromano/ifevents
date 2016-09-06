@@ -3,6 +3,18 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+
+.alert{
+    font-size: 30px;
+    /*width: 80%;*/
+    margin: 15px auto 10px;
+    padding: 0;
+    max-width: 800px;
+    border: 1;
+    /*border-top: solid 5px;*/
+    text-align: center;
+}
+
 input[type=text] {
     width: 100%;
     padding: 12px 20px;

@@ -3,7 +3,7 @@
 	class SubmitDAO extends CI_Model{
 
 		function SubmitDAO(){
-			parent::__construct('SubmitDAO');
+			parent::__construct( 'SubmitDAO' );
 			
 		}
 
@@ -20,19 +20,18 @@
 			$this->subm_orientador  = $orientador;
 			$this->subm_apoio       = $apoio;						
 			$this->subm_artigo      = $artigo;
-			
-           
-			 //$this->subm_article = $arquivo;
-			 	//$this->upload->do_upload('Submission', $subm_article);			
-			 	$confirm = $this->db->insert('submissao', $this);
+			           
+			 	$confirm = $this->db->insert( 'submissao', $this );
+				
 				if($confirm){
-					$this->session->set_flashdata('submited','Artigo enviado para avaliação');		
-					redirect('InicioControl');		
+					$this->session->set_flashdata('success', 'Artigo Enviado Com Sucesso');		
+					redirect('DataControl/sucesso');		
 				}
 				else{
-					$this->session->set_flashdata('notes_unread(database_name, user_name)bmited','Artigo não pode ser enviado');
+					$this->session->set_flashdata('empty', 'Os dados não puderam ser Inseridos.');
+					redirect( 'InicioControl/formSubmit' );
 				}	
-				redirect('InicioControl/formSubmit');
+				
 			
 		} 
 

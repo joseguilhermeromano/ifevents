@@ -89,7 +89,7 @@
 						,subm_resumo      varchar(50)  NOT NULL  
 						,subm_area        varchar(10)  NOT NULL 
 						,subm_orientador  varchar(30)  NOT NULL 
-						,subm_apoio       varchar(30)  NOT NULL 
+						,subm_apoio       varchar(30)  
 						,subm_artigo      varchar(30)  NOT NULL 
 						
 					)";
