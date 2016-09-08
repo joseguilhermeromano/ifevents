@@ -50,6 +50,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'InicioControl';
+$route['participante']='ParticipanteControl/index';
+$route['participante/(:any)']='ParticipanteControl/$1';
 $route['404_override'] = 'InicioControl/error_404';
 $route['translate_uri_dashes'] = FALSE;
 	

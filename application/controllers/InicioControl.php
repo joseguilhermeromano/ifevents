@@ -55,13 +55,6 @@
                     $this->load->view('inicio/login');
                     $this->load->view('common/footer');
                 }
-                
-                //teste 
-                public function teste(){
-                    $this->load->view('common/header_interno');
-                    $this->load->view('participante/index');
-                    $this->load->view('common/footer_interno');
-                }
 
 
 		/*Método chama a view que contém links para documentos
