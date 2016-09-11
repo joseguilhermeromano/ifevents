@@ -21,6 +21,7 @@
 		public function submitCadastro(){
 			$this->SubmitModel->upload_arquivo();
 			$this->SubmitModel->Verifica();
+			$this->load->model('SubmitDAO');
 
 			$this->load->view( 'common/header' );
 			$this->load->view( 'inicio/formSubmit' );
@@ -28,6 +29,8 @@
 
 		}
 
+
+		//Método chama a viu sucesso para exibir mensagem de sucesso
 		public function sucesso(){
 			$this->load->view( 'common/header' );
 			$this->load->view( 'mensagens/sucesso' );
@@ -35,6 +38,8 @@
 
 		}
 
+
+		//Método chama a viu erros para exibir mensagem de erro
 		public function erros(){
 			$this->load->view( 'common/header' );
 			$this->load->view( 'mensagens/erros' );
@@ -42,5 +47,21 @@
 
 		}
 
+		public function VerificaArtigo(){
+			$dados = array(
+				'result' => $this->SubmitDAO->Consulta()
+			);
+						
+			$this->load->view( 'common/header' );
+			$this->load->view( 'inicio/testConsulta', $dados );
+			$this->load->view( 'common/footer' );			
+		}
 
-	}
+
+		/*public function Download(){
+			$data = array(
+				'arq' => $this->SubmitModel->BaixaArtigo()			
+			);
+		$this->load->view( 'inicio/testConsulta', $data );
+		}*/
+}		

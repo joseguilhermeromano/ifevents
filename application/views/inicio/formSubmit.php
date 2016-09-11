@@ -30,46 +30,46 @@
 
                 echo form_fieldset( 'Enviar Artigo');    
                
-                    echo form_label( 'Artigo', 'subm_artigo' );
-                    $data = array( 'name' => 'subm_artigo' );
+                    echo form_label( 'Artigo', 'artigo' );
+                    $data = array( 'name' => 'artigo' );
                     echo form_upload($data);
 
-                    echo form_label( 'RA*', 'subm_ra' );
+                    /*echo form_label( 'RA*', 'subm_ra' );
                     $data = array('name' => 'subm_ra', 'id' => 'subm_ra', 'placeholder' => 'Registro Acadêmico' );
+                    echo form_input($data);*/
+
+                    echo form_label( 'Título*', 'titulo' );
+                    $data = array( 'name' => 'titulo', 'placeholder' => "Título" );
                     echo form_input($data);
 
-                    echo form_label( 'Título*', 'subm_titulo' );
-                    $data = array( 'name' => 'subm_titulo', 'placeholder' => "Título" );
+                    echo form_label( 'Autor*', 'autor' );
+                    $data = array( 'name' => 'autor', 'placeholder' => 'Autor(es)' );
                     echo form_input($data);
 
-                    echo form_label( 'Autor*', 'subm_autor' );
-                    $data = array( 'name' => 'subm_autor', 'placeholder' => 'Autor(es)' );
-                    echo form_input($data);
-
-                    echo form_label( 'Instituição*', 'subm_instituicao' );
-                    $data = array( 'name' => 'subm_instituicao', 'placeholder' => 'Instituicao' );
+                    echo form_label( 'Instituição*', 'instituicao' );
+                    $data = array( 'name' => 'instituicao', 'placeholder' => 'Instituicao' );
                     echo form_input( $data );
 
-                    echo form_label( 'Resumo*', 'subm_resumo' );
-                    $data = array( 'name' => 'subm_resumo', 'placeholder' => 'Resumo' );
+                    echo form_label( 'Resumo*', 'resumo' );
+                    $data = array( 'name' => 'resumo', 'placeholder' => 'Resumo' );
                     echo form_input( $data );
 
-                    echo form_label( 'Área*', 'subm_area' ).'<br>';
+                    echo form_label( 'Área*', 'area' ).'<br>';
                         $opcoes = array(
                             'Ciência, Educação, Inovação'  => 'Ciência, Educação, Inovação',
                             'Práticas Sustentáveis'        => 'Práticas Sustentáveis',
                             'Ciência Alimentando o Brasil' => 'Ciência Alimentando o Brasil',                            
                             );
-                    echo form_dropdown( 'subm_area', $opcoes, 'Selecione uma Área' ).'<br>';
+                    echo form_dropdown( 'area', $opcoes, 'Selecione uma Área' ).'<br>';
                         
                     //echo form_input( $opcoes );    
                     echo '<br>';
-                    echo form_label( 'Orientador*', 'subm_orientador' );
-                    $data = array( 'name' => 'subm_orientador', 'placeholder' => 'Orientador' );
+                    echo form_label( 'Orientador*', 'orientador' );
+                    $data = array( 'name' => 'orientador', 'placeholder' => 'Orientador' );
                     echo form_input( $data );        
 
-                    echo form_label( 'Apoio', 'subm_apoio' );
-                    $data = array( 'name' => 'subm_apoio', 'placeholder' => 'Apoio Financeiro' );
+                    echo form_label( 'Apoio', 'apoio' );
+                    $data = array( 'name' => 'apoio', 'placeholder' => 'Apoio Financeiro' );
                     echo form_input( $data );
 
                     echo '<br><br>'.form_submit("btn_cadastro", "Cadastrar");

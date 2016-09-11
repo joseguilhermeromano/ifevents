@@ -49,19 +49,19 @@
 			$this->load->view('common/footer');
 		}
                 
-                //Método que chama a view do login
-                public function login(){
-                    $this->load->view('common/header');
-                    $this->load->view('inicio/login');
-                    $this->load->view('common/footer');
-                }
+        //Método que chama a view do login
+        public function login(){
+            $this->load->view('common/header');
+            $this->load->view('inicio/login');
+            $this->load->view('common/footer');
+        }
                 
-                //teste 
-                public function teste(){
-                    $this->load->view('common/header_interno');
-                    $this->load->view('participante/index');
-                    $this->load->view('common/footer_interno');
-                }
+        //teste 
+        public function teste(){
+            $this->load->view('common/header_interno');
+            $this->load->view('participante/index');
+            $this->load->view('common/footer_interno');
+        }
 
 
 		/*Método chama a view que contém links para documentos
@@ -81,11 +81,11 @@
 			$this->load->view('common/footer');
 		}
 
-		public function upload(){
+		/*public function upload(){
 			$this->load->view('common/header');
 			$this->load->view('inicio/testUpload');
 			$this->load->view('common/footer');
-		}		
+		}*/		
 
 		public function error_404(){
 			$this->load->view('errors/html/error_404');
