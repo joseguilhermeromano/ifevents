@@ -168,15 +168,6 @@
     color:black;
 }
 
-input,select{
-    width: 100%;
-    margin:10px;
-}
-
-/* FORMATAÇÃO DE FORMULÁRIOS */
-
-
-
 @media(min-width:768px) {
     #wrapper {
         padding-left: 210px;
@@ -203,4 +194,41 @@ input,select{
         position: relative;
         margin-right: 0;
     }
+}
+
+textarea{
+    width: 100%;
+    max-width: 100%;
+}
+label{
+    color: #777777;
+}
+.estilo-input{
+    border-radius: 5px;
+    margin: 10px 10px 10px 0px;
+    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC;
+    outline:none;
+    height: 40px;
+}
+
+.estilo-input:focus {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -webkit-box-shadow: 0px 0px 15px 1px #FFA500;
+    -moz-box-shadow: 0px 0px 15px 1px #FFA500;
+    box-shadow: 0px 0px 5px 0px #FFA500;
+    border:1px solid #FF8C00;
+    outline:none; 
+}
+.button{
+    width: 150px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14pt;
 }

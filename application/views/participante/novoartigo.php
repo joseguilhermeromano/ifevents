@@ -19,65 +19,82 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-        <b><?php echo form_label( 'Enviar Artigo:', 'subm_artigo' ); ?></b>
-        <?php $data = array( 'name' => 'subm_artigo','class' => 'form-control border-input');
-              echo form_upload($data);?>
+        <b><?php echo form_label( 'Título', 'subm_titulo' ); ?></b>
+        <?php $data = array( 'name' => 'subm_titulo', 'placeholder' => "Título", 'class' => 'form-control estilo-input' );
+               echo form_input($data);?>
         </div>
     </div>
     <div class="col-md-6">
-        <b><?php echo form_label( 'RA:', 'subm_ra' ); ?></b><br>
-        <?php   $data = array('name' => 'subm_ra', 'placeholder' => 'Registro Acadêmico');
+        <div class="form-group">
+        <b><?php echo form_label( 'Autor', 'subm_autor' ); ?></b><br>
+        <?php   $data = array( 'name' => 'subm_autor', 'placeholder' => 'Autor(es)', 'class' => 'form-control estilo-input' );
                 echo form_input($data); ?>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <b><?php echo form_label( 'Título:', 'subm_titulo' ); ?></b>
-        <?php $data = array( 'name' => 'subm_titulo', 'placeholder' => "Título" );
-               echo form_input($data);?>
+        <div class="form-group">
+        <b><?php echo form_label( 'Orientador', 'subm_orientador' ); ?></b><br>
+        <?php   $data = array( 'name' => 'subm_orientador', 'placeholder' => 'Orientador', 'class' => 'form-control estilo-input' );
+                    echo form_input( $data );  ?>
+        </div>
     </div>
     <div class="col-md-6">
-        <b><?php echo form_label( 'Autor:', 'subm_autor' ); ?></b><br>
-        <?php   $data = array( 'name' => 'subm_autor', 'placeholder' => 'Autor(es)' );
-                echo form_input($data); ?>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
+        <div class="form-group">
         <b><?php echo form_label( 'Instituição', 'subm_instituicao' ); ?></b>
-        <?php $data = array( 'name' => 'subm_instituicao', 'placeholder' => 'Instituicao' );
+        <?php $data = array( 'name' => 'subm_instituicao', 'placeholder' => 'Instituição','class' => 'form-control estilo-input' );
               echo form_input( $data );?>
-    </div>
-    <div class="col-md-6">
-        <b><?php echo form_label( 'Resumo', 'subm_resumo' ); ?></b><br>
-        <?php   $data = array( 'name' => 'subm_resumo', 'placeholder' => 'Resumo' );
-                    echo form_input( $data ); ?>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
-        <b><?php echo form_label( 'Área', 'subm_area' ).'<br>'; ?></b>
+        <div class="form-group">
+        <b><?php echo form_label( 'Eixo Temático', 'subm_area' ).'<br>'; ?></b>
         <?php $opcoes = array(
                             'Ciência, Educação, Inovação'  => 'Ciência, Educação, Inovação',
                             'Práticas Sustentáveis'        => 'Práticas Sustentáveis',
                             'Ciência Alimentando o Brasil' => 'Ciência Alimentando o Brasil',                            
                             );
-                    echo form_dropdown( 'subm_area', $opcoes, 'Selecione uma Área' ).'<br>';?>
+                    echo form_dropdown( 'subm_area', $opcoes,'',array('class' => 'form-control estilo-input') ).'<br>';?>
+        </div>
     </div>
     <div class="col-md-6">
-        <b><?php echo form_label( 'Orientador', 'subm_orientador' ); ?></b><br>
-        <?php   $data = array( 'name' => 'subm_orientador', 'placeholder' => 'Orientador' );
-                    echo form_input( $data );  ?>
+        <div class="form-group">
+        <b><?php echo form_label( 'Tipo de Trabalho', 'subm_area' ).'<br>'; ?></b>
+        <?php $opcoes = array(
+                            'Pesquisa Científica'  => 'Pesquisa Científica',
+                            'Relato de Experiência'  => 'Relato de Experiência',
+                            );
+                    echo form_dropdown( 'subm_area', $opcoes, 'Selecione uma Área',array('class' => 'form-control estilo-input') ).'<br>';?>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6">
+        <div class="form-group">
         <b><?php echo form_label( 'Apoio', 'subm_apoio' ); ?></b>
-        <?php $data = array( 'name' => 'subm_apoio', 'placeholder' => 'Apoio Financeiro' );
+        <?php $data = array( 'name' => 'subm_apoio', 'placeholder' => 'Apoio Financeiro', 'class' => 'form-control estilo-input');
                     echo form_input( $data );?>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+        <b><?php echo form_label( 'Enviar Artigo:', 'subm_artigo' ); ?></b>
+        <?php $data = array( 'name' => 'subm_artigo','class' => 'form-control estilo-input');
+              echo form_upload($data);?>
+        </div>
     </div>
 </div>
-<?php echo '<br><br>'.form_submit("btn_cadastro", "Cadastrar");
+<div class="row">
+    <div class="col-md-12">
+        <b><?php echo form_label( 'Resumo', 'subm_resumo' ); ?></b><br>
+        <?php   $data = array( 'name' => 'subm_resumo', 'placeholder' => 'Resumo','cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
+                    echo form_textarea( $data ); ?>
+    </div>
+</div>
+<?php echo '<br><center>'.form_submit("btn_cadastro", "Cadastrar",array('class' => 'btn btn-success button'))."</center>";
 
       echo form_fieldset_close();
 
