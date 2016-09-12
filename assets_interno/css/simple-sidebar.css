@@ -36,6 +36,7 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    display:block;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -65,16 +66,21 @@
     position: relative;
     top: 0;
     width: 210px;
-    margin: 0;
+    margin: 0px;
     padding: 0;
     list-style: none;
+    display: block;
+    
 }
 
  .sidebar-nav li {
-    text-indent: 15px;
+    display: block;
+    /*text-indent: 15px;*/
+    padding-left: 30px;
     line-height: 50px;
     direction: ltr;
     text-align: left;
+    border: 0px solid black;
 }
 
  .sidebar-nav li a {
@@ -86,6 +92,7 @@
     color: #4e4a4a;
     font-weight: bold;
     font-size: 12pt;
+    
 }
 
  .sidebar-nav li a:hover {
@@ -100,39 +107,41 @@
    color: green;
 }
 
-.sidebar-nav li.active > a::before{
+.sidebar-nav li.active:before{
     content:"";
     display:inline-block;
     position:absolute;
     border:16px solid black;
     border-color: transparent #CDC9C9 transparent transparent;
-    top:9px;
-    margin-left: 163px;
+    margin-top: 9px;
+/*    top:9px;*/
+    margin-left: 149px;
 }
 
- .sidebar-nav li.active > a::after{
+ .sidebar-nav li.active:after{
     content:"";
     display:inline-block;
     position: absolute;
     border:15px solid white;
     border-color:transparent white transparent transparent;
-    top:9.5px;
-    left: 180.5px;
-    
+/*    top:9.5px;
+    left: 180.5px;*/
+    margin-top: -40px;
+    margin-left: 152px;
 }
 
  .sidebar-nav > .sidebar-brand {
     height: 110px;
-    line-height: 100px;
+    line-height: 120px;
 }
 
  .sidebar-nav > .sidebar-brand a {
     color: #FF8C00;
     font-size: 20pt;
     border-bottom: 1px solid #CDC9C9;
-    width: 180px;
-    height: 85px;
-    margin:10px;
+    width: 140px;
+    height: 95px;
+    margin:0px;
 }
 
  .sidebar-nav > .sidebar-brand a:hover {
@@ -151,17 +160,23 @@
 } 
 
 #menu-toggle {
-    font-size: 16pt;
-    color: black;
+    z-index: 2;
     position:absolute;
-    margin-left: -25px;
-    margin-top: -15px;
+    top:5px;
+    left:5px;
+    font-size: 18pt;
+    color:black;
 }
 
 input,select{
     width: 100%;
     margin:10px;
 }
+
+/* FORMATAÇÃO DE FORMULÁRIOS */
+
+
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 210px;

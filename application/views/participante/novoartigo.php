@@ -18,9 +18,11 @@
 <?php echo form_open_multipart( 'DataControl/submitCadastro', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 <div class="row">
     <div class="col-md-6">
-        <b>Enviar Artigo:</b>
-        <?php $data = array( 'name' => 'subm_artigo' );
+        <div class="form-group">
+        <b><?php echo form_label( 'Enviar Artigo:', 'subm_artigo' ); ?></b>
+        <?php $data = array( 'name' => 'subm_artigo','class' => 'form-control border-input');
               echo form_upload($data);?>
+        </div>
     </div>
     <div class="col-md-6">
         <b><?php echo form_label( 'RA:', 'subm_ra' ); ?></b><br>
