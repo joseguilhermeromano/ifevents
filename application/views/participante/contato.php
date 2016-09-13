@@ -1,8 +1,4 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<h2><span class="glyphicon glyphicon-envelope"></span><b> Contato</b></h2>
+<hr>
+<br>
 

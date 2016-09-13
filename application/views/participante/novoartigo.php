@@ -81,7 +81,7 @@
     </div>
     <div class="col-md-6">
         <div class="form-group">
-        <b><?php echo form_label( 'Enviar Artigo:', 'subm_artigo' ); ?></b>
+        <b><?php echo form_label( 'Escolher Artigo:', 'subm_artigo' ); ?></b>
         <?php $data = array( 'name' => 'subm_artigo','class' => 'form-control estilo-input');
               echo form_upload($data);?>
         </div>
@@ -94,7 +94,7 @@
                     echo form_textarea( $data ); ?>
     </div>
 </div>
-<?php echo '<br><center>'.form_submit("btn_cadastro", "Cadastrar",array('class' => 'btn btn-success button'))."</center>";
+<?php echo '<br><center>'.form_submit("btn_cadastro", "Enviar",array('class' => 'btn btn-success button'))."</center>";
 
       echo form_fieldset_close();
 
