@@ -3,13 +3,18 @@
     <head>
         <title>Parte Interna do Site...</title>
         <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url ('assets_interno/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets_interno/css/simple-sidebar.css');?>" rel="stylesheet">
         
-        <!-- assetststrap Core JavaScript -->
-        <script src="<?php echo base_url('assets_interno/js/bootstrap.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets_interno/js/jquery.min.js');?>"></script>
+        
+       
     </head>
     <body>
  <div id="wrapper">
@@ -53,9 +58,10 @@
         <div id="page-content-wrapper"><!-- Page Content -->
             <div class="container-fluid"><!-- Container-fluid -->
                 <div class="row"><!-- row -->
-                    <div class="col-lg-12"><!-- col-lg-12 -->
-
-                        <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
+                <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
                             <span class="glyphicon glyphicon-remove hidden-xs"></span>
                             <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
-                        </a><!-- /#Botão de exibir/ocultar menu lateral -->
+                            </a><!-- /#Botão de exibir/ocultar menu lateral -->
+                    <div class="col-lg-12"><!-- col-lg-12 -->
+
+                        
