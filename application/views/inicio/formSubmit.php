@@ -29,14 +29,14 @@
                 echo form_open_multipart( 'DataControl/submitCadastro', 'role="form" class="formsignin" enctype="multipart/form-data"' ); 
 
                 echo form_fieldset( 'Enviar Artigo');    
-               
+                
                     echo form_label( 'Artigo', 'artigo' );
                     $data = array( 'name' => 'artigo' );
                     echo form_upload($data);
 
-                    /*echo form_label( 'RA*', 'subm_ra' );
-                    $data = array('name' => 'subm_ra', 'id' => 'subm_ra', 'placeholder' => 'Registro Acadêmico' );
-                    echo form_input($data);*/
+                    echo form_label( 'RA*', 'ra' );
+                    $data = array('name' => 'ra', 'placeholder' => 'Registro Acadêmico' );
+                    echo form_input($data);
 
                     echo form_label( 'Título*', 'titulo' );
                     $data = array( 'name' => 'titulo', 'placeholder' => "Título" );

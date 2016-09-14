@@ -49,6 +49,7 @@
 			$this->load->view('common/footer');
 		}
                 
+
         //Método que chama a view do login
         public function login(){
             $this->load->view('common/header');
@@ -62,6 +63,13 @@
             $this->load->view('participante/index');
             $this->load->view('common/footer_interno');
         }
+
+        //Método que chama a view do login
+        /*public function login(){
+            $this->load->view('common/header');
+            $this->load->view('inicio/login');
+            $this->load->view('common/footer');
+        }*/
 
 
 		/*Método chama a view que contém links para documentos
@@ -90,4 +98,4 @@
 		public function error_404(){
 			$this->load->view('errors/html/error_404');
 		}
-	}
+		}

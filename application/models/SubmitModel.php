@@ -8,6 +8,8 @@
 			$this->load->model('dao/SubmitDAO');
 			$this->load->model('dao/DataBaseDAO');
 			$this->load->model('dao/Teste');
+			$this->load->library('upload');
+
 			
 			$this->DataBaseDAO->create_table_avaliacao();
 			$this->DataBaseDAO->create_table_avaliador();
@@ -20,16 +22,19 @@
 
 		//Método configura propriedades do arquivo e faz o upload 
 		public function upload_arquivo(){
-
-			$config['upload_path'] 	 = 'arquivos/documents';
-			$config['allowed_types'] = 'pdf|doc|docx|txt';
-			$config['max_size']      = '0';
-			$config['encrypt_name']  = 'true';
-			
+				
+			$config['upload_path'] = 'arquivos/documents';
+			$config['allowed_types'] = 'pdf|doc|docx|txt|jpg|png';
+			$config['max_size'] = '0';
+			//$config['encrypt_name'] = TRUE;
 			$this->load->library('upload', $config);
-			if(! $this->upload->do_upload( 'artigo' )){
-				$this->session->set_flashdata( 'subm_artigo', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
-				redirect('DataControl/erros');
+			$this->upload->initialize($config);
+
+			if(!$this->upload->do_upload('artigo')){
+
+
+				/*$this->session->set_flashdata( 'subm_artigo', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
+				redirect('DataControl/erros');*/
 				//exit();
 			}
 			else{
@@ -46,7 +51,7 @@
 		//Função faz a validação dos campos e chama a função cadastrar na model submitDAO
 		public function Verifica(){			
 			
-			//$this->form_validation->set_rules( 'subm_ra', 'RA', 'trim|required|max_length[7]' );
+			$this->form_validation->set_rules( 'ra', 'RA', 'trim|required|max_length[7]' );
 			$this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[50]|ucwords' );		
 			$this->form_validation->set_rules( 'autor', 'Autor(es)', 'trim|required|max_length[50]|ucwords' );
 			$this->form_validation->set_rules( 'instituicao', 'Instituição', 'trim|required|max_length[50]|ucwords' );
@@ -63,7 +68,7 @@
 			}
 			else{
 
-				//$ra 		 = $this->input->post( 'subm_ra' );
+				$ra 		 = $this->input->post( 'ra' );
 				$titulo 	 = $this->input->post( 'titulo' );
 				$autor 		 = $this->input->post( 'autor' );
 				$instituicao = $this->input->post( 'instituicao' );
@@ -73,7 +78,7 @@
 				$apoio 		 = $this->input->post( 'apoio' );
 				$artigo 	 = $this->upload_arquivo();
 
-				$this->SubmitDAO->Cadastrar( $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
+				$this->SubmitDAO->Cadastrar( $ra, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
 				
 				}
 			}	
@@ -84,6 +89,6 @@
 				 $quey = $this->SubmitDAO->DownArtigo();
 
 				// return $query;
-			}*/
+			}*/	
 }										 			
 

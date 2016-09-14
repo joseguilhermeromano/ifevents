@@ -9,6 +9,7 @@
 		public function __construct(){
 			parent::__construct();	
 			$this->load->model( 'SubmitModel' );
+			$this->load->library('upload');
 		}
 
 		public function index(){
@@ -21,7 +22,7 @@
 		public function submitCadastro(){
 			$this->SubmitModel->upload_arquivo();
 			$this->SubmitModel->Verifica();
-			$this->load->model('SubmitDAO');
+			$this->load->model('dao/SubmitDAO');
 
 			$this->load->view( 'common/header' );
 			$this->load->view( 'inicio/formSubmit' );
@@ -47,21 +48,26 @@
 
 		}
 
-		public function VerificaArtigo(){
+
+		public function ConsultaArtigo(){
+			
 			$dados = array(
 				'result' => $this->SubmitDAO->Consulta()
 			);
-						
+			//$this->SubmitDAO->Consulta();
+			
 			$this->load->view( 'common/header' );
 			$this->load->view( 'inicio/testConsulta', $dados );
 			$this->load->view( 'common/footer' );			
 		}
 
 
-		/*public function Download(){
-			$data = array(
+		public function Download(){
+			$this->SubmitDAO->DownArtigo();
+			//$this->SubmitModel->BaixaArtigo();
+			/*$data = array(
 				'arq' => $this->SubmitModel->BaixaArtigo()			
 			);
-		$this->load->view( 'inicio/testConsulta', $data );
-		}*/
+		$this->load->view( 'inicio/testConsulta', $data );*/
+		}
 }		
