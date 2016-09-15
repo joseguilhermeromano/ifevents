@@ -34,6 +34,10 @@
                     $data = array( 'name' => 'artigo' );
                     echo form_upload($data);
 
+                    echo form_label( 'Nome do Arquivo*', 'nome' );
+                    $data = array('name' => 'nome', 'placeholder' => 'Ex: arquivo.pdf');
+                    echo form_input($data);
+
                     echo form_label( 'RA*', 'ra' );
                     $data = array('name' => 'ra', 'placeholder' => 'Registro Acadêmico' );
                     echo form_input($data);

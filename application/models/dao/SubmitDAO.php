@@ -10,9 +10,36 @@
 
 
 		//Função insere dados na tabela Submissao do banco de dados
-		public function Cadastrar($ra, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo){
+		public function Cadastrar($ra, $nome, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo){
+
+          /* // setting the unlimited memory for reading huge pdf
+            ini_set('max_execution_time', -1);
+            // reading a pdf file
+            $file = file_get_contents($artigo);
+            $string_array = str_split($file);
+            // making a byte array from each character
+            $byteArr = array();
+            foreach ($string_array as $key=>$val) {
+            // reading ascii values fo each character and storing in array
+            $byteArr[$key] = ord($val);
+            }*/
+
+           /* //uma string de exemplo
+            $file = $artigo;
+            //criando um array vazio
+            $arq = array();
+
+            //pegando o tamanho da string
+            $total = strlen($file);
+            //fazendo o laco pra percorrer toda string
+            for($i = 0; $i < $total; $i++){
+            //atribuindo cada caractere à uma posiçao diferente
+            //do array
+            $arq[] = $file[$i];
+            }*/
 						            
            	$this->arti_ra     		= $ra;
+            $this->arti_nm          = $nome;
             $this->arti_titul 		= $titulo;
             $this->arti_autor  		= $autor;            
 			$this->arti_inst        = $instituicao;			
@@ -40,68 +67,53 @@
 
 		public function Consulta(){
 
-		
-
-
     		$this->load->helper('download');
-    		$download = $this->db->query('SELECT arti_id, arti_autor, arti_ra, arti_titul, arti_inst, arti_ori, arti_are, arti_subm, arti_res, arti_apoio FROM Artigo');
-    		/*foreach ($download->result() as $itens) {  
-    				header("Content-type: application/pdf");
-					//header('Content-Disposition: attachment; filename='.$itens->arti_subm);
-					header('Pragma: private');
-					header('Cache-control: private, must-revalidate');
-
-
-
-
-
-    			$folder = $itens->arti_subm;
-    			$artigo = $itens->arti_subm;
- 	   			$autor = $itens->arti_autor;
-    			$titulo = $itens->arti_titul;
-    			$instituicao = $itens->arti_inst;
-    			$orientador = $itens->arti_ori;
-    			$area = $itens->arti_are;
-    			$resumo = $itens->arti_res;
-    			$apoio = $itens->arti_apoio;
- 
-    			//$dados = file_get_contents($);
-    			//$arq = fopen($itens->arti_subm, "r");
-    			//$path  = 'arquivo/documents/'.$arquivo;				
-				//$pathDownload = 'Download/'.$path.'/'.$arquivo;
-				//$data[ 'urlDownload' ] = base_url( $pathDownload );		
-
-    			//$arq = file_get_contents($itens->arti_subm);
-    			//$arquivo = $itens->arti_subm;
-    			//$diretorio = $this->uri->segment(2).'/'.$arquivo;//file_get_contents( 'arquivos/documents'.$arquivo );                     	 
-            	//force_download($artigo);
-        	}*/
+    		$download = $this->db->query('SELECT arti_id, arti_autor, arti_ra, arti_nm, arti_titul, arti_inst, arti_ori, arti_are, arti_subm, arti_res, arti_apoio FROM Artigo');
+    		
         	return $download->result();
         	      
-    	}     
+    	}
+
 
 
     	public function DownArtigo(){
     		$this->load->helper('download');
     		$arq = $this->uri->segment(3);
-    		$download = $this->db->query('SELECT arti_subm FROM Artigo WHERE arti_id ='.$arq);
+    		$download = $this->db->query('SELECT arti_subm, arti_nm FROM Artigo WHERE arti_id ='.$arq);
     		header("Content-type: application/pdf");
     		header('Content-Transfer-Encoding: binary');
 
-    		foreach ($download->result() as $itens) {    
+    		/*foreach ($download->result() as $itens) {    
+
+                $result = $download->result();
+                
+                
+                // oppening other pdf file for writing the byte array
+                $fp = fopen($itens->arti_subm, 'wb+');
+                while(!empty($itens->arti_subm)) {
+                // reading the first element of the array and packing it through pack function again
+                $byte = array_shift($itens->arti_subm);
+                fwrite($fp, pack('c', $byte));
+                }
+                // closing the file handler
+                fclose($fp);                
+
 
     			//header("Content-type: application/pdf");
-    			header('Content-Disposition: attachment; filename='.$itens->arti_subm);	
+                header("Content-type: application/pdf");
+                //header('Content-Transfer-Encoding: binary');
+    			header('Content-Disposition: attachment; filename='.$itens->arti_nm);	
     			header('Pragma: private');
-				header('Cache-control: private, must-revalidate');	    		
+				header('Cache-control: private, must-revalidate');	
+
     			
     			//$diretorio = file_get_contents($itens->arti_subm);         
-            	$arquivo = $itens->arti_subm;  
-
-            	force_download($arquivo, $download->result());
+            	$artigo = $itens->arti_nm;  
+                $arquivo = $fp;
+            	force_download($artigo, $arquivo);
         	//return $download->result();      
     		}
-    	}
+    	}*/
 
 }		
 

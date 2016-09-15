@@ -13,7 +13,7 @@
 
  				  <strong>Área:</strong>        <?php echo $itens->arti_are."<br>";?>
   			   
-          <strong>Artigo:</strong>      <?php  echo anchor('DataControl/Download/'.$itens->arti_id, $itens->arti_subm);?><br>
+          <strong>Artigo:</strong>      <?php  echo anchor('DataControl/Download/'.$itens->arti_id, $itens->arti_nm);?><br>
             				
           <strong>Resumo:</strong>      <?php echo $itens->arti_res."<br>";?> 				
   			  			                                

@@ -23,18 +23,17 @@
 		//Método configura propriedades do arquivo e faz o upload 
 		public function upload_arquivo(){
 				
-			$config['upload_path'] = 'arquivos/documents';
+			$config['upload_path'] = 'upload';
 			$config['allowed_types'] = 'pdf|doc|docx|txt|jpg|png';
 			$config['max_size'] = '0';
 			//$config['encrypt_name'] = TRUE;
+			//$artigo = $_FILE["artigo"]["name"];
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
-
 			if(!$this->upload->do_upload('artigo')){
 
-
-				/*$this->session->set_flashdata( 'subm_artigo', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
-				redirect('DataControl/erros');*/
+				$this->session->set_flashdata( 'subm_artigo', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
+				redirect('DataControl/erros');
 				//exit();
 			}
 			else{
@@ -52,6 +51,7 @@
 		public function Verifica(){			
 			
 			$this->form_validation->set_rules( 'ra', 'RA', 'trim|required|max_length[7]' );
+			$this->form_validation->set_rules( 'nome', 'Nome do arquivo', 'trim|required|max_length[70]' );
 			$this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[50]|ucwords' );		
 			$this->form_validation->set_rules( 'autor', 'Autor(es)', 'trim|required|max_length[50]|ucwords' );
 			$this->form_validation->set_rules( 'instituicao', 'Instituição', 'trim|required|max_length[50]|ucwords' );
@@ -69,6 +69,7 @@
 			else{
 
 				$ra 		 = $this->input->post( 'ra' );
+				$nome        = $this->input->post( 'nome' );
 				$titulo 	 = $this->input->post( 'titulo' );
 				$autor 		 = $this->input->post( 'autor' );
 				$instituicao = $this->input->post( 'instituicao' );
@@ -78,7 +79,7 @@
 				$apoio 		 = $this->input->post( 'apoio' );
 				$artigo 	 = $this->upload_arquivo();
 
-				$this->SubmitDAO->Cadastrar( $ra, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
+				$this->SubmitDAO->Cadastrar( $ra, $nome, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
 				
 				}
 			}	

@@ -78,7 +78,7 @@
                         <a href="/">Histórico</a>
                     </li>*/ ?>
                     <li class="page-scroll">
-                        <?php echo anchor('DataControl/submitCadastro', 'Submissão'); ?>                        
+                        <?php echo anchor('InicioControl/submissao', 'Submissão'); ?>                        
                     </li>
                     <li class="page-scroll">
                         <?php echo anchor('InicioControl/cadastro', 'Cadastro'); ?>                        
