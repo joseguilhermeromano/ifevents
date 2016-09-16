@@ -169,7 +169,7 @@
     color:black;
 }
 
-@media(min-width:768px) {
+@media(min-width:800px) {
     #wrapper {
         padding-left: 210px;
     }
@@ -238,13 +238,10 @@ label{
 
 /* FORMATAÇÃO POST IT */
  
-
-
-
  .postit {
   line-height: 1;
   text-align:center;     
-  width: 125px; 
+  width: 165px; 
   margin: 10px 10px 10px 20px;    
   min-height:100px;
   max-height:100px;
@@ -355,4 +352,42 @@ label{
    font-family: 'Playball'; 
    font-size:10pt;
    margin-top: 5px;
+}
+
+/*FORMATAÇÃO POSTIT PARA TELAS DE DISPOSITIVOS MÓVEIS*/
+@media(max-width:400px) {
+    .postit{
+        width: 110px;
+    }
+    .postit:after{
+        width: 105px;
+    }
+}
+
+/*FORMATAÇÃO DE TABELAS*/
+#tabela1 thead{
+    background-color: #4F4F4F;
+    color: white;
+}
+#tabela1 > thead > tr > th{
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid #4F4F4F; 
+    border-top: 1px solid #4F4F4F; 
+}
+
+#tabela1 > tbody > tr.primeira-cor{
+    background-color: white; 
+}
+
+#tabela1 > tbody > tr.segunda-cor{
+    background-color: #E8E8E8; 
+}
+
+#tabela1 > tbody > tr:hover{
+    background-color: #F0FFF0; 
+}
+
+#tabela1 > tbody > tr > td{
+    border: 1px solid #CFCFCF; 
 }
