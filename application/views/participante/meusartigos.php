@@ -1,46 +1,52 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Minhas Submissões</b></h2>
+<h2><span class="glyphicon glyphicon-list"></span><b> Meus Artigos</b></h2>
 <hr>
 <br>
 <div class="row">
-<div class="col-sm-5">
-    
-    <div class="input-group h2">
-        <input name="codigo" class="form-control" id="search" type="text" placeholder="Buscar por Título">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="submit">Buscar</button>
-        </span>
+    <div class="col-sm-6">
+        <a class="btn btn-default visible-xs"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a><br>
     </div>
 </div>
-<div class="col-sm-7">
-    <a href="#" class="btn btn-success pull-right h2"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a>
-</div>
-</div>
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+       <div class="input-group">
+         <span class="input-group-btn">
+             <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+         </span>
+         <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
+       </div><!-- /input-group -->
+     </div><!-- /.col-lg-6 -->
+     <div class="col-md-6 col-sm-6">
+         <a class="btn btn-default hidden-xs" href='<?php echo site_url('/participante/novoartigo'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a>
+    </div>
+</div><!-- /row -->
 <br><br>
 <div class="table-responsive"><!-- TABELA-->
     <table class="table ls-table" id="tabela1">
         <thead>
             <tr>
-                    <th class="txt-center"><input type="checkbox"></th>
+                    
                     <th>Título</th>
-                    <th>Campanha</th>
-                    <th>Status</th>
-                    <th>Data de envio</th>
+                    <th><center>Status</center></th>
+                    <th><center>Edição</center></th>
+                    <th><center>Exclusão</center></th>
             </tr>
         </thead>
         <tbody>
             <tr class="primeira-cor">
-                    <td class="txt-center"><input type="checkbox"></td>
-                    <td><a href="" title="">Mensagem Teste Locastyle</a></td>
-                    <td class="">Campanha</td>
-                    <td>Enviada</td>
-                    <td class="">21/09/2013 as 20:00 PM</td>
+                    
+                    <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
+                    <td class="text-center">Submetido</td>
+                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
+                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                    
             </tr>
             <tr  class="segunda-cor">
-                    <td class="txt-center"><input type="checkbox"></td>
-                    <td><a href="" title="">Mensagem Teste Locastyle</a></td>
-                    <td class="">Campanha</td>
-                    <td>Enviada</td>
-                    <td class="">21/09/2013 as 20:00 PM</td>
+                    
+                    <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
+                    <td class="text-center">Submetido</td>
+                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
+                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                    
             </tr>
         </tbody>
     </table>

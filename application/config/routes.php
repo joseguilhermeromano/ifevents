@@ -54,6 +54,8 @@ $route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
 $route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
 $route[ 'participante' ]           = 'ParticipanteControl/index';
 $route[ 'participante/(:any)' ]    = 'ParticipanteControl/$1';
+$route[ 'organizador' ]           = 'OrganizadorControl/index';
+$route[ 'organizador/(:any)' ]    = 'OrganizadorControl/$1';
 $route[ '404_override' ]           = 'InicioControl/error_404';
 $route[ 'translate_uri_dashes' ]   = FALSE;
 	

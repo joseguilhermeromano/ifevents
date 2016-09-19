@@ -391,3 +391,34 @@ label{
 #tabela1 > tbody > tr > td{
     border: 1px solid #CFCFCF; 
 }
+
+.estilo-botao-edicao{
+    color: green;
+    font-size: 14pt;
+}
+
+.estilo-botao-exclusao{
+    color: red;
+    font-size: 14pt;
+}
+
+.estilo-botao-busca{
+    border-radius: 5px;
+    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC;
+    outline:none;
+}
+
+.estilo-botao-busca:focus {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -webkit-box-shadow: 0px 0px 15px 1px #FFA500;
+    -moz-box-shadow: 0px 0px 15px 1px #FFA500;
+    box-shadow: 0px 0px 5px 0px #FFA500;
+    border:1px solid #FF8C00;
+    outline:none; 
+}
