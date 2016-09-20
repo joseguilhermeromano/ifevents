@@ -58,14 +58,13 @@
                         force_download($file, NULL);
                     }
                 }
-                else
+                else{
                     $this->session->set_flashdata('NotDown', 'Esse arquivo não exite!!!');
                     redirect('DataControl/erros');
-            
+                }
     		}
-    	}
+}    	
 
-//}		
 
 
 

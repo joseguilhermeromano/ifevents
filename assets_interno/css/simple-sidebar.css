@@ -3,6 +3,7 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+@import 'https://fonts.googleapis.com/css?family=Playball';
 
  body {
     overflow-x: hidden;
@@ -168,7 +169,7 @@
     color:black;
 }
 
-@media(min-width:768px) {
+@media(min-width:800px) {
     #wrapper {
         padding-left: 210px;
     }
@@ -237,26 +238,17 @@ label{
 
 /* FORMATAÇÃO POST IT */
  
-@font-face {
-
-    font-family: 'bastardilla';
-    src: url('./fonts/bastardilla-FFP.ttf') format("truetype");
-
-}
-
  .postit {
   line-height: 1;
   text-align:center;     
-  width: 150px;    
-  margin: 25px;    
-  min-height:150px;
-  max-height:150px;
-  padding-top:0px;
+  width: 165px; 
+  margin: 10px 10px 10px 20px;    
+  min-height:100px;
+  max-height:100px;
+  padding-top: 0;
   position:relative;   
   border:1px solid #E8E8E8;  
-  border-top:60px solid #fdfd86;
-  font-family:'bastardilla';    
-  font-size:22px;      
+  border-top:60px solid #fdfd86;      
   border-bottom-right-radius: 60px 5px;
   display:inline-block;    
    background: #ffff88; /* Old browsers */
@@ -274,7 +266,7 @@ label{
   position:absolute;
   z-index:-1;
   right:-0px; bottom:20px;
-  width:145px;
+  width:120px;
   height: 25px;
   background: rgba(0, 0, 0, 0.2);
   box-shadow:2px 15px 5px rgba(0, 0, 0, 0.40);
@@ -288,22 +280,22 @@ label{
 .pin {
   background-color: #aaa;
   display: block;
-  height: 32px;
+  height: 16px;
   width: 2px;
   position: absolute;
   left: 50%;
-  top: -70px;
+  top: -65px;
   z-index: 1;
 }
 
 .pin:after {
-  background-color: #A31;
+  background-color: #32CD32;
   background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1),
               inset 3px 3px 3px hsla(0,0%,100%,.2),
               inset -3px -3px 3px hsla(0,0%,0%,.2),
-              23px 20px 3px hsla(0,0%,0%,.15);
+              18px 8px 3px hsla(0,0%,0%,.15);
   content: '';
   height: 12px;
   left: -5px;
@@ -317,11 +309,11 @@ label{
   box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
   content: '';
 
-  height: 24px;
+  height: 18px;
   width: 2px;
   left: 0;
   position: absolute;
-  top: 8px;
+  top: -2px;
 
   transform: rotate(57.5deg);
   -moz-transform: rotate(57.5deg);
@@ -334,4 +326,99 @@ label{
   -webkit-transform-origin: 50% 100%;
   -ms-transform-origin: 50% 100%;
   -o-transform-origin: 50% 100%;
+}
+
+.postit-conteudo{
+    top: -45px;
+    position:absolute;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+/*    background-color: #000;*/
+        
+}
+
+.postit-data{
+  font-family: 'Playball';   
+  font-size:24pt;
+}
+
+.postit-mes-ano{
+   font-family: 'Playball'; 
+   font-size:14pt;
+}
+
+.postit-detalhes{
+   font-family: 'Playball'; 
+   font-size:10pt;
+   margin-top: 5px;
+}
+
+/*FORMATAÇÃO POSTIT PARA TELAS DE DISPOSITIVOS MÓVEIS*/
+@media(max-width:400px) {
+    .postit{
+        width: 110px;
+    }
+    .postit:after{
+        width: 105px;
+    }
+}
+
+/*FORMATAÇÃO DE TABELAS*/
+#tabela1 thead{
+    background-color: #4F4F4F;
+    color: white;
+}
+#tabela1 > thead > tr > th{
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid #4F4F4F; 
+    border-top: 1px solid #4F4F4F; 
+}
+
+#tabela1 > tbody > tr.primeira-cor{
+    background-color: white; 
+}
+
+#tabela1 > tbody > tr.segunda-cor{
+    background-color: #E8E8E8; 
+}
+
+#tabela1 > tbody > tr:hover{
+    background-color: #F0FFF0; 
+}
+
+#tabela1 > tbody > tr > td{
+    border: 1px solid #CFCFCF; 
+}
+
+.estilo-botao-edicao{
+    color: green;
+    font-size: 14pt;
+}
+
+.estilo-botao-exclusao{
+    color: red;
+    font-size: 14pt;
+}
+
+.estilo-botao-busca{
+    border-radius: 5px;
+    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC;
+    outline:none;
+}
+
+.estilo-botao-busca:focus {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -webkit-box-shadow: 0px 0px 15px 1px #FFA500;
+    -moz-box-shadow: 0px 0px 15px 1px #FFA500;
+    box-shadow: 0px 0px 5px 0px #FFA500;
+    border:1px solid #FF8C00;
+    outline:none; 
 }
