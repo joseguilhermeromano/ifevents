@@ -26,17 +26,13 @@
 
 
             <?php 
-                echo form_open_multipart( 'DataControl/submitCadastro', 'role="form" class="formsignin" enctype="multipart/form-data"' ); 
+                echo form_open_multipart( 'DataControl/submitCadastro', 'role="form" class="formsignin"' ); 
 
                 echo form_fieldset( 'Enviar Artigo');    
                 
-                    echo form_label( 'Artigo', 'artigo' );
-                    $data = array( 'name' => 'artigo' );
-                    echo form_upload($data);
-
-                    echo form_label( 'Nome do Arquivo*', 'nome' );
-                    $data = array('name' => 'nome', 'placeholder' => 'Ex: arquivo.pdf');
-                    echo form_input($data);
+                    echo form_label( 'Artigo', 'userfile' );
+                    $data = array( 'name' => 'userfile' );
+                    echo form_upload($data);                    
 
                     echo form_label( 'RA*', 'ra' );
                     $data = array('name' => 'ra', 'placeholder' => 'Registro Acadêmico' );
@@ -66,7 +62,6 @@
                             );
                     echo form_dropdown( 'area', $opcoes, 'Selecione uma Área' ).'<br>';
                         
-                    //echo form_input( $opcoes );    
                     echo '<br>';
                     echo form_label( 'Orientador*', 'orientador' );
                     $data = array( 'name' => 'orientador', 'placeholder' => 'Orientador' );

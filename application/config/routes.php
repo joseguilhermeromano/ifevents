@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route[ 'default_controller' ]     = 'InicioControl';
+$route[ 'consulta' ]               = 'DataControl/ConsultaArtigo';
 $route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
 $route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
 $route[ 'participante' ]           = 'ParticipanteControl/index';

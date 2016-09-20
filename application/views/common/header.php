@@ -3,25 +3,21 @@
     <head>
         <title>5ª Semana de Ciência e Tecnologia de Guarulhos</title>
         <meta charset="UTF-8">
-
-        
-        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+                
         
         <link href="<?php echo base_url('font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/css/new.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/css/freelancer.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/css/bootstrap.css');?>" rel="stylesheet">
-        <link href="<?php echo base_url ('http://fonts.googleapis.com/css?family=Montserrat:400,700'); ?>" rel="stylesheet" type="text/css">
+       
 
     	<!-- assetststrap Core JavaScript -->
     	<script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.js');?>"></script>   
         
     	<!-- Plugin JavaScript -->
-    	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js');?>"></script>
+
     	<script src="<?php echo base_url('assets/js/classie.js');?>"></script>
     	<script src="<?php echo base_url('assets/js/cbpAnimatedHeader.js');?>"></script> 
 
@@ -31,10 +27,6 @@
 
     	<!-- Custom Theme JavaScript -->
     	<script src="<?php echo base_url('assets/js/freelancer.js');?>"></script>
-
-        
-        
-        <!--<link rel="shortcut icon" <?php //echo base_url('href="/favicon.ico"');?> type="image/x-icon">-->
 
         <img src="<?php echo base_url ('assets/img/favicon.ico');?>" rel="icon" type="image/x-icon">
 
