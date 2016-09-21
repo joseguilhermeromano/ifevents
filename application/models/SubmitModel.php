@@ -23,7 +23,7 @@
 		//Método configura propriedades do arquivo e faz o upload 
 		public function upload_arquivo(){
 				
-			$config['upload_path'] = 'upload';
+			$config['upload_path'] = 'arquivos';
 			$config['allowed_types'] = 'pdf|doc|docx|txt|jpg|rar';
 			$config['max_size'] = '2048';			
 
@@ -32,7 +32,7 @@
 			if(!$this->upload->do_upload()){
 
 				$this->session->set_flashdata( 'subm_artigo', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
-				redirect('ParticipanteControl/novoartigo');
+				redirect('participante/novoartigo');
 				
 			}
 			else{
