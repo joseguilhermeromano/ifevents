@@ -32,7 +32,11 @@
                 
                     echo form_label( 'Artigo', 'userfile' );
                     $data = array( 'name' => 'userfile' );
-                    echo form_upload($data);                    
+                    echo form_upload($data); 
+
+                    /*echo form_label( 'Artigo doc', 'userfile' );
+                    $data = array( 'name' => 'userfile' );
+                    echo form_upload($data);*/                   
 
                     echo form_label( 'RA*', 'ra' );
                     $data = array('name' => 'ra', 'placeholder' => 'Registro Acadêmico' );

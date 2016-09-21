@@ -25,14 +25,14 @@
 				
 			$config['upload_path'] = 'upload';
 			$config['allowed_types'] = 'pdf|doc|docx|txt|jpg|rar';
-			$config['max_size'] = '0';			
+			$config['max_size'] = '2048';			
 
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
 			if(!$this->upload->do_upload()){
 
 				$this->session->set_flashdata( 'subm_artigo', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
-				redirect('DataControl/erros');
+				redirect('ParticipanteControl/novoartigo');
 				
 			}
 			else{
@@ -59,7 +59,7 @@
 			
 			if( $this->form_validation->run() == FALSE ){
 				$this->session->set_flashdata('empty', 'Por Favor Preencha Todos Os Campos Marcados Com *');
-				redirect( 'InicioControl/formSubmit' );
+				redirect( 'ParticipanteControl/novoartigo' );
 				
 			}
 			else{
@@ -73,7 +73,7 @@
 				$area 		 = $this->input->post( 'area' );
 				$orientador  = $this->input->post( 'orientador' );
 				$apoio 		 = $this->input->post( 'apoio' );
-				$artigo 	 = $this->upload_arquivo();
+				$artigo 	 = $this->upload_arquivo($data);
 
 				$this->SubmitDAO->Cadastrar( $ra, $nome, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
 				
