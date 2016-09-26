@@ -53,10 +53,10 @@
     		
                 if($download->num_rows() > 0){
                     $row  = $download->row();
-                    $file = FCPATH . 'upload/'. $row->arti_subm;
-                    if(file_exists($file)){
-                        force_download($file, NULL);
-                    }
+                    header("Content-type: application/pdf");
+                    
+                      echo $row->arti_subm;  
+
                 }
                 else{
                     $this->session->set_flashdata('NotDown', 'Esse arquivo não exite!!!');

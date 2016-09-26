@@ -20,7 +20,7 @@
 		/*Método chama o função verifica na model submitCadastro*/
 
 		public function submitCadastro(){
-			$this->SubmitModel->upload_arquivo();
+//			$this->SubmitModel->upload_arquivo();
 			$this->SubmitModel->Verifica();
 			$this->load->model('dao/SubmitDAO');
 

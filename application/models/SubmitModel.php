@@ -8,8 +8,7 @@
 			$this->load->model('dao/SubmitDAO');
 			$this->load->model('dao/DataBaseDAO');
 			$this->load->model('dao/Teste');
-			$this->load->library('upload');
-
+                        $this->load->helper('file');
 			
 			$this->DataBaseDAO->create_table_avaliacao();
 			$this->DataBaseDAO->create_table_avaliador();
@@ -23,9 +22,9 @@
 		//Método configura propriedades do arquivo e faz o upload 
 		public function upload_arquivo(){
 				
-			$config['upload_path'] = 'arquivos';
+			$config['upload_path'] = 'uploads_temp';
 			$config['allowed_types'] = 'pdf|doc|docx|txt|jpg|rar';
-			$config['max_size'] = '2048';			
+			$config['max_size'] = '4000';			
 
 			$this->load->library('upload', $config);
 			$this->upload->initialize($config);
@@ -38,7 +37,10 @@
 			else{
 				
 				$data  = array('upload_data' => $this->upload->data());
-				return $data['upload_data']['file_name'];	
+				$file=read_file($data['upload_data']['full_path']);
+                                 
+                                unlink($data['upload_data']['full_path']);
+                                return $file;
 								
 			}
 		}
@@ -65,7 +67,8 @@
 			else{
 
 				$ra 		 = $this->input->post( 'ra' );
-				$nome        = $_FILES['userfile']['name'];
+//				$nome        = $_FILES['userfile']['name'];
+                                $nome            = "teste";
 				$titulo 	 = $this->input->post( 'titulo' );
 				$autor 		 = $this->input->post( 'autor' );
 				$instituicao = $this->input->post( 'instituicao' );
@@ -73,7 +76,7 @@
 				$area 		 = $this->input->post( 'area' );
 				$orientador  = $this->input->post( 'orientador' );
 				$apoio 		 = $this->input->post( 'apoio' );
-				$artigo 	 = $this->upload_arquivo($data);
+				$artigo 	 = $this->upload_arquivo();
 
 				$this->SubmitDAO->Cadastrar( $ra, $nome, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
 				
