@@ -17,6 +17,12 @@
                 $this->load->view("common/footer_interno");
             }
             
+            public function submissoes(){
+                $this->load->view("common/header_interno");
+                $this->load->view("organizador/submissoes");
+                $this->load->view("common/footer_interno");
+            }
+            
             public function avaliadores(){
                 $this->load->view("common/header_interno");
                 $this->load->view("organizador/avaliadores");

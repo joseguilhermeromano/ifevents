@@ -15,7 +15,7 @@
          <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
        </div><!-- /input-group -->
      </div><!-- /.col-lg-6 -->
-     <div class="col-md-6 col-sm-6">
+    <div class="col-md-6 col-sm-6">
          <a class="btn btn-default hidden-xs" href='<?php echo site_url('/participante/novoartigo'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a>
     </div>
 </div><!-- /row -->

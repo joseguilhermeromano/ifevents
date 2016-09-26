@@ -79,6 +79,12 @@
                 <li class="<?php if($paginacorrente == 'meuperfil') {echo 'active';} ?>">
                     <a href="<?php echo base_url("organizador/meuperfil");?>"><span class="glyphicon glyphicon-user"></span>  MEU PERFIL</a>
                 </li>
+                <li class="<?php if($paginacorrente == 'submissoes') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/submissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES</a>
+                </li>
+                <li class="<?php if($paginacorrente == 'conferencias') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/conferencias");?>"><span class="glyphicon glyphicon-list"></span>  CONFERÊNCIAS</a>
+                </li>
                 <li class="">
                     <a href="#"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
