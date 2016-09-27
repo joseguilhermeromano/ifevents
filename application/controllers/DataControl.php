@@ -21,7 +21,6 @@
 
 		public function submitCadastro(){
 			$this->SubmitModel->upload_arquivo();
-			//$this->SubmitModel->Verifica();
 			$this->load->model('dao/SubmitDAO');
 
             $this->load->view("common/header_interno");

@@ -8,8 +8,7 @@
 			$this->load->model('dao/SubmitDAO');
 			$this->load->model('dao/DataBaseDAO');
 			$this->load->model('dao/Teste');
-			$this->load->library('upload');
-
+                        $this->load->helper('file');
 			
 			$this->DataBaseDAO->create_table_avaliacao();
 			$this->DataBaseDAO->create_table_avaliador();
@@ -21,7 +20,7 @@
 
 
 		//Método configura propriedades do arquivo e faz o upload 
-		public function upload_arquivo(){			
+		public function upload_arquivo(){
 			
 			///$cont = count($_FILES['userfile']['name']);			
 			$config['upload_path'] = 'uploads_temp';
@@ -35,7 +34,6 @@
 					$_FILES['userfile']['name'] = $value['name'][$i];
 					$_FILES['userfile']['type'] = $value['type'][$i];
 					$_FILES['userfile']['size'] = $value['size'][$i];
-
 			*/		
 				
 					$this->load->library('upload', $config);

@@ -53,12 +53,12 @@
     		
                 if($download->num_rows() > 0){
                     $row  = $download->row();
+
                     $nome = $row->arti_nm;
                    
                     header("Content-type: application/pdf");
                     header('Content-Disposition: attachment; filename="'.$nome.'"');
-                    echo $row->arti_subm;
-
+                    echo $row->arti_subm;                   
                 }
                 else{
                     $this->session->set_flashdata('NotDown', 'Esse arquivo não exite!!!');
