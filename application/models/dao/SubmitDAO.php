@@ -48,7 +48,7 @@
         //Método realiza consulta e faz download
     	public function DownArtigo(){
     		$this->load->helper('download');
-            $arq = $this->uri->segment(3);                
+                $arq = $this->uri->segment(3);                
     		$download = $this->db->query('SELECT arti_subm, arti_nm FROM Artigo WHERE arti_id ='.$arq);
     		
                 if($download->num_rows() > 0){

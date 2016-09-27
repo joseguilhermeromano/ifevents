@@ -24,7 +24,6 @@
 			
 			///$cont = count($_FILES['userfile']['name']);			
 			$config['upload_path'] = 'uploads_temp';
-			$config['upload_path'] 	 = 'upload';
 			$config['allowed_types'] = 'pdf|docx';
 			$config['max_size']      = '2048';
 			
