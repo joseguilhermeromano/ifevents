@@ -84,18 +84,27 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
+        <b><?php //echo form_label( 'Escolher Artigo DOCX:', 'userfile' ); ?></b>
+        <?php //$data = array( 'name' => 'userfile[]','class' => 'form-control estilo-input');
+              //echo form_upload($data);?>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="form-group">
+        <b><?php echo form_label( 'Escolher Artigo PDF:', 'userfile' ); ?></b>
+        <?php $data = array( 'name' => 'userfile','class' => 'form-control estilo-input');
+              echo form_upload($data);?>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
         <b><?php echo form_label( 'Apoio', 'apoio' ); ?></b>
         <?php $data = array( 'name' => 'apoio', 'placeholder' => 'Apoio Financeiro', 'class' => 'form-control estilo-input');
                     echo form_input( $data );?>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group">
-        <b><?php echo form_label( 'Escolher Artigo:', 'userfile' ); ?></b>
-        <?php $data = array( 'name' => 'userfile','class' => 'form-control estilo-input');
-              echo form_upload($data);?>
-        </div>
-    </div>
+
 </div>
 <div class="row">
     <div class="col-md-12">

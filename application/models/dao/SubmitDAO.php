@@ -22,17 +22,17 @@
 			$this->arti_ori         = $orientador;
 			$this->arti_apoio       = $apoio;						
 			$this->arti_subm        = $artigo;
+            //$this->arti_subm_docx
 		           
 			 	$confirm = $this->db->insert('Artigo', $this);
 				
-				if($confirm){
-                    echo $total;    
+				if($confirm){  
 					$this->session->set_flashdata('success', 'Artigo Enviado Com Sucesso');		
 					redirect('DataControl/sucesso');		
 				}
 				else{
 					$this->session->set_flashdata('empty', 'Os dados não puderam ser Inseridos.');
-					redirect( 'InicioControl/formSubmit' );
+					redirect( 'participanteControl/novoarquivo' );
 				}		
 		} 
 
@@ -49,14 +49,16 @@
     	public function DownArtigo(){
     		$this->load->helper('download');
             $arq = $this->uri->segment(3);                
-    		$download = $this->db->query('SELECT arti_subm FROM Artigo WHERE arti_id ='.$arq);
+    		$download = $this->db->query('SELECT arti_subm, arti_nm FROM Artigo WHERE arti_id ='.$arq);
     		
                 if($download->num_rows() > 0){
                     $row  = $download->row();
-                    $file = FCPATH . 'upload/'. $row->arti_subm;
-                    if(file_exists($file)){
-                        force_download($file, NULL);
-                    }
+                    $nome = $row->arti_nm;
+                   
+                    header("Content-type: application/pdf");
+                    header('Content-Disposition: attachment; filename="'.$nome.'"');
+                    echo $row->arti_subm;
+
                 }
                 else{
                     $this->session->set_flashdata('NotDown', 'Esse arquivo não exite!!!');

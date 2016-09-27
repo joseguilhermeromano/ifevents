@@ -87,13 +87,15 @@
 		//Método cria a tabela artigo
 		public function create_table_artigo(){
 			$sql = "CREATE TABLE IF NOT EXISTS Artigo(
-					 	 arti_id      int(10)      NOT NULL PRIMARY KEY AUTO_INCREMENT					 	 
+					 	 arti_id      int(10)      NOT NULL PRIMARY KEY AUTO_INCREMENT	
+					 	,arti_ra 	  varchar(7)   NOT NULL	
+					 	,arti_nm 	  varchar(50)  NOT NULL			 	 
 						,arti_autor   varchar(50)  NOT NULL
 						,arti_titul   varchar(50)  NOT NULL
 						,arti_inst    varchar(50)  NOT NULL			
 						,arti_ori     varchar(50)  NOT NULL
 						,arti_are     varchar(50)  NOT NULL
-						,arti_subm    mediumblob   NOT NULL
+						,arti_subm    mediumblob   NOT NULL						
 						,arti_res     varchar(200) NOT NULL
 						,arti_apoio   varchar(30)  
 						,arti_user_id int(10)      

@@ -27,7 +27,7 @@
             public function novoartigo(){
                 $this->load->view("common/header_interno");
                 $this->load->view("participante/novoartigo");
-                $this->load->view("common/footer_interno");;
+                $this->load->view("common/footer_interno");
             }
             
             public function meusartigos(){

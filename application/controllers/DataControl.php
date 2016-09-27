@@ -21,12 +21,12 @@
 
 		public function submitCadastro(){
 			$this->SubmitModel->upload_arquivo();
-			$this->SubmitModel->Verifica();
+			//$this->SubmitModel->Verifica();
 			$this->load->model('dao/SubmitDAO');
 
-			$this->load->view( 'common/header' );
-			$this->load->view( 'inicio/formSubmit' );
-			$this->load->view( 'common/footer' );
+            $this->load->view("common/header_interno");
+            $this->load->view("participante/novoartigo");
+            $this->load->view("common/footer_interno");
 
 		}
 
