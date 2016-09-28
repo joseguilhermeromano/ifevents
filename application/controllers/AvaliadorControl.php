@@ -31,5 +31,17 @@ class AvaliadorControl extends CI_Controller{
                 $this->load->view("common/footer_interno");
             }
             
+            public function feedback(){
+                $this->load->view("common/header_interno");
+                $this->load->view("avaliador/feedback");
+                $this->load->view("common/footer_interno");
+            }
+            
+            public function contato(){
+                $this->load->view("common/header_interno");
+                $this->load->view("avaliador/contato");
+                $this->load->view("common/footer_interno");
+            }
+            
     }
 

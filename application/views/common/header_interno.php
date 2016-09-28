@@ -59,7 +59,7 @@
         </div><!-- /#sidebar-wrapper -->
         
         <?php 
-            }else if ($usuario=="organizaodor"){
+            }else if ($usuario=="organizador"){
         ?>
         <!-- Menu Organizador -->
         
@@ -114,7 +114,10 @@
                     <a href="<?php echo base_url("avaliador/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>
                 <li class="<?php if($paginacorrente == 'submissoes') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("avaliador/submissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES</a>
+                    <a href="<?php echo base_url("avaliador/submissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES ATIVAS</a>
+                </li>
+                <li class="<?php if($paginacorrente == 'contato') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("avaliador/contato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
                     <a href="#"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>

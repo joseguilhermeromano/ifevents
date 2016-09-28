@@ -1,4 +1,4 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Submissões</b></h2>
+<h2><span class="glyphicon glyphicon-list"></span><b> Submissões Ativas</b></h2>
 <hr>
 <br>
 <div class="row">
@@ -20,7 +20,8 @@
                     <th>Título</th>
                     <th><center>Conferência</center></th>
                     <th><center>Eixo Temático</center></th>
-                    <th><center>Visualizar</center></th>
+                    <th><center>Situação</center></th>
+                    <th><center>Enviar Feedback</center></th>
                     <th><center>Excluir</center></th>
             </tr>
         </thead>
@@ -30,7 +31,8 @@
                     <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
                     <td class="text-center">FLISOLI2016</td>
                     <td class="text-center">ABCD</td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a></td>
+                    <td class="text-center">Não Avaliado</td>
+                    <td class="text-center"><a href="feedback/"><span class="glyphicon glyphicon-comment estilo-botao-feedback"></span></a></td>
                     <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
                     
             </tr>
@@ -39,7 +41,8 @@
                     <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
                     <td class="text-center">FLISOLI2016</td>
                     <td class="text-center">ABCD</td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a></td>
+                    <td class="text-center">Aprovado</td>
+                    <td class="text-center"><a href="feedback/"><span class="glyphicon glyphicon glyphicon-comment estilo-botao-feedback"></span></a></td>
                     <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
                     
             </tr>
