@@ -107,4 +107,19 @@
 
 		}
 
+
+		//Método cria a tabela contato
+		public function create_table_contato(){
+			$sql = "CREATE TABLE IF NOT EXISTS Contato(
+						cont_id       int(10)      NOT NULL PRIMARY KEY AUTO_INCREMENT						 	
+					 	,cont_nm 	  varchar(50)  NOT NULL			 	 
+						,cont_email   varchar(80)  NOT NULL
+						,cont_assunto varchar(50)  NOT NULL
+						,cont_mens    varchar(200) NOT NULL									    						
+					)";
+
+			$this->db->query($sql);		
+
+		}
+
 }

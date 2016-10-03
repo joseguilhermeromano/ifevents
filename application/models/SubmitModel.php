@@ -8,7 +8,7 @@
 			$this->load->model('dao/SubmitDAO');
 			$this->load->model('dao/DataBaseDAO');
 			$this->load->model('dao/Teste');
-                        $this->load->helper('file');
+            $this->load->helper('file');
 			
 			$this->DataBaseDAO->create_table_avaliacao();
 			$this->DataBaseDAO->create_table_avaliador();
@@ -22,20 +22,21 @@
 		//Método configura propriedades do arquivo e faz o upload 
 		public function upload_arquivo(){
 			
-			///$cont = count($_FILES['userfile']['name']);			
-			$config['upload_path'] = 'uploads_temp';
-			$config['upload_path'] 	 = 'upload';
-			$config['allowed_types'] = 'pdf|docx';
-			$config['max_size']      = '2048';
+			//$cont = count($_FILES['userfile']['name']);			
+			
 			
 			/*foreach ($_FILES as $key => $value) {			
 				for($i = 0; $i < $cont; $i++){
 
 					$_FILES['userfile']['name'] = $value['name'][$i];
 					$_FILES['userfile']['type'] = $value['type'][$i];
-					$_FILES['userfile']['size'] = $value['size'][$i];
-			*/		
-				
+					$_FILES['userfile']['size'] = $value['size'][$i];*/
+					
+					$config['upload_path'] = 'uploads_temp';
+					$config['upload_path'] 	 = 'upload';
+					$config['allowed_types'] = 'pdf|docx';
+					$config['max_size']      = '4096';
+
 					$this->load->library('upload', $config);
 					$this->upload->initialize($config);
 					
@@ -47,7 +48,10 @@
 						$data  = array('upload_data' => $this->upload->data());
 						$file=read_file($data['upload_data']['full_path']);
 						unlink($data['upload_data']['full_path']);
-						
+					}
+				//}	
+			
+			//}				
 
 						$this->form_validation->set_rules( 'ra', 'RA', 'trim|required|max_length[7]' );			
 						$this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[50]|ucwords' );		
@@ -79,11 +83,11 @@
 							$this->SubmitDAO->Cadastrar( $ra, $nome, $titulo, $autor, $instituicao, $resumo, $area, $orientador, $apoio, $artigo );
 				
 						}
-					}
+					
 				
-				//}
-			//}
-		}
+				
+			}
+		
 			/*public function BaixaArtigo(){			
 				 $quey = $this->SubmitDAO->DownArtigo();
 

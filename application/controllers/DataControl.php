@@ -9,6 +9,7 @@
 		public function __construct(){
 			parent::__construct();	
 			$this->load->model( 'SubmitModel' );
+			$this->load->model('ContatoModel');
 			$this->load->library('upload');
 		}
 
@@ -68,5 +69,16 @@
 				'arq' => $this->SubmitModel->BaixaArtigo()			
 			);
 		$this->load->view( 'inicio/testConsulta', $data );*/
+		}
+
+
+		//Método chama model para verificar os campos do formulário de contato
+		public function RegistraContato(){
+            $this->ContatoModel->ContatoVerifying();
+            
+            $this->load->view("common/header_interno");
+            $this->load->view("participante/contato");
+            $this->load->view("common/footer_interno");
+
 		}
 }		

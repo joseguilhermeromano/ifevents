@@ -41,6 +41,7 @@
                 $this->load->view("participante/contato");
                 $this->load->view("common/footer_interno");
             }
+
             
             public function sair(){
                 
