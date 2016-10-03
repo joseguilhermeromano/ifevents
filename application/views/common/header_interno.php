@@ -95,7 +95,41 @@
         
         
         <?php
-            }//fim else if $usuário == "organizador"
+            //fim else if $usuário == "organizador" 
+            }else{
+        ?>
+        <!-- Menu Avaliador -->
+        
+        <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
+            <div class="borda"><!-- borda -->
+            <ul class="sidebar-nav">
+                
+                <li class="sidebar-brand">
+                    <a href="#">
+                        SEMCITEC
+                        <br>
+                    </a>
+                </li>
+                <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
+                    <a href="<?php echo base_url("avaliador/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
+                </li>
+                <li class="<?php if($paginacorrente == 'submissoes') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("avaliador/submissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES ATIVAS</a>
+                </li>
+                <li class="<?php if($paginacorrente == 'contato') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("avaliador/contato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
+                </li>
+                <li class="">
+                    <a href="#"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                </li>
+            </ul>
+            </div><!-- /#borda -->
+        </div><!-- /#sidebar-wrapper -->
+        
+        
+        
+        <?php
+            }//fim else if $usuário == "avaliador"
             
         ?>
         

@@ -22,8 +22,14 @@
 		//Método configura propriedades do arquivo e faz o upload 
 		public function upload_arquivo(){
 			
+
 			//$cont = count($_FILES['userfile']['name']);			
 			
+
+			///$cont = count($_FILES['userfile']['name']);			
+			$config['upload_path'] = 'uploads_temp';
+			$config['allowed_types'] = 'pdf|docx';
+			$config['max_size']      = '2048';
 			
 			/*foreach ($_FILES as $key => $value) {			
 				for($i = 0; $i < $cont; $i++){

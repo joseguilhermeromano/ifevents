@@ -92,7 +92,7 @@
     width:210px;
     color: #4e4a4a;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 10pt;
     
 }
 
@@ -394,6 +394,11 @@ label{
 
 .estilo-botao-edicao{
     color: green;
+    font-size: 14pt;
+}
+
+.estilo-botao-feedback{
+    color: #777777;
     font-size: 14pt;
 }
 
