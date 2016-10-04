@@ -49,17 +49,17 @@
 		}
 
 
-		public function ConsultaArtigo(){
+		/*public function ConsultaArtigo(){
 			
 			$dados = array(
 				'result' => $this->SubmitDAO->Consulta()
 			);
 			//$this->SubmitDAO->Consulta();
-			
+		
 			$this->load->view( 'common/header' );
 			$this->load->view( 'inicio/testConsulta', $dados );
-			$this->load->view( 'common/footer' );			
-		}
+			$this->load->view( 'common/footer' );		
+		}*/
 
 
 		public function Download(){

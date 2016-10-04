@@ -24,11 +24,16 @@ class AvaliadorControl extends CI_Controller{
                 $this->load->view("common/footer_interno");
             }
             
-            
+            //Método realiza consulta na tabela artigos e possibilita download
             public function submissoes(){
-                $this->load->view("common/header_interno");
-                $this->load->view("avaliador/submissoes");
-                $this->load->view("common/footer_interno");
+                $dados = array(
+                'result' => $this->SubmitDAO->Consulta()
+            );
+            
+            $this->load->view("common/header_interno");
+            $this->load->view("avaliador/submissoes", $dados);
+            $this->load->view("common/footer_interno");
+                
             }
             
             public function feedback(){
