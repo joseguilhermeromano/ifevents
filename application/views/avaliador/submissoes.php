@@ -27,17 +27,20 @@
         </thead>
         <tbody>
         
-        <?php $i = 2;
+        <?php 
+            
+            $i = 2;
+            $cor='';
            foreach( $result as $itens ):
+               
+                if($i % 2 == 0){
+                  $cor='primeira-cor';  
+                }else{
+                  $cor='segunda-cor'; 
+                }
           
-          if($i % 2 == 0){?>
-            <tr class="primeira-cor">
-            <?php $i = $i + 1;?>
-          <?php}
-          else{ ?>
-            <tr  class="segunda-cor"> 
-            <?php $i = $i + 1;?>
-          <?php } ?>     
+        ?>
+            <tr class="<?php echo $cor; ?>">    
                   <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - <?php  echo anchor('DataControl/Download/'.$itens->arti_id, $itens->arti_nm);?></a></td>
                   <td class="text-center">FLISOLI2016</td>
                   <td class="text-center"><?php echo $itens->arti_are;?></td>
@@ -45,7 +48,9 @@
                   <td class="text-center"><a href="feedback/"><span class="glyphicon glyphicon-comment estilo-botao-feedback"></span></a></td>
                   <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>                 
             </tr>
-            <?php  endforeach; ?> 
+            <?php  
+                $i++;
+                endforeach; ?> 
         </tbody>
     </table>
 </div><!-- /TABELA-->
