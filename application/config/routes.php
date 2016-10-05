@@ -51,7 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route[ 'default_controller' ]     = 'InicioControl';
-$route[ 'avaliador/submissoes' ]   = 'AvaliadorControl/submissoes';
 $route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
 $route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
 $route[ 'organizador' ]           = 'AreaRestritaControl/organizador';

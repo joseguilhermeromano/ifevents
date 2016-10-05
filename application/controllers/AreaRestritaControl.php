@@ -8,6 +8,7 @@ class AreaRestritaControl extends CI_Controller{
             parent::__construct();
 
             $this->load->helper('url');
+            $this->load->model('SubmitModel');
 
     }
     
@@ -29,9 +30,13 @@ class AreaRestritaControl extends CI_Controller{
                     // Whoops, we don't have a page for that!
                     show_404();
             }
+            
+            $dados = array(
+                'result' => $this->SubmitDAO->Consulta()
+            );
 
             $this->load->view("common/header_interno");
-            $this->load->view("avaliador/".$page);
+            $this->load->view("avaliador/".$page,$dados);
             $this->load->view("common/footer_interno");
     }
     

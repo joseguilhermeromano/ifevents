@@ -21,8 +21,7 @@
                     <th><center>Conferência</center></th>
                     <th><center>Eixo Temático</center></th>
                     <th><center>Situação</center></th>
-                    <th><center>Enviar Feedback</center></th>
-                    <th><center>Excluir</center></th>
+                    <th><center>Visualiar Histórico</center></th>
             </tr>
         </thead>
         <tbody>
@@ -41,12 +40,11 @@
           
         ?>
             <tr class="<?php echo $cor; ?>">    
-                  <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - <?php  echo anchor('DataControl/Download/'.$itens->arti_id, $itens->arti_nm);?></a></td>
+                  <td><?php  echo $itens->arti_titul;?></td>
                   <td class="text-center">FLISOLI2016</td>
                   <td class="text-center"><?php echo $itens->arti_are;?></td>
                   <td class="text-center">Não Avaliado</td>
-                  <td class="text-center"><a href="feedback/"><span class="glyphicon glyphicon-comment estilo-botao-feedback"></span></a></td>
-                  <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>                 
+                  <td class="text-center"><a href="historico-submissao/"><span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a></td>                 
             </tr>
             <?php  
                 $i++;
