@@ -28,19 +28,7 @@
     	<!-- Custom Theme JavaScript -->
     	<script src="<?php echo base_url('assets/js/freelancer.js');?>"></script>
 
-        <img src="<?php echo base_url ('assets/img/favicon.ico');?>" rel="icon" type="image/x-icon">
-
-        <script>
-
-            function aparece(ahhhh){
-                if(document.getElementById(ahhhh).style.display== "none"){
-                    document.getElementById(ahhhh).style.display = "block";
-                }
-                else {
-                    document.getElementById(ahhhh).style.display = "none"
-                }
-            }
-		</script>         
+        <img src="<?php echo base_url ('assets/img/favicon.ico');?>" rel="icon" type="image/x-icon">       
 
     </head>
 <body>

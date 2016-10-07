@@ -12,7 +12,16 @@
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url ('assets_interno/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets_interno/css/simple-sidebar.css');?>" rel="stylesheet">
-        
+        <script>
+            function aparece(ahhhh){
+                if(document.getElementById(ahhhh).style.display== "none"){
+                    document.getElementById(ahhhh).style.display = "block";
+                }
+                else {
+                    document.getElementById(ahhhh).style.display = "none"
+                }
+            }
+	</script>  
         
        
     </head>
