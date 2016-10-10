@@ -2,7 +2,7 @@
 <hr>
 <br>
 <div class="row">
-<div class="col-md-12">
+<!--<div class="col-md-12">
     <div class="panel panel-info">
         <div class="panel-heading"><b>Detalhes da Submissão</b></div>
         <div class="panel-body">
@@ -48,10 +48,10 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <div class="col-md-6">
 <div class="panel panel-success">
-    <div class="panel-heading"><b>Submissão e Ajustes</b></div>
+    <div class="panel-heading"><b><span class="glyphicon glyphicon-triangle-right"></span> Submissão e Ajustes</b></div>
   <div class="panel-body">
         <table class="table">
             <thead>
@@ -78,7 +78,7 @@
 </div>
 <div class="col-md-6">
 <div class="panel panel-danger">
-    <div class="panel-heading"><b>Avaliações</b> 
+    <div class="panel-heading"><b><span class="glyphicon glyphicon-triangle-right"></span> Avaliações</b> 
         <a href="#" style="float:right; color: #000;"><span class="glyphicon glyphicon-plus"></span> Nova Avaliação</a>
     </div>
   <div class="panel-body">
