@@ -52,7 +52,7 @@
                     <a href="<?php echo base_url("participante/contato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
-                    <a href="#"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
@@ -86,7 +86,7 @@
                     <a href="<?php echo base_url("organizador/conferencias");?>"><span class="glyphicon glyphicon-list"></span>  CONFERÊNCIAS</a>
                 </li>
                 <li class="">
-                    <a href="#"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
@@ -120,7 +120,7 @@
                     <a href="<?php echo base_url("avaliador/contato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
-                    <a href="#"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->

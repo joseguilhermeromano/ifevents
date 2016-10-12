@@ -38,7 +38,7 @@
             
             public function contato(){
                 $this->load->view("common/header_interno");
-                $this->load->view("participante/contato");
+                $this->load->view("common/contato");
                 $this->load->view("common/footer_interno");
             }
 

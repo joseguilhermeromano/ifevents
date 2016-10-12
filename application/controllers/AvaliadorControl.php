@@ -44,7 +44,7 @@ class AvaliadorControl extends CI_Controller{
             
             public function contato(){
                 $this->load->view("common/header_interno");
-                $this->load->view("avaliador/contato");
+                $this->load->view("common/contato");
                 $this->load->view("common/footer_interno");
             }
             
