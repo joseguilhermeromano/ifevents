@@ -38,10 +38,16 @@
 
         //Método realiza consulta na tabela Artigo e retorna resultado
 		public function Consulta(){
-    		
-    		$content = $this->db->query('SELECT arti_id, arti_autor, arti_ra, arti_nm, arti_titul, arti_inst, arti_ori, arti_are, arti_subm, arti_res, arti_apoio FROM Artigo');
-    		
-        	return $content->result();
+    		$arq = $this->uri->segment(3);
+            if($arq != ''){
+                $content1 = $this->db->query('SELECT arti_id, arti_autor, arti_ra, arti_nm, arti_titul, arti_inst, arti_ori, arti_are, arti_subm, arti_res, arti_apoio FROM Artigo  WHERE arti_id ='.$arq);
+                return $content1->result();
+            }
+            else{
+    		    $content2 = $this->db->query('SELECT arti_id, arti_autor, arti_ra, arti_nm, arti_titul, arti_inst, arti_ori, arti_are, arti_subm, arti_res, arti_apoio FROM Artigo');
+    		    return $content2->result();
+            }
+        	
         	      
     	}
 

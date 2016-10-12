@@ -1,9 +1,17 @@
 <h2><span class="glyphicon glyphicon-list"></span><b> Submissões Ativas</b></h2>
 <hr>
+
 <br>
 <div class="row">
     <div class="col-md-6 col-sm-6">
        <div class="input-group">
+<?php       
+        if(empty($result) != False){?>
+          <div class="alert alert-danger"> 
+              <h1>Não Existem submissões ativas!!!</h1>
+          </div>
+  <?php } 
+        else{?>       
          <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
          <span class="input-group-btn">
              <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
@@ -44,7 +52,7 @@
                   <td class="text-center">FLISOLI2016</td>
                   <td class="text-center"><?php echo $itens->arti_are;?></td>
                   <td class="text-center">Não Avaliado</td>
-                  <td class="text-center"><a href="historico-submissao/"><span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a></td>                 
+                  <td class="text-center"><?php  echo anchor('AvaliadorControl/historico/'.$itens->arti_id, '<span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span>');?></a></td>                 
             </tr>
             <?php  
                 $i++;
@@ -70,6 +78,9 @@
         </a>
       </li>
     </ul>
+    <?php  
+        }
+        ?> 
 </nav><!-- /Paginação -->
 
 

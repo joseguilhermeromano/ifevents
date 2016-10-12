@@ -10,21 +10,25 @@
                 <div class="col-md-6">
                     <table class="table">
                         <tbody>
+                            <?php foreach ($result as $iten): ?>    
+
+                            <?php endforeach ?>                    
+                                
                             <tr>
                                 <th class="col-xs-4">Título</th>
-                                <td>Teste</td>
+                                <td><?php echo $iten->arti_titul; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Orientador</th>
-                                <td>Teste</td>
+                                <td><?php echo $iten->arti_ori; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Instituição</th>
-                                <td>teste</td>
+                                <td><?php echo $iten->arti_inst; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Eixo Temático</th>
-                                <td>teste</td>
+                                <td><?php echo $iten->arti_are; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Evento</th>
@@ -32,8 +36,9 @@
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Apoio Financeiro</th>
-                                <td>teste</td>
+                                <td><?php echo $iten->arti_apoio; ?></td>
                             </tr>
+                        
                         </tbody>
                     </table>
                 </div>
