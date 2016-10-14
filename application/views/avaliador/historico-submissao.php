@@ -2,10 +2,18 @@
 <hr>
 <br>
 <div class="row">
-<!--<div class="col-md-12">
+<div class="col-md-12">
     <div class="panel panel-info">
-        <div class="panel-heading"><b>Detalhes da Submissão</b></div>
-        <div class="panel-body">
+        <!-- Versão para Ceular -->
+        <div class="panel-heading visible-xs" id="header_1" 
+             onclick="javascript: MostrarEsconderPainel('#Painel_1','#header_1');">
+            <b><span class="glyphicon glyphicon-triangle-right"></span> Detalhes da Submissão</b>
+        </div>
+        <!-- Versão Comum -->
+        <div class="panel-heading hidden-xs" id="header_1" >
+            <b>Detalhes da Submissão</b>
+        </div>
+        <div class="panel-body" id="Painel_1">
             <div class="row">
                 <div class="col-md-6">
                     <table class="table">
@@ -42,17 +50,23 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-6">
-                    
-                </div>
             </div>
         </div>
     </div>
-</div>-->
+</div>
 <div class="col-md-6">
 <div class="panel panel-success">
-    <div class="panel-heading"><b><span class="glyphicon glyphicon-triangle-right"></span> Submissão e Ajustes</b></div>
-  <div class="panel-body">
+    <!-- Versão para Celular-->
+    <div class="panel-heading visible-xs" id="header_2" 
+         onclick="javascript: MostrarEsconderPainel('#Painel_2','#header_2');">
+        <b><span class="glyphicon glyphicon-triangle-right"></span> Submissão e Ajustes</b>
+    </div>
+    <!-- Versão Comum -->
+    <div class="panel-heading hidden-xs" id="header_2">
+        <b>Submissão e Ajustes</b>
+    </div>
+    <div class="panel-body" id="Painel_2">
+        <br>
         <table class="table">
             <thead>
                 <th colspan="2" class="text-center">Versão: 1</th>
@@ -78,10 +92,17 @@
 </div>
 <div class="col-md-6">
 <div class="panel panel-danger">
-    <div class="panel-heading"><b><span class="glyphicon glyphicon-triangle-right"></span> Avaliações</b> 
-        <a href="#" style="float:right; color: #000;"><span class="glyphicon glyphicon-plus"></span> Nova Avaliação</a>
+    <!-- Versão para Celular-->
+    <div class="panel-heading visible-xs" id="header_3" 
+         onclick="javascript: MostrarEsconderPainel('#Painel_3','#header_3 b');">
+        <b><span class="glyphicon glyphicon-triangle-right"></span> Avaliações</b> 
     </div>
-  <div class="panel-body">
+    <!-- Versão Comum -->
+    <div class="panel-heading hidden-xs" id="header_3">
+        <b>Avaliações</b> 
+    </div>
+  <div class="panel-body" id="Painel_3">
+      <a href="#" style="float:right; color: #000;"><span class="glyphicon glyphicon-plus"></span> Nova Avaliação</a>
         <table class="table">
             <thead>
                 <th colspan="2" class="text-center">Versão Avaliada: 1</th>

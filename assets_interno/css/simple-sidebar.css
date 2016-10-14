@@ -168,8 +168,19 @@
     font-size: 18pt;
     color:black;
 }
+#Painel_1{
+    display:none;
+}
 
-@media(min-width:800px) {
+#Painel_2{
+    display:none;
+}
+
+#Painel_3{
+    display:none;
+}
+
+@media(min-width:767px) {
     #wrapper {
         padding-left: 210px;
     }
@@ -194,6 +205,15 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+    }
+    #Painel_1{
+        display:block;
+    }
+    #Painel_2{
+        display:block;
+    }
+    #Painel_3{
+        display:block;
     }
 }
 
