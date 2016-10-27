@@ -59,6 +59,6 @@ $route[ 'avaliador' ]           = 'AreaRestritaControl/avaliador';
 $route[ 'avaliador/(:any)' ]    = 'AreaRestritaControl/avaliador/$1';
 $route[ 'participante' ]           = 'AreaRestritaControl/participante';
 $route[ 'participante/(:any)' ]    = 'AreaRestritaControl/participante/$1';
-$route[ '404_override' ]           = 'InicioControl/error_404';
+//$route[ '404_override' ]           = 'InicioControl/error_404';
 $route[ 'translate_uri_dashes' ]   = FALSE;
 	
