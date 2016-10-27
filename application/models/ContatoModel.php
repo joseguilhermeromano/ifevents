@@ -8,6 +8,7 @@ class ContatoModel extends CI_Model{
 		$this->load->model('dao/DataBaseDAO');
 		$this->load->model('dao/ContatoDAO');
 		$this->DataBaseDAO->create_table_Contato();
+		//$this->DataBaseDAO->create_table_Contato();
 	}
 	
 	//Método faz a verificação dos campos do formulário de contato

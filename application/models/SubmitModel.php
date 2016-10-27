@@ -11,11 +11,19 @@
             $this->load->helper('file');
 			
 			$this->DataBaseDAO->create_table_avaliacao();
-			$this->DataBaseDAO->create_table_avaliador();
-			$this->DataBaseDAO->create_table_login();			
+			//$this->DataBaseDAO->create_table_avaliador();
+			//$this->DataBaseDAO->create_table_login();			
 			$this->DataBaseDAO->create_table_artigo();
 			$this->DataBaseDAO->create_table_user();
-
+			$this->DataBaseDAO->create_table_submissao();
+			$this->DataBaseDAO->create_table_contato();
+			$this->DataBaseDAO->create_table_conferencia();
+			$this->DataBaseDAO->create_table_edicao();
+			$this->DataBaseDAO->create_table_comite();
+			$this->DataBaseDAO->create_table_parceria();
+			$this->DataBaseDAO->create_table_regra();
+			$this->DataBaseDAO->create_table_endereco();
+			$this->DataBaseDAO->create_table_modalidade_tematica();
 		}
 
 
