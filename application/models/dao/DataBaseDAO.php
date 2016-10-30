@@ -27,7 +27,7 @@
 						 user_id        int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 						,user_nm        varchar(50)  NOT NULL						
 						,user_fone      varchar(15)  NOT NULL
-						,user_bio	    varchar(50)	 NOT NULL			
+								
 						,user_ins_emp   varchar(100) NOT NULL
 						,user_email     varchar(50)  NOT NULL
 						,user_pass      varchar(15)  NOT NULL

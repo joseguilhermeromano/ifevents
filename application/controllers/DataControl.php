@@ -1,4 +1,5 @@
-<?php if(! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+	if(! defined('BASEPATH')) exit('No direct script access allowed');
 
 	class DataControl extends CI_Controller{
 
@@ -9,8 +10,9 @@
 		public function __construct(){
 			parent::__construct();	
 			$this->load->model( 'SubmitModel' );
-			$this->load->model('ContatoModel');
-			$this->load->library('upload');
+			$this->load->model('ContatoModel' );
+			$this->load->model( 'UserModel' );
+			$this->load->library( 'upload' );
 		}
 
 		public function index(){
@@ -28,6 +30,12 @@
             $this->load->view("participante/novoartigo");
             $this->load->view("common/footer_interno");
 
+		}
+
+
+		//Metodo chama o método verifica para validação dos campos do formuĺário
+		public function cadastraUser(){
+			$this->UserModel->verifica();
 		}
 
 

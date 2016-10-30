@@ -71,17 +71,17 @@
                         <a href="/">Histórico</a>
                     </li>*/ ?>
                     <li class="page-scroll">
-                        <?php echo anchor('InicioControl/submissao', 'Submissão'); ?>                        
+                        <?php echo anchor('submissao', 'Submissão'); ?>                        
                     </li>
                     <li class="page-scroll">
-                        <?php echo anchor('InicioControl/cadastro', 'Cadastro'); ?>                        
+                        <?php echo anchor('cadastro', 'Cadastro'); ?>                        
                     </li>
                     
                     <li class="page-scroll">
                         <a href="/#page-down">Informações</a>
                     </li>
                     <li class="page-scroll">
-                        <?php echo anchor('InicioControl/login', 'Login'); ?>                        
+                        <?php echo anchor('login', 'Login'); ?>                        
                     </li>
                 </ul>
             </div>

@@ -29,13 +29,16 @@
                       
         <section id="formularioParticipante" style="display: none;">
             <div class="container">
+             <div class="error"><?php echo validation_errors(); ?></div>
+
+              
                         <div class="row">
                             <div class="col-lg-12 text-center">
                                 <h3>Cadastro de Participantes</h3>
                                 <hr class="star-primary">
                             </div>
                         </div>
-            <?php echo form_open('InicioControl/submitCadastro', 'role="form" class="formsignin"'); ?>
+            <?php echo form_open('DataControl/CadastraUser', 'role="form" class="formsignin"'); ?>
                         <div class="row text">
                             <div class="col-lg-8 col-lg-offset-2">
                                 <div class="row control-group">
@@ -44,7 +47,7 @@
                                 </br>
                             </div>
                         </div>
-                        <div class="row control-group">
+                        <!--<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                             	<input type="text" class="form-control" name="cpf" placeholder="CPF" autofocus>
                                 </br>
@@ -73,22 +76,22 @@
                                 <input type="text" class="form-control" name="bairro" placeholder="Bairro" autofocus>
                                 </br>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <input type="text" class="form-control" name="inst_empresa" placeholder="Instituição/Empresa" autofocus>
                                 </br>
                             </div>
                         </div>
-                        <div class="row control-group">
+                        <!--<div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <input type="text" class="form-control" name="bairro" placeholder="Telefone" autofocus>
                                 </br>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                            	<input type="text" class="form-control" name="celular" placeholder="Celular" autofocus>
+                            	<input type="text" class="form-control" name="fone" placeholder="Telefone" autofocus>
                                 </br>
                             </div>
                         </div>
@@ -106,10 +109,28 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" name="RA" placeholder="RA" autofocus>
+                                <input type="text" class="form-control" name="tipo" placeholder="Tipo de Usuário" autofocus>
                                 </br>
                             </div>
                         </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" name="valida" placeholder="Valida Email" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" name="status" placeholder="Status" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <!--<div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <input type="text" class="form-control" name="RA" placeholder="RA" autofocus>
+                                </br>
+                            </div>
+                        </div>-->
                         <br>
                         <div>
                             <?php echo "<br>".form_submit('submit', 'Cadastrar', 'class="btn btnlg btn-primary btn-block"');?><br><br><br><br><br><br><br>

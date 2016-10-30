@@ -51,12 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $route[ 'default_controller' ]     = 'InicioControl';
+$route['submissao']				   = 'InicioControl/submissao';
+$route['cadastro']                 = 'InicioControl/cadastro';
+$route['login']					   = 'InicioControl/login';	
 $route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
 $route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
-$route[ 'organizador' ]           = 'AreaRestritaControl/organizador';
-$route[ 'organizador/(:any)' ]    = 'AreaRestritaControl/organizador/$1';
-$route[ 'avaliador' ]           = 'AreaRestritaControl/avaliador';
-$route[ 'avaliador/(:any)' ]    = 'AreaRestritaControl/avaliador/$1';
+$route[ 'organizador' ]            = 'AreaRestritaControl/organizador';
+$route[ 'organizador/(:any)' ]     = 'AreaRestritaControl/organizador/$1';
+$route[ 'avaliador' ]              = 'AreaRestritaControl/avaliador';
+$route[ 'avaliador/(:any)' ]       = 'AreaRestritaControl/avaliador/$1';
 $route[ 'participante' ]           = 'AreaRestritaControl/participante';
 $route[ 'participante/(:any)' ]    = 'AreaRestritaControl/participante/$1';
 //$route[ '404_override' ]           = 'InicioControl/error_404';

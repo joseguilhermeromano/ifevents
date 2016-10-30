@@ -88,6 +88,7 @@
 			$this->load->view('inicio/formSubmit');
 			$this->load->view('common/footer');
 		}
+		
 
 		/*public function upload(){
 			$this->load->view('common/header');
