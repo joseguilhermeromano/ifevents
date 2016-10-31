@@ -1,4 +1,4 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Conferências</b></h2>
+<h2><span class="glyphicon glyphicon-list"></span><b> Comitê</b></h2>
 <hr>
 <br>
 <?php if ($this->session->flashdata('success')) { ?>
@@ -15,11 +15,11 @@
 
 <div class="row">
 <?php 
-    echo form_open_multipart( 'OrganizadorControl/cadastraConferencia', 'role="form" class="formsignin"' );?>
+    echo form_open_multipart( 'OrganizadorControl/cadastraComite', 'role="form" class="formsignin"' );?>
     <div class="col-md-12">
         <div class="form-group">
-        <b><?php echo form_label( 'Título', 'titulo' ); ?></b>
-        <?php $data = array( 'name' => 'titulo', 'placeholder' => "Título", 'class' => 'form-control estilo-input' );
+        <b><?php echo form_label( 'Organizadores', 'organizador' ); ?></b>
+        <?php $data = array( 'name' => 'organizador', 'placeholder' => "Organizadores", 'class' => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>

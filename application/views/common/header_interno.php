@@ -85,6 +85,9 @@
                 <li class="<?php if($paginacorrente == 'conferencias') {echo 'active';} ?>">
                     <a href="<?php echo base_url("organizador/conferencias");?>"><span class="glyphicon glyphicon-list"></span>  CONFERÊNCIAS</a>
                 </li>
+                 <li class="<?php if($paginacorrente == 'comite') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/comite");?>"><span class="glyphicon glyphicon-list"></span>  COMITÊ</a>
+                </li>
                 <li class="">
                     <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>

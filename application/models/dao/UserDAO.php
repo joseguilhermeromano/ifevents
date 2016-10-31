@@ -4,18 +4,18 @@
 	class UserDAO extends CI_Model{
 
 		public function __construct(){
-			parent::__construct();
+			parent::__construct('UserDAO');
 		}
 
-		public function cadastrar( $nome, $fone, $inst_emp, $email, $pass, $tipo, $val_email, $status ){
-
+		public function cadastrar( $nome, $instituicao, $fone, $email, $pass, $tipo, $valida, $status ){
+			
 			$this->user_nm        = $nome;
-			$this->user_fone      = $fone;
-			$this->user_ins_emp   = $inst_emp;
+			$this->user_ins_emp   = $instituicao;
+			$this->user_fone      = $fone;			
 			$this->user_email     = $email;
 			$this->user_pass      = $pass;
 		    $this->user_tipo      = $tipo;
-			$this->user_val_email = $val_email;
+			$this->user_val_email = $valida;
 			$this->user_status    = $status;
 
 			$confirm = $this->db->insert('User', $this);
@@ -27,6 +27,6 @@
 			else{
 				$this->session->set_flashdata('fail', 'A postagem não pode ser registrada.');
 				redirect( 'InicioControl/cadastro' );
-			}		
+			}
 		}
 	}

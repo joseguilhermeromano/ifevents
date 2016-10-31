@@ -35,6 +35,7 @@
 
 		//Metodo chama o método verifica para validação dos campos do formuĺário
 		public function cadastraUser(){
+			
 			$this->UserModel->verifica();
 		}
 
