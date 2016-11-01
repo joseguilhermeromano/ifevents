@@ -24,6 +24,7 @@
 			$this->DataBaseDAO->create_table_regra();
 			$this->DataBaseDAO->create_table_endereco();
 			$this->DataBaseDAO->create_table_modalidade_tematica();
+			//$this->DataBaseDAO->create_table_ci_session();
 		}
 
 
