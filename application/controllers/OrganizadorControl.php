@@ -9,6 +9,7 @@
 
                     $this->load->helper('url');
                     $this->load->model('OrganizaModel');
+                    $this->load->model('ComiteModel');
                     
             }
             
@@ -51,7 +52,7 @@
 
             //Método chama método verifica no model organiza model
             public function cadastraComite(){
-                $this->OrganizaModel->verifica();
+                $this->ComiteModel->verifica();
             }
             
             public function contatos(){

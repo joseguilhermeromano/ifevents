@@ -16,11 +16,13 @@
 <div class="row">
 <?php 
     echo form_open_multipart( 'OrganizadorControl/cadastraComite', 'role="form" class="formsignin"' );?>
+    <?php echo form_hidden('comite', 'co');?>
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Organizadores', 'organizador' ); ?></b>
         <?php $data = array( 'name' => 'organizador', 'placeholder' => "Organizadores", 'class' => 'form-control estilo-input' );
-               echo form_input($data);?>
+               echo form_input($data);
+        ?>
         </div>
     </div>
 </div>
