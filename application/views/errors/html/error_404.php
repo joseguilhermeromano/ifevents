@@ -60,7 +60,7 @@ p {
 		<h1>Ops. :-(</h1><br>
 		<h1>A página solicitada não foi encontrada</h1><br>
 
-		<h1><a href="javascript:history.go(-1)">Voltar</a>|<?php echo anchor('InicioControl', 'Página Inicial');?></h1>
+		<h1><a href="javascript:history.go(-1)">Voltar</a>|<?php// echo anchor('InicioControl', 'Página Inicial');?></h1>
 	</div>
 </body>
 </html>

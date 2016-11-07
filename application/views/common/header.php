@@ -81,7 +81,7 @@
                         <a href="/#page-down">Informações</a>
                     </li>
                     <li class="page-scroll">
-                        <?php echo anchor('login', 'Login'); ?>                        
+                        <?php echo anchor('administracao', 'Login'); ?>                        
                     </li>
                 </ul>
             </div>
