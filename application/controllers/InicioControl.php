@@ -7,7 +7,8 @@
 
 		public function __construct(){
 			parent::__construct();
-
+			$this->load->model('dao/DataBaseDAO');
+			$this->DataBaseDAO->create_table_ci_session();
 			$this->load->helper('url');
 			$this->load->model('SubmitModel');
 			
