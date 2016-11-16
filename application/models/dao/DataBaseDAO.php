@@ -225,6 +225,32 @@
 		}
 
 		
+		//Método cria a tabela metodos
+		public function create_table_metodos(){
+			$sql = "CREATE TABLE IF NOT EXISTS metodos(
+						id int(11) unsigned NOT NULL AUTO_INCREMENT,
+  						classe varchar(50) DEFAULT NULL,
+  						metodo varchar(50) DEFAULT NULL,
+  						identificacao varchar(100) DEFAULT NULL,
+  						privado tinyint(1) DEFAULT NULL,
+  						 PRIMARY KEY (id)
+						
+					)";
+					$this->db->query($sql);
+		}
+
+
+		//Método cria a tabela permissões
+		public function create_table_permissoes(){
+			$sql = "CREATE TABLE IF NOT EXISTS permissoes(
+						id int(11) unsigned NOT NULL AUTO_INCREMENT,
+  						id_metodo int(11) DEFAULT NULL,
+  						id_usuario int(11) DEFAULT NULL,
+  						PRIMARY KEY (id)
+						
+					)";
+					$this->db->query($sql);
+		}
 
 
 

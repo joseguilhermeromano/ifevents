@@ -9,13 +9,15 @@ class AvaliadorControl extends CI_Controller{
 
                     $this->load->helper('url');
                     $this->load->model('SubmitModel');
-                    
+                    //$this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method());  
             }
             
             public function index(){
-                $this->load->view("common/header_interno");
-                $this->load->view("avaliador/index");
-                $this->load->view("common/footer_interno");
+                //if($this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method()){
+                    $this->load->view("common/header_interno");
+                    $this->load->view("avaliador/index");
+                    $this->load->view("common/footer_interno");
+                //}
             }
             
             public function meuperfil(){

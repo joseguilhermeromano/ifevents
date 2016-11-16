@@ -10,6 +10,10 @@
                     $this->load->helper('url');
                     $this->load->model('OrganizaModel');
                     $this->load->model('ComiteModel');
+
+                    if(!$this->session->userdata('id') || !$this->session->userdata('logado')){
+                        redirect("administracao/Home");
+                    }
                     
             }
             

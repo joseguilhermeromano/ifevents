@@ -10,8 +10,9 @@
         <div class="col-lg-6 col-lg-offset-3">
             <div class="row control-group">
                 <div class="form-group col-xs-12 floating-label-form-group controls">                    
-                    <?php echo form_label('Usuário', 'usuario');
-                         echo form_input('usuario');?>
+                    <?php echo form_label('Usuário', 'email');
+                          $data = array('name' => 'email', 'placeholder' => 'Email' );
+                          echo form_input($data);?>
                     </br>
                 </div>
             </div>
@@ -22,7 +23,8 @@
             <div class="row control-group">
                 <div class="form-group col-xs-12 floating-label-form-group controls">                    
                     <?php echo form_label('Senha', 'senha');
-                    echo form_input('senha');?>
+                          $data = array('name' => 'senha', 'placeholder' => 'Senha' );  
+                          echo form_password($data);?>
                     </br>
                 </div>
             </div>

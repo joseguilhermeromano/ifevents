@@ -10,7 +10,7 @@
 			$this->load->model('dao/Teste');
             $this->load->helper('file');
 			
-			$this->DataBaseDAO->create_table_avaliacao();
+			/*$this->DataBaseDAO->create_table_avaliacao();
 			//$this->DataBaseDAO->create_table_avaliador();
 			//$this->DataBaseDAO->create_table_login();			
 			$this->DataBaseDAO->create_table_artigo();
@@ -25,6 +25,8 @@
 			$this->DataBaseDAO->create_table_endereco();
 			$this->DataBaseDAO->create_table_modalidade_tematica();
 			$this->DataBaseDAO->create_table_ci_session();
+			$this->DataBaseDAO->create_table_metodos();
+			$this->DataBaseDAO->create_table_permissoes();*/
 		}
 
 
