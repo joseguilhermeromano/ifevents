@@ -1,14 +1,14 @@
-                 <?php if ($this->session->flashdata('success')) { ?>
+                 <?php// if ($this->session->flashdata('success')) { ?>
                             <div class="alert alert-success"> 
-                                <?= $this->session->flashdata('success') ?> 
+                                <?php// $this->session->flashdata('success'); ?> 
                             </div>
-                        <?php } ?>
+                        <?php //} ?>
 
-                        <?php if ($this->session->flashdata('empty')) { ?>
+                        <?php// if ($this->session->flashdata('empty')) { ?>
                             <div class="alert alert-danger"> 
-                                <?= $this->session->flashdata('empty') ?> 
+                                <?php//$this->session->flashdata('empty'); ?> 
                             </div>
-                        <?php } ?> 
+                        <?php//} ?> 
 
                  <div class="container">
                         <div class="row">

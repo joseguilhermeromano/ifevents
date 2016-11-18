@@ -4,13 +4,14 @@ class Auth
   private $CI; // Receberá a instância do Codeigniter
   private $permissaoView = 'sem-permissao'; // Recebe o nome da view correspondente à página informativa de usuário sem permissão de acesso
   private $loginView = 'login'; // Recebe o nome da view correspondente à tela de login
-  public function __construct(){
+  public function __construct(){  
+
     /*
      * Criamos uma instância do CodeIgniter na variável $CI
      */
     $this->CI = &get_instance();
   }
-  function CheckAuth($classe,$metodo)
+  public function CheckAuth($classe,$metodo)
   {
     /*
      * Pesquisa a classe e o método passados como parâmetro em CheckAuth

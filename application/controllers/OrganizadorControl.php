@@ -9,18 +9,17 @@
 
                     $this->load->helper('url');
                     $this->load->model('OrganizaModel');
-                    $this->load->model('ComiteModel');
-
-                    if(!$this->session->userdata('id') || !$this->session->userdata('logado')){
-                        redirect("administracao/Home");
-                    }
-                    
+                    $this->load->model('ComiteModel');                                                        
             }
-            
+
+
+            //Método chama a página principal do organizador do evento.
             public function index(){
-                $this->load->view("common/header_interno");
-                $this->load->view("organizador/index");
-                $this->load->view("common/footer_interno");
+                if(!$this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method()){
+                    $this->load->view("common/header_interno");
+                    $this->load->view("organizador/index");
+                    $this->load->view("common/footer_interno");
+                }
             }
             
             public function submissoes(){
