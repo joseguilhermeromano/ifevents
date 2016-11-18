@@ -6,7 +6,8 @@
 			parent::__construct();
 			$this->load->library('session');
 			$this->load->model('LoginModel');			
-			//$this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method());
+			$this->load->model('acesso/Autentica');
+			
 		} 
 
 
@@ -19,14 +20,13 @@
 
 
 		//Método recebe parametros email e senha e verifica no banco para conceder acesso ao organizador
-		public function login(){
-			//$this->load->library('Auth');
-			if($this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method())){
+		public function login(){			
+			if($this->Autentica->Checa($this->router->fetch_class(), $this->router->fetch_method())){
 				$this->LoginModel->Logar();
 			}
-			else{
-				redirect('cadastro');
-			}
+			//else{
+			//	redirect('cadastro');
+			//}
 		}
 
 
