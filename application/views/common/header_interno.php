@@ -137,12 +137,12 @@
         ?>
         
         <div id="page-content-wrapper"><!-- Page Content -->
+            <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
+                    <span class="glyphicon glyphicon-remove hidden-xs"></span>
+                    <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
+            </a><!-- /#Botão de exibir/ocultar menu lateral -->
             <div class="container-fluid"><!-- Container-fluid -->
                 <div class="row"><!-- row -->
-                <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
-                            <span class="glyphicon glyphicon-remove hidden-xs"></span>
-                            <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
-                            </a><!-- /#Botão de exibir/ocultar menu lateral -->
-                    <div class="col-lg-12"><!-- col-lg-12 -->
+                <div class="col-lg-12"><!-- col-lg-12 -->
 
                         
