@@ -6,23 +6,23 @@
 
  <div class="error"><?php echo validation_errors(); ?></div>
 
-    <?php if ($this->session->flashdata('success')) { ?>
-               <div class="alert alert-success"> 
-                    <?= $this->session->flashdata('success') ?> 
+    <?php // if ($this->session->flashdata('success')) { ?>
+<!--               <div class="alert alert-success"> 
+                    <?php // $this->session->flashdata('success'); ?> 
                 </div>
-    <?php } ?>
+    <?php // } ?>
 
-    <?php if ($this->session->flashdata('empty')) { ?>
+    <?php // if ($this->session->flashdata('empty')) { ?>
                 <div class="alert alert-danger"> 
-                    <?= $this->session->flashdata('empty') ?> 
-                </div>
-    <?php } ?>
+                    <?php // $this->session->flashdata('empty'); ?> 
+                </div>-->
+    <?php // } ?>
 
-    <?php if ($this->session->flashdata( 'subm_artigo' )) { ?>
-           <div class="alert alert-danger"> 
-                 <?= $this->session->flashdata( 'subm_artigo' ) ?> 
-           </div>
-<?php } ?>
+    <?php // if ($this->session->flashdata( 'subm_artigo' )) { ?>
+<!--           <div class="alert alert-danger"> 
+                 <?php // $this->session->flashdata( 'subm_artigo' ); ?> 
+           </div>-->
+<?php // } ?>
 
 <?php echo form_open_multipart( 'DataControl/submitCadastro', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 

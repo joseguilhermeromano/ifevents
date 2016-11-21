@@ -4,23 +4,23 @@
 
 <div class="error"><?php echo validation_errors(); ?></div>
 
-<?php if ($this->session->flashdata('success')) { ?>
-    <div class="alert alert-success"> 
-        <?= $this->session->flashdata('success') ?> 
+<?php //if ($this->session->flashdata('success')) { ?>
+<!--    <div class="alert alert-success"> 
+        <?php// $this->session->flashdata('success') ?> 
     </div>
-<?php } ?>
+<?php //} ?>
 
-<?php if ($this->session->flashdata('empty')) { ?>
+<?php //if ($this->session->flashdata('empty')) { ?>
     <div class="alert alert-danger"> 
-        <?= $this->session->flashdata('empty') ?> 
+        <?php// $this->session->flashdata('empty') ?> 
     </div>
-<?php } ?>
+<?php //} ?>
 
-<?php if ($this->session->flashdata('fail')) { ?>
+<?php //if ($this->session->flashdata('fail')) { ?>
     <div class="alert alert-danger"> 
-        <?= $this->session->flashdata('fail') ?> 
-    </div>
-<?php } ?>
+        <?php //$this->session->flashdata('fail') ?> 
+    </div>-->
+<?php //} ?>
 
 
 

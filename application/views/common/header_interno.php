@@ -30,12 +30,12 @@
             <div class="borda"><!-- borda -->
             <ul class="sidebar-nav">
                 
-                <li class="sidebar-brand">
+                <div class="sidebar-brand">
                     <a href="#">
-                        SEMCITEC
-                        <br>
+                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>"> 
+                        
                     </a>
-                </li>
+                </div>
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
                     <a href="<?php echo base_url("participante/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>
@@ -67,12 +67,12 @@
             <div class="borda"><!-- borda -->
             <ul class="sidebar-nav">
                 
-                <li class="sidebar-brand">
+                <div class="sidebar-brand">
                     <a href="#">
-                        SEMCITEC
-                        <br>
+                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>"> 
+                        
                     </a>
-                </li>
+                </div>
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
                     <a href="<?php echo base_url("organizador/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>
@@ -107,12 +107,12 @@
             <div class="borda"><!-- borda -->
             <ul class="sidebar-nav">
                 
-                <li class="sidebar-brand">
+                <div class="sidebar-brand">
                     <a href="#">
-                        SEMCITEC
-                        <br>
+                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>"> 
+                        
                     </a>
-                </li>
+                </div>
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
                     <a href="<?php echo base_url("avaliador/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>

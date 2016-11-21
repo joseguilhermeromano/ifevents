@@ -6,12 +6,12 @@
     <div class="col-md-6 col-sm-6">
        <div class="input-group">
 <?php       
-        if(empty($result) != False){?>
-          <div class="alert alert-danger"> 
+        //if(empty($result) != False){?>
+<!--          <div class="alert alert-danger"> 
               <h1>Não Existem submissões ativas!!!</h1>
-          </div>
-  <?php } 
-        else{?>       
+          </div>-->
+  <?php //} 
+ //       else{?>       
          <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
          <span class="input-group-btn">
              <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
@@ -36,27 +36,27 @@
         
         <?php 
             
-            $i = 2;
-            $cor='';
-           foreach( $result as $itens ):
-               
-                if($i % 2 == 0){
-                  $cor='primeira-cor';  
-                }else{
-                  $cor='segunda-cor'; 
-                }
+//            $i = 2;
+//            $cor='';
+//           foreach( $result as $itens ):
+//               
+//                if($i % 2 == 0){
+//                  $cor='primeira-cor';  
+//                }else{
+//                  $cor='segunda-cor'; 
+//                }
           
         ?>
-            <tr class="<?php echo $cor; ?>">    
-                  <td><?php  echo $itens->arti_titul;?></td>
+            <tr class="<?php //echo $cor; ?>">    
+                  <td><?php  //echo $itens->arti_titul;?></td>
                   <td class="text-center">FLISOLI2016</td>
-                  <td class="text-center"><?php echo $itens->arti_are;?></td>
+                  <td class="text-center"><?php //echo $itens->arti_are;?></td>
                   <td class="text-center">Não Avaliado</td>
-                  <td class="text-center"><?php  echo anchor('AvaliadorControl/historico/'.$itens->arti_id, '<span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span>');?></a></td>                 
+                  <td class="text-center"><?php  echo anchor('AvaliadorControl/historico/','<span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span>'); ?></td>                 
             </tr>
             <?php  
-                $i++;
-                endforeach; ?> 
+//                $i++;
+//                endforeach; ?> 
         </tbody>
     </table>
 </div><!-- /TABELA-->
@@ -79,7 +79,7 @@
       </li>
     </ul>
     <?php  
-        }
+        //}
         ?> 
 </nav><!-- /Paginação -->
 
