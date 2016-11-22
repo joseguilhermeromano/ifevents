@@ -15,11 +15,11 @@
 
             //Método chama a página principal do organizador do evento.
             public function index(){
-                if(!$this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method()){
+//                if(!$this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method()){
                     $this->load->view("common/header_interno");
                     $this->load->view("organizador/index");
                     $this->load->view("common/footer_interno");
-                }
+//                }
             }
             
             public function submissoes(){
