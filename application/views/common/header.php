@@ -74,7 +74,7 @@
                         <?php echo anchor('submissao', 'Submissão'); ?>                        
                     </li>
                     <li class="page-scroll">
-                        <?php echo anchor('cadastro', 'Cadastro'); ?>                        
+                        <?php //echo anchor('cadastro', 'Cadastro'); ?>                        
                     </li>
                     
                     <li class="page-scroll">

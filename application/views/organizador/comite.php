@@ -1,5 +1,6 @@
 <h2><span class="glyphicon glyphicon-list"></span><b> Comitê</b></h2>
 <hr>
+<div class="error"><?php echo validation_errors(); ?></div>
 <br>
 <?php if ($this->session->flashdata('success')) { ?>
 	<div class="alert alert-success"> 

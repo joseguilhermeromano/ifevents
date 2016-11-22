@@ -39,7 +39,7 @@
             <?php echo form_submit('btnSubmit', 'Entrar','<button class="btn btn-primary", style="font-size: 14pt; font-weight: bold"><span class="glyphicon glyphicon-log-in"></span></button>');?><br><br>
             <?php echo form_close();?>       
             <hr>
-            <h4>Não tem uma Conta? <a href="<?php echo base_url('InicioControl/cadastro'); ?>">Cadastra-se</a></h4>
+            <h4>Não tem uma Conta? <a href="<?php echo base_url('cadastro'); ?>">Cadastra-se</a></h4>
             <br><br><br><br>
         </div>
     </div>

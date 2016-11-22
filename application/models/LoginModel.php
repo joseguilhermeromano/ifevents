@@ -17,10 +17,19 @@
 			$this->db->where('user_pass', $senha);
 			$this->db->where('user_status', 1);
 			$usuario = $this->db->get('User')->result();
-			if(count($usuario) === 1){
+			if( count($usuario) === 1 ){
 				$dados = array('usuario' => $usuario[0]->usuario, 'logado' => TRUE);
 				$this->session->set_userdata($dados);
-				redirect('organizador/');
+
+				if($usuario['tipo'] == 2){
+					redirect('organizador/');
+				}
+				else if($usuario['tipo'] == 1){
+					redirect('avaliador');
+				}	
+				else{
+					redirect('participante');
+				}
 			}
 			else{
 				redirect('administracao');

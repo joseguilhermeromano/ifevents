@@ -7,6 +7,7 @@
 			parent::__construct();
 
 			$this->load->Model( 'dao/UserDAO' );
+			//$this->load->library( 'session' );
 		}
 
 		//Método valida os campos do formulário cadastro de participantes
@@ -15,14 +16,13 @@
 			$this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|required|max_length[100]' );
 			$this->form_validation->set_rules( 'fone', 'Telefone', 'trim|required|max_length[15]' );
 			$this->form_validation->set_rules( 'email', 'Email', 'trim|required|max_length[50]' );
-			$this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|max_length[15]' );
-			$this->form_validation->set_rules( 'tipo', 'Tipo de Usuário', 'trim|required|max_length[1]' );
+			$this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|max_length[15]' );			
 			$this->form_validation->set_rules( 'valida', 'Valida Email', 'trim|required|max_length[10]' );
 			$this->form_validation->set_rules( 'status', 'Status', 'trim|max_length[2]' );
 
 			if( $this->form_validation->run() == FALSE ){
 				$this->session->set_flashdata('empty', 'Por Favor Preencha Todos Os Campos');
-				redirect( 'InicioControl/cadastro' );
+				redirect( 'cadastro' );
 				
 			}
 			else{
@@ -32,7 +32,7 @@
 				$fone         = $this->input->post( 'fone' );
 				$email        = $this->input->post( 'email' );
 				$pass  	      = $this->input->post( 'senha' );
-				$tipo         = $this->input->post( 'tipo' );
+				$tipo         = 0;
 				$valida       = $this->input->post( 'valida' );
 				$status       = $this->input->post( 'status' );
 

@@ -21,12 +21,12 @@
 			$confirm = $this->db->insert('User', $this);
 				
 			if($confirm){  
-				$this->session->set_flashdata('success', 'Postagem cadastrada Com Sucesso');		
-				redirect('InicioControl/cadastro');		
+				$this->session->set_flashdata('success', 'Cadastro Realizado Com Sucesso');		
+				redirect('cadastro');		
 			}
 			else{
-				$this->session->set_flashdata('fail', 'A postagem não pode ser registrada.');
-				redirect( 'InicioControl/cadastro' );
+				$this->session->set_flashdata('fail', 'O Cadastro Não Pode Ser Realizado');
+				redirect( 'cadastro' );
 			}
 		}
 	}

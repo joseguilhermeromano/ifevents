@@ -52,7 +52,7 @@
                                 Para submeter o seu projeto preencha o formulário de Submissão de Artigos.
                             </p>
                                 
-                                <h5><?php echo anchor('ParticipanteControl/novoartigo', 'Formulário de Submissão');?></h5>
+                                <h5><?php echo anchor('novoartigo', 'Formulário de Submissão');?></h5>
                                     
                                     
                                 <br><br><br><br><br>

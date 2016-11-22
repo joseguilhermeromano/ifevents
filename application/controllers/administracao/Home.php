@@ -21,7 +21,7 @@
 
 		//Método recebe parametros email e senha e verifica no banco para conceder acesso ao organizador
 		public function login(){			
-			if($this->Autentica->Checa($this->router->fetch_class(), $this->router->fetch_method())){
+			if($this->Autentica->Check($this->router->fetch_class(), $this->router->fetch_method() == true)){
 				$this->LoginModel->Logar();
 			}
 			//else{

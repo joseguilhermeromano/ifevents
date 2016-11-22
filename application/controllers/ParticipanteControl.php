@@ -9,6 +9,7 @@
 
                     $this->load->helper('url');
                     $this->load->model('SubmitModel');
+                    $this->load->model('acesso/Autentica');
                     
             }
             
@@ -24,10 +25,13 @@
                 $this->load->view("common/footer_interno");
             }
             
-            public function novoartigo(){
-                $this->load->view("common/header_interno");
-                $this->load->view("participante/novoartigo");
-                $this->load->view("common/footer_interno");
+            public function novoartigo(){                    
+                    if($this->Autentica->Check( $this->router->fetch_class(), $this->router->fetch_method()) == true ){
+                        $this->load->view("common/header_interno");
+                        $this->load->view("participante/novoartigo");
+                        $this->load->view("common/footer_interno");
+                    } 
+                //redirect('administracao/Home/login');   
             }
             
             public function meusartigos(){

@@ -6,17 +6,14 @@
         private $loginView = 'login'; // Recebe o nome da view correspondente à tela de login
         
         public function __construct(){  
-            parent::__construct();
-            /*
-            * Criamos uma instância do CodeIgniter na variável $CI
-            */
-            
+            parent::__construct('Autentica');
+                $this->load->database();
             }
 
-        public function Checa( $classe, $metodo ){
+        public function Check( $classe, $metodo ){
             
             /*
-            * Pesquisa a classe e o método passados como parâmetro em CheckAuth
+            * Pesquisa a classe e o método passados como parâmetro
             */
             $array = array('classe' => $classe, 'metodo' => $metodo);
             $qryMetodos = $this->db->where($array)->get('metodos');            
@@ -24,13 +21,13 @@
             
             /*
             * Caso o método passado ainda não conste na tabela "metodos"
-            * ele é inserido através de $this->CI->db->insert('metodos', $data);
+            * ele é inserido
             */
     
-            if( count( $resultMetodos ) ==0 ){
+            if( count( $resultMetodos ) == 0 ){
                 $data = array(
-                    'classe' => $classe ,
-                    'metodo' => $metodo ,
+                    'classe' => $classe,
+                    'metodo' => $metodo,
                     'identificacao' => $classe .  '/' . $metodo,
                     'privado' => 1
                 );
@@ -47,12 +44,12 @@
                     return false;
                 }
                 else{
-                    $nome = 'teste';//$this->CI->session->userdata('nome');
-                    $logged_in = 'logado';//$this->CI->session->userdata('logged');
-                    //$data = $this->CI->session->userdata('data');
-                    //$email = $this->CI->session->userdata('email');
-                    $id_usuario = 1; //$this->CI->session->userdata('id');
-                    $id_metodo = $resultMetodos[0]->id;
+                    $nome       = $this->session->userdata('usuario');
+                    $logged_in  = $this->session->userdata('logado');
+                    $data       = $this->session->userdata('data');
+                    $email      = $this->session->userdata('email');
+                    $id_usuario = $this->session->userdata('id');
+                    $id_metodo  = $resultMetodos[0]->id;
                 
                     /*
                     * Se o usuário estiver logado faz a verificação da permissão
@@ -71,15 +68,15 @@
                         * caso contrário o acesso é liberado
                         */
           
-                        if( count( $resultPermissoes ) ==0 ){
-                            redirect( $this->permissaoView, 'refresh' );
+                        if( count( $resultPermissoes ) == 0 ){
+                            redirect( base_url( 'InicioControl/noPermission'), 'refresh'  );
                         }
                         else{
                             return true;
                         }
                     }
                     else{
-                     redirect( $this->loginView, 'refresh' );
+                     redirect( base_url( 'InicioControl/login'));
                     }
                 }
             }

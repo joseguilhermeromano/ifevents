@@ -11,7 +11,8 @@
 			//$this->DataBaseDAO->create_table_ci_session();
 			$this->load->helper('url');
 			$this->load->model('SubmitModel');
-			
+			$this->load->model('UserModel');
+			$this->load->model('acesso/Autentica');
 		}
 
 		//Método chama a view principal do sistema (Home)
@@ -43,11 +44,18 @@
 			echo 'Área do participante';
 		}
 
-		//Método chama a view que contém formulário de cadastro para participantes e avaliadores
+		//Método chama a view que contém formulário de cadastro para participantes
 		public function cadastro(){
 			$this->load->view('common/header');
 			$this->load->view('inicio/cadastro');
 			$this->load->view('common/footer');
+		}
+
+		//Metodo chama o método verifica para validação dos campos do formuĺário
+		public function cadastraUser(){
+			if($this->Autentica->Check( $this->router->fetch_class(), $this->router->fetch_method()) == false ){
+				$this->UserModel->verifica();
+			}
 		}
                 
 
@@ -100,4 +108,12 @@
 		public function error_404(){
 			$this->load->view('errors/html/error_404');
 		}
+
+		public function noPermission(){
+			$this->load->view('common/header');
+			$this->load->view('inicio/noPermission');
+			$this->load->view('common/footer');
+
 		}
+
+}

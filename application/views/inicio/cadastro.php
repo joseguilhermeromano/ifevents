@@ -1,33 +1,42 @@
-                 <?php// if ($this->session->flashdata('success')) { ?>
-                            <div class="alert alert-success"> 
-                                <?php// $this->session->flashdata('success'); ?> 
-                            </div>
-                        <?php //} ?>
+                
+<div class="error"><?php echo validation_errors(); ?></div>
 
-                        <?php// if ($this->session->flashdata('empty')) { ?>
-                            <div class="alert alert-danger"> 
-                                <?php//$this->session->flashdata('empty'); ?> 
-                            </div>
-                        <?php//} ?> 
+<?php if ($this->session->flashdata('success')) { ?>
+    <div class="alert alert-success"> 
+        <?= $this->session->flashdata('success') ?> 
+    </div>
+<?php } ?>
 
-                 <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2>Cadastros</h2>
-                                <hr class="star-primary">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
+<?php if ($this->session->flashdata('empty')) { ?>
+    <div class="alert alert-danger"> 
+        <?= $this->session->flashdata('empty') ?> 
+    </div>
+<?php } ?>
+
+<?php if ($this->session->flashdata('fail')) { ?>
+    <div class="alert alert-danger"> 
+        <?= $this->session->flashdata('fail') ?> 
+    </div>
+<?php } ?>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Cadastros</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
                        
-                            <p>
-                                Para participar como expositor de algum projeto, ou comunicador, preencha o formulário de Cadastro de Participantes.
-                            </p>
-                                <button onclick="aparece('formularioParticipante');">Cadastro de Participantes</button>
-                                <br><br><br><br><br>
-                            </div>
+            <p>
+                Para participar como expositor de algum projeto, ou comunicador, preencha o formulário de Cadastro de Participantes.
+            </p>
+                <button onclick="aparece('formularioParticipante');">Cadastro de Participantes</button>
+                <br><br><br><br><br>
+            </div>
                             
                         <!--<div class="col-lg-12 text-center">
                             <p>
@@ -37,18 +46,17 @@
                                 <br><br><br><br><br><br><br>
                             </div>
                         </div>-->
-                      
+        
+
         <section id="formularioParticipante" style="display: none;">
             <div class="container">
-             <div class="error"><?php echo validation_errors(); ?></div>                        
-              
                         <div class="row">
                             <div class="col-lg-12 text-center">
                                 <h3>Cadastro de Participantes</h3>
                                 <hr class="star-primary">
                             </div>
                         </div>
-            <?php echo form_open('DataControl/cadastraUser', 'role="form" class="formsignin"'); ?>
+            <?php echo form_open('InicioControl/cadastraUser', 'role="form" class="formsignin"'); ?>
                         <div class="row text">
                             <div class="col-lg-8 col-lg-offset-2">
                         <div class="row control-group">
@@ -84,7 +92,7 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" name="tipo" placeholder="Tipo de Usuário" autofocus>
+                                <input type="hidden" class="form-control" name="tipo" value="<?php  $tipo = 0; ?>" placeholder="Tipo de Usuário" autofocus>
                                 </br>
                             </div>
                         </div>
