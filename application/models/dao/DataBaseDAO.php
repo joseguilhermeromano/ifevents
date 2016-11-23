@@ -6,6 +6,21 @@
 
 			parent::__construct();
 			$this->load->database();
+                        $this->create_table_artigo();
+                        $this->create_table_avaliacao();
+                        $this->create_table_ci_session();
+                        $this->create_table_comite();
+                        $this->create_table_conferencia();
+                        $this->create_table_contato();
+                        $this->create_table_edicao();
+                        $this->create_table_endereco();
+                        $this->create_table_metodos();
+                        $this->create_table_modalidade_tematica();
+                        $this->create_table_parceria();
+                        $this->create_table_permissoes();
+                        $this->create_table_regra();
+                        $this->create_table_submissao();
+                        $this->create_table_user();
 
 		}
 
