@@ -1,5 +1,7 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
-
+        
+        include_once 'DAO.php';// Chamar sempre a interface por esta forma!
+        
 	class ContatoDAO extends CI_Model implements DAO{
 
 		public function __construct(){

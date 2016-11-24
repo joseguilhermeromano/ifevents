@@ -1,6 +1,8 @@
 <?php
 if ( !defined('BASEPATH')) exit ( 'No direct sript access allowed' );
 
+    include_once 'DAO.php';// Chamar sempre a interface por esta forma!
+
 class UserDAO extends CI_Model implements DAO{
 
         public function __construct(){

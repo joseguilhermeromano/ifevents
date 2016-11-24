@@ -55,7 +55,8 @@
 
             //Método chama método verifica no model organiza model
             public function cadastraComite(){
-                $this->ComiteModel->verifica();
+//                $this->ComiteModel->verifica();
+                $this->ComiteModel->cadastrar();
             }
             
             public function contatos(){

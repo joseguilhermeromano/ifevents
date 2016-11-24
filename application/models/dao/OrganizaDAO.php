@@ -1,5 +1,7 @@
 <?php
 	if( !defined("BASEPATH")) exit('No direct srcipt access allowed');
+        
+                include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 	class OrganizaDAO extends CI_Model implements DAO{
 

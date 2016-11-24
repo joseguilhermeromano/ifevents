@@ -1,5 +1,7 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
+        
+        
 	class SubmitModel extends CI_Model{
 
 		public function __construct(){

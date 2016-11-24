@@ -1,5 +1,7 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
+        
+        include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 	class ComiteDAO extends CI_Model implements DAO{
 
@@ -37,7 +39,16 @@
     }
 
     public function inserir($obj) {
-        
+        $confirma = $this->db->insert( 'Comite', $obj );
+
+        if ($confirma){
+                $this->session->set_flashdata('success', 'Comitê cadastrado com sucesso' );
+                redirect('OrganizadorControl/comite');
+        }
+        else{
+                $this->session->set_flashdata('fail', 'Comitê não pode ser cadastrado' );
+                redirect('OrganizadorControl/comite');
+        }
     }
 
 }
