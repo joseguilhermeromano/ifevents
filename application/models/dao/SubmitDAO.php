@@ -1,6 +1,6 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
-	class SubmitDAO extends CI_Model{
+	class SubmitDAO extends CI_Model implements DAO{
 
 		function SubmitDAO(){
 			parent::__construct('SubmitDAO');
@@ -71,6 +71,23 @@
                     redirect('DataControl/erros');
                 }
     		}
+
+    public function alterar($obj) {
+        
+    }
+
+    public function consultar($arrayParametros) {
+        
+    }
+
+    public function excluir($obj) {
+        
+    }
+
+    public function inserir($obj) {
+        
+    }
+
 }    	
 
 

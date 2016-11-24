@@ -1,7 +1,7 @@
 <?php
 	if( !defined("BASEPATH")) exit('No direct srcipt access allowed');
 
-	class OrganizaDAO extends CI_Model{
+	class OrganizaDAO extends CI_Model implements DAO{
 
 		public function __construct(){
 			parent::__construct();
@@ -24,4 +24,21 @@
 			}	
 
 		}
-	}
+
+    public function alterar($obj) {
+        
+    }
+
+    public function consultar($arrayParametros) {
+        
+    }
+
+    public function excluir($obj) {
+        
+    }
+
+    public function inserir($obj) {
+        
+    }
+
+}

@@ -8,6 +8,7 @@
         public function __construct(){  
             parent::__construct('Autentica');
                 $this->load->database();
+                $this->Check($this->router->fetch_class(),$this->router->fetch_method());
             }
 
         public function Check( $classe, $metodo ){

@@ -1,6 +1,6 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
-	class ContatoDAO extends CI_Model{
+	class ContatoDAO extends CI_Model implements DAO{
 
 		public function __construct(){
 			parent::__construct('ContatoDAO');
@@ -24,5 +24,22 @@
 				$this->session->set_flashdata('fail', 'A mensagem não pode ser registrada.');
 				redirect( 'participanteControl/contato' );
 			}		
-		} 
-	}	
+		}
+
+    public function alterar($obj) {
+        
+    }
+
+    public function consultar($arrayParametros) {
+        
+    }
+
+    public function excluir($obj) {
+        
+    }
+
+    public function inserir($obj) {
+        
+    }
+
+}	

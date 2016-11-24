@@ -1,7 +1,7 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
 
-	class ComiteDAO extends CI_Model{
+	class ComiteDAO extends CI_Model implements DAO{
 
 		public function __construct(){
 			parent::__construct();
@@ -23,4 +23,21 @@
 				redirect('OrganizadorControl/comite');
 			}
 		}
-	}
+
+    public function alterar($obj) {
+        
+    }
+
+    public function consultar($arrayParametros) {
+        
+    }
+
+    public function excluir($obj) {
+        
+    }
+
+    public function inserir($obj) {
+        
+    }
+
+}
