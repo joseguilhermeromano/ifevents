@@ -39,7 +39,7 @@
     }
 
     public function inserir($obj) {
-        $confirma = $this->db->insert( 'Comite', $obj );
+        $confirma = $this->db->insert('Comite',$obj);
 
         if ($confirma){
                 $this->session->set_flashdata('success', 'Comitê cadastrado com sucesso' );
