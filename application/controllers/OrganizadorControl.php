@@ -54,6 +54,9 @@
             /*************************************************
              * Métodos Relacionados ao perfil do Organizador**
              *************************************************/
+            public function exibePerfil(){
+                
+            }
             
             public function atualizaPerfil(){
                 
@@ -283,7 +286,7 @@
                 
             }
             
-            public function visualizaHistorico(){
+            public function historicoSubmissao(){
                 
             }
             
