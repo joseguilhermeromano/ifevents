@@ -11,7 +11,7 @@ class LoginControl extends CI_Controller{
                     $this->load->helper('url');
                     
                     /*Carregamento de Models*/
-                    $this->load->model('UsuarioModel');
+                    $this->load->model('UserModel');
                      
             }
             

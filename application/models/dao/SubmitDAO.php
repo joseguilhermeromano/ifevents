@@ -74,21 +74,39 @@
                 }
     		}
 
-    public function alterar($obj) {
-        
-    }
+                public function inserir($obj) {
+                    $confirma= $this->db->insert('submissao', $obj);
+                     if($confirma){
+                         return true;
+                     }
+                         return false;
+                }
+                
+                public function alterar($obj) {
+                    $this->db->where('subm_id', $obj->subm_id);
+                    $confirma=$this->db->update('submissao', $obj);
+                    if($confirma){
+                         return true;
+                     }
+                         return false;
+                }
 
-    public function consultar($arrayParametros) {
-        
-    }
+                public function consultarTudo() {
+                    return null;
+                }
+                
+                public function consultarCodigo(){
+                    return null;
+                }
 
-    public function excluir($obj) {
-        
-    }
-
-    public function inserir($obj) {
-        
-    }
+                public function excluir($obj) {
+                    $this->db->where('subm_id', $obj->subm_id);
+                    $confirma= $this->db->delete('submissao');
+                    if($confirma){
+                         return true;
+                     }
+                         return false;
+                }
 
 }    	
 

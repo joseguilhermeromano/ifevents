@@ -1,7 +1,9 @@
 <?php
 	if ( !defined( 'BASEPATH' )) exit( 'No direct script access allowed' );
-
-	class UserModel extends CI_Model{
+        
+        include_once 'InterfaceModel.php';
+        
+	class UserModel extends CI_Model implements InterfaceModel{
 
 		public function __construct(){
 			parent::__construct();
@@ -40,4 +42,25 @@
 				
 			}
 	}
+        
+        public function cadastrar() {
+            return true;
+        }
+
+        public function alterar() {
+            return true;
+        }
+
+        public function buscar() {
+            return null;
+        }
+
+        public function buscarTudo() {
+            return null;
+        }
+
+        public function excluir() {
+            return true;
+        }
+
 }	

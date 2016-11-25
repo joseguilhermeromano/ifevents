@@ -28,20 +28,38 @@
 			}		
 		}
 
-    public function alterar($obj) {
-        
-    }
+                public function inserir($obj) {
+                    $confirma= $this->db->insert('contato', $obj);
+                     if($confirma){
+                         return true;
+                     }
+                         return false;
+                }
+                
+                public function alterar($obj) {
+                    $this->db->where('cont_id', $obj->cont_id);
+                    $confirma=$this->db->update('contato', $obj);
+                    if($confirma){
+                         return true;
+                     }
+                         return false;
+                }
 
-    public function consultar($arrayParametros) {
-        
-    }
+                public function consultarTudo() {
+                    return null;
+                }
+                
+                public function consultarCodigo(){
+                    return null;
+                }
 
-    public function excluir($obj) {
-        
-    }
-
-    public function inserir($obj) {
-        
-    }
+                public function excluir($obj) {
+                    $this->db->where('cont_id', $obj->cont_id);
+                    $confirma= $this->db->delete('contato');
+                    if($confirma){
+                         return true;
+                     }
+                         return false;
+                }
 
 }	

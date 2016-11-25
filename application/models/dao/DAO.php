@@ -9,11 +9,18 @@ interface DAO{
     public function inserir($obj);
     
     /**
-     * Retorna uma lista de determinado objeto
-     * @param string regra como um nome ou simplemente empty. 
-     * @return lista de objetos ou null
+     * Registra o objeto na base de dados
+     * @param Não recebe parametros
+     * @return Retorna uma array com os dados recuperados
      */
-    public function consultar($arrayParametros);
+    public function consultarTudo();
+    
+    /**
+     * Registra o objeto na base de dados
+     * @param Não recebe parametros
+     * @return Retorna uma array com os dados recuperados
+     */           
+    public function consultarCodigo();
 
     
     /**

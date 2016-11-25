@@ -12,7 +12,7 @@ class AvaliadorControl extends CI_Controller{
                     $this->load->helper('url');
                     
                     /*Carregamento de Models*/
-                    $this->load->model('UsuarioModel');
+                    $this->load->model('UserModel');
 //                    $this->load->model('ConferenciaModel'); 
 //                    $this->load->model('EdicaoModel');
                     $this->load->model('ComiteModel');

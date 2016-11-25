@@ -1,7 +1,7 @@
 <?php
 	if( !defined("BASEPATH")) exit('No direct script access allowed');
         
-               
+        include_once 'InterfaceModel.php';
 
 	class ComiteModel extends CI_Model{
 
@@ -41,5 +41,22 @@
 				$this->ComiteDAO->cadastra($organizador, $descricao );
 			}
 		}
+                
+
+                public function alterar() {
+                    return true;
+                }
+
+                public function buscar() {
+                    return null;
+                }
+
+                public function buscarTudo() {
+                    return null;
+                }
+
+                public function excluir() {
+                    return true;
+                }
 
 	}
