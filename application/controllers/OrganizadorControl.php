@@ -8,9 +8,24 @@
             public function __construct(){
                     parent::__construct();
                     //Validação de login deve ficar por aqui!!!!
+                    
+                    /* Carregamento de Helpers */
                     $this->load->helper('url');
-                    $this->load->model('OrganizaModel');
-                    $this->load->model('ComiteModel');                                                        
+                    
+                    /*Carregamento de Models*/
+                    $this->load->model('UsuarioModel');
+//                    $this->load->model('ConferenciaModel'); 
+//                    $this->load->model('EdicaoModel');
+                    $this->load->model('ComiteModel');
+//                    $this->load->model('ParceriaModel');
+//                    $this->load->model('RegraModel');
+//                    $this->load->model('EnderecoModel');
+//                    $this->load->model('ModalidadeTematicaModel');
+//                    $this->load->model('ArtigoModel');
+//                    $this->load->model('SubmissaoModel');
+//                    $this->load->model('AvaliacaoModel'); 
+                    $this->load->model('ContatoModel');
+                     
             }
 
 
@@ -36,9 +51,16 @@
                 $this->load->view("common/footer_interno");
             }
             
-            //Função para retornar uma instancia de Model
-            public function carregaModel($nomeModel=null){
-                 return $nomeModel==null ? null : $this->load->model(uppercase($nomeModel).'Model');
+            /*************************************************
+             * Métodos Relacionados ao perfil do Organizador**
+             *************************************************/
+            
+            public function atualizaPerfil(){
+                
+            }
+            
+            public function alteraSenha(){
+                
             }
             
             /***********************************
@@ -142,9 +164,9 @@
                 
             }
             
-            /************************************
+            /*********************************
              * Métodos relacionados a Edição**
-             ************************************/
+             *********************************/
             
             public function listaEdicao(){
                 
@@ -239,6 +261,33 @@
             }
             
             public function excluiRegra(){
+                
+            }
+            
+            /**************************************************
+             * Métodos relacionados ao controle de Submissões**
+             **************************************************/
+            public function listaSubmissoesAtivas(){
+                
+            }
+            
+            public function listaTodasSubmissoes(){
+                
+            }
+            
+            public function atribuiAvaliador(){
+                
+            }
+            
+            public function cancelaAtribuicao(){
+                
+            }
+            
+            public function visualizaHistorico(){
+                
+            }
+            
+            public function aceitaRecusaSubmissao(){
                 
             }
             
