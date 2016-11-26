@@ -392,26 +392,22 @@ label{
 
 /*FORMATAÇÃO DE TABELAS*/
 #tabela1 thead{
-    background-color: #4F4F4F;
+    background-color: #00CD66;
     color: white;
 }
 #tabela1 > thead > tr > th{
     border-left: 1px solid white;
     border-right: 1px solid white;
-    border-bottom: 1px solid #4F4F4F; 
-    border-top: 1px solid #4F4F4F; 
+    border-bottom: 1px solid #00CD66; 
+    border-top: 1px solid #00CD66; 
 }
 
-#tabela1 > tbody > tr.primeira-cor{
-    background-color: white; 
-}
-
-#tabela1 > tbody > tr.segunda-cor{
+#tabela1 > tbody > tr:nth-child(even){
     background-color: #E8E8E8; 
 }
 
 #tabela1 > tbody > tr:hover{
-    background-color: #F0FFF0; 
+    background-color: #FFFFE0; 
 }
 
 #tabela1 > tbody > tr > td{

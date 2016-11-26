@@ -39,7 +39,7 @@
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
-            public function view($view, $data=null){
+            public function chamaView($view, $data=null){
                 if ( ! file_exists(APPPATH.'/views/organizador/'.$view.'.php'))
                 {
                         // Caso não exista a págiina, retorna o erro abaixo
@@ -122,7 +122,7 @@
              **********************************/
             
             public function listaComite(){
-                
+                $this->chamaView('comite');
             }
             
             public function buscaComite(){
@@ -131,7 +131,11 @@
             
             public function cadastraComite(){
 //                $this->ComiteModel->verifica();
-                $this->ComiteModel->cadastrar();
+//                $this->ComiteModel->cadastrar();
+                if(!empty($this->input->get())||!empty($this->input->post())){
+                    $this->ComiteModel->cadastrar();
+                }
+                $this->chamaView('novo-comite');
             }
             
             public function alteraComite(){

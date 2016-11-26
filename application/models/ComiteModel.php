@@ -12,17 +12,20 @@
 		}
                 
                 public function cadastrar(){
-                        $this->form_validation->set_rules(	'organizador', 'Organizador', 'trim|required|max_length[50]' );
-			$this->form_validation->set_rules(	'descricao', 'Descricao', 'trim|required|max_length[500]' );
+                        $this->form_validation->set_rules('organizador', 'organizadores', 'trim|required|max_length[50]');
+			$this->form_validation->set_rules('descricao', 'descrição', 'trim|required|max_length[500]');
 
 			if ($this->form_validation->run() == FALSE ){
-				$this->session->set_flashdata('empty', 'Por favor preencha todos os campos');
-				redirect('OrganizadorControl/comite');
+				$this->session->set_flashdata('error', 'Por favor preencha todos os campos!');
 			}
 			else{
                                 $this->comi_organizad=$this->input->post( 'organizador' );
 				$this->comi_desc=$this->input->post( 'descricao' );
-				$this->ComiteDAO->inserir($this);
+				if($this->ComiteDAO->inserir($this)==true){
+                                    $this->session->set_flashdata('success', 'O Comitê foi cadastrado com sucesso!');
+                                }else{
+                                    $this->session->set_flashdata('error', 'O Comitê não foi cadastrado!');
+                                }
 			}
                 }
 
