@@ -52,9 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 $route[	'default_controller' ]     = 'InicioControl';
-$route[	'administracao' ]          = 'administracao/Home';
-$route[	'submissao' ]			   = 'InicioControl/submissao';
-$route[	'cadastro' ]               = 'InicioControl/cadastro';
+$route[	'(:any)' ]     = 'InicioControl/$1';
+//$route[	'administracao' ]          = 'administracao/Home';
+//$route[	'submissao' ]			   = 'InicioControl/submissao';
+//$route[	'cadastro' ]               = 'InicioControl/cadastro';
 
 //$route['login']					   = 'InicioControl/login';	
 //$route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';

@@ -34,18 +34,18 @@
             <p>
                 Para participar como expositor de algum projeto, ou comunicador, preencha o formulário de Cadastro de Participantes.
             </p>
-                <button onclick="aparece('formularioParticipante');">Cadastro de Participantes</button>
+                <button class="btn btn-warning" onclick="aparece('formularioParticipante');">Cadastro de Participantes</button>
                 <br><br><br><br><br>
             </div>
                             
-                        <!--<div class="col-lg-12 text-center">
-                            <p>
-                                Para participar como avaliador dos projetos, preencha o formulário de Cadastro de Avaliadores.
-                            </p>
-                                <button onclick="aparece('formularioAvaliador');">Cadastro de Avaliadores</button>
-                                <br><br><br><br><br><br><br>
-                            </div>
-                        </div>-->
+            <div class="col-lg-12 text-center">
+                <p>
+                    Para participar como avaliador dos projetos, preencha o formulário de Cadastro de Avaliadores.
+                </p>
+                    <button class="btn btn-warning" onclick="aparece('formularioAvaliador');">Cadastro de Avaliadores</button>
+                    <br><br><br><br><br><br><br>
+                </div>
+            </div>
         
 
         <section id="formularioParticipante" style="display: none;">
@@ -109,8 +109,8 @@
                             </div>
                         </div>
                         <br>
-                        <div>
-                            <?php echo "<br>".form_submit('submit', 'Cadastrar', 'class="btn btnlg btn-primary btn-block"');?><br><br><br><br><br><br><br>
+                        <div class="col-lg-12 text-center">
+                            <?php echo "<br>".form_submit('submit', 'Cadastrar', 'class="btn btnlg btn-primary"');?><br><br><br><br><br><br><br>
                         </div>
                     </div>
                 </div>
@@ -200,11 +200,8 @@
                                 </br>
                             </div>
                         </div>
-                        <div>
-                            <br>
-                        </div>
-                        <div>
-                            <?php echo "<br>".form_submit('submit', 'Cadastrar', 'class="btn btnlg btn-primary btn-block"');?><br><br><br><br><br><br><br>
+                        <div class="col-lg-12 text-center">
+                            <?php echo "<br>".form_submit('submit', 'Cadastrar', 'class="btn btnlg btn-primary"');?><br><br><br><br><br><br><br>
                         </div>
                     </div>
                 </div>
@@ -212,5 +209,4 @@
 
         </section>
     </div>
-
-</body>
+    </div>

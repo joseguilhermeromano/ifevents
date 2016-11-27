@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
                 
         
-        <link href="<?php echo base_url('font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url ('assets/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/css/new.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/css/freelancer.css');?>" rel="stylesheet">
@@ -44,8 +43,7 @@
         <img src="<?php echo base_url ('assets/img/favicon.ico');?>" rel="icon" type="image/x-icon">       
 
     </head>
-<body>
-    <body id="page-top" class="index">
+<body id="page-top" class="index">
     	
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -71,17 +69,16 @@
                         <a href="/">Histórico</a>
                     </li>*/ ?>
                     <li class="page-scroll">
+                        <?php echo anchor('index', 'Início'); ?>
+                    </li>
+                    <li class="page-scroll">
                         <?php echo anchor('submissao', 'Submissão'); ?>                        
                     </li>
                     <li class="page-scroll">
-                        <?php //echo anchor('cadastro', 'Cadastro'); ?>                        
-                    </li>
-                    
-                    <li class="page-scroll">
-                        <a href="/#page-down">Informações</a>
+                        <?php echo anchor('cadastro', 'Cadastrar'); ?>                         
                     </li>
                     <li class="page-scroll">
-                        <?php echo anchor('administracao', 'Login'); ?>                        
+                        <?php echo anchor('login', 'Login'); ?>                    
                     </li>
                 </ul>
             </div>
