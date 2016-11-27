@@ -50,9 +50,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
+/* Rotas Corretas */
 
-$route[	'default_controller' ]     = 'InicioControl';
+$route[ 'organizador' ]            = 'OrganizadorControl/index';
+$route[ 'organizador/(:any)' ]     = 'OrganizadorControl/$1';
+$route[ 'participante' ]            = 'ParticipanteControl/index';
+$route[ 'participante/(:any)' ]     = 'ParticipanteControl/$1';
+$route[ 'avaliador' ]            = 'AvaliadorControl/index';
+$route[ 'avaliador/(:any)' ]     = 'AvaliadorControl/$1';
 $route[	'(:any)' ]     = 'InicioControl/$1';
+$route[	'default_controller' ]     = 'InicioControl';
+
+
 //$route[	'administracao' ]          = 'administracao/Home';
 //$route[	'submissao' ]			   = 'InicioControl/submissao';
 //$route[	'cadastro' ]               = 'InicioControl/cadastro';
@@ -60,8 +69,6 @@ $route[	'(:any)' ]     = 'InicioControl/$1';
 //$route['login']					   = 'InicioControl/login';	
 //$route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
 //$route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
-$route[ 'organizador' ]            = 'OrganizadorControl/';
-$route[ 'organizador/(:any)' ]     = 'OrganizadorControl/$1';
 $route[ 'avaliador' ]              = 'AreaRestritaControl/avaliador';
 $route[ 'avaliador/(:any)' ]       = 'AreaRestritaControl/avaliador/$1';
 

@@ -11,20 +11,12 @@
 		}
                 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('avaliacao', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->insert('avaliacao', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('aval_id', $obj->aval_id);
-                    $confirma=$this->db->update('avaliacao', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('avaliacao', $obj);
                 }
 
                 public function consultarTudo() {
@@ -37,11 +29,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('aval_id', $obj->aval_id);
-                    $confirma= $this->db->delete('avaliacao');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('avaliacao');
                 }
 
                 

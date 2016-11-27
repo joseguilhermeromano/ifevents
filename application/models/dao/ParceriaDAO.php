@@ -11,20 +11,12 @@
 		}
                 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('parceria', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return  $this->db->insert('parceria', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('parc_id', $obj->parc_id);
-                    $confirma=$this->db->update('parcela', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('parcela', $obj);
                 }
 
                 public function consultarTudo() {
@@ -37,11 +29,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('parc_id', $obj->parc_id);
-                    $confirma= $this->db->delete('parcela');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return  $this->db->delete('parcela');
                 }
 
                 

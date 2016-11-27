@@ -75,20 +75,12 @@
     		}
 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('submissao', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->insert('submissao', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('subm_id', $obj->subm_id);
-                    $confirma=$this->db->update('submissao', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('submissao', $obj);
                 }
 
                 public function consultarTudo() {
@@ -101,11 +93,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('subm_id', $obj->subm_id);
-                    $confirma= $this->db->delete('submissao');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('submissao');
                 }
 
 }    	

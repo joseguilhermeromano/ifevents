@@ -28,20 +28,12 @@
 		}
                 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('conferencia', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->insert('conferencia', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('conf_id', $obj->conf_id);
-                    $confirma=$this->db->update('conferencia', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('conferencia', $obj);
                 }
 
                 public function consultarTudo() {
@@ -54,11 +46,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('conf_id', $obj->conf_id);
-                    $confirma= $this->db->delete('conferencia');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('conferencia');
                 }
 
                 

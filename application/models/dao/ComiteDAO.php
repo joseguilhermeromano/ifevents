@@ -27,20 +27,12 @@
 		}
 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('comite', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return  $this->db->insert('comite', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('comi_id', $obj->arti_id);
-                    $confirma=$this->db->update('comite', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('comite', $obj);
                 }
 
                 public function consultarTudo() {
@@ -53,11 +45,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('comi_id', $obj->comi_id);
-                    $confirma= $this->db->delete('comite');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('comite');
                 }
 
 }

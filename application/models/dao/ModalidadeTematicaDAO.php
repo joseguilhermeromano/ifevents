@@ -11,20 +11,12 @@
 		}
                 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('mote_id', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->insert('mote_id', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('mote_id', $obj->mote_id);
-                    $confirma=$this->db->update('modalidade_tematica', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('modalidade_tematica', $obj);
                 }
 
                 public function consultarTudo() {
@@ -37,11 +29,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('mote_id', $obj->mote_id);
-                    $confirma= $this->db->delete('modalidade_tematica');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('modalidade_tematica');
                 }
 
                 

@@ -33,20 +33,12 @@ class UserDAO extends CI_Model implements DAO{
         }
 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('user', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->insert('user', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('user_id', $obj->user_id);
-                    $confirma=$this->db->update('user', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('user', $obj);
                 }
 
                 public function consultarTudo() {
@@ -59,11 +51,7 @@ class UserDAO extends CI_Model implements DAO{
 
                 public function excluir($obj) {
                     $this->db->where('user_id', $obj->user_id);
-                    $confirma= $this->db->delete('user');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('user');
                 }
 
 }

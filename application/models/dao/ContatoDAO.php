@@ -29,20 +29,12 @@
 		}
 
                 public function inserir($obj) {
-                    $confirma= $this->db->insert('contato', $obj);
-                     if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return  $this->db->insert('contato', $obj);
                 }
                 
                 public function alterar($obj) {
                     $this->db->where('cont_id', $obj->cont_id);
-                    $confirma=$this->db->update('contato', $obj);
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->update('contato', $obj);
                 }
 
                 public function consultarTudo() {
@@ -55,11 +47,7 @@
 
                 public function excluir($obj) {
                     $this->db->where('cont_id', $obj->cont_id);
-                    $confirma= $this->db->delete('contato');
-                    if($confirma){
-                         return true;
-                     }
-                         return false;
+                    return $this->db->delete('contato');
                 }
 
 }	

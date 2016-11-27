@@ -27,8 +27,8 @@ if(!empty(validation_errors())){
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Organizadores', 'organizador' ); ?></b>
-        <?php $data = array( 'name' => 'organizador', 'placeholder' => "Organizadores", 'class' => 'form-control estilo-input' );
-               echo form_input($data);
+        <?php $data = array( 'name' => 'organizador', 'placeholder' => "Organizadores", 'cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input' );
+               echo form_textarea($data);
         ?>
         </div>
     </div>
@@ -38,10 +38,9 @@ if(!empty(validation_errors())){
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Descrição', 'descricao' ); ?></b><br>
-        	<?php  
-        		$data = array( 'name' => 'descricao', 'placeholder' => 'Descrição','cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
+        <?php  $data = array( 'name' => 'descricao', 'placeholder' => 'Descrição','cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
                 echo form_textarea( $data ); 
-        	?>
+        ?>
         </div>
     </div>
 </div>
