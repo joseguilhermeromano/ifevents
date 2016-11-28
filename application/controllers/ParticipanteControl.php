@@ -50,7 +50,7 @@
              **************************************************/
             
             public function exibePerfil(){
-                $this->chamaView('meuperfil');
+                $this->chamaView('meuperfil',null,'usuario/');
             }
             
             public function atualizaPerfil(){
