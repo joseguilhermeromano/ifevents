@@ -97,7 +97,13 @@
              ***********************************************/
             
             public function historicoSubmissao(){
-                $this->chamaView('historico-submissao',$this->ArtigoModel->buscar(),'usuario/');
+                $data['result']=$this->ArtigoModel->buscar();
+                $data['submissoes']=$this->SubmitModel->buscarPorArtigo(); 
+                $this->chamaView('historico-submissao',$data,'usuario/');
+            }
+            
+            public function downloadArtigo(){
+                $this->SubmitModel->download_arquivo();
             }
             
             public function novaSubmissao(){
