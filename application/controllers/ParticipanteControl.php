@@ -29,9 +29,7 @@
             }
             
             public function index(){
-                $this->load->view("common/header_interno");
-                $this->load->view("participante/index");
-                $this->load->view("common/footer_interno");
+                $this->chamaView('index');
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
@@ -52,7 +50,7 @@
              **************************************************/
             
             public function exibePerfil(){
-                
+                $this->chamaView('meuperfil');
             }
             
             public function atualizaPerfil(){
@@ -115,10 +113,12 @@
              **********************************************************/
             
             public function cadastraContato(){
-                
+                $this->chamaView('contato',null,'usuario/');
             }
             
-            
+            public function sair(){
+                
+            }
             
             
             
