@@ -2,29 +2,29 @@
 <hr>
 <br>
 
-<div class="error"><?php echo validation_errors(); ?></div>
-
-<?php // if ($this->session->flashdata('success')) { ?>
-<!--    <div class="alert alert-success"> 
-        <?php //$this->session->flashdata('success') ?> 
-    </div>
-<?php // } ?>
-
-<?php // if ($this->session->flashdata('empty')) { ?>
+<?php
+    if ($this->session->flashdata('error')) { ?>
     <div class="alert alert-danger"> 
-        <?php// $this->session->flashdata('empty') ?> 
+        <?= $this->session->flashdata('error') ?> 
     </div>
-<?php // } ?>
+<?php } ?>
+<?php
+if(!empty(validation_errors())){
+    echo '<div class="alert alert-danger">'.validation_errors().'</div>';
+}
+?>
+<?php
+ if ($this->session->flashdata('success')) { ?>
+	<div class="alert alert-success"> 
+        <?= $this->session->flashdata('success') ?> 
+    </div>
+<?php
+ } 
+ ?>
 
-<?php // if ($this->session->flashdata('fail')) { ?>
-    <div class="alert alert-danger"> 
-        <?php //$this->session->flashdata('fail') ?> 
-    </div>-->
-<?php // } ?>
 
 
-
-<?php echo form_open( 'DataControl/RegistraContato', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
+<?php echo form_open( 'participante/cadastracontato', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">

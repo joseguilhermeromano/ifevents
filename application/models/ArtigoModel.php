@@ -40,7 +40,6 @@
             $this->setaValores();
             if( $this->valida()==false){
                     $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-                    return $this;
             }
             else{
                 if($this->ArtigoDAO->inserir($this)==true){
@@ -51,7 +50,6 @@
                 }
 
             }
-            return null;
         }
 
             public function alterar() {

@@ -119,6 +119,9 @@
              **********************************************************/
             
             public function cadastraContato(){
+                if(!empty($this->input->get())||!empty($this->input->post())){
+                    $this->ContatoModel->cadastrar();
+                }
                 $this->chamaView('contato',null,'usuario/');
             }
             
