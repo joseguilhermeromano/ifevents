@@ -5,7 +5,7 @@
 	class SubmitDAO extends CI_Model implements DAO{
 
 		function SubmitDAO(){
-			parent::__construct('SubmitDAO');
+			parent::__construct();
 			$this->load->library('upload');
 			
 		}
@@ -87,8 +87,8 @@
                     return null;
                 }
                 
-                public function consultarCodigo(){
-                    return null;
+                public function consultarCodigo($codigo){
+                     return null;
                 }
 
                 public function excluir($obj) {

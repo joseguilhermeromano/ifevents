@@ -20,11 +20,13 @@
                 }
 
                 public function consultarTudo() {
-                    return null;
+                     $query=$this->db->get('artigo');
+                     return $query->result();
                 }
                 
-                public function consultarCodigo(){
-                    return null;
+                public function consultarCodigo($codigo){;
+                     $query=$this->db->get_where('artigo',array('arti_user_id' => $codigo));
+                     return $query->result();
                 }
 
                 public function excluir($obj) {

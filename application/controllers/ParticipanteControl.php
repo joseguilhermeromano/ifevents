@@ -13,6 +13,7 @@
                     
                     /*Carregamento de Models*/
                     $this->load->model('UserModel');
+                    $this->load->model('ArtigoModel');
 //                    $this->load->model('ConferenciaModel'); 
 //                    $this->load->model('EdicaoModel');
                     $this->load->model('ComiteModel');
@@ -34,15 +35,15 @@
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
-            public function view($view, $data=null){
-                if ( ! file_exists(APPPATH.'/views/organizador/'.$view.'.php'))
+            public function chamaView($view,$data=null,$caminho='participante/'){
+                if ( ! file_exists(APPPATH.'/views/'.$caminho.$view.'.php'))
                 {
                         // Caso não exista a págiina, retorna o erro abaixo
                         show_404();
                 }
 
                 $this->load->view("common/header_interno");
-                $this->load->view("organizador/".$view, $data);
+                $this->load->view($caminho.$view, $data);
                 $this->load->view("common/footer_interno");
             }
             
@@ -66,13 +67,11 @@
              * Métodos Relacionados ao registro do Artigo**
              **********************************************/
             
-            public function cadastraArtigo(){                    
-                    if($this->Autentica->Check( $this->router->fetch_class(), $this->router->fetch_method()) == true ){
-                        $this->load->view("common/header_interno");
-                        $this->load->view("participante/novoartigo");
-                        $this->load->view("common/footer_interno");
-                    } 
-                //redirect('administracao/Home/login');   
+            public function cadastraArtigo(){
+                if(!empty($this->input->get())||!empty($this->input->post())){
+                    $dados=$this->ArtigoModel->cadastrar();
+                }
+                $this->chamaView('novoartigo');
             }
             
             public function alteraArtigo(){
@@ -88,7 +87,7 @@
             }
             
             public function listaTodosArtigos(){
-                
+                $this->chamaView('meusartigos',$this->ArtigoModel->buscarTudo());
             }
             
             public function listaArtigosAtivos(){
@@ -100,7 +99,7 @@
              ***********************************************/
             
             public function historicoSubmissao(){
-                
+                $this->chamaView('historico-submissao',$this->ArtigoModel->buscar(),'usuario/');
             }
             
             public function novaSubmissao(){

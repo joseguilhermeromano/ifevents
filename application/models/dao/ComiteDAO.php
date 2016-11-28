@@ -39,7 +39,7 @@
                     return null;
                 }
                 
-                public function consultarCodigo(){
+                public function consultarCodigo($codigo){
                     return null;
                 }
 

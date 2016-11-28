@@ -45,7 +45,7 @@ class UserDAO extends CI_Model implements DAO{
                     return null;
                 }
                 
-                public function consultarCodigo(){
+                public function consultarCodigo($codigo){
                     return null;
                 }
 

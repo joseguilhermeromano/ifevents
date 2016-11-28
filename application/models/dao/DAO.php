@@ -20,7 +20,7 @@ interface DAO{
      * @param Não recebe parametros
      * @return Retorna uma array com os dados recuperados
      */           
-    public function consultarCodigo();
+    public function consultarCodigo($codigo);
 
     
     /**

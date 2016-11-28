@@ -3,20 +3,20 @@
 <br>
 <div class="row">
     <div class="col-sm-6">
-        <a class="btn btn-default visible-xs"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a><br>
+        <a href='<?php echo site_url('/participante/cadastraartigo'); ?>' class="btn btn-default visible-xs"><span class="glyphicon glyphicon-plus"></span> Novo Artigo</a><br>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6 col-sm-6">
        <div class="input-group">
+         <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
          <span class="input-group-btn">
              <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
          </span>
-         <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
        </div><!-- /input-group -->
      </div><!-- /.col-lg-6 -->
     <div class="col-md-6 col-sm-6">
-         <a class="btn btn-default hidden-xs" href='<?php echo site_url('/participante/novoartigo'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a>
+         <a class="btn btn-default hidden-xs" href='<?php echo site_url('/participante/cadastraartigo'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Artigo</a>
     </div>
 </div><!-- /row -->
 <br><br>
@@ -25,29 +25,28 @@
         <thead>
             <tr>
                     
-                    <th>Título</th>
+                    <th class="col-md-6">Título</th>
                     <th><center>Status</center></th>
+                    <th><center>Histórico</center></th>
                     <th><center>Edição</center></th>
                     <th><center>Exclusão</center></th>
             </tr>
         </thead>
         <tbody>
-            <tr class="primeira-cor">
-                    
-                    <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
-                    <td class="text-center">Submetido</td>
+            <?php foreach( $itens as $item ):?>
+                <tr>
+
+                    <td><?php echo $item->arti_titu; ?></td>
+                    <td class="text-center"><?php echo ($item->arti_status==0 ? "Submissões Ativas" : "Aprovado"); ?></td>
+                    <td class="text-center">
+                        <a href="<?php echo site_url('/participante/historicosubmissao?codigo='.$item->arti_id); ?>">
+                            <span class="glyphicon glyphicon-folder-open estilo-botao-edicao"></span></a>
+                    </td>
                     <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                     <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-                    
-            </tr>
-            <tr  class="segunda-cor">
-                    
-                    <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
-                    <td class="text-center">Submetido</td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-                    
-            </tr>
+
+                </tr>
+            <?php endforeach; ?> 
         </tbody>
     </table>
 </div><!-- /TABELA-->

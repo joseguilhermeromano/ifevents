@@ -92,32 +92,30 @@
 						,subm_dt  	   DATE       NOT NULL
 						,subm_hora	   TIME       NOT NULL
 						,subm_arq1	   mediumblob NOT NULL
-						,subm_arq2     mediumblob NOT NULL
-						,status        int(1)     NOT NULL   
+						,subm_status        int(1)     NOT NULL   
 					)";
 					$this->db->query($sql);
 		}
 
 		//Método cria a tabela artigo
 		public function create_table_artigo(){
-			$sql = "CREATE TABLE IF NOT EXISTS Artigo(
-					 	 arti_id      int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT	
-					 	,arti_ra 	  varchar(7)   NOT NULL	
-					 	,arti_nm 	  varchar(50)  NOT NULL			 	 
-						,arti_autor   varchar(50)  NOT NULL
-						,arti_titul   varchar(50)  NOT NULL
-						,arti_inst    varchar(50)  NOT NULL			
-						,arti_ori     varchar(50)  NOT NULL
-						,arti_are     varchar(50)  NOT NULL
-						,arti_subm    mediumblob   NOT NULL						
-						,arti_res     varchar(200) NOT NULL
-						,arti_apoio   varchar(30)  NOT NULL
-						,arti_user_id int(11)      NOT NULL
-						,arti_avdo_id int(11)      NOT NULL
-						
-					)";
+                    $sql = "CREATE TABLE IF NOT EXISTS Artigo(
+                                arti_id     int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT	
+                               ,arti_nm     varchar(50)  NOT NULL			 	 
+                               ,arti_autor  varchar(50)  NOT NULL
+                               ,arti_titu   varchar(50)  NOT NULL
+                               ,arti_inst   varchar(50)  NOT NULL			
+                               ,arti_orie   varchar(50)  NOT NULL
+                               ,arti_eite   int(11)      NOT NULL
+                               ,arti_moda   int(11)      NOT NULL
+                               ,arti_subm_final   mediumblob   NOT NULL						
+                               ,arti_resu   varchar(200) NOT NULL
+                               ,arti_apoio  varchar(30)  NOT NULL
+                               ,arti_user_id int(11)      NOT NULL
+                               ,arti_status int(1)      NOT NULL
+                            )";
 
-			$this->db->query($sql);		
+                    $this->db->query($sql);		
 
 		}
 

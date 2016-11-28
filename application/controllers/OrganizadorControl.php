@@ -130,8 +130,6 @@
             }
             
             public function cadastraComite(){
-//                $this->ComiteModel->verifica();
-//                $this->ComiteModel->cadastrar();
                 if(!empty($this->input->get())||!empty($this->input->post())){
                     $this->ComiteModel->cadastrar();
                 }
