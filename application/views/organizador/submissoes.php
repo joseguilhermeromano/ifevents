@@ -37,19 +37,20 @@
             <tr>
                 <td colspan="5" class="well" id="linha1" style="display:none">
                         <div class="col-md-8">
-                            <div class="page-header text-center" style="border-color: #CFCFCF;">
+                            <div class="page-header text-center" style="border-color: #CFCFCF; margin:0px;">
                                 <h5><b>Resumo</b></h5>
                             </div>
                             <div class="container-fluid">
-                                teste<br>
+                                <br>teste<br>
                                 
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="page-header text-center" style="border-color: #CFCFCF;">
+                            <div class="page-header text-center" style="border-color: #CFCFCF; margin:0px;">
                                 <h5><b>Ações</b></h5>
                             </div>
                             <div class="container-fluid">
+                                <br>
                                 <a href="#">
                                     <span class="glyphicon glyphicon-arrow-down estilo-botao-submissao-ativa">
                                         Download do Trabalho
