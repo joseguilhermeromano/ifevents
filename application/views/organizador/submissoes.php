@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <td colspan="5" class="well" id="linha1" style="display:none">
-                        <div class="col-md-8">
+                        <div class="col-md-8 col-xs-8">
                             <div class="page-header text-center" style="border-color: #CFCFCF; margin:0px;">
                                 <h5><b>Resumo</b></h5>
                             </div>
@@ -45,7 +45,7 @@
                                 
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-xs-4">
                             <div class="page-header text-center" style="border-color: #CFCFCF; margin:0px;">
                                 <h5><b>Ações</b></h5>
                             </div>
