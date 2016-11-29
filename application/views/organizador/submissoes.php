@@ -1,4 +1,4 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Submissões</b></h2>
+<h2><span class="glyphicon glyphicon-list"></span><b> Submissões Ativas</b></h2>
 <hr>
 <br>
 <div class="row">
@@ -18,30 +18,66 @@
             <tr>
                     
                     <th>Título</th>
-                    <th><center>Conferência</center></th>
+                    <th><center>Edição/Conferência</center></th>
                     <th><center>Eixo Temático</center></th>
-                    <th><center>Visualizar</center></th>
-                    <th><center>Excluir</center></th>
+                    <th><center>Modalidade</center></th>
+                    <th><center>Status</center></th>
             </tr>
         </thead>
         <tbody>
-            <tr class="primeira-cor">
+            <tr onclick="javascript: MostrarEsconderLinha('#linha1');">
                     
-                    <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
-                    <td class="text-center">FLISOLI2016</td>
-                    <td class="text-center">ABCD</td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a></td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                    <td>Título como link de downlod do artigo</td>
+                    <td class="text-center">5º SEMCITEC</td>
+                    <td class="text-center">Ciência Alimentando o Brasil.</td>
+                    <td class="text-center">Resumo</td>
+                    <td class="text-center">Não Alocado</td>
                     
             </tr>
-            <tr  class="segunda-cor">
-                    
-                    <td><a href="" title=""><span class="glyphicon glyphicon-download"></span> - Titulo como link de downlod do artigo</a></td>
-                    <td class="text-center">FLISOLI2016</td>
-                    <td class="text-center">ABCD</td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span></a></td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-                    
+            <tr>
+                <td colspan="5" class="well" id="linha1" style="display:none">
+                        <div class="col-md-8">
+                            <div class="page-header text-center" style="border-color: #CFCFCF;">
+                                <h5><b>Resumo</b></h5>
+                            </div>
+                            <div class="container-fluid">
+                                teste<br>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="page-header text-center" style="border-color: #CFCFCF;">
+                                <h5><b>Ações</b></h5>
+                            </div>
+                            <div class="container-fluid">
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-arrow-down estilo-botao-submissao-ativa">
+                                        Download do Trabalho
+                                    </span>
+                                </a><br>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-folder-open estilo-botao-submissao-ativa">
+                                        Histórico da Submissão
+                                    </span>
+                                </a><br>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-user estilo-botao-submissao-ativa">
+                                        Alocar Avaliador
+                                    </span>
+                                </a><br>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-ok-circle estilo-botao-submissao-ativa">
+                                        Aceitar Trabalho
+                                    </span>
+                                </a><br>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-remove-circle estilo-botao-submissao-ativa">
+                                        Recusar Trabalho
+                                    </span>
+                                </a><br>
+                            </div>
+                        </div>        
+                </td>
             </tr>
         </tbody>
     </table>
