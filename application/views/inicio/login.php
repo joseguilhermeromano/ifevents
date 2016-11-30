@@ -5,6 +5,11 @@
             <hr class="star-primary">
         </div>
     </div>
+    <?php   if ($this->session->flashdata('error')) { ?>
+                    <div class="alert alert-warning"> 
+                        <?= $this->session->flashdata('error') ?> 
+                    </div>
+            <?php } ?>
     <?php echo form_open('login/entrar');?>
     <div class="row text">
         <div class="col-lg-6 col-lg-offset-3">

@@ -32,16 +32,20 @@ class LoginControl extends CI_Controller{
             
             public function entrar(){
                 $usuario['usuario'] = $this->UserModel->login();
-                echo print_r($usuario);
-                $this->session->set_userdata($usuario);
-                if($usuario->user_tipo == 2){
-                        redirect('organizador/');
-                }
-                else if($usuario['tipo'] == 1){
-                        redirect('avaliador');
-                }	
-                else{
-                        redirect('participante');
+                if($usuario['usuario']!=null){
+                    $this->session->set_userdata($usuario);
+                        if($usuario->user_tipo == 2){
+                            redirect('organizador/');
+                        }
+                        else if($usuario['tipo'] == 1){
+                                redirect('avaliador');
+                        }	
+                        else{
+                                redirect('participante');
+                        }
+                }else{
+                    $this->session->set_flashdata("error","E-mail ou senha incorretos!");
+                    redirect('login');
                 }
             }
             
