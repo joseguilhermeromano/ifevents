@@ -24,6 +24,17 @@ class AvaliadorControl extends CI_Controller{
 //                    $this->load->model('SubmissaoModel');
 //                    $this->load->model('AvaliacaoModel'); 
                     $this->load->model('ContatoModel');
+                    
+                    /* VALIDAÇÃO DE LOGIN */
+                    
+                    $usuario=$this->session->userdata('usuario');
+                    if($usuario[0]!=null){
+                        if($usuario[0]->user_tipo!=1){
+                            redirect('login');
+                        }
+                    }else{
+                        redirect('login');
+                    }
                      
             }
             

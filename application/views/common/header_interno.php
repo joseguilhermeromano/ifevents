@@ -52,7 +52,7 @@
                     <a href="<?php echo base_url("participante/cadastracontato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
-                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
@@ -89,7 +89,7 @@
                     <a href="<?php echo base_url("organizador/cadastracomite");?>"><span class="glyphicon glyphicon-list"></span>  COMITÊ</a>
                 </li>
                 <li class="">
-                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
@@ -123,7 +123,7 @@
                     <a href="<?php echo base_url("avaliador/cadastracontato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
-                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->

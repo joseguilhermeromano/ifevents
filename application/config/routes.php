@@ -60,6 +60,8 @@ $route[ 'avaliador' ]            = 'AvaliadorControl/index';
 $route[ 'avaliador/(:any)' ]     = 'AvaliadorControl/$1';
 $route[	'(:any)' ]     = 'InicioControl/$1';
 $route[	'default_controller' ]     = 'InicioControl';
+$route[ 'login' ]            = 'LoginControl/entrar';
+$route[ 'login/(:any)' ]     = 'LoginControl/$1';
 
 
 //$route[	'administracao' ]          = 'administracao/Home';
