@@ -35,7 +35,7 @@
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
-            public function chamaView($view,$data=null,$caminho='participante/'){
+            public function chamaView($view, $data=null, $caminho='participante/'){
                 if ( ! file_exists(APPPATH.'/views/'.$caminho.$view.'.php'))
                 {
                         // Caso não exista a págiina, retorna o erro abaixo

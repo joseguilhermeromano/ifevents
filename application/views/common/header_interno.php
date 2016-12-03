@@ -43,7 +43,7 @@
                     <a href="<?php echo base_url("participante/meuperfil");?>"><span class="glyphicon glyphicon-user"></span>  MEU PERFIL</a>
                 </li>
                 <li class="<?php if($paginacorrente == 'novoartigo') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("participante/novoartigo");?>"><span class="glyphicon glyphicon-open-file"></span>  NOVO ARTIGO</a>
+                    <a href="<?php echo base_url('participante/novoartigo');?>"><span class="glyphicon glyphicon-open-file"></span>  NOVO ARTIGO</a>
                 </li>
                 <li class="<?php if($paginacorrente == 'meusartigos') {echo 'active';} ?>">
                     <a href="<?php echo base_url("participante/meusartigos");?>"><span class="glyphicon glyphicon-list"></span>  MEUS ARTIGOS</a>

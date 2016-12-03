@@ -54,11 +54,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route[ 'organizador' ]            = 'OrganizadorControl/index';
 $route[ 'organizador/(:any)' ]     = 'OrganizadorControl/$1';
-$route[ 'participante' ]            = 'ParticipanteControl/index';
-$route[ 'participante/(:any)' ]     = 'ParticipanteControl/$1';
-$route[ 'avaliador' ]            = 'AvaliadorControl/index';
-$route[ 'avaliador/(:any)' ]     = 'AvaliadorControl/$1';
-$route[	'(:any)' ]     = 'InicioControl/$1';
+$route[ 'participante' ]           = 'ParticipanteControl/index';
+$route[ 'participante/(:any)' ]    = 'ParticipanteControl/chamaView/$1';
+$route[ 'avaliador' ]              = 'AvaliadorControl/index';
+$route[ 'avaliador/(:any)' ]       = 'AvaliadorControl/$1';
+$route[	'(:any)' ]                 = 'InicioControl/$1';
 $route[	'default_controller' ]     = 'InicioControl';
 
 
