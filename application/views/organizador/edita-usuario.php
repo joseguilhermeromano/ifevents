@@ -31,6 +31,8 @@ if(!empty(validation_errors())){
         <b><?php echo form_label( 'Nome Completo', 'nome' ); ?></b>
         <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome Completo", 'value' => $usuario[0]['user_nm'], 'class' => 'form-control estilo-input');
                echo form_input($data);?>
+        <?php $data = array( 'name' => 'codigo', 'placeholder' => "Nome Completo", 'type'=>'hidden','value' => $usuario[0]['user_id'], 'class' => 'form-control estilo-input');
+               echo form_input($data);?>
         </div>
     </div>
     <div class="col-md-4">

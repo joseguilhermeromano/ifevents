@@ -78,7 +78,7 @@
         }
         
         private function setaValores(){
-            $this->user_id= $this->input->get('codigo');
+            $this->user_id= $this->input->post('codigo');
             $this->user_nm = $this->input->post( 'nome' );		
             $this->user_fone = $this->input->post( 'telefone' );
             $this->user_ins_emp = $this->input->post( 'instituicao' );
@@ -125,12 +125,15 @@
             else{
                 if($this->UserDAO->alterar($this)==true){
                     $this->session->set_flashdata('success', 'O Usuário foi atualizado com sucesso!');
+                    return $this->UserDAO->consultarCodigo($this->user_id);
+                    
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível atualizar o usuário!');
                 }
 
             }
-            return (array) $this;
+            $array[0]= (array)$this;
+            return $array;
         }
 
         public function buscar() {
