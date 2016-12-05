@@ -40,9 +40,9 @@ class LoginControl extends CI_Controller{
                         else if($usuario[0]['user_tipo'] == 1){
                                 redirect('avaliador');
                         }	
-//                        else{
-//                                redirect('participante');
-//                        }
+                        else{
+                                redirect('participante');
+                        }
                 }else{
                     $this->session->set_flashdata("error","E-mail ou senha incorretos!");
                     redirect('login');

@@ -46,7 +46,9 @@ class UserDAO extends CI_Model implements DAO{
                 }
                 
                 public function consultarCodigo($codigo){
-                    return null;
+                    $this->db->where('user_id',$codigo);
+                    $query = $this->db->get('User');
+                    return $query->result_array();
                 }
                 
                 public function consultarLogin($obj){
