@@ -1,23 +1,23 @@
                 
-<div class="error"><?php echo validation_errors(); ?></div>
-
-<?php if ($this->session->flashdata('success')) { ?>
-    <div class="alert alert-success"> 
+<?php
+    if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger"> 
+        <?= $this->session->flashdata('error') ?> 
+    </div>
+<?php } ?>
+<?php
+if(!empty(validation_errors())){
+    echo '<div class="alert alert-danger">'.validation_errors().'</div>';
+}
+?>
+<?php
+ if ($this->session->flashdata('success')) { ?>
+	<div class="alert alert-success"> 
         <?= $this->session->flashdata('success') ?> 
     </div>
-<?php } ?>
-
-<?php if ($this->session->flashdata('empty')) { ?>
-    <div class="alert alert-danger"> 
-        <?= $this->session->flashdata('empty') ?> 
-    </div>
-<?php } ?>
-
-<?php if ($this->session->flashdata('fail')) { ?>
-    <div class="alert alert-danger"> 
-        <?= $this->session->flashdata('fail') ?> 
-    </div>
-<?php } ?>
+<?php
+ } 
+ ?>
 
     <div class="container">
         <div class="row">
@@ -58,53 +58,107 @@
                         </div>
             <?php echo form_open('InicioControl/cadastraUser', 'role="form" class="formsignin"'); ?>
                         <div class="row text">
-                            <div class="col-lg-8 col-lg-offset-2">
+                        <div class="col-lg-8 col-lg-offset-2">
+                        <h3 style="color: green">Dados Pessoais</h3><br>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" name="nome" placeholder="Nome Completos" autofocus>
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control" name="nome" placeholder="Nome Completo" autofocus>
                                 </br>
                             </div>
                         </div>
                        
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="instituicao">Instituição</label>
                                 <input type="text" class="form-control" name="instituicao" placeholder="Instituição/Empresa" autofocus>
                                 </br>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="telefone">Telefone</label>
                             	<input type="text" class="form-control" name="fone" placeholder="Telefone" autofocus>
                                 </br>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="email">E-mail</label>
                                 <input type="text" class="form-control" name="email" placeholder="Email" autofocus>                              
                                 </br>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="confirmaemail">Confirma E-mail</label>
+                                <input type="text" class="form-control" name="confirmaemail" placeholder="Confirma E-mail" autofocus>                              
+                                </br>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="senha">Senha</label>
                                 <input type="password" class="form-control" name="senha" placeholder="Senha" autofocus>
                                 </br>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="hidden" class="form-control" name="tipo" value="<?php  $tipo = 0; ?>" placeholder="Tipo de Usuário" autofocus>
+                                <label for="confirmasenha">Confirma Senha</label>
+                                <input type="password" class="form-control" name="confirmasenha" placeholder="Confirma Senha" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <br>
+                        <h3 style="color: green">Endereço</h3><br>
+                        <br>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="logradouro">Logradouro</label>
+                                <input type="text" class="form-control" name="logradouro" placeholder="Logradouro" autofocus>
                                 </br>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" name="valida" placeholder="Valida Email" autofocus>
+                                <label for="bairro">Bairro</label>
+                                <input type="text" class="form-control" name="bairro" placeholder="Bairro" autofocus>
                                 </br>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" name="status" placeholder="Status" autofocus>
+                                <label for="numero">Número</label>
+                                <input type="text" class="form-control" name="numero" placeholder="Numero" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" class="form-control" name="complemento" placeholder="Complemento" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="cep">Cep</label>
+                                <input type="text" class="form-control" name="cep" placeholder="Cep" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" class="form-control" name="cidade" placeholder="Cidade" autofocus>
+                                </br>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="estado">UF</label>
+                                <input type="text" class="form-control" name="uf" placeholder="UF" autofocus>
                                 </br>
                             </div>
                         </div>

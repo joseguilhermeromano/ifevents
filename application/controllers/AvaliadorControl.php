@@ -24,27 +24,36 @@ class AvaliadorControl extends CI_Controller{
 //                    $this->load->model('SubmissaoModel');
 //                    $this->load->model('AvaliacaoModel'); 
                     $this->load->model('ContatoModel');
+                    
+                    /* VALIDAÇÃO DE LOGIN */
+                    
+                    $usuario=$this->session->userdata('usuario');
+                    if($usuario[0]!=null){
+                        if($usuario[0]->user_tipo!=1){
+                            $this->session->set_flashdata("error","Você não tem permissão para acessar esta página!");
+                            redirect('login');
+                        }
+                    }else{
+                        $this->session->set_flashdata("error","Você não está logado!");
+                        redirect('login');
+                    }
                      
             }
             
             public function index(){
-
-                    $this->load->view("common/header_interno");
-                    $this->load->view("avaliador/index");
-                    $this->load->view("common/footer_interno");
-
+                $this->chamaView('index');
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
-            public function view($view, $data=null){
-                if ( ! file_exists(APPPATH.'/views/organizador/'.$view.'.php'))
+            private function chamaView($view, $data=null,$caminho='avaliador/'){
+                if ( ! file_exists(APPPATH.'/views/'.$caminho.$view.'.php'))
                 {
                         // Caso não exista a págiina, retorna o erro abaixo
                         show_404();
                 }
 
                 $this->load->view("common/header_interno");
-                $this->load->view("organizador/".$view, $data);
+                $this->load->view($caminho.$view, $data);
                 $this->load->view("common/footer_interno");
             }
             
@@ -52,7 +61,7 @@ class AvaliadorControl extends CI_Controller{
              * Métodos Relacionados ao perfil do Organizador**
              *************************************************/
             public function exibePerfil(){
-                
+                $this->chamaView('meuperfil',null,'usuario/');
             }
             
             public function atualizaPerfil(){
@@ -72,7 +81,7 @@ class AvaliadorControl extends CI_Controller{
             }
             
             public function listaArtigosAtivos(){
-                
+                $this->chamaView('submissoes');
             }
             
             /***********************************************
@@ -100,7 +109,7 @@ class AvaliadorControl extends CI_Controller{
              **********************************************************/
             
             public function cadastraContato(){
-                
+                $this->chamaView('contato',null,'usuario/');
             }
             
 //            public function meuperfil(){

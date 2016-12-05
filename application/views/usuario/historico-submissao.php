@@ -1,4 +1,4 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Histórico da Submissão</b></h2>
+<h2><span class="glyphicon glyphicon-list"></span><b> Histórico de Submissões</b></h2>
 <hr>
 <br>
 <div class="row">
@@ -17,14 +17,19 @@
             <div class="row">
                 <div class="col-md-6">
                     <table class="table">
+                        <?php foreach ($result as $iten): ?>
+                        <thead>
+                            <th colspan="2" class="text-center">Informações do Artigo</th>
+                        </thead>
                         <tbody>
-                            <?php foreach ($result as $iten): ?>    
-
-                                              
-                                
+                             
                             <tr>
                                 <th class="col-xs-4">Título</th>
                                 <td><?php echo $iten->arti_titu; ?></td>
+                            </tr>
+                            <tr>
+                                <th class="col-xs-4">Autores</th>
+                                <td><?php echo $iten->arti_autor; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Orientador</th>
@@ -39,6 +44,10 @@
                                 <td><?php echo $iten->arti_eite; ?></td>
                             </tr>
                             <tr>
+                                <th class="col-xs-4">Modalidade</th>
+                                <td><?php echo $iten->arti_moda; ?></td>
+                            </tr>
+                            <tr>
                                 <th class="col-xs-4">Evento</th>
                                 <td>teste</td>
                             </tr>
@@ -46,7 +55,19 @@
                                 <th class="col-xs-4">Apoio Financeiro</th>
                                 <td><?php echo $iten->arti_apoio; ?></td>
                             </tr>
-                            <?php endforeach ?>  
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                            <th colspan="1" class="text-center">Resumo</th>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td><?php echo $iten->arti_resu; ?></td>
+                                </tr>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>
@@ -68,23 +89,44 @@
     <div class="panel-body" id="Painel_2">
         <br>
         <table class="table">
+            <?php foreach ($submissoes as $submissao): ?>
             <thead>
-                <th colspan="2" class="text-center">Versão: 1</th>
+                <th colspan="2" class="text-center">Informações da Submissão</th>
             </thead>
             <tbody>
                 <tr>
                     <th class="col-xs-2">Data</th>
-                    <td>07/10/206</td>
+                    <td><?php echo date("d/m/Y",  strtotime($submissao->subm_dt)); ?></td>
                 </tr>
                 <tr>
-                    <th class="col-xs-2">Arquivos</th>
-                    <td><a href="#">exemplo-1.pdf</a>, <a href="#">exemplo-2.pdf</a></td>
+                    <th class="col-xs-2">Hora</th>
+                    <td><?php echo date("h:m",  strtotime($submissao->subm_hora)); ?></td>
+                </tr>
+                <tr>
+                    <th class="col-xs-2">Arquivo</th>
+                    <td><?php echo anchor('participante/downloadartigo?codigo='.$submissao->subm_id,$submissao->subm_arquivo_nm);?></td>
                 </tr>
                 <tr>
                     <th class="col-xs-2">Status</th>
-                    <td>Avaliado</td>
+                    <td><?php 
+                    switch ($submissao->subm_status){
+                        case 0: 
+                            echo "Aguardando Avaliação";
+                            break;
+                        case 1:
+                            echo "Ajustes Pendentes";
+                            break;
+                        case 2:
+                            echo "Artigo Aprovado";
+                            break;
+                        default:
+                            echo "Artigo não aprovado!";
+                    }
+                    
+                    ?></td>
                 </tr>
             </tbody>
+            <?php endforeach ?>
         </table>
         
   </div>
@@ -105,7 +147,7 @@
       <a href="#" style="float:right; color: #000;"><span class="glyphicon glyphicon-plus"></span> Nova Avaliação</a>
         <table class="table">
             <thead>
-                <th colspan="2" class="text-center">Versão Avaliada: 1</th>
+                <th colspan="2" class="text-center">Informações da Avaliação</th>
             </thead>
             <tbody>
                 <tr>

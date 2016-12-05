@@ -26,12 +26,23 @@
 //                    $this->load->model('AvaliacaoModel'); 
                     $this->load->model('ContatoModel');
                     
+                    /* VALIDAÇÃO DE LOGIN */
+                    
+                    $usuario=$this->session->userdata('usuario');
+                    if($usuario[0]!=null){
+                        if($usuario[0]->user_tipo!=0){
+                            $this->session->set_flashdata("error","Você não tem permissão para acessar esta página!");
+                            redirect('login');
+                        }
+                    }else{
+                        $this->session->set_flashdata("error","Você não está logado!");
+                        redirect('login');
+                    }
+                    
             }
             
             public function index(){
-                $this->load->view("common/header_interno");
-                $this->load->view("participante/index");
-                $this->load->view("common/footer_interno");
+                $this->chamaView('index');
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
@@ -52,7 +63,7 @@
              **************************************************/
             
             public function exibePerfil(){
-                
+                $this->chamaView('meuperfil',null,'usuario/');
             }
             
             public function atualizaPerfil(){
@@ -99,7 +110,13 @@
              ***********************************************/
             
             public function historicoSubmissao(){
-                $this->chamaView('historico-submissao',$this->ArtigoModel->buscar(),'usuario/');
+                $data['result']=$this->ArtigoModel->buscar();
+                $data['submissoes']=$this->SubmitModel->buscarPorArtigo(); 
+                $this->chamaView('historico-submissao',$data,'usuario/');
+            }
+            
+            public function downloadArtigo(){
+                $this->SubmitModel->download_arquivo();
             }
             
             public function novaSubmissao(){
@@ -115,10 +132,15 @@
              **********************************************************/
             
             public function cadastraContato(){
-                
+                if(!empty($this->input->get())||!empty($this->input->post())){
+                    $this->ContatoModel->cadastrar();
+                }
+                $this->chamaView('contato',null,'usuario/');
             }
             
-            
+            public function sair(){
+                
+            }
             
             
             

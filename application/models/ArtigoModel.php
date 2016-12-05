@@ -34,24 +34,22 @@
             $this->arti_eite = $this->input->post( 'area' );
             $this->arti_apoio = $this->input->post( 'apoio' );	
             $this->arti_resu = $this->input->post( 'resumo' );
-            $this->arti_nm = $_FILES['userfile']['name'];
         }
 
         public function cadastrar() {
             $this->setaValores();
             if( $this->valida()==false){
                     $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-                    return $this;
             }
             else{
                 if($this->ArtigoDAO->inserir($this)==true){
+                    $this->SubmitModel->subm_arti_cod=$this->ArtigoDAO->ultimoId();
                     $this->SubmitModel->cadastrar();
                 }else{
                     $this->session->set_flashdata('error', 'O Artigo não foi cadastrado!');
                 }
 
             }
-            return null;
         }
 
             public function alterar() {
@@ -59,8 +57,7 @@
             }
 
             public function buscar() {
-                $data['result'] =$this->ArtigoDAO->consultarCodigo(1);
-                return $data;
+                return $this->ArtigoDAO->consultarCodigo($this->input->get('codigo'));
             }
 
             public function buscarTudo() {

@@ -43,6 +43,12 @@
 			}
 	}
         
+        public function login(){
+            $this->user_email = $this->input->post('email');
+            $this->user_pass = $this->input->post('senha');
+            return $this->UserDAO->consultarLogin($this);
+        }
+        
         public function cadastrar() {
             return true;
         }

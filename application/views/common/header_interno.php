@@ -39,20 +39,23 @@
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
                     <a href="<?php echo base_url("participante/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'meuperfil') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("participante/meuperfil");?>"><span class="glyphicon glyphicon-user"></span>  MEU PERFIL</a>
+                <li class="<?php if($paginacorrente == 'exibeperfil') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("participante/exibeperfil");?>"><span class="glyphicon glyphicon-user"></span>  MEU PERFIL</a>
                 </li>
+
                 <li class="<?php if($paginacorrente == 'novoartigo') {echo 'active';} ?>">
                     <a href="<?php echo base_url('participante/novoartigo');?>"><span class="glyphicon glyphicon-open-file"></span>  NOVO ARTIGO</a>
+                <li class="<?php if($paginacorrente == 'cadastraartigo') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("participante/cadastraartigo");?>"><span class="glyphicon glyphicon-open-file"></span>  NOVO ARTIGO</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'meusartigos') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("participante/meusartigos");?>"><span class="glyphicon glyphicon-list"></span>  MEUS ARTIGOS</a>
+                <li class="<?php if($paginacorrente == 'listatodosartigos') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("participante/listatodosartigos");?>"><span class="glyphicon glyphicon-list"></span>  MEUS ARTIGOS</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'contato') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("participante/contato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
+                <li class="<?php if($paginacorrente == 'cadastracontato') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("participante/cadastracontato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
-                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
@@ -76,20 +79,20 @@
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
                     <a href="<?php echo base_url("organizador/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'meuperfil') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("organizador/meuperfil");?>"><span class="glyphicon glyphicon-user"></span>  MEU PERFIL</a>
+                <li class="<?php if($paginacorrente == 'exibeperfil') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/exibeperfil");?>"><span class="glyphicon glyphicon-user"></span>  MEU PERFIL</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'submissoes') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("organizador/submissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES</a>
+                <li class="<?php if($paginacorrente == 'listatodassubmissoes') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/listatodassubmissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'conferencias') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("organizador/conferencias");?>"><span class="glyphicon glyphicon-list"></span>  CONFERÊNCIAS</a>
+                <li class="<?php if($paginacorrente == 'listaconferencia') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/listaconferencia");?>"><span class="glyphicon glyphicon-list"></span>  CONFERÊNCIAS</a>
                 </li>
-                 <li class="<?php if($paginacorrente == 'comite') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("organizador/comite");?>"><span class="glyphicon glyphicon-list"></span>  COMITÊ</a>
+                 <li class="<?php if($paginacorrente == 'cadastracomite') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("organizador/cadastracomite");?>"><span class="glyphicon glyphicon-list"></span>  COMITÊ</a>
                 </li>
                 <li class="">
-                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
@@ -116,14 +119,14 @@
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
                     <a href="<?php echo base_url("avaliador/index");?>"><span class="glyphicon glyphicon-home"></span>  INÍCIO</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'submissoes') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("avaliador/submissoes");?>"><span class="glyphicon glyphicon-list"></span>  SUBMISSÕES ATIVAS</a>
+                <li class="<?php if($paginacorrente == 'listaartigosativos') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("avaliador/listaartigosativos");?>"><span class="glyphicon glyphicon-list"></span>  ARTIGOS ATIVOS</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'contato') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("avaliador/contato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
+                <li class="<?php if($paginacorrente == 'cadastracontato') {echo 'active';} ?>">
+                    <a href="<?php echo base_url("avaliador/cadastracontato");?>"><span class="glyphicon glyphicon-envelope"></span>  CONTATO</a>
                 </li>
                 <li class="">
-                    <a href="<?php echo base_url("InicioControl");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
+                    <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->

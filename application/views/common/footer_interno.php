@@ -20,6 +20,16 @@
             $(parametro).toggle(500);
             $("span",header).toggleClass("glyphicon glyphicon-triangle-right glyphicon glyphicon-triangle-bottom");
         }
+        
+        function MostrarEsconderLinha(parametro){
+            $(parametro).toggle(function () {
+                    $(this).animate({left:'250px'}, 300);
+                },
+                function () {
+                    $(this).animate({left:'0'}, 300); // Aqui volta para o Zero, lugar inicial
+                }
+            );
+        }
     </script>
     
     

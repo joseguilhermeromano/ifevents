@@ -25,29 +25,38 @@
 //                    $this->load->model('SubmissaoModel');
 //                    $this->load->model('AvaliacaoModel'); 
                     $this->load->model('ContatoModel');
+                    
+                    /* VALIDAÇÃO DE LOGIN */
+                    
+                    $usuario=$this->session->userdata('usuario');
+                    if($usuario[0]!=null){
+                        if($usuario[0]->user_tipo!=2){
+                            $this->session->set_flashdata("error","Você não tem permissão para acessar esta página!");
+                            redirect('login');
+                        }
+                    }else{
+                        $this->session->set_flashdata("error","Você não está logado!");
+                        redirect('login');
+                    }
                      
             }
 
 
             //Método chama a página principal do organizador do evento.
             public function index(){
-//                if(!$this->Auth->CheckAuth($this->router->fetch_class(), $this->router->fetch_method()){
-                    $this->load->view("common/header_interno");
-                    $this->load->view("organizador/index");
-                    $this->load->view("common/footer_interno");
-//                }
+                $this->chamaView('index');
             }
             
             //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
-            public function chamaView($view, $data=null){
-                if ( ! file_exists(APPPATH.'/views/organizador/'.$view.'.php'))
+            public function chamaView($view, $data=null,$caminho="organizador/"){
+                if ( ! file_exists(APPPATH.'/views/'.$caminho.$view.'.php'))
                 {
                         // Caso não exista a págiina, retorna o erro abaixo
                         show_404();
                 }
 
                 $this->load->view("common/header_interno");
-                $this->load->view("organizador/".$view, $data);
+                $this->load->view($caminho.$view, $data);
                 $this->load->view("common/footer_interno");
             }
             
@@ -55,7 +64,7 @@
              * Métodos Relacionados ao perfil do Organizador**
              *************************************************/
             public function exibePerfil(){
-                
+                $this->chamaView('meuperfil',null,'usuario/');
             }
             
             public function atualizaPerfil(){
@@ -97,7 +106,7 @@
              ***************************************/
             
             public function listaConferencia(){
-                
+                $this->chamaView("conferencias");
             }
             
             public function buscaConferencia(){
@@ -272,12 +281,9 @@
             /**************************************************
              * Métodos relacionados ao controle de Submissões**
              **************************************************/
-            public function listaSubmissoesAtivas(){
-                
-            }
             
             public function listaTodasSubmissoes(){
-                
+                $this->chamaView("submissoes");
             }
             
             public function atribuiAvaliador(){

@@ -86,9 +86,10 @@
 		//Método cria tabela submissão
 		public function create_table_submissao(){
 			$sql = "CREATE TABLE IF NOT EXISTS Submissao(
-						 subm_id       int(11)    NOT NULL
+						 subm_id       int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 						,subm_user_cod int(11)    NOT NULL
 						,subm_arti_cod int(11)    NOT NULL
+                                                ,subm_arquivo_nm   VARCHAR(50)NOT NULL
 						,subm_dt  	   DATE       NOT NULL
 						,subm_hora	   TIME       NOT NULL
 						,subm_arq1	   mediumblob NOT NULL

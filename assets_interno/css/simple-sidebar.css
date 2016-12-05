@@ -391,15 +391,18 @@ label{
 }
 
 /*FORMATAÇÃO DE TABELAS*/
-#tabela1 thead{
+#tabela1 > thead{
     background-color: #00CD66;
     color: white;
 }
+#tabela1 > thead > tr{
+    border: 1px solid #00CD66;
+}
 #tabela1 > thead > tr > th{
-    border-left: 1px solid white;
+/*    border-left: 1px solid white;
     border-right: 1px solid white;
-    border-bottom: 1px solid #00CD66; 
-    border-top: 1px solid #00CD66; 
+*/    border-bottom: 1px solid #00CD66; 
+/*    border-top: 1px solid #00CD66; */
 }
 
 #tabela1 > tbody > tr:nth-child(even){
@@ -417,6 +420,11 @@ label{
 .estilo-botao-edicao{
     color: green;
     font-size: 14pt;
+}
+
+.estilo-botao-submissao-ativa{
+    color: green;
+    font-size: 10pt;
 }
 
 .estilo-botao-feedback{
