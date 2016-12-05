@@ -54,7 +54,7 @@ class UserDAO extends CI_Model implements DAO{
 			$this->db->where('user_pass', $obj->user_pass);
 			$this->db->where('user_status', 1);
                         $query = $this->db->get('User');
-                        return $query->result();
+                        return $query->result_array();
                 }
 
                 public function excluir($obj) {

@@ -30,7 +30,7 @@
                     
                     $usuario=$this->session->userdata('usuario');
                     if($usuario[0]!=null){
-                        if($usuario[0]->user_tipo!=2){
+                        if($usuario[0]['user_tipo']!=2){
                             $this->session->set_flashdata("error","Você não tem permissão para acessar esta página!");
                             redirect('login');
                         }
