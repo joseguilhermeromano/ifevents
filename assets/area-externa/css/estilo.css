@@ -800,12 +800,14 @@ and (min-resolution:.001dpcm) {
      background-repeat: no-repeat;
      width: 300px;
      height: 100px;
+     margin:0 auto;
 }
 .footer-logo-if{
      background: url('../img/logofooterif.png');
      background-repeat: no-repeat;
      width: 300px;
      height: 100px;
+     margin:0 auto;
 }
 .w3agile_footer_grid h3{
     font-size:1.7em;
@@ -815,9 +817,10 @@ and (min-resolution:.001dpcm) {
     position:relative;
     border-bottom: 2px ridge green;
 }
-.w3agile_footer_grid{
+.w3agile_footer_grid p{
     color:#fff;
     line-height:2em;
+    font-size: 1em;
 }
 .w3agile_footer_grid h2{
     margin:1em 0 0;

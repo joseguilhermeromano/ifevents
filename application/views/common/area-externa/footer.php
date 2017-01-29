@@ -1,20 +1,18 @@
 <!-- footer -->
   <div class="footer">
     <div class="container">
-      <div class="col-md-4 w3agile_footer_grid">
+      <div class="col-md-5 w3agile_footer_grid">
         <h3>Sobre</h3>
-        <p>Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis 
-          voluptatibus.</p>
+        <p>O IFEvents é uma plataforma interativa de eventos, criado especialmente
+            para atender as necessidades do IFSP Câmpus Guarulhos!</p>
+        <br>
+        <p>Seja bem vindo e aproveite ao máximo os eventos da instituição!</p>
           <br>
           <a href="#">
             <div class="footer-logo"></div>
           </a>
-          <br>
-          <a href="#">
-            <div class="footer-logo-if"></div>
-          </a>
       </div>
-      <div class="col-md-4 w3agile_footer_grid">  
+      <div class="col-md-2 w3agile_footer_grid">  
         <h3>Links</h3>
        <ul>
           <li><a href="#inicio">Início</a></li>
@@ -24,9 +22,18 @@
           <li><a href="#login">Login</a></li>
         </ul>
       </div>
-      <div class="col-md-4 w3agile_footer_grid">
+      <div class="col-md-5 w3agile_footer_grid">
         <h3>Contato</h3>
-        
+        <p> <span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Av. Salgado Filho, 3501 - Centro, 
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guarulhos - SP, 07115-000</p>
+        <br>
+        <p> <span class="glyphicon glyphicon-envelope"></span> &nbsp;&nbsp;example@ifsp.edu.gov.br</p>
+        <br>
+        <p> <span class="glyphicon glyphicon-phone-alt"></span> &nbsp;&nbsp;(11) 2304-4250</p>
+          <br>
+          <a href="#">
+            <div class="footer-logo-if"></div>
+          </a>
         <div class="clearfix"> </div>
       </div>
       <div class="clearfix"> </div>
