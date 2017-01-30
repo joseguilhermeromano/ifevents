@@ -45,8 +45,56 @@
   </div>
 </div>
 
-
 <!-- Container (Eventos Section) -->
+<div id="eventos">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Eventos</h3><br>
+      <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <h4>Nome do Evento</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            <h6>30/jan/2017</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <p>Descrição...</p>
+                    <br>
+                    <a href="#" class="btn btn-danger">Mais detalhes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <h4>Nome do Evento</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            <h6>30/jan/2017</h6>
+                        </div>
+                    </div>
+                    <br>
+                    <p>Descrição...</p>
+                    <br>
+                    <a href="#" class="btn btn-danger">Mais detalhes</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Container (Contato Section) -->
 <div id="contato" class="container-fluid">
   <div class="row">
     <div class="col-sm-12">

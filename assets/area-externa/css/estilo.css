@@ -41,7 +41,23 @@ blockquote{
 }
 
 #eventos{
-    background-color: white;
+    background-color: #e6ffcc;
+    padding:10px;
+    min-height: 100%;
+}
+#eventos h3{
+    margin-top:80px;
+}
+.card{
+    background-color:#fff;
+    box-shadow: 2px 2px 15px #888888;
+    margin:10px;
+}
+.card img{
+    max-height:300px;
+}
+.card > .container-fluid{
+    padding: 20px;
 }
 
 #inicio{
@@ -59,6 +75,8 @@ blockquote{
 #contato p{
     font-size: 12px;
 }
+
+
 .boxshadow{
     background-color:#fff;
     box-shadow: 2px 2px 15px #888888;
@@ -69,7 +87,6 @@ blockquote{
 .container-fluid {
   padding: 60px 40px;
   min-height: 100%;
-/*  height: 100%;*/
 }
 
 .navbar-default {
