@@ -42,16 +42,21 @@ blockquote{
 
 #eventos{
     background-color: #e6ffcc;
-    padding:10px;
     min-height: 100%;
 }
 #eventos h3{
     margin-top:80px;
 }
+#eventos > .container{
+    padding: 15px;
+    min-width: 100%;
+    margin:0;
+}
 .card{
     background-color:#fff;
     box-shadow: 2px 2px 15px #888888;
     margin:10px;
+    height: 450px;
 }
 .card img{
     max-height:300px;
