@@ -61,7 +61,7 @@
 <script src="<?php echo base_url('assets/area-externa/js/classie.js'); ?>"></script>
 <script src="<?php echo base_url('assets/area-externa/js/cbpAnimatedHeader.js'); ?>"></script> 
 <script src="<?php echo base_url('assets/area-externa/js/slideanim.js'); ?>"></script> 
-<script src="<?php echo base_url('assets/area-externa/js/codigos.js'); ?>"></script> 
+<script src="<?php echo base_url('assets/area-externa/js/codigos.js'); ?>"></script>
 
 </body>
 </html>

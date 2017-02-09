@@ -34,6 +34,12 @@ if ($('#back-to-top').length) {
 }
 });
 
+//  $(".button-fill").hover(function () {
+//     $(this).children(".button-inside").addClass('full');
+// }, function() {
+//   $(this).children(".button-inside").removeClass('full');
+// });
+
 // Highlight the top nav as scrolling occurs
 //$('body').scrollspy({
 //    target: '.navbar-fixed-top'
