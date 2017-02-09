@@ -31,7 +31,7 @@ body a:hover{
 
 blockquote{
     font-style:italic;
-    font-size: 22px;
+    font-size: 20px;
     color:#006600;
 }
 
@@ -39,34 +39,81 @@ blockquote{
     background-color: #31B404;
     color: white;
 }
+::-moz-selection{
+    background-color: #31B404;
+    color: white;
+}
+
+/*#eventos*/
 
 #eventos{
-    background-color: #e6ffcc;
-    min-height: 100%;
+    background-color: #00cc99;
 }
 #eventos h3{
-    margin-top:80px;
+    color:#fff;
+    margin-bottom: 0px;
 }
-#eventos > .container{
-    padding: 15px;
-    min-width: 100%;
+#eventos h4{
+    font-weight: bold;
+    font-size: 20px;
+    color: #00cc99;
     margin:0;
 }
-.card{
-    background-color:#fff;
-    box-shadow: 2px 2px 15px #888888;
-    margin:10px;
-    height: 450px;
+#eventos h5{
+    font-size:13px;
+    font-weight: bold;
+    color:#9ea0a3;
 }
-.card img{
-    max-height:300px;
+#eventos p{
+    font-size: 15px;
 }
-.card > .container-fluid{
-    padding: 20px;
+.portfolio-item {
+  margin: 0 0 15px;
+  right: 0;
+}
+.portfolio-item .portfolio-caption {
+  /*max-width: 600px;*/
+  margin: 0 auto;
+  background-color: white;
+/*  text-align: center;*/
+  padding: 25px;
+}
+.box-shadow{
+    box-shadow: 0px 0px 10px #004d4d;
 }
 
-#inicio{
-    padding: 7.5em 0 0 0;
+.botao-detalhar {
+    color: #00cc99;
+    background: #FFF;
+    padding: 6px 11px;
+    margin: 0px;
+    font-family: 'OpenSansBold', sans-serif;
+    border: 1px solid #00cc99;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+/*    border-radius: 2px;*/
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 #00cc99;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+.botao-detalhar:hover {
+    box-shadow: inset -200px 0 0 0 #00cc99;
+    color: #FFF;
+}
+.page-link{
+    color: #00cc99!important;
+    font-weight: bold;
+}
+
+.img-principal > img{
+    width: 100%;
+    height: 100%;
 }
 #contato{
     background-color: #f2f2f2;
@@ -89,9 +136,8 @@ blockquote{
     margin:10px;
 }
 
-.container-fluid {
-  padding: 60px 40px;
-  min-height: 100%;
+.section {
+    padding: 60px 0px;
 }
 
 .navbar-default {
@@ -143,19 +189,17 @@ blockquote{
     color: red;
 }
 .navbar-nav > li > a {
-    margin: 0 3px;
+    margin: 0 2px;
     padding: 0px 0px;
     line-height: 1.42857143;
     font-size: 15px;
     font-weight: 600;
+    text-transform: uppercase;
 }
 .navbar-nav {
     float: right;
     margin: 0px;
 }
-/*.logo_nav {
-    padding: 0em 0;
-}*/
 
 .logo{
      background: url('../img/teste.png');
@@ -163,6 +207,9 @@ blockquote{
      background-size: 220px;
      width: 250px;
      height: 70px;
+     -webkit-transition: all 0.3s;
+     -moz-transition: all 0.3s;
+     transition: all 0.3s;
 }
 
 
@@ -212,7 +259,7 @@ blockquote{
     }
     .hover-effect span {
         font-size: 1em;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
     }
     .hover-effect{
         position: relative;
@@ -343,20 +390,13 @@ blockquote{
 
     .navbar-fixed-top {
         padding: 27px 0;
-        -webkit-transition: padding .3s;
-        -moz-transition: padding .3s;
-        transition: padding .3s;
-    }
-
-    .navbar-fixed-top .navbar-brand {
-        font-size: 2em;
-        -webkit-transition: all .3s;
-        -moz-transition: all .3s;
-        transition: all .3s;
     }
 
     .navbar-fixed-top.navbar-shrink {
         padding: 10px 0px 0px 0px;
+        -webkit-transition: padding 0.3s;
+        -moz-transition: padding 0.3s;
+        transition:padding 0.3s;
     }
 
     .navbar-fixed-top.navbar-shrink .navbar-nav{
@@ -370,6 +410,9 @@ blockquote{
         width: 150px;
         height: 47px;
         visibility: visible !important;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
     }
 
     .navbar-nav .divider{
@@ -403,7 +446,12 @@ blockquote{
          height: 70px;
     }
     .hover-effect {
-        width: 90px;
+        width: 93px;
+        height: 35px;
+    }
+    .hover-effect span {
+        font-size: 13px;
+        letter-spacing: 1px;
     }
     .navbar-nav{
         width: 500px;
@@ -470,7 +518,7 @@ blockquote{
     .navbar-nav > li > a {
         padding: 0px 30px 0px 30px;
         display: inline-block;
-        font-size: 12px;
+        font-size: 10px;
         top:4px;
     }
     .center-pills{
@@ -489,7 +537,7 @@ blockquote{
     }
 
     .hover-effect {
-        width: 62px;
+        width: 61px;
         background-color: transparent;
         cursor: pointer;
         border-color: #31B404;
@@ -507,8 +555,8 @@ blockquote{
         color: red;
     }
     .hover-effect span {
-        font-size: 1em;
-        letter-spacing: 2px;
+        font-size: 10px;
+        letter-spacing: 1px;
     }
 
     .hover-effect {
