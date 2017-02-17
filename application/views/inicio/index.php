@@ -9,7 +9,9 @@
   <div class="container">
     <div class="row vertical-center">
       <div class="col-sm-8">
-        <h3>Sobre</h3><br>
+        <h1>Sobre</h1>
+        <hr class="estilo-hr">
+        <br>
         <blockquote class="text-justify">
         Otimize o seu tempo com essa ferramenta que organiza tudo para você!
         </blockquote>
@@ -17,7 +19,7 @@
         <p class="text-justify" >O IFEvents oferece suporte para a criação de eventos com controle de presença e emissão de certificados além de também proporcionar o controle de submissões e avaliações de trabalhos científicos. Tudo isso com muita qualidade e de forma gratuita.</p>
       </div>
       <div class="col-sm-4">
-          <img src="http://192.168.1.4/layout/assets/img/logosobre.png" class="slideanim img-responsive center-block" width="300px" height="300px">
+          <img src="<?php echo base_url("assets/area-externa/img/logosobre.png");?>" class="slideanim img-responsive center-block" width="300px" height="300px">
       </div>
     </div>
   </div>
@@ -28,7 +30,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h3>Eventos</h3><br>
+        <h1>Eventos Recentes</h1><br>
         <!-- Evento Atual -->
 
          <div class="row">
@@ -36,7 +38,19 @@
               <div class="box-shadow">
                 <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
                   <div class="portfolio-caption">
-                      <h4>Nome do Evento</h4>
+                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
+                        <br>
+                        <p>Descrição...</p>
+                        <br>
+                        <a href="#" class="botao-detalhar">Mais detalhes</a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6 portfolio-item">
+              <div class="box-shadow">
+                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
                         <br>
                         <p>Descrição...</p>
                         <br>
@@ -49,7 +63,6 @@
         <!-- /Evento Atual -->
       </div>
     </div>
-    <nav class="text-center">
     <ul class="pagination pagination-sm">
       <li class="page-item">
         <a class="page-link" href="#" tabindex="-1"><<</a>
@@ -61,7 +74,37 @@
         <a class="page-link" href="#">>></a>
       </li>
     </ul>
-    </nav>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Todas as Conferências</h1><br>
+
+         <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item">
+              <div class="box-shadow">
+              <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal" style="display:block;">
+                  <div class="portfolio-hover">
+                    <!-- <img src="http://queconceito.com.br/wp-content/uploads/2015/08/Dissidente-400x289.jpg" class="img-responsive" alt=""> -->
+                  </div>
+              <div class="portfolio-item-desc">
+                  <h4 class="text-center">Exemplo de Conferência</h4>
+              </div>
+              </a>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <ul class="pagination pagination-sm">
+      <li class="page-item">
+        <a class="page-link" href="#" tabindex="-1"><<</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">>></a>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -70,7 +113,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h3>Contato</h3>
+        <h1>Contato</h1>
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
               <div class="boxshadow">
