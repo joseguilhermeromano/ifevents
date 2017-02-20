@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <table class="table">
-                        <?php foreach ($result as $iten): ?>
+                        <?php //foreach ($result as $iten): ?>
                         <thead>
                             <th colspan="2" class="text-center">Informações do Artigo</th>
                         </thead>
@@ -25,27 +25,27 @@
                              
                             <tr>
                                 <th class="col-xs-4">Título</th>
-                                <td><?php echo $iten->arti_titu; ?></td>
+                                <td><?php //echo $iten->arti_titu; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Autores</th>
-                                <td><?php echo $iten->arti_autor; ?></td>
+                                <td><?php //echo $iten->arti_autor; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Orientador</th>
-                                <td><?php echo $iten->arti_orie; ?></td>
+                                <td><?php //echo $iten->arti_orie; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Instituição</th>
-                                <td><?php echo $iten->arti_inst; ?></td>
+                                <td><?php //echo $iten->arti_inst; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Eixo Temático</th>
-                                <td><?php echo $iten->arti_eite; ?></td>
+                                <td><?php //echo $iten->arti_eite; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Modalidade</th>
-                                <td><?php echo $iten->arti_moda; ?></td>
+                                <td><?php //echo $iten->arti_moda; ?></td>
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Evento</th>
@@ -53,7 +53,7 @@
                             </tr>
                             <tr>
                                 <th class="col-xs-4">Apoio Financeiro</th>
-                                <td><?php echo $iten->arti_apoio; ?></td>
+                                <td><?php //echo $iten->arti_apoio; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,9 +65,9 @@
                         </thead>
                         <tbody>
                                 <tr>
-                                    <td><?php echo $iten->arti_resu; ?></td>
+                                    <td><?php //echo $iten->arti_resu; ?></td>
                                 </tr>
-                            <?php endforeach ?>
+                            <?php// endforeach ?>
                         </tbody>
                     </table>
                 </div>
@@ -89,27 +89,27 @@
     <div class="panel-body" id="Painel_2">
         <br>
         <table class="table">
-            <?php foreach ($submissoes as $submissao): ?>
+            <?php// foreach ($submissoes as $submissao): ?>
             <thead>
                 <th colspan="2" class="text-center">Informações da Submissão</th>
             </thead>
             <tbody>
                 <tr>
                     <th class="col-xs-2">Data</th>
-                    <td><?php echo date("d/m/Y",  strtotime($submissao->subm_dt)); ?></td>
+                    <td><?php //echo date("d/m/Y",  strtotime($submissao->subm_dt)); ?></td>
                 </tr>
                 <tr>
                     <th class="col-xs-2">Hora</th>
-                    <td><?php echo date("h:m",  strtotime($submissao->subm_hora)); ?></td>
+                    <td><?php //echo date("h:m",  strtotime($submissao->subm_hora)); ?></td>
                 </tr>
                 <tr>
                     <th class="col-xs-2">Arquivo</th>
-                    <td><?php echo anchor('participante/downloadartigo?codigo='.$submissao->subm_id,$submissao->subm_arquivo_nm);?></td>
+                    <td><?php //echo anchor('participante/downloadartigo?codigo='.$submissao->subm_id,$submissao->subm_arquivo_nm);?></td>
                 </tr>
                 <tr>
                     <th class="col-xs-2">Status</th>
                     <td><?php 
-                    switch ($submissao->subm_status){
+                  /*  switch ($submissao->subm_status){
                         case 0: 
                             echo "Aguardando Avaliação";
                             break;
@@ -121,12 +121,12 @@
                             break;
                         default:
                             echo "Artigo não aprovado!";
-                    }
+                    }*/
                     
                     ?></td>
                 </tr>
             </tbody>
-            <?php endforeach ?>
+            <?php //endforeach ?>
         </table>
         
   </div>
@@ -144,7 +144,7 @@
         <b>Avaliações</b> 
     </div>
   <div class="panel-body" id="Painel_3">
-      <a href="#" style="float:right; color: #000;"><span class="glyphicon glyphicon-plus"></span> Nova Avaliação</a>
+      <?php echo anchor('avaliador/cadastraAvaliacao', 'style="float:right; color: #000;" <span class="glyphicon glyphicon-plus">Nova Avaliação</span> ');?>"
         <table class="table">
             <thead>
                 <th colspan="2" class="text-center">Informações da Avaliação</th>
