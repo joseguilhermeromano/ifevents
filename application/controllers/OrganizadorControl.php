@@ -30,7 +30,7 @@
                     
                     $usuario=$this->session->userdata('usuario');
                     if($usuario[0]!=null){
-                        if($usuario[0]->user_tipo!=2){
+                        if($usuario[0]['user_tipo']!=2){
                             $this->session->set_flashdata("error","Você não tem permissão para acessar esta página!");
                             redirect('login');
                         }
@@ -89,11 +89,18 @@
             
             //Método chama método verifica no model organiza model
             public function cadastraUsuario(){
-                
+                if(!empty($this->input->get())||!empty($this->input->post())){
+                    $dados=$this->UserModel->cadastrar();
+                }
+                $this->chamaView('novo-usuario');
             }
             
             public function alteraUsuario(){
-                
+                $dados=array('usuario' => $this->UserModel->buscar());
+                if(sizeof($this->input->post())>1){
+                    $dados=array('usuario'=> $this->UserModel->alterar());
+                }
+                $this->chamaView('edita-usuario',$dados);
             }
             
             public function excluiUsuario(){

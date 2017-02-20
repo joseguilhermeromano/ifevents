@@ -31,13 +31,13 @@ class LoginControl extends CI_Controller{
             }
             
             public function entrar(){
-                $usuario['usuario'] = $this->UserModel->login();
-                if($usuario['usuario']!=null){
-                    $this->session->set_userdata($usuario);
-                        if($usuario->user_tipo == 2){
+                $usuario = $this->UserModel->login();
+                if($usuario!=null){
+                    $this->session->set_userdata('usuario',$usuario);
+                        if($usuario[0]['user_tipo'] == 2){
                             redirect('organizador/');
                         }
-                        else if($usuario['tipo'] == 1){
+                        else if($usuario[0]['user_tipo'] == 1){
                                 redirect('avaliador');
                         }	
                         else{

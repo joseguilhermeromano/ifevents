@@ -1,161 +1,189 @@
+<div id="inicio">
+    <div class="img-principal">
+      <img src="https://www.bls.gov/opub/btn/volume-3/images/cover-image-for-stem-btn.jpg" />
+    </div>
+</div>
 
-<section id="apresentacao">
-    <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2> Apresentação</h2>
-                    <hr class="star-primary">
+<!-- Container (Sobre Section) -->
+<div id="sobre" class="section">
+  <div class="container">
+    <div class="row vertical-center">
+      <div class="col-sm-8">
+        <h1>Sobre</h1>
+        <hr class="estilo-hr">
+        <br>
+        <blockquote class="text-justify">
+        Otimize o seu tempo com essa ferramenta que organiza tudo para você!
+        </blockquote>
+        <p class="text-justify">O IFEvents é uma poderosa ferramenta que permite a gestão de eventos científicos (congressos, seminários, palestras, workshops, etc) de uma forma mais simples e prática, voltada especialmente para as necessidades do Instituto Federal de Educação, Ciência e Tecnologia de São Paulo, Câmpus Guarulhos.</p><br>
+        <p class="text-justify" >O IFEvents oferece suporte para a criação de eventos com controle de presença e emissão de certificados além de também proporcionar o controle de submissões e avaliações de trabalhos científicos. Tudo isso com muita qualidade e de forma gratuita.</p>
+      </div>
+      <div class="col-sm-4">
+          <img src="<?php echo base_url("assets/area-externa/img/logosobre.png");?>" class="slideanim img-responsive center-block" width="300px" height="300px">
+      </div>
+    </div>
+  </div>
+</div>
 
-                    
+<!-- Container (Eventos Section) -->
+<div id="eventos" class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Eventos Recentes</h1><br>
+        <!-- Evento Atual -->
 
-                    <p>SEMCITEC é a Semana da Ciência Tecnologia Inovação e Desenvolvimento de Guarulhos, que celebra a ciência e a inovação, com o objetivo de incentivar alunos do ensino superior a buscar, através da ciência e tecnologia, soluções para os problemas do cotidiano, além de dar acesso à população ao conhecimento produzido no município. </p>
+         <div class="row">
+            <div class="col-md-6 portfolio-item">
+              <div class="box-shadow">
+                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
+                        <br>
+                        <p>Descrição...</p>
+                        <br>
+                        <a href="#" class="botao-detalhar">Mais detalhes</a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6 portfolio-item">
+              <div class="box-shadow">
+                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
+                        <br>
+                        <p>Descrição...</p>
+                        <br>
+                        <a href="#" class="botao-detalhar">Mais detalhes</a>
+                  </div>
+                </div>
+            </div>
+          </div>
 
-                    <p>Realizada desde 2012, recebe inscrição de trabalhos na modelidade de pesquisa científica e relato de experiência, segundo eixos temáticos específicos para cada edição. </p>
+        <!-- /Evento Atual -->
+      </div>
+    </div>
+    <ul class="pagination pagination-sm">
+      <li class="page-item">
+        <a class="page-link" href="#" tabindex="-1"><<</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">>></a>
+      </li>
+    </ul>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Todas as Conferências</h1><br>
 
-                    <p>Os trabalhos aceitos são apresentados em sessões de pôster e comunicação oral, abertas ao público.</p>
-
-                    <p>Durante o período de sua realização, sempre em outubro, a SEMCITEC oferece gratuitamente à população palestras e oficinas com base na temática geral do evento, além de variada programação cultural.</p>
-
+         <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item">
+              <div class="box-shadow">
+              <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal" style="display:block;">
+                  <div class="portfolio-hover">
+                    <!-- <img src="http://queconceito.com.br/wp-content/uploads/2015/08/Dissidente-400x289.jpg" class="img-responsive" alt=""> -->
+                  </div>
+              <div class="portfolio-item-desc">
+                  <h4 class="text-center">Exemplo de Conferência</h4>
+              </div>
+              </a>
+            </div>
             </div>
         </div>
+      </div>
     </div>
-</section>
+    <ul class="pagination pagination-sm">
+      <li class="page-item">
+        <a class="page-link" href="#" tabindex="-1"><<</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">>></a>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<section id="datasImportantes" class="tod">
-    <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 onclick= "aparece('datas');">+ Datas Importantes</h2>
-                    <hr class="star-primary">
-                    <div id="datas" style="display: none;">
-                        <p> Até 30/8/2016   –   Inscrições para Submissão de Trabalhos</p>
-                        <p> Até 30/9/2016   –  Publicação dos trabalhos aceitos</p>
-                        <p> 17 a 21/10/2016   –     Realização da Semana</p>
-                        <p> 18, 19, 21/10/2016  –  Sessões de pôster e comunicação oral</p>
-                        <p> 21/10/2016  –  Encerramento e Cerimônia de premiação</p>
+<!-- Container (Contato Section) -->
+<div id="contato" class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>Contato</h1>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+              <div class="boxshadow">
+                  <h6>Escrever mensagem:</h6>
+                  <form action="#" role="form" class="formsignin" method="post" accept-charset="utf-8">
+                    <div class="row">
+                      <div class="col-sm-6">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="nome">Nome</label>
+                                    <input type="text" class="form-control" name="nome" placeholder="Nome Completo">
+                                </div>
+                            </div>
+                      </div>
+                      <div class="col-sm-6">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" class="form-control" name="email" placeholder="E-mail">
+                                </div>
+                            </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="assunto">Assunto</label>
+                                    <input type="text" class="form-control" name="assunto" placeholder="Assunto">
+                                </div>
+                            </div>
+                      </div>
+                      <div class="col-sm-6">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="telefone">Telefone</label>
+                                    <input type="text" class="form-control" name="telefone" placeholder="Telefone">
+                                </div>
+                            </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="mensagem">Mensagem</label>
+                                    <textarea class="form-control" name="mensagem" placeholder="Mensagem" rows="2"></textarea>
+                                </div>
+                            </div>
+                      </div>
                     </div>
 
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="coordenacao" class="tod">
-    <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 onclick= "aparece('coord');">+ Quem Faz</h2>
-                    <hr class="star-primary">
-                    <div id="coord" style="display: none;">
-                        <b>Coordenação Geral</b>
-                        <p>Dra. Marinilzes Moradillo Mello
-                            <br> Prefeitura de Guarulhos - PMG</p>
-
-                        <b>Coordenação Acadêmica</b>
-                        <p>Dra. Marinilzes Moradillo Mello
-                        <br>Me. Maria de Jesus Ribeiro, PMG
-                        <br>Profa. Dra. Cláudia Fonseca Rosès, IFSP – Campus Guarulhos
-                        <br>Prof. Me. Robson Ferreira Lopes, IFSP – Campus Guarulhos</p>
-
-                        <b>Equipe Responsável - Prefeitura de Guarulhos</b>
-                        <p>Ademilson Cerqueira de Jesus
-                        <br>Ailton Diller
-                        <br>Alex Garcia Smith Angelo
-                        <br>Ana Regina de Almeida
-                        <br>Celso Massom
-                        <br>Cilene de Oliveira
-                        <br>Daniel Ribeiro Alves
-                        <br>Erdnilza Santos Barretos
-                        <br>Fernanda Milat
-                        <br>Fernando de Oliveira Vieira
-                        <br>José Luis de Jesus
-                        <br>Leandro Gramulha
-                        <br>Lilian Oliveira de Nascimento
-                        <br>Luiza Ghidini
-                        <br>Marli Neves Santos
-                        <br>Merilin Vieira de Oliveira Alencar
-                        <br>Milton Alves da Silva
-                        <br>Rodrigo Luiz Afonso
-                        <br>Sandra Sória
-                        <br>Solange Marcia Araújo da Silva</p>
-
-                        <b>Equipe Responsável pela Sala Temática – Prefeitura de Guarulhos</b>
-                        <p>Ademir Luiz Alves Gabriel
-                        <br>Aline Pires
-                        <br>Antonio Perondi
-                        <br>Carlos Artur Salgado
-                        <br>Celi Pereira
-                        <br>Mariana Parussolu
-                        <br>Arq. Me. Marli Araújo (Coordenação)
-                        <br>Miriam Petri
-                        <br>Raul Campos Nascimento
-                        <br>Robson Grizilli
-                        <br>Sandra Carvalho</p>
+                    <div class="row">
+                      <div class="col-sm-12 text-center">
+                        <br>
+                        <input type="submit" name="enviar" value="Enviar" class="btn btn-success" />
+                        <input type="reset" name="limpar" value="Limpar" class="btn btn-default" />
+                      </div>
                     </div>
-            </div>
+
+                  </form>
+                  <br>
+                   <h6>Contato&Localização:</h6>
+                   <p> <span class="glyphicon glyphicon-home"></span> &nbsp;&nbsp;Av. Salgado Filho, 3501 - Centro,Guarulhos - SP, 07115-000</p>
+                  <p> <span class="glyphicon glyphicon-envelope"></span> &nbsp;&nbsp;example@ifsp.edu.gov.br</p>
+                  <p> <span class="glyphicon glyphicon-phone-alt"></span> &nbsp;&nbsp;(11) 2304-4250</p>
+              </div>
+          </div>
         </div>
+      </div>
     </div>
-</section>
-
-<section id="instituicoes" class="tod">
-    <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 onclick= "aparece('inst');">+ Instituições Acadêmicas Parceiras</h2>
-                    <hr class="star-primary">
-                    <div id="inst" style="display: none;">
-                        <b>Anhanguera</b>
-                        <p>Prof. Carlos Alberto Abrantes
-                        <br>Prof. Dr. Alex Candiago</p>
-
-                        <b>Faculdade eniac</b>
-                        <p>Prof. Me. Ruy Guérios</p>
-
-                        <b>Fatec Guarulhos</b>
-                        <p>Profa. Dra. Celia Pizzolato
-                        <br>Prof. Dr. Marcos Antonio Maia de Oliveira</p>
-
-                        <b>Fig-Unimesp</b>
-                        <p>Prof. Ary Badini
-                        <br>Prof. Dr. Eduardo Gimenez</p>
-
-                        <b>IFSP-Campus Guarulhos</b>
-                        <p>Profa. Dra. Cláudia Fonseca Rosès
-                        <br>Prof. Me. Joel Saade
-                        <br>Prof. Me. Robson Lopes Ferreira
-                        <br>Douglas Andrade
-                        <br>Jairo Filho Souza de Almeida
-                        <br>Jessica Cristina Cáceres Gonzalez
-                        <br>Juliana Brazelino Simões
-                        <br>Sergio Andrade Silva Leal</p>
-
-                        <b>Unifesp</b>
-                        <p>Prof. Dr. Daniel Arias Vazquez
-                        <br>Profa. Dra. Marineide de Oliveira Gomes</p>
-
-                        <b>Universidade Guarulhos - UNG</b>
-                        <p>Prof. Dr. Jânio Janguié Bezerra Diniz<br>
-                        Profa. Lis Lakei Bertan</p>
-                    </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="apoio" class="tod">
-    <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 onclick= "aparece('ap');">+ Apoio</h2>
-                    <hr class="star-primary">
-                    <b id="ap" style="display: none;"> CNPq/MCTI</b>
-            </div>
-        </div>
-    </div>
-</section>
-
+  </div>
+</div>

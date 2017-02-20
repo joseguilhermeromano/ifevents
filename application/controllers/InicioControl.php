@@ -18,9 +18,9 @@
 		//Método chama a view principal do sistema (Home)
 		public function index(){
 
-			$this->load->view("common/header");
+			$this->load->view("common/area-externa/header");
 			$this->load->view("inicio/index");
-			$this->load->view("common/footer");
+			$this->load->view("common/area-externa/footer");
 		}
 
 

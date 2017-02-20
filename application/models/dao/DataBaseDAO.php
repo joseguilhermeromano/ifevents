@@ -49,7 +49,13 @@
 						,user_tipo      varchar(1)   NOT NULL
 						,user_val_email varchar(10)  NOT NULL
 						,user_status    varchar(2)   NOT NULL
-						
+                                                ,user_logradouro varchar(50) 
+						,user_bairro    varchar(15) 
+                                                ,user_numero    varchar(5)
+                                                ,user_complemento varchar(15)
+                                                ,user_cep       varchar(15)
+                                                ,user_cidade    varchar(50)
+                                                ,user_uf        varchar(2)
 					)";
 					$this->db->query($sql);			
 		}
