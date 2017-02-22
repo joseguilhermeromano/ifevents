@@ -41,9 +41,22 @@
       <div class="col-sm-12">
         <h1 class="estilo-h1">Eventos</h1><br>
         <!-- Evento Atual -->
+        <div class="col-md-4">
+        <div class="demo-3">
+                <figure>
+                    <img class="img-responsive top" src="<?php echo base_url("assets/area-externa/img/img-example.png");?>" alt=""/>
+                    <figcaption>
+                        <h2>Título do Evento, <span class="glyphicon glyphicon-calendar"> 9 fev. 2017</span></h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                        <br>
+                        <a href="#" class="botao-detalhar">Mais detalhes</a>
+                    </figcaption>
+                </figure>
+                </div>
+        </div>
 
-         <div class="row">
-            <div class="col-md-6 portfolio-item">
+<!--          <div class="row">
+            <div class="col-md-4 portfolio-item">
               <div class="box-shadow">
                 <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
                   <div class="portfolio-caption">
@@ -55,7 +68,7 @@
                   </div>
                 </div>
             </div>
-            <div class="col-md-6 portfolio-item">
+            <div class="col-md-4 portfolio-item">
               <div class="box-shadow">
                 <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
                   <div class="portfolio-caption">
@@ -67,7 +80,19 @@
                   </div>
                 </div>
             </div>
-          </div>
+            <div class="col-md-4 portfolio-item">
+              <div class="box-shadow">
+                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
+                        <br>
+                        <p>Descrição...</p>
+                        <br>
+                        <a href="#" class="botao-detalhar">Mais detalhes</a>
+                  </div>
+                </div>
+            </div>
+          </div> -->
 
         <!-- /Evento Atual -->
       </div>
