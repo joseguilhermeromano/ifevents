@@ -1,16 +1,33 @@
-<div id="inicio">
-    <div class="img-principal">
-      <img src="https://www.bls.gov/opub/btn/volume-3/images/cover-image-for-stem-btn.jpg" />
-    </div>
-</div>
+<!-- Header -->
+<!-- <header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+  <img class="w3-image" src="https://w3schools.com/w3images/architect.jpg" alt="Architecture" width="1500" height="800">
+  <div class="w3-display-middle w3-margin-top w3-center">
+    <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>BR</b></span> <span class="w3-hide-small w3-text-light-grey">Architects</span></h1>
+  </div>
+</header> -->
 
+<div id="inicio">
+  <div class="inicio-header">
+    <div class="banner">
+      <img class="img-responsive banner-image" src="<?php echo base_url('assets/area-externa/img/banner-index.jpg'); ?>" width="100%" height="600px">
+    </div>
+    <div class="display-middle margin-top centralizar">
+      <h4>EVENTOS</h4>
+      <h1>A GENTE FAZ<br>
+      ACONTECER</h1>
+      <hr>
+        <!-- arrow bounce --> 
+        <div class="agileits-arrow bounce animated"><a href="#sobre" class="scroll"><i class="glyphicon glyphicon-menu-down" aria-hidden="true"></i></a></div>
+        <!-- //arrow bounce -->
+    </div>
+  </div>
+</div>
 <!-- Container (Sobre Section) -->
 <div id="sobre" class="section">
   <div class="container">
     <div class="row vertical-center">
       <div class="col-sm-8">
-        <h1>Sobre</h1>
-        <hr class="estilo-hr">
+        <h1 class="estilo-h1">Sobre</h1>
         <br>
         <blockquote class="text-justify">
         Otimize o seu tempo com essa ferramenta que organiza tudo para você!
@@ -30,7 +47,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>Eventos Recentes</h1><br>
+        <h1 class="estilo-h1">Eventos</h1><br>
         <!-- Evento Atual -->
 
          <div class="row">
@@ -63,6 +80,7 @@
         <!-- /Evento Atual -->
       </div>
     </div>
+    <nav class="text-center">
     <ul class="pagination pagination-sm">
       <li class="page-item">
         <a class="page-link" href="#" tabindex="-1"><<</a>
@@ -74,37 +92,7 @@
         <a class="page-link" href="#">>></a>
       </li>
     </ul>
-    <div class="row">
-      <div class="col-sm-12">
-        <h1>Todas as Conferências</h1><br>
-
-         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item">
-              <div class="box-shadow">
-              <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal" style="display:block;">
-                  <div class="portfolio-hover">
-                    <!-- <img src="http://queconceito.com.br/wp-content/uploads/2015/08/Dissidente-400x289.jpg" class="img-responsive" alt=""> -->
-                  </div>
-              <div class="portfolio-item-desc">
-                  <h4 class="text-center">Exemplo de Conferência</h4>
-              </div>
-              </a>
-            </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <ul class="pagination pagination-sm">
-      <li class="page-item">
-        <a class="page-link" href="#" tabindex="-1"><<</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">>></a>
-      </li>
-    </ul>
+    </nav>
   </div>
 </div>
 
@@ -113,7 +101,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>Contato</h1>
+        <h1 class="estilo-h1">Contato</h1>
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
               <div class="boxshadow">

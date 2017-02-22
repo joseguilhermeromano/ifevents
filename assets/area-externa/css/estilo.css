@@ -13,56 +13,33 @@ p{
 }
 @font-face {
     font-family: 'Signika';
-    src: url("../fonts/Signika/Signika-Regular.otf") format("opentype");
+    src: url("../fonts/Signika/Signika-ligth.otf") format("opentype");
+}
+@font-face {
+    font-family: 'FontAwesome';
+    src: url("../fonts/FontAwesome/FontAwesome.otf") format("opentype");
 }
 h1,h2,h3,h4,h5,h6{
     font-family: 'Signika', sans-serif;
 }
 h1{
-    color:#00b300; 
+    color:#438c43; 
     font-size: 48px;
     text-transform: uppercase;
     text-align: center;
-    padding-bottom: 10px;
-}
-hr.estilohr-light,
-hr.estilo-hr {
-    margin: 25px auto 30px;
-    padding: 0;
-    max-width: 100px;
-    border: 0;
-    border-top: solid 5px;
-    text-align: center;
-    border-radius: 50px;
+    padding-bottom: 0px;
 }
 
-hr.estilohr-light:after,
-hr.estilo-hr:after {
-    content:"";
-    display: inline-block;
-    position: relative;
-    top: -.8em;
-    padding: 0 .25em;
-    font-family: FontAwesome;
-    font-size: 2em;
-}
-
-hr.estilohr-light {
-    border-color:  #f17800;
-}
-
-hr.estilohr-light:after {
-    color: #fff;
-    background-color: #e66112;
-}
-
-hr.estilo-hr {
-    border-color: #00b300;
-}
-
-hr.estilo-hr:after {
-    color:#00b300;
-    background-color: #fff;
+h1.estilo-h1:after { /*depois disso podemos estilazar como qualquer outro elemento*/
+    display: block;
+    height: 2px;
+    background-color: #1bfc1b;
+    /*IMPORTANTE, sempre que usamos o after pseudo class precisamos adicionar um conteudo*/
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 5px;
+    border-radius: 100%;
 }
 ul,label{
     margin:0;
@@ -95,8 +72,13 @@ blockquote{
 #eventos h1{
     color:#fff;
     margin-bottom: 0px;
-    text-shadow: #004d4d 0.1em 0em 0.1em;
-    text-align: left;
+    text-shadow: #274f27 0em 0em 0.2em;
+    text-align: center;
+}
+#eventos h1:after{
+    background-color: white;
+    box-shadow: #274f27 0em 0em 0.2em;
+    border-radius: 100%;
 }
 #eventos h4{
     font-weight: bold;
@@ -195,11 +177,131 @@ blockquote{
     color: #00cc99!important;
     font-weight: bold;
 }
-
-.img-principal > img{
+#inicio{
+    display: block;
+}
+.inicio-header{
+    display:block;
     width: 100%;
     height: 100%;
+    position: relative;
 }
+.banner{
+/*    background: url('../img/banner-index.jpg') no-repeat 0px 0px;
+    background-size: cover;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    -ms-background-size:cover;
+    min-height:600px;*/
+    position:relative;
+    background-color: #000;
+    overflow:hidden;
+/*    padding-top:16%;*/
+}
+.banner img{
+    opacity: 0.7;
+}
+.banner-image{
+    min-height: 250px;
+    min-width: 600px;
+}
+.display-middle{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    -ms-transform:translate(-50%,-50%);
+}
+.margin-top{
+    margin-top:23px;
+}
+.centralizar{
+    display:inline-block;
+    width:auto;
+}
+/*.banner::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    background-color: black;
+    opacity: 0.3;
+}*/
+/*.w3ls_banner_info{
+    width: 36%;
+    padding: 2em;
+   background:rgba(46, 46, 46, 0);
+}*/
+#inicio h1{
+    color:#fff;
+    margin:0;
+    padding: 0;
+    position: relative;
+    font-size: 70px;
+}
+/*.header{
+    border: 1px solid black;
+    width: auto;
+    margin-left: 33%;
+    margin-right: 33%;
+    padding: 1%;
+}*/
+#inicio h4{
+    color:#fff;
+    margin:0;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    font-size: 30px;
+}
+#inicio hr{
+    height: 2px;
+    background-color: white;
+    position: relative;
+    margin: 5px 0 12px 0;
+    padding:0;
+}
+#inicio h4::before {
+    content: "";
+    height: 3px;
+    background: #ffffff;
+    position: absolute;
+    width: 30%;
+    top: 15px;
+    left: 0px;
+}
+#inicio h4::after {
+    content: "";
+    height: 3px;
+    background: #ffffff;
+    position: absolute;
+    width: 30%;
+    top: 15px;
+    right: 0px;
+}
+.agileits-arrow {
+    text-align: center; 
+} 
+.agileits-arrow a {
+    font-size: 3em;
+    color: white;
+} 
+.agileits-arrow.bounce.animated {
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    -o-animation-duration: 3s;
+    -ms-animation-duration: 3s;
+    animation-duration: 3s; 
+}
+.bounce {
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    -o-animation: bounce 2s infinite;
+    -ms-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+}
+
 #contato{
     background-color: #f2f2f2;
 }
@@ -212,7 +314,6 @@ blockquote{
 #contato p{
     font-size: 12px;
 }
-
 
 .boxshadow{
     background-color:#fff;
@@ -302,10 +403,11 @@ blockquote{
 
 /**Responsive Design **/
 
-
-
-
 @media(min-width:768px) {
+
+    body{
+        padding-top: 6em;
+    }
 
     .vertical-center {
         display: flex;
@@ -516,7 +618,24 @@ blockquote{
 
 }
 
-@media(min-width: 768px) and (max-width: 1020px){
+@media(min-width: 768px) and (max-width: 1200px){
+    #inicio h1{
+        font-size:58px;
+    }
+    #inicio h4{
+        font-size:24px;
+    }
+    #inicio h4::before{
+        margin-top: -5px;
+    }
+    #inicio h4::after{
+        margin-top: -5px;
+    }
+
+    body{
+        padding-top: 6em;
+    }
+
     blockquote{
         font-style:italic;
         font-size: 20px;
@@ -541,16 +660,40 @@ blockquote{
     .navbar-nav{
         width: 500px;
         padding: 6px;
+        margin-top:5px;
+    }
+    .navbar-fixed-top {
+        padding: 25px 0 12px 0;
     }
     .navbar-fixed-top.navbar-shrink .navbar-nav{
         visibility: visible !important;
         padding: 4px;
         width: 500px;
+        margin-top:0px;
     }
 
 }
 
 @media (max-width: 767px){
+
+    #inicio h1{
+        font-size:28px;
+    }
+    #inicio h4{
+        font-size:14px;
+    }
+    #inicio h4::before{
+        margin-top: -8px;
+    }
+    #inicio h4::after{
+        margin-top: -8px;
+    }
+    .agileits-arrow a {
+        font-size: 2em;
+    }
+    body{
+        padding-top: 3em;
+    }
 
     blockquote{
         font-style:italic;
@@ -563,11 +706,6 @@ blockquote{
     h1{
         font-size: 220%;
     }
-
-    #inicio{
-        padding: 4em 0 0 0;
-    }
-
     .logo{
          background-size: 160px;
          width: 160px;
@@ -723,6 +861,21 @@ blockquote{
         visibility: visible !important;
     }
 
+}
+
+@media (max-width: 400px){
+    #inicio h1{
+        font-size:18px;
+    }
+    #inicio h4{
+        font-size:9px;
+    }
+    #inicio h4::before{
+        margin-top: -10px;
+    }
+    #inicio h4::after{
+        margin-top: -10px;
+    }
 }
 
   .slideanim {visibility:hidden;}
@@ -943,12 +1096,12 @@ blockquote{
 }
 
 #back-to-top.btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    font-size: 32px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    font-size: 24px;
     line-height: 28px;
-    padding: 8px 0px;
+    padding: 7px;
 }
 
 #back-to-top .btn:focus {
@@ -1001,7 +1154,7 @@ blockquote{
     text-transform: uppercase;
     font-weight: 600;
 }
-.w3agile_footer_grid h2 a span{
+/*.w3agile_footer_grid h2 a span{
     transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
     -moz-transform: rotate(-180deg);
@@ -1010,7 +1163,7 @@ blockquote{
     display: inline-block;
     color: #ff9900;
     line-height: 1;
-}
+}*/
 .w3agile_footer_grid ul li{
     list-style-type:none;
     margin-bottom:1.5em;

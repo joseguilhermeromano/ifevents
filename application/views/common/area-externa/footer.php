@@ -15,10 +15,10 @@
       <div class="col-md-2 w3agile_footer_grid">  
         <h3>Links</h3>
        <ul>
-          <li><a href="#inicio">Início</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#eventos">Eventos</a></li>
-          <li><a href="#contato">Contato</a></li>
+          <li><a href="#inicio" class="scroll">Início</a></li>
+          <li><a href="#sobre" class="scroll">Sobre</a></li>
+          <li><a href="#eventos" class="scroll">Eventos</a></li>
+          <li><a href="#contato" class="scroll">Contato</a></li>
           <li><a href="#login">Login</a></li>
         </ul>
       </div>
