@@ -160,7 +160,6 @@ blockquote{
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase;
-/*    border-radius: 2px;*/
     display: inline-block;
     text-align: center;
     cursor: pointer;
@@ -187,17 +186,10 @@ blockquote{
     position: relative;
 }
 .banner{
-/*    background: url('../img/banner-index.jpg') no-repeat 0px 0px;
-    background-size: cover;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    -ms-background-size:cover;
-    min-height:600px;*/
     position:relative;
     background-color: #000;
     overflow:hidden;
-/*    padding-top:16%;*/
+    max-height: 750px;
 }
 .banner img{
     opacity: 0.7;
@@ -220,19 +212,6 @@ blockquote{
     display:inline-block;
     width:auto;
 }
-/*.banner::before {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 0; right: 0;
-    background-color: black;
-    opacity: 0.3;
-}*/
-/*.w3ls_banner_info{
-    width: 36%;
-    padding: 2em;
-   background:rgba(46, 46, 46, 0);
-}*/
 #inicio h1{
     color:#fff;
     margin:0;
@@ -240,13 +219,6 @@ blockquote{
     position: relative;
     font-size: 70px;
 }
-/*.header{
-    border: 1px solid black;
-    width: auto;
-    margin-left: 33%;
-    margin-right: 33%;
-    padding: 1%;
-}*/
 #inicio h4{
     color:#fff;
     margin:0;
@@ -406,7 +378,7 @@ blockquote{
 @media(min-width:768px) {
 
     body{
-        padding-top: 6em;
+        padding-top: 3em;
     }
 
     .vertical-center {
@@ -436,7 +408,7 @@ blockquote{
     }
 
     .hover-effect:hover {
-        border-color: #DF0101;
+        border-color: red;
     }
     .hover-effect span:nth-child(1) {
         color: #31B404;
@@ -464,13 +436,13 @@ blockquote{
     .hover-effect>span>span:nth-child(3),.hover-effect:before, .hover-effect:after, .hover-effect>:first-child, .hover-effect>:first-child:before, .hover-effect>:first-child:after {
         border-color: inherit;
         display: block;
-        -moz-transition: border-color 0.3s ease;
-        -webkit-transition: border-color 0.3s ease;
-        transition: border-color 0.3s ease;
+        -moz-transition: border-color 0.6s ease;
+        -webkit-transition: border-color 0.6s ease;
+        transition: border-color 0.6s ease;
     }
     .hover-effect:before, .hover-effect:after, .hover-effect>:first-child:before, .hover-effect>:first-child:after {
-        -webkit-animation-duration: 0.3s;
-        animation-duration: 0.3s;
+        -webkit-animation-duration: 0.6s;
+        animation-duration: 0.6s;
         position: absolute;
         box-sizing: border-box;
         content: ' ';
@@ -609,7 +581,7 @@ blockquote{
     @media screen and (-webkit-min-device-pixel-ratio:0)
     and (min-resolution:.001dpcm) {
         .hover-effect{
-            border-color:#DF0101;
+            border-color:red;
         } 
         .hover-effect:hover{
             border-color:#31B404;
@@ -633,8 +605,10 @@ blockquote{
     }
 
     body{
-        padding-top: 6em;
+        padding-top: 3em;
     }
+
+
 
     blockquote{
         font-style:italic;
@@ -1154,16 +1128,6 @@ blockquote{
     text-transform: uppercase;
     font-weight: 600;
 }
-/*.w3agile_footer_grid h2 a span{
-    transform: rotate(-180deg);
-    -webkit-transform: rotate(-180deg);
-    -moz-transform: rotate(-180deg);
-    -o-transform: rotate(-180deg);
-    -ms-transform: rotate(-180deg);
-    display: inline-block;
-    color: #ff9900;
-    line-height: 1;
-}*/
 .w3agile_footer_grid ul li{
     list-style-type:none;
     margin-bottom:1.5em;
