@@ -41,18 +41,52 @@
       <div class="col-sm-12">
         <h1 class="estilo-h1">Eventos</h1><br>
         <!-- Evento Atual -->
-        <div class="col-md-4">
-        <div class="demo-3">
-                <figure>
-                    <img class="img-responsive top" src="<?php echo base_url("assets/area-externa/img/img-example.png");?>" alt=""/>
-                    <figcaption>
-                        <h2>Título do Evento, <span class="glyphicon glyphicon-calendar"> 9 fev. 2017</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
-                        <br>
-                        <a href="#" class="botao-detalhar">Mais detalhes</a>
-                    </figcaption>
-                </figure>
-                </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="demo-3">
+            <figure>
+                <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
+                <figcaption>
+                    <h2>Título do Evento</h2>
+                    <hr>
+                    <span class="glyphicon glyphicon-calendar"> 09/02/2017</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                    <a href="#" class="botao-detalhar">Mais detalhes</a>
+                </figcaption>
+            </figure>
+          </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="demo-3">
+            <figure>
+                <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
+                <figcaption>
+                    <h2>Título do Evento</h2>
+                    <hr>
+                    <span class="glyphicon glyphicon-calendar"> 09/02/2017</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                    <a href="#" class="botao-detalhar">Mais detalhes</a>
+                </figcaption>
+            </figure>
+          </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="demo-3">
+            <figure>
+                <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
+                <figcaption>
+                    <h2>Título do Evento</h2>
+                    <hr>
+                    <span class="glyphicon glyphicon-calendar"> 09/02/2017</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                    <a href="#" class="botao-detalhar">Mais detalhes</a>
+                </figcaption>
+            </figure>
+          </div>
+          </div>
         </div>
 
 <!--          <div class="row">

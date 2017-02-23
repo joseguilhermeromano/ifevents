@@ -100,35 +100,28 @@ blockquote{
 }
 
 
-.ul-li {
-    display:inline-block;
-    margin:0 10px;
-}
-
+ /* effect hover 2 */
+ 
 .demo-3 {
     position:relative;
-    width:100%;
+    width: 100%;
     height:100%;
     overflow:hidden;
     float:left;
-/*    margin-right:20px;*/
 }
-
 .demo-3 figure {
     margin:0;
     padding:0;
     position:relative;
     cursor:pointer;
-/*    margin-left:-50px*/
-}
 
+}
 .demo-3 figure img {
     display:block;
     position:relative;
     z-index:10;
-/*    margin:-15px 0*/
-}
 
+}
 .demo-3 figure figcaption {
     display:block;
     position:absolute;
@@ -137,18 +130,16 @@ blockquote{
     -moz-box-sizing:border-box;
     box-sizing:border-box
 }
-
 .demo-3 figure h2 {
     font-family:'Lato';
     color:#fff;
     font-size:20px;
-    text-align:left
+    text-align:left;
+    margin:0px;
 }
-
-.demo-3 figure h2 span{
-    font-size: 12px;
+.demo-3 figure hr{
+    margin:5px 0;
 }
-
 .demo-3 figure p {
     display:block;
     font-family:'Lato';
@@ -156,45 +147,46 @@ blockquote{
     line-height:18px;
     margin:0;
     color:#fff;
-    text-align:left
+    text-align:left;
 }
-
+.demo-3 figure span{
+    color:white;
+    float: right;
+    font-size:12px;
+}
 .demo-3 figure figcaption {
-    top:0;
+    top:0px;
     left:0;
     width:100%;
     height:100%;
-    padding:5px 10px;
-    background-color:#197f2f;
+    position: absolute;
+    display: block;
+    padding:10px;
+    /*padding:29px 44px;*/
+    background-color:rgba(35, 122, 44,0.5);
     text-align:center;
     backface-visibility:hidden;
     -webkit-transform:rotateY(-180deg);
     -moz-transform:rotateY(-180deg);
-    -ms-transform:rotate(-180deg);
     transform:rotateY(-180deg);
     -webkit-transition:all .5s;
     -moz-transition:all .5s;
     transition:all .5s
 }
-
 .demo-3 figure img {
     backface-visibility:hidden;
     -webkit-transition:all .5s;
     -moz-transition:all .5s;
     transition:all .5s
 }
-
 .demo-3 figure:hover img,figure.hover img {
     -webkit-transform:rotateY(180deg);
     -moz-transform:rotateY(180deg);
-    -ms-transform:rotateY(180deg);
     transform:rotateY(180deg)
 }
-
 .demo-3 figure:hover figcaption,figure.hover figcaption {
     -webkit-transform:rotateY(0);
     -moz-transform:rotateY(0);
-    -ms-transform:rotateY(0);
     transform:rotateY(0)
 }
 
@@ -252,12 +244,12 @@ blockquote{
 }
 
 .botao-detalhar {
-    color: #4df94a;
-    background: #FFF;
+    color: white;
+    background-color:transparent;
     padding: 6px 11px;
-    margin: 0px;
+    margin-top: 8px;
     font-family: 'OpenSansBold', sans-serif;
-    border: 1px solid #4df94a;
+    border: 1px solid white;
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 1px;
@@ -265,14 +257,14 @@ blockquote{
     display: inline-block;
     text-align: center;
     cursor: pointer;
-    box-shadow: inset 0 0 0 0 #4df94a;
+    box-shadow: inset 0 0 0 0 white;
     -webkit-transition: all ease 0.8s;
     -moz-transition: all ease 0.8s;
     transition: all ease 0.8s;
 }
 .botao-detalhar:hover {
-    box-shadow: inset -200px 0 0 0 #4df94a;
-    color: #FFF;
+    box-shadow: inset -200px 0 0 0 white;
+    color: #288c32;
 }
 .page-link{
     color: #4df94a!important;
