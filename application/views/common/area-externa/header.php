@@ -25,7 +25,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header wow fadeInLeft animated animated" 
         data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -39,51 +39,69 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <nav>
-            <ul class="nav navbar-nav  nav-pills center-pills wow fadeInRight animated animated"
+            <ul class="nav navbar-nav wow fadeInRight animated animated"
             data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-              <span class="divider visible-xs">|</span>
+<!--           
               <li><a href="#inicio" class="hover-effect">
                 <span>
                   <span>Início</span>
-                  <span>Início</span>
-                  <span></span>
+                  <span class="hidden-xs">Início</span>
                 </span>
               </a></li>
-              <span class="divider visible-xs">|</span>
               <li><a href="#sobre" class="hover-effect">
                 <span>
                   <span>Sobre</span>
-                  <span>Sobre</span>
-                  <span></span>
+                  <span class="hidden-xs">Sobre</span>
                 </span>
               </a></li>
-              <span class="divider visible-xs">|</span>
               <li><a href="#eventos" class="hover-effect">
                 <span>
                   <span>Eventos</span>
-                  <span>Eventos</span>
-                  <span></span>
+                  <span class="hidden-xs">Eventos</span>
                 </span>
-              </a></li>
-              <span class="divider visible-xs">|</span>
-              <li><a href="#contato" class="hover-effect">
+              </a></li> -->
+              <!--Dropdowns específicos para as paginas do evento -->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span>
+                  <span>Início <b class="caret"></b></span>
+                  <span class="hidden-xs">Início <b class="caret"></b></span>
+                </span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#sobre">Sobre</a></li>
+                  <li><a href="#eventos">Eventos</a></li>
+                  <li><a href="#contato">Contato</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span>
+                  <span>Evento <b class="caret"></b></span>
+                  <span class="hidden-xs">Evento <b class="caret"></b></span>
+                </span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#sobre">Sobre o Evento</a></li>
+                  <li><a href="#">Programação</a></li>
+                  <li><a href="#">Submissão</a></li>
+                  <li><a href="#">Anais e Resultados</a></li>
+                </ul>
+              </li>
+              <!-- <li><a href="#contato" class="hover-effect">
                 <span>
                   <span>Contato</span>
-                  <span>Contato</span>
-                  <span></span>
+                  <span class="hidden-xs">Contato</span>
                 </span>
-              </a></li>
-              <span class="divider visible-xs">|</span>
+              </a></li> -->
               <li><a href="about.html" class="hover-effect">
                 <span>
                   <span>Login</span>
-                  <span>Login</span>
-                  <span></span>
+                  <span class="hidden-xs">Login</span>
                 </span>
               </a></li>
-              <span class="divider visible-xs">|</span>
             </ul>
           </nav>
         </div>

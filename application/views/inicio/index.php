@@ -42,7 +42,7 @@
         <h1 class="estilo-h1">Eventos</h1><br>
         <!-- Evento Atual -->
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
           <div class="demo-3">
             <figure>
                 <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
@@ -57,7 +57,7 @@
             </figure>
           </div>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
           <div class="demo-3">
             <figure>
                 <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
@@ -72,7 +72,7 @@
             </figure>
           </div>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
           <div class="demo-3">
             <figure>
                 <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
@@ -88,45 +88,6 @@
           </div>
           </div>
         </div>
-
-<!--          <div class="row">
-            <div class="col-md-4 portfolio-item">
-              <div class="box-shadow">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
-                  <div class="portfolio-caption">
-                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
-                        <br>
-                        <p>Descrição...</p>
-                        <br>
-                        <a href="#" class="botao-detalhar">Mais detalhes</a>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 portfolio-item">
-              <div class="box-shadow">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
-                  <div class="portfolio-caption">
-                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
-                        <br>
-                        <p>Descrição...</p>
-                        <br>
-                        <a href="#" class="botao-detalhar">Mais detalhes</a>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-4 portfolio-item">
-              <div class="box-shadow">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
-                  <div class="portfolio-caption">
-                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
-                        <br>
-                        <p>Descrição...</p>
-                        <br>
-                        <a href="#" class="botao-detalhar">Mais detalhes</a>
-                  </div>
-                </div>
-            </div>
-          </div> -->
 
         <!-- /Evento Atual -->
       </div>
