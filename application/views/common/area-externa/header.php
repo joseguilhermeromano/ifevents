@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link href="<?php echo base_url('assets/area-externa/css/bootstrappaper.css'); ?>" rel="stylesheet" type="text/css" media="all" />
+  <link href="<?php echo base_url('assets/area-externa/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css" media="all" />
   <link href="<?php echo base_url('assets/area-externa/css/estilo.css'); ?>" rel="stylesheet" type="text/css" media="all" />
   <!-- //JavaScript --><!-- animation-effect -->
   <link href="<?php echo base_url('assets/area-externa/css/animate.min.css'); ?>" rel="stylesheet"> 
@@ -26,10 +27,7 @@
         <div class="navbar-header wow fadeInLeft animated animated" 
         data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <span class="fa fa-bars"></span> MENU
           </button>
             <div class="wow swing animated" data-wow-delay=".5s">
               <a href="#">
@@ -71,9 +69,9 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#sobre">Sobre</a></li>
-                  <li><a href="#eventos">Eventos</a></li>
-                  <li><a href="#contato">Contato</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#sobre">Sobre</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#eventos">Eventos</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#contato">Contato</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -84,10 +82,10 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#sobre">Sobre o Evento</a></li>
-                  <li><a href="#">Programação</a></li>
-                  <li><a href="#">Submissão</a></li>
-                  <li><a href="#">Anais e Resultados</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#sobre">Sobre o Evento</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Programação</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Submissão</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Anais e Resultados</a></li>
                 </ul>
               </li>
               <!-- <li><a href="#contato" class="hover-effect">
@@ -96,7 +94,7 @@
                   <span class="hidden-xs">Contato</span>
                 </span>
               </a></li> -->
-              <li><a href="about.html" class="hover-effect">
+              <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
                 <span>
                   <span>Login</span>
                   <span class="hidden-xs">Login</span>

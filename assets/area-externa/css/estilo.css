@@ -533,13 +533,13 @@ blockquote{
     .hover-effect>span>span:nth-child(3),.hover-effect:before, .hover-effect:after, .hover-effect>:first-child, .hover-effect>:first-child:before, .hover-effect>:first-child:after {
         border-color: inherit;
         display: block;
-        -moz-transition: border-color 0.6s ease;
-        -webkit-transition: border-color 0.6s ease;
-        transition: border-color 0.6s ease;
+        -moz-transition: border-color 0.8s ease;
+        -webkit-transition: border-color 0.8s ease;
+        transition: border-color 0.8s ease;
     }
     .hover-effect:before, .hover-effect:after, .hover-effect>:first-child:before, .hover-effect>:first-child:after {
-        -webkit-animation-duration: 0.6s;
-        animation-duration: 0.6s;
+        -webkit-animation-duration: 0.8s;
+        animation-duration: 0.8s;
         position: absolute;
         box-sizing: border-box;
         content: ' ';
@@ -718,6 +718,9 @@ blockquote{
     p,ul li{
         font-size:16px;
     }
+
+    /*-- CONFIGURAÇÕES DO MENU EM TELAS PEQUENAS --*/
+
     .logo{
          background-size: 170px;
          width: 170px;
@@ -746,9 +749,27 @@ blockquote{
         margin-top:0px;
     }
 
+    /*-- /CONFIGURAÇÕES DO MENU EM TELAS PEQUENAS --*/
+
 }
 
 @media(max-width: 767px){
+
+    body{
+        padding-top: 3em;
+    }
+
+    blockquote{
+        font-style:italic;
+        font-size: 18px;
+    }
+
+    p,ul li{
+        font-size:14px;
+    }
+    h1{
+        font-size: 220%;
+    }
 
     #inicio h1{
         font-size:28px;
@@ -765,31 +786,9 @@ blockquote{
     .agileits-arrow a {
         font-size: 2em;
     }
-    body{
-        padding-top: 3em;
-    }
 
-    blockquote{
-        font-style:italic;
-        font-size: 18px;
-    }
+    /* DESABILITA ALGUMAS ANIMAÇÕES SOMENTE EM TELAS MOBILE */
 
-    p,ul li{
-        font-size:14px;
-    }
-    h1{
-        font-size: 220%;
-    }
-    .logo{
-         background-size: 150px;
-         width: 150px;
-         height: 50px;
-         position: absolute;
-         float: none;
-         top:8px;
-    }
-
-    /*Desabilita algumas animações somente na tela mobile*/
     .fadeInRight, .swing {
         /*CSS transitions*/
         -o-transition-property: none !important;
@@ -811,6 +810,17 @@ blockquote{
         animation: none !important;
     }
 
+    /*-- CONFIGURAÇÕES DO MENU MOBILE --*/
+
+    .logo{
+         background-size: 150px;
+         width: 150px;
+         height: 50px;
+         position: absolute;
+         float: none;
+         top:8px;
+    }
+
     .navbar-header {
         text-align: center;
         width: 100%;
@@ -821,62 +831,22 @@ blockquote{
          float: none;
     }
 
-    .navbar-default .navbar-toggle .icon-bar {
-        background-color: green;
-    }
-    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-        background-color: transparent;
-    }
-    .navbar-nav {
-        background: #37ba40;
-        padding:0px;
-        width: 100%;
-        height: auto;
-        overflow:hidden;
-        margin:0;
-    }
-    .navbar-nav > li > a{
-        font-size: 15px;
-        font-weight: none;
-        top:4px;
-        padding: 10px;
-        background-color: #37ba40;
+    .navbar-default .navbar-toggle {
+        padding: 1px 5px;
+        font-weight: bold;
         color:#37ba40;
-        margin:2px;
     }
-    .navbar-nav > li > a > span{
-        color:#fff;
+    .navbar-default button.navbar-toggle{
+        margin-right:5px;
+        border: 1px solid #37ba40;
     }
-    .navbar-nav > li > a:hover{
-        background-color: transparent!important;
+    .navbar-default button.navbar-toggle:focus{
+        background-color: #37ba40;
+        color:white;
     }
-    .navbar-nav > li > a:hover > span{
-        color: #fff;
+    .navbar-default .navbar-header{
+        margin:0px;
     }
-    .navbar-nav > li.open > a:focus > span{
-        color: green;
-    }
-    .navbar-nav > li.open > a:focus{
-        background-color: #37ba40!important;
-        margin: 0px;
-    }
-    .navbar-nav > li.open{
-        background-color: green;
-    }
-    .dropdown-menu::before{
-        display: none;
-    }
-    .dropdown-menu::after{
-        display:none;
-    }
-    .dropdown-menu > li > a{
-        color: white!important;
-    }
-    .dropdown-menu > li > a:hover{
-        color: white!important;
-        background-color: #37ba40!important;
-    }
-
     .navbar-fixed-top .logo{
         visibility: visible !important;
     }
@@ -887,44 +857,59 @@ blockquote{
         visibility: visible !important;
         width: 100%;
     }
-
-    
+   .navbar-nav {
+        background: green;
+        padding:0px;
+        width: 100%;
+        height: auto;
+        overflow:hidden;
+    }
+    .navbar-nav > li{
+        background-color: yellow;
+        margin:1px 0px;/*Margem entre os links*/
+    }
+    .navbar-default .navbar-nav > li > a{
+        background-color: #37ba40;
+        color:white;
+        padding: 10px 25px;
+        margin:0px!important;
+        width: 100%;
+    }
+    .navbar-default .navbar-nav > li > a:hover:not([enabled="enabled"]){
+        background: #fff;
+        color: #37ba40;   
+    }
+    .navbar-default .navbar-nav > li > a:focus:not([enabled="enabled"]){
+        background: #fff;
+        color: #37ba40;  
+    }
+    .navbar-default .navbar-nav > li.open > a:focus{
+        background: #37ba40;
+        color: #fff;
+    }
+    .navbar-default .navbar-nav > li.dropdown{
+        background-color: transparent;
+        display:block;
+    }
+    .navbar-default .navbar-nav > li.open > ul.dropdown-menu{
+        border-radius: 0px;
+        padding:0px;
+    }
+    .navbar-default .navbar-nav > li.open > ul.dropdown-menu > li > a{
+        background-color: #32993c;
+        color:white;
+        padding:5px 50px;
+        margin:1px 0px;
+    }
+    .navbar-default .navbar-nav > li.open > ul.dropdown-menu > li > a:hover{
+        background-color: #37ba40;
+        color:white;
+    }
+    /*-- /CONFIGURAÇÕES DO MENU MOBILE --*/   
 
 }
 
-/*@media (max-width: 630px){
-    #inicio h1{
-        font-size:29px;
-    }
-    #inicio h4{
-        font-size:12px;
-    }
-    #inicio h4::before{
-        margin-top: -10px;
-    }
-    #inicio h4::after{
-        margin-top: -10px;
-    }
-    .navbar-nav > li > a {
-        padding: 0px 13px 0px 13px;
-        display: inline-block;
-        font-size: 12px;
-    }
-    .center-pills{
-        display: flex;
-        justify-content: center;
-    }
-    .navbar-fixed-top .logo{
-        visibility: visible !important;
-    }
-    .navbar-fixed-top .collapsed{
-        visibility: visible !important;
-    }
-    .navbar-fixed-top .navbar-nav{
-        visibility: visible !important;
-    }
-
-}*/
+/*-- ANIMAÇÃO SLIDEANIM */
 
   .slideanim {visibility:hidden;}
   .slide {
@@ -954,134 +939,138 @@ blockquote{
       -webkit-transform: translateY(0%);
     }
   }
+/*-- /ANIMAÇÃO SLIDEANIM */
 
 
+/*-- CONFIGURAÇÃO DAS BORDAS DO EFEITO HOVER-EFFECT --*/
+@-webkit-keyframes center-left {
+    0%      {left: 40%; width: 8%; opacity: 0.2;}
+    25%     {left: 25%; width: 15%;}
+    50%     {left: 0%; width: 30%;}
+    80%     {left: 0%; width: 0%;}
+    100%    {left: 0%; width: 0%; opacity: 1;}
+}
+@-webkit-keyframes left-center {
+    0%      {left: 0%; width: 0%; opacity: 1;}
+    20%     {left: 0%; width: 0%;}
+    50%     {left: 0%; width: 30%;}
+    55%     {left: 40%; width: 11%;}
+    100%    {left: 43%; width: 8%; opacity: 0.2;}
+}
+@-webkit-keyframes center-right {
+    0%      {left: 52%; width: 8%; opacity: 0.2;}
+    25%     {left: 60%; width: 15%;}
+    50%     {left: 70%; width: 30%;}
+    80%     {left: 100%; width: 0%;}
+    100%    {left: 100%; width: 0%; opacity: 1;}
+}
+/*-- agileits --*/
+@-webkit-keyframes right-center {
+    0%      {left: 100%; width: 0%; opacity: 1;}
+    20%     {left: 100%; width: 0%;}
+    50%     {left: 70%; width: 30%;}
+    55%     {left: 49%; width: 11%;}
+    100%    {left: 49%; width: 8%; opacity: 0.2;}
+}
+@-webkit-keyframes top-center {
+    0%      {top: 0%; height: 0%; opacity: 0.2;}
+    50%     {top: 0%; height: 0%;}
+    60%     {top: 0%; height: 20%;}
+
+    80%     {top: 0%; height: 50%;}
+    90%     {top: 25%; height: 25%;}
+    100%    {top: 50%; height: 0%; opacity: 1;}
+}
+@-webkit-keyframes center-top {
+    0%      {top: 50%; height: 0%; opacity: 1;}
+    10%     {top: 25%; height: 25%;}
+    20%     {top: 0%; height: 50%;}
+    40%     {top: 0%; height: 20%;}
+    50%     {top: 0%; height: 0%;}
+    100%    {top: 0%; height: 0%; opacity: 0.2;}
+}
+@-webkit-keyframes bottom-center {
+    0%      {top: 100%; height: 0%; opacity: 0.2;}
+    50%     {top: 100%; height: 0%;}
+    60%     {top: 80%; height: 20%;}
+    80%     {top: 50%; height: 50%;}
+    90%     {top: 50%; height: 25%;}
+    100%    {top: 50%; height: 0%; opacity: 1;}
+}
+@-webkit-keyframes center-bottom {
+    0%      {top: 50%; height: 0%; opacity: 1;}
+    10%     {top: 50%; height: 25%;}
+    20%     {top: 50%; height: 50%;}
+    40%     {top: 80%; height: 20%;}
+    50%     {top: 100%; height: 0%;}
+    100%    {top: 100%; height: 0%; opacity: 0.2;}
+}
+@keyframes center-left {
+    0%      {left: 40%; width: 8%; opacity: 0.2;}
+    25%     {left: 25%; width: 15%;}
+    50%     {left: 0%; width: 30%;}
+    80%     {left: 0%; width: 0%;}
+    100%    {left: 0%; width: 0%; opacity: 1;}
+}
+/*-- w3layouts --*/
+@keyframes left-center {
+    0%      {left: 0%; width: 0%; opacity: 1;}
+    20%     {left: 0%; width: 0%;}
+    50%     {left: 0%; width: 30%;}
+    55%     {left: 40%; width: 11%;}
+    100%    {left: 43%; width: 8%; opacity: 0.2;}
+}
+@keyframes center-right {
+    0%      {left: 52%; width: 8%; opacity: 0.2;}
+    25%     {left: 60%; width: 15%;}
+    50%     {left: 70%; width: 30%;}
+    80%     {left: 100%; width: 0%;}
+    100%    {left: 100%; width: 0%; opacity: 1;}
+}
+@keyframes right-center {
+    0%      {left: 100%; width: 0%; opacity: 1;}
+    20%     {left: 100%; width: 0%;}
+    50%     {left: 70%; width: 30%;}
+    55%     {left: 49%; width: 11%;}
+    100%    {left: 49%; width: 8%; opacity: 0.2;}
+}
+@keyframes top-center {
+    0%      {top: 0%; height: 0%; opacity: 0.2;}
+    50%     {top: 0%; height: 0%;}
+    60%     {top: 0%; height: 20%;}
+    80%     {top: 0%; height: 50%;}
+    90%     {top: 25%; height: 25%;}
+    100%    {top: 50%; height: 0%; opacity: 1;}
+}
+@keyframes center-top {
+    0%      {top: 50%; height: 0%; opacity: 1;}
+    10%     {top: 25%; height: 25%;}
+    20%     {top: 0%; height: 50%;}
+    40%     {top: 0%; height: 20%;}
+    50%     {top: 0%; height: 0%;}
+    100%    {top: 0%; height: 0%; opacity: 0.2;}
+}
+@keyframes bottom-center {
+    0%{     top: 100%; height: 0%; opacity: 0.2;}
+    50%     {top: 100%; height: 0%;}
+    60%     {top: 80%; height: 20%;}
+    80%     {top: 50%; height: 50%;}
+    90%     {top: 50%; height: 25%;}
+    100%    {top: 50%; height: 0%; opacity: 1;}
+}
+/*-- agileits --*/
+@keyframes center-bottom {
+    0%      {top: 50%; height: 0%; opacity: 1;}
+    10%     {top: 50%; height: 25%;}
+    20%     {top: 50%; height: 50%;}
+    40%     {top: 80%; height: 20%;}
+    50%     {top: 100%; height: 0%;}
+    100%    {top: 100%; height: 0%; opacity: 0.2;}
+}
+/*-- /CONFIGURAÇÃO DAS BORDAS DO EFEITO HOVER-EFFECT --*/
 
 
-    @-webkit-keyframes center-left {
-        0%      {left: 40%; width: 8%; opacity: 0.2;}
-        25%     {left: 25%; width: 15%;}
-        50%     {left: 0%; width: 30%;}
-        80%     {left: 0%; width: 0%;}
-        100%    {left: 0%; width: 0%; opacity: 1;}
-    }
-    @-webkit-keyframes left-center {
-        0%      {left: 0%; width: 0%; opacity: 1;}
-        20%     {left: 0%; width: 0%;}
-        50%     {left: 0%; width: 30%;}
-        55%     {left: 40%; width: 11%;}
-        100%    {left: 43%; width: 8%; opacity: 0.2;}
-    }
-    @-webkit-keyframes center-right {
-        0%      {left: 52%; width: 8%; opacity: 0.2;}
-        25%     {left: 60%; width: 15%;}
-        50%     {left: 70%; width: 30%;}
-        80%     {left: 100%; width: 0%;}
-        100%    {left: 100%; width: 0%; opacity: 1;}
-    }
-    /*-- agileits --*/
-    @-webkit-keyframes right-center {
-        0%      {left: 100%; width: 0%; opacity: 1;}
-        20%     {left: 100%; width: 0%;}
-        50%     {left: 70%; width: 30%;}
-        55%     {left: 49%; width: 11%;}
-        100%    {left: 49%; width: 8%; opacity: 0.2;}
-    }
-    @-webkit-keyframes top-center {
-        0%      {top: 0%; height: 0%; opacity: 0.2;}
-        50%     {top: 0%; height: 0%;}
-        60%     {top: 0%; height: 20%;}
-
-        80%     {top: 0%; height: 50%;}
-        90%     {top: 25%; height: 25%;}
-        100%    {top: 50%; height: 0%; opacity: 1;}
-    }
-    @-webkit-keyframes center-top {
-        0%      {top: 50%; height: 0%; opacity: 1;}
-        10%     {top: 25%; height: 25%;}
-        20%     {top: 0%; height: 50%;}
-        40%     {top: 0%; height: 20%;}
-        50%     {top: 0%; height: 0%;}
-        100%    {top: 0%; height: 0%; opacity: 0.2;}
-    }
-    @-webkit-keyframes bottom-center {
-        0%      {top: 100%; height: 0%; opacity: 0.2;}
-        50%     {top: 100%; height: 0%;}
-        60%     {top: 80%; height: 20%;}
-        80%     {top: 50%; height: 50%;}
-        90%     {top: 50%; height: 25%;}
-        100%    {top: 50%; height: 0%; opacity: 1;}
-    }
-    @-webkit-keyframes center-bottom {
-        0%      {top: 50%; height: 0%; opacity: 1;}
-        10%     {top: 50%; height: 25%;}
-        20%     {top: 50%; height: 50%;}
-        40%     {top: 80%; height: 20%;}
-        50%     {top: 100%; height: 0%;}
-        100%    {top: 100%; height: 0%; opacity: 0.2;}
-    }
-    @keyframes center-left {
-        0%      {left: 40%; width: 8%; opacity: 0.2;}
-        25%     {left: 25%; width: 15%;}
-        50%     {left: 0%; width: 30%;}
-        80%     {left: 0%; width: 0%;}
-        100%    {left: 0%; width: 0%; opacity: 1;}
-    }
-    /*-- w3layouts --*/
-    @keyframes left-center {
-        0%      {left: 0%; width: 0%; opacity: 1;}
-        20%     {left: 0%; width: 0%;}
-        50%     {left: 0%; width: 30%;}
-        55%     {left: 40%; width: 11%;}
-        100%    {left: 43%; width: 8%; opacity: 0.2;}
-    }
-    @keyframes center-right {
-        0%      {left: 52%; width: 8%; opacity: 0.2;}
-        25%     {left: 60%; width: 15%;}
-        50%     {left: 70%; width: 30%;}
-        80%     {left: 100%; width: 0%;}
-        100%    {left: 100%; width: 0%; opacity: 1;}
-    }
-    @keyframes right-center {
-        0%      {left: 100%; width: 0%; opacity: 1;}
-        20%     {left: 100%; width: 0%;}
-        50%     {left: 70%; width: 30%;}
-        55%     {left: 49%; width: 11%;}
-        100%    {left: 49%; width: 8%; opacity: 0.2;}
-    }
-    @keyframes top-center {
-        0%      {top: 0%; height: 0%; opacity: 0.2;}
-        50%     {top: 0%; height: 0%;}
-        60%     {top: 0%; height: 20%;}
-        80%     {top: 0%; height: 50%;}
-        90%     {top: 25%; height: 25%;}
-        100%    {top: 50%; height: 0%; opacity: 1;}
-    }
-    @keyframes center-top {
-        0%      {top: 50%; height: 0%; opacity: 1;}
-        10%     {top: 25%; height: 25%;}
-        20%     {top: 0%; height: 50%;}
-        40%     {top: 0%; height: 20%;}
-        50%     {top: 0%; height: 0%;}
-        100%    {top: 0%; height: 0%; opacity: 0.2;}
-    }
-    @keyframes bottom-center {
-        0%{     top: 100%; height: 0%; opacity: 0.2;}
-        50%     {top: 100%; height: 0%;}
-        60%     {top: 80%; height: 20%;}
-        80%     {top: 50%; height: 50%;}
-        90%     {top: 50%; height: 25%;}
-        100%    {top: 50%; height: 0%; opacity: 1;}
-    }
-    /*-- agileits --*/
-    @keyframes center-bottom {
-        0%      {top: 50%; height: 0%; opacity: 1;}
-        10%     {top: 50%; height: 25%;}
-        20%     {top: 50%; height: 50%;}
-        40%     {top: 80%; height: 20%;}
-        50%     {top: 100%; height: 0%;}
-        100%    {top: 100%; height: 0%; opacity: 0.2;}
-    }
+/*-- ANIMAÇÃO DE FLUTUAR LABELS --*/
 
 .floating-label-form-group {
     position: relative;
@@ -1129,8 +1118,10 @@ blockquote{
     color: #009900;
     font-weight: bold;
 }
+/*-- /ANIMAÇÃO DE FLUTUAR LABELS --*/
 
 
+/*-- BOTÃO VOLTAR AO TOPO --*/
 
 #back-to-top{
     z-index: 1049;
@@ -1160,7 +1151,10 @@ blockquote{
     opacity: 0.80;
 }
 
-/*-- footer --*/
+/*-- /BOTÃO VOLTAR AO TOPO --*/
+
+/*-- FOOTER --*/
+
 .footer{
     background:#004d00;
     padding:4em 0;
@@ -1245,7 +1239,7 @@ ul.w3agile_footer_grid_list li{
 .agileinfo_copy_right_left p a:hover{
     color:#fff;
 }
-/*-- //footer --*/
+/*-- //FOOTER --*/
 
 
 
