@@ -1,16 +1,25 @@
 <div id="inicio">
-    <div class="img-principal">
-      <img src="https://www.bls.gov/opub/btn/volume-3/images/cover-image-for-stem-btn.jpg" />
+  <div class="inicio-header">
+    <div class="banner">
+      <img class="img-responsive banner-image" src="<?php echo base_url("assets/area-externa/img/banner-index.jpg"); ?>" width="100%">
     </div>
+    <div class="display-middle margin-top centralizar">
+      <h4>EVENTOS</h4>
+      <h1>A GENTE FAZ<br>
+      ACONTECER</h1>
+      <hr>
+        <!-- arrow bounce --> 
+        <div class="agileits-arrow bounce animated"><a href="#sobre" class="scroll"><i class="glyphicon glyphicon-menu-down" aria-hidden="true"></i></a></div>
+        <!-- //arrow bounce -->
+    </div>
+  </div>
 </div>
-
 <!-- Container (Sobre Section) -->
 <div id="sobre" class="section">
   <div class="container">
     <div class="row vertical-center">
       <div class="col-sm-8">
-        <h1>Sobre</h1>
-        <hr class="estilo-hr">
+        <h1 class="estilo-h1">Sobre</h1>
         <br>
         <blockquote class="text-justify">
         Otimize o seu tempo com essa ferramenta que organiza tudo para você!
@@ -30,39 +39,60 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>Eventos Recentes</h1><br>
+        <h1 class="estilo-h1">Eventos</h1><br>
         <!-- Evento Atual -->
-
-         <div class="row">
-            <div class="col-md-6 portfolio-item">
-              <div class="box-shadow">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
-                  <div class="portfolio-caption">
-                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
-                        <br>
-                        <p>Descrição...</p>
-                        <br>
-                        <a href="#" class="botao-detalhar">Mais detalhes</a>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-6 portfolio-item">
-              <div class="box-shadow">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
-                  <div class="portfolio-caption">
-                      <h4>Nome do Evento, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
-                        <br>
-                        <p>Descrição...</p>
-                        <br>
-                        <a href="#" class="botao-detalhar">Mais detalhes</a>
-                  </div>
-                </div>
-            </div>
+        <div class="row">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="demo-3">
+            <figure>
+                <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
+                <figcaption>
+                    <h2>Título do Evento</h2>
+                    <hr>
+                    <span class="glyphicon glyphicon-calendar"> 09/02/2017</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                    <a href="#" class="botao-detalhar">Mais detalhes</a>
+                </figcaption>
+            </figure>
           </div>
+          </div>
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="demo-3">
+            <figure>
+                <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
+                <figcaption>
+                    <h2>Título do Evento</h2>
+                    <hr>
+                    <span class="glyphicon glyphicon-calendar"> 09/02/2017</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                    <a href="#" class="botao-detalhar">Mais detalhes</a>
+                </figcaption>
+            </figure>
+          </div>
+          </div>
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="demo-3">
+            <figure>
+                <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
+                <figcaption>
+                    <h2>Título do Evento</h2>
+                    <hr>
+                    <span class="glyphicon glyphicon-calendar"> 09/02/2017</span>
+                    <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost.</p>
+                    <a href="#" class="botao-detalhar">Mais detalhes</a>
+                </figcaption>
+            </figure>
+          </div>
+          </div>
+        </div>
 
         <!-- /Evento Atual -->
       </div>
     </div>
+    <nav class="text-center">
     <ul class="pagination pagination-sm">
       <li class="page-item">
         <a class="page-link" href="#" tabindex="-1"><<</a>
@@ -74,37 +104,7 @@
         <a class="page-link" href="#">>></a>
       </li>
     </ul>
-    <div class="row">
-      <div class="col-sm-12">
-        <h1>Todas as Conferências</h1><br>
-
-         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item">
-              <div class="box-shadow">
-              <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal" style="display:block;">
-                  <div class="portfolio-hover">
-                    <!-- <img src="http://queconceito.com.br/wp-content/uploads/2015/08/Dissidente-400x289.jpg" class="img-responsive" alt=""> -->
-                  </div>
-              <div class="portfolio-item-desc">
-                  <h4 class="text-center">Exemplo de Conferência</h4>
-              </div>
-              </a>
-            </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <ul class="pagination pagination-sm">
-      <li class="page-item">
-        <a class="page-link" href="#" tabindex="-1"><<</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">>></a>
-      </li>
-    </ul>
+    </nav>
   </div>
 </div>
 
@@ -113,7 +113,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1>Contato</h1>
+        <h1 class="estilo-h1">Contato</h1>
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
               <div class="boxshadow">

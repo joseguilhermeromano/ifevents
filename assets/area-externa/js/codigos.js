@@ -34,6 +34,14 @@ if ($('#back-to-top').length) {
 }
 });
 
+jQuery(document).ready(function($) {
+    $(".scroll").click(function(event){     
+        event.preventDefault();
+        $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+    });
+});
+
+
 //  $(".button-fill").hover(function () {
 //     $(this).children(".button-inside").addClass('full');
 // }, function() {
