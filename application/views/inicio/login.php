@@ -1,57 +1,59 @@
-<div class="container">
+<!-- Container (Login Section) -->
+<div id="login" class="section distancia-menu">
+  <div class="container">
     <div class="row">
-        <div class="col-lg-12 text-center">
-            <h2>Acesse sua Conta</h2>
-            <hr class="star-primary">
-        </div>
-    </div>
-    <?php   if ($this->session->flashdata('error')) { ?>
-                    <div class="alert alert-warning"> 
-                        <?= $this->session->flashdata('error') ?> 
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+              <div class="boxshadow">
+                <?php echo form_open('login/entrar');?>
+
+                
+                <div class="row">
+                      <div class="col-md-10 col-md-offset-1">
+                        <h1 class="estilo-h1">Login</h1>
+                            <?php   if ($this->session->flashdata('error')) { ?>
+                                <br>
+                                <div class="alert alert-warning"> 
+                                    <?= $this->session->flashdata('error') ?> 
+                                </div>
+                            <?php } ?> 
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="email">E-mail</label>
+                                    <input type="text" class="form-control" name="email" placeholder="E-mail">
+                                    <i class="fa fa-user icon-in-input"></i>
+                                </div>
+                            </div>
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label for="senha">Senha</label>
+                                    <input type="password" class="form-control" name="senha" placeholder="Senha">
+                                    <i class="fa fa-key icon-in-input"></i>
+                                </div>
+                            </div>
+                            <div align='right'>
+                                <a href="#">Esqueceu sua Senha?</a>
+                            </div>
+                            <div align='center'>
+                                <br>
+                                <button class="btn btn-success" style="font-size: 14pt; font-weight: bold">
+                                    Entrar
+                                    <span class="glyphicon glyphicon-log-in"></span>
+                                </button>
+                                <br><br>   
+                                <hr>
+                                <h4>Não tem uma Conta? <a style="color:#969690;" href="<?php echo base_url('cadastro'); ?>">Cadastra-se</a></h4>
+                            </div>
+                      </div>
                     </div>
-            <?php } ?>
-    <?php echo form_open('login/entrar');?>
-    <div class="row text">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="row control-group">
-                <div class="form-group col-xs-12 floating-label-form-group controls">                    
-                    <?php echo form_label('Usuário', 'email');
-                          $data = array('name' => 'email', 'placeholder' => 'Email' );
-                          echo form_input($data);?>
-                    </br>
-                </div>
-            </div>
+                <?php echo form_close();?>
+              </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="row text">
-        <div class="col-lg-6 col-lg-offset-3">
-            <div class="row control-group">
-                <div class="form-group col-xs-12 floating-label-form-group controls">                    
-                    <?php echo form_label('Senha', 'senha');
-                          $data = array('name' => 'senha', 'placeholder' => 'Senha' );  
-                          echo form_password($data);?>
-                    </br>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-lg-offset-3">
-        <div align='right'>
-            <a href="#">Esqueceu sua Senha?</a>
-        </div>
-        <div align='center'>
-            <br>
-            <button class="btn btn-primary" style="font-size: 14pt; font-weight: bold">
-                Entrar
-                <span class="glyphicon glyphicon-log-in"></span>
-            </button>
-            <br><br>
-            <?php echo form_close();?>       
-            <hr>
-            <h4>Não tem uma Conta? <a href="<?php echo base_url('cadastro'); ?>">Cadastra-se</a></h4>
-            <br><br><br><br>
-        </div>
-    </div>
+  </div>
 </div>
 
 

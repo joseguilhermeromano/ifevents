@@ -3,7 +3,7 @@
     <div class="banner">
       <img class="img-responsive banner-image" src="<?php echo base_url("assets/area-externa/img/banner-index.jpg"); ?>" width="100%">
     </div>
-    <div class="display-middle margin-top centralizar">
+    <div class="display-middle margin-top">
       <h4>EVENTOS</h4>
       <h1>A GENTE FAZ<br>
       ACONTECER</h1>
@@ -42,8 +42,8 @@
         <h1 class="estilo-h1">Eventos</h1><br>
         <!-- Evento Atual -->
         <div class="row">
-          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
-          <div class="demo-3">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12 horizontal-center-content-col">
+          <div class="rotate-effect">
             <figure>
                 <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
                 <figcaption>
@@ -57,8 +57,8 @@
             </figure>
           </div>
           </div>
-          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
-          <div class="demo-3">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12 horizontal-center-content-col">
+          <div class="rotate-effect">
             <figure>
                 <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
                 <figcaption>
@@ -72,8 +72,8 @@
             </figure>
           </div>
           </div>
-          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12">
-          <div class="demo-3">
+          <div class="col-padding col-lg-4 col-md-4 col-sm-6 col-xs-12 horizontal-center-content-col">
+          <div class="rotate-effect">
             <figure>
                 <img class="img-responsive" src="<?php echo base_url("assets/area-externa/img/img-example.png"); ?>" alt=""/>
                 <figcaption>

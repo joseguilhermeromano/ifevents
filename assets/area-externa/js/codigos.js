@@ -41,6 +41,11 @@ jQuery(document).ready(function($) {
     });
 });
 
+$(document).ready(function() {
+    $('#myCarousel').carousel({
+        interval: 10000
+    })
+});
 
 //  $(".button-fill").hover(function () {
 //     $(this).children(".button-inside").addClass('full');

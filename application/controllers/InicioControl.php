@@ -61,9 +61,9 @@
 
         //Método que chama a view do login
         public function login(){
-            $this->load->view('common/header');
+            $this->load->view('common/area-externa/header');
             $this->load->view('inicio/login');
-            $this->load->view('common/footer');
+            $this->load->view('common/area-externa/footer');
         }
                 
         //teste 
@@ -88,6 +88,12 @@
 			$this->load->view('common/header');
 			$this->load->view('inicio/submissao');
 			$this->load->view('common/footer');
+		}
+
+		public function evento(){
+			$this->load->view('common/area-externa/header');
+			$this->load->view('inicio/evento');
+			$this->load->view('common/area-externa/footer');
 		}
 
 
