@@ -674,7 +674,7 @@ a.thumbnail:hover .balao:after {
     }
 }
 
-/* carousel */
+/*-- CONFIGURAÇÕES PARCERIA--*/
 .media-carousel 
 {
   margin-bottom: 0;
@@ -731,8 +731,23 @@ a.thumbnail{
   width: 250px;
   height: 100px;
 }
-/* End carousel */
+/* /PARCERIAS */
 
+/*-- PROGRAMAÇÃO--*/
+
+/*-- /PROGRAMAÇÃO--*/
+.panel-default>.panel-heading{background:#fff;color:#37ba40;font-size:16px;padding:0}
+.panel-default>.panel-heading .panel-title{line-height:40px}
+.panel-default>.panel-heading .panel-title>a:hover{text-decoration:none}
+.panel-default>.panel-collapse{background:#f0f0f0;color:#989898;font-size:14px}
+.panel-default>.panel-collapse .panel-body{padding:20px 15px}
+.panel-group .panel + .panel{margin-top:10px}
+.accordion-caret .accordion-toggle:hover{text-decoration:none}
+.accordion-caret .accordion-toggle:before{vertical-align:-1px;border-bottom:0;line-height:0}
+.accordion-caret .accordion-toggle:not(.collapsed):before{ float:right;color:#000;display:inline-block;content:url(../img/icon-minus.png);}
+.accordion-caret .accordion-toggle.collapsed:before{color:#fff;float:right;content:url(../img/icon-plus.png);}
+.panel-title .accordion-toggle.collapsed{padding-left:10px}
+.panel-title .accordion-toggle:not(.collapsed){background:#37ba40 !important; border-radius: 3px;display:block;padding-left:10px;color:#fff}
 /*-- CONFIGURAÇÕES DA PÁGINA DE LOGIN--*/
 #login{
     background-color: #e2291f;

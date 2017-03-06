@@ -26,7 +26,9 @@
 
 
 		public function programacao(){
-			echo 'programação do evento';
+			$this->load->view('common/area-externa/header');
+			$this->load->view('inicio/programacao');
+			$this->load->view('common/area-externa/footer');
 		}
 
 
