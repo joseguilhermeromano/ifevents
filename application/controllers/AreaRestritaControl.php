@@ -3,7 +3,7 @@
 //Posteriormente os controladores ParticipanteControl, AvaliadorControl e OrganizadorControl
 //serão substituidos por este
 class AreaRestritaControl extends CI_Controller{
-    
+
     public function __construct(){
             parent::__construct();
 
@@ -11,7 +11,7 @@ class AreaRestritaControl extends CI_Controller{
             $this->load->model('SubmitModel');
 
     }
-    
+
     public function participante($page="index"){
         if ( ! file_exists(APPPATH.'/views/participante/'.$page.'.php'))
             {
@@ -23,14 +23,14 @@ class AreaRestritaControl extends CI_Controller{
             $this->load->view("participante/".$page);
             $this->load->view("common/footer_interno");
     }
-    
+
     public function avaliador($page="index"){
          if ( ! file_exists(APPPATH.'/views/avaliador/'.$page.'.php'))
             {
                     // Whoops, we don't have a page for that!
                     show_404();
             }
-            
+
 //            $dados = array(
 //                'result' => $this->SubmitDAO->Consulta()
 //            );
@@ -39,7 +39,7 @@ class AreaRestritaControl extends CI_Controller{
             $this->load->view("avaliador/".$page);
             $this->load->view("common/footer_interno");
     }
-    
+
     public function organizador($page="index"){
          if ( ! file_exists(APPPATH.'/views/organizador/'.$page.'.php'))
             {
@@ -51,6 +51,7 @@ class AreaRestritaControl extends CI_Controller{
             $this->load->view("organizador/".$page);
             $this->load->view("common/footer_interno");
     }
-   
+
 }
 
+    
