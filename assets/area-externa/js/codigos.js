@@ -41,11 +41,17 @@ jQuery(document).ready(function($) {
     });
 });
 
-$(document).ready(function() {
-    $('#myCarousel').carousel({
-        interval: 10000
-    })
+$(document).ready(function(){
+     // $(".carousel-inner").addClass('carousel-inner-visible');
+    $("a.thumbnail").hover(function(){
+        console.log("passou por aqui!!!!");
+    $(".carousel-inner").addClass('carousel-inner-visible');
+          }, function(){
+        $(".carousel-inner").removeClass('carousel-inner-visible');
+    });
 });
+
+
 
 //  $(".button-fill").hover(function () {
 //     $(this).children(".button-inside").addClass('full');

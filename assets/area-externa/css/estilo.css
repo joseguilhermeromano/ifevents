@@ -1,5 +1,4 @@
 /*-- CONFIGURAÇÕES GERAIS E BÁSICAS --*/
-
 html, body{
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -12,6 +11,21 @@ p,ul li{
 }
 p{
     margin:0;
+}
+p.paragrafo{
+    text-indent: 2em;
+    text-align: justify;
+}
+@media(min-width: 768px){
+    .div-em-colunas {
+        -webkit-column-count:2; /* Chrome, Safari, Opera */
+        -moz-column-count:2;    /* Firefox */
+        column-count:2;         /* padrão */
+    }
+}
+@font-face {
+  font-family: 'Playball';
+  src: url("../fonts/Playball/Playball-Regular.otf") format("opentype");
 }
 @font-face {
     font-family: 'Signika';
@@ -478,6 +492,187 @@ blockquote{
     box-shadow: #274f27 0em 0em 0.2em;
     border-radius: 100%;
 }
+/*.carousel-inner{
+    background-color: yellow!important;
+}*/
+.carousel-inner-visible{
+    overflow: visible;
+}
+a.thumbnail{
+    position: relative;
+    color: #039;
+    text-decoration: none;
+}
+/*a.thumbnail:hover{
+    background: transparent;
+    z-index: 25;
+}
+*/
+a.thumbnail .balao{
+    display: none;
+}
+
+a.thumbnail:hover .balao{
+    display: block;
+    position: absolute;
+    width: 150px;
+    top: 100%;
+    text-align: justify;
+    left: 3em;
+    font: 10px Verdana, arial, helvetica, sans-serif;
+    padding: 5px 10px;
+    box-shadow:0px 0px 5px #2d2d2c;
+    background: #fff;
+    color: #000;
+    border-radius:5px;
+    z-index: 3;
+}
+
+a.thumbnail:hover .balao:before {
+    position: absolute;
+    top: -10px;
+    left: 20%;
+    display: inline-block;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ccc;
+    border-left: 10px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+a.thumbnail:hover .balao:after {
+    position: absolute;
+    top: -9px;
+    left: 20%;
+    display: inline-block;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #fff;
+    border-left: 10px solid transparent;
+    content: '';
+}
+
+/*-- Apresentacao (evento) --*/
+#apresentacao h4{
+    color:#d11212;
+}
+ .postit {
+  line-height: 1;
+  text-align:center;     
+  width: 100%; 
+  max-width: 250px;
+  height: auto;
+  margin: 10px 10px 10px 20px;    
+  min-height:170px;
+  max-height: auto;
+  /*padding-top: 0;*/
+  padding:10px;
+  position:relative;   
+  border:1px solid #E8E8E8;  
+/*  border-top:60px solid #fdfd86;  */    
+  border-bottom-right-radius: 60px 10px;
+  display:block;    
+   background: #ffff88; 
+    background: -moz-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(81%,#ffff88), color-stop(82%,#ffff88), color-stop(82%,#ffff88), color-stop(100%,#ffffc6)); /* Chrome,Safari4+*/
+    background: -webkit-linear-gradient(-45deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* IE10+ */
+    background: linear-gradient(135deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffffc6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.postit:after {     
+   content: "";
+  position:absolute;
+  z-index:-1;
+  right:-0px; bottom:20px;
+  width:120px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow:2px 15px 5px rgba(0, 0, 0, 0.40);
+    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+     -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+          -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+         -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+             transform: matrix(-1, -0.1, 0, 1, 0, 0);
+}
+
+.pin {
+  background-color: #aaa;
+  display: block;
+  height: 16px;
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  z-index: 1;
+}
+
+.pin:after {
+  background-color: #32CD32;
+  background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1),
+              inset 3px 3px 3px hsla(0,0%,100%,.2),
+              inset -3px -3px 3px hsla(0,0%,0%,.2),
+              18px 8px 3px hsla(0,0%,0%,.15);
+  content: '';
+  height: 12px;
+  left: -5px;
+  position: absolute;
+  top: -10px;
+  width: 12px;
+}
+
+.pin:before {
+  background-color: hsla(0,0%,0%,0.1);
+  box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
+  content: '';
+
+  height: 18px;
+  width: 2px;
+  left: 0;
+  position: absolute;
+  top: -2px;
+
+  transform: rotate(57.5deg);
+  -moz-transform: rotate(57.5deg);
+  -webkit-transform: rotate(57.5deg);
+  -o-transform: rotate(57.5deg);
+  -ms-transform: rotate(57.5deg);
+
+  transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+}
+
+.postit-conteudo{
+    position:relative;
+    width: 100%;
+    height: 100%;
+        
+}
+.postit-conteudo > h1{ 
+  font-family: "Playball";
+  color: black;  
+  font-size:15pt;
+}
+
+.postit-conteudo > h2{
+  font-family: "Playball";
+  color: black;
+  font-size:14pt;
+}
+
+@media(max-width: 767px){
+    .center-xs{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
 /* carousel */
 .media-carousel 
@@ -485,6 +680,9 @@ blockquote{
   margin-bottom: 0;
   padding: 25px 41px 0px 41px;
   width: 100%;
+}
+a.thumbnail{
+    max-width: 250px;
 }
 /* Previous button  */
 .media-carousel .carousel-control.left 
