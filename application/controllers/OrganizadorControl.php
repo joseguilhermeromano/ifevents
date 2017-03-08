@@ -26,6 +26,8 @@
 //                    $this->load->model('AvaliacaoModel');
                     $this->load->model('ContatoModel');
 
+                    $this->load->model('ConviteModel');
+
                     /* VALIDAÇÃO DE LOGIN */
 
                     $usuario=$this->session->userdata('usuario');
@@ -360,8 +362,12 @@
             }
 
             //Método envia convite para os avaliadores por email
-            public function enviaEmail(){
+            public function enviaConvite(){
                 $this->chamaView('convite');
+            }
+
+            public function sendEmail(){
+                $this->ConviteModel->enviar();
             }
 
 

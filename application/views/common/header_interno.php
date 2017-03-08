@@ -91,8 +91,8 @@
                  <li class="<?php if($paginacorrente == 'cadastracomite') {echo 'active';} ?>">
                     <a href="<?php echo base_url("organizador/cadastracomite");?>"><span class="glyphicon glyphicon-list"></span>  COMITÊ</a>
                 </li>
-                <li class="<?php if($paginacorrente == 'enviaemail') {echo 'active';} ?>">
-                   <a href="<?php echo base_url("organizador/enviaEmail");?>"><span class="glyphicon glyphicon-list"></span>  CONVITES</a>
+                <li class="<?php if($paginacorrente == 'enviaconvite') {echo 'active';} ?>">
+                   <a href="<?php echo base_url("organizador/enviaConvite");?>"><span class="glyphicon glyphicon-list"></span>  CONVITES</a>
                </li>
                 <li class="">
                     <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>

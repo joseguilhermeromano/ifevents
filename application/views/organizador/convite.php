@@ -8,15 +8,15 @@
     </div>
 <?php } ?>
 
-<?php if ($this->session->flashdata('empty')) { ?>
+<?php if ($this->session->flashdata('error')) { ?>
     <div class="alert alert-danger">
-        <?= $this->session->flashdata('empty') ?>
+        <?= $this->session->flashdata('error') ?>
     </div>
 <?php } ?>
 
 <div class="row">
 <?php
-    echo form_open_multipart( 'OrganizadorControl/enviaEmail', 'role="form" class="formsignin"' );?>
+    echo form_open_multipart( 'OrganizadorControl/sendEmail', 'role="form" class="formsignin"' );?>
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Nome', 'nome' ); ?></b>
@@ -64,40 +64,3 @@
 
 echo form_close();
 ?>
-
-
-
-
-
-=================================================================================================================================
-
-<form method="POST" action="<?=base_url('enviar-email')?>">
-
-<div>
-    <label>Seu nome</label>
-    <input type="text" name="nome" required/>
-</div>
-
-<div>
-    <label>Seu email</label>
-    <input type="email" name="email" required/>
-</div>
-
-<div>
-    <label>Uma mensagem pra você</label>
-    <textarea name="mensagem" rows="6" required></textarea>
-</div>
-
-<div>
-    <label><input type="checkbox" name="anexo"/><strong>Enviar anexo</strong></label>
-</div>
-
-<div>
-    <label><input type="checkbox" name="template"/><strong>Usar template</strong></label>
-</div>
-
-<div>
-    <input type="submit" value="Enviar"/>
-</div>
-
-</form>
