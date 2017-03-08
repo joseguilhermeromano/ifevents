@@ -14,7 +14,6 @@
 			$this->load->model('UserModel');
 //			$this->load->model('acesso/Autentica');
 		}
-
 		//Método chama a view principal do sistema (Home)
 		public function index(){
 

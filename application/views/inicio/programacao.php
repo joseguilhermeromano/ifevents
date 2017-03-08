@@ -1,3 +1,7 @@
+<?php
+include("application/views/common/area-externa/header-presentation.php");
+?>
+
 <div id ="programacao" class="section">
    <div class="container">
    <h1 class="estilo-h1">PROGRAMAÇÃO</h1>
