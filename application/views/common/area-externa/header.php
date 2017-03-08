@@ -51,10 +51,12 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#inicio">Apresentação</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#sobre">Sobre</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#eventos">Eventos</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#contato">Contato</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=apresentacao"); ?>">Apresentação</a>
+
+                  </li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=sobre"); ?>">Sobre</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=eventos"); ?>">Eventos</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=contato"); ?>">Contato</a></li>
                 </ul>
               </li>
               <li class="dropdown">
@@ -65,10 +67,10 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#sobre">Sobre o Evento</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Programação</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Submissão</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Anais e Resultados</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento?div=apresentacao"); ?>">Sobre o Evento</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("programacao"); ?>">Programação</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("submissao"); ?>">Submissão</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("anaisresultados"); ?>">Anais e Resultados</a></li>
                 </ul>
               </li>
               <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
@@ -77,7 +79,7 @@
                   <span class="hidden-xs">Cadastrar</span>
                 </span>
               </a></li>
-              <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
+              <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
                 <span>
                   <span>Login</span>
                   <span class="hidden-xs" href="">Login</span>

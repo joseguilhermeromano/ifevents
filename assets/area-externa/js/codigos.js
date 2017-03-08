@@ -44,13 +44,31 @@ jQuery(document).ready(function($) {
 $(document).ready(function(){
      // $(".carousel-inner").addClass('carousel-inner-visible');
     $("a.thumbnail").hover(function(){
-        console.log("passou por aqui!!!!");
     $(".carousel-inner").addClass('carousel-inner-visible');
           }, function(){
         $(".carousel-inner").removeClass('carousel-inner-visible');
     });
 });
 
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+$(document).ready(function(){
+    var div = getUrlVars()["div"];
+    div = "#" + div;
+    $('html,body').animate({scrollTop:$(div).offset().top},1000);
+    console.log(div);
+});
 
 
 //  $(".button-fill").hover(function () {
