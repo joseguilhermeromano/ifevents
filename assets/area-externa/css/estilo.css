@@ -1,3 +1,4 @@
+/*-- CONFIGURAÇÕES GERAIS E BÁSICAS --*/
 html, body{
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -10,6 +11,21 @@ p,ul li{
 }
 p{
     margin:0;
+}
+p.paragrafo{
+    text-indent: 2em;
+    text-align: justify;
+}
+@media(min-width: 768px){
+    .div-em-colunas {
+        -webkit-column-count:2; /* Chrome, Safari, Opera */
+        -moz-column-count:2;    /* Firefox */
+        column-count:2;         /* padrão */
+    }
+}
+@font-face {
+  font-family: 'Playball';
+  src: url("../fonts/Playball/Playball-Regular.otf") format("opentype");
 }
 @font-face {
     font-family: 'Signika';
@@ -63,293 +79,19 @@ blockquote{
     background-color: #31B404;
     color: white;
 }
-
-/*#eventos*/
-
-#eventos{
-    background-color: #32bc4e;
-}
-#eventos h1{
-    color:#fff;
-    margin-bottom: 0px;
-    text-shadow: #274f27 0em 0em 0.2em;
-    text-align: center;
-}
-#eventos h1:after{
-    background-color: white;
-    box-shadow: #274f27 0em 0em 0.2em;
-    border-radius: 100%;
-}
-#eventos h4{
-    font-weight: bold;
-    font-size: 20px;
-    color: #00cc99;
-    margin:0;
-}
-#eventos h4 span{
-    font-size: 15px;
-    color:#929599;
-}
-#eventos h5{
-    font-size:13px;
-    font-weight: bold;
-    color:#9ea0a3;
-}
-#eventos p{
-    font-size: 15px;
-}
-
-
- /* Efeito hover na imagem (#eventos) */
- 
-.demo-3 {
-    position:relative;
-    width: 100%;
-    height:100%;
-    overflow:hidden;
-    float:left;
-}
-.demo-3 figure {
-    margin:0;
-    padding:0;
-    position:relative;
-    cursor:pointer;
-
-}
-.demo-3 figure img {
-    display:block;
-    position:relative;
-    z-index:10;
-
-}
-.demo-3 figure figcaption {
-    display:block;
-    position:absolute;
-    z-index:5;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box
-}
-.demo-3 figure h2 {
-    font-family:'Lato';
-    color:#fff;
-    font-size:20px;
-    text-align:left;
-    margin:0px;
-}
-.demo-3 figure hr{
-    margin:5px 0;
-}
-.demo-3 figure p {
-    display:block;
-    font-family:'Lato';
-    font-size:12px;
-    line-height:18px;
-    margin:0;
-    color:#fff;
-    text-align:left;
-}
-.demo-3 figure span{
-    color:white;
-    float: left;
-    font-size:12px;
-}
-.demo-3 figure figcaption {
-    top:0px;
-    left:0;
-    width:100%;
-    height:100%;
-    position: absolute;
-    display: block;
-    padding:10px;
-    /*padding:29px 44px;*/
-    background-color:rgba(35, 122, 44,0.5);
-    text-align:center;
-    backface-visibility:hidden;
-    -webkit-transform:rotateY(-180deg);
-    -moz-transform:rotateY(-180deg);
-    transform:rotateY(-180deg);
-    -webkit-transition:all .5s;
-    -moz-transition:all .5s;
-    transition:all .5s
-}
-.demo-3 figure img {
-    backface-visibility:hidden;
-    -webkit-transition:all .5s;
-    -moz-transition:all .5s;
-    transition:all .5s
-}
-.demo-3 figure:hover img,figure.hover img {
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-    transform:rotateY(180deg)
-}
-.demo-3 figure:hover figcaption,figure.hover figcaption {
-    -webkit-transform:rotateY(0);
-    -moz-transform:rotateY(0);
-    transform:rotateY(0)
-}
-#eventos .col-padding{
-    margin: 0px;
-    padding: 5px;
-}
-
-/* Botão detalhar (#eventos) */
-
-.botao-detalhar {
-    color: white;
-    background-color:transparent;
-    padding: 6px 11px;
-    margin-top: 8px;
-    font-family: 'OpenSansBold', sans-serif;
-    border: 1px solid white;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 0 white;
-    -webkit-transition: all ease 0.8s;
-    -moz-transition: all ease 0.8s;
-    transition: all ease 0.8s;
-}
-.botao-detalhar:hover {
-    box-shadow: inset -200px 0 0 0 white;
-    color: #288c32;
-}
-.page-link{
-    color: #4df94a!important;
-    font-weight: bold;
-}
-
-.box-shadow{
-    box-shadow: 0px 0px 10px #004d4d;
-}
-
-
-#inicio{
-    display: block;
-}
-.inicio-header{
-    display:block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.banner{
-    position:relative;
-    background-color: #000;
-    overflow:hidden;
-    max-height: 750px;
-}
-.banner img{
-    opacity: 0.7;
-}
-.banner-image{
-    min-height: 250px;
-    min-width: 600px;
-}
-.display-middle{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    -ms-transform:translate(-50%,-50%);
-}
-.margin-top{
-    margin-top:23px;
-}
-.centralizar{
-    display:inline-block;
-    width:auto;
-}
-#inicio h1{
-    color:#fff;
-    margin:0;
-    padding: 0;
-    position: relative;
-    font-size: 70px;
-}
-#inicio h4{
-    color:#fff;
-    margin:0;
-    padding: 0;
-    text-align: center;
-    position: relative;
-    font-size: 30px;
-}
-#inicio hr{
-    height: 2px;
-    background-color: white;
-    position: relative;
-    margin: 5px 0 12px 0;
-    padding:0;
-}
-#inicio h4::before {
-    content: "";
-    height: 3px;
-    background: #ffffff;
-    position: absolute;
-    width: 30%;
-    top: 15px;
-    left: 0px;
-}
-#inicio h4::after {
-    content: "";
-    height: 3px;
-    background: #ffffff;
-    position: absolute;
-    width: 30%;
-    top: 15px;
-    right: 0px;
-}
-.agileits-arrow {
-    text-align: center; 
-} 
-.agileits-arrow a {
-    font-size: 3em;
-    color: white;
-} 
-.agileits-arrow.bounce.animated {
-    -webkit-animation-duration: 3s;
-    -moz-animation-duration: 3s;
-    -o-animation-duration: 3s;
-    -ms-animation-duration: 3s;
-    animation-duration: 3s; 
-}
-.bounce {
-    -moz-animation: bounce 2s infinite;
-    -webkit-animation: bounce 2s infinite;
-    -o-animation: bounce 2s infinite;
-    -ms-animation: bounce 2s infinite;
-    animation: bounce 2s infinite;
-}
-
-#contato{
-    background-color: #f2f2f2;
-}
-#contato h6{
-    color:#a6a6a6; 
-    font-weight: bold;
-    text-transform: uppercase; 
-    margin:7px;
-}
-#contato p{
-    font-size: 12px;
-}
-
-.boxshadow{
-    background-color:#fff;
-    box-shadow: 2px 2px 15px #888888;
-    padding: 30px;
-    margin:10px;
-}
-
 .section {
     padding: 60px 0px;
 }
+
+.horizontal-center-content-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*-- /CONFIGURAÇÕES GERAIS E BÁSICAS --*/
+
+/*-- CONFIGURAÇÕES GERAIS DO MENU--*/
 
 .navbar-default {
     background: #fff;
@@ -422,10 +164,650 @@ blockquote{
      -moz-transition: all 0.3s;
      transition: all 0.3s;
 }
+/*-- /CONFIGURAÇÕES GERAIS DO MENU--*/
+
+/*-- class Distancia do menu --*/
+.distancia-menu{
+    margin-top:3em;
+}
+@media(max-width: 767px){
+        .distancia-menu{
+        margin-top:0em;
+    }
+}
+/*-- /class Distancia do menu --*/
+
+/*-- CONFIGURAÇÕES DA PÁGINA DE INÍCIO/APRESENTAÇÃO --*/
+
+#inicio{
+    display: block;
+}
+#inicio h1{
+    color:#fff;
+    margin:0;
+    padding: 0;
+    position: relative;
+    font-size: 70px;
+}
+#inicio h4{
+    color:#fff;
+    margin:0;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    font-size: 30px;
+}
+#inicio hr{
+    height: 2px;
+    background-color: white;
+    position: relative;
+    margin: 5px 0 12px 0;
+    padding:0;
+}
+#inicio h4::before {
+    content: "";
+    height: 3px;
+    background: #ffffff;
+    position: absolute;
+    width: 30%;
+    top: 15px;
+    left: 0px;
+}
+#inicio h4::after {
+    content: "";
+    height: 3px;
+    background: #ffffff;
+    position: absolute;
+    width: 30%;
+    top: 15px;
+    right: 0px;
+}
+
+.inicio-header{
+    display:block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.banner{
+    position:relative;
+    background-color: #000;
+    overflow:hidden;
+    max-height: 750px;
+}
+.banner img{
+    opacity: 0.7;
+}
+.banner-image{
+    min-height: 250px;
+    min-width: 700px;
+}
+.display-middle{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    -ms-transform:translate(-50%,-50%);
+}
+.margin-top{
+    margin-top:23px;
+}
+
+@media(max-width: 700px){
+    .banner{
+        overflow-y:hidden;
+        overflow-x: scroll;
+    }
+    .display-middle{
+        top:35%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        -ms-transform:translate(-50%,-50%);
+    }
+}
+
+/*-- ANIMAÇÃO BOTÃO ABAIXO DA FRASE "A GENTE FAZ ACONTECER"--*/
+
+.agileits-arrow {
+    text-align: center; 
+} 
+.agileits-arrow a {
+    font-size: 3em;
+    color: white;
+} 
+.agileits-arrow.bounce.animated {
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    -o-animation-duration: 3s;
+    -ms-animation-duration: 3s;
+    animation-duration: 3s; 
+}
+.bounce {
+    -moz-animation: bounce 2s infinite;
+    -webkit-animation: bounce 2s infinite;
+    -o-animation: bounce 2s infinite;
+    -ms-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+}
+/*-- /ANIMAÇÃO BOTÃO ABAIXO DA FRASE "A GENTE FAZ ACONTECER"--*/
+/*-- /CONFIGURAÇÕES DA PÁGINA DE INÍCIO/APRESENTAÇÃO --*/
+
+/*-- #EVENTOS --*/
+
+#eventos{
+    background-color: #32bc4e;
+}
+#eventos h1{
+    color:#fff;
+    margin-bottom: 0px;
+    text-shadow: #274f27 0em 0em 0.2em;
+    text-align: center;
+}
+#eventos h1:after{
+    background-color: white;
+    box-shadow: #274f27 0em 0em 0.2em;
+    border-radius: 100%;
+}
+#eventos h4{
+    font-weight: bold;
+    font-size: 20px;
+    color: #00cc99;
+    margin:0;
+}
+#eventos h4 span{
+    font-size: 15px;
+    color:#929599;
+}
+#eventos h5{
+    font-size:13px;
+    font-weight: bold;
+    color:#9ea0a3;
+}
+#eventos p{
+    font-size: 15px;
+}
+
+#eventos .col-padding{
+    margin: 0px;
+    padding: 5px;
+}
+
+ /* EFEITO HOVER ROTATE EM IMAGENS DOS EVENTOS (#EVENTOS) */
+ 
+.rotate-effect {
+    position:relative;
+    max-width: 400px;
+    min-width: 300px;
+    overflow:hidden;
+    float:left;
+}
+.rotate-effect figure {
+    margin:0;
+    padding:0;
+    position:relative;
+    cursor:pointer;
+
+}
+.rotate-effect figure img {
+    display:block;
+    position:relative;
+    z-index:10;
+
+}
+.rotate-effect figure figcaption {
+    display:block;
+    position:absolute;
+    z-index:5;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box
+}
+.rotate-effect figure h2 {
+    font-family:'Lato';
+    color:#fff;
+    font-size:20px;
+    text-align:left;
+    margin:0px;
+}
+.rotate-effect figure hr{
+    margin:5px 0;
+}
+.rotate-effect figure p {
+    display:block;
+    font-family:'Lato';
+    font-size:12px;
+    line-height:18px;
+    margin:0;
+    color:#fff;
+    text-align:left;
+}
+.rotate-effect figure span{
+    color:white;
+    float: left;
+    font-size:12px;
+}
+.rotate-effect figure figcaption {
+    top:0px;
+    left:0;
+    width:100%;
+    height:100%;
+    position: absolute;
+    display: block;
+    padding:10px;
+    /*padding:29px 44px;*/
+    background-color:rgba(35, 122, 44,0.5);
+    text-align:center;
+    backface-visibility:hidden;
+    -webkit-transform:rotateY(-180deg);
+    -moz-transform:rotateY(-180deg);
+    transform:rotateY(-180deg);
+    -webkit-transition:all .5s;
+    -moz-transition:all .5s;
+    transition:all .5s
+}
+.rotate-effect figure img {
+    backface-visibility:hidden;
+    -webkit-transition:all .5s;
+    -moz-transition:all .5s;
+    transition:all .5s
+}
+.rotate-effect figure:hover img,figure.hover img {
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    transform:rotateY(180deg)
+}
+.rotate-effect figure:hover figcaption,figure.hover figcaption {
+    -webkit-transform:rotateY(0);
+    -moz-transform:rotateY(0);
+    transform:rotateY(0)
+}
+ /* /EFEITO HOVER ROTATE EM IMAGENS DOS EVENTOS (#EVENTOS) */
+
+/* BOTÃO DETALHAR DO ROTATE-EFFECT (#EVENTOS) */
+
+.botao-detalhar {
+    color: white;
+    background-color:transparent;
+    padding: 6px 11px;
+    margin-top: 8px;
+    font-family: 'OpenSansBold', sans-serif;
+    border: 1px solid white;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 0 white;
+    -webkit-transition: all ease 0.8s;
+    -moz-transition: all ease 0.8s;
+    transition: all ease 0.8s;
+}
+.botao-detalhar:hover {
+    box-shadow: inset -200px 0 0 0 white;
+    color: #288c32;
+}
+.page-link{
+    color: #4df94a!important;
+    font-weight: bold;
+}
+/* /BOTÃO DETALHAR DO ROTATE-EFFECT (#EVENTOS) */
+
+/*-- /#EVENTOS --*/
+
+/*-- CONFIGURAÇÕES DA PÁGINA DE CONTATO--*/
+#contato{
+    background-color: #f2f2f2;
+}
+#contato h6{
+    color:#a6a6a6; 
+    font-weight: bold;
+    text-transform: uppercase; 
+    margin:7px;
+}
+#contato p{
+    font-size: 12px;
+}
+
+.boxshadow{
+    background-color:#fff;
+    box-shadow: 0px 0px 8px #2d2d2c;
+    padding: 30px;
+    margin:10px;
+}
+
+/*-- CONFIGURAÇÕES PÁGINA DE EVENTOS --*/
+#parcerias{
+    background-color: #54d9f7;
+}
+#parcerias h1{
+    color:#fff;
+    margin-bottom: 0px;
+    text-shadow: #274f27 0em 0em 0.2em;
+    text-align: center;
+}
+#parcerias h1:after{
+    background-color: white;
+    box-shadow: #274f27 0em 0em 0.2em;
+    border-radius: 100%;
+}
+/*.carousel-inner{
+    background-color: yellow!important;
+}*/
+.carousel-inner-visible{
+    overflow: visible;
+}
+a.thumbnail{
+    position: relative;
+    color: #039;
+    text-decoration: none;
+}
+/*a.thumbnail:hover{
+    background: transparent;
+    z-index: 25;
+}
+*/
+a.thumbnail .balao{
+    display: none;
+}
+
+a.thumbnail:hover .balao{
+    display: block;
+    position: absolute;
+    width: 150px;
+    top: 100%;
+    text-align: justify;
+    left: 3em;
+    font: 10px Verdana, arial, helvetica, sans-serif;
+    padding: 5px 10px;
+    box-shadow:0px 0px 5px #2d2d2c;
+    background: #fff;
+    color: #000;
+    border-radius:5px;
+    z-index: 3;
+}
+
+a.thumbnail:hover .balao:before {
+    position: absolute;
+    top: -10px;
+    left: 20%;
+    display: inline-block;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ccc;
+    border-left: 10px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+a.thumbnail:hover .balao:after {
+    position: absolute;
+    top: -9px;
+    left: 20%;
+    display: inline-block;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #fff;
+    border-left: 10px solid transparent;
+    content: '';
+}
+
+/*-- Apresentacao (evento) --*/
+#apresentacao h4{
+    color:#d11212;
+}
+ .postit {
+  line-height: 1;
+  text-align:center;     
+  width: 100%; 
+  max-width: 250px;
+  height: auto;
+  margin: 10px 10px 10px 20px;    
+  min-height:170px;
+  max-height: auto;
+  /*padding-top: 0;*/
+  padding:10px;
+  position:relative;   
+  border:1px solid #E8E8E8;  
+/*  border-top:60px solid #fdfd86;  */    
+  border-bottom-right-radius: 60px 10px;
+  display:block;    
+   background: #ffff88; 
+    background: -moz-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(81%,#ffff88), color-stop(82%,#ffff88), color-stop(82%,#ffff88), color-stop(100%,#ffffc6)); /* Chrome,Safari4+*/
+    background: -webkit-linear-gradient(-45deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* IE10+ */
+    background: linear-gradient(135deg, #ffff88 81%,#ffff88 82%,#ffff88 82%,#ffffc6 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffffc6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.postit:after {     
+   content: "";
+  position:absolute;
+  z-index:-1;
+  right:-0px; bottom:20px;
+  width:120px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow:2px 15px 5px rgba(0, 0, 0, 0.40);
+    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+     -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+          -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+         -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+             transform: matrix(-1, -0.1, 0, 1, 0, 0);
+}
+
+.pin {
+  background-color: #aaa;
+  display: block;
+  height: 16px;
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  z-index: 1;
+}
+
+.pin:after {
+  background-color: #32CD32;
+  background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1),
+              inset 3px 3px 3px hsla(0,0%,100%,.2),
+              inset -3px -3px 3px hsla(0,0%,0%,.2),
+              18px 8px 3px hsla(0,0%,0%,.15);
+  content: '';
+  height: 12px;
+  left: -5px;
+  position: absolute;
+  top: -10px;
+  width: 12px;
+}
+
+.pin:before {
+  background-color: hsla(0,0%,0%,0.1);
+  box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
+  content: '';
+
+  height: 18px;
+  width: 2px;
+  left: 0;
+  position: absolute;
+  top: -2px;
+
+  transform: rotate(57.5deg);
+  -moz-transform: rotate(57.5deg);
+  -webkit-transform: rotate(57.5deg);
+  -o-transform: rotate(57.5deg);
+  -ms-transform: rotate(57.5deg);
+
+  transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+}
+
+.postit-conteudo{
+    position:relative;
+    width: 100%;
+    height: 100%;
+        
+}
+.postit-conteudo > h1{ 
+  font-family: "Playball";
+  color: black;  
+  font-size:15pt;
+}
+
+.postit-conteudo > h2{
+  font-family: "Playball";
+  color: black;
+  font-size:14pt;
+}
+
+@media(max-width: 767px){
+    .center-xs{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* carousel */
+.media-carousel 
+{
+  margin-bottom: 0;
+  padding: 25px 41px 0px 41px;
+  width: 100%;
+}
+a.thumbnail{
+    max-width: 250px;
+}
+/* Previous button  */
+.media-carousel .carousel-control.left 
+{
+  left: 0px !important;
+  background-image: none;
+  color:#fff;
+  height: 55px;
+  width : 40px;
+  font-size: 32px;
+  position: absolute;
+  top: 0; bottom: 0;
+  margin: auto;
+}
+/* Next button  */
+.media-carousel .carousel-control.right 
+{
+  right: 0px !important;
+  background-image: none;
+  color:#fff;
+  height: 55px;
+  width : 40px;
+  font-size: 32px;
+  position: absolute;
+  top: 0; bottom: 0;
+  margin: auto;
+}
+/* Changes the position of the indicators */
+.media-carousel .carousel-indicators 
+{
+  right: 50%;
+  bottom: -25px;
+  margin-right: -19px;
+}
+/* Changes the colour of the indicators */
+.media-carousel .carousel-indicators li 
+{
+  background: #fff;
+}
+.media-carousel .carousel-indicators .active 
+{
+  background: #54d9f7;
+}
+.media-carousel img
+{
+  width: 250px;
+  height: 100px;
+}
+/* End carousel */
+
+/*-- CONFIGURAÇÕES DA PÁGINA DE LOGIN--*/
+#login{
+    background-color: #e2291f;
+}
+#login > h4 > a{
+    color:#969690;
+}
+#login input{
+    padding:5px;
+    float:right;
+}
+
+.icon-in-input{
+    float:left;
+    margin:10px 0px 0px -20px;
+    z-index: 10000;
+    cursor: pointer;
+    font-size: 18px;
+    color:green;
+}
+
+/*-- ANIMAÇÃO DE FLUTUAR LABELS --*/
+
+.floating-label-form-group {
+    position: relative;
+    margin-bottom: 0;
+    padding-bottom: .5em;
+}
+
+.floating-label-form-group input,
+.floating-label-form-group textarea {
+    z-index: 1;
+    position: relative;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.floating-label-form-group label {
+    display: block;
+    z-index: 0;
+    position: relative;
+    top: 2em;
+    margin: 0;
+    font-size: .85em;
+    line-height: 1.764705882em;
+    vertical-align: middle;
+    vertical-align: baseline;
+    opacity: 0;
+    -webkit-transition: top .3s ease,opacity .3s ease;
+    -moz-transition: top .3s ease,opacity .3s ease;
+    -ms-transition: top .3s ease,opacity .3s ease;
+    transition: top .3s ease,opacity .3s ease;
+}
+
+.floating-label-form-group::not(:first-child) {
+    padding-left: 14px;
+}
+
+.floating-label-form-group-with-value label {
+    top: 0;
+    opacity: 1;
+    color: #009900;
+    font-weight: bold;
+}
+
+.floating-label-form-group-with-focus label {
+    color: #009900;
+    font-weight: bold;
+}
+/*-- /ANIMAÇÃO DE FLUTUAR LABELS --*/
+/*-- /CONFIGURAÇÕES DA PÁGINA DE CONTATO--*/
 
 
 
-/**Responsive Design **/
+/*-- LAYOUT RESPONSIVO --*/
 
 @media(min-width:768px) {
 
@@ -448,7 +830,7 @@ blockquote{
         outline: none;
     }
     .hover-effect{
-        width: 110px;
+        width: 9em;
         background-color: transparent;
         cursor: pointer;
         border-color: #31B404;
@@ -727,7 +1109,7 @@ blockquote{
          height: 70px;
     }
     .hover-effect {
-        width: 93px;
+        width: 7em;
         height: 35px;
     }
     .hover-effect span {
@@ -772,7 +1154,7 @@ blockquote{
     }
 
     #inicio h1{
-        font-size:28px;
+        font-size:31px;
     }
     #inicio h4{
         font-size:14px;
@@ -786,7 +1168,6 @@ blockquote{
     .agileits-arrow a {
         font-size: 2em;
     }
-
     /* DESABILITA ALGUMAS ANIMAÇÕES SOMENTE EM TELAS MOBILE */
 
     .fadeInRight, .swing {
@@ -858,15 +1239,16 @@ blockquote{
         width: 100%;
     }
    .navbar-nav {
-        background: green;
+        background: white;
         padding:0px;
         width: 100%;
         height: auto;
         overflow:hidden;
     }
     .navbar-nav > li{
-        background-color: yellow;
-        margin:1px 0px;/*Margem entre os links*/
+        background-color: #37ba40;
+        margin:0px;/*Margem entre os links*/
+        margin-top:1px;
     }
     .navbar-default .navbar-nav > li > a{
         background-color: #37ba40;
@@ -876,19 +1258,19 @@ blockquote{
         width: 100%;
     }
     .navbar-default .navbar-nav > li > a:hover:not([enabled="enabled"]){
-        background: #fff;
-        color: #37ba40;   
+        background: #37ba40;
+        color: white;   
     }
     .navbar-default .navbar-nav > li > a:focus:not([enabled="enabled"]){
-        background: #fff;
-        color: #37ba40;  
+        background: #37ba40;
+        color: white;  
     }
     .navbar-default .navbar-nav > li.open > a:focus{
         background: #37ba40;
-        color: #fff;
+        color: #237018;
     }
     .navbar-default .navbar-nav > li.dropdown{
-        background-color: transparent;
+        background-color:  #37ba40;
         display:block;
     }
     .navbar-default .navbar-nav > li.open > ul.dropdown-menu{
@@ -899,7 +1281,8 @@ blockquote{
         background-color: #32993c;
         color:white;
         padding:5px 50px;
-        margin:1px 0px;
+        border-top: 1px solid #237018;
+        margin:0px;
     }
     .navbar-default .navbar-nav > li.open > ul.dropdown-menu > li > a:hover{
         background-color: #37ba40;
@@ -908,6 +1291,7 @@ blockquote{
     /*-- /CONFIGURAÇÕES DO MENU MOBILE --*/   
 
 }
+/*-- /LAYOUT RESPONSIVO --*/
 
 /*-- ANIMAÇÃO SLIDEANIM */
 
@@ -1068,57 +1452,6 @@ blockquote{
     100%    {top: 100%; height: 0%; opacity: 0.2;}
 }
 /*-- /CONFIGURAÇÃO DAS BORDAS DO EFEITO HOVER-EFFECT --*/
-
-
-/*-- ANIMAÇÃO DE FLUTUAR LABELS --*/
-
-.floating-label-form-group {
-    position: relative;
-    margin-bottom: 0;
-    padding-bottom: .5em;
-}
-
-.floating-label-form-group input,
-.floating-label-form-group textarea {
-    z-index: 1;
-    position: relative;
-    padding-right: 0;
-    padding-left: 0;
-}
-
-.floating-label-form-group label {
-    display: block;
-    z-index: 0;
-    position: relative;
-    top: 2em;
-    margin: 0;
-    font-size: .85em;
-    line-height: 1.764705882em;
-    vertical-align: middle;
-    vertical-align: baseline;
-    opacity: 0;
-    -webkit-transition: top .3s ease,opacity .3s ease;
-    -moz-transition: top .3s ease,opacity .3s ease;
-    -ms-transition: top .3s ease,opacity .3s ease;
-    transition: top .3s ease,opacity .3s ease;
-}
-
-.floating-label-form-group::not(:first-child) {
-    padding-left: 14px;
-}
-
-.floating-label-form-group-with-value label {
-    top: 0;
-    opacity: 1;
-    color: #009900;
-    font-weight: bold;
-}
-
-.floating-label-form-group-with-focus label {
-    color: #009900;
-    font-weight: bold;
-}
-/*-- /ANIMAÇÃO DE FLUTUAR LABELS --*/
 
 
 /*-- BOTÃO VOLTAR AO TOPO --*/

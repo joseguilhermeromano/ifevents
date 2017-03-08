@@ -41,25 +41,7 @@
           <nav>
             <ul class="nav navbar-nav wow fadeInRight animated animated"
             data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-<!--
-              <li><a href="#inicio" class="hover-effect">
-                <span>
-                  <span>Início</span>
-                  <span class="hidden-xs">Início</span>
-                </span>
-              </a></li>
-              <li><a href="#sobre" class="hover-effect">
-                <span>
-                  <span>Sobre</span>
-                  <span class="hidden-xs">Sobre</span>
-                </span>
-              </a></li>
-              <li><a href="#eventos" class="hover-effect">
-                <span>
-                  <span>Eventos</span>
-                  <span class="hidden-xs">Eventos</span>
-                </span>
-              </a></li> -->
+
               <!--Dropdowns específicos para as paginas do evento -->
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -69,6 +51,7 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#inicio">Apresentação</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#sobre">Sobre</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#eventos">Eventos</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#contato">Contato</a></li>
@@ -88,12 +71,12 @@
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="#">Anais e Resultados</a></li>
                 </ul>
               </li>
-              <!-- <li><a href="#contato" class="hover-effect">
+              <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
                 <span>
-                  <span>Contato</span>
-                  <span class="hidden-xs">Contato</span>
+                  <span>Cadastrar</span>
+                  <span class="hidden-xs">Cadastrar</span>
                 </span>
-              </a></li> -->
+              </a></li>
               <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
                 <span>
                   <span>Login</span>

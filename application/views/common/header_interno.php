@@ -13,27 +13,27 @@
         <link href="<?php echo base_url ('assets_interno/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets_interno/css/simple-sidebar.css');?>" rel="stylesheet">
 
-        
-       
+
+
     </head>
     <body>
  <div id="wrapper">
 
         <!-- Menu Participante -->
-        <?php 
+        <?php
             $paginacorrente=$this->uri->segment(2); //Codigo php para identificar a pagina corrente e setar item de menu ativo
             $usuario=$this->uri->segment(1);
             if ($usuario=="participante"){
         ?>
-        
+
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
             <div class="borda"><!-- borda -->
             <ul class="sidebar-nav">
-                
+
                 <div class="sidebar-brand">
                     <a href="#">
-                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>"> 
-                        
+                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>">
+
                     </a>
                 </div>
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
@@ -60,20 +60,20 @@
             </ul>
             </div><!-- /#borda -->
         </div><!-- /#sidebar-wrapper -->
-        
-        <?php 
+
+        <?php
             }else if ($usuario=="organizador"){
         ?>
         <!-- Menu Organizador -->
-        
+
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
             <div class="borda"><!-- borda -->
             <ul class="sidebar-nav">
-                
+
                 <div class="sidebar-brand">
                     <a href="#">
-                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>"> 
-                        
+                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>">
+
                     </a>
                 </div>
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
@@ -91,29 +91,32 @@
                  <li class="<?php if($paginacorrente == 'cadastracomite') {echo 'active';} ?>">
                     <a href="<?php echo base_url("organizador/cadastracomite");?>"><span class="glyphicon glyphicon-list"></span>  COMITÊ</a>
                 </li>
+                <li class="<?php if($paginacorrente == 'enviaemail') {echo 'active';} ?>">
+                   <a href="<?php echo base_url("organizador/enviaEmail");?>"><span class="glyphicon glyphicon-list"></span>  CONVITES</a>
+               </li>
                 <li class="">
                     <a href="<?php echo base_url("login/sair");?>"><span class="glyphicon glyphicon-log-out"></span>  SAIR</a>
                 </li>
             </ul>
             </div><!-- /#borda -->
         </div><!-- /#sidebar-wrapper -->
-        
-        
-        
+
+
+
         <?php
-            //fim else if $usuário == "organizador" 
+            //fim else if $usuário == "organizador"
             }else{
         ?>
         <!-- Menu Avaliador -->
-        
+
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
             <div class="borda"><!-- borda -->
             <ul class="sidebar-nav">
-                
+
                 <div class="sidebar-brand">
                     <a href="#">
-                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>"> 
-                        
+                        <img src="<?php echo base_url('application/views/common/img/logoifevents.png'); ?>">
+
                     </a>
                 </div>
                 <li class="<?php if($paginacorrente == 'index' || empty($paginacorrente)) {echo 'active';} ?>">
@@ -131,14 +134,14 @@
             </ul>
             </div><!-- /#borda -->
         </div><!-- /#sidebar-wrapper -->
-        
-        
-        
+
+
+
         <?php
             }//fim else if $usuário == "avaliador"
-            
+
         ?>
-        
+
         <div id="page-content-wrapper"><!-- Page Content -->
             <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
                     <span class="glyphicon glyphicon-remove hidden-xs"></span>
@@ -147,5 +150,3 @@
             <div class="container-fluid"><!-- Container-fluid -->
                 <div class="row"><!-- row -->
                 <div class="col-lg-12"><!-- col-lg-12 -->
-
-                        
