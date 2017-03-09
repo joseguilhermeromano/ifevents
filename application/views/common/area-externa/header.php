@@ -59,6 +59,13 @@
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=contato"); ?>">Contato</a></li>
                 </ul>
               </li>
+              <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
+                <span>
+                  <span>Sobre</span>
+                  <span class="hidden-xs">Sobre</span>
+                </span>
+              </a></li>
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
                 <span>
@@ -75,8 +82,14 @@
               </li>
               <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
                 <span>
-                  <span>Cadastrar</span>
-                  <span class="hidden-xs">Cadastrar</span>
+                  <span>Cadastro</span>
+                  <span class="hidden-xs">Cadastro</span>
+                </span>
+              </a></li>
+              <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
+                <span>
+                  <span>Contato</span>
+                  <span class="hidden-xs">Contato</span>
                 </span>
               </a></li>
               <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">

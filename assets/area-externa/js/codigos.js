@@ -42,12 +42,19 @@ jQuery(document).ready(function($) {
 });
 
 $(document).ready(function(){
+    var timer;
      // $(".carousel-inner").addClass('carousel-inner-visible');
     $("a.thumbnail").hover(function(){
-    $(".carousel-inner").addClass('carousel-inner-visible');
+        $("a.thumbnail:hover .balao").hide();
+        timer = setTimeout(function(){$(".carousel-inner").addClass('carousel-inner-visible');
+             $("a.thumbnail:hover .balao").show();
+            }, 400);
+    
           }, function(){
+        clearTimeout(timer);
         $(".carousel-inner").removeClass('carousel-inner-visible');
     });
+    
 });
 
 function getUrlVars()
