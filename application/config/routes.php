@@ -52,23 +52,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /* Rotas Corretas */
 
-$route[ 'organizador' ]            = 'OrganizadorControl/index';
-$route[ 'organizador/(:any)' ]     = 'OrganizadorControl/$1';
-$route[ 'participante' ]            = 'ParticipanteControl/index';
-$route[ 'participante/(:any)' ]     = 'ParticipanteControl/$1';
-$route[ 'avaliador' ]            = 'AvaliadorControl/index';
-$route[ 'avaliador/(:any)' ]     = 'AvaliadorControl/$1';
-$route[	'(:any)' ]     = 'InicioControl/$1';
-$route[	'default_controller' ]     = 'InicioControl';
-$route[ 'login' ]            = 'LoginControl/entrar';
-$route[ 'login/(:any)' ]     = 'LoginControl/$1';
+$route[ 'organizador' ]         = 'OrganizadorControl/index';
+$route[ 'organizador/(:any)' ]  = 'OrganizadorControl/$1';
+$route[ 'participante' ]        = 'ParticipanteControl/index';
+$route[ 'participante/(:any)' ] = 'ParticipanteControl/chamaView/$1';
+$route[ 'avaliador' ]           = 'AvaliadorControl/index';
+$route[ 'avaliador/(:any)' ]    = 'AvaliadorControl/$1';
+$route[	'(:any)' ]              = 'InicioControl/$1';
+$route[	'default_controller' ]  = 'InicioControl';
+$route[ 'login' ]            	= 'LoginControl/entrar';
+$route[ 'login/(:any)' ]        = 'LoginControl/$1';
 
 
 //$route[	'administracao' ]          = 'administracao/Home';
 //$route[	'submissao' ]			   = 'InicioControl/submissao';
 //$route[	'cadastro' ]               = 'InicioControl/cadastro';
 
-//$route['login']					   = 'InicioControl/login';	
+//$route['login']					   = 'InicioControl/login';
 //$route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
 //$route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
 //$route[ 'avaliador' ]              = 'AreaRestritaControl/avaliador';
@@ -79,4 +79,3 @@ $route[ 'login/(:any)' ]     = 'LoginControl/$1';
 //$route[ 'novoartigo' ]             = 'ParticipanteControl/novoartigo';
 //$route[ '404_override' ]           = 'InicioControl/error_404';
 $route[ 'translate_uri_dashes' ]   = FALSE;
-	

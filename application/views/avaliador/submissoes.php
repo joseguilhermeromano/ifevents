@@ -52,7 +52,7 @@
                   <td class="text-center">FLISOLI2016</td>
                   <td class="text-center"><?php //echo $itens->arti_are;?></td>
                   <td class="text-center">Não Avaliado</td>
-                  <td class="text-center"><?php  echo anchor('AvaliadorControl/historico/','<span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span>'); ?></td>                 
+                  <td class="text-center"><?php  echo anchor('AvaliadorControl/historicoSubmissao/','<span class="glyphicon glyphicon-eye-open estilo-botao-edicao"></span>'); ?></td>                 
             </tr>
             <?php  
 //                $i++;

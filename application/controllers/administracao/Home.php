@@ -6,7 +6,7 @@
 			parent::__construct();
 			$this->load->library('session');
 			$this->load->model('LoginModel');			
-			$this->load->model('acesso/Autentica');
+			//$this->load->model('acesso/Autentica');
 			
 		} 
 
@@ -21,9 +21,9 @@
 
 		//Método recebe parametros email e senha e verifica no banco para conceder acesso ao organizador
 		public function login(){			
-			if($this->Autentica->Check($this->router->fetch_class(), $this->router->fetch_method() == true)){
+			//if($this->Autentica->Check($this->router->fetch_class(), $this->router->fetch_method() == true)){
 				$this->LoginModel->Logar();
-			}
+			//}
 			//else{
 			//	redirect('cadastro');
 			//}

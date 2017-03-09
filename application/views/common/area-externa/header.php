@@ -9,7 +9,7 @@
   <link href="<?php echo base_url('assets/area-externa/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css" media="all" />
   <link href="<?php echo base_url('assets/area-externa/css/estilo.css'); ?>" rel="stylesheet" type="text/css" media="all" />
   <!-- //JavaScript --><!-- animation-effect -->
-  <link href="<?php echo base_url('assets/area-externa/css/animate.min.css'); ?>" rel="stylesheet"> 
+  <link href="<?php echo base_url('assets/area-externa/css/animate.min.css'); ?>" rel="stylesheet">
   <script src="<?php echo base_url('assets/area-externa/js/wow.min.js');?>"></script>
   <script>
    new WOW().init();
@@ -20,11 +20,11 @@
 
 <!--header-->
 <div class="logo_nav">
-    
+
       <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header wow fadeInLeft animated animated" 
+        <div class="navbar-header wow fadeInLeft animated animated"
         data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="fa fa-bars"></span> MENU
@@ -41,7 +41,7 @@
           <nav>
             <ul class="nav navbar-nav wow fadeInRight animated animated"
             data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-          
+
               <!--Dropdowns específicos para as paginas do evento -->
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -95,7 +95,7 @@
               <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
                 <span>
                   <span>Login</span>
-                  <span class="hidden-xs">Login</span>
+                  <span class="hidden-xs" href="">Login</span>
                 </span>
               </a></li>
             </ul>

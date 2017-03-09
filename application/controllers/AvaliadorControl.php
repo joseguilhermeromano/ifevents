@@ -89,11 +89,11 @@ class AvaliadorControl extends CI_Controller{
              ***********************************************/
             
             public function historicoSubmissao(){
-                
+                $this->chamaView('historico-submissao', null, 'usuario/');
             }
             
             public function cadastraAvaliacao(){
-                
+                $this->chamaView('feedback');
             }
             
             public function alteraAvaliacao(){
