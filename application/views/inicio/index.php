@@ -17,10 +17,10 @@
 
 <!-- Container (Eventos Section) -->
 <div id="eventos" class="section">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="estilo-h1">Eventos Recentes</h1><br>
+        <h1 class="estilo-h1">Eventos Recentes</h1><br><br>
         <!-- Evento Atual -->
 
         <div id="carouselEventos" class="carousel slide" data-ride="carousel">
@@ -35,19 +35,31 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
               <div class="item active">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" alt="Chania">
+                <a href="<?php echo base_url("/evento");?>">
+                  <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" 
+                   alt="Chania">
+                </a>
               </div>
 
               <div class="item">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" alt="Chania">
+                <a href="<?php echo base_url("/evento");?>">
+                  <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" 
+                   alt="Chania">
+                </a>
               </div>
 
               <div class="item">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" alt="Flower">
+                <a href="<?php echo base_url("/evento");?>">
+                  <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" 
+                   alt="Chania">
+                </a>
               </div>
 
               <div class="item">
-                <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" alt="Flower">
+                <a href="<?php echo base_url("/evento");?>">
+                  <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" 
+                   alt="Chania">
+                </a>
               </div>
             </div>
 
@@ -66,10 +78,10 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <br>
+        <br><br>
         <h1 class="estilo-h1">Todos os Eventos</h1><br>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-6 col-sm-offset-3">
            <div class="panel-group" id="accordion">
               <div class="panel panel-default">
                 <div class="panel-heading accordion-caret">

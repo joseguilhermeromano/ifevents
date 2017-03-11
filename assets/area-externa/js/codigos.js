@@ -41,9 +41,9 @@ jQuery(document).ready(function($) {
     });
 });
 
+/* FUNÇÃO UTILIZADA PARA EXIBIR O BALAOZINHO SOBRE O LOGO NO CAROUSEL DE PARCERIAS*/
 $(document).ready(function(){
     var timer;
-     // $(".carousel-inner").addClass('carousel-inner-visible');
     $("a.thumbnail").hover(function(){
         $("a.thumbnail:hover .balao").hide();
         timer = setTimeout(function(){$(".carousel-inner").addClass('carousel-inner-visible');
@@ -55,26 +55,6 @@ $(document).ready(function(){
         $(".carousel-inner").removeClass('carousel-inner-visible');
     });
     
-});
-
-function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
-
-$(document).ready(function(){
-    var div = getUrlVars()["div"];
-    div = "#" + div;
-    $('html,body').animate({scrollTop:$(div).offset().top},1000);
-    console.log(div);
 });
 
 

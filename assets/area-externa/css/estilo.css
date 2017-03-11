@@ -265,6 +265,26 @@ blockquote{
         -ms-transform:translate(-50%,-50%);
     }
 }
+/*-- /CONFIGURAÇÕES DA PÁGINA DE INÍCIO/APRESENTAÇÃO --*/
+
+/*-- CONFIGURAÇÕES DA APRESENTAÇÃO DA IMAGEM DO EVENTO (#header-presentation) --*/
+
+#header-presentation{
+    margin-top:3.5em;
+}
+@media(max-width: 767px){
+    #header-presentation{
+        margin-top:1em;
+    }
+}
+#header-presentation .banner{
+    background-color: transparent;
+    max-height: 500px;
+}
+#header-presentation .banner img{
+    opacity: 1;
+}
+/*-- /CONFIGURAÇÕES DA APRESENTAÇÃO DA IMAGEM DO EVENTO --*/
 
 /*-- ANIMAÇÃO BOTÃO ABAIXO DA FRASE "A GENTE FAZ ACONTECER"--*/
 
@@ -640,6 +660,39 @@ a.thumbnail{
 #login input{
     padding:5px;
     float:right;
+}
+#login .display-middle{
+  opacity: 0.80;
+  top:10%;
+  left: 0%;
+      transform:translate(0%,0%);
+    -ms-transform:translate(0%,0%);
+}
+#login .banner{
+  overflow:hidden;
+  margin-left: -400px;
+}
+@media (max-width: 1000px) and (min-width: 767px){
+    #login .banner{
+    overflow:hidden;
+    margin-left: -500px;
+  }
+}
+@media(max-width: 767px){
+  #login .banner{
+    overflow:hidden;
+    margin-left: -650px;
+  }
+}
+@media(max-width: 500px){
+  #login .banner{
+    overflow:hidden;
+    margin-left: -950px;
+  }
+}
+#login .banner .banner-image{
+  min-height: 700px;
+  min-width: 1500px;
 }
 
 .icon-in-input{

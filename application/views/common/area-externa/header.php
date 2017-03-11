@@ -64,7 +64,7 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento?div=apresentacao"); ?>">Sobre o Evento</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento"); ?>">Sobre o Evento</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("programacao"); ?>">Programação</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("submissao"); ?>">Submissão</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("anaisresultados"); ?>">Anais e Resultados</a></li>
