@@ -97,6 +97,17 @@
 			$this->load->view('common/area-externa/footer');
 		}
 
+		public function contato(){
+			$this->load->view('common/area-externa/header');
+			$this->load->view('inicio/contato');
+			$this->load->view('common/area-externa/footer');
+		}
+
+		public function sobre(){
+			$this->load->view('common/area-externa/header');
+			$this->load->view('inicio/sobre');
+			$this->load->view('common/area-externa/footer');
+		}
 
 		//Método chama a view que contém formulário para upload do artigo
 		public function formSubmit(){

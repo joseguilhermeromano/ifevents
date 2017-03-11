@@ -292,167 +292,57 @@ blockquote{
 /*-- /ANIMAÇÃO BOTÃO ABAIXO DA FRASE "A GENTE FAZ ACONTECER"--*/
 /*-- /CONFIGURAÇÕES DA PÁGINA DE INÍCIO/APRESENTAÇÃO --*/
 
-/*-- #EVENTOS --*/
+/*-- #EVENTOS (carouselEventos) --*/
 
-#eventos{
-    background-color: #32bc4e;
-}
-#eventos h1{
-    color:#fff;
-    margin-bottom: 0px;
-    text-shadow: #274f27 0em 0em 0.2em;
-    text-align: center;
-}
-#eventos h1:after{
-    background-color: white;
-    box-shadow: #274f27 0em 0em 0.2em;
-    border-radius: 100%;
-}
-#eventos h4{
-    font-weight: bold;
-    font-size: 20px;
-    color: #00cc99;
-    margin:0;
-}
-#eventos h4 span{
-    font-size: 15px;
-    color:#929599;
-}
-#eventos h5{
-    font-size:13px;
-    font-weight: bold;
-    color:#9ea0a3;
-}
-#eventos p{
-    font-size: 15px;
+#carouselEventos .carousel-control.left 
+{
+  left: 0px !important;
+  background-image: none;
+  color:#37ba40;
+  height: 75px;
+  width : 60px;
+  font-size: 50px;
+  position: absolute;
+  top: 0; bottom: 0;
+  margin: auto;
 }
 
-#eventos .col-padding{
-    margin: 0px;
-    padding: 5px;
+#carouselEventos .carousel-control.right 
+{
+  right: 0px !important;
+  background-image: none;
+  color:#37ba40;
+  height: 75px;
+  width : 60px;
+  font-size: 50px;
+  position: absolute;
+  top: 0; bottom: 0;
+  margin: auto;
 }
 
- /* EFEITO HOVER ROTATE EM IMAGENS DOS EVENTOS (#EVENTOS) */
- 
-.rotate-effect {
-    position:relative;
-    max-width: 400px;
-    min-width: 300px;
-    overflow:hidden;
-    float:left;
+@media(max-width: 767px){
+    #carouselEventos .carousel-control.left {
+       font-size: 30px; 
+    }
+   #carouselEventos .carousel-control.right {
+       font-size: 30px; 
+   } 
 }
-.rotate-effect figure {
-    margin:0;
-    padding:0;
-    position:relative;
-    cursor:pointer;
 
+#carouselEventos .carousel-indicators 
+{
+  right: 50%;
+  bottom: -15px;
+  margin-right: -19px;
 }
-.rotate-effect figure img {
-    display:block;
-    position:relative;
-    z-index:10;
-
+#carouselEventos .carousel-indicators li 
+{
+  background: #fff;
 }
-.rotate-effect figure figcaption {
-    display:block;
-    position:absolute;
-    z-index:5;
-    -webkit-box-sizing:border-box;
-    -moz-box-sizing:border-box;
-    box-sizing:border-box
+#carouselEventos .carousel-indicators .active 
+{
+  background: #37ba40;
 }
-.rotate-effect figure h2 {
-    font-family:'Lato';
-    color:#fff;
-    font-size:20px;
-    text-align:left;
-    margin:0px;
-}
-.rotate-effect figure hr{
-    margin:5px 0;
-}
-.rotate-effect figure p {
-    display:block;
-    font-family:'Lato';
-    font-size:12px;
-    line-height:18px;
-    margin:0;
-    color:#fff;
-    text-align:left;
-}
-.rotate-effect figure span{
-    color:white;
-    float: left;
-    font-size:12px;
-}
-.rotate-effect figure figcaption {
-    top:0px;
-    left:0;
-    width:100%;
-    height:100%;
-    position: absolute;
-    display: block;
-    padding:10px;
-    /*padding:29px 44px;*/
-    background-color:rgba(35, 122, 44,0.5);
-    text-align:center;
-    backface-visibility:hidden;
-    -webkit-transform:rotateY(-180deg);
-    -moz-transform:rotateY(-180deg);
-    transform:rotateY(-180deg);
-    -webkit-transition:all .5s;
-    -moz-transition:all .5s;
-    transition:all .5s
-}
-.rotate-effect figure img {
-    backface-visibility:hidden;
-    -webkit-transition:all .5s;
-    -moz-transition:all .5s;
-    transition:all .5s
-}
-.rotate-effect figure:hover img,figure.hover img {
-    -webkit-transform:rotateY(180deg);
-    -moz-transform:rotateY(180deg);
-    transform:rotateY(180deg)
-}
-.rotate-effect figure:hover figcaption,figure.hover figcaption {
-    -webkit-transform:rotateY(0);
-    -moz-transform:rotateY(0);
-    transform:rotateY(0)
-}
- /* /EFEITO HOVER ROTATE EM IMAGENS DOS EVENTOS (#EVENTOS) */
-
-/* BOTÃO DETALHAR DO ROTATE-EFFECT (#EVENTOS) */
-
-.botao-detalhar {
-    color: white;
-    background-color:transparent;
-    padding: 6px 11px;
-    margin-top: 8px;
-    font-family: 'OpenSansBold', sans-serif;
-    border: 1px solid white;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: inset 0 0 0 0 white;
-    -webkit-transition: all ease 0.8s;
-    -moz-transition: all ease 0.8s;
-    transition: all ease 0.8s;
-}
-.botao-detalhar:hover {
-    box-shadow: inset -200px 0 0 0 white;
-    color: #288c32;
-}
-.page-link{
-    color: #4df94a!important;
-    font-weight: bold;
-}
-/* /BOTÃO DETALHAR DO ROTATE-EFFECT (#EVENTOS) */
 
 /*-- /#EVENTOS --*/
 
@@ -492,9 +382,6 @@ blockquote{
     box-shadow: #274f27 0em 0em 0.2em;
     border-radius: 100%;
 }
-/*.carousel-inner{
-    background-color: yellow!important;
-}*/
 .carousel-inner-visible{
     overflow: visible;
 }
@@ -503,11 +390,6 @@ a.thumbnail{
     color: #039;
     text-decoration: none;
 }
-/*a.thumbnail:hover{
-    background: transparent;
-    z-index: 25;
-}
-*/
 a.thumbnail .balao{
     display: none;
 }
