@@ -67,7 +67,7 @@
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento"); ?>">Sobre o Evento</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("programacao"); ?>">Programação</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("submissao"); ?>">Submissão</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("anaisresultados"); ?>">Anais e Resultados</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("resultadosanais"); ?>">Resultados e Anais</a></li>
                 </ul>
               </li>
               <li><a href="<?php echo base_url("/cadastro"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in"  class="hover-effect">

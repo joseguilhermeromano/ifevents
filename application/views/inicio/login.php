@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="row">
-              <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+              <div class="col-sm-8 col-md-6">
                   <div class="boxshadow">
                     <?php echo form_open('login/entrar');?>
 

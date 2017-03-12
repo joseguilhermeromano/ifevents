@@ -155,7 +155,7 @@ blockquote{
 }
 
 .logo{
-     background: url('../img/teste.png');
+     background: url('../img/logo_ifevents.svg');
      background-repeat: no-repeat;
      background-size: 220px;
      width: 250px;
@@ -650,6 +650,26 @@ a.thumbnail{
 .accordion-caret .accordion-toggle.collapsed:before{color:#fff;float:right;content:url(../img/icon-plus.png);}
 .panel-title .accordion-toggle.collapsed{padding-left:10px}
 .panel-title .accordion-toggle:not(.collapsed){background:#37ba40 !important; border-radius: 3px;display:block;padding-left:10px;color:#fff}
+.panel-body > hr{
+  border: 1px solid #b6b7ba;
+  padding:0;
+  margin:0;
+}
+.panel-body > p{
+  font-size: 14px;
+}
+hr.hr-pontilhado{
+  border: 1px dotted #b6b7ba;
+}
+.panel-body{
+  font-size: 12px;
+}
+/*-- CONFIGURAÇÕES PÁGINA DE CADASTRO --*/ 
+#cadastro h3{
+  color:#e01d1d;
+}
+/*-- /CONFIGURAÇÕES PÁGINA DE CADASTRO --*/ 
+
 /*-- CONFIGURAÇÕES DA PÁGINA DE LOGIN--*/
 #login{
     background-color: #e2291f;
@@ -783,7 +803,7 @@ a.thumbnail{
         width: 7em;
         background-color: transparent;
         cursor: pointer;
-        border-color: #31B404;
+        border-color: #37BA40;
     }
 
     a.hover-effect {
@@ -794,15 +814,15 @@ a.thumbnail{
         border-color: red;
     }
     .navbar-default .navbar-nav > li > a {
-      color: #31B404;
+      color: #37BA40;
     }
     .navbar-default .navbar-nav > li > a:hover,
     .navbar-default .navbar-nav > li > a:focus{
-      color: #31B404;
+      color: #37BA40;
     }
     .dropdown-menu{
         top: 50px;
-        background-color: #31B404;
+        background-color: #37BA40;
         border-top-left-radius: 5px!important;
         border-top-right-radius: 5px!important;
         border-radius: 5px;
@@ -826,7 +846,7 @@ a.thumbnail{
         left: 20%;
         display: inline-block;
         border-right: 9px solid transparent;
-        border-bottom: 9px solid #31B404;
+        border-bottom: 9px solid #37BA40;
         border-left: 10px solid transparent;
         content: '';
     }
@@ -836,11 +856,11 @@ a.thumbnail{
         font-size:12px;
     }
     .dropdown-menu > li > a:hover{
-        color:#31B404;
+        color:#37BA40;
         background-color: #fff;
     }
     .hover-effect span:nth-child(1) {
-        color: #31B404;
+        color: #37BA40;
     }
     .hover-effect span:nth-child(2) {
         color: red;

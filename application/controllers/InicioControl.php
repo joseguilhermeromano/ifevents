@@ -47,9 +47,15 @@
 
 		//Método chama a view que contém formulário de cadastro para participantes
 		public function cadastro(){
-			$this->load->view('common/header');
-			$this->load->view('inicio/cadastro');
-			$this->load->view('common/footer');
+            $this->load->view('common/area-externa/header');
+            $this->load->view('inicio/cadastro');
+            $this->load->view('common/area-externa/footer');
+		}
+
+		public function recuperasenha(){
+            $this->load->view('common/area-externa/header');
+            $this->load->view('inicio/recuperasenha');
+            $this->load->view('common/area-externa/footer');
 		}
 
 		//Metodo chama o método verifica para validação dos campos do formuĺário
@@ -86,9 +92,9 @@
 		com as regras para submissão de artigos*/
 
 		public function submissao(){
-			$this->load->view('common/header');
+			$this->load->view('common/area-externa/header');
 			$this->load->view('inicio/submissao');
-			$this->load->view('common/footer');
+			$this->load->view('common/area-externa/footer');
 		}
 
 		public function evento(){
@@ -106,6 +112,12 @@
 		public function sobre(){
 			$this->load->view('common/area-externa/header');
 			$this->load->view('inicio/sobre');
+			$this->load->view('common/area-externa/footer');
+		}
+
+		public function resultadosanais(){
+			$this->load->view('common/area-externa/header');
+			$this->load->view('inicio/resultadosAnais');
 			$this->load->view('common/area-externa/footer');
 		}
 
