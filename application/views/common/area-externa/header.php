@@ -43,22 +43,19 @@
             data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
 
               <!--Dropdowns específicos para as paginas do evento -->
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
+              <li><a href="<?php echo base_url("/index"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
                 <span>
-                  <span>Início <b class="caret"></b></span>
-                  <span class="hidden-xs">Início <b class="caret"></b></span>
+                  <span>INÍCIO</span>
+                  <span class="hidden-xs">INÍCIO</span>
                 </span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=apresentacao"); ?>">Apresentação</a>
+              </a></li>
+              <li><a href="<?php echo base_url("/sobre"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
+                <span>
+                  <span>SOBRE</span>
+                  <span class="hidden-xs">SOBRE</span>
+                </span>
+              </a></li>
 
-                  </li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=sobre"); ?>">Sobre</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=eventos"); ?>">Eventos</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("index?div=contato"); ?>">Contato</a></li>
-                </ul>
-              </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
                 <span>
@@ -67,22 +64,28 @@
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento?div=apresentacao"); ?>">Sobre o Evento</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento"); ?>">Sobre o Evento</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("programacao"); ?>">Programação</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("submissao"); ?>">Submissão</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("anaisresultados"); ?>">Anais e Resultados</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("resultadosanais"); ?>">Resultados e Anais</a></li>
                 </ul>
               </li>
-              <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
+              <li><a href="<?php echo base_url("/cadastro"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in"  class="hover-effect">
                 <span>
-                  <span>Cadastrar</span>
-                  <span class="hidden-xs">Cadastrar</span>
+                  <span>CADASTRO</span>
+                  <span class="hidden-xs">CADASTRO</span>
                 </span>
               </a></li>
-              <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" href="about.html" class="hover-effect">
+              <li><a href="<?php echo base_url("/contato"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
+                <span>
+                  <span>CONTATO</span>
+                  <span class="hidden-xs">CONTATO</span>
+                </span>
+              </a></li>
+              <li><a href="<?php echo base_url("/login"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
                 <span>
                   <span>Login</span>
-                  <span class="hidden-xs" href="">Login</span>
+                  <span class="hidden-xs">Login</span>
                 </span>
               </a></li>
             </ul>

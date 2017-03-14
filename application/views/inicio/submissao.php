@@ -1,12 +1,14 @@
-   
+<?php
+include("application/views/common/area-externa/header-presentation.php");
+?>   
 
-    <section id="submissao" class="tod">
+    <div id="submissao" class="section">
     <br>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Submissão de Projetos</h2>
-                    <hr class="star-primary">
+                    <h1 class="estilo-h1">Submissão de Projetos</h1>
+                    <br>
                 </div>
             </div>
             <div class="row">
@@ -34,30 +36,7 @@
                 </div>
             </div>
         </div>
-
-	</section>
-	<section>
-	   <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2>Submissão</h2>
-                                <hr class="star-primary">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                            <p>
-                                Para submeter o seu projeto preencha o formulário de Submissão de Artigos.
-                            </p>
-                                
-                                <h5><?php echo anchor('novoartigo', 'Formulário de Submissão');?></h5>
-                                    
-                                    
-                                <br><br><br><br><br>
-                            </div>                                                        
-                        </div>
-    </section>    
+	</div> 
+</div>
 
                  
