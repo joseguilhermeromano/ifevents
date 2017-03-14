@@ -21,7 +21,7 @@
 
             $this->email->initialize($config);
 
-            $this->email->from('projeotifsp@gmail.com', 'Remetente');
+            $this->email->from('projetoifsp@gmail.com', 'Remetente');
             $this->email->to($data['email'], $data['nome']);
             $this->email->subject("Testando o envio de convite para o avaliador");
             $this->email->message($data['mensagem']);
