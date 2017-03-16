@@ -10,9 +10,8 @@
         }
 
         public function login(){
-            $this->user_email = $this->input->post('email');
-            $this->user_pass = $this->input->post('senha');
-            return $this->UserDAO->consultarLogin($this);
+            return $this->UserDAO->consultarLogin($this->input->post('email'),
+             $this->input->post('senha'));
         }
 
         public function setaValores(){

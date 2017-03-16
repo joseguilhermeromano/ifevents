@@ -33,6 +33,8 @@
 				$this->create_table_submissao();
 				$this->create_table_avaliacao();
 				$this->create_table_contem();
+				$this->create_table_metodo();
+				$this->create_table_permissao();
 		}
 
 		//Método cria a tabela login
@@ -264,7 +266,11 @@
 					,user_tipo        varchar(2)   NOT NULL
 					,user_instituicao varchar(100) NOT NULL
 					,user_biograf     varchar(500) NOT NULL
-					,user_pass        varchar(9)   NOT NULL
+					,user_pass        varchar(100) NOT NULL
+					-- ,user_email       varchar(100) NOT NULL
+					-- -- ,user_email_alter varchar(100) NOT NULL
+					-- ,user_telefone	  varchar(15)  NOT NULL
+					-- -- ,user_tele_alter  varchar(15)  NOT NULL
 					,user_email_vali  varchar(100) NOT NULL
 					,user_stat_cd     int(11)      NOT NULL
 			) ENGINE=INNODB";
@@ -430,6 +436,27 @@
 			$this->db->query($sql);
 		}
 
+		//Método cria tabela métodos
+		public function create_table_metodo(){
+			$sql = "CREATE TABLE IF NOT EXISTS `metodo` (
+					  `meto_cd` int(11) NOT NULL,
+					  `meto_classe` varchar(100) NOT NULL,
+					  `meto_metodo` varchar(100) NOT NULL,
+					  `meto_identificacao` varchar(200) NOT NULL,
+					  `meto_privado` tinyint(1) NOT NULL
+					) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;";
+			$this->db->query($sql);
+		}
+
+		//Método cria tabela permissao
+		public function create_table_permissao(){
+			$sql = "CREATE TABLE IF NOT EXISTS `permissao` (
+					  `perm_cd` int(11) NOT NULL,
+					  `perm_meto_cd` int(11) NOT NULL,
+					  `perm_tius_cd` int(11) NOT NULL
+					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$this->db->query($sql);
+		}
 
 /*
 		//Método cria declarações de alteração nas tabelas

@@ -11,6 +11,7 @@ class PrincipalControl extends CI_Controller {
 		$this->load->helper ( 'security' );
 		$this->load->helper ( 'language' );
 		$this->load->library('form_validation');
+        $this->load->model('dao/DataBaseDAO');
 		$this->load->library("session");
         $this->load->library('upload');
         $this->load->helper('file');
