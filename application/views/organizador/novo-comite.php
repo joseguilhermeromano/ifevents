@@ -1,4 +1,4 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Comitê</b></h2>
+<h2><span class="glyphicon glyphicon-list"></span><b> Novo Comitê</b></h2>
 <hr>
 <?php
 if(!empty(validation_errors())){
@@ -22,7 +22,7 @@ if(!empty(validation_errors())){
 
 <div class="row">
 <?php 
-    echo form_open_multipart( 'organizador/cadastraComite', 'role="form" class="formsignin"' );?>
+    echo form_open_multipart( 'comite/cadastrar', 'role="form" class="formsignin"' );?>
     <?php echo form_hidden('comite', 'co');?>
     <div class="col-md-12">
         <div class="form-group">

@@ -2,7 +2,7 @@
 
     class Autentica extends CI_Model{
                 
-        private $permissaoView = 'sem-permissao'; // Recebe o nome da view correspondente à página informativa de usuário sem   permissão de acesso
+        private $permissaoView = 'noPermission'; // Recebe o nome da view correspondente à página informativa de usuário sem   permissão de acesso
         private $loginView = 'login'; // Recebe o nome da view correspondente à tela de login
         
         public function __construct(){  
@@ -12,12 +12,15 @@
             }
 
         public function Check( $classe, $metodo ){
+            if($classe=="InicioControl"||$classe=="LoginControl"){
+                return true;
+            }
             
             /*
             * Pesquisa a classe e o método passados como parâmetro
             */
-            $array = array('classe' => $classe, 'metodo' => $metodo);
-            $qryMetodos = $this->db->where($array)->get('metodos');            
+            $array = array('meto_classe' => $classe, 'meto_metodo' => $metodo);
+            $qryMetodos = $this->db->where($array)->get('metodo');            
             $resultMetodos = $qryMetodos->result();
             
             /*
@@ -27,12 +30,12 @@
     
             if( count( $resultMetodos ) == 0 ){
                 $data = array(
-                    'classe' => $classe,
-                    'metodo' => $metodo,
-                    'identificacao' => $classe .  '/' . $metodo,
-                    'privado' => 1
+                    'meto_classe' => $classe,
+                    'meto_metodo' => $metodo,
+                    'meto_identificacao' => $classe .  '/' . $metodo,
+                    'meto_privado' => 1
                 );
-                $this->db->insert( 'metodos', $data );                
+                $this->db->insert( 'metodo', $data );                
                 redirect( base_url( $classe . '/' . $metodo ), 'refresh' );
             }
             else{
@@ -41,24 +44,23 @@
                 * O método sendo público (0), então não verifica o login e libera o acesso
                 * Mas se for privado (1) então é verificado o login e a permissão do usuário
                 */
-                if( $resultMetodos[0]->privado == 0 ){
+                if( $resultMetodos[0]->meto_privado == 0 ){
                     return false;
                 }
                 else{
-                    $nome       = $this->session->userdata('usuario');
-                    $logged_in  = $this->session->userdata('logado');
-                    $data       = $this->session->userdata('data');
-                    $email      = $this->session->userdata('email');
-                    $id_usuario = $this->session->userdata('id');
-                    $id_metodo  = $resultMetodos[0]->id;
+                    $nome       = "teste";
+                    $logged_in  = "teste";
+                    $email      = "teste";
+                    $tipo_usuario = "1";
+                    $cd_metodo  = $resultMetodos[0]->meto_cd;
                 
                     /*
                     * Se o usuário estiver logado faz a verificação da permissão
                     * caso contrário redireciona para uma tela de login
                     */
-                    if( $nome && $logged_in && $id_usuario ){
-                        $array = array('id_metodo' => $id_metodo, 'id_usuario' => $id_usuario);
-                        $qryPermissoes = $this->db->where($array)->get('permissoes');                        
+                    if( $nome && $logged_in && $tipo_usuario ){
+                        $array = array('perm_meto_cd' => $cd_metodo, 'perm_tius_cd' => $tipo_usuario);
+                        $qryPermissoes = $this->db->where($array)->get('permissao');                        
                         $resultPermissoes = $qryPermissoes->result();
                 
                         /*
@@ -70,14 +72,14 @@
                         */
           
                         if( count( $resultPermissoes ) == 0 ){
-                            redirect( base_url( 'InicioControl/noPermission'), 'refresh'  );
+                            return redirect($this->permissaoView,"refresh");
                         }
                         else{
                             return true;
                         }
                     }
                     else{
-                     redirect( base_url( 'InicioControl/login'));
+                     return redirect($this->loginView,"refresh");
                     }
                 }
             }

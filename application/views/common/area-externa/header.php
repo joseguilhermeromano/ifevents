@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>IFEvents!</title>
+<title><?php echo($title); ?></title>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -67,10 +67,10 @@
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento"); ?>">Sobre o Evento</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("programacao"); ?>">Programação</a></li>
                   <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("submissao"); ?>">Submissão</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("resultadosanais"); ?>">Resultados e Anais</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("resultadosAnais"); ?>">Resultados e Anais</a></li>
                 </ul>
               </li>
-              <li><a href="<?php echo base_url("/cadastro"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in"  class="hover-effect">
+              <li><a href="<?php echo base_url("/cadastraParticipante"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in"  class="hover-effect">
                 <span>
                   <span>CADASTRO</span>
                   <span class="hidden-xs">CADASTRO</span>

@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div align='right'>
-                                    <a href="#">Esqueceu sua Senha?</a>
+                                    <a href="<?php echo base_url('recuperaSenha'); ?>">Esqueceu sua Senha?</a>
                                 </div>
                                 <div align='center'>
                                     <br>
@@ -48,7 +48,7 @@
                                     </button>
                                     <br><br>   
                                     <hr>
-                                    <h4>Não tem uma Conta? <a style="color:#969690;" href="<?php echo base_url('cadastro'); ?>">Cadastra-se</a></h4>
+                                    <h4>Não tem uma Conta? <a style="color:#969690;" href="<?php echo base_url('cadastraParticipante'); ?>">Cadastra-se</a></h4>
                                 </div>
                           </div>
                         </div>

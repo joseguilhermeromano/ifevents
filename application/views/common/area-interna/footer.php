@@ -5,8 +5,8 @@
         </div><!-- /#page-content-wrapper -->
     </div><!-- /#wrapper -->
      <!-- assetststrap Core JavaScript -->
-        <script src="<?php echo base_url('assets_interno/js/bootstrap.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets_interno/js/jquery.min.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/jquery.min.js');?>"></script>
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -34,7 +34,5 @@
     
     
 <!-- Menu Toggle Script -->
-
 </body>
 </html>
-

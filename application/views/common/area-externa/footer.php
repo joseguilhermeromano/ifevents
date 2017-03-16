@@ -15,11 +15,11 @@
       <div class="col-md-2 w3agile_footer_grid">  
         <h3>Links</h3>
        <ul>
-          <li><a href="#inicio" class="scroll">Início</a></li>
-          <li><a href="#sobre" class="scroll">Sobre</a></li>
-          <li><a href="#eventos" class="scroll">Eventos</a></li>
-          <li><a href="#contato" class="scroll">Contato</a></li>
-          <li><a href="#login">Login</a></li>
+          <li><a href="<?php echo base_url('index'); ?>">Início</a></li>
+          <li><a href="<?php echo base_url('sobre'); ?>">Sobre</a></li>
+          <li><a href="<?php echo base_url('cadastraParticipante'); ?>">Cadastro</a></li>
+          <li><a href="<?php echo base_url('contato'); ?>">Contato</a></li>
+          <li><a href="<?php echo base_url('login'); ?>">Login</a></li>
         </ul>
       </div>
       <div class="col-md-5 w3agile_footer_grid">

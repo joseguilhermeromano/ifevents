@@ -1,61 +1,82 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
+	require_once 'PrincipalControl.php';
 
-	class InicioControl extends CI_Controller{
+	class InicioControl extends PrincipalControl{
 
 		/*Método construtor faz o carregamento de vários componentes
 		necessários ao funcionamento do sistema*/
 
 		public function __construct(){
 			parent::__construct();
-			$this->load->model('dao/DataBaseDAO');
+			// $this->load->model('dao/DataBaseDAO');
 //			$this->DataBaseDAO->create_table_ci_session();
-			$this->load->helper('url');
-			$this->load->model('SubmitModel');
-			$this->load->model('UserModel');
-//			$this->load->model('acesso/Autentica');
+			// $this->load->model('SubmitModel');
+			// $this->load->model('UserModel');
+			// $this->model('Autentica');
 		}
 		//Método chama a view principal do sistema (Home)
 		public function index(){
-
-			$this->load->view("common/area-externa/header");
-			$this->load->view("inicio/index");
-			$this->load->view("common/area-externa/footer");
+			
+			$this->chamaView("index", "inicio",array("title"=>"IFEvents - Página Inicial - Seja bem vindo!"), 0);
 		}
 
+		public function sobre(){
+			
+			$this->chamaView("sobre", "inicio",
+            	array("title"=>"IFEvents - Sobre"), 0);
+		}
+
+		public function evento(){
+
+			$this->chamaView("evento", "inicio",
+            	array("title"=>"IFEvents - Sobre o Evento"), 0);
+		}
 
 
 		public function programacao(){
-			$this->load->view('common/area-externa/header');
-			$this->load->view('inicio/programacao');
-			$this->load->view('common/area-externa/footer');
+
+			$this->chamaView("programacao", "inicio",array("title"=>"IFEvents - Programação do Evento"), 0);
 		}
 
+		/*Método chama a view que contém links para documentos
+		com as regras para submissão de artigos*/
 
-		public function gerenciar(){
-			echo 'Área de gerenciamento';
+		public function submissao(){
+			
+			$this->chamaView("submissao", "inicio",
+            	array("title"=>"IFEvents - Submissão"), 0);
 		}
 
+		public function resultadosAnais(){
 
-		public function avaliador(){
-			echo 'Área do avaliador';
-		}
-
-
-		public function participante(){
-			echo 'Área do participante';
+			$this->chamaView("resultados_anais", "inicio",
+            	array("title"=>"IFEvents - Resultados & Anais"), 0);
 		}
 
 		//Método chama a view que contém formulário de cadastro para participantes
-		public function cadastro(){
-            $this->load->view('common/area-externa/header');
-            $this->load->view('inicio/cadastro');
-            $this->load->view('common/area-externa/footer');
+		public function cadastraParticipante(){
+
+            $this->chamaView("cadastro_participante", "inicio",
+            	array("title"=>"IFEvents - Cadastro de Participantes"), 0);
 		}
 
-		public function recuperasenha(){
-            $this->load->view('common/area-externa/header');
-            $this->load->view('inicio/recuperasenha');
-            $this->load->view('common/area-externa/footer');
+        //Método que chama a view do login
+        public function login(){
+
+            $this->chamaView("login", "inicio",
+            	array("title"=>"IFEvents - Login"), 0);
+        }
+
+		public function contato(){
+
+			$this->chamaView("contato", "inicio",
+            	array("title"=>"IFEvents - Contato"), 0);
+		}
+
+		public function recuperaSenha(){
+
+            $this->chamaView("recupera_senha", "inicio",
+            	array("title"=>"IFEvents - Recuperação de Senha"), 0);
 		}
 
 		//Metodo chama o método verifica para validação dos campos do formuĺário
@@ -64,86 +85,12 @@
 				$this->UserModel->verifica();
 			}
 		}
-                
 
-        //Método que chama a view do login
-        public function login(){
-            $this->load->view('common/area-externa/header');
-            $this->load->view('inicio/login');
-            $this->load->view('common/area-externa/footer');
-        }
-                
-        //teste 
-        public function teste(){
-            $this->load->view('common/header_interno');
-            $this->load->view('participante/index');
-            $this->load->view('common/footer_interno');
-        }
-
-        //Método que chama a view do login
-        /*public function login(){
-            $this->load->view('common/header');
-            $this->load->view('inicio/login');
-            $this->load->view('common/footer');
-        }*/
-
-
-		/*Método chama a view que contém links para documentos
-		com as regras para submissão de artigos*/
-
-		public function submissao(){
-			$this->load->view('common/area-externa/header');
-			$this->load->view('inicio/submissao');
-			$this->load->view('common/area-externa/footer');
-		}
-
-		public function evento(){
-			$this->load->view('common/area-externa/header');
-			$this->load->view('inicio/evento');
-			$this->load->view('common/area-externa/footer');
-		}
-
-		public function contato(){
-			$this->load->view('common/area-externa/header');
-			$this->load->view('inicio/contato');
-			$this->load->view('common/area-externa/footer');
-		}
-
-		public function sobre(){
-			$this->load->view('common/area-externa/header');
-			$this->load->view('inicio/sobre');
-			$this->load->view('common/area-externa/footer');
-		}
-
-		public function resultadosanais(){
-			$this->load->view('common/area-externa/header');
-			$this->load->view('inicio/resultadosAnais');
-			$this->load->view('common/area-externa/footer');
-		}
-
-		//Método chama a view que contém formulário para upload do artigo
-		public function formSubmit(){
-			$this->load->view('common/header');
-			$this->load->view('inicio/formSubmit');
-			$this->load->view('common/footer');
-		}
-		
-
-		/*public function upload(){
-			$this->load->view('common/header');
-			$this->load->view('inicio/testUpload');
-			$this->load->view('common/footer');
-		}*/		
-
-		public function error_404(){
-			$this->load->view('errors/html/error_404');
-		}
 
 		public function noPermission(){
-			$this->load->view('common/header');
-			$this->load->view('inicio/noPermission');
-			$this->load->view('common/footer');
 
+			$this->chamaView("noPermission", "inicio",
+            	array("title"=>"IFEvents - Erro de Permissão"), 0);
 		}
 
 }

@@ -27,7 +27,7 @@ if(!empty(validation_errors())){
 
 
 
-<?php echo form_open_multipart( 'participante/cadastraartigo', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
+<?php echo form_open_multipart( 'artigo/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 
 <div class="row">
     <div class="col-md-6">

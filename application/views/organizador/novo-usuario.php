@@ -23,7 +23,7 @@ if(!empty(validation_errors())){
  } 
  ?>
 
-<?php echo form_open_multipart( 'organizador/cadastrausuario', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
+<?php echo form_open_multipart( 'usuario/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 <h4><i>Dados pessoais e de acesso</i></h4><br>
 <div class="row">
     <div class="col-md-4">

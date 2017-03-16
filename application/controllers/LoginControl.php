@@ -1,33 +1,17 @@
-<?php
+<?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 
-class LoginControl extends CI_Controller{
+require_once 'PrincipalControl.php';
+
+class LoginControl extends PrincipalControl{
             /*Método construtor faz o carregamento de vários componentes
             necessários ao funcionamento do sistema*/
 
             public function __construct(){
                     parent::__construct();
                     
-                    /* Carregamento de Helpers */
-                    $this->load->helper('url');
-                    
                     /*Carregamento de Models*/
                     $this->load->model('UserModel');
-                    $this->load->library("session");
                      
-            }
-            
-            //Tela de Login
-            //Método para chamar qualquer view, dando a possibilidade de passar array de dados ou objetos
-            public function chamaView($view, $data=null,$caminho="organizador/"){
-                if ( ! file_exists(APPPATH.'/views/'.$caminho.$view.'.php'))
-                {
-                        // Caso não exista a págiina, retorna o erro abaixo
-                        show_404();
-                }
-
-                $this->load->view("common/header_interno");
-                $this->load->view($caminho.$view, $data);
-                $this->load->view("common/footer_interno");
             }
             
             public function entrar(){
@@ -35,13 +19,13 @@ class LoginControl extends CI_Controller{
                 if($usuario!=null){
                     $this->session->set_userdata('usuario',$usuario);
                         if($usuario[0]['user_tipo'] == 2){
-                            redirect('organizador/');
+                            redirect('usuario/inicioOrganizador');
                         }
                         else if($usuario[0]['user_tipo'] == 1){
-                                redirect('avaliador');
+                                redirect('usuario/inicioAvaliador');
                         }	
                         else{
-                                redirect('participante');
+                                redirect('usuario/inicioParticipante');
                         }
                 }else{
                     $this->session->set_flashdata("error","E-mail ou senha incorretos!");

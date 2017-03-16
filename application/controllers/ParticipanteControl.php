@@ -53,9 +53,9 @@
                         show_404();
                 }
 
-                $this->load->view("common/header_interno");
+                $this->load->view("common/area-interna/header");
                 $this->load->view($caminho.$view, $data);
-                $this->load->view("common/footer_interno");
+                $this->load->view("common/area-interna/footer");
             }
             
             /**************************************************

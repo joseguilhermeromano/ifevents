@@ -32,7 +32,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     direction:rtl;
-    background: #F5F5F5;
+    background:#F5F5F5;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -73,7 +73,7 @@
     top: 0;
     width: 210px;
     margin: 0px;
-    padding: 0;
+    padding: 0px;
     list-style: none;
     display: block;
     
@@ -96,7 +96,7 @@
     display:block;
     height:50px;
     width:210px;
-    color: #4e4a4a;
+    color: #4c7a4a;
     font-weight: bold;
     font-size: 10pt;
     
@@ -104,21 +104,25 @@
 
  .sidebar-nav li a:hover {
     text-decoration: none;
-    color: green;
+    color: #4dcc47;
 }
 
  .sidebar-nav li a:active,
  .sidebar-nav li.active a,
  .sidebar-nav li a:focus {
   text-decoration: none;
-   color: green;
+   color: #4dcc47;
+}
+
+.sidebar-nav > hr{
+  padding:0px;
+  border-color:#CDC9C9;
+  margin: 0px 10px;
 }
 
 .sidebar-brand {
-    margin: 10px;
+    margin: 30px 10px 30px 10px;
     height: 85px;
-    border-bottom: 1px solid #CDC9C9;
-    padding: 20px 5px 5px 5px; 
 }
 
 .sidebar-brand a {
@@ -248,10 +252,10 @@ label{
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-    -webkit-box-shadow: 0px 0px 15px 1px #FFA500;
-    -moz-box-shadow: 0px 0px 15px 1px #FFA500;
-    box-shadow: 0px 0px 5px 0px #FFA500;
-    border:1px solid #FF8C00;
+    -webkit-box-shadow: 0px 0px 15px 1px #37BA40;
+    -moz-box-shadow: 0px 0px 15px 1px #37BA40;
+    box-shadow: 0px 0px 5px 0px #37BA40;
+    border:1px solid #37BA40;
     outline:none; 
 }
 .button{
