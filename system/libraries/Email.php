@@ -83,7 +83,7 @@ class CI_Email {
 	 *
 	 * @var	string
 	 */
-	public $smtp_user	= 'projeotifsp@gmail.com';
+	public $smtp_user	= 'projetoifsp@gmail.com';
 
 	/**
 	 * SMTP Password
