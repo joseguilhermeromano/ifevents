@@ -461,3 +461,24 @@ label{
     border:1px solid #FF8C00;
     outline:none; 
 }
+
+.estilo-botao-remove{
+    border-radius: 5px;
+    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC;
+    outline:none;
+}
+
+.estilo-botao-remove:focus {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -webkit-box-shadow: 0px 0px 15px 1px #37BA40;
+    -moz-box-shadow: 0px 0px 15px 1px #37BA40;
+    box-shadow: 0px 0px 5px 0px #37BA40;
+    border:1px solid #37BA40;
+    outline:none; 
+}
