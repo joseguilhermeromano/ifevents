@@ -5,10 +5,13 @@
         </div><!-- /#page-content-wrapper -->
     </div><!-- /#wrapper -->
      <!-- assetststrap Core JavaScript -->
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/jquery.min.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/adicionaCampos.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/jquery.maskedinput.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/jquery-ui.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/jquery.dataTables.min.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/select2.min.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/adicionaCampos.js');?>"></script>
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -20,13 +23,14 @@
     <script>
         jQuery(function($){
                $("#campoData").mask("99/99/9999");
-               $("#campoTelefone").mask("(999) 9999-9999");
+               $("#campoTelefone").mask("(99) 9999-9999");
                $("#campoCep").mask("99999-999");
                $("#campoSenha").mask("***-****");
         });
     </script>
     
     <script>
+
         function MostrarEsconderPainel(parametro,header){
             $(parametro).toggle(500);
             $("span",header).toggleClass("glyphicon glyphicon-triangle-right glyphicon glyphicon-triangle-bottom");

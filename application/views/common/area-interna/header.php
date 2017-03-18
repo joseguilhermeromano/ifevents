@@ -10,6 +10,7 @@
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('assets/area-interna/css/select2.min.css');?>" rel="stylesheet">
     </head>
     <body>
  <div id="wrapper">

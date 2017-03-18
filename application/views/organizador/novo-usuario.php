@@ -46,8 +46,10 @@ if(!empty(validation_errors())){
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Instituição/Empresa', 'instituicao' ); ?></b><br>
-        <?php   $data = array( 'name' => 'instituicao', 'placeholder' => 'Instituição/Empresa', 'class' => 'form-control estilo-input' );
-                echo form_input($data); ?>
+            <select class="select2 form-control estilo-input" id="uf" multiple="multiple">
+                <option>Selecione uma instituição</option>
+                <option>teste</option>
+            </select>
         </div>
     </div>
 </div>
