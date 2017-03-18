@@ -1,7 +1,8 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 require_once 'PrincipalControl.php';
+require_once 'InterfaceControl.php';
 
-class ComiteControl extends PrincipalControl{
+class ComiteControl extends PrincipalControl implements InterfaceControl{
 
 		public function __construct(){
 			parent::__construct();
@@ -14,7 +15,7 @@ class ComiteControl extends PrincipalControl{
             if (empty($this->comite->input->post())){
                 $this->chamaView("novo-comite", "organizador",
                     array("title"=>"IFEvents - Novo Comitê"), 1);
-                return true;
+                return 0;
             }
             if( $this->comite->valida()==false){
                     $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
@@ -33,19 +34,16 @@ class ComiteControl extends PrincipalControl{
         }
 
         public function alterar() {
-            return true;
         }
 
         public function buscar() {
-            return null;
         }
 
         public function buscarTudo() {
-            return null;
         }
 
         public function excluir() {
-            return true;
+
         }
 
 

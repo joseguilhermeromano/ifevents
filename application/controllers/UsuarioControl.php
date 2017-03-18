@@ -1,7 +1,8 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 require_once 'PrincipalControl.php';
+require_once 'InterfaceControl.php';
 
-class UsuarioControl extends PrincipalControl{
+class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
 		public function __construct(){
 			parent::__construct();
@@ -76,11 +77,11 @@ class UsuarioControl extends PrincipalControl{
             $array[0]= (array)$this;
         }
 
-        public function buscar() {
+        public function consultar() {
             $this->UserDAO->consultarCodigo($this->usuario->input->get('codigo'));
         }
 
-        public function buscarTudo() {
+        public function consultarTudo() {
             $this->chamaView("usuarios", "organizador",
 	            	array("title"=>"IFEvents - Usuários"), 1);
         }

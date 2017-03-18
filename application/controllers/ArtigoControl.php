@@ -1,7 +1,8 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 require_once 'PrincipalControl.php';
+require_once 'InterfaceControl.php';
 
-class ArtigoControl extends PrincipalControl{
+class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
 		public function __construct(){
 			parent::__construct();
@@ -16,7 +17,7 @@ class ArtigoControl extends PrincipalControl{
             if (empty($this->artigo->input->post())){
                 $this->chamaView("novoartigo", "participante",
                     array("title"=>"IFEvents - Novo Artigo - Participante"), 1);
-                return true;
+                return 0;
             }
             if( $this->artigo->valida()==false){
                     $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
@@ -56,21 +57,19 @@ class ArtigoControl extends PrincipalControl{
         }
 
             public function alterar() {
-                return null;
             }
 
-            public function buscar() {
+            public function consultar() {
                 return $this->ArtigoDAO->consultarCodigo($this->input->get('codigo'));
             }
 
-            public function buscarTudo() {
+            public function consultarTudo() {
                 $data['itens'] = $this->ArtigoDAO->consultarTudo();
                 $data['title'] = "IFEvents - Meus Artigos - Participante";
                 $this->chamaView("meusartigos", "participante", $data, 1);
             }
 
             public function excluir() {
-                return true;
             }
 
 

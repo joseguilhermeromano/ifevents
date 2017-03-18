@@ -43,7 +43,7 @@
                 </li>
                 <hr>
                 <li class="<?php if($paginacorrente == 'meusartigos') {echo 'active';} ?>">
-                    <a href="<?php echo base_url("artigo/buscarTudo");?>"><span class="glyphicon glyphicon-list"></span>  MEUS ARTIGOS</a>
+                    <a href="<?php echo base_url("artigo/consultarTudo");?>"><span class="glyphicon glyphicon-list"></span>  MEUS ARTIGOS</a>
                 </li>
                 <hr>
                 <li class="<?php if($paginacorrente == 'contato') {echo 'active';} ?>">
