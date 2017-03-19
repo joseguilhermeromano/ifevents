@@ -35,11 +35,7 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
 
         public function alterar() {
         }
-
-        public function buscar() {
-        }
-
-        public function buscarTudo() {
+        public function consultarTudo() {
         }
 
         public function excluir() {

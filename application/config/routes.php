@@ -61,6 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route[ 'login/(:any)' ]        = 'LoginControl/$1';
 $route[ 'usuario/(:any)' ]        = 'UsuarioControl/$1';
 $route[ 'artigo/(:any)' ]        = 'ArtigoControl/$1';
+$route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]        = 'SubmitControl/$1';
 $route[ 'comite/(:any)' ]        = 'ComiteControl/$1';
 $route[ 'contato/(:any)' ]        = 'ContatoControl/$1';

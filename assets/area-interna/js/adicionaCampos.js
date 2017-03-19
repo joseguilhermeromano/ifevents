@@ -88,10 +88,40 @@ $('#addTelefone').on('click', function(){
 });
 /** /ADICIONA O CAMPO PARA TELEFONE DINAMICAMENTE**/
 
-/** IMPLANTA O SELECT2 NAS BUSCAS **/
+/** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
 $(document).ready(function() {
-    $(".select2").select2({
-    	 maximumSelectionLength: 1
-    });
+
+    $(".consultaInstituicao").select2({
+    // tags: true,
+    multiple: true,
+    // tokenSeparators: [',', ' '],
+    minimumInputLength: 2,
+     maximumSelectionLength: 1,
+    minimumResultsForSearch: 10,
+    ajax: {
+        url: "../instituicao/consultarParaSelect2",
+        dataType: "json",
+        type: "POST",
+        data: function (params) {
+
+            var queryParameters = {
+                term: params.term
+            }
+            return queryParameters;
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return {
+                        text: item.inst_nm,
+                        id: item.inst_cd
+                    }
+                })
+            };
+        }
+    }
 });
+
+});
+
 

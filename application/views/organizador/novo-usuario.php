@@ -39,14 +39,14 @@ if(!empty(validation_errors())){
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Nome Completo', 'nome' ); ?></b>
-        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome Completo", 'class' => 'form-control estilo-input');
+        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome Completo", 'class' => 'teste form-control estilo-input');
                echo form_input($data);?>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Instituição/Empresa', 'instituicao' ); ?></b><br>
-            <select class="select2 form-control estilo-input" id="uf" multiple="multiple">
+            <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao"multiple="multiple">
                 <option>Selecione uma instituição</option>
                 <option>teste</option>
             </select>
@@ -113,6 +113,33 @@ if(!empty(validation_errors())){
 </div>
 <div id="inputsTelefones" class="row">
 </div>
+
+
+<h4><i>Documentos</i></h4><br>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <b><?php echo form_label( 'RG', 'rg' ); ?></b>
+            <?php $data = array( 'name' => 'rg', 
+                'id' => 'campoRG',
+             'type' => 'text', 'placeholder' => 'RG',
+              'class' => 'form-control estilo-input');
+                    echo form_input( $data );?>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            <b><?php echo form_label( 'CPF', 'cpf' ); ?></b>
+            <?php $data = array( 'name' => 'cpf', 
+                'id' => 'campoCPF',
+             'type' => 'text', 'placeholder' => 'CPF',
+              'class' => 'form-control estilo-input');
+                    echo form_input( $data );?>
+        </div>
+    </div>
+</div>
+
+
 <h4><i>Endereço</i></h4><br>
 <div class="row">
     <div class="col-sm-6">
@@ -156,14 +183,14 @@ if(!empty(validation_errors())){
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Cidade', 'cidade' ); ?></b>
         <?php $data = array( 'name' => 'cidade', 'placeholder' => 'Cidade', 'class' => 'form-control estilo-input');
                     echo form_input( $data );?>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'UF', 'uf' ); ?></b>
             <select class="form-control estilo-input" id="uf">
