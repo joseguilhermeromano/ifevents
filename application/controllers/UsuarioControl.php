@@ -42,21 +42,19 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 	            	array("title"=>"IFEvents - Novo Usuário"), 1);
         		return true;
         	}
-            echo print_r($this->usuario->input->post());
-            // $this->usuario->setaValores();
-            // if( $this->usuario->valida()==false){
-            //         $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-            // }
-            // else{
-            //     if($this->UserDAO->inserir($this->usuario)==true){
-            //         $this->session->set_flashdata('success', 'O Usuário foi cadastrado com sucesso!');
-            //     }else{
-            //         $this->session->set_flashdata('error', 'Não foi possível cadastrar o usuário!');
-            //     }
+            // echo print_r($this->usuario->input->post());
+            $this->usuario->setaValores();
+            $data = $this->usuario;
+            if( $this->usuario->valida()==true){
+                if($this->UserDAO->inserir($this->usuario)==true){
+                    $this->session->set_flashdata('success', 'O Usuário foi cadastrado com sucesso!');
+                }else{
+                    $this->session->set_flashdata('error', 'Não foi possível cadastrar o usuário!');
+                }
 
-            // }
-            // $this->chamaView("novo-usuario", "organizador",
-	           //  	array("title"=>"IFEvents - Novo Usuário"), 1);
+            }
+            $this->chamaView("novo-usuario", "organizador",
+	            	array("title"=>"IFEvents - Novo Usuário", "user" => $data), 1);
         }
 
         public function alterar() {

@@ -55,11 +55,11 @@ $(document).on('mask-it', function(){
 	event.preventDefault();
 	var i = document.getElementById('inputsTelefones').getElementsByTagName('input').length;
 	i += 1;
-	if(i==3){
+	if(i>3){
 		return alert("Você pode cadastrar até 3 telefones!");
 	}
 	var novotelefone = `<div class="col-sm-4">
-	<b><label for="telefone[`+i+`]">Telefone alternativo `+i+`</label></b>
+	<b><label for="telefone[`+i+`]">Telefone/Celular `+i+`</label></b>
 		<div class="input-group">
 			<input type="text" name="telefone[`+i+`]" class="campoTelefone form-control estilo-botao-remove"  />
 			 <span class="input-group-btn">
@@ -93,6 +93,7 @@ $(document).ready(function() {
 
     $(".consultaInstituicao").select2({
     // tags: true,
+    placeholder: "Instituição",
     multiple: true,
     // tokenSeparators: [',', ' '],
     minimumInputLength: 2,
@@ -123,5 +124,27 @@ $(document).ready(function() {
 });
 
 });
+
+/** Trava campo para aceitar somente números **/
+function somenteNumeros(num) {
+    var er = /[^0-9.]/;
+    er.lastIndex = 0;
+    if (er.test(num.value)) {
+      num.value = "";
+    }
+}
+
+/** Exibe  input de qtd maxima de submissoes para o cadastro de avaliadores (area do organizador) **/
+ $('#tipoUsuario').change(function () {
+     var optionSelected = $(this).find("option:selected");
+     var valueSelected  = optionSelected.val();
+     if(valueSelected==1){
+     	$('#qtdMaxSubmissaoAval').show();
+     }else{
+     	$('#qtdMaxSubmissaoAval').hide();
+     }
+ });
+
+
 
 

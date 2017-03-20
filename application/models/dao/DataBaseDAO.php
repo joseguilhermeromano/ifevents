@@ -264,14 +264,11 @@
 					 user_cd          int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,user_nm          varchar(100) NOT NULL
 					,user_tipo        varchar(2)   NOT NULL
-					,user_instituicao varchar(100) NOT NULL
-					,user_biograf     varchar(500) NOT NULL
+					,user_instituicao varchar(100) NULL
+					,user_biograf     varchar(500) NULL
 					,user_pass        varchar(100) NOT NULL
-					-- ,user_email       varchar(100) NOT NULL
-					-- -- ,user_email_alter varchar(100) NOT NULL
-					-- ,user_telefone	  varchar(15)  NOT NULL
-					-- -- ,user_tele_alter  varchar(15)  NOT NULL
 					,user_email_vali  varchar(100) NOT NULL
+					,user_qtd_subm	  int(2)	   NOT NULL
 					,user_stat_cd     int(11)      NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);

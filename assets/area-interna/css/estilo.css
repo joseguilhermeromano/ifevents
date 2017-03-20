@@ -490,7 +490,7 @@ label{
 
 .select2-selection{
     /*margin: 10px 10px 10px 0px;*/
-    width: 100%!important;
+   /* width: 100%!important;*/
     margin: 10px 0px 0px 0px!important;
     font-family:helvetica; color:#666;
     border-radius:4px;
@@ -503,7 +503,7 @@ label{
 
 .selection .selection2-selection .select2-selection__rendered .select2-search__field{
    /* margin: 10px 10px 10px 0px;*/
-    width: 100%!important;
+   /* width: 100%!important;*/
     font-family:helvetica; color:#666;
     border-radius:4px;
     -moz-border-radius:4px;
@@ -560,3 +560,11 @@ h4{
     color:green;
 }
 
+.select2-selection--multiple { max-height: 10rem; overflow: auto }
+
+/** EXPANDE O TAMANHO DO SELECT 2 (UTIL PARA ASSOCIAR  ARTIGO AO USUARIO)**/
+/*.select2-container .select2-selection {
+    height: 100px!important;
+    overflow: scroll;
+} 
+*/

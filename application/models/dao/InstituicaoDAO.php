@@ -23,7 +23,9 @@ class InstituicaoDAO extends CI_Model implements DAO{
     }
 
      public function consultarCodigo($codigo){
-
+        $this->db->where('inst_cd',$codigo);
+        $query = $this->db->get('Instituicao');
+        return $query->result_array();
      }
     
     public function consultarPorNome($nome){

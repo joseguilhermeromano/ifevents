@@ -2,53 +2,46 @@
 <h2><span class="glyphicon glyphicon-plus"></span><b> Novo Usuário</b></h2>
 <hr>
 <br>
-<?php
-    if ($this->session->flashdata('error')) { ?>
-    <div class="alert alert-danger"> 
-        <?= $this->session->flashdata('error') ?> 
-    </div>
-<?php } ?>
-<?php
-if(!empty(validation_errors())){
-    echo '<div class="alert alert-danger">'.validation_errors().'</div>';
-}
-?>
-<?php
- if ($this->session->flashdata('success')) { ?>
-	<div class="alert alert-success"> 
-        <?= $this->session->flashdata('success') ?> 
-    </div>
-<?php
- } 
- ?>
+<?php 
 
+        $this->load->helper('html');
+        echo alert($this);
+
+                                             ?>
 <?php echo form_open_multipart( 'usuario/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
-<h4><i>Dados pessoais e de acesso</i></h4><br>
+<h4><i>Dados de acesso</i></h4><br>
 <div class="row">
     <div class="col-sm-4">
         <div class="form-group">
-        <b><?php echo form_label( 'Tipo de Usuário', 'tipo_usuario' ); ?></b><br>
-            <select name="tipo_usuario" class="form-control estilo-input">
+        <b><?php echo form_label( '*Tipo de Usuário', 'tipo_usuario' ); ?></b><br>
+            <select name="tipo_usuario" id="tipoUsuario" class="form-control estilo-input">
                 <option value="-1" selected disabled> Selecionar Tipo de Usuário</option>
-                <option value="2" >Organizador</option>
-                <option value="1" >Avaliador</option>
-                <option value="0">Participante</option>
+                <option value="2" <?= (isset($user) && $user->user_tipo == 2 ? 'selected' : ''); ?> >
+                    Organizador
+                </option>
+                <option value="1" <?= (isset($user) && $user->user_tipo == 1 ? 'selected' : ''); ?>>
+                    Avaliador
+                </option>
+                <option value="0" <?= (isset($user) && $user->user_tipo == 0 ? 'selected' : ''); ?>>  
+                    Participante
+                </option>
             </select>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
-        <b><?php echo form_label( 'Nome Completo', 'nome' ); ?></b>
-        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome Completo", 'class' => 'teste form-control estilo-input');
+        <b><?php echo form_label( '*Nome Completo', 'nome' ); ?></b>
+        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome Completo", 'class' => 'form-control estilo-input', 'value' => (isset($user) ? $user->user_nm : ''));
                echo form_input($data);?>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
-        <b><?php echo form_label( 'Instituição/Empresa', 'instituicao' ); ?></b><br>
-            <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao"multiple="multiple">
-                <option>Selecione uma instituição</option>
-                <option>teste</option>
+        <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
+            <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao" multiple="multiple">
+            <?php   if(isset($user)){   ?>
+                <option value="<?php echo $user->user_ins_emp; ?>" selected><?php echo $user->inst_nm; ?></option>
+            <?php   }   ?>
             </select>
         </div>
     </div>
@@ -56,14 +49,15 @@ if(!empty(validation_errors())){
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group" id='EmailPrincipal'>
-        <b><?php echo form_label( 'E-mail de login', 'email' ); ?></b>
-        <?php $data = array( 'name' => 'email[0]', 'placeholder' => 'E-mail','class' => 'form-control estilo-input' );
+        <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
+        <?php $data = array( 'name' => 'emailLogin', 'placeholder' => 'E-mail','class' => 'form-control estilo-input',
+         'value' => (isset($user) ? $user->emailLogin : ''));
               echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
-        <b><?php echo form_label( 'Confirmar e-mail de login', 'confirmaemail' ); ?></b>
+        <b><?php echo form_label( '*Confirmar e-mail de login', 'confirmaemail' ); ?></b>
         <?php $data = array( 'name' => 'confirmaemail', 'placeholder' => 'Confirma E-mail','class' => 'form-control estilo-input' );
               echo form_input( $data );?>
         </div>
@@ -76,54 +70,73 @@ if(!empty(validation_errors())){
     </div>
 </div>
 <div id="inputsEmails" class="row">
+<?php   if(isset($user) && !empty($user->lista_emails)) { 
+
+
+            foreach ($user->lista_emails as $key => $value) {
+                                                        ?>
+            <div class="col-sm-6">
+            <b><label for="email<?php echo '['.$key.']'; ?>">E-mail alternativo <?php echo $key; ?></label></b>
+                <div class="input-group">
+                    <input type="text" name="email<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
+                    value="<?php echo $value;?>" />
+                    <span class="input-group-btn">
+                         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                     </span>
+                </div>
+            </div>
+<?php
+            }
+        }                    
+                                                        ?>
 </div>
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group">
-        <b><?php echo form_label( 'Senha', 'senha' ); ?></b>
+        <b><?php echo form_label( '*Senha', 'senha' ); ?></b>
         <?php $data = array( 'name' => 'senha', 'type' => 'password','placeholder' => 'Senha','class' => 'form-control estilo-input' );
               echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
-        <b><?php echo form_label( 'Confirmar Senha', 'confirmasenha' ); ?></b>
+        <b><?php echo form_label( '*Confirmar Senha', 'confirmasenha' ); ?></b>
         <?php $data = array( 'name' => 'confirmasenha',  'type' => 'password', 'placeholder' => 'Confirmar Senha', 'class' => 'form-control estilo-input');
                     echo form_input( $data );?>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <div class="form-group">
-            <b><?php echo form_label( 'Telefone', 'telefone' ); ?></b>
-            <?php $data = array( 'name' => 'telefone[0]', 
-                'id' => 'campoTelefone',
-             'type' => 'text', 'placeholder' => 'Telefone',
-              'class' => 'form-control estilo-input');
-                    echo form_input( $data );?>
+        <b><?php echo form_label( 'Biografia', 'biografia' ); ?></b>
+        <i style="font-size:10pt;color:grey"> (Fale um pouco sobre suas formações!)</i>
+        <textarea name="biografia" class="form-control estilo-input" rows="5"><?php echo (isset($user) ? $user->user_biografia : ''); ?></textarea>
+        </div>
+    </div>
+    <div class="col-sm-6"  id="qtdMaxSubmissaoAval" 
+      <?php (!isset($user->qtdSubmissoes) ? 'style="display:none"' : '')?> >
+        <div class="form-group">
+        <b><?php echo form_label( '*Qtd. Máxima de Submissões', 'qtdSubmissoes' ); ?></b>
+        <?php $data = array( 'name' => 'qtdSubmissoes', 'type' => 'text','placeholder' => 'Qtd. Máxima de Submissões','class' => 'form-control estilo-input', 'onkeyup' => "somenteNumeros(this);", "maxlength" => "2",
+            'value' => (isset($user->qtdSubmissoes) ? $user->qtdSubmissoes : ''));
+              echo form_input( $data );?>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-12">
-        <a href="#" id="addTelefone" class="btn btn-success" style="margin-bottom:10px">
-        <span class="glyphicon glyphicon-plus"></span> <b>Adicionar Telefone</b></a><br>
-    </div>
-</div>
-<div id="inputsTelefones" class="row">
-</div>
+
 
 
 <h4><i>Documentos</i></h4><br>
 <div class="row">
     <div class="col-sm-4">
         <div class="form-group">
-            <b><?php echo form_label( 'RG', 'rg' ); ?></b>
+            <b><?php echo form_label( '*RG', 'rg' ); ?></b>
             <?php $data = array( 'name' => 'rg', 
                 'id' => 'campoRG',
              'type' => 'text', 'placeholder' => 'RG',
-              'class' => 'form-control estilo-input');
+              'class' => 'form-control estilo-input',
+              'value' => (isset($user) ? $user->user_rg : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -133,7 +146,8 @@ if(!empty(validation_errors())){
             <?php $data = array( 'name' => 'cpf', 
                 'id' => 'campoCPF',
              'type' => 'text', 'placeholder' => 'CPF',
-              'class' => 'form-control estilo-input');
+              'class' => 'form-control estilo-input',
+            'value' => (isset($user) ? $user->user_cpf : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -225,11 +239,41 @@ if(!empty(validation_errors())){
         </div>
     </div>
 </div>
+
+<h4><i>Contato</i></h4><br>
+<div class="row">
+    <div class="col-sm-12">
+        <a href="#" id="addTelefone" class="btn btn-success" style="margin-bottom:10px">
+        <span class="glyphicon glyphicon-plus"></span> <b>Adicionar Telefone</b></a><br>
+    </div>
+</div>
+<div id="inputsTelefones" class="row">
+<?php   if(isset($user) && !empty($user->lista_telefones)) { 
+
+
+            foreach ($user->lista_telefones as $key => $value) {
+                                                        ?>
+            <div class="col-sm-4">
+            <b><label for="telefone<?php echo '['.$key.']'; ?>">Telefone/Celular <?php echo $key; ?></label></b>
+                <div class="input-group">
+                    <input type="text" id="campoTelefone" name="telefone<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
+                    value="<?php echo $value;?>" />
+                    <span class="input-group-btn">
+                         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                     </span>
+                </div>
+            </div>
+<?php
+            }
+        }                    
+                                                        ?>
+</div>
 <?php echo '<br><center>'.form_submit("btn_cadastro", "Enviar",array('class' => 'btn btn-success button'))."</center>";
 
       echo form_fieldset_close();
 
       echo form_close();
 ?>
+
 </div>
 

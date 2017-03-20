@@ -22,12 +22,25 @@
 
     <script>
         jQuery(function($){
+               $.mask.definitions['~']='[+-]';
                $("#campoData").mask("99/99/9999");
-               $("#campoTelefone").mask("(99) 9999-9999");
+               $("#campoTelefone").focusout(function(){
+                    var phone, element;
+                    element = $(this);
+                    element.unmask();
+                    phone = element.val().replace(/\D/g, '');
+                    if(phone.length > 10) {
+                        element.mask("(99) 99999-999?9");
+                    } else {
+                        element.mask("(99) 9999-9999?9");
+                    }
+                }).trigger('focusout');
                $("#campoRG").mask("99.999.999-9");
                 $("#campoCPF").mask("999.999.999-99");
                $("#campoCep").mask("99999-999");
                $("#campoSenha").mask("***-****");
+               $('#campoQtdMaxSubmissaoAvaliador').mask('#');
+               
         });
     </script>
     

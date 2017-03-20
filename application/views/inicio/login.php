@@ -16,13 +16,13 @@
                     
                     <div class="row">
                           <div class="col-md-10 col-md-offset-1">
-                            <h1 class="estilo-h1">Login</h1>
-                                <?php   if ($this->session->flashdata('error')) { ?>
-                                    <br>
-                                    <div class="alert alert-warning"> 
-                                        <?= $this->session->flashdata('error') ?> 
-                                    </div>
-                                <?php } ?> 
+                            <h1 class="estilo-h1">Login</h1><br>
+                                <?php 
+
+                                      $this->load->helper('html');
+                                      echo alert($this);
+
+                                             ?>
                                 <div class="row control-group">
                                     <div class="form-group col-xs-12 floating-label-form-group controls">
                                         <label for="email">E-mail</label>
