@@ -50,7 +50,7 @@
     <div class="col-sm-6">
         <div class="form-group" id='EmailPrincipal'>
         <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
-        <?php $data = array( 'name' => 'emailLogin', 'placeholder' => 'E-mail','class' => 'form-control estilo-input',
+        <?php $data = array( 'name' => 'email[0]', 'placeholder' => 'E-mail','class' => 'form-control estilo-input',
          'value' => (isset($user) ? $user->emailLogin : ''));
               echo form_input( $data );?>
         </div>

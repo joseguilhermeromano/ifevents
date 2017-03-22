@@ -28,6 +28,10 @@
                 $array = $this->InstituicaoDAO->consultarCodigo($this->input->post('instituicao'));
                 $this->inst_nm = $array[0]['inst_nm'];
             }
+            if(null !== $this->input->post('senha')
+                && ""!== $this->input->post('senha')){
+                 $this->user_pass=md5($this->input->post('senha'));
+            }
             $this->lista_emails = $this->input->post('email');
             $this->lista_telefones = $this->input->post('telefone');
             $this->qtdSubmissoes = $this->input->post('qtdSubmissoes');
@@ -39,7 +43,6 @@
             $this->user_rg = $this->input->post('rg');
             $this->user_cpf = $this->input->post('cpf');
             $this->emailLogin = $this->input->post('emailLogin');
-            $this->user_pass=$this->input->post('senha');
             $this->user_tipo=$this->input->post('tipo_usuario');
             $this->user_logradouro=$this->input->post('logradouro');
             $this->user_bairro=$this->input->post('bairro');
@@ -56,19 +59,6 @@
             $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
             $this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|max_length[100]' );
 
-            $this->form_validation
-            ->set_rules( 'emailLogin', 'Email de Login', 'valid_email|trim|required|max_length[100]' );
-
-            $this->form_validation
-            ->set_rules( 'confirmaemail', 'Confirma E-mail', 
-                'valid_email|trim|required|max_length[100]|matches[emailLogin]' );
-
-            $this->form_validation
-            ->set_rules( 'email[1]', 'E-mail alternativo 1', 'valid_email|trim|max_length[100]|differs[email[2]]|differs[emailLogin]' );
-
-            $this->form_validation
-            ->set_rules( 'email[2]', 'E-mail alternativo 2', 'valid_email|trim|max_length[100]|differs[emailLogin]' );
-
             $this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[7]' );
 
             $this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha', 
@@ -76,17 +66,9 @@
 
             $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[9]' );
             $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf' );
-            $this->form_validation->set_rules( 'logradouro', 'Logradouro', 'trim|max_length[200]' );
-            $this->form_validation->set_rules( 'bairro', 'Bairro', 'trim|max_length[100]' );
             $this->form_validation->set_rules( 'numero', 'Número', 'trim|max_length[9]' );
             $this->form_validation->set_rules( 'complemento', 'Complemento', 'trim|max_length[100]' );
-            $this->form_validation->set_rules( 'cep', 'CEP', 'valid_cep' );
-            $this->form_validation->set_rules( 'cidade', 'Cidade', 'trim|max_length[100]' );
-            $this->form_validation->set_rules( 'uf', 'UF', 'trim|max_length[2]' );
-            $this->form_validation->set_rules( 'email', 'E-mail alternativo ', 'trim|max_length[15]' );
-            $this->form_validation->set_rules( 'telefone[1]', 'Telefone/Celular 1', 
-                'valid_phone|differs[telefone[2]]' );
-            $this->form_validation->set_rules( 'telefone[2]', 'Telefone/Celular 2', 'valid_phone' );
+
 
             if($this->input->post('tipo_usuario') == 1){
                 $this->form_validation->set_rules( 'qtdSubmissoes', 'Qtd. Máxima de Submissões', 'trim|required|max_length[2]' );

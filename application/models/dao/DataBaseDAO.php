@@ -134,7 +134,6 @@
 					 loca_cd     int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,loca_lograd varchar(200) NOT NULL
 					,loca_bairro varchar(100) NOT NULL
-					,loca_num    varchar(9)   NOT NULL
 					,loca_cep    varchar(9)   NOT NULL
 					,loca_cid    varchar(100) NOT NULL
 					,loca_uf     varchar(2)   NOT NULL
@@ -269,6 +268,9 @@
 					,user_pass        varchar(100) NOT NULL
 					,user_email_vali  varchar(100) NOT NULL
 					,user_qtd_subm	  int(2)	   NOT NULL
+					,user_loca_cd 	  int(11) 	   NULL
+					,user_loca_num 	  varchar(9)   NULL
+					,user_loca_comp   varchar(100) NULL
 					,user_stat_cd     int(11)      NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
@@ -367,13 +369,13 @@
 
 
 		//Método cria tabela Abriga
-		public function create_table_abriga(){
-			$sql = "CREATE TABLE IF NOT EXISTS Abriga (
-					  abri_user_cd int(11)  NOT NULL
-					 ,abri_loca_cd int(11) NOT NULL
-			) ENGINE=INNODB";
-			$this->db->query($sql);
-		}
+		// public function create_table_abriga(){
+		// 	$sql = "CREATE TABLE IF NOT EXISTS Abriga (
+		// 			  abri_user_cd int(11)  NOT NULL
+		// 			 ,abri_loca_cd int(11) NOT NULL
+		// 	) ENGINE=INNODB";
+		// 	$this->db->query($sql);
+		// }
 
 
 		//Método cria tabela Apoia
