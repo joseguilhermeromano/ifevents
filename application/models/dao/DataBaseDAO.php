@@ -28,7 +28,7 @@
 				$this->create_table_email();
 				$this->create_table_telefone();
 				$this->create_table_executa();
-				$this->create_table_abriga();
+				// $this->create_table_abriga();
 				$this->create_table_apoia();
 				$this->create_table_submissao();
 				$this->create_table_avaliacao();
