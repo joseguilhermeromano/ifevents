@@ -10,8 +10,19 @@ class TelefoneModel extends CI_Model{
             
     }
 
-    public function setaValores(){
-    	
+    public function criaLista($user_cd){
+        $listaTelefones = array();
+        if(null !== $this->input->post('telefone')){
+            foreach($this->input->post('telefone') as $key=>$value){
+                 if(!empty($value)){
+                    $tel = new TelefoneModel();
+                    $tel->tele_fone = $value;
+                    isset($user_cd) ? $tel->tele_user_cd = $user_cd : '';
+                    $listaTelefones[$key] = $tel;
+                }
+            }  
+        } 
+        return $listaTelefones;
     }
 
     public function valida(){
@@ -19,6 +30,7 @@ class TelefoneModel extends CI_Model{
         'valid_phone|differs[telefone[2]]|differs[telefone[3]]' );
         $this->form_validation->set_rules( 'telefone[2]', 'Telefone/Celular 2', 'valid_phone' );
         $this->form_validation->set_rules( 'telefone[3]', 'Telefone/Celular 3', 'valid_phone' );
+
     }
 
 

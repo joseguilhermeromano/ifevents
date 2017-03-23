@@ -9,16 +9,17 @@ if ( ! function_exists('alert'))
 	 *
 	 * @return	string
 	 */
-	function alert($instance){
-		if ($instance->session->flashdata('success')) {
+	function alert($session){
+		if ($session->flashdata('success')) {
 			$alert = '<div class="alert alert-success">'
 			.'<h4><b><span class="glyphicon glyphicon-ok"></span> Sucesso</b></h4>'
-			.$instance->session->flashdata('success').'</div>'; 
+			.$session->flashdata('success').'</div>'; 
+			return $alert;
     	}
-		if ($instance->session->flashdata('error')) {
+		if ($session->flashdata('error')) {
     		$alert = '<div class="alert alert-danger">' 
 		    .'<h4><b><span class="glyphicon glyphicon-alert"></span> Erro</b></h4>'
-    		.$instance->session->flashdata('error').'</div>';
+    		.$session->flashdata('error').'</div>';
     		return $alert;
     	}
     	if(!empty(validation_errors())){

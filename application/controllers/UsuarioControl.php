@@ -8,7 +8,13 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 			parent::__construct();
 
 			$this->load->Model( 'dao/UserDAO' );
+            $this->load->Model( 'dao/EmailDAO' );
+            $this->load->Model( 'dao/TelefoneDAO' );
+            $this->load->Model( 'dao/LocalidadeDAO' );
 			$this->load->Model('UserModel','usuario');
+            $this->load->Model('EmailModel','email');
+            $this->load->Model('TelefoneModel','telefone');
+            $this->load->Model('LocalidadeModel','localidade');
 		}
 
 
@@ -42,11 +48,24 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 	            	array("title"=>"IFEvents - Novo Usuário"), 1);
         		return true;
         	}
-            // echo print_r($this->usuario->input->post());
+
             $this->usuario->setaValores();
-            $data = $this->usuario;
-            if( $this->usuario->valida()==true){
-                if($this->UserDAO->inserir($this->usuario)==true){
+            $emails = $this->email->criaLista(null);
+            $telefones = $this->telefone->criaLista(null);
+
+            $this->usuario->valida(); 
+            $this->email->valida();
+            $this->telefone->valida();
+
+            if($this->form_validation->run()){
+                $user_cd = $this->UserDAO->inserir($this->usuario);
+                if($user_cd){
+                    foreach($this->email->criaLista($user_cd) as $key => $email){
+                        $this->EmailDAO->inserir($email);
+                    }
+                    foreach($this->telefone->criaLista($user_cd) as $key => $tel){
+                        $this->TelefoneDAO->inserir($tel);
+                    }
                     $this->session->set_flashdata('success', 'O Usuário foi cadastrado com sucesso!');
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível cadastrar o usuário!');
@@ -54,7 +73,9 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
             }
             $this->chamaView("novo-usuario", "organizador",
-	            	array("title"=>"IFEvents - Novo Usuário", "user" => $data), 1);
+	            	array("title"=>"IFEvents - Novo Usuário", 
+                        "user" => $this->usuario, "emails" => $emails,
+                        "telefones" => $telefones), 1);
         }
 
         public function alterar() {

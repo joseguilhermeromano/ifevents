@@ -265,6 +265,8 @@
 					,user_tipo        varchar(2)   NOT NULL
 					,user_instituicao varchar(100) NULL
 					,user_biograf     varchar(500) NULL
+					,user_rg          varchar(12)  NOT NULL
+					,user_cpf         varchar(14)  NULL
 					,user_pass        varchar(100) NOT NULL
 					,user_email_vali  varchar(100) NOT NULL
 					,user_qtd_subm	  int(2)	   NOT NULL

@@ -16,7 +16,7 @@ class UserDAO extends CI_Model implements DAO{
                 $this->user_fone      = $fone;			
                 $this->user_email     = $email;
                 $this->user_pass      = $pass;
-            $this->user_tipo      = $tipo;
+                $this->user_tipo      = $tipo;
                 $this->user_val_email = $valida;
                 $this->user_status    = $status;
 
@@ -33,7 +33,8 @@ class UserDAO extends CI_Model implements DAO{
         }
 
                 public function inserir($obj) {
-                    return $this->db->insert('user', $obj);
+                    $this->db->insert('user', $obj);
+                    return $this->db->insert_id();
                 }
                 
                 public function alterar($obj) {

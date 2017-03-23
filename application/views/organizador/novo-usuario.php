@@ -5,7 +5,7 @@
 <?php 
 
         $this->load->helper('html');
-        echo alert($this);
+        echo alert($this->session);
 
                                              ?>
 <?php echo form_open_multipart( 'usuario/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
@@ -39,7 +39,7 @@
         <div class="form-group">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao" multiple="multiple">
-            <?php   if(isset($user)){   ?>
+            <?php   if(isset($user->user_ins_emp)){   ?>
                 <option value="<?php echo $user->user_ins_emp; ?>" selected><?php echo $user->inst_nm; ?></option>
             <?php   }   ?>
             </select>
@@ -51,7 +51,7 @@
         <div class="form-group" id='EmailPrincipal'>
         <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
         <?php $data = array( 'name' => 'email[0]', 'placeholder' => 'E-mail','class' => 'form-control estilo-input',
-         'value' => (isset($user) ? $user->emailLogin : ''));
+         'value' => (isset($email) && !empty($email->listaEmails) ? $email->listaEmails[0]->email_email : ''));
               echo form_input( $data );?>
         </div>
     </div>
@@ -70,22 +70,24 @@
     </div>
 </div>
 <div id="inputsEmails" class="row">
-<?php   if(isset($user) && !empty($user->lista_emails)) { 
+<?php   if(isset($emails) && !empty($emails)) { 
 
 
-            foreach ($user->lista_emails as $key => $value) {
+            foreach ($emails as $key => $value) {
+            if ($key !=0 ){
                                                         ?>
             <div class="col-sm-6">
             <b><label for="email<?php echo '['.$key.']'; ?>">E-mail alternativo <?php echo $key; ?></label></b>
                 <div class="input-group">
                     <input type="text" name="email<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
-                    value="<?php echo $value;?>" />
+                    value="<?php echo $value->email_email;?>" />
                     <span class="input-group-btn">
                          <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
                      </span>
                 </div>
             </div>
 <?php
+            }
             }
         }                    
                                                         ?>
@@ -115,11 +117,17 @@
         </div>
     </div>
     <div class="col-sm-6"  id="qtdMaxSubmissaoAval" 
-      <?php (!isset($user->qtdSubmissoes) ? 'style="display:none"' : '')?> >
+      <?php 
+
+        if(!isset($user->user_tipo) || (isset($user->user_tipo) && $user->user_tipo!=1)){
+            echo 'style="display:none"';
+        }
+
+      ?> >
         <div class="form-group">
         <b><?php echo form_label( '*Qtd. Máxima de Submissões', 'qtdSubmissoes' ); ?></b>
         <?php $data = array( 'name' => 'qtdSubmissoes', 'type' => 'text','placeholder' => 'Qtd. Máxima de Submissões','class' => 'form-control estilo-input', 'onkeyup' => "somenteNumeros(this);", "maxlength" => "2",
-            'value' => (isset($user->qtdSubmissoes) ? $user->qtdSubmissoes : ''));
+            'value' => (isset($user->user_qtd_subm) ? $user->user_qtd_subm : ''));
               echo form_input( $data );?>
         </div>
     </div>
@@ -248,16 +256,16 @@
     </div>
 </div>
 <div id="inputsTelefones" class="row">
-<?php   if(isset($user) && !empty($user->lista_telefones)) { 
+<?php   if(isset($telefones) && !empty($telefones)) { 
 
 
-            foreach ($user->lista_telefones as $key => $value) {
+            foreach ($telefones as $key => $value) {
                                                         ?>
             <div class="col-sm-4">
             <b><label for="telefone<?php echo '['.$key.']'; ?>">Telefone/Celular <?php echo $key; ?></label></b>
                 <div class="input-group">
                     <input type="text" id="campoTelefone" name="telefone<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
-                    value="<?php echo $value;?>" />
+                    value="<?php echo $value->tele_fone;?>" />
                     <span class="input-group-btn">
                          <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
                      </span>
