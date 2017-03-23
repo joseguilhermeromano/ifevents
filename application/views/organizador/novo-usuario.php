@@ -39,8 +39,8 @@
         <div class="form-group">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao" multiple="multiple">
-            <?php   if(isset($user->user_ins_emp)){   ?>
-                <option value="<?php echo $user->user_ins_emp; ?>" selected><?php echo $user->inst_nm; ?></option>
+            <?php   if(isset($instituicao->inst_nm)){   ?>
+                <option value="<?php echo $instituicao->inst_cd; ?>" selected><?php echo $instituicao->inst_nm;?></option>
             <?php   }   ?>
             </select>
         </div>
@@ -51,7 +51,7 @@
         <div class="form-group" id='EmailPrincipal'>
         <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
         <?php $data = array( 'name' => 'email[0]', 'placeholder' => 'E-mail','class' => 'form-control estilo-input',
-         'value' => (isset($email) && !empty($email->listaEmails) ? $email->listaEmails[0]->email_email : ''));
+         'value' => (isset($emails) && !empty($emails) ? $emails[0]->email_email : ''));
               echo form_input( $data );?>
         </div>
     </div>
@@ -113,7 +113,7 @@
         <div class="form-group">
         <b><?php echo form_label( 'Biografia', 'biografia' ); ?></b>
         <i style="font-size:10pt;color:grey"> (Fale um pouco sobre suas formações!)</i>
-        <textarea name="biografia" class="form-control estilo-input" rows="5"><?php echo (isset($user) ? $user->user_biografia : ''); ?></textarea>
+        <textarea name="biografia" class="form-control estilo-input" rows="5"><?php echo (isset($user) ? $user->user_biograf : ''); ?></textarea>
         </div>
     </div>
     <div class="col-sm-6"  id="qtdMaxSubmissaoAval" 
@@ -167,14 +167,18 @@
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( 'Logradouro', 'logradouro' ); ?></b>
-        <?php $data = array( 'name' => 'logradouro', 'placeholder' => 'Logradouro','class' => 'form-control estilo-input' );
+        <?php $data = array( 'name' => 'logradouro', 'placeholder' => 'Logradouro',
+            'class' => 'form-control estilo-input',
+            'value' => (isset($localidade) ? $localidade->loca_lograd : ''));
               echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( 'Bairro', 'bairro' ); ?></b>
-        <?php $data = array( 'name' => 'bairro', 'placeholder' => 'Bairro', 'class' => 'form-control estilo-input');
+        <?php $data = array( 'name' => 'bairro', 'placeholder' => 'Bairro', 
+            'class' => 'form-control estilo-input',
+            'value' => (isset($localidade) ? $localidade->loca_bairro : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -183,14 +187,18 @@
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Número', 'numero' ); ?></b>
-        <?php $data = array( 'name' => 'numero', 'placeholder' => 'Número', 'class' => 'form-control estilo-input');
+        <?php $data = array( 'name' => 'numero', 'placeholder' => 'Número', 
+            'class' => 'form-control estilo-input',
+            'value' => (isset($user) ? $user->user_loca_num : ''));
                     echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Complemento', 'complemento' ); ?></b>
-        <?php $data = array( 'name' => 'complemento', 'placeholder' => 'Complemento', 'class' => 'form-control estilo-input');
+        <?php $data = array( 'name' => 'complemento', 'placeholder' => 'Complemento', 
+            'class' => 'form-control estilo-input',
+            'value' => (isset($user) ? $user->user_loca_comp : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -199,7 +207,8 @@
         <b><?php echo form_label( 'CEP', 'cep' ); ?></b>
         <?php $data = array( 'name' => 'cep', 'placeholder' => 'CEP', 
             'id' => 'campoCep',
-            'class' => 'form-control estilo-input');
+            'class' => 'form-control estilo-input',
+            'value' => (isset($localidade) ? $localidade->loca_cep : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -208,42 +217,37 @@
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'Cidade', 'cidade' ); ?></b>
-        <?php $data = array( 'name' => 'cidade', 'placeholder' => 'Cidade', 'class' => 'form-control estilo-input');
+        <?php $data = array( 'name' => 'cidade', 'placeholder' => 'Cidade', 
+            'class' => 'form-control estilo-input',
+            'value' => (isset($localidade) ? $localidade->loca_cid : ''));
                     echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( 'UF', 'uf' ); ?></b>
-            <select class="form-control estilo-input" id="uf">
-                    <option>AC</option>
-                    <option>AL</option>
-                    <option>AM</option>
-                    <option>AP</option>
-                    <option>BA</option>
-                    <option>CE</option>
-                    <option>DF</option>
-                    <option>ES</option>
-                    <option>GO</option>
-                    <option>MA</option>
-                    <option>MG</option>
-                    <option>MS</option>
-                    <option>MT</option>
-                    <option>PA</option>
-                    <option>PB</option>
-                    <option>PE</option>
-                    <option>PI</option>
-                    <option>PR</option>
-                    <option>RJ</option>
-                    <option>RN</option>
-                    <option>RO</option>
-                    <option>RR</option>
-                    <option>RS</option>
-                    <option>SC</option>
-                    <option>SE</option>
-                    <option selected="selected">SP</option>
-                    <option>TO</option>
-                  </select>
+            <select name ="uf" class="form-control estilo-input" id="uf">
+            <?php 
+
+            $uf = array('AC','AL','AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO');
+            foreach($uf as $key => $value){
+                if(!isset($localidade->loca_uf) && $value=='SP'){
+                     echo "<option selected>".$value."</option>";
+                }
+                if(isset($localidade->loca_uf) && $localidade->loca_uf==$value){
+
+                    echo "<option selected>".$value."</option>";
+
+                }else{
+
+                    echo "<option>".$value."</option>";
+                }
+
+            }
+
+            ?>
+
+            </select>
         </div>
     </div>
 </div>

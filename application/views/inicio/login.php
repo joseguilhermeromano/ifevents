@@ -20,7 +20,7 @@
                                 <?php 
 
                                       $this->load->helper('html');
-                                      echo alert($this);
+                                      echo alert($this->session);
 
                                              ?>
                                 <div class="row control-group">

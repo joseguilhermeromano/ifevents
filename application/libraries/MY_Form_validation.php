@@ -151,10 +151,11 @@ class MY_Form_validation extends CI_Form_validation {
         $resultado = urldecode($resultado);
         $resultado = utf8_encode($resultado);
         parse_str( $resultado, $retorno);
-        if($retorno['resultado'] == 1 || $retorno['resultado'] == 2)
+        if($retorno['resultado'] == 1 || $retorno['resultado'] == 2){
             return TRUE;
-        else
+        }else{
             return FALSE;
+        }
     }
     /**
      * valid_phone

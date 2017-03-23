@@ -11,6 +11,14 @@
 		}
                 
         public function inserir($obj) {
+            $this->db->where('loca_cep',$obj->loca_cep);
+            $query = $this->db->get('localidade');
+             $localidade = $query->result_array();
+             if(isset($localidade[0]['loca_cd'])){
+                return $localidade[0]['loca_cd'];
+             } 
+
+
             $this->db->insert('localidade', $obj);
             return $this->db->insert_id();
         }

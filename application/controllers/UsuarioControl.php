@@ -11,10 +11,12 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
+            $this->load->Model( 'dao/InstituicaoDAO' );
 			$this->load->Model('UserModel','usuario');
             $this->load->Model('EmailModel','email');
             $this->load->Model('TelefoneModel','telefone');
             $this->load->Model('LocalidadeModel','localidade');
+            $this->load->Model('InstituicaoModel','instituicao');
 		}
 
 
@@ -52,12 +54,24 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->usuario->setaValores();
             $emails = $this->email->criaLista(null);
             $telefones = $this->telefone->criaLista(null);
+            $this->localidade->setaValores();
 
             $this->usuario->valida(); 
             $this->email->valida();
             $this->telefone->valida();
+            $this->localidade->valida();
+            if((null != $this->input->post('instituicao')) &&
+                !empty($this->input->post('instituicao'))){
+                $this->instituicao = (object)$this->InstituicaoDAO->
+                    consultarCodigo($this->input->post('instituicao'))[0];
+            }
+            $data = array("title"=>"IFEvents - Novo Usuário", 
+                    "user" => $this->usuario, "emails" => $emails,
+                    "telefones" => $telefones, "localidade" => $this->localidade, "instituicao" => $this->instituicao);
 
             if($this->form_validation->run()){
+                    $this->db->trans_start();
+                $this->usuario->user_loca_cd = $this->LocalidadeDAO->inserir($this->localidade);
                 $user_cd = $this->UserDAO->inserir($this->usuario);
                 if($user_cd){
                     foreach($this->email->criaLista($user_cd) as $key => $email){
@@ -66,16 +80,23 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     foreach($this->telefone->criaLista($user_cd) as $key => $tel){
                         $this->TelefoneDAO->inserir($tel);
                     }
+                    $this->db->trans_complete();
+                    if($this ->db->trans_status() === FALSE){
+                         $this->session->set_flashdata('error', 'O Usuário não pode ser cadastrado!');
+                         $this->chamaView("novo-usuario", "organizador",$data, 1);
+                        return 0;
+                    }
                     $this->session->set_flashdata('success', 'O Usuário foi cadastrado com sucesso!');
+                    $this->usuario = null;
+                    $emails = null;
+                    $telefones = null;
+                    $this->localidade = null;
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível cadastrar o usuário!');
                 }
 
             }
-            $this->chamaView("novo-usuario", "organizador",
-	            	array("title"=>"IFEvents - Novo Usuário", 
-                        "user" => $this->usuario, "emails" => $emails,
-                        "telefones" => $telefones), 1);
+            $this->chamaView("novo-usuario", "organizador", $data, 1);
         }
 
         public function alterar() {
