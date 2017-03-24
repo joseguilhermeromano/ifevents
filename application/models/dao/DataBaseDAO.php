@@ -269,7 +269,7 @@
 					,user_cpf         varchar(14)  NULL
 					,user_pass        varchar(100) NOT NULL
 					,user_email_vali  varchar(100) NOT NULL
-					,user_qtd_subm	  int(2)	   NOT NULL
+					,user_qtd_subm	  int(2)	   NULL
 					,user_loca_cd 	  int(11) 	   NULL
 					,user_loca_num 	  varchar(9)   NULL
 					,user_loca_comp   varchar(100) NULL

@@ -65,9 +65,6 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 $this->instituicao = (object)$this->InstituicaoDAO->
                     consultarCodigo($this->input->post('instituicao'))[0];
             }
-            $data = array("title"=>"IFEvents - Novo Usuário", 
-                    "user" => $this->usuario, "emails" => $emails,
-                    "telefones" => $telefones, "localidade" => $this->localidade, "instituicao" => $this->instituicao);
 
             if($this->form_validation->run()){
                     $this->db->trans_start();
@@ -91,11 +88,15 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     $emails = null;
                     $telefones = null;
                     $this->localidade = null;
+                    $this->instituicao = null;
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível cadastrar o usuário!');
                 }
 
             }
+             $data = array("title"=>"IFEvents - Novo Usuário", 
+                "user" => $this->usuario, "emails" => $emails,
+                "telefones" => $telefones, "localidade" => $this->localidade, "instituicao" => $this->instituicao);
             $this->chamaView("novo-usuario", "organizador", $data, 1);
         }
 

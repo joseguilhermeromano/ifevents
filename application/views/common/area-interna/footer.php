@@ -7,41 +7,17 @@
      <!-- assetststrap Core JavaScript -->
         <script src="<?php echo base_url('assets/area-interna/js/jquery.min.js');?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/jquery.maskedinput.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/jquery-ui.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/jquery.dataTables.min.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/select2.min.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/adicionaCampos.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         $("span", this).toggleClass("glyphicon glyphicon-remove glyphicon glyphicon-menu-hamburger");
     });
-    </script>
-
-    <script>
-        jQuery(function($){
-               $.mask.definitions['~']='[+-]';
-               $("#campoData").mask("99/99/9999");
-               $("#campoTelefone").focusout(function(){
-                    var phone, element;
-                    element = $(this);
-                    element.unmask();
-                    phone = element.val().replace(/\D/g, '');
-                    if(phone.length > 10) {
-                        element.mask("(99) 99999-999?9");
-                    } else {
-                        element.mask("(99) 9999-9999?9");
-                    }
-                }).trigger('focusout');
-               $("#campoRG").mask("99.999.999-9");
-                $("#campoCPF").mask("999.999.999-99");
-               $("#campoCep").mask("99999-999");
-               $("#campoSenha").mask("***-****");
-               $('#campoQtdMaxSubmissaoAvaliador').mask('#');
-               
-        });
     </script>
     
     <script>

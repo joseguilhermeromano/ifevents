@@ -62,6 +62,11 @@
 <script src="<?php echo base_url('assets/area-externa/js/cbpAnimatedHeader.js'); ?>"></script> 
 <script src="<?php echo base_url('assets/area-externa/js/slideanim.js'); ?>"></script> 
 <script src="<?php echo base_url('assets/area-externa/js/codigos.js'); ?>"></script>
+<script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
+<script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
+<script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
+<script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
+<script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
 
 </body>
 </html>
