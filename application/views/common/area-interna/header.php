@@ -11,13 +11,16 @@
         <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/ambas-areas/css/select2.min.css');?>" rel="stylesheet">
+        <script type="text/javascript">
+            var baseUrl = "<?php echo base_url(''); ?>";
+        </script>
     </head>
     <body>
  <div id="wrapper">
         <?php 
 
             $usuario = $this->session->userdata('usuario'); 
-            $paginacorrente = $this->session->userdata('pagina'); 
+            $paginacorrente = $this->session->userdata('view'); 
 
             if ($usuario[0]['user_tipo']==0){
         ?>

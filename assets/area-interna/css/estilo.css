@@ -550,17 +550,19 @@ label{
     width: 100%!important;
 }
 
-h4{
-  color:#21a51a;
-  font-weight: bold;
-  margin:30px 0px 20px 0px;
-}
  
 .select2-container .select2-selection--single .select2-selection__rendered .select2-search input[type="text"] {
     color:green;
 }
 
 .select2-selection--multiple { max-height: 10rem; overflow: auto }
+
+
+h4{
+  color:#21a51a;
+  font-weight: bold;
+  margin:30px 0px 20px 0px;
+}
 
 /** EXPANDE O TAMANHO DO SELECT 2 (UTIL PARA ASSOCIAR  ARTIGO AO USUARIO)**/
 /*.select2-container .select2-selection {

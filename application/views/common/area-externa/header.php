@@ -15,6 +15,9 @@
   <script>
    new WOW().init();
   </script>
+  <script type="text/javascript">
+      var baseUrl = "<?php echo base_url(''); ?>";
+  </script>
   <!-- //animation-effect -->
 </head>
 <body id="page-top">

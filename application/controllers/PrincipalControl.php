@@ -37,7 +37,10 @@ class PrincipalControl extends CI_Controller {
         }
         $areaTemplate == 1 ? $header="common/area-interna/header" : $header="common/area-externa/header";
         $areaTemplate == 1 ? $footer="common/area-interna/footer" : $footer="common/area-externa/footer";
-        $this->session->set_userdata('pagina',$view);
+        $this->session->set_userdata('view',$view);
+        $this->session->set_userdata('nomeDiretorio',$nomeDiretorio);
+        $this->session->set_userdata('title',$data['title']);
+        $this->session->set_userdata('areaTemplate',$areaTemplate);
         $this->load->view($header,$data);
         $this->load->view($nomeDiretorio.'/'.$view, $data);
         $this->load->view($footer);

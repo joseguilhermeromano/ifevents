@@ -668,6 +668,10 @@ hr.hr-pontilhado{
 #cadastro h3{
   color:#e01d1d;
 }
+#cadastro .subtitulo{
+  margin-top:50px;
+  color:#ff0c0c;
+}
 /*-- /CONFIGURAÇÕES PÁGINA DE CADASTRO --*/ 
 
 /*-- CONFIGURAÇÕES DA PÁGINA DE LOGIN--*/
@@ -733,6 +737,7 @@ hr.hr-pontilhado{
 }
 
 .floating-label-form-group input,
+.floating-label-form-group select,
 .floating-label-form-group textarea {
     z-index: 1;
     position: relative;
@@ -740,11 +745,11 @@ hr.hr-pontilhado{
     padding-left: 0;
 }
 
-.floating-label-form-group label {
-    display: block;
+.floating-label-form-group  label {
+    display: inline-block;
     z-index: 0;
     position: relative;
-    top: 2em;
+    top: 0em;
     margin: 0;
     font-size: .85em;
     line-height: 1.764705882em;
@@ -762,7 +767,7 @@ hr.hr-pontilhado{
 }
 
 .floating-label-form-group-with-value label {
-    top: 0;
+    top: -0.5em;
     opacity: 1;
     color: #009900;
     font-weight: bold;
@@ -1549,6 +1554,100 @@ ul.w3agile_footer_grid_list li{
     color:#fff;
 }
 /*-- //FOOTER --*/
+
+/** CONFIGURAÇÕES SELECT 2 **/
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 38px!important;
+    top:0px!important;
+}
+
+.select2-container--default .select2-selection--multiple{
+  border:0px!important;
+  border-bottom: 1px solid #DCDCDC!important;
+  border-radius: 0px!important;
+}
+
+.select2-selection{
+    margin: 0px 0px 0px 0px!important;
+    font-family:helvetica; color:#666;
+    border-bottom:1px solid #DCDCDC!important;
+    outline:none;
+    height: 40px!important;
+}
+
+/*.selection .selection2-selection .select2-selection__rendered .select2-search__field{*/
+   /* margin: 10px 10px 10px 0px;*/
+   /* width: 100%!important;*/
+/*    font-family:helvetica; color:#666;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border:1px solid #DCDCDC!important;
+    outline:none;*/
+/*}*/
+.select2-container--default .select2-search--inline .select2-search__field:focus
+{
+    border-radius: 0px!important;
+    border-bottom: 2px solid  #009900!important;
+    outline:none;
+}
+
+/*.select2-selection:hover {
+    border-radius: 0px!important;
+    border-bottom: 2px solid  #009900!important;
+    outline:none; 
+}*/
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #37BA40!important;
+}
+
+.select2-selection__rendered{
+  padding-top:0px!important;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-top: 0px!important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+  font-size: 9pt!important;
+}
+
+.select2-dropdown {
+  border:1px solid #DCDCDC!important;
+}
+
+/*Make select2 responsive*/
+[class*="col-"] .select2-container {
+    width:100%!important;
+}
+[class*="col-"] .select2-container .select2-search input[type="text"] {
+    padding:2px 4%!important;
+    width:90%!important;
+    margin:5px 2%;
+}
+[class*="col-"] .select2-container .select2-drop {
+    width: 100%!important;
+}
+
+ 
+.select2-container .select2-selection--single .select2-selection__rendered .select2-search input[type="text"] {
+    color:green;
+}
+
+.select2-selection--multiple { max-height: 10rem; }
+/** /CONFIGURAÇÕES SELECT 2 **/
+
+/** /CONFIGURAÇÕES MENSAGENS DE ERRO **/
+.alert > p {
+  font-size: 10pt!important;
+}
+.alert > h4 {
+  font-size: 14pt!important;
+}
+
 
 
 

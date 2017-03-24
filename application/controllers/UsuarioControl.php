@@ -65,12 +65,15 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 $this->instituicao = (object)$this->InstituicaoDAO->
                     consultarCodigo($this->input->post('instituicao'))[0];
             }
+            $view = $this->session->userdata('view'); 
+            $nomeDiretorio = $this->session->userdata('nomeDiretorio'); 
+            $titulo = $this->session->userdata('title'); 
+            $areaTemplate = $this->session->userdata('areaTemplate'); 
 
             if($this->form_validation->run()){
                     $this->db->trans_start();
                 $this->usuario->user_loca_cd = $this->LocalidadeDAO->inserir($this->localidade);
                 $user_cd = $this->UserDAO->inserir($this->usuario);
-                if($user_cd){
                     foreach($this->email->criaLista($user_cd) as $key => $email){
                         $this->EmailDAO->inserir($email);
                     }
@@ -78,26 +81,23 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                         $this->TelefoneDAO->inserir($tel);
                     }
                     $this->db->trans_complete();
-                    if($this ->db->trans_status() === FALSE){
-                         $this->session->set_flashdata('error', 'O Usuário não pode ser cadastrado!');
-                         $this->chamaView("novo-usuario", "organizador",$data, 1);
-                        return 0;
-                    }
+
+                if($this ->db->trans_status() !== FALSE){
                     $this->session->set_flashdata('success', 'O Usuário foi cadastrado com sucesso!');
                     $this->usuario = null;
                     $emails = null;
                     $telefones = null;
                     $this->localidade = null;
                     $this->instituicao = null;
+                            
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível cadastrar o usuário!');
                 }
-
             }
-             $data = array("title"=>"IFEvents - Novo Usuário", 
+             $data = array("title"=>$titulo, 
                 "user" => $this->usuario, "emails" => $emails,
                 "telefones" => $telefones, "localidade" => $this->localidade, "instituicao" => $this->instituicao);
-            $this->chamaView("novo-usuario", "organizador", $data, 1);
+            $this->chamaView($view, $nomeDiretorio, $data, $areaTemplate);
         }
 
         public function alterar() {

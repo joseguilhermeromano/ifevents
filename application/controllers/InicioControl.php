@@ -60,6 +60,13 @@
             	array("title"=>"IFEvents - Cadastro de Participantes"), 0);
 		}
 
+		public function cadastraAvaliador(){
+
+			$this->chamaView("cadastro_avaliador", "inicio",
+            	array("title"=>"IFEvents - Contato"), 0);
+		}
+
+
         //Método que chama a view do login
         public function login(){
 
@@ -78,14 +85,6 @@
             $this->chamaView("recupera_senha", "inicio",
             	array("title"=>"IFEvents - Recuperação de Senha"), 0);
 		}
-
-		//Metodo chama o método verifica para validação dos campos do formuĺário
-		public function cadastraUser(){
-			if($this->Autentica->Check( $this->router->fetch_class(), $this->router->fetch_method()) == false ){
-				$this->UserModel->verifica();
-			}
-		}
-
 
 		public function noPermission(){
 

@@ -33,14 +33,16 @@ btn_add_email.addEventListener("click", function(event){
 		return alert("Você pode cadastrar até 3 e-mails!");
 	}
 	var novoemail = `<div class="col-sm-6">
+    <div class="form-group floating-label-form-group controls">
 	<b><label for="email[`+i+`]">E-mail alternativo `+i+`</label></b>
 		<div class="input-group">
-			<input type="text" name="email[`+i+`]" " class="form-control estilo-botao-remove"  />
+			<input type="text" name="email[`+i+`]" " placeholder="E-mail alternativo `+i+`" class="form-control estilo-botao-remove"  />
 			<span class="input-group-btn">
-		         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+		         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
 		     </span>
 		</div>
-	</div>`;
+	</div>
+    </div>`;
 	var div = document.querySelector("#inputsEmails");
 	var elems = div.getElementsByTagName("input");
 
@@ -82,14 +84,16 @@ $(document).on('mask-it', function(){
 		return alert("Você pode cadastrar até 3 telefones!");
 	}
 	var novotelefone = `<div class="col-sm-4">
+    <div class="form-group floating-label-form-group floating-label-form-group-with-value controls">
 	<b><label for="telefone[`+i+`]">Telefone/Celular `+i+`</label></b>
 		<div class="input-group">
-			<input type="text" name="telefone[`+i+`]" class="campoTelefone form-control estilo-botao-remove"  />
+			<input type="text" name="telefone[`+i+`]" placeholder="Telefone/Celular `+i+`" class="campoTelefone form-control estilo-botao-remove"  />
 			 <span class="input-group-btn">
-		         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+		         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
 		     </span>
 	    </div>
-	</div>`;
+	</div>
+    </div>`;
 	var div = document.querySelector("#inputsTelefones");
 	var elems = div.getElementsByTagName("input");
 
@@ -113,7 +117,6 @@ $('#addTelefone').on('click', function(){
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
 $(document).ready(function() {
-
     $(".consultaInstituicao").select2({
     // tags: true,
     placeholder: "Instituição",
@@ -123,7 +126,7 @@ $(document).ready(function() {
      maximumSelectionLength: 1,
     minimumResultsForSearch: 10,
     ajax: {
-        url: "../instituicao/consultarParaSelect2",
+        url: baseUrl + "instituicao/consultarParaSelect2",
         dataType: "json",
         type: "POST",
         data: function (params) {
