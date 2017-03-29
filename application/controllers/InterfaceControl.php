@@ -11,7 +11,7 @@ interface InterfaceControl{
      * Alterar um valor existente na base de dados
      * @return Não apresenta retorno
      */
-    public function alterar();
+    public function alterar($codigo);
     
     /**
      * Chama a dao de exclusão de dados

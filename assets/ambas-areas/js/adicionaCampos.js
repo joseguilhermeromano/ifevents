@@ -164,7 +164,7 @@ function somenteNumeros(num) {
  $('#tipoUsuario').change(function () {
      var optionSelected = $(this).find("option:selected");
      var valueSelected  = optionSelected.val();
-     if(valueSelected==1){
+     if(valueSelected==2){
      	$('#qtdMaxSubmissaoAval').show();
      }else{
      	$('#qtdMaxSubmissaoAval').hide();

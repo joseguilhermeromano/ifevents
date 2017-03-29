@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="estilo-h1">Cadastro de Avaliadores</h1>
+                <h1 class="estilo-h1">Cadastro de Revisores</h1>
                 <br>
             </div>
         </div>

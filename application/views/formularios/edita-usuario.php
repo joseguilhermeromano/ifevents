@@ -3,15 +3,16 @@
         $this->load->helper('html');
         echo alert($this->session);
 
-         $nomeDiretorio = $this->session->userdata('nomeDiretorio'); 
-         $view = $this->session->userdata('view'); 
+         $usuario = $this->session->userdata('usuario'); 
 
                                              ?>
-<?php echo form_open_multipart( 'usuario/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
+<?php echo form_open_multipart( 'usuario/'.$this->uri->segment(2).'/'.$this->uri->segment(3), 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 <h4 class="subtitulo"><i>Dados de acesso</i></h4><br>
 <div class="row">
-<?php   if($nomeDiretorio!='inicio'){ 
-        $colsm6="col-sm-6";                                                                                  ?>
+
+<?php   if($usuario[0]['user_tipo']== 3){ 
+                                                                                         ?>
+
     <div class="col-sm-4">
         <div class="form-group floating-label-form-group controls">
         <b>
@@ -31,15 +32,19 @@
             </select>
         </div>
     </div>
-<?php   }                                                                                        ?>
-    <div class="<?php echo ($nomeDiretorio=='inicio' ? 'col-sm-6' : 'col-sm-4'); ?>">
+
+
+<?php   }                                                                                ?>
+
+
+    <div class="<?php echo ($usuario[0]['user_tipo']!= 3 ? 'col-sm-6' : 'col-sm-4'); ?>">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( '*Nome Completo', 'nome' ); ?></b>
         <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome Completo", 'class' => 'form-control estilo-input', 'value' => (isset($user) ? $user->user_nm : ''));
                echo form_input($data);?>
         </div>
     </div>
-    <div class="<?php echo ($nomeDiretorio=='inicio' ? 'col-sm-6' : 'col-sm-4'); ?>">
+    <div class="<?php echo ($usuario[0]['user_tipo']!= 3 ? 'col-sm-6' : 'col-sm-4'); ?>">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao" multiple="multiple">
@@ -54,11 +59,14 @@
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls" id='EmailPrincipal'>
         <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
-        <?php $data = array( 'name' => 'email[0]', 'placeholder' => 'E-mail','class' => 'form-control estilo-input',
-         'value' => (isset($emails) && !empty($emails) ? $emails[0]->email_email : ''));
-              echo form_input( $data );?>
+        <input type="text" name="email[0]" placeholder="E-mail" class="form-control estilo-input"
+             value="<?php echo (isset($emails) && !empty($emails) ? $emails[0] : '') ?>" <?php echo ($usuario[0]['user_tipo'] != 3 ? 'disabled' : ''); ?>>
         </div>
     </div>
+
+
+<?php   if($usuario[0]['user_tipo']== 3){ 
+                                                                                         ?>
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls">
         <b><?php echo form_label( '*Confirmar e-mail de login', 'confirmaemail' ); ?></b>
@@ -66,6 +74,9 @@
               echo form_input( $data );?>
         </div>
     </div>
+
+<?php }                                                                                  ?>
+
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -84,7 +95,7 @@
             <b><label for="email<?php echo '['.$key.']'; ?>">E-mail alternativo <?php echo $key; ?></label></b>
                 <div class="input-group floating-label-form-group controls">
                     <input type="text" name="email<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
-                    value="<?php echo $value->email_email;?>" />
+                    value="<?php echo $value;?>" />
                     <span class="input-group-btn">
                          <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
                      </span>
@@ -96,6 +107,10 @@
         }                    
                                                         ?>
 </div>
+
+<?php   if($usuario[0]['user_tipo']== 3){ 
+                                                                                         ?>
+
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls">
@@ -112,6 +127,9 @@
         </div>
     </div>
 </div>
+
+<?php }                                                                                  ?>
+
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group floating-label-form-group controls">
@@ -121,13 +139,7 @@
         </div>
     </div>
     <div class="col-sm-6"  id="qtdMaxSubmissaoAval" 
-      <?php 
-
-        if((!isset($user->user_tipo)  &&  $view !== 'cadastro_avaliador') || (isset($user->user_tipo) && $user->user_tipo!=2)){
-            echo 'style="display:none"';
-        }
-
-      ?> >
+    <?php echo ($usuario[0]['user_tipo']!= 2 ? 'style="display:none"' : ''); ?> >
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( '*Qtd. Máxima de Submissões', 'qtdSubmissoes' ); ?></b>
         <?php $data = array( 'name' => 'qtdSubmissoes', 'type' => 'text','placeholder' => 'Qtd. Máxima de Submissões','class' => 'form-control estilo-input', 'onkeyup' => "somenteNumeros(this);", "maxlength" => "2",
@@ -144,23 +156,17 @@
     <div class="col-sm-4">
         <div class="form-group floating-label-form-group floating-label-form-group-with-value controls">
             <b><?php echo form_label( '*RG', 'rg' ); ?></b>
-            <?php $data = array( 'name' => 'rg', 
-                'id' => 'campoRG',
-             'type' => 'text', 'placeholder' => 'RG',
-              'class' => 'form-control estilo-input',
-              'value' => (isset($user) ? $user->user_rg : ''));
-                    echo form_input( $data );?>
+            <input type="text" name="rg" id="campoRG" placeholder="RG" class="form-control estilo-input"
+             value="<?php echo (isset($user) ? $user->user_rg : ''); ?>" 
+             <?php echo $usuario[0]['user_tipo'] != 3 ? 'disabled' : ''; ?>>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group floating-label-form-group floating-label-form-group-with-value controls">
             <b><?php echo form_label( 'CPF', 'cpf' ); ?></b>
-            <?php $data = array( 'name' => 'cpf', 
-                'id' => 'campoCPF',
-             'type' => 'text', 'placeholder' => 'CPF',
-              'class' => 'form-control estilo-input',
-            'value' => (isset($user) ? $user->user_cpf : ''));
-                    echo form_input( $data );?>
+            <input type="text" name="cpf" id="campoCPF" placeholder="CPF" class="form-control estilo-input"
+             value="<?php echo (isset($user) ? $user->user_cpf : ''); ?>" 
+             <?php echo $usuario[0]['user_tipo'] != 3 && !empty($user->user_cpf)  ? 'disabled' : ''; ?>>
         </div>
     </div>
 </div>
@@ -273,7 +279,7 @@
             <b><label for="telefone<?php echo '['.$key.']'; ?>">Telefone/Celular <?php echo $key; ?></label></b>
                 <div class="input-group  floating-label-form-group controls">
                     <input type="text" id="campoTelefone" name="telefone<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
-                    value="<?php echo $value->tele_fone;?>" />
+                    value="<?php echo $value;?>" />
                     <span class="input-group-btn">
                          <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
                      </span>

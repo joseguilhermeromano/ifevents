@@ -26,8 +26,9 @@
             return null;
         }
 
-        public function excluir($obj) {
-
+        public function excluir($user_cd) {
+            $this->db->where('tele_user_cd', $user_cd);
+            $this->db->delete('telefone');
         }
 
                 

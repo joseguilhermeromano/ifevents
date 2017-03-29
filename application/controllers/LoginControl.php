@@ -18,10 +18,10 @@ class LoginControl extends PrincipalControl{
                 $usuario = $this->UserModel->login();
                 if($usuario!=null){
                     $this->session->set_userdata('usuario',$usuario);
-                        if($usuario[0]['user_tipo'] == 2){
+                        if($usuario[0]['user_tipo'] == 3){
                             redirect('usuario/inicioOrganizador');
                         }
-                        else if($usuario[0]['user_tipo'] == 1){
+                        else if($usuario[0]['user_tipo'] == 2){
                                 redirect('usuario/inicioAvaliador');
                         }	
                         else{

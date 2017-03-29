@@ -35,6 +35,7 @@
 				$this->create_table_contem();
 				$this->create_table_metodo();
 				$this->create_table_permissao();
+				$this->create_table_tipo_usuario();
 		}
 
 		//Método cria a tabela login
@@ -270,9 +271,6 @@
 					,user_pass        varchar(100) NOT NULL
 					,user_email_vali  varchar(100) NOT NULL
 					,user_qtd_subm	  int(2)	   NULL
-					,user_loca_cd 	  int(11) 	   NULL
-					,user_loca_num 	  varchar(9)   NULL
-					,user_loca_comp   varchar(100) NULL
 					,user_stat_cd     int(11)      NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
@@ -370,14 +368,25 @@
 
 
 
-		//Método cria tabela Abriga
-		// public function create_table_abriga(){
-		// 	$sql = "CREATE TABLE IF NOT EXISTS Abriga (
-		// 			  abri_user_cd int(11)  NOT NULL
-		// 			 ,abri_loca_cd int(11) NOT NULL
-		// 	) ENGINE=INNODB";
-		// 	$this->db->query($sql);
-		// }
+		//Método cria tabela user_loca_ende
+		public function create_table_user_loca_ende(){
+			$sql = "CREATE TABLE IF NOT EXISTS user_loca_ende (
+					  ule_cd int(11)  NOT NULL PRIMARY KEY AUTO_INCREMENT
+					 ,ule_user_cd int(11)  NOT NULL
+					 ,ule_loca_cd int(11) NOT NULL
+					 ,ule_ende_cd int(11) NOT NULL
+			) ENGINE=INNODB";
+			$this->db->query($sql);
+		}
+
+		public function create_table_ende_user(){
+			$sql = "CREATE TABLE IF NOT EXISTS endereco_user (
+					  enus_cd int(11)  NOT NULL PRIMARY KEY AUTO_INCREMENT
+					 ,enus_num varchar(10) NOT NULL
+					 ,enus_comp varchar(100) NOT NULL
+			) ENGINE=INNODB";
+			$this->db->query($sql);
+		}
 
 
 		//Método cria tabela Apoia
@@ -440,21 +449,30 @@
 		//Método cria tabela métodos
 		public function create_table_metodo(){
 			$sql = "CREATE TABLE IF NOT EXISTS `metodo` (
-					  `meto_cd` int(11) NOT NULL,
-					  `meto_classe` varchar(100) NOT NULL,
-					  `meto_metodo` varchar(100) NOT NULL,
-					  `meto_identificacao` varchar(200) NOT NULL,
-					  `meto_privado` tinyint(1) NOT NULL
-					) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;";
+					  `meto_cd` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT
+					 ,`meto_classe` varchar(100) NOT NULL
+					 ,`meto_metodo` varchar(100) NOT NULL
+					 ,`meto_identificacao` varchar(200) NOT NULL
+					 ,`meto_privado` tinyint(1) NOT NULL
+					) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;";
 			$this->db->query($sql);
 		}
 
 		//Método cria tabela permissao
 		public function create_table_permissao(){
 			$sql = "CREATE TABLE IF NOT EXISTS `permissao` (
-					  `perm_cd` int(11) NOT NULL,
-					  `perm_meto_cd` int(11) NOT NULL,
-					  `perm_tius_cd` int(11) NOT NULL
+					  `perm_cd` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT
+					  ,`perm_meto_cd` int(11) NOT NULL
+					  ,`perm_tius_cd` int(11) NOT NULL
+					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$this->db->query($sql);
+		}
+
+		public function create_table_tipo_usuario(){
+			$sql = "CREATE TABLE IF NOT EXISTS `tipo_usuario` (
+					  `tius_cd` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT
+					 ,`tius_nm` varchar(100) NOT NULL
+					 ,`tius_ds` varchar(200) NOT NULL
 					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 			$this->db->query($sql);
 		}

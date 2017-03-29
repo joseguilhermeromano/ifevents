@@ -16,6 +16,8 @@
             	$this->loca_cep = $this->input->post('cep');
             	$this->loca_cid = $this->input->post('cidade');
             	$this->loca_uf = $this->input->post('uf');
+                $this->enus_num=$this->input->post('numero');
+                $this->enus_comp=$this->input->post('complemento');
             }
 
             public function valida(){
@@ -30,6 +32,8 @@
                 	$this->form_validation->set_rules( 'cep', 'CEP', 'required|valid_cep' );
                 	$this->form_validation->set_rules( 'cidade', 'Cidade', 'required|trim|max_length[100]' );
                 	$this->form_validation->set_rules( 'uf', 'UF', 'required|trim|max_length[2]' );
+                    $this->form_validation->set_rules( 'numero', 'Número', 'trim|required|max_length[9]' );
+                    $this->form_validation->set_rules( 'complemento', 'Complemento', 'trim|max_length[100]' );
                 }
             }
 

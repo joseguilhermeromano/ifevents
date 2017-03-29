@@ -60,9 +60,9 @@
             	array("title"=>"IFEvents - Cadastro de Participantes"), 0);
 		}
 
-		public function cadastraAvaliador(){
+		public function cadastraRevisor(){
 
-			$this->chamaView("cadastro_avaliador", "inicio",
+			$this->chamaView("cadastro_revisor", "inicio",
             	array("title"=>"IFEvents - Contato"), 0);
 		}
 

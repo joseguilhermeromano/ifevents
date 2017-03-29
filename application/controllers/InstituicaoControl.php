@@ -16,7 +16,7 @@ class InstituicaoControl extends PrincipalControl implements InterfaceControl{
 
 
 
-        public function alterar() {
+        public function alterar($codigo) {
         }
 
         public function consultarParaSelect2(){

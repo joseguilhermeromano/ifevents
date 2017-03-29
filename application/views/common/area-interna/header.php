@@ -22,7 +22,7 @@
             $usuario = $this->session->userdata('usuario'); 
             $paginacorrente = $this->session->userdata('view'); 
 
-            if ($usuario[0]['user_tipo']==0){
+            if ($usuario[0]['user_tipo']==1){
         ?>
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
             <div class="borda"><!-- borda -->
@@ -61,7 +61,7 @@
             </div><!-- /#borda -->
         </div><!-- /#sidebar-wrapper -->
         <?php
-            }else if ($usuario[0]['user_tipo']==2){
+            }else if ($usuario[0]['user_tipo']==3){
         ?>
         <!-- Menu Organizador -->
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
