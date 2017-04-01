@@ -77,7 +77,7 @@ function somenteNumeros(num) {
      }
  });
 
-
+/*Oculta e exibe ids de tags html (usado nos inputs senha e email de cadastro de usuários */
 $(function(){
       $(".btn-toggle").click(function(e){
           e.preventDefault();
@@ -85,6 +85,20 @@ $(function(){
           $(el).toggle();
       });
   });
+
+/* APLICA EFEITO DE SETINHA NO MENU INTERNO*/
+$(document).ready(function() {
+    var url_atual =  window.location.href;
+    document.querySelectorAll(".sidebar-nav li a").forEach(function (elem,i) {
+        if(elem.getAttribute("href") == url_atual){
+          console.log(elem);
+          elem.parentNode.className = "active";
+        }
+      });
+
+});
+
+
 
 
 
