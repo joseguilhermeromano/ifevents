@@ -55,6 +55,20 @@
         </div>
     </div>
 </div>
+
+<?php   if($usuario[0]['user_tipo']== 3){ 
+                                                                                         ?>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn-toggle btn btn-default" data-element="#confirmaemail" style="margin-bottom:20px">
+        <i><span class="glyphicon glyphicon-pencil"></span> Alterar Email</i>
+        </a>
+    </div>
+</div>
+
+<?php    }                                                                               ?>
+
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls" id='EmailPrincipal'>
@@ -65,9 +79,8 @@
     </div>
 
 
-<?php   if($usuario[0]['user_tipo']== 3){ 
-                                                                                         ?>
-    <div class="col-sm-6">
+
+    <div class="col-sm-6" id="confirmaemail" style="display:none">
         <div class="form-group  floating-label-form-group controls">
         <b><?php echo form_label( '*Confirmar e-mail de login', 'confirmaemail' ); ?></b>
         <?php $data = array( 'name' => 'confirmaemail', 'placeholder' => 'Confirma E-mail','class' => 'form-control estilo-input' );
@@ -75,32 +88,37 @@
         </div>
     </div>
 
-<?php }                                                                                  ?>
+
 
 </div>
 
 
-<?php   if($usuario[0]['user_tipo']== 3){ 
-                                                                                         ?>
-
 <div class="row">
+    <div class="col-md-12">
+        <a class="btn-toggle btn btn-default" data-element="#senha" style="margin-bottom:20px">
+        <i><span class="glyphicon glyphicon-pencil"></span> Alterar Senha</i>
+        </a>
+    </div>
+</div>
+
+<div class="row" id="senha" style="display: none">
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls">
-        <b><?php echo form_label( '*Senha', 'senha' ); ?></b>
+        <b><?php echo form_label( '*Nova senha', 'senha' ); ?></b>
         <?php $data = array( 'name' => 'senha', 'type' => 'password','placeholder' => 'Senha','class' => 'form-control estilo-input' );
               echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group floating-label-form-group controls">
-        <b><?php echo form_label( '*Confirmar Senha', 'confirmasenha' ); ?></b>
+        <b><?php echo form_label( '*Confirmar nova senha', 'confirmasenha' ); ?></b>
         <?php $data = array( 'name' => 'confirmasenha',  'type' => 'password', 'placeholder' => 'Confirmar Senha', 'class' => 'form-control estilo-input');
                     echo form_input( $data );?>
         </div>
     </div>
 </div>
 
-<?php }                                                                                  ?>
+
 
 <div class="row">
     <div class="col-sm-6">
@@ -248,7 +266,7 @@
         </div>
     </div>
 </div>
-<?php echo '<br><center>'.form_submit("btn_cadastro", "Enviar",array('class' => 'btn btn-success button'))."</center>";
+<?php echo '<br><center>'.form_submit("btn_cadastro", "Atualizar",array('class' => 'btn btn-success button'))."</center>";
 
       echo form_fieldset_close();
 

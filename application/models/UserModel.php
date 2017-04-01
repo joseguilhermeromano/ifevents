@@ -42,7 +42,7 @@
                 $this->user_tipo = 1;
              }
 
-            if($cadastro == true && null !== $this->input->post('senha')
+            if(null !== $this->input->post('senha')
                 && ""!== $this->input->post('senha')){
                  $this->user_pass=md5($this->input->post('senha'));
             }
@@ -68,13 +68,14 @@
 
             if($cadastro == false && $user==3){
                  $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
-                 if(!empty($this->input->post('senha'))&&
+            }
+
+            if($cadastro == false && !empty($this->input->post('senha'))&&
                     !empty($this->input->post('confirmasenha'))){
                     $this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
                     $this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha', 
                     'trim|required|min_length[6]|matches[senha]' );
                  }
-            }
 
 
             if(empty($this->user_cpf)){

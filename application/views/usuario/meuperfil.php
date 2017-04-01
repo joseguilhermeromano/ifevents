@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-user"></span><b> Meu Perfil</b><a class="btn btn-default" style="float:right">Alterar Senha</a></h2>
+<h2><span class="glyphicon glyphicon-user"></span><b> Meu Perfil</b></h2>
 <hr>
 <br>
 <?php 

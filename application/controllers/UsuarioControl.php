@@ -151,6 +151,11 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 $this->instituicao = (object)$this->InstituicaoDAO->
                     consultarCodigo($this->input->post('instituicao'))[0];
             }
+            if($this->session->userdata('usuario')[0]['user_tipo']!=3||
+                  ($this->session->userdata('usuario')[0]['user_tipo']==3 &&
+                    empty($this->input->post('confirmaemail')))){
+                    $this->email->email_email = $data['email']->email_email;
+               }
 
             if($this->form_validation->run()){
                 $this->db->trans_start();
@@ -175,12 +180,6 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
                 if($data['user']->user_cpf === null){
                     $this->usuario->user_cpf = $this->input->post('cpf');
-                }
-
-                if($this->session->userdata('usuario')[0]['user_tipo']!=3||
-                  ($this->session->userdata('usuario')[0]['user_tipo']==3 &&
-                    empty($this->input->post('confirmaemail')))){
-                    $this->email->email_email = $data['email']->email_email;
                 }
 
                 $this->UserDAO->alterar($this->usuario);
