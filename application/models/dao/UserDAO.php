@@ -10,8 +10,16 @@ class UserDAO extends CI_Model implements DAO{
     }
 
     public function inserir($obj) {
-        $this->db->insert('user', $obj);
-        return $this->db->insert_id();
+            $orig_db_debug = $this->db->db_debug;
+
+            $this->db->db_debug = FALSE;
+            $this->db->insert('user', $obj);
+            if($this->db->error()['code']==1062){
+                throw new Exception('Já existe um usuário cadastrado com o mesmo documento RG!');
+            }
+
+            $this->db->db_debug = $orig_db_debug;
+            return $this->db->insert_id();
     }
     
     public function alterar($obj) {
@@ -20,46 +28,48 @@ class UserDAO extends CI_Model implements DAO{
     }
 
     public function consultarTudo() {
-        return null;
+        $this->db->select("User.*,email_email, tele_fone");
+        $this->db->from("User");
+        $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
+        $this->db->join('Telefone', 'User.user_tele_cd = Telefone.tele_cd','left');
+        $query = $this->db->get();
+        return $query->result_object();
     }
     
     public function consultarCodigo($codigo){
 
-        $this->db->select("User.*,email_email, tele_fone, inst_nm, localidade.*, enus_num, enus_comp");
+        $this->db->select("User.*,email_email, tele_fone, inst_nm, Localidade.*, abri_num, abri_comp");
         $this->db->from("User");
-        $this->db->join('Email', 'User.user_cd = Email.email_user_cd','left outer');
-        $this->db->join('Telefone', 'User.user_cd = Telefone.tele_user_cd','left outer');
+        $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
+        $this->db->join('Telefone', 'User.user_tele_cd = Telefone.tele_cd','left');
         $this->db->join('Instituicao', 'User.user_instituicao = Instituicao.inst_cd','left');
-        $this->db->join('user_loca_ende', 'User.user_cd = user_loca_ende.ule_user_cd','left');
-        $this->db->join('localidade', 'user_loca_ende.ule_loca_cd = localidade.loca_cd','left');
-        $this->db->join('endereco_user', 'user_loca_ende.ule_ende_cd = endereco_user.enus_cd','left');
+        $this->db->join('Abriga', 'User.user_cd = Abriga.abri_user_cd','left');
+        $this->db->join('Localidade', 'Abriga.abri_loca_cd = Localidade.loca_cd','left');
         $this->db->where('User.user_cd', $codigo);
         $query = $this->db->get();
         $consulta = $query->result_object();
+
         $user = new UserModel();
         $loca = new LocalidadeModel();
-        $emails= array();
-        $telefones = array();
+        $email = new EmailModel();
+        $telefone = new TelefoneModel();
         $inst = new InstituicaoModel();
-        $indexEmail = 0;
-        $indexTele = 1;
 
         foreach ($consulta as $key => $value) {
 
             if(empty($user->user_cd)){
                 $user->user_cd = $value->user_cd;
                 $user->user_nm = $value->user_nm;
-                $user->user_cd = $value->user_cd;
                 $user->user_tipo = $value->user_tipo;
                 $useruser_instituicao = $value->user_instituicao;
                 $user->user_biograf = $value->user_biograf;
                 $user->user_rg = $value->user_rg;
                 $user->user_cpf = $value->user_cpf;
                 $user->user_qtd_subm = $value->user_qtd_subm;
+                $user->user_email_cd = $value->user_email_cd;
                 $user->user_pass = $value->user_pass;
-                $user->user_email_vali = $value->user_email_vali;
+                $user->user_tele_cd = $value->user_tele_cd;
                 $user->user_stat_cd = $value->user_stat_cd;
-                $user->user_rg = $value->user_rg;
             }
 
             if(empty($loca->loca_cd)){
@@ -69,27 +79,30 @@ class UserDAO extends CI_Model implements DAO{
                 $loca->loca_cep = $value->loca_cep;
                 $loca->loca_cid = $value->loca_cid;
                 $loca->loca_uf = $value->loca_uf;
-                $loca->enus_num = $value->enus_num;
-                $loca->enus_comp = $value->enus_comp;
+                $loca->abri_num = $value->abri_num;
+                $loca->abri_comp = $value->abri_comp;
             }
-            !in_array($value->email_email, $emails) ? $emails[$indexEmail++] = $value->email_email : '';
-            !in_array($value->tele_fone, $telefones) ? $telefones[$indexTele++] = $value->tele_fone : '';
+            if(empty($email->email_email)){
+                $email->email_email = $value->email_email;
+            }
+            if(empty($telefone->tele_fone)){
+                $telefone->tele_fone = $value->tele_fone;
+            }
             if(empty($inst->inst_nm)){
                 $inst->inst_cd = $value->user_instituicao;
                 $inst->inst_nm = $value->inst_nm;
             }
 
         }
-         $data = array('user'=>$user, 'localidade' => $loca, 'emails'=> $emails, 'telefones' => $telefones, 'instituicao' => $inst);
+         $data = array('user'=>$user, 'localidade' => $loca, 'email'=> $email, 'telefone' => $telefone, 'instituicao' => $inst);
         return $data;
     }
     
     public function consultarLogin($email, $senha){
         $this->db->select("*");
         $this->db->from("Email");
-        $this->db->join('User', 'User.user_cd = Email.email_user_cd');
+        $this->db->join('User', 'User.user_email_cd = Email.email_cd');
         $this->db->where('Email.email_email', $email);
-        $this->db->where('Email.email_principal', 1);
         $this->db->where('User.user_pass',$senha);
         $query = $this->db->get();
         return $query->result_array();

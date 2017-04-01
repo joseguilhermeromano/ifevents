@@ -16,8 +16,8 @@
             	$this->loca_cep = $this->input->post('cep');
             	$this->loca_cid = $this->input->post('cidade');
             	$this->loca_uf = $this->input->post('uf');
-                $this->enus_num=$this->input->post('numero');
-                $this->enus_comp=$this->input->post('complemento');
+                $this->abri_num=$this->input->post('numero');
+                $this->abri_comp=$this->input->post('complemento');
             }
 
             public function valida(){

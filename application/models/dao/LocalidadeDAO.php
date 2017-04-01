@@ -11,20 +11,12 @@
                 
         public function inserirEnderecoUser($obj, $user_cd) {
             $data= array();
-
-            $this->db->select("endereco_user.enus_cd, endereco_user.enus_num, localidade.loca_cd");
-            $this->db->from("user_loca_ende");
-            $this->db->join('endereco_user', 'user_loca_ende.ule_ende_cd = endereco_user.enus_cd','inner');
-            $this->db->join('localidade', 'user_loca_ende.ule_loca_cd = localidade.loca_cd','inner');
-            $this->db->where('localidade.loca_cep',  $obj->loca_cep);
-            $query = $this->db->get();
-            $consulta = $query->result_object();
+            $consulta = $this->consultarCep($obj->loca_cep);
+            
             if(!empty($consulta)){
                 $data['loca_cd'] = $consulta[0]->loca_cd;
-                foreach ($consulta as $key => $value) {
-                    $value->enus_num == $obj->enus_num ? $data['enus_cd'] = $value->enus_cd : '';
-                }
             }
+
             if(empty($data['loca_cd'])){
                 $this->db->insert('localidade', array('loca_lograd' => $obj->loca_lograd
                     ,'loca_bairro' => $obj->loca_bairro
@@ -35,25 +27,57 @@
                 $data['loca_cd'] = $this->db->insert_id();
             }
 
-            if(empty($data['enus_cd'])){
-                $this->db->insert('endereco_user', array('enus_num' => $obj->enus_num
-                    ,'enus_comp' => $obj->enus_comp
-                    ));
-                $data['enus_cd'] = $this->db->insert_id();
-            }
-            $this->db->insert('user_loca_ende', array('ule_ende_cd' => $data['enus_cd']
-                ,'ule_loca_cd' => $data['loca_cd']
-                ,'ule_user_cd' => $user_cd
-                ));
+            $this->db->insert('Abriga', array('abri_user_cd' => $user_cd
+            ,'abri_loca_cd' => $data['loca_cd']
+            ,'abri_num' => $obj->abri_num
+            ,'abri_comp' => $obj->abri_comp
+            ));
+
+
         }
         
-        public function alterar($obj) {
-            $this->db->where('loca_cd', $obj->loca_cd);
-            return $this->db->update('localidade', $obj);
+        public function alterarEnderecoUser($obj,$user_cd) {
+             $data= array();
+            $consulta = $this->consultarCep($obj->loca_cep);
+            
+            if(!empty($consulta)){
+                $data['loca_cd'] = $consulta[0]->loca_cd;
+            }
+
+            if(empty($data['loca_cd'])){
+                $this->db->insert('localidade', array('loca_lograd' => $obj->loca_lograd
+                    ,'loca_bairro' => $obj->loca_bairro
+                    ,'loca_cid' => $obj->loca_cid
+                    ,'loca_cep' => $obj->loca_cep
+                    ,'loca_uf' => $obj->loca_uf
+                    ));
+                $data['loca_cd'] = $this->db->insert_id();
+            }else{
+                $this->db->where('loca_cep', $obj->loca_cep);
+                $this->db->update('Localidade', array('loca_lograd' => $obj->loca_lograd
+                        ,'loca_bairro' => $obj->loca_bairro
+                        ,'loca_cid' => $obj->loca_cid
+                        ,'loca_cep' => $obj->loca_cep
+                        ,'loca_uf' => $obj->loca_uf
+                        ));
+            }
+
+            $this->db->where('abri_user_cd', $user_cd);
+            $this->db->update('Abriga', array(
+                     'abri_loca_cd' => $data['loca_cd']
+                    ,'abri_user_cd' => $user_cd
+                    ,'abri_num' => $obj->abri_num
+                    ,'abri_comp' => $obj->abri_comp
+                    ));            
+                 
         }
 
-        public function consultarTudo() {
-            return null;
+        public function consultarCep($cep) {
+            $this->db->select("*");
+            $this->db->from("Localidade");
+            $this->db->where('Localidade.loca_cep',  $cep);
+            $query = $this->db->get();
+            return $query->result_object();
         }
         
         public function consultarCodigo($codigo){
@@ -61,8 +85,6 @@
         }
 
         public function excluir($user_cd) {
-            $this->db->where('ule_user_cd',$user_cd);
-            return $this->db->delete('user_loca_ende');
         }
 
                 

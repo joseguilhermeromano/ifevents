@@ -11,11 +11,23 @@
 		}
                 
         public function inserir($obj) {
-            return $this->db->insert('email', $obj);
+            $orig_db_debug = $this->db->db_debug;
+
+            $this->db->db_debug = FALSE;
+            $this->db->insert('email', $obj);
+            if($this->db->error()['code']==1062){
+                throw new Exception('Já existe um usuário cadastrado com este mesmo endereço de E-mail!');
+            }
+
+            $this->db->db_debug = $orig_db_debug;
+            return $this->db->insert_id();
         }
         
         public function alterar($obj) {
-
+            $this->db->where('email_cd', $obj->email_cd);
+            $this->db->update('Email', array(
+                     'email_email' => $obj->email_email
+                    ));  
         }
 
         public function consultarTudo() {

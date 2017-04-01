@@ -28,7 +28,7 @@
 				$this->create_table_email();
 				$this->create_table_telefone();
 				$this->create_table_executa();
-				// $this->create_table_abriga();
+				$this->create_table_abriga();
 				$this->create_table_apoia();
 				$this->create_table_submissao();
 				$this->create_table_avaliacao();
@@ -268,10 +268,12 @@
 					,user_biograf     varchar(500) NULL
 					,user_rg          varchar(12)  NOT NULL
 					,user_cpf         varchar(14)  NULL
+					,user_email_cd 	  int(11)	   NOT NULL 
 					,user_pass        varchar(100) NOT NULL
-					,user_email_vali  varchar(100) NOT NULL
+					,user_tele_cd	  int(11)	   NULL
 					,user_qtd_subm	  int(2)	   NULL
 					,user_stat_cd     int(11)      NOT NULL
+					,UNIQUE(user_rg)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 			//$consulta = $this->db->query("SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA = 'eventos' AND TABLE_NAME = 'User' AND REFERENCED_TABLE_NAME IS NOT NULL");
@@ -336,8 +338,7 @@
 			$sql = "CREATE TABLE IF NOT EXISTS Email (
 					 email_cd        int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,email_email     varchar(100) NOT NULL
-					,email_principal tinyint
-					,email_user_cd   int(11)      NOT NULL
+					,UNIQUE(email_email)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -348,7 +349,6 @@
 			$sql = "CREATE TABLE IF NOT EXISTS Telefone (
 					 tele_cd        int(11)     NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,tele_fone      varchar(15) NOT NULL
-					,tele_user_cd   int(11)     NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -366,24 +366,14 @@
 				$this->db->query($sql);
 		}
 
-
-
-		//Método cria tabela user_loca_ende
-		public function create_table_user_loca_ende(){
-			$sql = "CREATE TABLE IF NOT EXISTS user_loca_ende (
-					  ule_cd int(11)  NOT NULL PRIMARY KEY AUTO_INCREMENT
-					 ,ule_user_cd int(11)  NOT NULL
-					 ,ule_loca_cd int(11) NOT NULL
-					 ,ule_ende_cd int(11) NOT NULL
-			) ENGINE=INNODB";
-			$this->db->query($sql);
-		}
-
-		public function create_table_ende_user(){
-			$sql = "CREATE TABLE IF NOT EXISTS endereco_user (
-					  enus_cd int(11)  NOT NULL PRIMARY KEY AUTO_INCREMENT
-					 ,enus_num varchar(10) NOT NULL
-					 ,enus_comp varchar(100) NOT NULL
+		public function create_table_abriga(){
+			$sql = "CREATE TABLE IF NOT EXISTS Abriga (
+					 abri_cd      int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
+					,abri_loca_cd int(11) 	   NOT NULL
+					,abri_user_cd int(11)      NOT NULL
+					,abri_num     varchar(5)   NOT NULL
+					,abri_comp    varchar(100) NULL
+					,UNIQUE(abri_user_cd)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}

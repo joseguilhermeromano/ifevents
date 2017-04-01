@@ -59,8 +59,8 @@
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls" id='EmailPrincipal'>
         <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
-        <input type="text" name="email[0]" placeholder="E-mail" class="form-control estilo-input"
-             value="<?php echo (isset($emails) && !empty($emails) ? $emails[0] : '') ?>" <?php echo ($usuario[0]['user_tipo'] != 3 ? 'disabled' : ''); ?>>
+        <input type="text" name="email" placeholder="E-mail" class="form-control estilo-input"
+             value="<?php echo (isset($email) && !empty($email) ? $email->email_email : '');?>" <?php echo ($usuario[0]['user_tipo'] != 3 ? 'disabled' : ''); ?>>
         </div>
     </div>
 
@@ -78,35 +78,7 @@
 <?php }                                                                                  ?>
 
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <a href="#inputsEmails" id="addEmail" class="btn btn-success" style="margin-bottom:10px">
-        <span class="glyphicon glyphicon-plus"></span> <b>Adicionar E-mail</b></a><br>
-    </div>
-</div>
-<div id="inputsEmails" class="row">
-<?php   if(isset($emails) && !empty($emails)) { 
 
-
-            foreach ($emails as $key => $value) {
-            if ($key !=0 ){
-                                                        ?>
-            <div class="col-sm-6">
-            <b><label for="email<?php echo '['.$key.']'; ?>">E-mail alternativo <?php echo $key; ?></label></b>
-                <div class="input-group floating-label-form-group controls">
-                    <input type="text" name="email<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
-                    value="<?php echo $value;?>" />
-                    <span class="input-group-btn">
-                         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
-                     </span>
-                </div>
-            </div>
-<?php
-            }
-            }
-        }                    
-                                                        ?>
-</div>
 
 <?php   if($usuario[0]['user_tipo']== 3){ 
                                                                                          ?>
@@ -199,7 +171,7 @@
         <b><?php echo form_label( 'Número', 'numero' ); ?></b>
         <?php $data = array( 'name' => 'numero', 'placeholder' => 'Número', 
             'class' => 'form-control estilo-input',
-            'value' => (isset($localidade) ? $localidade->enus_num : ''));
+            'value' => (isset($localidade) ? $localidade->abri_num : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -208,7 +180,7 @@
         <b><?php echo form_label( 'Complemento', 'complemento' ); ?></b>
         <?php $data = array( 'name' => 'complemento', 'placeholder' => 'Complemento', 
             'class' => 'form-control estilo-input',
-            'value' => (isset($localidade) ? $localidade->enus_comp : ''));
+            'value' => (isset($localidade) ? $localidade->abri_comp : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -264,31 +236,17 @@
 
 <h4 class="subtitulo"><i>Contato</i></h4><br>
 <div class="row">
-    <div class="col-sm-12">
-        <a href="#" id="addTelefone" class="btn btn-success" style="margin-bottom:10px">
-        <span class="glyphicon glyphicon-plus"></span> <b>Adicionar Telefone</b></a><br>
+    <div class="col-sm-4">
+        <div class="form-group floating-label-form-group floating-label-form-group-with-value controls"">
+        <b><?php echo form_label( 'Telefone/Celular', 'telefone' ); ?></b>
+        <?php $data = array( 'name' => 'telefone'
+             ,'id' => 'campoTelefone'
+             ,'placeholder' => 'Telefone/Celular'
+             ,'class' => 'form-control estilo-input' 
+             ,'value' => isset($telefone) ? $telefone->tele_fone : '');
+              echo form_input( $data );?>
+        </div>
     </div>
-</div>
-<div id="inputsTelefones" class="row">
-<?php   if(isset($telefones) && !empty($telefones)) { 
-
-
-            foreach ($telefones as $key => $value) {
-                                                        ?>
-            <div class="col-sm-4">
-            <b><label for="telefone<?php echo '['.$key.']'; ?>">Telefone/Celular <?php echo $key; ?></label></b>
-                <div class="input-group  floating-label-form-group controls">
-                    <input type="text" id="campoTelefone" name="telefone<?php echo '['.$key.']';?>" class="form-control estilo-botao-remove"
-                    value="<?php echo $value;?>" />
-                    <span class="input-group-btn">
-                         <button class="btn btn-danger" onclick="this.parentNode.parentNode.parentNode.remove(this);" type="button"><span class="glyphicon glyphicon-remove"></span></button>
-                     </span>
-                </div>
-            </div>
-<?php
-            }
-        }                    
-                                                        ?>
 </div>
 <?php echo '<br><center>'.form_submit("btn_cadastro", "Enviar",array('class' => 'btn btn-success button'))."</center>";
 

@@ -1,9 +1,8 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
         
-        include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
-	class TelefoneDAO extends CI_Model implements DAO{
+	class TelefoneDAO extends CI_Model{
 
 		public function __construct(){
 			parent::__construct();
@@ -11,11 +10,21 @@
 		}
                 
         public function inserir($obj) {
-            return $this->db->insert('telefone', $obj);
+            //Verifica se telefone já está cadastrado, caso afirmativo ele retorna o codigo do telefone
+            $this->db->select('*');
+            $this->db->from('Telefone');
+            $this->db->where('tele_fone', $obj->tele_fone);
+            $query = $this->db->get();
+            if(isset($query->result_object()[0])){
+                return $query->result_object()[0]->tele_cd;
+            }
+            //Cadastra um novo telefone
+            $this->db->insert('telefone', $obj);
+            return $this->db->insert_id();
         }
         
-        public function alterar($obj) {
-
+        public function alterarTelefoneUser($obj) {
+            $this->db->update('Telefone', $obj);  
         }
 
         public function consultarTudo() {

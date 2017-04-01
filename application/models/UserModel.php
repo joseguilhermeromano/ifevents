@@ -21,14 +21,11 @@
             $this->user_nm = $this->input->post( 'nome' );      
             $this->user_instituicao = $this->input->post( 'instituicao' );
             $this->user_biograf = $this->input->post('biografia');
-            $this->user_cpf = $this->input->post('cpf');
-            if(empty($this->user_cpf)){
-                 $this->user_cpf = $this->input->post('cpf');
-            }
 
              if($cadastro == true || 
                 ($cadastro == false && $user==3)){
-                 $this->user_rg = $this->input->post('rg');
+                $this->user_rg = $this->input->post('rg');
+                $this->user_cpf = $this->input->post('cpf');
                 if(null !== $this->input->post('senha')
                 && ""!== $this->input->post('senha')){
                  $this->user_pass=md5($this->input->post('senha'));

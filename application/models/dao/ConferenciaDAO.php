@@ -9,7 +9,7 @@
 			parent::__construct();
 
 		}
-                public function Cadastrar( $titulo, $descricao ){
+        public function Cadastrar( $titulo, $descricao ){
 
 			$this->conf_nm   = $titulo;
 			$this->conf_desc = $descricao;
