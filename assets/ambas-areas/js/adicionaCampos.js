@@ -89,12 +89,26 @@ $(function(){
 /* APLICA EFEITO DE SETINHA NO MENU INTERNO*/
 $(document).ready(function() {
     var url_atual =  window.location.href;
-    document.querySelectorAll(".sidebar-nav li a").forEach(function (elem,i) {
+    var verfificaSeta=false;
+    document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
         if(elem.getAttribute("href") == url_atual){
-          console.log(elem);
-          elem.parentNode.className = "active";
+          // console.log(elem);
+          elem.parentNode.className += " active";
+          verfificaSeta = true;
         }
       });
+
+    if(!verfificaSeta){
+       document.querySelectorAll("ul.submenu li a").forEach(function (elem,i) {
+        if(elem.getAttribute("href") == url_atual){
+          console.log(elem.parentNode.parentNode);
+          elem.parentNode.parentNode.classList.remove('collapse');
+          // console.log(elem.parentNode.parentNode.parentNode);
+          elem.parentNode.className += " active";
+          elem.parentNode.parentNode.parentNode.className += " active"
+        }
+      });
+    }
 
 });
 

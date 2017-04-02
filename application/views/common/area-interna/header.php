@@ -25,7 +25,7 @@
         ?>
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
             <div class="borda"><!-- borda -->
-            <ul class="sidebar-nav">
+            <ul class="sidebar-nav" id="sidenav">
                 <div class="sidebar-brand">
                     <a href="#">
                         <img width="175px" height="50px" src="<?php echo base_url('assets/area-interna/img/logo_ifevents.svg'); ?>" />
