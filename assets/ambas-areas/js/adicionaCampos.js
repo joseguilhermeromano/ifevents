@@ -92,7 +92,6 @@ $(document).ready(function() {
     var verfificaSeta=false;
     document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
         if(elem.getAttribute("href") == url_atual){
-          // console.log(elem);
           elem.parentNode.className += " active";
           verfificaSeta = true;
         }
@@ -101,9 +100,8 @@ $(document).ready(function() {
     if(!verfificaSeta){
        document.querySelectorAll("ul.submenu li a").forEach(function (elem,i) {
         if(elem.getAttribute("href") == url_atual){
-          console.log(elem.parentNode.parentNode);
-          elem.parentNode.parentNode.classList.remove('collapse');
-          // console.log(elem.parentNode.parentNode.parentNode);
+          elem.parentNode.parentNode.previousElementSibling.setAttribute("aria-expanded", "true");
+          elem.parentNode.parentNode.className += " in"; 
           elem.parentNode.className += " active";
           elem.parentNode.parentNode.parentNode.className += " active"
         }

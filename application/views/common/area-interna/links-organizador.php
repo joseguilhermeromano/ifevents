@@ -11,6 +11,14 @@
       <li><a href="<?php echo base_url("usuario/cadastrar");?>" class="list-group-item">NOVO USUÁRIO</a></li>
     </ul>
 </li>
+<li class="list-group panel">
+  <a href="#" data-toggle="collapse" data-target="#teste" data-parent="#sidenav" class="list-group-item list-group-item-success">
+  <span class="glyphicon glyphicon-user"></span> USUÁRIOS <span class="caret"></span>
+  </a>
+    <ul class="submenu collapse" id="teste">
+      <li><a href="<?php echo base_url("");?>" class="list-group-item">NOVO USUÁRIO</a></li>
+    </ul>
+</li>
 <li class="item-menu">
     <a href="<?php echo base_url("usuario/perfil");?>">
         <span class="glyphicon glyphicon-user"></span>  MEU PERFIL
