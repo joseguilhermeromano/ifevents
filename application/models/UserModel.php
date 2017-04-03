@@ -21,6 +21,9 @@
             $this->user_nm = $this->input->post( 'nome' );      
             $this->user_instituicao = $this->input->post( 'instituicao' );
             $this->user_biograf = $this->input->post('biografia');
+            if($cadastro == true){
+                $this->user_stat_cd = 1;
+            }
 
              if($cadastro == true || 
                 ($cadastro == false && $user==3)){

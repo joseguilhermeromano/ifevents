@@ -59,6 +59,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $route[ 'avaliador' ]           = 'AvaliadorControl/index';
 // $route[ 'avaliador/(:any)' ]    = 'AvaliadorControl/$1';
 $route[ 'login/(:any)' ]        = 'LoginControl/$1';
+$route[ 'usuario/consultar/(:any)' ]        = 'UsuarioControl/consultar/$1';
+$route[ 'usuario/consultarTudo/(:any)' ]        = 'UsuarioControl/consultarTudo/$1';
 $route[ 'usuario/alterar/(:any)' ]        = 'UsuarioControl/alterar/$1';
 $route[ 'usuario/(:any)' ]        = 'UsuarioControl/$1';
 $route[ 'artigo/(:any)' ]        = 'ArtigoControl/$1';

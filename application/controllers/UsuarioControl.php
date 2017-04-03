@@ -1,8 +1,8 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 require_once 'PrincipalControl.php';
-require_once 'InterfaceControl.php';
+// require_once 'InterfaceControl.php';
 
-class UsuarioControl extends PrincipalControl implements InterfaceControl{
+class UsuarioControl extends PrincipalControl{
 
 		public function __construct(){
 			parent::__construct();
@@ -202,13 +202,26 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             return $data;
         }
 
-        public function consultar() {
-            $this->UserDAO->consultarCodigo($this->usuario->input->get('codigo'));
+        public function consultar($pagination=0) {
+            // if(null !== ($this->input->get('busca'))){
+                // $users=$this->UserDAO->consultarPorNome($this->input->get('busca'));
+                $users=$this->UserDAO->consultarTudo();
+                $array = $this->geraPaginacao($pagination,$users);
+            // }else{
+            //     $data['users']=null;
+            // }
+            $data['title']="IFEvents - Usuários";
+            $data['paginacao'] = $array['paginacao'];
+            $data['users'] = $array['lista'];
+            $this->chamaView("usuarios", "organizador", $data, 1);
         }
 
-        public function consultarTudo() {
-            $this->chamaView("usuarios", "organizador",
-	            	array("title"=>"IFEvents - Usuários"), 1);
+        public function consultarTudo($numPagina=0) {
+            $limite = 2;
+            $data['users']=$this->UserDAO->consultarTudo(null,null, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultarTudo/');
+            $data['title']="IFEvents - Usuários";
+            $this->chamaView("usuarios", "organizador", $data, 1);
         }
 
         public function excluir() {

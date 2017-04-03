@@ -202,7 +202,7 @@ ul.submenu{
 }
 
 .sidebar-brand {
-    margin: 30px 10px 30px 10px;
+    margin: 30px 10px 0px 10px;
     height: 85px;
 }
 
@@ -491,11 +491,11 @@ label{
 }
 
 #tabela1 > tbody > tr:nth-child(even){
-    background-color: #E8E8E8; 
+    background-color: #F7F7F7; 
 }
 
 #tabela1 > tbody > tr:hover{
-    background-color: #FFFFE0; 
+    background-color: #e7ffd6; 
 }
 
 #tabela1 > tbody > tr > td{
@@ -536,10 +536,10 @@ label{
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
-    -webkit-box-shadow: 0px 0px 15px 1px #FFA500;
-    -moz-box-shadow: 0px 0px 15px 1px #FFA500;
-    box-shadow: 0px 0px 5px 0px #FFA500;
-    border:1px solid #FF8C00;
+    -webkit-box-shadow: 0px 0px 15px 1px #37BA40;
+    -moz-box-shadow: 0px 0px 15px 1px #37BA40;
+    box-shadow: 0px 0px 5px 0px #37BA40;
+    border:1px solid #37BA40;
     outline:none; 
 }
 
@@ -562,6 +562,12 @@ label{
     box-shadow: 0px 0px 5px 0px #37BA40;
     border:1px solid #37BA40;
     outline:none; 
+}
+
+@media(max-width: 767px){
+  .margin-button{
+    margin:20px 0px;
+  }  
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
