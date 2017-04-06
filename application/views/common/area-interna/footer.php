@@ -4,9 +4,69 @@
             </div><!-- /#container-fluid-->
         </div><!-- /#page-content-wrapper -->
     </div><!-- /#wrapper -->
+
+    <!-- Modal de Exclusão -->
+        <div id="modalExcluir" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Excluir</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Deseja realmente excluir este registro?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn btn-success" onclick="Executa();">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+    <!-- Modal de Ativa/Desativa -->
+        <div id="modalAtivar" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Ativar Usuário</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja realmente ativar este usuário?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn btn-success" onclick="Executa();">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <!-- Modal de Ativa/Desativa -->
+        <div id="modalDesativar" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Desativar Usuário</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja realmente desativar este usuário?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn btn-success" onclick="Executa();">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
      <!-- assetststrap Core JavaScript -->
         <script src="<?php echo base_url('assets/area-interna/js/jquery.min.js');?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/metodosModais.js'); ?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>

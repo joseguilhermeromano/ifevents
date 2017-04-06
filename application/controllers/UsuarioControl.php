@@ -202,27 +202,27 @@ class UsuarioControl extends PrincipalControl{
             return $data;
         }
 
-        public function consultar($pagination=0) {
-            // if(null !== ($this->input->get('busca'))){
-                // $users=$this->UserDAO->consultarPorNome($this->input->get('busca'));
-                $users=$this->UserDAO->consultarTudo();
-                $array = $this->geraPaginacao($pagination,$users);
-            // }else{
-            //     $data['users']=null;
-            // }
+        public function consultar() {
+            $limite = 2;
+            $numPagina =0;
+            if(null !== $this->input->get('pagina')){
+                $numPagina = $this->input->get('pagina');
+            }
+
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array = array('user_nm'=>$busca);
+            }else{
+                $busca=null;
+                $array=null;
+            }
+            
+            $data['users']=$this->UserDAO->consultarTudo($array, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
             $data['title']="IFEvents - Usuários";
-            $data['paginacao'] = $array['paginacao'];
-            $data['users'] = $array['lista'];
             $this->chamaView("usuarios", "organizador", $data, 1);
         }
 
-        public function consultarTudo($numPagina=0) {
-            $limite = 2;
-            $data['users']=$this->UserDAO->consultarTudo(null,null, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultarTudo/');
-            $data['title']="IFEvents - Usuários";
-            $this->chamaView("usuarios", "organizador", $data, 1);
-        }
 
         public function excluir() {
             

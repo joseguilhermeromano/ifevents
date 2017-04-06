@@ -9,7 +9,7 @@
     </a>
 </li>
 <li class="item-menu">
-    <a href="<?php echo base_url("usuario/consultarTudo");?>">
+    <a href="<?php echo base_url("usuario/consultar");?>">
         <span class="glyphicon glyphicon-user"></span>  USUÁRIOS
     </a>
 </li>

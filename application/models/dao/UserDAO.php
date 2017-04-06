@@ -27,13 +27,18 @@ class UserDAO extends CI_Model implements DAO{
         $this->db->update('User',$obj);
     }
 
-    public function consultarTudo($campo='user_nm', $ordenacao='asc', $limite=null, $numPagina=null) {
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='user_nm', $ordenacao='asc') {
         $this->db->select("User.*,email_email, tius_nm, stat_nm");
         $this->db->from("User");
         $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
         $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
         $this->db->join('Status', 'User.user_stat_cd = Status.stat_cd','left');
-        $this->db->order_by($campo, $ordenacao);
+        $this->db->order_by($sort, $ordenacao);
+        if($parametros !== null){
+            foreach ($parametros as $key => $value) {
+                $this->db->where($key.' LIKE ','%'.$value.'%');
+            }
+        }
         if($limite)
             $this->db->limit($limite, $numPagina);
         $query = $this->db->get();

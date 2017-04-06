@@ -16,6 +16,7 @@
 </form>
 <div class="row">
     <div class="col-sm-12">
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-envelope"></span> Convidar Revisor</a>
          <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
     </div>
 </div>
@@ -42,8 +43,20 @@
                     <td class="text-center"><?php echo $user->tius_nm; ?></td>
                     <td class="text-center"><?php echo $user->stat_nm; ?></td>
                     <td class="text-center">
-                      <a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a>
-                      <a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a>
+                    <div class="botoes-opcoes text-left col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
+                        <a href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>"class="link-laranja">
+                        <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
+                        <a href="#" data-toggle="modal" data-target="#modalAtivar" 
+                        onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
+                        setLink('<?php echo base_url('usuario/ativa-desativa/')?>');" class="link-verde">
+                        <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
+                        <a href="#" class="link-vermelho" data-toggle="modal" data-target="#modalDesativar"
+                        onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
+                        setLink('<?php echo base_url('usuario/ativa-desativa/')?>');">
+                        <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
+                    </div>
+
+                      <!-- <a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span> Excluir</a>-->
                     </td>
                 </tr>
             <?php endforeach;}else{ ?>

@@ -74,6 +74,9 @@ class PrincipalControl extends CI_Controller {
         $config['num_links'] = '2';
         $config['total_rows'] = $totalLinhasTabela;
         $config['per_page'] = $limite;
+        $config['enable_query_strings']=true;
+        $config['page_query_string']=true;
+        $config['query_string_segment'] = 'pagina';
         $this->pagination->initialize($config);
         $paginacao = $this->pagination->create_links();
         return $paginacao;
