@@ -91,7 +91,7 @@ $(document).ready(function() {
     var url_atual =  window.location.href;
     var verfificaSeta=false;
     document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-        if(elem.getAttribute("href") == url_atual){
+    if(elem.getAttribute("href") == url_atual){
           elem.parentNode.className += " active";
           verfificaSeta = true;
         }
@@ -103,8 +103,20 @@ $(document).ready(function() {
           elem.parentNode.parentNode.previousElementSibling.setAttribute("aria-expanded", "true");
           elem.parentNode.parentNode.className += " in"; 
           elem.parentNode.className += " active";
-          elem.parentNode.parentNode.parentNode.className += " active"
+          elem.parentNode.parentNode.parentNode.className += " active";
+          verfificaSeta=true;
         }
+
+    if(!verfificaSeta){
+        document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
+        if(elem.getAttribute("href") != url_atual && elem.id != '' && elem.id.indexOf(url_atual)){
+          elem.parentNode.className += " active";
+          verfificaSeta = true;
+        }
+      });
+    }
+
+
       });
     }
 

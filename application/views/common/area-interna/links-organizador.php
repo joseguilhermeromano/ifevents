@@ -9,7 +9,7 @@
     </a>
 </li>
 <li class="item-menu">
-    <a href="<?php echo base_url("usuario/consultar");?>">
+    <a href="<?php echo base_url("usuario/consultar");?>" id="usuario">
         <span class="glyphicon glyphicon-user"></span>  USUÁRIOS
     </a>
 </li>
@@ -30,7 +30,7 @@
   <span class="glyphicon glyphicon-user"></span> USUÁRIOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="teste">
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">NOVO USUÁRIO</a></li>
+      <li><a href="<?php echo base_url("usuario/consultar");?>" class="list-group-item">LISTAR TUDO</a></li>
     </ul>
 </li> -->
 <li class="item-menu">
