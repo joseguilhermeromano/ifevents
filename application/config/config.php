@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // $config['base_url'] = 'http://localhost/ifevents/';
 // $config['base_url'] = 'http://172.17.253.108/ifevents/';
-$config['base_url'] = 'http://localhost/ifevents/';
+$config['base_url'] = 'http://192.168.1.5/ifevents/';
   // $config['base_url'] = 'http://localhost/semcitec/';
 
 /*

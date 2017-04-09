@@ -2,6 +2,10 @@
 <h2><span class="glyphicon glyphicon-list"></span><b> Usuários</b></h2>
 <hr>
 <br>
+<?php 
+        $this->load->helper('html');
+        echo alert($this->session);
+?>
 <form method="GET" action="<?php echo base_url('usuario/consultar'); ?>">
   <div class="row">
       <div class="col-sm-5">
@@ -16,7 +20,7 @@
 </form>
 <div class="row">
     <div class="col-sm-12">
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-envelope"></span> Convidar Revisor</a>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificaUsers'); ?>' style="float:right"><span class="glyphicon glyphicon-envelope"></span> Notificar Usuários</a>
          <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
     </div>
 </div>
@@ -48,11 +52,11 @@
                         <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
                         <a href="#" data-toggle="modal" data-target="#modalAtivar" 
                         onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/ativa-desativa/')?>');" class="link-verde">
+                        setLink('<?php echo base_url('usuario/ativar/')?>');" class="link-verde">
                         <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
                         <a href="#" class="link-vermelho" data-toggle="modal" data-target="#modalDesativar"
                         onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/ativa-desativa/')?>');">
+                        setLink('<?php echo base_url('usuario/desativar/')?>');">
                         <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
                     </div>
 
@@ -69,6 +73,9 @@
 </div><!-- /TABELA-->
 
   <!-- PAGINAÇÃO -->
+    <div class="text-center">
+    Exibindo de 1 a <?php echo !empty($users) ? sizeof($users) : 0; ?> de um total de <?php echo !empty($users) ? $totalRegistros : 0; ?> registros
+    </div>
     <?php echo $paginacao; ?>
   <!--/ PAGINAÇÃO -->
 

@@ -47,7 +47,7 @@ class PrincipalControl extends CI_Controller {
         
     }
 
-    public function geraPaginacao($limite = 2, $totalLinhasTabela = null, $uri=null){
+    public function geraPaginacao($limite = 10, $totalLinhasTabela = null, $uri=null){
         if($uri==null){
             return null;
         }
@@ -71,7 +71,6 @@ class PrincipalControl extends CI_Controller {
         $config['full_tag_open'] = '<nav class="text-center">
         <ul class="pagination">';
         $config['full_tag_close'] = '</ul></nav>';
-        $config['num_links'] = '2';
         $config['total_rows'] = $totalLinhasTabela;
         $config['per_page'] = $limite;
         $config['enable_query_strings']=true;
