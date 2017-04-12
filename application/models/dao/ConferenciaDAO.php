@@ -1,59 +1,73 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-        
+
         include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 	class ConferenciaDAO extends CI_Model implements DAO{
 
 		public function __construct(){
-			parent::__construct();
+			parent::__construct('ConferenciaDAO');
+
 
 		}
-        public function Cadastrar( $titulo, $descricao ){
 
-			$this->conf_nm   = $titulo;
-			$this->conf_desc = $descricao;
+		// public function Cadastrar( $titulo, $descricao ){
+		//
+		// 	$this->conf_nm   = $titulo;
+		// 	$this->conf_desc = $descricao;
+		//
+		// 	$confirm = $this->db->insert('Conferencia', $this);
+		//
+		// 	if($confirm){
+		// 		$this->session->set_flashdata('success', 'Conferencia Cadastrada Com Sucesso');
+		// 		redirect('ConferenciaControl/conferencias');
+		// 	}
+		// 	else{
+		// 		$this->session->set_flashdata('empty', 'Os dados não puderam ser Inseridos.');
+		// 		redirect( 'ConfereciaControl/conferencias' );
+		// 	}
+		//
+		// }
 
-			$confirm = $this->db->insert('Conferencia', $this);
-				
-			if($confirm){  
-				$this->session->set_flashdata('success', 'Conferencia Cadastrada Com Sucesso');		
-				redirect('OrganizadorControl/conferencias');		
+        public function inserir($obj) {
+            return $this->db->insert('Conferencia', $obj);
+        }
+
+        public function alterar($obj) {
+            $this->db->where('conf_cd', $obj->conf_cd);
+			$this->db->set('conf_nm', $obj->conf_nm);
+			$this->db->set('conf_desc', $obj->conf_desc);
+            return $this->db->update('Conferencia', $obj);
+        }
+
+        public function consultarTudo() {
+			$query=$this->db->select('conf_cd, conf_nm, conf_desc')
+    								 ->from('Conferencia')
+									 ->get();
+			if($query->num_rows() > 0){
+        		return $query->result_object();
+    		 }
+    		else{
+        		return FALSE;
+    		}
+
+        }
+
+
+        public function consultarCodigo($codigo){
+			$this->db->where('conf_cd',$codigo);
+			$query = $this->db->get('Conferencia');
+			if($query->num_rows() > 0){
+				return $query->result_object();
 			}
 			else{
-				$this->session->set_flashdata('empty', 'Os dados não puderam ser Inseridos.');
-				redirect( 'OrganizadorControl/conferencias' );
-			}	
+				return FALSE;
+			}
+        }
 
-		}
-                
-                public function inserir($obj) {
-                    return $this->db->insert('conferencia', $obj);
-                }
-                
-                public function alterar($obj) {
-                    $this->db->where('conf_id', $obj->conf_id);
-                    return $this->db->update('conferencia', $obj);
-                }
-
-                public function consultarTudo() {
-                    return null;
-                }
-                
-                public function consultarCodigo($codigo){
-                    return null;
-                }
-
-                public function excluir($obj) {
-                    $this->db->where('conf_id', $obj->conf_id);
-                    return $this->db->delete('conferencia');
-                }
-
-                
+        public function excluir($obj) {
+            $this->db->where('conf_cd', $obj);
+            return $this->db->delete('Conferencia');
+        }
 
 }
-
-
-
-
-

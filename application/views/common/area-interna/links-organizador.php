@@ -18,7 +18,7 @@
   <span class="glyphicon glyphicon-list"></span> EVENTOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="eventos">
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">CONFERÊNCIAS</a></li>
+      <li><a href="<?php echo base_url("conferencia/consultarTudo");?>" class="list-group-item">CONFERÊNCIAS</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">EDIÇÕES</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">PROGRAMAÇÕES</a></li>
     </ul>

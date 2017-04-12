@@ -58,17 +58,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $route[ 'participante/(:any)' ] = 'ParticipanteControl/chamaView/$1';
 // $route[ 'avaliador' ]           = 'AvaliadorControl/index';
 // $route[ 'avaliador/(:any)' ]    = 'AvaliadorControl/$1';
-$route[ 'login/(:any)' ]        = 'LoginControl/$1';
-$route[ 'usuario/consultar' ]        = 'UsuarioControl/consultar';
-$route[ 'usuario/alterar/(:any)' ]        = 'UsuarioControl/alterar/$1';
-$route[ 'usuario/(:any)' ]        = 'UsuarioControl/$1';
-$route[ 'artigo/(:any)' ]        = 'ArtigoControl/$1';
+$route[ 'login/(:any)' ]              = 'LoginControl/$1';
+$route[ 'usuario/consultar' ]         = 'UsuarioControl/consultar';
+$route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
+$route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
+$route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
-$route[ 'submissao/(:any)' ]        = 'SubmitControl/$1';
-$route[ 'comite/(:any)' ]        = 'ComiteControl/$1';
-$route[ 'contato/(:any)' ]        = 'ContatoControl/$1';
-$route[	'(:any)' ]              = 'InicioControl/$1';
-$route[	'default_controller' ]  = 'InicioControl';
+$route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';
+$route[ 'comite/(:any)' ]             = 'ComiteControl/$1';
+$route[ 'contato/(:any)' ]            = 'ContatoControl/$1';
+$route[	'(:any)' ]                    = 'InicioControl/$1';
+$route[ 'conferencia/(:any)' ]        = 'ConferenciaControl/$1';
+$route[ 'conferencia/alterar/(:any)'] = 'ConferenciaControl/alterar/$1';
+$route[ 'conferencia/excluir/(:any)'] = 'ConferenciaControl/excluir/$1';
+$route[	'default_controller' ]        = 'InicioControl';
 
 
 

@@ -1,6 +1,6 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-        
+
 
 	class LocalidadeDAO extends CI_Model{
 
@@ -8,17 +8,17 @@
 			parent::__construct();
 
 		}
-                
+
         public function inserirEnderecoUser($obj, $user_cd) {
             $data= array();
             $consulta = $this->consultarCep($obj->loca_cep);
-            
+
             if(!empty($consulta)){
                 $data['loca_cd'] = $consulta[0]->loca_cd;
             }
 
             if(empty($data['loca_cd'])){
-                $this->db->insert('localidade', array('loca_lograd' => $obj->loca_lograd
+                $this->db->insert('Localidade', array('loca_lograd' => $obj->loca_lograd
                     ,'loca_bairro' => $obj->loca_bairro
                     ,'loca_cid' => $obj->loca_cid
                     ,'loca_cep' => $obj->loca_cep
@@ -35,11 +35,11 @@
 
 
         }
-        
+
         public function alterarEnderecoUser($obj,$user_cd) {
              $data= array();
             $consulta = $this->consultarCep($obj->loca_cep);
-            
+
             if(!empty($consulta)){
                 $data['loca_cd'] = $consulta[0]->loca_cd;
             }
@@ -68,8 +68,8 @@
                     ,'abri_user_cd' => $user_cd
                     ,'abri_num' => $obj->abri_num
                     ,'abri_comp' => $obj->abri_comp
-                    ));            
-                 
+                    ));
+
         }
 
         public function consultarCep($cep) {
@@ -79,7 +79,7 @@
             $query = $this->db->get();
             return $query->result_object();
         }
-        
+
         public function consultarCodigo($codigo){
             return null;
         }
@@ -87,11 +87,6 @@
         public function excluir($user_cd) {
         }
 
-                
+
 
 }
-
-
-
-
-

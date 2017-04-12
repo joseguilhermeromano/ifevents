@@ -1,6 +1,6 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-        
+
 
 	class TelefoneDAO extends CI_Model{
 
@@ -8,7 +8,7 @@
 			parent::__construct();
 
 		}
-                
+
         public function inserir($obj) {
             //Verifica se telefone já está cadastrado, caso afirmativo ele retorna o codigo do telefone
             $this->db->select('*');
@@ -19,18 +19,18 @@
                 return $query->result_object()[0]->tele_cd;
             }
             //Cadastra um novo telefone
-            $this->db->insert('telefone', $obj);
+            $this->db->insert('Telefone', $obj);
             return $this->db->insert_id();
         }
-        
+
         public function alterarTelefoneUser($obj) {
-            $this->db->update('Telefone', $obj);  
+            $this->db->update('Telefone', $obj);
         }
 
         public function consultarTudo() {
             return null;
         }
-        
+
         public function consultarCodigo($codigo){
             return null;
         }
@@ -40,11 +40,6 @@
             $this->db->delete('telefone');
         }
 
-                
+
 
 }
-
-
-
-
-
