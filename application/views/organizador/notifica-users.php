@@ -16,8 +16,8 @@
         <b><?php echo form_label( 'Emails', 'emails' ); ?></b><br>
             <select name="emails[]" class="form-control estilo-input consultaEmails" multiple="multiple">
             <?php 
-            if(!empty($notificacao['emails'])){
-                foreach ($notificacao['emails'] as $key => $value) {
+            if(!empty($notificacao->emails)){
+                foreach ($notificacao->emails as $key => $value) {
             ?>
                 <option value="<?php echo $value; ?>" selected><?php echo $value;?></option>
             <?php 
@@ -35,7 +35,7 @@
         <b><?php echo form_label( 'Assunto', 'assunto' ); ?></b>
         <?php $data = array( 'name' => 'assunto', 'placeholder' => "Assunto", 
             'class' => 'form-control estilo-input',
-             'value' => (isset($notificacao) ? $notificacao['assunto'] : '') );
+             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
         </div>
     </div>
@@ -47,7 +47,7 @@
         <div class="form-group">
         <b><?php echo form_label( 'Mensagem', 'mensagem' ); ?></b><br>
         <textarea name="mensagem" placeholder="Mensagem" class="form-control" id="editor" rows="10">
-            <?php echo  (isset($notificacao) ? $notificacao['mensagem'] : ''); ?>
+            <?php echo  (isset($notificacao) ? $notificacao->mensagem : ''); ?>
         </textarea>
         </div>
     </div>

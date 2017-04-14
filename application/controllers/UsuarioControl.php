@@ -231,7 +231,7 @@ class UsuarioControl extends PrincipalControl{
                 return true;
             }
 
-            $data['notificacao'] = array(
+            $notificacao = (object) array(
                 'emails' => $this->input->post('emails'),
                 'assunto' => $this->input->post('assunto'),
                 'mensagem' => $this->input->post('mensagem'));
@@ -240,11 +240,19 @@ class UsuarioControl extends PrincipalControl{
             $this->form_validation->set_rules( 'mensagem', 'Mensagem', 'trim|required|max_length[100]' );
             if($this->form_validation->run()){
                 if(!empty($this->input->post('emails'))){
-
-               
+                    $test=0;
+                    foreach ($notificacao->emails as $key => $value) {
+                        $test = $this->envia_email($value,$notificacao->assunto, $notificacao->mensagem);
+                    }
+                    if($test == 0){
+                        $this->session->set_flashdata('success', 'Os Emails foram enviados com sucesso!');
+                    }else{
+                        $this->session->set_flashdata('error', 'Não foi possível enviar os emails!');
+                    }
                 }
             }
             $data['title']="IFEvents - Nova Notificação";
+            $data['notificacao'] = $notificacao;
             $this->chamaView("notifica-users", "organizador",
                    $data, 1);
         }
