@@ -94,7 +94,7 @@ class PrincipalControl extends CI_Controller {
         $mail->Port = 465; //Estabelecemos a porta utilizada pelo servidor do gMail.
         $mail->Username = "projetoifsp2017@gmail.com"; //Usuário do gMail
         $mail->Password = "ifsp2017"; //Senha do gMail
-        $mail->SetFrom($remetente,"Ifevents - Plataforma interativa de eventos"); //Quem está enviando o e-mail.
+        $mail->SetFrom($remetente,"IFEvents - Plataforma interativa de eventos"); //Quem está enviando o e-mail.
         $mail->AddReplyTo($destinatario); //Para que a resposta será enviada.
         $mail->Subject = utf8_decode($assunto); //Assunto do e-mail.
         $mail->Body = utf8_decode($mensagem);
