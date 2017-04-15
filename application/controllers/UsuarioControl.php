@@ -203,7 +203,7 @@ class UsuarioControl extends PrincipalControl{
         }
 
         public function consultar() {
-            $limite = 2;
+            $limite = 10;
             $numPagina =0;
             if(null !== $this->input->get('pagina')){
                 $numPagina = $this->input->get('pagina');
@@ -219,8 +219,62 @@ class UsuarioControl extends PrincipalControl{
             
             $data['users']=$this->UserDAO->consultarTudo($array, $limite, $numPagina);
             $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $this->UserDAO->totalRegistros();
             $data['title']="IFEvents - Usuários";
             $this->chamaView("usuarios", "organizador", $data, 1);
+        }
+
+        public function notificaUsers(){
+            if (empty($this->input->post())){
+                $this->chamaView("notifica-users", "organizador",
+                    array("title"=>"IFEvents - Nova Notificação"), 1);
+                return true;
+            }
+
+            $data['notificacao'] = array(
+                'emails' => $this->input->post('emails'),
+                'assunto' => $this->input->post('assunto'),
+                'mensagem' => $this->input->post('mensagem'));
+            $this->form_validation->set_rules( 'emails[]', 'Emails', 'valid_emails|trim|required|max_length[100]' );
+            $this->form_validation->set_rules( 'assunto', 'Assunto', 'trim|required|max_length[100]' );
+            $this->form_validation->set_rules( 'mensagem', 'Mensagem', 'trim|required|max_length[100]' );
+            if($this->form_validation->run()){
+                if(!empty($this->input->post('emails'))){
+
+               
+                }
+            }
+            $data['title']="IFEvents - Nova Notificação";
+            $this->chamaView("notifica-users", "organizador",
+                   $data, 1);
+        }
+
+        public function consultarEmailSelect(){
+            $data = $this->UserDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+
+
+        public function ativar($user_cd){
+            if(!empty($user_cd)){
+                 if($this->UserDAO->ativaDesativa($user_cd, 2)==0){
+                    $this->session->set_flashdata('success','O Usuário foi ativado com sucesso!');
+                 }else{
+                    $this->session->set_flashdata('error','Não foi possível ativar o Usuário!');
+                 }
+            }
+             $this->consultar();
+        }
+
+        public function desativar($user_cd){
+            if(!empty($user_cd)){
+                 if($this->UserDAO->ativaDesativa($user_cd, 3)==0){
+                    $this->session->set_flashdata('success','O Usuário foi desativado com sucesso!');
+                 }else{
+                    $this->session->set_flashdata('error','Não foi possível desativar o Usuário!');
+                 }
+            }
+             $this->consultar();
         }
 
 

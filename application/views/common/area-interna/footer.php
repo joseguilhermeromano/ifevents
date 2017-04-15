@@ -78,9 +78,12 @@
         $("#wrapper").toggleClass("toggled");
         $("span", this).toggleClass("glyphicon glyphicon-remove glyphicon glyphicon-menu-hamburger");
     });
+
     </script>
     
     <script>
+
+
 
         function MostrarEsconderPainel(parametro,header){
             $(parametro).toggle(500);

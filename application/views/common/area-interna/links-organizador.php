@@ -43,11 +43,16 @@
         <span class="glyphicon glyphicon-list"></span>  TRABALHOS
     </a>
 </li>
-<li class="item-menu">
-    <a href="<?php echo base_url("organizador/listaconferencia");?>">
-        <span class="glyphicon glyphicon-list"></span>  CONTATOS
-    </a>
+<li class="list-group panel">
+  <a href="#" data-toggle="collapse" data-target="#contatos" data-parent="#sidenav" class="list-group-item list-group-item-success">
+  <span class="glyphicon glyphicon-list"></span> CONTATOS <span class="caret"></span>
+  </a>
+    <ul class="submenu collapse" id="contatos">
+      <li><a href="<?php echo base_url("");?>" class="list-group-item">LISTA DE CONTATOS</a></li>
+      <li><a href="<?php echo base_url("contato/sendEmail");?>" class="list-group-item">EMAIL</a></li>      
+    </ul>
 </li>
+
 <li class="item-menu">
     <a href="<?php echo base_url("login/sair");?>">
         <span class="glyphicon glyphicon-log-out"></span>  SAIR

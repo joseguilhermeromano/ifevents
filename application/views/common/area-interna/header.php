@@ -10,7 +10,16 @@
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('assets/ambas-areas/css/font-awesome.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/ambas-areas/css/select2.min.css');?>" rel="stylesheet">
+        <script src="<?php echo base_url ('assets/area-interna/nicedit/nicEdit-latest.js');?>"></script>
+            <script type="text/javascript">
+              //<![CDATA[
+                bkLib.onDomLoaded(function() {
+                      new nicEditor().panelInstance('editor');
+                 });
+                //]]>
+            </script>
         <script type="text/javascript">
             var baseUrl = "<?php echo base_url(''); ?>";
         </script>

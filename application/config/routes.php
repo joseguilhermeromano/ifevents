@@ -58,11 +58,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // $route[ 'participante/(:any)' ] = 'ParticipanteControl/chamaView/$1';
 // $route[ 'avaliador' ]           = 'AvaliadorControl/index';
 // $route[ 'avaliador/(:any)' ]    = 'AvaliadorControl/$1';
+/*<<<<<<< HEAD
 $route[ 'login/(:any)' ]              = 'LoginControl/$1';
 $route[ 'usuario/consultar' ]         = 'UsuarioControl/consultar';
 $route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
 $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
 $route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
+=======*/
+$route[ 'login/(:any)' ]        = 'LoginControl/$1';
+$route[ 'usuario/alterar/(:any)' ]        = 'UsuarioControl/alterar/$1';
+$route[ 'usuario/ativar/(:num)' ]        = 'UsuarioControl/ativar/$1';
+$route[ 'usuario/desativar/(:num)' ]        = 'UsuarioControl/desativar/$1';
+$route[ 'usuario/(:any)' ]        = 'UsuarioControl/$1';
+$route[ 'artigo/(:any)' ]        = 'ArtigoControl/$1';
+//>>>>>>> de466bdf2db8d8d41f7cb5564946aeef0bc0d06e
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';
 $route[ 'comite/(:any)' ]             = 'ComiteControl/$1';

@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // $config['base_url'] = 'http://localhost/ifevents/';
 // $config['base_url'] = 'http://172.17.253.108/ifevents/';
-$config['base_url'] = 'http://localhost/ifevents/';
+$config['base_url'] = 'http://www.ifevents.dev/';
   // $config['base_url'] = 'http://localhost/semcitec/';
 
 /*
@@ -140,6 +140,22 @@ $config['subclass_prefix'] = 'MY_';
 |	autoloading (application/config/autoload.php)
 */
 $config['composer_autoload'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+|Configuração para o envio de email
+|--------------------------------------------------------------------------
+
+$config['charset'] = 'utf-8';
+$config['mailtype'] = 'html';
+$config['protocol'] = 'smtp';
+$config['smtp_host'] =  'ssl://smtp.googlemail.com';
+$config['smtp_port'] = '465';
+$config['smtp_timeout'] = '30';
+$config['smtp_user'] = 'projetoifsp2017@gmail.com';
+$config['smtp_pass'] = 'ifsp2017';
+$config['newline'] = "\r\n";
+*/
 
 /*
 |--------------------------------------------------------------------------

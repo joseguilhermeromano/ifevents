@@ -143,9 +143,17 @@ class UserDAO extends CI_Model implements DAO{
         return $query->result_array();
     }
 
+    public function ativaDesativa($user_cd, $situacao){
+        $this->db->where('user_cd',$user_cd);
+        $this->db->update('User',array('user_stat_cd' => $situacao));
+        if($this->db->affected_rows()){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+
     public function excluir($obj) {
-        $this->db->where('user_id', $obj->user_id);
-        return $this->db->delete('user');
     }
 
 }

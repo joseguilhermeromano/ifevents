@@ -57,6 +57,42 @@ $(document).ready(function() {
 
 });
 
+/** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
+$(document).ready(function() {
+    $(".consultaEmails").select2({
+    tags: true,
+    placeholder: "Emails",
+    multiple: true,
+    // tokenSeparators: [',', ' '],
+    minimumInputLength: 2,
+     // maximumSelectionLength: 20,
+    minimumResultsForSearch: 10,
+    ajax: {
+        url: baseUrl + "usuario/consultarEmailSelect",
+        dataType: "json",
+        type: "POST",
+        data: function (params) {
+
+            var queryParameters = {
+                term: params.term
+            }
+            return queryParameters;
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return {
+                        text: item.email_email,
+                        id: item.email_email
+                    }
+                })
+            };
+        }
+    }
+});
+
+});
+
 /** Trava campo para aceitar somente números **/
 function somenteNumeros(num) {
     var er = /[^0-9.]/;

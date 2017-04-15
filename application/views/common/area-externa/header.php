@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link href="<?php echo base_url('assets/area-externa/css/bootstrappaper.css'); ?>" rel="stylesheet" type="text/css" media="all" />
-  <link href="<?php echo base_url('assets/area-externa/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css" media="all" />
+  <link href="<?php echo base_url ('assets/ambas-areas/css/font-awesome.min.css');?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/area-externa/css/estilo.css'); ?>" rel="stylesheet" type="text/css" media="all" />
   <!-- //JavaScript --><!-- animation-effect -->
   <link href="<?php echo base_url('assets/area-externa/css/animate.min.css'); ?>" rel="stylesheet">

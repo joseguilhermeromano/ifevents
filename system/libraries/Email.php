@@ -69,42 +69,42 @@ class CI_Email {
 	 *
 	 * @var	string	'mail', 'sendmail' or 'smtp'
 	 */
-	public $protocol	= 'mail';		// mail/sendmail/smtp
+	public $protocol	= '';		// mail/sendmail/smtp
 
 	/**
 	 * STMP Server host
 	 *
 	 * @var	string
 	 */
-	public $smtp_host	= 'smtp.gmail.com';
+	public $smtp_host	= '';
 
 	/**
 	 * SMTP Username
 	 *
 	 * @var	string
 	 */
-	public $smtp_user	= 'projetoifsp@gmail.com';
+	public $smtp_user	= '';
 
 	/**
 	 * SMTP Password
 	 *
 	 * @var	string
 	 */
-	public $smtp_pass	= 'ifsp2017';
+	public $smtp_pass	= '';
 
 	/**
 	 * SMTP Server port
 	 *
 	 * @var	int
 	 */
-	public $smtp_port	= 465;
+	public $smtp_port	= '';
 
 	/**
 	 * SMTP connection timeout in seconds
 	 *
 	 * @var	int
 	 */
-	public $smtp_timeout	= 5;
+	public $smtp_timeout	= '' ;
 
 	/**
 	 * SMTP persistent connection
@@ -140,14 +140,14 @@ class CI_Email {
 	 *
 	 * @var	string	'text' or 'html'
 	 */
-	public $mailtype	= 'text';
+	public $mailtype	= '';
 
 	/**
 	 * Character set (default: utf-8)
 	 *
 	 * @var	string
 	 */
-	public $charset		= 'UTF-8';
+	public $charset		= '';
 
 	/**
 	 * Alternative message (for HTML messages only)

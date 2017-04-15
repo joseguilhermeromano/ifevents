@@ -16,7 +16,7 @@
 
 <div class="row">
 <?php
-    echo form_open_multipart( 'OrganizadorControl/sendEmail', 'role="form" class="formsignin"' );?>
+    echo form_open_multipart( 'ContatoControl/sendEmail', 'role="form" class="formsignin"' );?>
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Nome', 'nome' ); ?></b>
@@ -38,6 +38,17 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+        <b><?php echo form_label( 'Assunto', 'assunto' ); ?></b><br>
+        	<?php
+        		$data = array( 'name' => 'assunto', 'placeholder' => 'Assunto', 'class' => 'form-control estilo-input');
+                echo form_input( $data );
+        	?>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -47,15 +58,6 @@
         		$data = array( 'name' => 'mensagem', 'placeholder' => 'Mensagem','cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
                 echo form_textarea( $data );
         	?>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-        	<?php echo form_checkbox('anexo', 'Anexo','FALSE');?>
-            <b><?php echo form_label( 'Anexo', 'anexo' ); ?></b><br>
         </div>
     </div>
 </div>
