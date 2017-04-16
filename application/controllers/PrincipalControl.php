@@ -81,6 +81,43 @@ class PrincipalControl extends CI_Controller {
         return $paginacao;
     }
 
+    public function envia_email($destinatario, $assunto, $mensagem, $remetente='projetoifsp2017@gmail.com'){
+
+
+        $this->load->library("My_PHPMailer");
+
+        $mail = new PHPMailer();
+        $mail->IsSMTP(); //Definimos que usaremos o protocolo SMTP para envio.
+        $mail->SMTPAuth = true; //Habilitamos a autenticação do SMTP. (true ou false)
+        $mail->SMTPSecure = "ssl"; //Estabelecemos qual protocolo de segurança será usado.
+        $mail->Host = "smtp.gmail.com"; //Podemos usar o servidor do gMail para enviar.
+        $mail->Port = 465; //Estabelecemos a porta utilizada pelo servidor do gMail.
+        $mail->Username = "projetoifsp2017@gmail.com"; //Usuário do gMail
+        $mail->Password = "ifsp2017"; //Senha do gMail
+        $mail->SetFrom($remetente,"IFEvents - Plataforma interativa de eventos"); //Quem está enviando o e-mail.
+        $mail->AddReplyTo($destinatario); //Para que a resposta será enviada.
+        $mail->Subject = utf8_decode($assunto); //Assunto do e-mail.
+        $mail->Body = utf8_decode($mensagem);
+        $mail->IsHTML(true);
+        $destino = $destinatario;
+        $mail->AddAddress($destino);
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
+        if(!$mail->Send()) {
+          echo "Mailer Error: " . $mail->ErrorInfo;
+          return 1;
+        } else {
+          return 0;
+        }
+
+    }
+
     public function upload_arquivo($model){
         $config['upload_path']   = 'upload';
         $config['allowed_types'] = 'pdf|docx';

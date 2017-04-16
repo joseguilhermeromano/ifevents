@@ -23,10 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-// $config['base_url'] = 'http://localhost/ifevents/';
-// $config['base_url'] = 'http://172.17.253.108/ifevents/';
 $config['base_url'] = 'http://www.ifevents.dev/';
-  // $config['base_url'] = 'http://localhost/semcitec/';
+//$config['base_url'] = 'http://localhost/ifevents/';
+
 
 /*
 |--------------------------------------------------------------------------

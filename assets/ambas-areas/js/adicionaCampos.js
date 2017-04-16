@@ -113,6 +113,17 @@ function somenteNumeros(num) {
      }
  });
 
+ /** Exibe  input de emails para a opcao especificar emails (area do organizador, notificacao de usuários)**/
+ $('#tipoNotificacao').change(function () {
+     var optionSelected = $(this).find("option:selected");
+     var valueSelected  = optionSelected.val();
+     if(valueSelected==1){
+      $('#notificacoesEmails').show();
+     }else{
+      $('#notificacoesEmails').hide();
+     }
+ });
+
 /*Oculta e exibe ids de tags html (usado nos inputs senha e email de cadastro de usuários */
 $(function(){
       $(".btn-toggle").click(function(e){
@@ -121,6 +132,20 @@ $(function(){
           $(el).toggle();
       });
   });
+
+//Script para mostrar status de carregando no envio de notificações ou reposta de contato
+$(document).ready(function () {
+    if (typeof($("div#divCarregando")) !== "undefined") {
+      $( "form" ).submit(function( event ) {
+        $('#fundoTelaDivCarregando').css({"display": "block"});
+        $("#divCarregando").show();
+        $(window).load(function () {
+            // Quando a página estiver totalmente carregada, remove o id
+            $('#divCarregando').fadeOut('slow');
+        });
+      });
+     }
+});
 
 /* APLICA EFEITO DE SETINHA NO MENU INTERNO*/
 $(document).ready(function() {

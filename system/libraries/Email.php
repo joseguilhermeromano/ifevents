@@ -62,7 +62,7 @@ class CI_Email {
 	 *
 	 * @var	string
 	 */
-	public $mailpath	= '/usr/sbin/sendmail';	// Sendmail path
+	// public $mailpath	= '/usr/sbin/sendmail';	// Sendmail path
 
 	/**
 	 * Which method to use for sending e-mails.
@@ -83,7 +83,11 @@ class CI_Email {
 	 *
 	 * @var	string
 	 */
-	public $smtp_user	= '';
+
+	//public $smtp_user	= '';
+
+	public $smtp_user	= 'projetoifsp2017@gmail.com';
+
 
 	/**
 	 * SMTP Password
@@ -118,7 +122,7 @@ class CI_Email {
 	 *
 	 * @var	string	empty, 'tls' or 'ssl'
 	 */
-	public $smtp_crypto	= '';
+	public $smtp_crypto	= 'ssl';
 
 	/**
 	 * Whether to apply word-wrapping to the message body.
@@ -140,7 +144,7 @@ class CI_Email {
 	 *
 	 * @var	string	'text' or 'html'
 	 */
-	public $mailtype	= '';
+	public $mailtype	= 'html';
 
 	/**
 	 * Character set (default: utf-8)
