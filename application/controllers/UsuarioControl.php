@@ -1,8 +1,8 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 require_once 'PrincipalControl.php';
-// require_once 'InterfaceControl.php';
+require_once 'InterfaceControl.php';
 
-class UsuarioControl extends PrincipalControl{
+class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
 		public function __construct(){
 			parent::__construct();
@@ -328,7 +328,7 @@ class UsuarioControl extends PrincipalControl{
         }
 
 
-        public function excluir() {
+        public function excluir($codigo) {
             
         }
 

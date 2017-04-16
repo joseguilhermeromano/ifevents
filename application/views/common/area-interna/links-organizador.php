@@ -19,8 +19,8 @@
   </a>
     <ul class="submenu collapse" id="eventos">
       <li class="item-menu">
-      <a href="" class="list-group-item">CONFERÊNCIAS</a></li>
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">EDIÇÕES</a></li>
+      <a href="<?php echo base_url('');?>" class="list-group-item">CONFERÊNCIAS</a></li>
+      <li><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">PROGRAMAÇÕES</a></li>
     </ul>
 </li>

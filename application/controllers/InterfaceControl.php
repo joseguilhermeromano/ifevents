@@ -17,13 +17,13 @@ interface InterfaceControl{
      * Chama a dao de exclusão de dados
       * @return Não apresenta retorno
      */
-    public function excluir();
+    public function excluir($codigo);
     
     /**
-     * Retorna todos os dados de uma determinada entidade do banco de dados
+     * Consulta que pode ser realizada de forma personalizada para cada entidade, trazendo todos ou parte dos registros com ou sem paginação
       * @return Não apresenta retorno
      */
-    public function consultarTudo();
+    public function consultar();
     
     
 }
