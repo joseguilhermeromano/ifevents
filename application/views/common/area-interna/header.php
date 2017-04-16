@@ -34,6 +34,9 @@
         ?>
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
             <div class="borda"><!-- borda -->
+                <a href="javascript:void(0)" href="#close-toggle" id="close-toggle" onclick="closeNav()">
+                    <span class="glyphicon">&times;</span>
+                </a>
             <ul class="sidebar-nav" id="sidenav">
                 <div class="sidebar-brand">
                     <a href="#">
@@ -61,9 +64,15 @@
             </div><!-- /#borda -->
         </div><!-- /#sidebar-wrapper -->
 
-        <div id="page-content-wrapper"><!-- Page Content -->
-            <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
-                    <span class="glyphicon glyphicon-remove hidden-xs"></span>
+        <div id="page-content-wrapper">
+        <!-- Use any element to open the sidenav -->
+        <a href="#menu-toggle" id="menu-toggle">
+            <span onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+
+        <!-- Page Content -->
+<!--             <a href="#menu-toggle" id="menu-toggle"><!-- Botão de exibir/ocultar menu lateral -->
+                    <!--<span class="glyphicon glyphicon-remove hidden-xs"></span>
                     <span class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md hidden-sm"></span>
             </a><!-- /#Botão de exibir/ocultar menu lateral -->
             <div class="container-fluid"><!-- Container-fluid -->

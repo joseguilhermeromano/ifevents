@@ -148,40 +148,67 @@ $(document).ready(function () {
 });
 
 /* APLICA EFEITO DE SETINHA NO MENU INTERNO*/
-$(document).ready(function() {
-    var url_atual =  window.location.href;
-    var verfificaSeta=false;
-    document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-    if(elem.getAttribute("href") == url_atual){
-          elem.parentNode.className += " active";
-          verfificaSeta = true;
-        }
-      });
+$(document).ready(function(){
+  var verfificaSeta = false;
+  $('li.item-menu a').each(function(i){ 
+      // Aplica a cor de fundo 
+      if($(location).attr('href') == $(this).attr('href')){
+        $(this.parentNode).addClass('active');
+        verfificaSeta = true;
+      }
+  }); 
 
-    if(!verfificaSeta){
-       document.querySelectorAll("ul.submenu li a").forEach(function (elem,i) {
-        if(elem.getAttribute("href") == url_atual){
-          elem.parentNode.parentNode.previousElementSibling.setAttribute("aria-expanded", "true");
-          elem.parentNode.parentNode.className += " in"; 
-          elem.parentNode.className += " active";
-          elem.parentNode.parentNode.parentNode.className += " active";
-          verfificaSeta=true;
-        }
-
-    if(!verfificaSeta){
-        document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-        if(elem.getAttribute("href") != url_atual && elem.id != '' && elem.id.indexOf(url_atual)){
-          elem.parentNode.className += " active";
-          verfificaSeta = true;
-        }
-      });
-    }
+  if(!verfificaSeta){
+      $('li.item-menu a').each(function(i){ 
+          if($(location).attr('href') != $(this).attr('href')
+            && $(location).attr('href').indexOf($(this).parent().attr('id')) !== -1){
+            $(this).parent().addClass('active');
+            verfificaSeta = true;
+            if(!$(this).parent().parent().attr('submenu')){
+              $(this).parent().parent().attr('class', 'in');
+            }
+          }
 
 
       });
-    }
+  }
 
 });
+// $(document).ready(function() {
+//     var url_atual =  window.location.href;
+//     var verfificaSeta=false;
+//     document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
+//     if(elem.getAttribute("href") == url_atual){
+//           //elem.parentNode.className += " active";
+//           elem.parentNode.id = "seta";
+//           verfificaSeta = true;
+//         }
+//       });
+
+//     if(!verfificaSeta){
+//        document.querySelectorAll("ul.submenu li a").forEach(function (elem,i) {
+//         if(elem.getAttribute("href") == url_atual){
+//           elem.parentNode.parentNode.previousElementSibling.setAttribute("aria-expanded", "true");
+//           elem.parentNode.parentNode.className += " in"; 
+//           elem.parentNode.className += " active";
+//           elem.parentNode.parentNode.parentNode.className += " active";
+//           verfificaSeta=true;
+//         }
+
+//     if(!verfificaSeta){
+//         document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
+//         if(elem.getAttribute("href") != url_atual && elem.id != '' && elem.id.indexOf(url_atual)){
+//           elem.parentNode.className += " active";
+//           verfificaSeta = true;
+//         }
+//       });
+//     }
+
+
+//       });
+//     }
+
+// });
 
 
 

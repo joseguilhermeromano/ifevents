@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-list"></span><b> Usuários</b></h2>
+<h2><span class="fa fa-users"></span><b> Usuários</b></h2>
 <hr>
 <br>
 <?php 
@@ -20,8 +20,9 @@
 </form>
 <div class="row">
     <div class="col-sm-12">
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificaUsers'); ?>' style="float:right"><span class="glyphicon glyphicon-envelope"></span> Notificar Usuários</a>
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificaUsers'); ?>' style="float:right"><span class="fa fa-exclamation-triangle"></span> Notificar Usuários</a>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right">
+         <i class="fa fa-user-plus" aria-hidden="true"></i> Novo Usuário</a>
     </div>
 </div>
 <br><br>

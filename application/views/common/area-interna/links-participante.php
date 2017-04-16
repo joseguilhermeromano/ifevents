@@ -25,6 +25,6 @@
 </li>
 <li class="item-menu">
     <a href="<?php echo base_url("login/sair");?>">
-    	<span class="glyphicon glyphicon-log-out"></span>  SAIR
+    	<span class="fa fa-power-off"></span>  SAIR
     </a>
 </li>

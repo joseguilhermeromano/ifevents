@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-envelope"></span><b> Notificar Usuários</b></h2>
+<h2><span class="fa fa-exclamation-triangle"></span><b> Notificar Usuários</b></h2>
 <hr>
 <br>
 
