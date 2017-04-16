@@ -8,18 +8,18 @@
         <span class="glyphicon glyphicon-user"></span>  MEU PERFIL
     </a>
 </li>
-<!--  <li class="item-menu" id="usuario">
+  <li class="item-menu" id="usuario">
     <a href="<?php echo base_url("usuario/consultar");?>" id="usuario">
         <span class="fa fa-users"></span>  USUÁRIOS
     </a>
-</li> -->
+</li>
 <li class="item-menu list-group panel" >
   <a href="#" data-toggle="collapse" data-target="#eventos" data-parent="#sidenav" class="list-group-item list-group-item-success">
   <span class="fa fa-flask"></span> EVENTOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="eventos">
-      <li class="item-menu" id="usuario">
-      <a href="<?php //echo base_url("usuario/consultar");?>" class="list-group-item">CONFERÊNCIAS</a></li>
+      <li class="item-menu">
+      <a href="" class="list-group-item">CONFERÊNCIAS</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">EDIÇÕES</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">PROGRAMAÇÕES</a></li>
     </ul>

@@ -164,7 +164,7 @@ $(document).ready(function(){
             && $(location).attr('href').indexOf($(this).parent().attr('id')) !== -1){
             $(this).parent().addClass('active');
             verfificaSeta = true;
-            if(!$(this).parent().parent().attr('submenu')){
+            if($(this).parent().parent().hasClass('submenu')){
               $(this).parent().parent().attr('class', 'in');
             }
           }
