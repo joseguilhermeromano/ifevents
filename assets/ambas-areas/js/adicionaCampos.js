@@ -1,7 +1,7 @@
 /** FORMATAÇÃO DE CAMPOS NO PADRÃO MASKED INPUT**/
 jQuery(function($){
    $.mask.definitions['~']='[+-]';
-   $("#campoData").mask("99/99/9999");
+   $("#data_inicio_1, #data_inicio_2, #data_inicio_3, #data_fim_1, #data_fim_2, #data_fim_3 ").mask("99/99/9999");
    $("#campoTelefone").focusout(function(){
         var phone, element;
         element = $(this);
@@ -21,15 +21,34 @@ jQuery(function($){
    
 });
 
+/*TRADUÇÃO DO DATEPICKER*/
+$(function() {
+        $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior',
+                
+            });
+        $(".datepicker").datepicker(); 
+    });
+
+
+
 /** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
 $(document).ready(function() {
+    var maximumSelectionLengthVariable = ($(location).attr('href').indexOf('edicao') !== -1) ? 0 : 1;
     $(".consultaInstituicao").select2({
     // tags: true,
-    placeholder: "Instituição",
+    placeholder: "Instituição (nome abreviado)",
     multiple: true,
     // tokenSeparators: [',', ' '],
     minimumInputLength: 2,
-     maximumSelectionLength: 1,
+    maximumSelectionLength: maximumSelectionLengthVariable,
     minimumResultsForSearch: 10,
     ajax: {
         url: baseUrl + "instituicao/consultarParaSelect2",
@@ -46,7 +65,8 @@ $(document).ready(function() {
             return {
                 results: $.map(data, function (item) {
                     return {
-                        text: item.inst_nm,
+                        text: item.inst_abrev,
+                        title: item.inst_nm,
                         id: item.inst_cd
                     }
                 })
@@ -57,7 +77,79 @@ $(document).ready(function() {
 
 });
 
-/** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
+/** IMPLANTA O SELECT2 NA CONSULTA DE CONFERÊNCIAS **/
+$(document).ready(function() {
+    $(".consultaConferencia").select2({
+    // tags: true,
+    placeholder: "Conferência (consulta por denominação)",
+    multiple: true,
+    // tokenSeparators: [',', ' '],
+    minimumInputLength: 2,
+    maximumSelectionLength: 1,
+    minimumResultsForSearch: 10,
+    ajax: {
+        url: baseUrl + "conferencia/consultarParaSelect2",
+        dataType: "json",
+        type: "POST",
+        data: function (params) {
+
+            var queryParameters = {
+                term: params.term
+            }
+            return queryParameters;
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return {
+                        text: item.conf_nm,
+                        id: item.conf_cd
+                    }
+                })
+            };
+        }
+    }
+});
+
+});
+
+/** IMPLANTA O SELECT2 NA CONSULTA DE COMITÊS **/
+$(document).ready(function() {
+    $(".consultaComite").select2({
+    // tags: true,
+    placeholder: "Comitê (consulta por denominação)",
+    multiple: true,
+    // tokenSeparators: [',', ' '],
+    minimumInputLength: 2,
+    maximumSelectionLength: 1,
+    minimumResultsForSearch: 10,
+    ajax: {
+        url: baseUrl + "comite/consultarParaSelect2",
+        dataType: "json",
+        type: "POST",
+        data: function (params) {
+
+            var queryParameters = {
+                term: params.term
+            }
+            return queryParameters;
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return {
+                        text: item.comi_nm,
+                        id: item.comi_cd
+                    }
+                })
+            };
+        }
+    }
+});
+
+});
+
+/** IMPLANTA O SELECT2 NA CONSULTA DE E-mails **/
 $(document).ready(function() {
     $(".consultaEmails").select2({
     tags: true,
@@ -155,6 +247,9 @@ $(document).ready(function(){
       if($(location).attr('href') == $(this).attr('href')){
         $(this.parentNode).addClass('active');
         verfificaSeta = true;
+        if($(this).parent().parent().hasClass('submenu')){
+          $(this).parent().parent().attr('class', 'in');
+        }
       }
   }); 
 

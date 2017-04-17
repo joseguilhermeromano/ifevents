@@ -33,12 +33,17 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
                     array("title"=>"IFEvents - Novo Comitê"), 1);
         }
 
-        public function alterar() {
+        public function alterar($codigo) {
         }
-        public function consultarTudo() {
+        public function consultar() {
         }
 
-        public function excluir() {
+        public function consultarParaSelect2(){
+            $data = $this->ComiteDAO->consultarTudo(array('comi_nm' => $this->comite->input->post('term')));
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+
+        public function excluir($codigo) {
 
         }
 

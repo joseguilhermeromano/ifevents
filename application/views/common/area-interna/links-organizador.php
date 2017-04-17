@@ -1,3 +1,11 @@
+<li class="list-group panel" >
+  <a href="#" data-toggle="collapse" data-target="#selecionarEvento" data-parent="#sidenav" class="list-group-item list-group-item-success"> SEMCITEC5 <span class="caret"></span>
+  </a>
+    <ul class="submenu collapse" id="selecionarEvento">
+      <li><a href="<?php echo base_url('');?>" class="list-group-item">SEMCITEC5</a></li>
+      <li><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">FECEG3</a></li>
+    </ul>
+</li>
 <li class="item-menu">
     <a href="<?php echo base_url("usuario/inicioOrganizador");?>">
         <span class="glyphicon glyphicon-home"></span>  INÍCIO
@@ -20,8 +28,9 @@
     <ul class="submenu collapse" id="eventos">
       <li class="item-menu">
       <a href="<?php echo base_url('');?>" class="list-group-item">CONFERÊNCIAS</a></li>
-      <li><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">PROGRAMAÇÕES</a></li>
+      <li id="edicao"><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
+      <li><a href="<?php echo base_url("");?>" class="list-group-item">COMITÊS</a></li>
+      <li><a href="<?php echo base_url("");?>" class="list-group-item">INSTITUIÇÕES</a></li>
     </ul>
 </li>
 

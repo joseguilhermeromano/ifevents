@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="fa fa-users"></span><b> Usuários</b></h2>
+<h2 class="titulo-pagina"><span class="fa fa-users"></span><b> Usuários</b></h2>
 <hr>
 <br>
 <?php 
@@ -41,21 +41,21 @@
         <tbody>
             <?php 
             if(!empty($users)){
-            foreach( $users as $user ):?>
+            foreach( $users as $user ): ?>
                 <tr>
                     <td><?php echo $user->user_nm; ?></td>
                     <td><?php echo $user->email_email; ?></td>
                     <td class="text-center"><?php echo $user->tius_nm; ?></td>
                     <td class="text-center"><?php echo $user->stat_nm; ?></td>
                     <td class="text-center">
-                    <div class="botoes-opcoes text-left col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-                        <a href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>"class="link-laranja">
+                    <div class="text-left" style="display: inline-block">
+                        <a href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>" class="btn-opcao">
                         <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
                         <a href="#" data-toggle="modal" data-target="#modalAtivar" 
                         onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/ativar/')?>');" class="link-verde">
+                        setLink('<?php echo base_url('usuario/ativar/')?>');" class="btn-opcao">
                         <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
-                        <a href="#" class="link-vermelho" data-toggle="modal" data-target="#modalDesativar"
+                        <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
                         onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
                         setLink('<?php echo base_url('usuario/desativar/')?>');">
                         <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>

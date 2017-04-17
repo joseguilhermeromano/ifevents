@@ -70,6 +70,7 @@ $route[ 'artigo/(:any)' ]        = 'ArtigoControl/$1';
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]        = 'SubmitControl/$1';
 $route[ 'comite/(:any)' ]        = 'ComiteControl/$1';
+$route[ 'conferencia/(:any)' ]        = 'ConferenciaControl/$1';
 $route[ 'contato/(:any)' ]        = 'ContatoControl/$1';
 $route[	'(:any)' ]              = 'InicioControl/$1';
 $route[	'default_controller' ]  = 'InicioControl';

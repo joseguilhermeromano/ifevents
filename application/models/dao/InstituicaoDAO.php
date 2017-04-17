@@ -29,9 +29,14 @@ class InstituicaoDAO extends CI_Model implements DAO{
      }
     
     public function consultarPorNome($nome){
-        $this->db->like('inst_nm', $nome);
+        // $this->db->like('inst_nm', $nome);
+        // $this->db->like('inst_abrev', $nome);
+        $this->db->select('*');
+        $this->db->from('Instituicao');
+        $this->db->where('inst_nm LIKE', '%'.$nome.'%');
+        $this->db->or_where('inst_abrev LIKE', '%'.$nome.'%');
         $this->db->order_by("inst_nm", "asc");
-		$query = $this->db->get('instituicao');
+		$query = $this->db->get();
 		return $query->result_array();
     }
 

@@ -48,8 +48,8 @@
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="consultaInstituicao form-control estilo-input" id="consultaInstituicao" multiple="multiple">
-            <?php   if(isset($instituicao->inst_nm)){   ?>
-                <option value="<?php echo $instituicao->inst_cd; ?>" selected><?php echo $instituicao->inst_nm;?></option>
+            <?php   if(isset($instituicao->inst_abrev)){   ?>
+                <option value="<?php echo $instituicao->inst_cd; ?>" selected><?php echo $instituicao->inst_abrev;?></option>
             <?php   }   ?>
             </select>
         </div>

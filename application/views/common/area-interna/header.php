@@ -12,6 +12,7 @@
         <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/ambas-areas/css/font-awesome.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/ambas-areas/css/select2.min.css');?>" rel="stylesheet">
+        <link href="<?php echo base_url ('assets/area-interna/css/jquery-ui.css');?>" rel="stylesheet">
         <script src="<?php echo base_url ('assets/area-interna/nicedit/nicEdit-latest.js');?>"></script>
             <script type="text/javascript">
               //<![CDATA[
@@ -43,7 +44,6 @@
                         <img width="175px" height="50px" src="<?php echo base_url('assets/area-interna/img/logo_ifevents.svg'); ?>" />
                     </a>
                 </div>
-
                 <?php
 
                     switch($usuario[0]['user_tipo']){
