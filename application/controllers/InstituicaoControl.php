@@ -24,10 +24,10 @@ class InstituicaoControl extends PrincipalControl implements InterfaceControl{
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
-        public function consultarTudo() {
+        public function consultar() {
         }
 
-        public function excluir() {
+        public function excluir($codigo) {
 
         }
 

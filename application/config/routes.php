@@ -51,27 +51,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /* Rotas Corretas */
-
-// $route[ 'organizador' ]         = 'OrganizadorControl/index';
-// $route[ 'organizador/(:any)' ]  = 'OrganizadorControl/$1';
-// $route[ 'participante' ]        = 'ParticipanteControl/index';
-// $route[ 'participante/(:any)' ] = 'ParticipanteControl/chamaView/$1';
-// $route[ 'avaliador' ]           = 'AvaliadorControl/index';
-// $route[ 'avaliador/(:any)' ]    = 'AvaliadorControl/$1';
-/*<<<<<<< HEAD
 $route[ 'login/(:any)' ]              = 'LoginControl/$1';
-$route[ 'usuario/consultar' ]         = 'UsuarioControl/consultar';
+/*Rotas Usuário*/
 $route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
+$route[ 'usuario/ativar/(:num)' ]     = 'UsuarioControl/ativar/$1';
+$route[ 'usuario/desativar/(:num)' ]  = 'UsuarioControl/desativar/$1';
 $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
+/*Rotas Edição*/
+$route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
 $route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
-=======*/
-$route[ 'login/(:any)' ]        = 'LoginControl/$1';
-$route[ 'usuario/alterar/(:any)' ]        = 'UsuarioControl/alterar/$1';
-$route[ 'usuario/ativar/(:num)' ]        = 'UsuarioControl/ativar/$1';
-$route[ 'usuario/desativar/(:num)' ]        = 'UsuarioControl/desativar/$1';
-$route[ 'usuario/(:any)' ]        = 'UsuarioControl/$1';
-$route[ 'artigo/(:any)' ]        = 'ArtigoControl/$1';
-//>>>>>>> de466bdf2db8d8d41f7cb5564946aeef0bc0d06e
+
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';
 $route[ 'comite/(:any)' ]             = 'ComiteControl/$1';
@@ -82,20 +71,4 @@ $route[ 'conferencia/alterar/(:any)'] = 'ConferenciaControl/alterar/$1';
 $route[ 'conferencia/excluir/(:any)'] = 'ConferenciaControl/excluir/$1';
 $route[	'default_controller' ]        = 'InicioControl';
 
-
-
-//$route[	'administracao' ]          = 'administracao/Home';
-//$route[	'submissao' ]			   = 'InicioControl/submissao';
-//$route[	'cadastro' ]               = 'InicioControl/cadastro';
-
-//$route['login']					   = 'InicioControl/login';
-//$route[ 'VerificaArtigo' ]         = 'DataControl/VerificaArtigo';
-//$route[ 'Download/(:any)/(:any)' ] = 'DataControl/Download/$1/$2';
-//$route[ 'avaliador' ]              = 'AreaRestritaControl/avaliador';
-//$route[ 'avaliador/(:any)' ]       = 'AreaRestritaControl/avaliador/$1';
-//
-//$route[ 'participante' ]           = 'AreaRestritaControl/participante';
-//$route[ 'participante/(:any)' ]    = 'AreaRestritaControl/participante/$1';
-//$route[ 'novoartigo' ]             = 'ParticipanteControl/novoartigo';
-//$route[ '404_override' ]           = 'InicioControl/error_404';
-$route[ 'translate_uri_dashes' ]   = FALSE;
+$route[ 'translate_uri_dashes' ]      = FALSE;

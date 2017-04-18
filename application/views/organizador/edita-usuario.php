@@ -1,5 +1,5 @@
 <div class="container-fluid">                        
-<h2><span class="glyphicon glyphicon-pencil"></span><b> Edita Usuário</b></h2>
+<h2><span class="glyphicon glyphicon-pencil"></span><b> Editar Usuário</b></h2>
 <hr>
 <br>
 

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-list"></span><b> Usuários</b></h2>
+<h2 class="titulo-pagina"><span class="fa fa-users"></span><b> Usuários</b></h2>
 <hr>
 <br>
 <?php 
@@ -20,8 +20,9 @@
 </form>
 <div class="row">
     <div class="col-sm-12">
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificaUsers'); ?>' style="float:right"><span class="glyphicon glyphicon-envelope"></span> Notificar Usuários</a>
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Usuário</a>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificaUsers'); ?>' style="float:right"><span class="fa fa-exclamation-triangle"></span> Notificar Usuários</a>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right">
+         <i class="fa fa-user-plus" aria-hidden="true"></i> Novo Usuário</a>
     </div>
 </div>
 <br><br>
@@ -38,35 +39,42 @@
             </tr>
         </thead>
         <tbody>
+
+
             <?php 
             if(!empty($users)){
-            foreach( $users as $user ):?>
+            foreach( $users as $user ){ ?>
+
+
                 <tr>
                     <td><?php echo $user->user_nm; ?></td>
                     <td><?php echo $user->email_email; ?></td>
                     <td class="text-center"><?php echo $user->tius_nm; ?></td>
                     <td class="text-center"><?php echo $user->stat_nm; ?></td>
                     <td class="text-center">
-                    <div class="botoes-opcoes text-left col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-                        <a href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>"class="link-laranja">
-                        <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
-                        <a href="#" data-toggle="modal" data-target="#modalAtivar" 
-                        onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/ativar/')?>');" class="link-verde">
-                        <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
-                        <a href="#" class="link-vermelho" data-toggle="modal" data-target="#modalDesativar"
-                        onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/desativar/')?>');">
-                        <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
-                    </div>
-
-                      <!-- <a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span> Excluir</a>-->
+                      <div class="text-left" style="display: inline-block">
+                          <a class="btn-opcao" href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>">
+                          <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalAtivar" 
+                          onclick="setCodigo('<?php echo $user->user_cd; ?>');
+                          setLink('<?php echo base_url("usuario/ativar/")?>');">
+                          <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
+                          onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
+                          setLink('<?php echo base_url('usuario/desativar/')?>');">
+                          <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
+                      </div>
                     </td>
                 </tr>
-            <?php endforeach;}else{ ?>
+
+
+            <?php } }else{ ?>
+
+
               <tr>
                 <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
+
             <?php } ?> 
         </tbody>
     </table>

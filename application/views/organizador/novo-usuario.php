@@ -1,5 +1,5 @@
 <div class="container-fluid">                  
-<h2><span class="glyphicon glyphicon-plus"></span><b> Novo Usuário</b></h2>
+<h2><i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Usuário</b></h2>
 <hr>
 <br>
 <?php 

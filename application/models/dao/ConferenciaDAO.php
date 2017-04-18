@@ -40,7 +40,41 @@
             return $this->db->update('Conferencia', $obj);
         }
 
-        public function consultarTudo() {
+        public function inserir($obj) {
+            return $this->db->insert('conferencia', $obj);
+        }
+
+
+        public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='conf_nm', $ordenacao='asc') {
+            $this->db->select("*");
+            $this->db->from("Conferencia");
+            $this->db->order_by($sort, $ordenacao);
+            if($parametros !== null){
+                foreach ($parametros as $key => $value) {
+                    $this->db->where($key.' LIKE ','%'.$value.'%');
+                }
+            }
+                	if($limite)
+                        $this->db->limit($limite, $numPagina);
+                    $query = $this->db->get();
+                    if($query->num_rows()>0){
+                        return $query->result_object();
+                    }else{
+                        return null;
+                    }
+        }
+
+        public function consultarCodigo($codigo){
+            return null;
+        }
+
+        public function excluir($obj) {
+            $this->db->where('conf_id', $obj->conf_id);
+            return $this->db->delete('conferencia');
+        }
+
+
+        /*public function consultarTudo() {
 			$query=$this->db->select('conf_cd, conf_nm, conf_desc')
     								 ->from('Conferencia')
 									 ->get();
@@ -51,7 +85,7 @@
         		return FALSE;
     		}
 
-        }
+        }*/
 
 
         public function consultarCodigo($codigo){

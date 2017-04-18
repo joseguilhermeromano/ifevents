@@ -42,8 +42,8 @@
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="form-control estilo-input consultaInstituicao" multiple="multiple">
-            <?php   if(isset($instituicao->inst_nm)){   ?>
-                <option value="<?php echo $instituicao->inst_cd; ?>" selected><?php echo $instituicao->inst_nm;?></option>
+            <?php   if(isset($instituicao->inst_abrev)){   ?>
+                <option value="<?php echo $instituicao->inst_cd; ?>" selected><?php echo $instituicao->inst_abrev;?></option>
             <?php   }   ?>
             </select>
         </div>
@@ -93,7 +93,7 @@
     <div class="col-sm-6"  id="qtdMaxSubmissaoAval" 
       <?php 
 
-        if((!isset($user->user_tipo)  &&  $view !== 'cadastro_avaliador') || (isset($user->user_tipo) && $user->user_tipo!=2)){
+        if((!isset($user->user_tipo)  &&  $view !== 'cadastro_revisor') || (isset($user->user_tipo) && $user->user_tipo!=2)){
             echo 'style="display:none"';
         }
 

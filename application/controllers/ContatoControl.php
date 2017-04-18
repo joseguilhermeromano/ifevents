@@ -44,7 +44,7 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
                     array("title"=>"IFEvents - Novo Contato"), 1);
         }
 
-        public function alterar() {
+        public function alterar($codigo) {
 
         }
 
@@ -52,11 +52,7 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
 
         }
 
-        public function consultarTudo() {
-
-        }
-
-        public function excluir() {
+        public function excluir($codigo) {
 
         }
 
