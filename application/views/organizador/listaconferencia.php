@@ -34,7 +34,10 @@
                         <td><?php echo $item->conf_nm; ?></td>
                         <td class="text-center"><?php echo $item->conf_desc; ?></td>
                         <td class="text-center"><a href="<?php echo base_url('/conferencia/alterar/'.$item->conf_cd); ?>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                        <td class="text-center"><a href="<?php echo base_url('/conferencia/excluir/'.$item->conf_cd); ?>"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+                        <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir"
+                        onclick="setCodigo('<?php echo $item->conf_cd; ?>');
+                        setLink('<?php echo base_url('conferencia/excluir/')?>');">
+                        <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
                     </tr>
             <?php endforeach;
             endif;?>

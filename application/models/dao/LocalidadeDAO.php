@@ -45,7 +45,7 @@
             }
 
             if(empty($data['loca_cd'])){
-                $this->db->insert('localidade', array('loca_lograd' => $obj->loca_lograd
+                $this->db->insert('Localidade', array('loca_lograd' => $obj->loca_lograd
                     ,'loca_bairro' => $obj->loca_bairro
                     ,'loca_cid' => $obj->loca_cid
                     ,'loca_cep' => $obj->loca_cep

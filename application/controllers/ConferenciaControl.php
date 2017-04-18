@@ -82,6 +82,7 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 
 
 		public function excluir() {
+			
 			if( $this->ConferenciaDAO->excluir($this->uri->segment(3)) == false){
 					$this->session->set_flashdata('error', 'Arquivo não pode ser excluido!');
 			}

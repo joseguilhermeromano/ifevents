@@ -1,4 +1,4 @@
-                    
+
                     </div><!-- /#col-lg-12 -->
                 </div><!-- /#row -->
             </div><!-- /#container-fluid-->
@@ -23,7 +23,28 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+
+
+        <!-- Modal de Atualização -->
+            <div id="modalAtualizar" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Atualizar</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <p>Deseja realmente atualizar este registro?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                            <button class="btn btn-success" onclick="Executa();">Continuar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     <!-- Modal de Ativa/Desativa -->
         <div id="modalAtivar" class="modal fade">
@@ -42,7 +63,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <!-- Modal de Ativa/Desativa -->
         <div id="modalDesativar" class="modal fade">
@@ -61,7 +82,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
      <!-- assetststrap Core JavaScript -->
         <script src="<?php echo base_url('assets/area-interna/js/jquery.min.js');?>"></script>
@@ -80,7 +101,7 @@
     });
 
     </script>
-    
+
     <script>
 
 
@@ -89,7 +110,7 @@
             $(parametro).toggle(500);
             $("span",header).toggleClass("glyphicon glyphicon-triangle-right glyphicon glyphicon-triangle-bottom");
         }
-        
+
         function MostrarEsconderLinha(parametro){
             $(parametro).toggle(function () {
                     $(this).animate({left:'250px'}, 300);
@@ -100,8 +121,8 @@
             );
         }
     </script>
-    
-    
+
+
 <!-- Menu Toggle Script -->
 </body>
 </html>
