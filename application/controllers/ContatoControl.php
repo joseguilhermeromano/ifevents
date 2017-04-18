@@ -52,6 +52,11 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
 
         }
 
+		public function consultarTudo() {
+			return null;
+        }
+
+
         public function excluir($codigo) {
 
         }

@@ -40,10 +40,6 @@
             return $this->db->update('Conferencia', $obj);
         }
 
-        public function inserir($obj) {
-            return $this->db->insert('conferencia', $obj);
-        }
-
 
         public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='conf_nm', $ordenacao='asc') {
             $this->db->select("*");
@@ -64,17 +60,8 @@
                     }
         }
 
-        public function consultarCodigo($codigo){
-            return null;
-        }
 
-        public function excluir($obj) {
-            $this->db->where('conf_id', $obj->conf_id);
-            return $this->db->delete('conferencia');
-        }
-
-
-        /*public function consultarTudo() {
+    	/*public function consultarTudo() {
 			$query=$this->db->select('conf_cd, conf_nm, conf_desc')
     								 ->from('Conferencia')
 									 ->get();

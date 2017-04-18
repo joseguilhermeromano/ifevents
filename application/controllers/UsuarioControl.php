@@ -37,8 +37,8 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 	            	array("title"=>"IFEvents - Início - Participante"), 1);
 		}
 
-       
-        
+
+
         public function cadastrar() {
 
         	if (empty($this->usuario->input->post())){
@@ -52,7 +52,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->telefone->setaValores();
             $this->localidade->setaValores();
 
-            $this->usuario->valida(); 
+            $this->usuario->valida();
             $this->email->valida();
             $this->telefone->valida();
             $this->localidade->valida();
@@ -63,10 +63,10 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     consultarCodigo($this->input->post('instituicao'))[0];
             }
 
-            $view = $this->session->userdata('view'); 
-            $nomeDiretorio = $this->session->userdata('nomeDiretorio'); 
-            $titulo = $this->session->userdata('title'); 
-            $areaTemplate = $this->session->userdata('areaTemplate'); 
+            $view = $this->session->userdata('view');
+            $nomeDiretorio = $this->session->userdata('nomeDiretorio');
+            $titulo = $this->session->userdata('title');
+            $areaTemplate = $this->session->userdata('areaTemplate');
 
             if($this->form_validation->run()){
                     $this->db->trans_start();
@@ -89,10 +89,10 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     $this->telefone = null;
                     $this->localidade = null;
                     $this->instituicao = null;
-                            
+
                 }
             }
-             $data = array("title"=>$titulo, 
+             $data = array("title"=>$titulo,
                 "user" => $this->usuario, "email" => $this->email,
                 "telefone" => $this->telefone, "localidade" => $this->localidade, "instituicao" => $this->instituicao);
             $this->chamaView($view, $nomeDiretorio, $data, $areaTemplate);
@@ -111,13 +111,13 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 return true;
             }
             // $data['title'] = "IFEvents - Registros de Usuários!";
-            // $this->chamaView("edita-usuario", "organizador", $data, 1);  
+            // $this->chamaView("edita-usuario", "organizador", $data, 1);
         }
 
         //Procedimentos para alterar perfil de usuário
         public function perfil() {
             if (null !== $this->session->userdata('usuario')){
-                $user = $this->session->userdata('usuario'); 
+                $user = $this->session->userdata('usuario');
                 $data = $this->UserDAO->consultarCodigo($user[0]['user_cd']);
                 if(empty($this->input->post())){
                     $data['title'] = "IFEvents - Atualizar Registro de Usuário!";
@@ -142,7 +142,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->telefone->setaValores();
             $this->localidade->setaValores();
 
-            $this->usuario->valida(false); 
+            $this->usuario->valida(false);
             $this->email->valida(false);
             $this->telefone->valida();
             $this->localidade->valida();
@@ -216,13 +216,17 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 $busca=null;
                 $array=null;
             }
-            
+
             $data['users']=$this->UserDAO->consultarTudo($array, $limite, $numPagina);
             $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
             $data['totalRegistros'] = $this->UserDAO->totalRegistros();
             $data['title']="IFEvents - Usuários";
             $this->chamaView("usuarios", "organizador", $data, 1);
         }
+
+		public function consultarTudo(){
+			return null;
+		}
 
         public function notificaUsers(){
             if (empty($this->input->post())){
@@ -249,14 +253,14 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                         $users = $this->UserDAO->consultarTudo(array('user_tipo' => 1));
                         break;
 
-                    case '3':  
+                    case '3':
                         $users = $this->UserDAO->consultarTudo(array('user_tipo' => 2));
                         break;
 
                     case '4':
                         $users = $this->UserDAO->consultarTudo(array('user_tipo' => 3));
                         break;
-                    
+
                     default:
                         $users = $this->UserDAO->consultarTudo(null);
                         break;
@@ -329,7 +333,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
 
         public function excluir($codigo) {
-            
+
         }
 
 

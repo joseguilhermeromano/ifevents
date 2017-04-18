@@ -11,14 +11,14 @@ interface InterfaceControl{
      * Alterar um valor existente na base de dados
      * @return Não apresenta retorno
      */
-    public function alterar();
+    public function alterar($codigo);
 
     /**
      * Chama a dao de exclusão de dados
       * @return Não apresenta retorno
      */
 
-    public function excluir();
+    public function excluir($codigo);
 
     /**
      * Consulta que pode ser realizada de forma personalizada para cada entidade, trazendo todos ou parte dos registros com ou sem paginação
