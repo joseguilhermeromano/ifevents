@@ -10,14 +10,8 @@
 
 
 <?php
-    echo form_open_multipart( 'usuario/notificaUsers', 'role="form" class="formsignin"' );
+    echo form_open_multipart( 'edicao/cadastrar', 'role="form" class="formsignin"' );
 ?>
-
-<div id="divCarregando" class="progresso">
-    <img src="<?php echo base_url('assets/area-interna/img/status-carregando.gif');?>">
-</div>
-<div id="fundoTelaDivCarregando">
-</div>
 
 <h4 class="subtitulo"><i>Dados da Edição</i></h4><br>
 
@@ -65,26 +59,6 @@
     </div>
 </div>
 
-<div class="row" id="notificacoesEmails" <?= ((isset($notificacao) && $notificacao->tipo_notificacao == 1) 
-|| isset($notificacao->emails) ? '' : 'style="display:none"'); ?>>
-    <div class="col-md-12">
-        <div class="form-group">
-        <b><?php echo form_label( '*Emails', 'emails' ); ?></b><br>
-            <select name="emails[]" class="form-control estilo-input consultaEmails" multiple="multiple">
-            <?php 
-            if(!empty($notificacao->emails)){
-                foreach ($notificacao->emails as $key => $value) {
-            ?>
-                <option value="<?php echo $value; ?>" selected><?php echo $value;?></option>
-            <?php 
-                }
-            }
-            ?>
-            </select>
-        </div>
-    </div>
-</div>
-
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
@@ -98,7 +72,7 @@
     <div class="col-md-6">
         <div class="form-group">
         <b><?php echo form_label( '*Imagem do Evento', 'imagemevento' ); ?></b>
-            <?php $data = array( 'name' => 'userfile','class' => 'form-control estilo-input');
+            <?php $data = array( 'name' => 'imagemevento','class' => 'form-control estilo-input');
               echo form_upload($data);?>
         </div>
     </div>
@@ -119,7 +93,7 @@
     <div class="col-md-12">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Parcerias', 'parcerias' ); ?></b><br>
-            <select name="parcerias" class="form-control estilo-input consultaInstituicao" multiple="multiple">
+            <select name="parcerias[]" class="form-control estilo-input consultaInstituicao" multiple="multiple">
             <?php   //if(isset($instituicao->inst_nm)){   ?>
                 <!-- <option value="<?php echo $instituicao->inst_cd; ?>" selected><?php echo $instituicao->inst_nm;?></option> -->
             <?php   //}   ?>
@@ -134,19 +108,29 @@
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( '*Data de Início do Evento', 'datainicioevento' ); ?></b>
+        <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datainicioevento', 'placeholder' => "Data de Início do Evento", 
-            'class' => 'form-control estilo-input datepicker', 'id' => 'data_inicio_1',
-             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
+            'class' => 'form-control estilo-input datepicker',
+             'value' => (isset($notificacao) ? $notificacao->assunto : ''));
                echo form_input($data);?>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( '*Data de Término do Evento', 'datafimevento' ); ?></b>
+        <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datafimevento', 'placeholder' => "Data de Término do Evento", 
-            'class' => 'form-control estilo-input datepicker', 'id' => 'data_fim_1',
+            'class' => 'form-control estilo-input datepicker',
              'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
         </div>
     </div>
 </div>
@@ -155,19 +139,29 @@
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( '*Data inicial da publicação', 'datainiciopub' ); ?></b>
+        <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datainiciopub', 'placeholder' => "Data inicial da publicação do evento no site", 
-            'class' => 'form-control estilo-input datepicker', 'id' => 'data_inicio_2',
+            'class' => 'form-control estilo-input datepicker',
              'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( '*Data final da publicação', 'datafimpub' ); ?></b>
+        <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datafimpub', 'placeholder' => "Data final da publicação do evento no site", 
-            'class' => 'form-control estilo-input datepicker', 'id' => 'data_fim_2',
+            'class' => 'form-control estilo-input datepicker',
              'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
         </div>
     </div>
 </div>
@@ -176,19 +170,29 @@
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( '*Data da abertura de submissões de trabalhos', 'datainiciopub' ); ?></b>
+         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datainisub', 'placeholder' => "Data da abertura de submissões de trabalhos", 
-            'class' => 'form-control estilo-input datepicker', 'id' => 'data_inicio_3',
+            'class' => 'form-control estilo-input datepicker',
              'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
         <b><?php echo form_label( '*Data de encerramento das submissões de trabalhos', 'datafimsub' ); ?></b>
+         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datafimsub', 'placeholder' => "Data de encerramento das submissões de trabalhos", 
-            'class' => 'form-control estilo-input datepicker', 'id' => 'data_fim_3',
+            'class' => 'form-control estilo-input datepicker',
              'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
+          <span class="input-group-addon">
+            <span class="fa fa-calendar"></span>
+          </span>
+        </div>
         </div>
     </div>
 </div>
@@ -223,8 +227,7 @@
     </div>
 </div>
 
-<?php echo '<br><center>'.form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button',
-    "onclick"=>"nicEditors.findEditor('editor').saveContent();"))."</center>";
+<?php echo '<br><center>'.form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button'))."</center>";
 
 echo form_close();
 ?>

@@ -39,35 +39,42 @@
             </tr>
         </thead>
         <tbody>
+
+
             <?php 
             if(!empty($users)){
-            foreach( $users as $user ): ?>
+            foreach( $users as $user ){ ?>
+
+
                 <tr>
                     <td><?php echo $user->user_nm; ?></td>
                     <td><?php echo $user->email_email; ?></td>
                     <td class="text-center"><?php echo $user->tius_nm; ?></td>
                     <td class="text-center"><?php echo $user->stat_nm; ?></td>
                     <td class="text-center">
-                    <div class="text-left" style="display: inline-block">
-                        <a href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>" class="btn-opcao">
-                        <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
-                        <a href="#" data-toggle="modal" data-target="#modalAtivar" 
-                        onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/ativar/')?>');" class="btn-opcao">
-                        <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
-                        <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
-                        onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                        setLink('<?php echo base_url('usuario/desativar/')?>');">
-                        <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
-                    </div>
-
-                      <!-- <a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span> Excluir</a>-->
+                      <div class="text-left" style="display: inline-block">
+                          <a class="btn-opcao" href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>">
+                          <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalAtivar" 
+                          onclick="setCodigo('<?php echo $user->user_cd; ?>');
+                          setLink('<?php echo base_url("usuario/ativar/")?>');">
+                          <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
+                          onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
+                          setLink('<?php echo base_url('usuario/desativar/')?>');">
+                          <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
+                      </div>
                     </td>
                 </tr>
-            <?php endforeach;}else{ ?>
+
+
+            <?php } }else{ ?>
+
+
               <tr>
                 <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
+
             <?php } ?> 
         </tbody>
     </table>

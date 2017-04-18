@@ -17,13 +17,15 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
             	array("title"=>"IFEvents - Nova Edição"), 1);
     		return true;
     	}
+    	$this->edicao->setaValores();
+    	$this->edicao->valida();
 
     	if($this->form_validation->run()){
 
     	}
 
     	$this->chamaView("nova-edicao", "organizador",
-            	array("title"=>"IFEvents - Nova Edição"), 1);
+            	array("title"=>"IFEvents - Nova Edição", "edicao" => $this->edicao), 1);
 	}
 
 	public function alterar($codigo){

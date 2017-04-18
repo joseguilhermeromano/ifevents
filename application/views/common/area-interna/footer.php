@@ -71,7 +71,6 @@
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-datepicker.min.js');?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
     <script>
     $("#menu-toggle").click(function(e) {

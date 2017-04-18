@@ -6,7 +6,7 @@
 @import 'https://fonts.googleapis.com/css?family=Playball';
 
  body {
-    overflow-x: hidden;
+    overflow:auto;
  }
 
 /* Toggle Styles */
@@ -26,11 +26,11 @@
     position: fixed;
     left: 210px;
     width: 0;
-    height: 100%;
     margin-left: -210px;
+    height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    overflow: none;
+/*    overflow: hidden;*/
     direction:rtl;
     background:#f7f7f7;
     -webkit-transition: all 0.5s ease;
@@ -49,6 +49,12 @@
     width: 100%;
     position: relative;
     padding: 15px;
+}
+
+@media(max-width: 767px){
+  #page-content-wrapper {
+    height: 100%;
+  }
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -175,6 +181,7 @@
     border:13px solid black;
     border-color: transparent #dae1e8 transparent transparent;
     right: -30px;
+    margin-top:-4px;
 }
 
 .sidebar-nav li.list-group.panel.active > a::after{
@@ -184,7 +191,7 @@
     border:12px solid white;
     border-color:transparent white transparent transparent;
     right: -31px;
-    margin-top:1px;
+    margin-top:-3px;
 }
 
 
@@ -235,6 +242,7 @@
     position:absolute;
     border:13px solid black;
     border-color: transparent #dae1e8 transparent transparent;
+    margin-top:-4px;
     right: -30px;
 }
 
@@ -245,7 +253,7 @@
     border:12px solid white;
     border-color:transparent white transparent transparent;
     right: -31px;
-    margin-top:1px;
+    margin-top:-3px;
 }
 
 #menu-toggle {
@@ -733,7 +741,7 @@ h2{
 }
 
 /*CONFIGURAÇÕES DA BARRA DE ROLAGEM DO MENU*/
-::-webkit-scrollbar-track {
+/*::-webkit-scrollbar-track {
     background-color: #F4F4F4;
 }
 ::-webkit-scrollbar {
@@ -742,7 +750,7 @@ h2{
 }
 ::-webkit-scrollbar-thumb {
     background: #dad7d7;
-}
+}*/
 
 /** EXPANDE O TAMANHO DO SELECT 2 (UTIL PARA ASSOCIAR  ARTIGO AO USUARIO)**/
 /*.select2-container .select2-selection {

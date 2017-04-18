@@ -58,7 +58,7 @@
             if($user==3){
                 $this->form_validation->set_rules( 'tipo_usuario', 'Tipo de Usuário', 'trim|required|max_length[11]' );
             }
-            $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
+            $this->form_validation->set_rules( 'nome', 'Nome Completo', 'alpha|trim|required|max_length[50]' );
             $this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|max_length[100]' );
 
             

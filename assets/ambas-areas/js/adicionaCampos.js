@@ -1,7 +1,7 @@
 /** FORMATAÇÃO DE CAMPOS NO PADRÃO MASKED INPUT**/
 jQuery(function($){
    $.mask.definitions['~']='[+-]';
-   $("#data_inicio_1, #data_inicio_2, #data_inicio_3, #data_fim_1, #data_fim_2, #data_fim_3 ").mask("99/99/9999");
+   $(".datepicker").mask("99/99/9999");
    $("#campoTelefone").focusout(function(){
         var phone, element;
         element = $(this);
@@ -22,20 +22,70 @@ jQuery(function($){
 });
 
 /*TRADUÇÃO DO DATEPICKER*/
-$(function() {
-        $(".datepicker").datepicker({
-                dateFormat: 'dd/mm/yy',
-                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-                nextText: 'Próximo',
-                prevText: 'Anterior',
-                
-            });
-        $(".datepicker").datepicker(); 
-    });
+/* Portuguese initialisation for the jQuery UI date picker plugin. */
+/* Based on the Brazilian initialisation */
+jQuery(function(){
+  $.datepicker.regional['pt'] = {
+    closeText: 'Fechar',
+    prevText: '&#x3c;Anterior',
+    nextText: 'Seguinte',
+    currentText: 'Hoje',
+    monthNames: ['Janeiro','Fevereiro','Mar&ccedil;o','Abril','Maio','Junho',
+    'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+    'Jul','Ago','Set','Out','Nov','Dez'],
+    dayNames: ['Domingo','Segunda-feira','Ter&ccedil;a-feira','Quarta-feira','Quinta-feira','Sexta-feira','S&aacute;bado'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','S&aacute;b'],
+    dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','S&aacute;b'],
+    weekHeader: 'Sem',
+    dateFormat: 'dd/mm/yy',
+    firstDay: 0,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''};
+  $.datepicker.setDefaults($.datepicker.regional['pt']);
+});﻿
+
+$(function(){
+  $('.datepicker').datepicker();
+});
+
+
+/*PERMITE TRAVAR INTERVALO DE DATAS NO DATEPICKER*/
+// $( function() {
+//     var dateFormat = "dd/mm/yy",
+//     from = $( ".date-from" ).focusout(function(){ var b = '#'+$(this).attr('id');  return  console.log(b);}),
+//     to = $( ".date-to" ).focusout(function(){ var b = '#'+$(this).attr('id');  return console.log(b); });
+      // from.datepicker({
+      //     defaultDate: "+1w",
+      //     changeMonth: true,
+      //     numberOfMonths: 1
+      //   })
+      //   .on( "change", function() {
+      //     to.datepicker( "option", "minDate", getDate( this ) );
+      //   }),
+      // to.datepicker({
+      //   defaultDate: "+1w",
+      //   changeMonth: true,
+      //   numberOfMonths: 1
+      // })
+      // .on( "change", function() {
+      //   from.datepicker( "option", "maxDate", getDate( this ) );
+      // });
+  //     console.log();
+
+  //   function getDate( element ) {
+  //     var date;
+  //     try {
+  //       date = $.datepicker.parseDate( dateFormat, element.value );
+  //     } catch( error ) {
+  //       date = null;
+  //     }
+
+  //     return date;
+  //   }
+  // } );
+
 
 
 
