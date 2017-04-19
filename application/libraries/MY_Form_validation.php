@@ -133,7 +133,7 @@ class MY_Form_validation extends CI_Form_validation {
     function valid_cep($cep)
     {
         $CI =& get_instance();
-        $CI->form_validation->set_message('valid_cep', 'O campo %s não contém um CEP válido.');
+        $CI->form_validation->set_message('valid_cep', 'O campo <b>%s</b> não contém um <b>CEP</b> válido.');
         $cep = str_replace('.', '', $cep);
         $cep = str_replace('-', '', $cep);
         $url = 'http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string';

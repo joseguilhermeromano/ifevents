@@ -59,7 +59,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
             if((null != $this->input->post('instituicao')) &&
                 !empty($this->input->post('instituicao'))){
-                $this->instituicao = (object)$this->InstituicaoDAO->
+                $this->instituicao = $this->InstituicaoDAO->
                     consultarCodigo($this->input->post('instituicao'))[0];
             }
 

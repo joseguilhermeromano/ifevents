@@ -72,7 +72,7 @@
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group  floating-label-form-group controls" id='EmailPrincipal'>
-        <b><?php echo form_label( '*E-mail de login', 'email' ); ?></b>
+        <b><?php echo form_label( '*E-mail', 'email' ); ?></b>
         <input type="text" name="email" placeholder="E-mail" class="form-control estilo-input"
              value="<?php echo (isset($email) && !empty($email) ? $email->email_email : '');?>" <?php echo ($usuario[0]['user_tipo'] != 3 ? 'disabled' : ''); ?>>
         </div>
@@ -82,7 +82,7 @@
 
     <div class="col-sm-6" id="confirmaemail" style="display:none">
         <div class="form-group  floating-label-form-group controls">
-        <b><?php echo form_label( '*Confirmar e-mail de login', 'confirmaemail' ); ?></b>
+        <b><?php echo form_label( '*Confirmar e-mail', 'confirmaemail' ); ?></b>
         <?php $data = array( 'name' => 'confirmaemail', 'placeholder' => 'Confirma E-mail','class' => 'form-control estilo-input' );
               echo form_input( $data );?>
         </div>
@@ -164,7 +164,17 @@
 
 <h4 class="subtitulo"><i>Endereço</i></h4><br>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
+        <div class="form-group floating-label-form-group controls">
+        <b><?php echo form_label( 'CEP', 'cep' ); ?></b>
+        <?php $data = array( 'name' => 'cep', 'placeholder' => 'CEP', 
+            'id' => 'campoCep',
+            'class' => 'form-control estilo-input',
+            'value' => (isset($localidade) ? $localidade->loca_cep : ''));
+                    echo form_input( $data );?>
+        </div>
+    </div>
+    <div class="col-sm-8">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Logradouro', 'logradouro' ); ?></b>
         <?php $data = array( 'name' => 'logradouro', 'placeholder' => 'Logradouro',
@@ -173,7 +183,9 @@
               echo form_input( $data );?>
         </div>
     </div>
-    <div class="col-sm-6">
+</div>
+<div class="row">
+    <div class="col-sm-4">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Bairro', 'bairro' ); ?></b>
         <?php $data = array( 'name' => 'bairro', 'placeholder' => 'Bairro', 
@@ -182,8 +194,6 @@
                     echo form_input( $data );?>
         </div>
     </div>
-</div>
-<div class="row">
     <div class="col-sm-4">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Número', 'numero' ); ?></b>
@@ -202,19 +212,9 @@
                     echo form_input( $data );?>
         </div>
     </div>
-    <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
-        <b><?php echo form_label( 'CEP', 'cep' ); ?></b>
-        <?php $data = array( 'name' => 'cep', 'placeholder' => 'CEP', 
-            'id' => 'campoCep',
-            'class' => 'form-control estilo-input',
-            'value' => (isset($localidade) ? $localidade->loca_cep : ''));
-                    echo form_input( $data );?>
-        </div>
-    </div>
 </div>
 <div class="row">
-    <div class="col-sm-4">
+      <div class="col-sm-4">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Cidade', 'cidade' ); ?></b>
         <?php $data = array( 'name' => 'cidade', 'placeholder' => 'Cidade', 

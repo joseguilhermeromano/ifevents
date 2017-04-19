@@ -152,7 +152,7 @@ $(document).ready(function() {
             return {
                 results: $.map(data, function (item) {
                     return {
-                        text: item.conf_nm,
+                        text: item.conf_abrev,
                         id: item.conf_cd
                     }
                 })
@@ -161,6 +161,25 @@ $(document).ready(function() {
     }
 });
 
+});
+
+$(document).ready(function(){
+  $('.consultaConferencia').change(function(){
+    var data = {conf_cd : $('.consultaConferencia option:selected').val()};
+    console.log(data);
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "edicao/geraNumeracaoEdicao",
+        data: data,
+        async: true,
+        dataType: "text",
+        success: function( data ) {
+
+            console.log(data);
+
+        }
+    }); 
+  });
 });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE COMITÊS **/
@@ -319,41 +338,6 @@ $(document).ready(function(){
   }
 
 });
-// $(document).ready(function() {
-//     var url_atual =  window.location.href;
-//     var verfificaSeta=false;
-//     document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-//     if(elem.getAttribute("href") == url_atual){
-//           //elem.parentNode.className += " active";
-//           elem.parentNode.id = "seta";
-//           verfificaSeta = true;
-//         }
-//       });
-
-//     if(!verfificaSeta){
-//        document.querySelectorAll("ul.submenu li a").forEach(function (elem,i) {
-//         if(elem.getAttribute("href") == url_atual){
-//           elem.parentNode.parentNode.previousElementSibling.setAttribute("aria-expanded", "true");
-//           elem.parentNode.parentNode.className += " in"; 
-//           elem.parentNode.className += " active";
-//           elem.parentNode.parentNode.parentNode.className += " active";
-//           verfificaSeta=true;
-//         }
-
-//     if(!verfificaSeta){
-//         document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-//         if(elem.getAttribute("href") != url_atual && elem.id != '' && elem.id.indexOf(url_atual)){
-//           elem.parentNode.className += " active";
-//           verfificaSeta = true;
-//         }
-//       });
-//     }
-
-
-//       });
-//     }
-
-// });
 
 
 

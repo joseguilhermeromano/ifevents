@@ -20,7 +20,7 @@ class InstituicaoControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function consultarParaSelect2(){
-            $data = $this->InstituicaoDAO->consultarPorNome($this->instituicao->input->post('term'));
+            $data = $this->InstituicaoDAO->consultarPorNomeOuAbreviacao($this->instituicao->input->post('term'));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
