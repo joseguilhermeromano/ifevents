@@ -16,6 +16,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->library('upload');
         $this->load->helper('file');
         $this->load->helper('download');
+        $this->load->library('uploadimage','','img');
 		// $this->load->model('acesso/Autentica');		
 	}
 
@@ -133,6 +134,7 @@ class PrincipalControl extends CI_Controller {
         else{
                 $data  = array('upload_data' => $model->upload->data());
                 $file=read_file($data['upload_data']['full_path']);
+                //função que deleta o arquivo do diretório temporário
                 unlink($data['upload_data']['full_path']);
 
         }
@@ -155,6 +157,80 @@ class PrincipalControl extends CI_Controller {
         else{
             $model->session->set_flashdata('error', 'Esse arquivo não exite!!!');
         }
+    }
+    //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight
+    public function upload_image($novoNome,$maxWidth=null, $maxHeight=null, $minWidth=null, $minHeight=null){
+      $this->img->upload($_FILES['image_field'],'pt_BR');
+        if ($this->img->uploaded) {
+            if($this->img->file_is_image == true){
+                // $this->img->image_max_width = $maxWidth;
+                // $this->img->image_max_height = $maxHeight;
+                // $this->img->image_min_width = $minWidth;
+                // $this->img->image_min_height = $minHeight;
+                // $this->img->allowed = array('image/jpg','image/jpeg','image/png');
+                // $this->img->file_new_name_body = $novoNome;
+                $processo = $this->img->Process();
+                echo $this->img->Process();
+                // header('Content-type: ' . $this->img->file_src_mime);
+                // header("Content-Disposition: attachment; filename=".rawurlencode($this->img->file_src_name).";");
+                  // echo $processo;
+                  die();
+                // if ($this->img->processed) {
+
+                //       $this->session->set_flashdata('success','A Imagem foi processada com sucesso!');
+                // } else {
+                //       $this->session->set_flashdata('error', $this->img->error);
+                // }
+            }else{
+                $this->session->set_flashdata('error', 'O Arquivo selecionado não é uma imagem!');
+            }
+
+
+
+
+
+
+
+
+              // Salva uma cópia da imagem com as configurações originais
+              // $this->img->Process('application/views/upload/img/');
+              // if ($this->img->processed) {
+              //   echo '<br>A Imagem original foi copiada com sucesso!!';
+              // } else {
+              //   echo ('<br>Erro : '.$this->img->error);
+              // }
+               // Salva uma cópia da imagem com um novo nome
+              // $this->img->file_new_name_body = 'NovoNome';
+              // $this->img->Process('application/views/upload/img/');
+              // if ($this->img->processed) {
+              //     echo '<br>A Imagem renomeada para "NovoNome" foi copiada com sucesso!!! ';
+              // } else {
+              //     echo ('<br>Erro : '.$this->img->error);
+              // }
+              // Salva uma cópia da imagem com um novo nome
+              // E Redimensiona a imagem para 100 px de comprimento e mantém a largura auto-ajustável
+              // $this->img->file_new_name_body = 'ImagemReajustada';
+              // $this->img->image_resize = true;
+              //Atribui uma extensão diferente para a nova cópia da Imagem
+              // $this->img->image_convert = 'gif';
+              // $this->img->image_x = 100;
+              // $this->img->image_ratio_y = true;
+              // $this->img->Process('application/views/upload/img/');
+              // if ($this->img->processed) {
+              //     echo '<br>A Imagem foi renomeada para "ImagemReajustada" , foi ajustada para x=100
+              //           e convertida para o formato GIF com sucesso!!!';
+              //     $this->img->Clean();
+              // } else {
+              //     echo '<br>Erro : ' . $this->img->error;
+              // } 
+        } else {
+            $this->session->set_flashdata('error', $this->img->error);
+        }
+        
+    }
+
+    public function show_image(){
+
     }
 
 }

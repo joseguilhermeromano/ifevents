@@ -19,23 +19,22 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	}
     	$this->edicao->setaValores();
     	$this->edicao->valida();
+    	$this->upload_image('teste', 100, 100, null, null);
 
     	if($this->form_validation->run()){
 
     	}
 
-    	echo print_r($this->edicao);
+    	// echo print_r($this->edicao);
 
     	$this->chamaView("nova-edicao", "organizador",
             	array("title"=>"IFEvents - Nova Edição", "edicao" => $this->edicao), 1);
 	}
 
 	public function geraNumeracaoEdicao(){
-		header('Content-type: text/plain');
-		$data = $this->EdicaoDAO->consultarTudo(array('edic_conf_cd' => $this->input->post('conf_cd')), null, null, 
-			'edic_cd');
-		$novaEdicao = sizeof($data) + 1;
-		echo $this->edicao->numero_romano($novaEdicao);
+		header('Content-type: text');
+		$novaEdicao = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conf_cd')) + 1;
+		$this->output->set_content_type('application/json')->set_output(json_encode($novaEdicao));
 	}
 
 	public function alterar($codigo){

@@ -33,11 +33,11 @@
             	$this->edic_abrev = $this->input->post('abreviacao');
             	$this->edic_link = $this->input->post('linkevento');
             	$this->edic_apresent = $this->input->post('apresentacao');
-            	$this->parcerias = $this->input->post('parcerias[]');
-                foreach ($this->parcerias as $key => $value) {
-                    $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value)[0];
-                }
-                $this->parcerias = $listaparcerias;
+            	// $this->parcerias = $this->input->post('parcerias[]');
+             //    foreach ($this->parcerias as $key => $value) {
+             //        $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value)[0];
+             //    }
+                // $this->parcerias = $listaparcerias;
                 $this->RegraModel->setaValoresRegraEdicao();
                 $this->regra = $this->RegraModel;
                 $this->EmailModel->setaValores(true);

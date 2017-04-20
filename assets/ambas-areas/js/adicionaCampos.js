@@ -165,17 +165,15 @@ $(document).ready(function() {
 
 $(document).ready(function(){
   $('.consultaConferencia').change(function(){
-    var data = {conf_cd : $('.consultaConferencia option:selected').val()};
-    console.log(data);
+    var conferencia = {conf_cd : $('.consultaConferencia option:selected').val()};
     $.ajax({
         type: "POST",
         url: baseUrl + "edicao/geraNumeracaoEdicao",
-        data: data,
+        data: conferencia,
         async: true,
-        dataType: "text",
-        success: function( data ) {
-
-            console.log(data);
+        dataType: "json",
+        success: function(data) {
+            $('#linkEvento').val($('#linkEvento').val()+data+'-'+ $('.consultaConferencia option:selected').text().toLowerCase());
 
         }
     }); 

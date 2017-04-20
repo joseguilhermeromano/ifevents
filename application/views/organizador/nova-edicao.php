@@ -16,7 +16,7 @@
 <h4 class="subtitulo"><i>Dados da Edição</i></h4><br>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( '*Conferência', 'conferencia' ); ?></b><br>
             <select name="conferencia" class="form-control estilo-input consultaConferencia" multiple="multiple">
@@ -26,7 +26,7 @@
             </select>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6">
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( '*Comitê', 'comite' ); ?></b><br>
             <select name="comite" class="form-control estilo-input consultaComite" multiple="multiple">
@@ -39,40 +39,19 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-        <b><?php echo form_label( '*Nome', 'nome' ); ?></b>
-        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome da Edição", 
-            'class' => 'form-control estilo-input',
-             'value' => (isset($edicao) ? $edicao->edic_nm : '') );
-               echo form_input($data);?>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-        <b><?php echo form_label( '*Abreviação', 'abreviacao' ); ?></b>
-        <?php $data = array( 'name' => 'abreviacao', 'placeholder' => "Abreviação da Edição", 
-            'class' => 'form-control estilo-input',
-             'value' => (isset($edicao) ? $edicao->edic_abrev : '') );
-               echo form_input($data);?>
-        </div>
-    </div>
-</div>
-
-<div class="row">
     <div class="col-md-6">
         <div class="form-group">
         <b><?php echo form_label( '*Link do Evento', 'linkevento' ); ?></b>
         <?php $data = array( 'name' => 'linkevento', 'placeholder' => "Link do Evento no site", 
-            'class' => 'form-control estilo-input',
-             'value' => base_url('evento/SEMCITEC_V'), 'readonly' => '');
+            'class' => 'form-control estilo-input', 'id' => 'linkEvento',
+             'value' => !isset($edicao->edic_link) ? base_url('evento/') : $edicao->edic_link, 'readonly' => '');
                echo form_input($data);?>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
         <b><?php echo form_label( '*Imagem do Evento', 'imagemevento' ); ?></b>
-            <?php $data = array( 'name' => 'imagemevento','class' => 'form-control estilo-input');
+            <?php $data = array( 'name' => 'image_field', 'size' => '32','class' => 'form-control estilo-input');
               echo form_upload($data);?>
         </div>
     </div>

@@ -37,6 +37,15 @@
                         return null;
                     }
                 }
+
+                public function consultarUltimaEdicao($conf_cd){
+                    $this->db->select("edic_num");
+                    $this->db->from("Edicao");
+                    $this->db->where("edic_conf_cd",$conf_cd);
+                    $query = $this->db->get();
+                    // echo print_r($query->result_object());
+                    return $query->result_object()[0]->edic_num;
+                }
                 
                 public function consultarCodigo($codigo){
                     return null;
