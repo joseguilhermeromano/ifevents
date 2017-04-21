@@ -44,14 +44,18 @@
         <b><?php echo form_label( '*Link do Evento', 'linkevento' ); ?></b>
         <?php $data = array( 'name' => 'linkevento', 'placeholder' => "Link do Evento no site", 
             'class' => 'form-control estilo-input', 'id' => 'linkEvento',
-             'value' => !isset($edicao->edic_link) ? base_url('evento/') : $edicao->edic_link, 'readonly' => '');
+             'value' => isset($edicao->edic_link) ?  $edicao->edic_link : '', 'readonly' => '');
                echo form_input($data);?>
         </div>
     </div>
-    <div class="col-md-6">
+</div>
+
+<div class="row">
+    <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Imagem do Evento', 'imagemevento' ); ?></b>
-            <?php $data = array( 'name' => 'image_field', 'size' => '32','class' => 'form-control estilo-input');
+            <?php $data = array( 'name' => 'image_field', 'id' => 'file', 'data-show-upload' => 'false',
+              'data-preview-file-type'=> 'text','class' => 'file form-control');
               echo form_upload($data);?>
         </div>
     </div>

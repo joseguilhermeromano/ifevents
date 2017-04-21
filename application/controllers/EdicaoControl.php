@@ -19,13 +19,24 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	}
     	$this->edicao->setaValores();
     	$this->edicao->valida();
-    	$this->upload_image('teste', 100, 100, null, null);
+
+    	$this->edicao->edic_img="teste";
+    	if(!isset($this->edicao->edic_img)||(isset($this->edicao->edic_img) && !empty($_FILES['image_field']['name']))){
+	    	if($this->input->post('conferencia')!==null){
+		    	$nomeImagem = 'img_'.($this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1).'_'.strtolower($this->edicao->conferencia->conf_abrev);
+		    	
+	    		$this->edicao->edic_img = $this->upload_image($nomeImagem, 'edicoes', null, null, 3543, 1181);
+	    	}
+    	}
+    	
+    	
+    		
+    	
 
     	if($this->form_validation->run()){
 
     	}
 
-    	// echo print_r($this->edicao);
 
     	$this->chamaView("nova-edicao", "organizador",
             	array("title"=>"IFEvents - Nova Edição", "edicao" => $this->edicao), 1);

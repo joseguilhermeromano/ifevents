@@ -10,10 +10,15 @@
         <!-- Bootstrap Core CSS -->
         <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
+        <!-- font awesome --> 
         <link href="<?php echo base_url ('assets/ambas-areas/css/font-awesome.min.css');?>" rel="stylesheet">
+        <!-- plugin select 2 -->
         <link href="<?php echo base_url ('assets/ambas-areas/css/select2.min.css');?>" rel="stylesheet">
         <link href="<?php echo base_url ('assets/area-interna/css/jquery-ui.css');?>" rel="stylesheet">
+        <!-- plugin niceEdit --> 
         <script src="<?php echo base_url ('assets/area-interna/nicedit/nicEdit-latest.js');?>"></script>
+        <!--plugin bootstrap-input-file --> 
+        <link href="<?php echo base_url ('assets/area-interna/css/bootstrap-file-input-fileinput.css');?>" rel="stylesheet">
             <script type="text/javascript">
               //<![CDATA[
                 bkLib.onDomLoaded(function() {

@@ -173,8 +173,9 @@ $(document).ready(function(){
         async: true,
         dataType: "json",
         success: function(data) {
-            $('#linkEvento').val($('#linkEvento').val()+data+'-'+ $('.consultaConferencia option:selected').text().toLowerCase());
-
+            $('#linkEvento').val('');
+            $('#linkEvento').val($('#linkEvento').val()
+              + baseUrl + 'evento/' + data + '-' + $('.consultaConferencia option:selected').text().toLowerCase());
         }
     }); 
   });
