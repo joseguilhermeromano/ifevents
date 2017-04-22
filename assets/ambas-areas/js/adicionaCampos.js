@@ -163,6 +163,7 @@ $(document).ready(function() {
 
 });
 
+/**GERA O LINK DA NOVA EDIÇÃO**/
 $(document).ready(function(){
   $('.consultaConferencia').change(function(){
     var conferencia = {conf_cd : $('.consultaConferencia option:selected').val()};
@@ -179,6 +180,40 @@ $(document).ready(function(){
         }
     }); 
   });
+});
+
+// /**CARREGA PLUGIN FILE UPLOAD BOOTSTRAP**/
+  // initialize with defaults
+$(document).ready(function(){
+
+  $.ajax({
+  type: "POST",
+  url: baseUrl + "edicao/recuperaImagem",
+  async: true,
+  dataType: "json",
+  success: function (data) {
+      
+    console.log(data);
+    $("#file").fileinput({
+    language: 'pt-BR',
+    theme: 'fa',
+    showUpload: false,
+    browseClass: 'btn btn-success',
+    browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+    initialPreview: [data.initialPreview],
+    initialPreviewAsData: data.initialPreviewAsData,
+    initialPreviewShowDelete:data.initialPreviewShowDelete,
+    initialPreviewConfig: [data.initialPreviewConfig],
+    overwriteInitial: data.overwriteInitial,
+    maxFileSize: data.maxFileSize,
+    });
+
+
+  }
+
+  });
+
+
 });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE COMITÊS **/

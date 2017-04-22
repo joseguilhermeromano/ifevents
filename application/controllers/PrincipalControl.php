@@ -173,7 +173,22 @@ class PrincipalControl extends CI_Controller {
                 $this->img->file_overwrite = true ;
                 $this->img->Process("application/views/imagens/".$diretorioImg."/");
                 if ($this->img->processed) {
-                      return str_replace("\\", "", $this->img->file_dst_pathname);
+                      $linkImg = str_replace("\\", "", $this->img->file_dst_pathname);
+
+                        $configInputFile = array(
+                        "initialPreview" => "<img src='".base_url($linkImg)."' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='".$novoNome."' >",
+                        "initialPreviewConfig" => array('caption' => $this->img->file_dst_name, 
+                            "size" => $this->img->file_src_size),
+                        "initialPreviewAsData" => false,
+                        "initialPreviewShowDelete" => false,  
+                        "initialCaption" => $novoNome, 
+                        "maxFileSize" => "1000000",
+                        "overwriteInitial" => true
+                        );
+
+                        $this->session->set_userdata('configInputFile',$configInputFile);
+
+                      return $linkImg;
                 } else {
                       $this->session->set_flashdata('error', $this->img->error);
                 }

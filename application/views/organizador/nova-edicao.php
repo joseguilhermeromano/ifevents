@@ -54,8 +54,8 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Imagem do Evento', 'imagemevento' ); ?></b>
-            <?php $data = array( 'name' => 'image_field', 'id' => 'file', 'data-show-upload' => 'false',
-              'data-preview-file-type'=> 'text','class' => 'file form-control');
+            <?php $data = array( 'name' => 'image_field', 'id' => 'file','type' => 'file',  
+              'class' =>'file-loading');
               echo form_upload($data);?>
         </div>
     </div>
@@ -308,3 +308,13 @@
 echo form_close();
 ?>
 </div>
+
+<!-- PRÉ CARREGA A IMAGEM NO SELECT DO UPLOAD-->
+<?php //if(isset($edicao->edic_img)){ ?>
+<script>
+
+// configUpload('teste', "<img src='http://192.168.1.5/ifevents/application/views/imagens/edicoes/img_1_semcitec.jpg' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='teste' >", false, '');
+// configUpload();
+// lendo("testando envio de variavel!");
+</script>
+<?php //} ?>

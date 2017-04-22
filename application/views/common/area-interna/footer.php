@@ -86,27 +86,31 @@
 
      <!-- assetststrap Core JavaScript -->
      <!--bootstrap -->
-        <script src="<?php echo base_url('assets/area-interna/js/jquery.min.js');?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
+<!--      <script src="<?php echo base_url('assets/area-interna/js/jquery-3.2.1.js');?>"></script> -->
+<!--         <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script> -->
+       <!--  <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script> -->
     <!-- metodos para as modais --> 
-        <script src="<?php echo base_url('assets/area-interna/js/metodosModais.js'); ?>"></script>
+        <!-- <script src="<?php echo base_url('assets/area-interna/js/metodosModais.js'); ?>"></script> -->
     <!-- plugin jquery masked input --> 
-        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
+        <!-- <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script> -->
     <!-- plugins para calendario jquery --> 
-        <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
-        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
+        <!-- <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script> -->
     <!-- plugin select 2 jquery --> 
-        <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
+        <!-- <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script> -->
     <!-- consultas ajax e implementação de alguns plugins --> 
-        <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
+         <!-- <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script> -->
     <!-- plugin bootstrap file input --> 
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-canvas-to-blob.min.js'); ?>">
+        <!-- <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-canvas-to-blob.min.js'); ?>">
         </script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-sortable.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-purify.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-fileinput.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-theme.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/pt-BR.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/pt-BR.js'); ?>"></script> -->
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
@@ -119,43 +123,6 @@
         $("#wrapper").toggleClass("toggled");
          $("#menu-toggle").show();
         // $("span", this).toggleClass("glyphicon glyphicon-remove glyphicon glyphicon-menu-hamburger");
-    });
-
-    // initialize with defaults
-    $("#file").fileinput({
-        // setup initial preview with data keys
-        initialPreviewConfig: [
-                {caption:'teste.jpg'}
-        ],
-        initialPreview: [
-            "<img src='http://192.168.1.5/ifevents/application/views/imagens/edicoes/img_1_semcitec.jpg' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: 160px' title='teste' >",
-
-           
-        ]
-         // "<img src='/images/jellyfish.jpg' class='file-preview-image' alt='Jelly Fish' title='Jelly Fish'>",
-        // initial preview configuration
-        // initialPreviewConfig: [
-        //     {
-        //         caption: 'desert.jpg',
-        //         width: '120px'
-        //         // key: 100,
-        //         // extra: {id: 100}
-        //     },
-        //     {
-        //         caption: 'jellyfish.jpg', 
-        //         width: '120px'
-                // url: '/localhost/avatar/delete', 
-                // key: 101, 
-                // frameClass: 'my-custom-frame-css',
-                // frameAttr: {
-                //     style: 'height:80px',
-                //     title: 'My Custom Title',
-                // }
-                // extra: function() { 
-                //     return {id: $("#id").val()};
-                // },
-        //     }
-        // ]
     });
 
     </script>

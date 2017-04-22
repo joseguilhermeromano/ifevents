@@ -19,6 +19,28 @@
         <script src="<?php echo base_url ('assets/area-interna/nicedit/nicEdit-latest.js');?>"></script>
         <!--plugin bootstrap-input-file --> 
         <link href="<?php echo base_url ('assets/area-interna/css/bootstrap-file-input-fileinput.css');?>" rel="stylesheet">
+        <script src="<?php echo base_url('assets/area-interna/js/jquery-3.2.1.js');?>"></script>
+                <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
+    <!-- metodos para as modais --> 
+        <script src="<?php echo base_url('assets/area-interna/js/metodosModais.js'); ?>"></script>
+    <!-- plugin jquery masked input --> 
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
+    <!-- plugins para calendario jquery --> 
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
+    <!-- plugin select 2 jquery --> 
+        <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
+    <!-- consultas ajax e implementação de alguns plugins --> 
+         <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
+    <!-- plugin bootstrap file input --> 
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-canvas-to-blob.min.js'); ?>">
+        </script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-sortable.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-purify.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-fileinput.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-theme.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/pt-BR.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/scripts-upload.js');?>"></script>
             <script type="text/javascript">
               //<![CDATA[
                 bkLib.onDomLoaded(function() {
