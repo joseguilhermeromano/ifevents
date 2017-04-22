@@ -193,7 +193,6 @@ $(document).ready(function(){
   dataType: "json",
   success: function (data) {
       
-    console.log(data);
     $("#file").fileinput({
     language: 'pt-BR',
     theme: 'fa',
