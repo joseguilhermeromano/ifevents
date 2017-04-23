@@ -184,7 +184,7 @@ $(document).ready(function(){
 
 // /**CARREGA PLUGIN FILE UPLOAD BOOTSTRAP**/
   // initialize with defaults
-$(document).ready(function(){
+$("#fileImage").ready(function(){
 
   $.ajax({
   type: "POST",
@@ -193,7 +193,7 @@ $(document).ready(function(){
   dataType: "json",
   success: function (data) {
       
-    $("#file").fileinput({
+    $("#fileImage").fileinput({
     language: 'pt-BR',
     theme: 'fa',
     showUpload: false,

@@ -11,6 +11,7 @@
                     $this->load->Model( 'dao/ComiteDAO' );
                     $this->load->Model( 'dao/InstituicaoDAO' );
                     $this->load->Model( 'RegraModel');
+                    $this->load->Model( 'RegraModel');
                     $this->load->Model( 'LocalidadeModel');
                     $this->load->Model( 'EmailModel');
                     $this->load->Model( 'TelefoneModel');
@@ -22,22 +23,31 @@
             public $localidade;
             public $conferencia;
             public $comite;
+            public $edic_num;
+            public $sedia;
 
             public function setaValores(){
-            	$this->edic_conf_cd = $this->input->post('conferencia');
-                $this->conferencia = $this->ConferenciaDAO->consultarTudo(array('conf_cd' => $this->edic_conf_cd), null, null, 'conf_cd')[0];
-                $this->edic_comi_cd = $this->input->post('comite');
-                $this->comite= $this->ComiteDAO->consultarTudo(array('comi_cd' => $this->edic_comi_cd), null, null, 
+                if($this->input->post('conferencia')!==null){
+                	$this->edic_conf_cd = $this->input->post('conferencia');
+                    $this->conferencia = $this->ConferenciaDAO->consultarTudo(array('conf_cd' => $this->edic_conf_cd), null, null, 'conf_cd')[0];
+                }
+                if($this->input->post("comite")!==null){
+                    $this->edic_comi_cd = $this->input->post('comite');
+                    $this->comite= $this->ComiteDAO->consultarTudo(array('comi_cd' => $this->edic_comi_cd), null, null, 
                     'comi_cd')[0];
-            	$this->edic_nm = $this->input->post('nome');
-            	$this->edic_abrev = $this->input->post('abreviacao');
-            	$this->edic_link = $this->input->post('linkevento');
+                }
+                $this->edic_num = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
+                $this->edic_img_nm ='img_'.$this->edic_num.'_'.strtolower($this->edicao->conferencia->conf_abrev);
+            	$this->edic_tema = $this->input->post('tema');
+            	$this->edic_link = str_replace(base_url(),'', $this->input->post('linkevento'));
             	$this->edic_apresent = $this->input->post('apresentacao');
-            	// $this->parcerias = $this->input->post('parcerias[]');
-             //    foreach ($this->parcerias as $key => $value) {
-             //        $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value)[0];
-             //    }
-                // $this->parcerias = $listaparcerias;
+            	$this->parcerias = $this->input->post('parcerias');
+                if($this->parcerias !== null){
+                    foreach ($this->parcerias as $key => $value) {
+                        $listaparcerias[$key+1] = $this->InstituicaoDAO->consultarCodigo($value)[0];
+                    }
+                    $this->parcerias = $listaparcerias;
+                }
                 $this->RegraModel->setaValoresRegraEdicao();
                 $this->regra = $this->RegraModel;
                 $this->EmailModel->setaValores(true);
@@ -46,6 +56,10 @@
                 $this->telefone = $this->TelefoneModel;
                 $this->LocalidadeModel->setaValores();
                 $this->localidade = $this->LocalidadeModel;
+                $this->sedia = (object) array(
+                        'sedi_num' => $this->input->post('numero'),
+                        'sedi_comp' => $this->input->post('complemento')
+                    );
             }
 
             public function valida(){
@@ -53,11 +67,10 @@
                 /*DADOS DA EDIÇÃO*/
             	$this->form_validation->set_rules( 'conferencia', 'Conferência', 'trim|required|max_length[11]' );
             	$this->form_validation->set_rules( 'comite', 'Comitê', 'trim|required|max_length[11]' );
-            	$this->form_validation->set_rules( 'nome', 'Nome', 'alpha|trim|required|max_length[100]' );
-            	$this->form_validation->set_rules( 'abreviacao', 'Abreviação', 'alpha|trim|required|max_length[10]' );
+            	$this->form_validation->set_rules( 'tema', 'Tema da Edição', 'alpha|trim|required|max_length[100]' );
             	$this->form_validation->set_rules( 'linkevento', 'Link do Evento', 
             		'valid_url|trim|required|max_length[100]' );
-            	$this->form_validation->set_rules( 'imagemevento', 'Imagem do Evento', 'trim|required|max_length[100]' );
+            	// $this->form_validation->set_rules( 'image_field', 'Imagem do Evento', 'required' );
             	$this->form_validation->set_rules( 'apresentacao', 'Apresentação', 'trim|required' );
             	$this->form_validation->set_rules( 'parcerias[]', 'Parcerias', 'trim|required' );
 

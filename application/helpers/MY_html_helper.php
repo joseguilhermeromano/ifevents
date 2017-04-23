@@ -5,7 +5,7 @@ if ( ! function_exists('alert'))
 	/**
 	 * Alert
 	 *
-	 * Generates an Alert Bootstrap tag.
+	 * Gera um alert com layout bootstrap
 	 *
 	 * @return	string
 	 */
@@ -30,5 +30,27 @@ if ( ! function_exists('alert'))
 		    .validation_errors().'</div>';
 		    return $alert;
 		}
+	}
+
+	/**
+	 * Conversão de data para padrão Mysql
+	 *
+	 * Converte a data para o padrão do MySql yyyy-dd-mm
+	 *
+	 * @return	string
+	 */
+	function converteDataMysql ($data){
+		return $data === null ? null : implode("-",array_reverse(explode("/",$data)));
+	}
+
+	/**
+	 * Conversão de data para padrão brasileiro
+	 *
+	 * Converte a data para o padrão do brasileiro dd-mm-yyyy
+	 *
+	 * @return	string
+	 */
+	function desconverteDataMysql($data){
+		return $data === null ? null : implode("/",array_reverse(explode("-",$data)));
 	}
 }

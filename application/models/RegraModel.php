@@ -9,6 +9,14 @@
                     $this->load->Model( 'dao/RegraDAO' );
             }
 
+            public $regr_subm_abert = null;
+            public $regr_subm_encerr = null;
+            public $regr_qtd_min_subm_aval = null;
+            public $regr_prazo_resp_autor = null;
+            public $regr_prazo_resp_aval = null;
+            public $regr_dire_subm = null;
+            public $regr_dire_aval = null;
+
             public function validaRegraEdicao(){
                 $this->form_validation->set_rules( 'datainicioinsc', 'Data de Início das inscrições', 'trim|required' );
                 $this->form_validation->set_rules( 'datafiminsc', 'Data de Término das inscrições', 'trim|required' );

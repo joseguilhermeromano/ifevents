@@ -100,18 +100,19 @@
 		public function create_table_regra(){
 			$sql = "CREATE TABLE IF NOT EXISTS Regra(
 					 regr_cd 			   int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT
-					,regr_insc_ini_dt      date    NOT NULL
-					,regr_insc_fin_dt      date    NOT NULL
-					,regr_subm_abert       date    NOT NULL
-					,regr_subm_encerr      date    NOT NULL
-					,regr_even_ini_dt      date    NOT NULL
-					,regr_even_fin_dt      date    NOT NULL
-					,regr_pub_ini_dt       date    NOT NULL
-					,regr_pub_fin_dt       date    NOT NULL
-					,regr_max_aval_qtd     int(3)  NOT NULL
-					,regr_max_subm_qtd     int(3)  NOT NULL
-					,regr_prazo_resp_autor date    NOT NULL
-					,regr_prazo_resp_aval  date    NOT NULL
+					,regr_even_ini_dt       date    NOT NULL
+					,regr_even_fin_dt       date    NOT NULL
+					,regr_pub_ini_dt        date    NOT NULL
+					,regr_pub_fin_dt        date    NOT NULL
+					,regr_insc_ini_dt       date    NOT NULL
+					,regr_insc_fin_dt       date    NOT NULL
+					,regr_subm_abert        date    NULL
+					,regr_subm_encerr       date    NULL
+					,regr_qtd_min_subm_aval int(3)  NULL
+					,regr_prazo_resp_autor  int(3)  NULL
+					,regr_prazo_resp_aval   int(3)  NULL
+					,regr_dire_subm			mediumblob NULL
+					,regr_dire_aval			mediumblob NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -201,18 +202,18 @@
 		public function create_table_edicao(){
 			$sql = "CREATE TABLE IF NOT EXISTS Edicao(
 					 edic_cd       int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-					,edic_anais    varchar(500) NOT NULL
+					,edic_num      int(11)      NOT NULL
+					,edic_tema 	   varchar(100) NOT NULL
+					,edic_apresent varchar(500) NOT NULL
 					,edic_link     varchar(200) NOT NULL
 					,edic_img      varchar(200) NOT NULL
-					,edic_nm       varchar(100) NOT NULL
-					,edic_num      int(3)       NOT NULL
-					,edic_abrev    varchar(9)   NOT NULL
-					,edic_apresent varchar(500) NOT NULL
-					,edic_subm_dir varchar(100) NOT NULL
 					,edic_result   varchar(100) NOT NULL
+					,edic_anais    varchar(500) NOT NULL
 					,edic_regr_cd  int(11)      NOT NULL
 					,edic_comi_cd  int(11)      NOT NULL
 					,edic_conf_cd  int(11)      NOT NULL
+					,edic_email_cd int(11)		NOT NULL
+					,edic_tele_cd  int(11)		NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 
@@ -233,8 +234,12 @@
 		//Método cria tabela sedia
 		public function create_table_sedia(){
 			$sql = "CREATE TABLE IF NOT EXISTS Sedia(
-					 sedi_edic_cd int(11) NOT NULL
-					,sedi_loca_cd int(11) NOT NULL
+ 					 sedi_cd      int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
+					,sedi_loca_cd int(11) 	   NOT NULL
+					,sedi_edic_cd int(11)      NOT NULL
+					,sedi_num     int(5)   	   NOT NULL
+					,sedi_comp    varchar(100) NULL
+					,UNIQUE(sedi_edic_cd)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -382,12 +387,9 @@
 		//Método cria tabela Apoia
 		public function create_table_apoia(){
 			$sql = "CREATE TABLE IF NOT EXISTS Apoia (
-					 apoia_represent varchar(500) NOT NULL
-					,apoia_logo      varchar(200) NOT NULL
-					,inst_cd         int(11)      NOT NULL
-					,edic_cd         int(11)      NOT NULL
-					,tipa_cd         int(11)      NOT NULL
-					,PRIMARY KEY(inst_cd,edic_cd,tipa_cd)
+					 apoia_inst_cd         int(11)      NOT NULL
+					,apoia_edic_cd         int(11)      NOT NULL
+					,PRIMARY KEY(apoia_inst_cd,apoia_edic_cd)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}

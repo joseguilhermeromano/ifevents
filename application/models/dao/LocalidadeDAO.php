@@ -36,8 +36,68 @@
 
         }
 
+        public function inserirEnderecoEdicao($obj,$edic_cd){
+            $data= array();
+            $consulta = $this->consultarCep($obj->localidade->loca_cep);
+
+            if(!empty($consulta)){
+                $data['loca_cd'] = $consulta[0]->loca_cd;
+            }
+
+            if(empty($data['loca_cd'])){
+                $this->db->insert('Localidade', array('loca_lograd' => $obj->localidade->loca_lograd
+                    ,'loca_bairro' => $obj->localidade->loca_bairro
+                    ,'loca_cid' => $obj->localidade->loca_cid
+                    ,'loca_cep' => $obj->localidade->loca_cep
+                    ,'loca_uf' => $obj->localidade->loca_uf
+                    ));
+                $data['loca_cd'] = $this->db->insert_id();
+            }
+
+            $this->db->insert('Sedia', array('sedi_edic_cd' => $edic_cd
+            ,'sedi_loca_cd' => $data['loca_cd']
+            ,'sedi_num' => $obj->sedia->sedi_num
+            ,'sedi_comp' => $obj->sedia->sedi_comp
+            ));
+        }
+
+        public function alterarEnderecoEdicao($obj,$edic_cd){
+            $data= array();
+            $consulta = $this->consultarCep($obj->loca_cep);
+
+            if(!empty($consulta)){
+                $data['loca_cd'] = $consulta[0]->loca_cd;
+            }
+
+            if(empty($data['loca_cd'])){
+                $this->db->insert('Localidade', array('loca_lograd' => $obj->loca_lograd
+                    ,'loca_bairro' => $obj->loca_bairro
+                    ,'loca_cid' => $obj->loca_cid
+                    ,'loca_cep' => $obj->loca_cep
+                    ,'loca_uf' => $obj->loca_uf
+                    ));
+                $data['loca_cd'] = $this->db->insert_id();
+            }else{
+                $this->db->where('loca_cep', $obj->loca_cep);
+                $this->db->update('Localidade', array('loca_lograd' => $obj->loca_lograd
+                        ,'loca_bairro' => $obj->loca_bairro
+                        ,'loca_cid' => $obj->loca_cid
+                        ,'loca_cep' => $obj->loca_cep
+                        ,'loca_uf' => $obj->loca_uf
+                        ));
+            }
+
+            $this->db->where('abri_edic_cd', $edic_cd);
+            $this->db->update('Sedia', array(
+                     'sedi_loca_cd' => $data['loca_cd']
+                    ,'sedi_user_cd' => $sedi_cd
+                    ,'sedi_num' => $obj->sedi_num
+                    ,'sedi_comp' => $obj->sedi_comp
+                    ));
+        }
+
         public function alterarEnderecoUser($obj,$user_cd) {
-             $data= array();
+            $data= array();
             $consulta = $this->consultarCep($obj->loca_cep);
 
             if(!empty($consulta)){

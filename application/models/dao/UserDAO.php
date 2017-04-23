@@ -13,7 +13,7 @@ class UserDAO extends CI_Model implements DAO{
             $orig_db_debug = $this->db->db_debug;
 
             $this->db->db_debug = FALSE;
-            $this->db->insert('user', $obj);
+            $this->db->insert('User', $obj);
             if($this->db->error()['code']==1062){
                 throw new Exception('Já existe um usuário cadastrado com o mesmo documento RG!');
             }
