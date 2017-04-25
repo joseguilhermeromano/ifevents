@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="fa fa-calendar-plus-o"></span><b> Nova Edição</b></h2>
+<?= $tituloh2 ?>
 <hr>
 <br>
 
@@ -86,7 +86,7 @@
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Parcerias', 'parcerias' ); ?></b><br>
             <select name="parcerias[]" class="form-control estilo-input consultaInstituicao" multiple="multiple">
-            <?php   if(isset($edicao->parcerias)){   
+            <?php   if(isset($edicao->parcerias[0]->inst_cd) && !empty($edicao->parcerias[0]->inst_cd)){   
                       foreach ($edicao->parcerias as $key => $value) {
                                                                             ?>
                         <option value="<?php echo $key; ?>" selected>
@@ -232,7 +232,7 @@
         <b><?php echo form_label( 'Número', 'numero' ); ?></b>
         <?php $data = array( 'name' => 'numero', 'placeholder' => 'Número', 
             'class' => 'form-control estilo-input',
-            'value' => (isset($edicao->localidade) ? $edicao->localidade->abri_num : ''));
+            'value' => (isset($edicao->localidade) ? $edicao->localidade->loca_num : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -241,7 +241,7 @@
         <b><?php echo form_label( 'Complemento', 'complemento' ); ?></b>
         <?php $data = array( 'name' => 'complemento', 'placeholder' => 'Complemento', 
             'class' => 'form-control estilo-input',
-            'value' => (isset($edicao->localidade) ? $edicao->localidade->abri_comp : ''));
+            'value' => (isset($edicao->localidade) ? $edicao->localidade->loca_comp : ''));
                     echo form_input( $data );?>
         </div>
     </div>

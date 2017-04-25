@@ -29,8 +29,8 @@
 
             $this->db->insert('Abriga', array('abri_user_cd' => $user_cd
             ,'abri_loca_cd' => $data['loca_cd']
-            ,'abri_num' => $obj->abri_num
-            ,'abri_comp' => $obj->abri_comp
+            ,'abri_num' => $obj->loca_num
+            ,'abri_comp' => $obj->loca_comp
             ));
 
 
@@ -56,8 +56,8 @@
 
             $this->db->insert('Sedia', array('sedi_edic_cd' => $edic_cd
             ,'sedi_loca_cd' => $data['loca_cd']
-            ,'sedi_num' => $obj->sedia->sedi_num
-            ,'sedi_comp' => $obj->sedia->sedi_comp
+            ,'sedi_num' => $obj->sedia->loca_num
+            ,'sedi_comp' => $obj->sedia->loca_comp
             ));
         }
 
@@ -90,9 +90,9 @@
             $this->db->where('abri_edic_cd', $edic_cd);
             $this->db->update('Sedia', array(
                      'sedi_loca_cd' => $data['loca_cd']
-                    ,'sedi_user_cd' => $sedi_cd
-                    ,'sedi_num' => $obj->sedi_num
-                    ,'sedi_comp' => $obj->sedi_comp
+                    ,'sedi_edic_cd' => $edic_cd
+                    ,'sedi_num' => $obj->loca_num
+                    ,'sedi_comp' => $obj->loca_comp
                     ));
         }
 
@@ -126,8 +126,8 @@
             $this->db->update('Abriga', array(
                      'abri_loca_cd' => $data['loca_cd']
                     ,'abri_user_cd' => $user_cd
-                    ,'abri_num' => $obj->abri_num
-                    ,'abri_comp' => $obj->abri_comp
+                    ,'abri_num' => $obj->loca_num
+                    ,'abri_comp' => $obj->loca_comp
                     ));
 
         }

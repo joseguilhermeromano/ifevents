@@ -59,6 +59,7 @@ $route[ 'usuario/desativar/(:num)' ]  = 'UsuarioControl/desativar/$1';
 $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
+$route[ 'edicao/alterar/(:any)' ]     = 'EdicaoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
 
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';

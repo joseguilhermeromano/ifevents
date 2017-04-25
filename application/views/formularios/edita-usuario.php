@@ -199,7 +199,7 @@
         <b><?php echo form_label( 'Número', 'numero' ); ?></b>
         <?php $data = array( 'name' => 'numero', 'placeholder' => 'Número', 
             'class' => 'form-control estilo-input',
-            'value' => (isset($localidade) ? $localidade->abri_num : ''));
+            'value' => (isset($localidade) ? $localidade->loca_num : ''));
                     echo form_input( $data );?>
         </div>
     </div>
@@ -208,7 +208,7 @@
         <b><?php echo form_label( 'Complemento', 'complemento' ); ?></b>
         <?php $data = array( 'name' => 'complemento', 'placeholder' => 'Complemento', 
             'class' => 'form-control estilo-input',
-            'value' => (isset($localidade) ? $localidade->abri_comp : ''));
+            'value' => (isset($localidade) ? $localidade->loca_comp : ''));
                     echo form_input( $data );?>
         </div>
     </div>

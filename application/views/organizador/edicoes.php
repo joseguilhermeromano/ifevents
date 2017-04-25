@@ -31,8 +31,8 @@
         <thead>
             <tr>
                     
-                    <th class="col-xs-3">Conferência</th>
-                    <th class="col-xs-2">Edição</th>
+                    <th class="col-xs-3">Edição</th>
+                    <th class="col-xs-2">Tema</th>
                     <th class="col-xs-1 text-center">Início</th>
                     <th class="col-xs-1 text-center">Término</th>
                     <th class="col-xs-1 text-center">Anais</th>
@@ -42,22 +42,22 @@
         </thead>
         <tbody>
             <?php 
-            //if(!empty($users)){
-           // foreach( $users as $user ): ?>
+            if(!empty($edicoes)){
+            foreach( $edicoes as $edicao ): ?>
                  <tr> 
-                    <td>Semana da Tecnologia, Ciência e Inovação</td>
-                    <td><?php //echo $user->email_email; ?>SEMCITEC5</td>
-                    <td class="text-center"><?php //echo $user->tius_nm; ?> 16/04/2017</td>
-                    <td class="text-center"><?php //echo $user->stat_nm; ?>16/04/2017</td>
-                    <td class="text-center"><?php //echo $user->stat_nm; ?>Não submetido</td>
-                    <td class="text-center"><?php //echo $user->stat_nm; ?>Não submetido</td>
+                    <td><?= $edicao->edic_num.'º '.$edicao->conf_abrev ?></td>
+                    <td><?= $edicao->edic_tema ?></td>
+                    <td class="text-center"><?= desconverteDataMysql($edicao->regr_even_ini_dt) ?></td>
+                    <td class="text-center"><?= desconverteDataMysql($edicao->regr_even_fin_dt) ?></td>
+                    <td class="text-center"><?= $edicao->edic_result === NULL ? 'Não submetido' : '' ?></td>
+                    <td class="text-center"><?= $edicao->edic_anais === NULL ? 'Não submetido' : '' ?></td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
-                          <a href="<?php //echo base_url('usuario/alterar/'.$user->user_cd); ?>" class="btn-opcao">
+                          <a href="<?= base_url('edicao/alterar/'.$edicao->edic_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
                           <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo('<?php //echo $user->user_cd; ?>'); 
-                          setLink('<?php //echo base_url('usuario/desativar/')?>');">
+                          onclick="setCodigo('<?= $edicao->edic_cd; ?>'); 
+                          setLink('<?= base_url('edicao/desativar/')?>');">
                           <span class="fa fa-trash"></span>&#09;Excluir</a><br>
                           <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
                           onclick="setCodigo('<?php //echo $user->user_cd; ?>'); 
@@ -66,20 +66,20 @@
                     </div>
                     </td>
                 </tr>
-            <?php //endforeach;}else{ ?>
+            <?php endforeach;}else{ ?>
               <tr>
                 <td class="col-xs-12 text-center" colspan="7">Não foram encontrados resultados para a sua busca...</td>
               </tr>
-            <?php //} ?> 
+            <?php } ?> 
         </tbody>
     </table>
 </div><!-- /TABELA-->
 
   <!-- PAGINAÇÃO -->
     <div class="text-center">
-    Exibindo de 1 a <?php //echo !empty($users) ? sizeof($users) : 0; ?> de um total de <?php //echo !empty($users) ? $totalRegistros : 0; ?> registros
+    Exibindo de 1 a <?php echo !empty($edicoes) ? sizeof($edicoes) : 0; ?> de um total de <?php echo !empty($edicoes) ? $totalRegistros : 0; ?> registros
     </div>
-    <?php //echo $paginacao; ?>
+    <?php echo $paginacao; ?>
   <!--/ PAGINAÇÃO -->
 
 </div>

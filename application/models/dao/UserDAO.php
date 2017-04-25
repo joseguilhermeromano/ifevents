@@ -96,8 +96,8 @@ class UserDAO extends CI_Model implements DAO{
                 $loca->loca_cep = $value->loca_cep;
                 $loca->loca_cid = $value->loca_cid;
                 $loca->loca_uf = $value->loca_uf;
-                $loca->abri_num = $value->abri_num;
-                $loca->abri_comp = $value->abri_comp;
+                $loca->loca_num = $value->abri_num;
+                $loca->loca_comp = $value->abri_comp;
             }
             if(empty($email->email_email)){
                 $email->email_email = $value->email_email;
