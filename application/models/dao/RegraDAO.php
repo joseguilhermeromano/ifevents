@@ -31,7 +31,15 @@
                 }
                 
                 public function alterar($obj) {
-                    $this->db->where('regra_id', $obj->regra_id);
+                    $obj->regr_even_ini_dt = converteDataMysql($obj->regr_even_ini_dt);
+                    $obj->regr_even_fin_dt = converteDataMysql($obj->regr_even_fin_dt);
+                    $obj->regr_pub_ini_dt = converteDataMysql($obj->regr_pub_ini_dt);
+                    $obj->regr_pub_fin_dt = converteDataMysql($obj->regr_pub_fin_dt);
+                    $obj->regr_insc_ini_dt = converteDataMysql($obj->regr_insc_ini_dt);
+                    $obj->regr_insc_fin_dt = converteDataMysql($obj->regr_insc_fin_dt);
+                    $obj->regr_subm_abert = converteDataMysql($obj->regr_subm_abert);
+                    $obj->regr_subm_encerr = converteDataMysql($obj->regr_subm_encerr);
+                    $this->db->where('regr_cd', $obj->regr_cd);
                     return $this->db->update('regra', $obj);
                 }
 

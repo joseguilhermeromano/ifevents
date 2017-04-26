@@ -83,10 +83,10 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function alterar($codigo){
+		$edicao = $this->EdicaoDAO->consultarCodigo($codigo);
 		if (empty($this->edicao->input->post()) && isset($codigo)) {
 	    	$this->session->userdata('configInputFile') !==null ? $this->session->unset_userdata('configInputFile') : '';
-	    	$edicao = $this->EdicaoDAO->consultarCodigo($codigo);
-	    	echo print_r(filesize($edicao->edic_img));
+
 	    	$configInputFile = array(
             "initialPreview" => "<img src='".base_url($edicao->edic_img)."' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='"
             .basename($edicao->edic_img)."' >",
@@ -107,47 +107,61 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
             		"edicao" => $edicao), 1);
     		return true;
     	}
-    	// $this->edicao->setaValores();
-    	// $this->edicao->valida();
+    	$this->edicao->setaValores();
+    	$this->edicao->valida();
     		
 
-    	// if($this->form_validation->run()){
+    	if($this->form_validation->run()){
 
-	    // 	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
+	    	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
 		    		
-		   //  		$this->edicao->edic_img = $this->upload_image($this->edicao->edic_img_nm, 'edicoes',
-		   //  		 null, null, 3543, 1181);
+		    		$this->edicao->edic_img = $this->upload_image($this->edicao->edic_img_nm, 'edicoes',
+		    		 null, null, 3543, 1181);
 		    	
-	    // 	}
+	    	}
 
-    	// 	$this->db->trans_start();
-     //        try{
-     //        	$email = $this->EmailDAO->consultarTudo($this->edicao->email->email_email)[0];
-     //        	if(sizeof($email) == 0){
-     //            	$this->edicao->edic_email_cd = $this->EmailDAO->inserir($this->edicao->email);
-     //        	}else{
-     //        		$this->edicao->edic_email_cd = $email->email_cd;
-     //        	}
-     //            $this->edicao->edic_tele_cd = $this->TelefoneDAO->inserir($this->edicao->telefone);
-     //            $this->edicao->edic_regr_cd = $this->RegraDAO->inserir($this->edicao->regra);
-     //            $edic_cd = $this->EdicaoDAO->inserir($this->edicao);
-     //            $this->LocalidadeDAO->inserirEnderecoEdicao($this->edicao, $edic_cd);
-     //        }catch(Exception $e){
-     //            $this->session->set_flashdata('error', $e->getMessage());
-     //        }
-     //        $this->db->trans_complete();
+			$this->db->trans_start();
+			 $verificaTel = $this->TelefoneDAO->verificaTelefoneExiste($this->edicao->telefone->tele_fone);
+            if(null === $edicao->telefone->tele_cd){
+                $this->edicao->edic_tele_cd = $this->TelefoneDAO->inserir($this->edicao->telefone);
+            }else if($verificaTel!=null){
+                $this->edicao->edic_tele_cd = $verificaTel;
+            }else if($edicao->tele_fone != $this->edicao->telefone->tele_fone){
+                $edicoes = $this->EdicaoDAO->consultarTudo();
+                $numedicoes=0;
+                foreach ($edicoes as $key => $value) {
+                    $value->edic_tele_cd == $edicao->tele_cd ? $numedicoes++ :'';
+                }
+                if($numedicoes > 1){
+                    $this->edicao->edic_tele_cd = $this->TelefoneDAO->inserir($this->edicao->telefone);
+                }else{
+                    $this->edicao->edic_tele_cd = $edicao->edic_tele_cd;
+                    $this->edicao->telefone->tele_cd = $edicao->edic_tele_cd;
+                    $this->TelefoneDAO->alterar($this->telefone);
+                }
+            }
 
-     //        if($this ->db->trans_status() !== FALSE){
-     //            $this->session->set_flashdata('success', 'A Edição foi cadastrada com sucesso!');
-     //            $this->session->unset_userdata('configInputFile');
-     //            $this->edicao = null;
-     //        }
+            $this->EdicaoDAO->alterar($this->edicao);
+            $this->RegraDAO->alterar($this->edicao->regra);
+            $this->LocalidadeDAO->alterarEnderecoEdicao($this->localidade, $edicao->edic_cd);
+            $this->EmailDAO->alterar($this->edicao->edic_email_cd);
+            $this->db->trans_complete();
 
-    	// }
+            if($this ->db->trans_status() !== FALSE){
+                $this->session->set_flashdata('success', 'A Edição foi atualizada com sucesso!');
+                $this->session->unset_userdata('configInputFile');
+                $this->edicao = null;
+            }else{
+            	$this->session->set_flashdata('error', 'Não foi possível atualizar a edição!');
+            }
+
+    	}
 
 
-    	// $this->chamaView("nova-edicao", "organizador",
-     //        	array("title"=>"IFEvents - Nova Edição", "edicao" => $this->edicao), 1);
+    	$this->chamaView("nova-edicao", "organizador",
+            	array("title"=>"IFEvents - Nova Edição",
+            	 "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Edição</b></h2>",
+            	 "edicao" => $this->edicao), 1);
 	}
 
 	public function excluir($codigo){

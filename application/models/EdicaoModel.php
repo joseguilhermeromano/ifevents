@@ -30,6 +30,7 @@
                 if($this->input->post('conferencia')!==null){
                 	$this->edic_conf_cd = $this->input->post('conferencia');
                     $this->conferencia = $this->ConferenciaDAO->consultarTudo(array('conf_cd' => $this->edic_conf_cd), null, null, 'conf_cd')[0];
+                    $this->edic_img_nm ='img_'.$this->edic_num.'_'.strtolower($this->conferencia->conf_abrev);
                 }
                 if($this->input->post("comite")!==null){
                     $this->edic_comi_cd = $this->input->post('comite');
@@ -37,7 +38,6 @@
                     'comi_cd')[0];
                 }
                 $this->edic_num = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
-                $this->edic_img_nm ='img_'.$this->edic_num.'_'.strtolower($this->edicao->conferencia->conf_abrev);
             	$this->edic_tema = $this->input->post('tema');
             	$this->edic_link = str_replace(base_url(),'', $this->input->post('linkevento'));
             	$this->edic_apresent = $this->input->post('apresentacao');

@@ -160,9 +160,11 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             if($this->form_validation->run()){
                 $this->db->trans_start();
                 $this->usuario->user_cd = $data['user']->user_cd;
-
+                $verificaTel = $this->TelefoneDAO->verificaTelefoneExiste($this->telefone->tele_fone);
                 if(null === $data['user']->user_tele_cd){
                     $this->usuario->user_tele_cd = $this->TelefoneDAO->inserir($this->telefone);
+                }else if($verificaTel!=null){
+                    $this->usuario->user_tele_cd = $verificaTel;
                 }else if($data['telefone']->tele_fone != $this->telefone->tele_fone){
                     $users = $this->UserDAO->consultarTudo();
                     $numusers=0;
@@ -174,7 +176,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     }else{
                         $this->usuario->user_tele_cd = $data['user']->user_tele_cd;
                         $this->telefone->tele_cd = $data['user']->user_tele_cd;
-                        $this->TelefoneDAO->alterarTelefoneUser($this->telefone);
+                        $this->TelefoneDAO->alterar($this->telefone);
                     }
                 }
 

@@ -10,7 +10,7 @@
 
 
 <?php
-    echo form_open_multipart( 'edicao/cadastrar', 'role="form" class="formsignin"' );
+    echo form_open_multipart( $this->uri->segment(2) != 'alterar' ? 'edicao/cadastrar/' : $this->uri->uri_string(), 'role="form" class="formsignin"' );
 ?>
 
 <h4 class="subtitulo"><i>Dados da Edição</i></h4><br>
@@ -103,7 +103,7 @@
 <h4 class="subtitulo"><i>Agendamento do Evento</i></h4><br>
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( '*Data de Início do Evento', 'datainicioevento' ); ?></b>
         <div class="input-group date" data-provide="datepicker">
@@ -117,7 +117,7 @@
         </div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( '*Data de Término do Evento', 'datafimevento' ); ?></b>
         <div class="input-group date" data-provide="datepicker">
@@ -134,7 +134,7 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( '*Data inicial da publicação', 'datainiciopub' ); ?></b>
         <div class="input-group date" data-provide="datepicker">
@@ -148,7 +148,7 @@
         </div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( '*Data final da publicação', 'datafimpub' ); ?></b>
         <div class="input-group date" data-provide="datepicker">
@@ -165,7 +165,7 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( '*Data de Início das inscrições no evento', 'datainicioinsc' ); ?></b>
         <div class="input-group date" data-provide="datepicker">
@@ -179,7 +179,7 @@
         </div>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
         <b><?php echo form_label( '*Data de Término de inscrições no evento', 'datafiminsc' ); ?></b>
         <div class="input-group date" data-provide="datepicker">

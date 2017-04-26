@@ -34,8 +34,27 @@
         }
         
         public function alterar($obj) {
-            $this->db->where('ende_id', $obj->ende_id);
-            return $this->db->update('edicao', $obj);
+            $this->db->where('edic_cd', $obj->edic_cd);
+            $this->db->update('edicao',
+                array(
+                'edic_num' => $obj->edic_num
+                ,'edic_tema' => $obj->edic_tema
+                ,'edic_apresent' => $obj->edic_apresent
+                ,'edic_link' => $obj->edic_link
+                ,'edic_img' => $obj->edic_img
+                ,'edic_regr_cd' => $obj->edic_regr_cd
+                ,'edic_comi_cd' => $obj->edic_comi_cd
+                ,'edic_conf_cd' => $obj->edic_conf_cd
+                ,'edic_email_cd' => $obj->edic_email_cd
+                ,'edic_tele_cd' => $obj->edic_tele_cd
+                    ));
+            $this->db->where('apoia_edic_cd', $obj->edic_cd);
+            $this->db->delete('Apoia');
+            if(null !== $obj->parcerias){
+                foreach ($obj->parcerias as $key => $value) {
+                    $this->db->insert('Apoia', array('apoia_inst_cd' => $key,'apoia_edic_cd'=> $obj->edic_cd));
+                }
+            }
         }
 
         public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='edic_num', $ordenacao='asc') {
