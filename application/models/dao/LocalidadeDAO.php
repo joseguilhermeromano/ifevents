@@ -87,7 +87,7 @@
                         ));
             }
 
-            $this->db->where('abri_edic_cd', $edic_cd);
+            $this->db->where('sedi_edic_cd', $edic_cd);
             $this->db->update('Sedia', array(
                      'sedi_loca_cd' => $data['loca_cd']
                     ,'sedi_edic_cd' => $edic_cd

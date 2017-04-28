@@ -24,7 +24,6 @@
 
 #sidebar-wrapper {
     position: fixed;
-    left: 210px;
     width: 0;
     margin-left: -210px;
     height: 100%;

@@ -10,6 +10,9 @@ class TelefoneModel extends CI_Model{
             
     }
 
+    public $tele_cd;
+    public $tele_fone;
+
     public function setaValores(){
         $this->tele_fone = $this->input->post('telefone');
     }

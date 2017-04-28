@@ -89,7 +89,7 @@
             <?php   if(isset($edicao->parcerias[0]->inst_cd) && !empty($edicao->parcerias[0]->inst_cd)){   
                       foreach ($edicao->parcerias as $key => $value) {
                                                                             ?>
-                        <option value="<?php echo $key; ?>" selected>
+                        <option value="<?php echo $value->inst_cd; ?>" selected>
                         <?php echo $value->inst_abrev; ?>
                         </option>
 
@@ -109,7 +109,7 @@
         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datainicioevento', 'placeholder' => "Data de Início do Evento", 
             'class' => 'form-control estilo-input datepicker',
-             'value' => (isset($edicao->regra) ? $edicao->regra->regr_even_ini_dt : ''));
+             'value' => (isset($edicao->regra) ? desconverteDataMysql($edicao->regra->regr_even_ini_dt) : ''));
                echo form_input($data);?>
           <span class="input-group-addon">
             <span class="fa fa-calendar"></span>
@@ -123,7 +123,7 @@
         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datafimevento', 'placeholder' => "Data de Término do Evento", 
             'class' => 'form-control estilo-input datepicker',
-             'value' => (isset($edicao->regra) ? $edicao->regra->regr_even_fin_dt : '') );
+             'value' => (isset($edicao->regra) ? desconverteDataMysql($edicao->regra->regr_even_fin_dt) : '') );
                echo form_input($data);?>
           <span class="input-group-addon">
             <span class="fa fa-calendar"></span>
@@ -140,7 +140,7 @@
         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datainiciopub', 'placeholder' => "Data inicial da publicação do evento no site", 
             'class' => 'form-control estilo-input datepicker',
-             'value' => (isset($edicao->regra) ? $edicao->regra->regr_pub_ini_dt : '') );
+             'value' => (isset($edicao->regra) ? desconverteDataMysql($edicao->regra->regr_pub_ini_dt) : '') );
                echo form_input($data);?>
           <span class="input-group-addon">
             <span class="fa fa-calendar"></span>
@@ -154,7 +154,7 @@
         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datafimpub', 'placeholder' => "Data final da publicação do evento no site", 
             'class' => 'form-control estilo-input datepicker',
-             'value' => (isset($edicao->regra) ? $edicao->regra->regr_pub_fin_dt : '') );
+             'value' => (isset($edicao->regra) ? desconverteDataMysql($edicao->regra->regr_pub_fin_dt) : '') );
                echo form_input($data);?>
           <span class="input-group-addon">
             <span class="fa fa-calendar"></span>
@@ -171,7 +171,7 @@
         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datainicioinsc', 'placeholder' => "Data de Início do Evento", 
             'class' => 'form-control estilo-input datepicker',
-             'value' => (isset($edicao->regra) ? $edicao->regra->regr_insc_ini_dt : ''));
+             'value' => (isset($edicao->regra) ? desconverteDataMysql($edicao->regra->regr_insc_ini_dt) : ''));
                echo form_input($data);?>
           <span class="input-group-addon">
             <span class="fa fa-calendar"></span>
@@ -185,7 +185,7 @@
         <div class="input-group date" data-provide="datepicker">
         <?php $data = array( 'name' => 'datafiminsc', 'placeholder' => "Data de Término do Evento", 
             'class' => 'form-control estilo-input datepicker',
-             'value' => (isset($edicao->regra) ? $edicao->regra->regr_insc_fin_dt : '') );
+             'value' => (isset($edicao->regra) ? desconverteDataMysql($edicao->regra->regr_insc_fin_dt) : '') );
                echo form_input($data);?>
           <span class="input-group-addon">
             <span class="fa fa-calendar"></span>

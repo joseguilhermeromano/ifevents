@@ -25,26 +25,31 @@
             public $comite;
             public $edic_num;
             public $sedia;
+            public $edic_cd;
+            public $edic_img;
+            public $edic_email_cd;
+            public $edic_regr_cd;
+            public $edic_conf_cd;
 
             public function setaValores(){
+
                 if($this->input->post('conferencia')!==null){
-                	$this->edic_conf_cd = $this->input->post('conferencia');
+                    $this->edic_conf_cd = $this->input->post('conferencia');
                     $this->conferencia = $this->ConferenciaDAO->consultarTudo(array('conf_cd' => $this->edic_conf_cd), null, null, 'conf_cd')[0];
-                    $this->edic_img_nm ='img_'.$this->edic_num.'_'.strtolower($this->conferencia->conf_abrev);
                 }
+                
                 if($this->input->post("comite")!==null){
                     $this->edic_comi_cd = $this->input->post('comite');
                     $this->comite= $this->ComiteDAO->consultarTudo(array('comi_cd' => $this->edic_comi_cd), null, null, 
                     'comi_cd')[0];
                 }
-                $this->edic_num = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
             	$this->edic_tema = $this->input->post('tema');
             	$this->edic_link = str_replace(base_url(),'', $this->input->post('linkevento'));
             	$this->edic_apresent = $this->input->post('apresentacao');
             	$this->parcerias = $this->input->post('parcerias');
-                if($this->parcerias !== null){
+                if($this->parcerias !== null && !empty($this->parcerias)){
                     foreach ($this->parcerias as $key => $value) {
-                        $listaparcerias[$key+1] = $this->InstituicaoDAO->consultarCodigo($value)[0];
+                        $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value)[0];
                     }
                     $this->parcerias = $listaparcerias;
                 }

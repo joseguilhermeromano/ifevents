@@ -52,7 +52,7 @@
             $this->db->delete('Apoia');
             if(null !== $obj->parcerias){
                 foreach ($obj->parcerias as $key => $value) {
-                    $this->db->insert('Apoia', array('apoia_inst_cd' => $key,'apoia_edic_cd'=> $obj->edic_cd));
+                    $this->db->insert('Apoia', array('apoia_inst_cd' => $value->inst_cd,'apoia_edic_cd'=> $obj->edic_cd));
                 }
             }
         }
@@ -134,17 +134,22 @@
             $edicao->conferencia->conf_abrev = $consulta->conf_abrev;
             $edicao->comite->comi_cd = $consulta->comi_cd;
             $edicao->comite->comi_nm = $consulta->comi_nm;
+            $edicao->edic_cd = $consulta->edic_cd;
+            $edicao->edic_num = $consulta->edic_num;
+            $edicao->edic_email_cd = $consulta->edic_email_cd;
+            $edicao->edic_tele_cd = $consulta->edic_tele_cd;
             $edicao->edic_tema = $consulta->edic_tema;
             $edicao->edic_link = $consulta->edic_link;
             $edicao->edic_img = $consulta->edic_img;
             $edicao->edic_apresent = $consulta->edic_apresent; 
             $edicao->parcerias = $parcerias;
-            $edicao->regra->regr_even_ini_dt = desconverteDataMysql($consulta->regr_even_ini_dt);
-            $edicao->regra->regr_even_fin_dt = desconverteDataMysql($consulta->regr_even_fin_dt);
-            $edicao->regra->regr_pub_ini_dt = desconverteDataMysql($consulta->regr_pub_ini_dt);
-            $edicao->regra->regr_pub_fin_dt = desconverteDataMysql($consulta->regr_pub_fin_dt);
-            $edicao->regra->regr_insc_ini_dt = desconverteDataMysql($consulta->regr_insc_ini_dt);
-            $edicao->regra->regr_insc_fin_dt = desconverteDataMysql($consulta->regr_insc_fin_dt);
+            $edicao->regra->regr_cd = $consulta->regr_cd;
+            $edicao->regra->regr_even_ini_dt = $consulta->regr_even_ini_dt;
+            $edicao->regra->regr_even_fin_dt = $consulta->regr_even_fin_dt;
+            $edicao->regra->regr_pub_ini_dt = $consulta->regr_pub_ini_dt;
+            $edicao->regra->regr_pub_fin_dt = $consulta->regr_pub_fin_dt;
+            $edicao->regra->regr_insc_ini_dt = $consulta->regr_insc_ini_dt;
+            $edicao->regra->regr_insc_fin_dt = $consulta->regr_insc_fin_dt;
             $edicao->localidade->loca_cep = $consulta->loca_cep;
             $edicao->localidade->loca_lograd = $consulta->loca_lograd;
             $edicao->localidade->loca_bairro = $consulta->loca_bairro;

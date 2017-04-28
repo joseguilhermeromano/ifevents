@@ -11,7 +11,7 @@
       <div class="col-sm-5">
          <div class="input-group">
                <input type="text" name="busca" class="form-control estilo-botao-busca" 
-               placeholder="Buscar por Denominação...">
+               placeholder="Buscar por Edição, ex: 1º Semcitec...">
                <span class="input-group-btn">
                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                </span>

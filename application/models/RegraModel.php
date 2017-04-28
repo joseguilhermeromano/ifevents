@@ -8,7 +8,7 @@
 
                     $this->load->Model( 'dao/RegraDAO' );
             }
-
+            public $regr_cd;
             public $regr_subm_abert = null;
             public $regr_subm_encerr = null;
             public $regr_qtd_min_subm_aval = null;
@@ -36,12 +36,12 @@
             }
 
             public function setaValoresRegraEdicao(){
-            	$this->regr_insc_ini_dt = $this->input->post('datainicioinsc');
-            	$this->regr_insc_fin_dt = $this->input->post('datafiminsc');
-            	$this->regr_even_ini_dt = $this->input->post('datainicioevento');
-            	$this->regr_even_fin_dt = $this->input->post('datafimevento');
-            	$this->regr_pub_ini_dt = $this->input->post('datainiciopub');
-            	$this->regr_pub_fin_dt = $this->input->post('datafimpub');
+            	$this->regr_insc_ini_dt = converteDataMysql($this->input->post('datainicioinsc'));
+            	$this->regr_insc_fin_dt = converteDataMysql($this->input->post('datafiminsc'));
+            	$this->regr_even_ini_dt = converteDataMysql($this->input->post('datainicioevento'));
+            	$this->regr_even_fin_dt = converteDataMysql($this->input->post('datafimevento'));
+            	$this->regr_pub_ini_dt = converteDataMysql($this->input->post('datainiciopub'));
+            	$this->regr_pub_fin_dt = converteDataMysql($this->input->post('datafimpub'));
             	// $this->regr_qtd_min_subm_rev = $this->input->post('qtdminsubrev');
             	// $this->regr_prazo_resp_revisor = $this->input->post('prazorev');
             	// $this->regr_prazo_resp_autor = $this->input->post('prazopart');

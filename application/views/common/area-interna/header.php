@@ -40,7 +40,7 @@
 
         ?>
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
-            <div class="borda"><!-- borda -->
+             <div class="borda"><!-- borda -->
                 <a href="javascript:void(0)" href="#close-toggle" id="close-toggle" onclick="closeNav()">
                     <span class="glyphicon">&times;</span>
                 </a>

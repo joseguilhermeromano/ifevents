@@ -24,6 +24,10 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     		
 
     	if($this->form_validation->run()){
+            $this->edicao->edic_num = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
+            
+            $this->edicao->edic_img_nm ='img_'.$this->edicao->edic_num.'_'.strtolower($this->conferencia->conf_abrev);
+            
 
 	    	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
 		    		
@@ -112,6 +116,10 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     		
 
     	if($this->form_validation->run()){
+             $this->edicao->edic_num = $edicao != null ? $edicao->edic_num : 
+             $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
+
+            $this->edicao->edic_img_nm ='img_'.$this->edicao->edic_num.'_'.strtolower($this->edicao->conferencia->conf_abrev);
 
 	    	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
 		    		
@@ -126,11 +134,11 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
                 $this->edicao->edic_tele_cd = $this->TelefoneDAO->inserir($this->edicao->telefone);
             }else if($verificaTel!=null){
                 $this->edicao->edic_tele_cd = $verificaTel;
-            }else if($edicao->tele_fone != $this->edicao->telefone->tele_fone){
+            }else if($edicao->telefone->tele_fone != $this->edicao->telefone->tele_fone){
                 $edicoes = $this->EdicaoDAO->consultarTudo();
                 $numedicoes=0;
                 foreach ($edicoes as $key => $value) {
-                    $value->edic_tele_cd == $edicao->tele_cd ? $numedicoes++ :'';
+                    $value->edic_tele_cd == $edicao->edic_tele_cd ? $numedicoes++ :'';
                 }
                 if($numedicoes > 1){
                     $this->edicao->edic_tele_cd = $this->TelefoneDAO->inserir($this->edicao->telefone);
@@ -140,17 +148,20 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
                     $this->TelefoneDAO->alterar($this->telefone);
                 }
             }
-
+            $this->edicao->edic_img = null === $this->edicao->edic_img ? $edicao->edic_img : $this->edicao->edic_img;
+            $this->edicao->edic_cd = $edicao->edic_cd;
+            $this->edicao->edic_regr_cd = $edicao->regra->regr_cd;
+            $this->edicao->regra->regr_cd = $edicao->regra->regr_cd;
+            $this->edicao->edic_email_cd = $edicao->email->email_cd;
             $this->EdicaoDAO->alterar($this->edicao);
             $this->RegraDAO->alterar($this->edicao->regra);
-            $this->LocalidadeDAO->alterarEnderecoEdicao($this->localidade, $edicao->edic_cd);
-            $this->EmailDAO->alterar($this->edicao->edic_email_cd);
+            $this->LocalidadeDAO->alterarEnderecoEdicao($this->edicao->localidade, $edicao->edic_cd);
+            $this->edicao->email->email_cd = $edicao->edic_email_cd;
+            $this->EmailDAO->alterar($this->edicao->email);
             $this->db->trans_complete();
 
             if($this ->db->trans_status() !== FALSE){
                 $this->session->set_flashdata('success', 'A Edição foi atualizada com sucesso!');
-                $this->session->unset_userdata('configInputFile');
-                $this->edicao = null;
             }else{
             	$this->session->set_flashdata('error', 'Não foi possível atualizar a edição!');
             }
@@ -177,7 +188,9 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('conf_abrev'=>$busca);
+            $numEdicao = preg_replace("/\D/","", $busca);
+            $busca =  preg_replace("/[^A-Za-z]/", "", $busca);
+            $array = array('Conferencia.conf_abrev'=>$busca, 'edic_num'=> $numEdicao);
         }else{
             $busca=null;
             $array=null;
