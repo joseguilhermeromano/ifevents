@@ -361,10 +361,14 @@ label{
 }
 .button{
     width: 150px;
-    border-radius: 50px;
+    /*border-radius: 50px;*/
     font-weight: bold;
     text-align: center;
-    font-size: 14pt;
+    font-size: 12pt;
+}
+
+.button.btn-default{
+  color: #666768;
 }
 
 /* FORMATAÇÃO POST IT */

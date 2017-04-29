@@ -57,10 +57,19 @@ $route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
 $route[ 'usuario/ativar/(:num)' ]     = 'UsuarioControl/ativar/$1';
 $route[ 'usuario/desativar/(:num)' ]  = 'UsuarioControl/desativar/$1';
 $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
+
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]     = 'EdicaoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
+
+/*Rotas da Modalidade*/
+$route[ 'modalidade/(:any)' ]             = 'ModalidadeControl/$1';
+$route[ 'modalidade/alterar/(:any)' ]             = 'ModalidadeControl/alterar/$1';
+
+/*Rotas das Áreas Temáticas*/
+$route[ 'area-tematica/(:any)' ]             = 'AreaTematicaControl/$1';
+$route[ 'area-tematica/alterar/(:any)' ]             = 'AreaTematicaControl/alterar/$1';
 
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';

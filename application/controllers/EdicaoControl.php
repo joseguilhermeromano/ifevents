@@ -14,7 +14,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 	public function cadastrar(){
 	    if (empty($this->edicao->input->post())){
 	    	$this->session->userdata('configInputFile') !==null ? $this->session->unset_userdata('configInputFile') : '';
-    		$this->chamaView("nova-edicao", "organizador",
+    		$this->chamaView("form-edicao", "organizador",
             	array("title"=>"IFEvents - Nova Edição",
             		"tituloh2" => "<h2><span class='fa fa-calendar-plus-o'></span><b> Nova Edição</b></h2>"), 1);
     		return true;
@@ -62,7 +62,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	}
 
 
-    	$this->chamaView("nova-edicao", "organizador",
+    	$this->chamaView("form-edicao", "organizador",
             	array("title"=>"IFEvents - Nova Edição",
             	 "tituloh2" => "<h2><span class='fa fa-calendar-plus-o'></span><b>Nova Edição</b></h2>",
             	 "edicao" => $this->edicao), 1);
@@ -105,7 +105,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 
             $this->session->set_userdata("configInputFile",$configInputFile);
 
-    		$this->chamaView("nova-edicao", "organizador",
+    		$this->chamaView("form-edicao", "organizador",
             	array("title"=>"IFEvents - Editar Edição",
             		"tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Edição</b></h2>",
             		"edicao" => $edicao), 1);
@@ -164,15 +164,16 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
                 $this->session->set_flashdata('success', 'A Edição foi atualizada com sucesso!');
             }else{
             	$this->session->set_flashdata('error', 'Não foi possível atualizar a edição!');
+                $this->chamaView("form-edicao", "organizador",
+                array("title"=>"IFEvents - Nova Edição",
+                 "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Edição</b></h2>",
+                 "edicao" => $this->edicao), 1);
             }
 
     	}
 
-
-    	$this->chamaView("nova-edicao", "organizador",
-            	array("title"=>"IFEvents - Nova Edição",
-            	 "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Edição</b></h2>",
-            	 "edicao" => $this->edicao), 1);
+        redirect('edicao/consultar');
+    	
 	}
 
 	public function excluir($codigo){

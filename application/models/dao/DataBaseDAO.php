@@ -175,6 +175,7 @@
 					,mote_nm   varchar(100) NOT NULL
 					,mote_desc varchar(500) NOT NULL
 					,mote_tipo varchar(100) NOT NULL
+					,mote_conf_cd int(11)   NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}

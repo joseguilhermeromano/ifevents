@@ -312,7 +312,7 @@
 </div>
 
 
-<?php echo '<br><center>'.form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button'))."</center>";
+<?php echo "<br><center><a href='".base_url($this->uri->segment(1)."/consultar/")."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;".form_submit("btn_atualizar", $this->uri->segment(2) != 'alterar' ? 'Cadastrar' : 'Atualizar',array('class' => 'btn btn-success button'))."</center>";
 
 echo form_close();
 ?>
