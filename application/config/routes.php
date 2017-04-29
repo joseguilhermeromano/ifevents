@@ -66,10 +66,12 @@ $route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]             = 'ModalidadeControl/$1';
 $route[ 'modalidade/alterar/(:any)' ]             = 'ModalidadeControl/alterar/$1';
+$route[ 'modalidade/excluir/(:any)' ]             = 'ModalidadeControl/excluir/$1';
 
-/*Rotas das Áreas Temáticas*/
-$route[ 'area-tematica/(:any)' ]             = 'AreaTematicaControl/$1';
-$route[ 'area-tematica/alterar/(:any)' ]             = 'AreaTematicaControl/alterar/$1';
+/*Rotas dos Eixos Temáticas*/
+$route[ 'eixo-tematico/(:any)' ]             = 'EixoTematicoControl/$1';
+$route[ 'eixo-tematico/alterar/(:any)' ]             = 'EixoTematicoControl/alterar/$1';
+$route[ 'eixo-tematico/excluir/(:any)' ]             = 'EixoTematicoControl/excluir/$1';
 
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';

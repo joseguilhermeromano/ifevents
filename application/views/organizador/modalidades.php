@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="fa fa-calendar"></span><b> Modalidades</b></h2>
+<h2><span class="fa fa-check-square-o"></span><b> Modalidades</b></h2>
 <hr>
 <br>
 <?php 
@@ -22,7 +22,7 @@
 <div class="row">
     <div class="col-sm-12">
          <a class="btn btn-default margin-button" href='<?= site_url('/modalidade/cadastrar'); ?>' style="float:right">
-         <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> Nova Modalidade</a>
+         <i class="fa fa-plus" aria-hidden="true"></i> Nova Modalidade</a>
     </div>
 </div>
 <br><br>
@@ -33,7 +33,7 @@
                     
                     <th class="col-xs-3">Denominação</th>
                     <th class="col-xs-4">Descrição</th>
-                    <th class="col-xs-3">Trabalhos Submetidos</th>
+                    <th class="text-center col-xs-3">Trabalhos Submetidos</th>
                     <th class="text-center" style="width:auto">Opções</th>
             </tr>
         </thead>
@@ -43,14 +43,14 @@
             foreach( $modalidades as $modalidade ): ?>
                  <tr> 
                     <td><?= $modalidade->mote_nm ?></td>
-                    <td><?= $modalidade->mote_ds ?></td>
+                    <td><?= $modalidade->mote_desc ?></td>
                     <td class="text-center">0</td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
-                          <a href="<?= base_url('edicao/alterar/'.$modalidade->mote_cd); ?>" class="btn-opcao">
+                          <a href="<?= base_url('modalidade/alterar/'.$modalidade->mote_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
                           <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo(' $modalidade->mote_cd; ?>'); 
+                          onclick="setCodigo('<?= $modalidade->mote_cd; ?>'); 
                           setLink('<?= base_url('modalidade/excluir/')?>');">
                           <span class="fa fa-trash"></span>&#09;Excluir</a>
                     </div>
@@ -67,7 +67,7 @@
 
   <!-- PAGINAÇÃO -->
     <div class="text-center">
-    Exibindo de 1 a <?php echo !empty($edicoes) ? sizeof($edicoes) : 0; ?> de um total de <?php echo !empty($edicoes) ? $totalRegistros : 0; ?> registros
+    Exibindo de 1 a <?php echo !empty($modalidades) ? sizeof($modalidades) : 0; ?> de um total de <?php echo !empty($modalidades) ? $totalRegistros : 0; ?> registros
     </div>
     <?= isset($paginacao) ? $paginacao : ''; ?>
   <!--/ PAGINAÇÃO -->

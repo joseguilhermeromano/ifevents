@@ -59,9 +59,9 @@
   <span class="fa fa-files-o"></span>  TRABALHOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="trabalhos">
-      <li class="item-menu">
+      <li id="modalidade" class="item-menu">
       <a href="<?php echo base_url('modalidade/consultar');?>" class="list-group-item">MODALIDADES</a></li>
-      <li><a href="<?php echo base_url('area-tematica/consultar');?>" class="list-group-item">ÁREAS TEMÁTICAS</a></li>
+      <li id="eixo-tematico"><a href="<?php echo base_url('eixo-tematico/consultar');?>" class="list-group-item">EIXOS TEMÁTICOS</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">AVALIAÇÕES</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">REGRAS</a></li>
   </ul>

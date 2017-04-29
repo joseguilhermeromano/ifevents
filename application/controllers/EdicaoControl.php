@@ -57,6 +57,8 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
                 $this->session->set_flashdata('success', 'A Edição foi cadastrada com sucesso!');
                 $this->session->unset_userdata('configInputFile');
                 $this->edicao = null;
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível cadastrar a nova edição!');
             }
 
     	}
