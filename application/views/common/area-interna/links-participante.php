@@ -8,14 +8,14 @@
     	<span class="glyphicon glyphicon-user"></span>  MEU PERFIL
     </a>
 </li>
-<li class="item-menu">
+<!-- <li class="item-menu">
     <a href="<?php echo base_url('artigo/cadastrar');?>">
     	<span class="glyphicon glyphicon-open-file"></span>  NOVO ARTIGO
     </a>
-</li>
-<li class="item-menu">
-    <a href="<?php echo base_url("artigo/consultarTudo");?>">
-    	<span class="glyphicon glyphicon-list"></span>  MEUS ARTIGOS
+</li> -->
+<li id="artigo" class="item-menu">
+    <a href="<?php echo base_url("artigo/consultar");?>">
+    	<span class="fa fa-files-o"></span>  MEUS TRABALHOS
     </a>
 </li>
 <li class="item-menu">

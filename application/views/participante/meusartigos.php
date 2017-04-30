@@ -1,24 +1,30 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Meus Artigos</b></h2>
+<div class="container-fluid">
+<h2><span class="fa fa-files-o"></span><b> Meus Trabalhos</b></h2>
 <hr>
 <br>
+<?php 
+        $this->load->helper('html');
+        echo alert($this->session);
+?>
+<form method="GET" action="<?php echo base_url('artigo/consultar'); ?>">
+  <div class="row">
+      <div class="col-sm-5">
+         <div class="input-group">
+               <input type="text" name="busca" class="form-control estilo-botao-busca" 
+               placeholder="Buscar por Título do Trabalho...">
+               <span class="input-group-btn">
+                   <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+               </span>
+         </div><!-- /input-group -->
+       </div><!-- /.col-lg-6 -->
+  </div><!-- /row -->
+</form>
 <div class="row">
-    <div class="col-sm-6">
-        <a href='<?php echo site_url('/participante/cadastraartigo'); ?>' class="btn btn-default visible-xs"><span class="glyphicon glyphicon-plus"></span> Novo Artigo</a><br>
+    <div class="col-sm-12">
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/artigo/cadastrar'); ?>' style="float:right">
+         <i class="fa fa-plus" aria-hidden="true"></i> Novo Trabalho</a>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 col-sm-6">
-       <div class="input-group">
-         <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
-         <span class="input-group-btn">
-             <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-         </span>
-       </div><!-- /input-group -->
-     </div><!-- /.col-lg-6 -->
-    <div class="col-md-6 col-sm-6">
-         <a class="btn btn-default hidden-xs" href='<?php echo site_url('/participante/cadastraartigo'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Artigo</a>
-    </div>
-</div><!-- /row -->
 <br><br>
 <div class="table-responsive"><!-- TABELA-->
     <table class="table ls-table" id="tabela1">
@@ -26,46 +32,37 @@
             <tr>
                     
                     <th class="col-md-6">Título</th>
-                    <th><center>Status</center></th>
-                    <th><center>Histórico</center></th>
-                    <th><center>Edição</center></th>
-                    <th><center>Exclusão</center></th>
+                    <th>Última Modificação</th>
+                    <th><center>Situação</center></th>
+                    <th class="text-center"> Opções </th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach( $itens as $item ):?>
-                <tr>
+            <?php 
+            if(!empty($itens)){
+              foreach( $itens as $item ):?>
+                  <tr>
 
-                    <td><?php echo $item->arti_titu; ?></td>
-                    <td class="text-center"><?php echo ($item->arti_status==0 ? "Submissões Ativas" : "Aprovado"); ?></td>
-                    <td class="text-center">
-                        <a href="<?php echo site_url('/participante/historicosubmissao?codigo='.$item->arti_id); ?>">
-                            <span class="glyphicon glyphicon-folder-open estilo-botao-edicao"></span></a>
-                    </td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                    <td class="text-center"><a href="#"><span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
-
-                </tr>
-            <?php endforeach; ?> 
+                      <td><?php echo $item->arti_titu; ?></td>
+                      <td class="text-center">30/04/2017</td>
+                      <td class="text-center"><?php echo ($item->arti_status==0 ? "Submissões Ativas" : "Aprovado"); ?></td>
+                      <td class="text-center"></td>
+                  </tr>
+            <?php endforeach;}else{ ?>
+              <tr>
+                <td class="col-xs-12 text-center" colspan="4">Não há trabalhos submetidos...</td>
+              </tr>
+            <?php } ?> 
         </tbody>
     </table>
 </div><!-- /TABELA-->
-<nav><!-- Paginação -->
-    <ul class="pagination">
-      <li>
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li>
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-</nav><!-- /Paginação -->
+
+  <!-- PAGINAÇÃO -->
+    <div class="text-center">
+      <?php if (!empty($itens)){  ?>
+      Exibindo de 1 a <?php echo !empty($itens) ? sizeof($itens) : 0; ?> de um total de <?php echo !empty($itens) ? $totalRegistros : 0; ?> registros
+      <?php } ?>
+    </div>
+    <?php isset($paginacao) ? $paginacao : ''; ?>
+  <!--/ PAGINAÇÃO -->
+</div>

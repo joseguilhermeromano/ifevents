@@ -69,14 +69,14 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             }
 
             public function consultar() {
-                return $this->ArtigoDAO->consultarCodigo($this->input->get('codigo'));
+                $data['itens'] = $this->ArtigoDAO->consultarTudo();
+                $data['title'] = "IFEvents - Meus Artigos - Participante";
+                $this->chamaView("meusartigos", "participante", $data, 1);
             }
 
-            // public function consultarTudo() {
-            //     $data['itens'] = $this->ArtigoDAO->consultarTudo();
-            //     $data['title'] = "IFEvents - Meus Artigos - Participante";
-            //     $this->chamaView("meusartigos", "participante", $data, 1);
-            // }
+            public function consultarTudo() {
+               
+            }
 
             public function excluir($codigo) {
             }

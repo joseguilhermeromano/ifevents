@@ -127,6 +127,46 @@ $(document).ready(function() {
 
 });
 
+$(document).ready(function() {
+    $(".consultaUsuario").select2({
+    tags: true,
+    placeholder: "Buscar autor inscrito por nome",
+    multiple: true,
+    // tokenSeparators: [',', ' '],
+    minimumInputLength: 2,
+    // maximumSelectionLength: maximumSelectionLengthVariable,
+    minimumResultsForSearch: 10,
+    ajax: {
+        url: baseUrl + "usuario/consultarParaSelect2",
+        dataType: "json",
+        type: "POST",
+        data: function (params) {
+
+            var queryParameters = {
+                term: params.term
+            }
+            return queryParameters;
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return {
+                        text: item.user_nm,
+                        id: item.user_cd
+                    }
+                })
+            };
+        }
+    }
+});
+
+});
+
+/*implanta select 2 nos inputs de modalidade e eixo temático*/
+$(".consultaModalidadeTematica").select2({
+  minimumResultsForSearch: Infinity
+});
+
 /** IMPLANTA O SELECT2 NA CONSULTA DE CONFERÊNCIAS **/
 $(document).ready(function() {
     $(".consultaConferencia").select2({
@@ -211,6 +251,39 @@ $("#fileImage").ready(function(){
   }
 
   });
+
+
+});
+
+// /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
+  // initialize with defaults
+$("#fileDoc").ready(function(){
+
+  // $.ajax({
+  // type: "POST",
+  // url: baseUrl + "artigo/recuperaArtigo",
+  // async: true,
+  // dataType: "json",
+  // success: function (data) {
+      
+    $("#fileDoc").fileinput({
+    language: 'pt-BR',
+    theme: 'fa',
+    showUpload: false,
+    browseClass: 'btn btn-success',
+    browseIcon: "<i class=\"fa fa-file\"></i> ",
+    // initialPreview: [data.initialPreview],
+    // initialPreviewAsData: data.initialPreviewAsData,
+    // initialPreviewShowDelete:data.initialPreviewShowDelete,
+    // initialPreviewConfig: [data.initialPreviewConfig],
+    // overwriteInitial: data.overwriteInitial,
+    // maxFileSize: data.maxFileSize,
+    });
+
+
+  // }
+
+  // });
 
 
 });

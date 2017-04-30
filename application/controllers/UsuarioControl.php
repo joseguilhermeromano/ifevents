@@ -310,6 +310,12 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
+        //busca usuário por nome 
+        public function consultarParaSelect2(){
+            $data = $this->UserDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+
 
         public function ativar($user_cd){
             if(!empty($user_cd)){
