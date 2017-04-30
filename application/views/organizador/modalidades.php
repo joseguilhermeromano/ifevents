@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="fa fa-check-square-o"></span><b> Modalidades</b></h2>
+<h2><span class="fa fa-list"></span><b> Modalidades</b></h2>
 <hr>
 <br>
 <?php 

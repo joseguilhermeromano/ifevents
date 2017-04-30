@@ -63,7 +63,7 @@
       <a href="<?php echo base_url('modalidade/consultar');?>" class="list-group-item">MODALIDADES</a></li>
       <li id="eixo-tematico"><a href="<?php echo base_url('eixo-tematico/consultar');?>" class="list-group-item">EIXOS TEMÁTICOS</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">AVALIAÇÕES</a></li>
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">REGRAS</a></li>
+      <li><a href="<?php echo base_url("regra-submissao/consultar");?>" class="list-group-item">REGRAS</a></li>
   </ul>
 </li>
 

@@ -73,6 +73,10 @@ $route[ 'eixo-tematico/(:any)' ]             = 'EixoTematicoControl/$1';
 $route[ 'eixo-tematico/alterar/(:any)' ]             = 'EixoTematicoControl/alterar/$1';
 $route[ 'eixo-tematico/excluir/(:any)' ]             = 'EixoTematicoControl/excluir/$1';
 
+/*Rotas para Regras*/
+$route[ 'regra-submissao/(:any)' ]             = 'RegraControl/$1';
+$route[ 'regra-submissao/alterar(:any)' ]             = 'RegraControl/alterar/$1';
+
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';
 $route[ 'comite/(:any)' ]             = 'ComiteControl/$1';

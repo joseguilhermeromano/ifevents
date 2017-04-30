@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-road"></span><b> Eixos Temáticos</b></h2>
+<h2><span class="fa fa-list"></span><b> Eixos Temáticos</b></h2>
 <hr>
 <br>
 <?php 
