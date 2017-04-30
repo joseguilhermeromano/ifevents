@@ -36,6 +36,15 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                     array("title"=>"IFEvents - Novo Artigo - Participante"), 1);
         }
 
+        public function listarAtribuicoes(){
+            $this->chamaView("atribuicoes-submissoes", "organizador",
+                    array("title"=>"IFEvents - Atribuição de Submissões"), 1);
+        }
+
+        public function atribuirArtigo(){
+
+        }
+
         private function submeterArtigo(){
             if($this->upload_arquivo($this->submissao)!=null){
                 $this->submissao->setaValores();
@@ -56,20 +65,20 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             $this->chamaView("historico-submissao", "participante", $data, 1);
         }
 
-            public function alterar() {
+            public function alterar($codigo) {
             }
 
             public function consultar() {
                 return $this->ArtigoDAO->consultarCodigo($this->input->get('codigo'));
             }
 
-            public function consultarTudo() {
-                $data['itens'] = $this->ArtigoDAO->consultarTudo();
-                $data['title'] = "IFEvents - Meus Artigos - Participante";
-                $this->chamaView("meusartigos", "participante", $data, 1);
-            }
+            // public function consultarTudo() {
+            //     $data['itens'] = $this->ArtigoDAO->consultarTudo();
+            //     $data['title'] = "IFEvents - Meus Artigos - Participante";
+            //     $this->chamaView("meusartigos", "participante", $data, 1);
+            // }
 
-            public function excluir() {
+            public function excluir($codigo) {
             }
 
 

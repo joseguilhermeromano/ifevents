@@ -61,7 +61,9 @@ $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]     = 'EdicaoControl/alterar/$1';
+$route[ 'artigo/listar-atribuicoes' ]             = 'ArtigoControl/listarAtribuicoes';
 $route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
+
 
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]             = 'ModalidadeControl/$1';

@@ -373,6 +373,28 @@ $(document).ready(function(){
 });
 
 
+/*Seleciona linha da tabela de atribuições de artigos*/
+
+$('#form_atribuicoes :checkbox').click(function() {
+   var limit = 1;
+   
+   if($(this).hasClass("limited")) {
+      var counter = $('.limited:checked').length;
+      if(counter > limit) {
+        this.checked = false;
+        alert('Você pode selecionar apenas um revisor!');
+      }else{
+         $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
+      }
+   }
+  if(!$(this).hasClass("limited")){
+      $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
+  }
+    
+
+});
+
+
 
 
 

@@ -531,6 +531,10 @@ font-weight: bold;
     display: table-cell;
 }
 
+.linhaSelecionadaCheckbox{
+  background-color: #e1e1e1!important;
+}
+
 .btn-opcao{
    color:#00CD66;
 }
