@@ -152,7 +152,7 @@ $(document).ready(function() {
                 results: $.map(data, function (item) {
                     return {
                         text: item.user_nm,
-                        id: item.user_cd
+                        id: item.user_cd+" "+item.user_nm
                     }
                 })
             };
@@ -257,7 +257,7 @@ $("#fileImage").ready(function(){
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
   // initialize with defaults
-$("#fileDoc").ready(function(){
+$("#fileArtigo").ready(function(){
 
   // $.ajax({
   // type: "POST",
@@ -266,10 +266,13 @@ $("#fileDoc").ready(function(){
   // dataType: "json",
   // success: function (data) {
       
-    $("#fileDoc").fileinput({
+    $("#fileArtigo").fileinput({
     language: 'pt-BR',
     theme: 'fa',
     showUpload: false,
+    maxFileCount: 2,
+    maxFileSize: 4096,
+    allowedFileExtensions: ["pdf", "docx"], 
     browseClass: 'btn btn-success',
     browseIcon: "<i class=\"fa fa-file\"></i> ",
     // initialPreview: [data.initialPreview],

@@ -251,13 +251,14 @@
 			$sql = "CREATE TABLE IF NOT EXISTS Artigo(
 					 arti_cd         int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,arti_title      varchar(100) NOT NULL
+					,arti_autores	 varchar(200) NOT NULL
 					,arti_orienta    varchar(100) NOT NULL
 					,arti_resumo     varchar(500) NOT NULL
-					,arti_pal_chaves varchar(100) NOT NULL
-					,arti_arq_fin    mediumblob
-					,arti_status     varchar(9)   NOT NULL
-					,arti_mote_cd    int(11)      NOT NULL
-					,arti_stat_cd    int(11)      NOT NULL
+					,arti_arq_1    	 mediumblob	  NOT NULL
+					,arti_arq_2    	 mediumblob	  NULL
+					,arti_status     int(11)   	  NOT NULL
+					,arti_moda_cd    int(11)      NOT NULL
+					,arti_eite_cd    int(11)      NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}

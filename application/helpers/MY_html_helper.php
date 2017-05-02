@@ -53,4 +53,37 @@ if ( ! function_exists('alert'))
 	function desconverteDataMysql($data){
 		return $data === null ? null : implode("/",array_reverse(explode("-",$data)));
 	}
+
+
+	/**
+	* Ajusta nomes deixando as primeiras letras maiúsculas e o resto minúsculo
+	* @return string
+	**/
+	function ajustaNomes($nome){
+			setlocale(LC_CTYPE, 'pt_BR');
+			$nome = htmlentities($nome);
+			$array = array('da', 'das', 'de', 'do', 'dos', 'e');
+		    return join(' ',
+             array_map(
+                 create_function(
+                     '$nome',
+                     'return (!in_array($nome, ' . var_export($array, true) . ')) ? ucfirst($nome) : $nome;'
+                 ),
+                 explode(
+                     ' ',
+                     strtolower($nome)
+                 )
+             )
+         );
+	}
+
+	function somenteLetras($string){
+		$string = html_entity_decode($string);
+		return preg_replace("/[^A-Za-z ,ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÜÚàáâãäåçèéêëìíîïðñòóôõöùüúÿ]/", "", $string);
+	}
+
+	function somenteNumeros($string){
+		return  preg_replace("/\D/","", $string);
+	}
+
 }

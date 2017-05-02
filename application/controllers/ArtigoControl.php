@@ -9,31 +9,65 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
 			$this->load->Model( 'dao/ArtigoDAO' );
 			$this->load->Model('ArtigoModel','artigo');
+            $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
+            $this->load->Model('dao/ModalidadeTematicaDAO');
             $this->load->Model( 'dao/SubmitDAO' );
             $this->load->Model('SubmitModel','submissao');
 		}
 
         public function cadastrar() {
+            $conf_cd = 1;
+            $modalidades = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$conf_cd, 'mote_tipo'=> 0));
+            $eixosTematicos = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$conf_cd, 'mote_tipo'=> 1));
             if (empty($this->artigo->input->post())){
                 $this->chamaView("novoartigo", "participante",
-                    array("title"=>"IFEvents - Novo Artigo - Participante"), 1);
+                    array("title"=>"IFEvents - Novo Trabalho ", "modalidades" => $modalidades, "eixos" => $eixosTematicos), 1);
                 return 0;
             }
-            if( $this->artigo->valida()==false){
-                    $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-            }
-            else{
-                $this->artigo->setaValores();
-                if($this->ArtigoDAO->inserir($this->artigo)==true){
-                    $this->submissao->subm_arti_cod=$this->ArtigoDAO->ultimoId();
-                    $this->submeterArtigo();
-                }else{
-                    $this->session->set_flashdata('error', 'O Artigo não foi cadastrado!');
+            $this->artigo->valida();
+            $this->artigo->setaValores();
+
+            if($this->form_validation->run()){
+
+                $config['upload_path']   = 'upload';
+                $config['allowed_types'] = 'pdf|docx';
+                $config['max_size']      =  4096;
+                $lista_files = array();
+                $files = $_FILES;
+
+                for($i=0; $i<count($files['userfile']['name']); $i++)
+                {
+                    $_FILES = array();
+                    foreach( $files['userfile'] as $k=>$v )
+                    {
+                        $_FILES['userfile'][$k] = $v[$i];                
+                    }
+
+                    $lista_files[$i] = $this->upload_arquivo($config);
                 }
 
+                $this->artigo->arti_arq_1 = isset($lista_files[0]) ? $lista_files[0] : NULL;
+                $this->artigo->arti_arq_2 = isset($lista_files[1]) ? $lista_files[1] : NULL;
+
+
+                $this->db->trans_start();
+                    // $this->ArtigoDAO->inserir($this->artigo);
+                    // $this->submissao->subm_arti_cod=1;
+                    // $this->submeterArtigo();
+                $this->db->trans_complete();
+
+                if($this ->db->trans_status() !== FALSE){
+                    $this->session->set_flashdata('success', 'O seu trabalho foi submetido com sucesso!');
+                    $this->artigo = null;
+                }else{
+                    $this->session->set_flashdata('error', 'Não foi possível submeter o seu trabalho!');
+                }
+                
+
             }
+
             $this->chamaView("novoartigo", "participante",
-                    array("title"=>"IFEvents - Novo Artigo - Participante"), 1);
+                    array("title"=>"IFEvents - Novo Artigo - Participante","modalidades" => $modalidades, "eixos" => $eixosTematicos, "artigo" => $this->artigo), 1);
         }
 
         public function listarAtribuicoes(){

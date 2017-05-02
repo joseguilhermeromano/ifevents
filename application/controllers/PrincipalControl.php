@@ -119,20 +119,20 @@ class PrincipalControl extends CI_Controller {
 
     }
 
-    public function upload_arquivo($model){
-        $config['upload_path']   = 'upload';
-        $config['allowed_types'] = 'pdf|docx';
-        $config['max_size']      = '4096';
+    public function upload_arquivo($config){
+        // $config['upload_path']   = 'upload';
+        // $config['allowed_types'] = 'pdf|docx';
+        // $config['max_size']      = '4096';
 
-        $model->load->library('upload', $config);
-        $model->upload->initialize($config);
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
 
-        if(!$model->upload->do_upload()){
-                $model->session->set_flashdata( 'error', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
+        if(!$this->upload->do_upload('userfile')){
+                $this->session->set_flashdata( 'error', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é uma das permitidas!' );
                 redirect('artigo/cadastrar');
         }
         else{
-                $data  = array('upload_data' => $model->upload->data());
+                $data  = array('upload_data' => $this->upload->data());
                 $file=read_file($data['upload_data']['full_path']);
                 //função que deleta o arquivo do diretório temporário
                 unlink($data['upload_data']['full_path']);
