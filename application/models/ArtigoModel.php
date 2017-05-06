@@ -23,7 +23,7 @@
         
         public function valida(){
             $this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[100]' );		
-            $this->form_validation->set_rules( 'autor[]', 'Autor (es)', 'trim|required|max_length[200]' );
+            $this->form_validation->set_rules( 'autor[]', 'Autor(es)', 'trim|required|max_length[200]' );
             $this->form_validation->set_rules( 'instituicao', 'Instituição', 'trim|required' );
             $this->form_validation->set_rules( 'modalidade', 'Tipo de Modalidade', 'required' );
             $this->form_validation->set_rules( 'area', 'Eixo Temático', 'required' );		
@@ -35,6 +35,7 @@
         public function setaValores(){
             $this->arti_title = $this->input->post( 'titulo' );
             $this->autores = $this->input->post( 'autor' );
+            natcasesort($this->autores);
             if(null !== $this->autores){
                 $i = 0;
                 $this->codigo_autores = array();
@@ -61,6 +62,8 @@
             $this->arti_eite_cd = $this->input->post( 'area' );
             $this->arti_apoio = $this->input->post( 'apoio' );	
             $this->arti_resumo = $this->input->post( 'resumo' );
+            $this->arti_user_resp_cd = $this->session->userdata('usuario')[0]['user_cd'];
+            $this->arti_status = 0;
         }
 
        

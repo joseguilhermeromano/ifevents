@@ -152,7 +152,7 @@ $(document).ready(function() {
                 results: $.map(data, function (item) {
                     return {
                         text: item.user_nm,
-                        id: item.user_cd+" "+item.user_nm
+                        id: item.user_nm + "-" + item.user_cd
                     }
                 })
             };

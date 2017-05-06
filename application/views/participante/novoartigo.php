@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-8">
         <div class="form-group">
-        <b><?php echo form_label( 'Autor', 'autor' ); ?></b><br>
+        <b><?php echo form_label( 'Autor(es) ', 'autor' ); ?></b><br>
             <select name="autor[]" class="form-control consultaUsuario" multiple="multiple">
             <?php if(isset($artigo->autores)){ ?>
                 <?php foreach ($artigo->autores as $key => $value) { ?>
@@ -38,7 +38,7 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-        <b><?php echo form_label( 'Orientador', 'orientador' ); ?></b><br>
+        <b><?php echo form_label( 'Orientador(a)', 'orientador' ); ?></b><br>
         <?php   $data = array( 'name' => 'orientador', 'placeholder' => 'Orientador','class' => 'form-control estilo-input', 'value' => isset($artigo) ? $artigo->arti_orienta : '' );
                     echo form_input( $data );  ?>
         </div>
@@ -97,7 +97,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
-        <b><?php echo form_label( 'Escolher Artigo PDF:', 'userfile' ); ?></b>
+        <b><?php echo form_label( 'Selecionar trabalho', 'userfile' ); ?></b>
         <?php $data = array( 'name' => 'userfile[]','id' => 'fileArtigo', 'class' => 'form-control estilo-input file-loading', 'multiple' => '');
               echo form_upload($data);?>
         </div>

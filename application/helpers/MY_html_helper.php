@@ -24,6 +24,15 @@ if ( ! function_exists('alert'))
     		$session->set_flashdata('error', '');
     		return $alert;
     	}
+    	if($session->flashdata('erros')){
+    		$alert = '<div class="alert alert-danger">' 
+		    	.'<h4><b><span class="glyphicon glyphicon-alert"></span> Erro</b></h4>';
+    		foreach($session->flashdata('erros') as $erro){
+    			$alert .= $erro.'<br>';
+    		}
+    		 $alert .= '</div>';
+    		return $alert;
+    	}
     	if(!empty(validation_errors())){
 		    $alert = '<div class="alert alert-danger">'
 		    .'<h4><b><span class="glyphicon glyphicon-alert"></span> Erros de Validação</b></h4>'

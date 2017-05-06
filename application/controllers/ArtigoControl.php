@@ -11,8 +11,6 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
 			$this->load->Model('ArtigoModel','artigo');
             $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
             $this->load->Model('dao/ModalidadeTematicaDAO');
-            $this->load->Model( 'dao/SubmitDAO' );
-            $this->load->Model('SubmitModel','submissao');
 		}
 
         public function cadastrar() {
@@ -32,28 +30,12 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 $config['upload_path']   = 'upload';
                 $config['allowed_types'] = 'pdf|docx';
                 $config['max_size']      =  4096;
-                $lista_files = array();
-                $files = $_FILES;
 
-                for($i=0; $i<count($files['userfile']['name']); $i++)
-                {
-                    $_FILES = array();
-                    foreach( $files['userfile'] as $k=>$v )
-                    {
-                        $_FILES['userfile'][$k] = $v[$i];                
-                    }
-
-                    $lista_files[$i] = $this->upload_arquivo($config);
-                }
-
-                $this->artigo->arti_arq_1 = isset($lista_files[0]) ? $lista_files[0] : NULL;
-                $this->artigo->arti_arq_2 = isset($lista_files[1]) ? $lista_files[1] : NULL;
+                $files = $this->upload_arquivo($config);
 
 
                 $this->db->trans_start();
                     // $this->ArtigoDAO->inserir($this->artigo);
-                    // $this->submissao->subm_arti_cod=1;
-                    // $this->submeterArtigo();
                 $this->db->trans_complete();
 
                 if($this ->db->trans_status() !== FALSE){
@@ -103,8 +85,26 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             }
 
             public function consultar() {
-                $data['itens'] = $this->ArtigoDAO->consultarTudo();
-                $data['title'] = "IFEvents - Meus Artigos - Participante";
+                $limite = 10;
+                $numPagina =0;
+                //pegar codigo da conferencia pela sessao 
+                $conf_cd = 1;
+                if(null !== $this->input->get('pagina')){
+                    $numPagina = $this->input->get('pagina');
+                }
+
+                if( $this->input->get('busca') !== null){
+                    $busca = $this->input->get('busca');
+                    $array = array('Artigo.arti_title'=>$busca);
+                }else{
+                    $busca=null;
+                    $array=null;
+                }
+
+                $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
+                $data['paginacao'] = $this->geraPaginacao($limite, $this->ArtigoDAO->totalRegistros(), 'artigo/consultar/?busca='.$busca);
+                $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros();
+                $data['title']="IFEvents - Meus Trabalhos";
                 $this->chamaView("meusartigos", "participante", $data, 1);
             }
 

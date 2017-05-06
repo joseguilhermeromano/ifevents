@@ -120,25 +120,49 @@ class PrincipalControl extends CI_Controller {
     }
 
     public function upload_arquivo($config){
-        // $config['upload_path']   = 'upload';
-        // $config['allowed_types'] = 'pdf|docx';
-        // $config['max_size']      = '4096';
-
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
-        if(!$this->upload->do_upload('userfile')){
-                $this->session->set_flashdata( 'error', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é uma das permitidas!' );
-                redirect('artigo/cadastrar');
-        }
-        else{
+        $lista_files = array();
+        $files_errors = array();
+        $files = $_FILES;
+
+        for($i=0; $i<count($files['userfile']['name']); $i++)
+        {
+            $_FILES = array();
+
+            foreach( $files['userfile'] as $k=>$v )
+            {
+                $_FILES['userfile'][$k] = $v[$i];                
+            }
+
+            $lista_files[$i]['file_nm'] = $files['userfile']['name'][$i];
+            
+            if(!$this->upload->do_upload('userfile')){
+                $file_error = $files['userfile']['name'][$i];
+                array_push($files_errors, $file_error);
+            }
+            else{
                 $data  = array('upload_data' => $this->upload->data());
                 $file=read_file($data['upload_data']['full_path']);
                 //função que deleta o arquivo do diretório temporário
                 unlink($data['upload_data']['full_path']);
+                $lista_files[$i]['file'] = $file;
+
+            }
 
         }
-        return $file;
+
+        if(!empty($files_errors)){
+            if(sizeof($files_errors)>1){
+                $this->session->set_flashdata( 'error', 'Os arquivos <b>('.implode(', ',$files_errors).')</b> não puderam ser enviados! <br>Verifique se os arquivos foram selecionados ou se as extensões são permitidas.' );
+            }else{
+                $this->session->set_flashdata( 'error', 'O arquivo <b>('.$files_erros[0].')</b> não pode ser enviado!<br> Verifique se o arquivo foi selecionado ou se a extensão é uma das permitidas.' );
+            }
+            redirect('artigo/cadastrar');
+        }
+        
+        return $lista_files;
     }
             
     public function download_arquivo($model){
@@ -158,6 +182,7 @@ class PrincipalControl extends CI_Controller {
             $model->session->set_flashdata('error', 'Esse arquivo não exite!!!');
         }
     }
+    
     //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight
     public function upload_image($novoNome, $diretorioImg = 'edicoes', $maxWidth=null, $maxHeight=null, $minWidth=null, $minHeight=null){
       $this->img->upload($_FILES['image_field'],'pt_BR');

@@ -254,11 +254,18 @@
 					,arti_autores	 varchar(200) NOT NULL
 					,arti_orienta    varchar(100) NOT NULL
 					,arti_resumo     varchar(500) NOT NULL
+					,arti_apoio 	 varchar(100) NULL
+					,arti_ulti_alte_dt date 	  NOT NULL
+					,arti_ulti_alte_hr time 	  NOT NULL
+					,arti_arq_1_nm	 varchar(100) NOT NULL
 					,arti_arq_1    	 mediumblob	  NOT NULL
+					,arti_arq_2_nm	 varchar(100) NOT NULL
 					,arti_arq_2    	 mediumblob	  NULL
 					,arti_status     int(11)   	  NOT NULL
+					,arti_inst_cd 	 int(11)	  NOT NULL
 					,arti_moda_cd    int(11)      NOT NULL
 					,arti_eite_cd    int(11)      NOT NULL
+					,arti_user_resp_cd int(11)	  NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
