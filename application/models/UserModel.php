@@ -89,7 +89,7 @@
 
             if($this->session->userdata('view') == 'cadastro_revisor'||
                 ($user==3 && !empty($this->user_tipo) && $this->user_tipo == 2)){
-                $this->form_validation->set_rules( 'qtdSubmissoes', 'Qtd. Máxima de Submissões', 'trim|required|max_length[2]' );
+                $this->form_validation->set_rules( 'qtdSubmissoes', 'Qtd. Máxima de Submissões', 'integer|trim|required|max_length[2]' );
             }
 
         }

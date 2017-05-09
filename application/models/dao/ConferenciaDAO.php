@@ -50,14 +50,14 @@
                     $this->db->where($key.' LIKE ','%'.$value.'%');
                 }
             }
-                	if($limite)
-                        $this->db->limit($limite, $numPagina);
-                    $query = $this->db->get();
-                    if($query->num_rows()>0){
-                        return $query->result_object();
-                    }else{
-                        return null;
-                    }
+        	if($limite)
+                $this->db->limit($limite, $numPagina);
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                return $query->result_object();
+            }else{
+                return null;
+            }
         }
 
 
@@ -73,6 +73,16 @@
     		}
 
         }*/
+
+        public function consultarPorNomeOuAbreviacao($nome){
+            $this->db->select('*');
+            $this->db->from('Conferencia');
+            $this->db->where('conf_nm LIKE', '%'.$nome.'%');
+            $this->db->or_where('conf_abrev LIKE', '%'.$nome.'%');
+            $this->db->order_by("conf_nm", "asc");
+            $query = $this->db->get();
+            return $query->result_array();
+        }
 
 
         public function consultarCodigo($codigo){

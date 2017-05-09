@@ -23,10 +23,12 @@ class EmailModel extends CI_Model{
         $user = $this->session->userdata('usuario')[0]['user_tipo'];
         $user = empty($user) ? '0' : $user;
         if($cadastro == true || ($cadastro == false && $user==3 && !empty($this->input->post('confirmaemail')))){
-        	$this->form_validation->set_rules( 'email', 'Email de Login', 'valid_email|trim|required|max_length[100]' );
+        	$this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
 
-            $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
-                'valid_email|trim|required|max_length[100]|matches[email]' );
+            if($this->input->post('confirmaemail')){
+                $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
+                    'valid_email|trim|required|max_length[100]|matches[email]' );
+            }
         }
 
     }

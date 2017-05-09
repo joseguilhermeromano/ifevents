@@ -23,8 +23,21 @@
             return $this->db->insert_id();
         }
 
-        public function alterarTelefoneUser($obj) {
+        public function alterar($obj) {
+            $this->db->where('tele_cd', $obj->tele_cd);
             $this->db->update('Telefone', $obj);
+        }
+
+        public function verificaTelefoneExiste($telefone){
+            $this->db->select('*');
+            $this->db->from('Telefone');
+            $this->db->where('tele_fone', $telefone);
+            $query = $this->db->get();
+            if($query->num_rows() > 0){
+                return $query->result_object()[0]->tele_cd;
+            }else{
+                return null;
+            }
         }
 
         public function consultarTudo() {

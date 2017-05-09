@@ -16,6 +16,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->library('upload');
         $this->load->helper('file');
         $this->load->helper('download');
+        $this->load->library('uploadimage','','img');
 		// $this->load->model('acesso/Autentica');		
 	}
 
@@ -118,43 +119,100 @@ class PrincipalControl extends CI_Controller {
 
     }
 
-    public function upload_arquivo($model){
-        $config['upload_path']   = 'upload';
-        $config['allowed_types'] = 'pdf|docx';
-        $config['max_size']      = '4096';
+    public function upload_arquivo($config, $input){
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
 
-        $model->load->library('upload', $config);
-        $model->upload->initialize($config);
+        $file = array();
 
-        if(!$model->upload->do_upload()){
-                $model->session->set_flashdata( 'error', 'O arquivo não pode ser enviado. Verifique se o arquivo foi selecionado ou se a extensão é ".pdf"  ou  ".docx"' );
-                redirect('artigo/cadastrar');
-        }
-        else{
-                $data  = array('upload_data' => $model->upload->data());
-                $file=read_file($data['upload_data']['full_path']);
+
+            $file['file_nm'] = $_FILES[$input]['name'];
+            $file['error'] =  false;
+            
+            if(!$this->upload->do_upload($input)){
+                $file['error'] =  true;
+                $file['file_nm'] = null;
+                $file['file'] = null;
+            }
+            else{
+                $data  = array('upload_data' => $this->upload->data());
+                $arquivo=read_file($data['upload_data']['full_path']);
+                //função que deleta o arquivo do diretório temporário
                 unlink($data['upload_data']['full_path']);
-
-        }
+                $file['file'] = $arquivo;
+            }
+        
         return $file;
     }
             
-    public function download_arquivo($model){
-        $codigo = $model->input->get("codigo");                
-        $download = $model->SubmitDAO->consultarCodigo($codigo);
+    public function download_arquivo($nomeArquivo, $arquivo){
 
-        if($download->num_rows() > 0){
-            $row  = $download->row();
-
-            $nome = $row->subm_arquivo_nm;
-
-            header("Content-type: application/pdf");
-            header('Content-Disposition: attachment; filename="'.$nome.'"');
-            echo $row->subm_arq1;                   
+        if($arquivo == null){
+            $this->session->set_flashdata('error', 'O arquivo <b>'.$nomeArquivo.'</b> não exite!!!');
         }
-        else{
-            $model->session->set_flashdata('error', 'Esse arquivo não exite!!!');
-        }
+        $tipo = '';
+        switch(pathinfo($nomeArquivo, PATHINFO_EXTENSION)){ // verifica a extensão do arquivo para pegar o tipo
+             case "pdf": $tipo="application/pdf"; break;
+             case "doc": $tipo="application/msword"; break;
+             case "docx": $tipo="application/msword"; break;
+             case "ppt": $tipo="application/vnd.ms-powerpoint"; break;
+             case "gif": $tipo="image/gif"; break;
+             case "png": $tipo="image/png"; break;
+             case "jpg": $tipo="image/jpg"; break;
+          }
+           header("Content-Type: ".$tipo); // informa o tipo do arquivo ao navegador
+           //header("Content-Length: ".filesize($nomeArquivo)); // informa o tamanho do arquivo ao navegador
+           header("Content-Disposition: attachment; filename=".$nomeArquivo); // informa ao navegador que é tipo anexo e faz abrir a janela de download, tambem informa o nome do arquivo
+           echo($arquivo); // lê o arquivo
+           exit; // aborta pós-ações
+
     }
+    
+    //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight
+    public function upload_image($novoNome, $diretorioImg = 'edicoes', $maxWidth=null, $maxHeight=null, $minWidth=null, $minHeight=null){
+      $this->img->upload($_FILES['image_field'],'pt_BR');
+        if ($this->img->uploaded) {
+
+            if($this->img->file_is_image == true){
+                $this->img->image_max_width = $maxWidth;
+                $this->img->image_max_height = $maxHeight;
+                $this->img->image_min_width = $minWidth;
+                $this->img->image_min_height = $minHeight;
+                $this->img->allowed = array('image/jpg','image/jpeg','image/png', 'image/bmp');
+                $this->img->file_new_name_body = $novoNome;
+                $this->img->file_overwrite = true ;
+                $this->img->Process("application/views/imagens/".$diretorioImg."/");
+                if ($this->img->processed) {
+                      $linkImg = str_replace("\\", "", $this->img->file_dst_pathname);
+
+                        $configInputFile = array(
+                        "initialPreview" => "<img src='".base_url($linkImg)."' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='".$novoNome."' >",
+                        "initialPreviewConfig" => array('caption' => $this->img->file_dst_name, 
+                            "size" => $this->img->file_src_size),
+                        "initialPreviewAsData" => false,
+                        "initialPreviewShowDelete" => false,  
+                        "initialCaption" => $novoNome, 
+                        "maxFileSize" => "1000000",
+                        "overwriteInitial" => true
+                        );
+
+                        $this->session->set_userdata('configInputFile',$configInputFile);
+
+                      return $linkImg;
+                } else {
+                      $this->session->set_flashdata('error', $this->img->error);
+                }
+            }else{
+                $this->session->set_flashdata('error', 'O Arquivo selecionado não é uma imagem!');
+            }
+
+
+        } else {
+            $this->session->set_flashdata('error', $this->img->error);
+        }
+
+        return null;
+    }
+
 
 }

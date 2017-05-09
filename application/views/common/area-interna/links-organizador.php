@@ -26,11 +26,6 @@
   <span class="fa fa-flask"></span> EVENTOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="eventos">
-<!--
-      <li><a href="<?php// echo base_url("conferencia/consultarTudo");?>" class="list-group-item">CONFERÊNCIAS</a></li>
-      <li><a href="<?php// echo base_url("");?>" class="list-group-item">EDIÇÕES</a></li>
-      <li><a href="<?php //echo base_url("");?>" class="list-group-item">PROGRAMAÇÕES</a></li>
--->
       <li class="item-menu">
       <a href="<?php echo base_url('conferencia/consultarTudo');?>" class="list-group-item">CONFERÊNCIAS</a></li>
       <li id="edicao"><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
@@ -53,10 +48,23 @@
         <span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
     </a>
 </li>
-<li class="item-menu">
-    <a href="<?php echo base_url("organizador/listatodassubmissoes");?>">
+<!-- <li class="item-menu">
+    <a href="#">
         <span class="fa fa-files-o"></span>  TRABALHOS
     </a>
+</li> -->
+
+<li class="item-menu list-group panel" >
+  <a href="#" data-toggle="collapse" data-target="#trabalhos" data-parent="#sidenav" class="list-group-item list-group-item-success">
+  <span class="fa fa-files-o"></span>  TRABALHOS <span class="caret"></span>
+  </a>
+    <ul class="submenu collapse" id="trabalhos">
+      <li id="modalidade" class="item-menu">
+      <a href="<?php echo base_url('modalidade/consultar');?>" class="list-group-item">MODALIDADES</a></li>
+      <li id="eixo-tematico"><a href="<?php echo base_url('eixo-tematico/consultar');?>" class="list-group-item">EIXOS TEMÁTICOS</a></li>
+      <li><a href="<?php echo base_url("artigo/listar-atribuicoes");?>" class="list-group-item">ATRIBUIÇÃO DE SUBMISSÕES</a></li>
+      <li><a href="<?php echo base_url("regra-submissao/consultar");?>" class="list-group-item">REGRAS</a></li>
+  </ul>
 </li>
 <li class="item-menu">
     <a href="<?php echo base_url("contato/consultarTudo");?>">

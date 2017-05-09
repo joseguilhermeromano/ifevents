@@ -127,6 +127,103 @@ $(document).ready(function() {
 
 });
 
+$(document).ready(function() {
+    $(".consultaUsuario").select2({
+    tags: true,
+    placeholder: "Buscar autor inscrito por nome",
+    multiple: true,
+    // tokenSeparators: [',', ' '],
+    minimumInputLength: 2,
+    // maximumSelectionLength: maximumSelectionLengthVariable,
+    minimumResultsForSearch: 10,
+    ajax: {
+        url: baseUrl + "usuario/consultarParaSelect2",
+        dataType: "json",
+        type: "POST",
+        data: function (params) {
+
+            var queryParameters = {
+                term: params.term
+            }
+            return queryParameters;
+        },
+        processResults: function (data) {
+            return {
+                results: $.map(data, function (item) {
+                    return {
+                        text: item.user_nm,
+                        id: item.user_nm + "-" + item.user_cd
+                    }
+                })
+            };
+        }
+    }
+});
+
+});
+
+/*implanta select 2 em inputs simples sem consulta ajax*/
+$(".selectComum").select2({
+  minimumResultsForSearch: Infinity
+});
+
+$(document).ready(function(){
+
+ $('#teste').change(function () {
+     // var optionSelected = $(this).find("option:selected");
+     // var valueSelected  = optionSelected.val();
+  console.log('teste');
+// var conferencia = {conf_cd : $('.conferencia option:selected').val()};
+// $(".consultaModalidade").select2({
+//     minimumResultsForSearch: Infinity,
+//     ajax: {
+//         url: baseUrl + "modalidade/consultarParaSelect2",
+//         dataType: "json",
+//         type: "POST",
+//         data: conferencia,
+//         processResults: function (data) {
+//             return {
+//                 results: $.map(data, function (item) {
+//                     return {
+//                         text: item.mote_nm,
+//                         id: item.mote_cd
+//                     }
+//                 })
+//             };
+//         }
+//     }
+// });
+
+});
+
+});
+
+
+
+// $(".conferencia").change(function(){
+// var conferencia = {conf_cd : $('#conferencia option:selected').val()};
+// $(".consultaEixo").select2({
+//     minimumResultsForSearch: Infinity,
+//     ajax: {
+//         url: baseUrl + "eixo-tematico/consultarParaSelect2",
+//         dataType: "json",
+//         type: "POST",
+//         data: conferencia,
+//         processResults: function (data) {
+//             return {
+//                 results: $.map(data, function (item) {
+//                     return {
+//                         text: item.mote_nm,
+//                         id: item.mote_cd
+//                     }
+//                 })
+//             };
+//         }
+//     }
+// });
+
+// });
+
 /** IMPLANTA O SELECT2 NA CONSULTA DE CONFERÊNCIAS **/
 $(document).ready(function() {
     $(".consultaConferencia").select2({
@@ -152,7 +249,7 @@ $(document).ready(function() {
             return {
                 results: $.map(data, function (item) {
                     return {
-                        text: item.conf_nm,
+                        text: item.conf_abrev,
                         id: item.conf_cd
                     }
                 })
@@ -160,6 +257,128 @@ $(document).ready(function() {
         }
     }
 });
+
+});
+
+/**GERA O LINK DA NOVA EDIÇÃO**/
+$(document).ready(function(){
+  $('.consultaConferencia').change(function(){
+    var conferencia = {conf_cd : $('.consultaConferencia option:selected').val()};
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "edicao/geraNumeracaoEdicao",
+        data: conferencia,
+        async: true,
+        dataType: "json",
+        success: function(data) {
+            $('#linkEvento').val('');
+            $('#linkEvento').val($('#linkEvento').val()
+              + baseUrl + 'evento/' + data + '-' + $('.consultaConferencia option:selected').text().toLowerCase());
+        }
+    }); 
+  });
+});
+
+// /**CARREGA PLUGIN FILE UPLOAD BOOTSTRAP**/
+  // initialize with defaults
+$("#fileImage").ready(function(){
+
+  $.ajax({
+  type: "POST",
+  url: baseUrl + "edicao/recuperaImagem",
+  async: true,
+  dataType: "json",
+  success: function (data) {
+      
+    $("#fileImage").fileinput({
+    language: 'pt-BR',
+    theme: 'fa',
+    showUpload: false,
+    browseClass: 'btn btn-success',
+    browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+    initialPreview: [data.initialPreview],
+    initialPreviewAsData: data.initialPreviewAsData,
+    initialPreviewShowDelete:data.initialPreviewShowDelete,
+    initialPreviewConfig: [data.initialPreviewConfig],
+    overwriteInitial: data.overwriteInitial,
+    maxFileSize: data.maxFileSize,
+    });
+
+
+  }
+
+  });
+
+
+});
+
+// /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
+  // initialize with defaults
+$("#file_artigo_1").ready(function(){
+
+  // $.ajax({
+  // type: "POST",
+  // url: baseUrl + "artigo/recuperaArtigo",
+  // async: true,
+  // dataType: "json",
+  // success: function (data) {
+      
+    $("#file_artigo_1").fileinput({
+    language: 'pt-BR',
+    theme: 'fa',
+    showUpload: false,
+    // maxFileCount: 1,
+    maxFileSize: 4096,
+    allowedFileExtensions: ["pdf", "docx"], 
+    browseClass: 'btn btn-success',
+    browseIcon: "<i class=\"fa fa-file\"></i> ",
+    // initialPreview: [data.initialPreview],
+    // initialPreviewAsData: data.initialPreviewAsData,
+    // initialPreviewShowDelete:data.initialPreviewShowDelete,
+    // initialPreviewConfig: [data.initialPreviewConfig],
+    // overwriteInitial: data.overwriteInitial,
+    // maxFileSize: data.maxFileSize,
+    });
+
+
+  // }
+
+  // });
+
+
+});
+
+$("#file_artigo_2").ready(function(){
+
+  // $.ajax({
+  // type: "POST",
+  // url: baseUrl + "artigo/recuperaArtigo",
+  // async: true,
+  // dataType: "json",
+  // success: function (data) {
+      
+    $("#file_artigo_2").fileinput({
+    language: 'pt-BR',
+    theme: 'fa',
+    showUpload: false,
+    // maxFileCount: 1,
+    maxFileSize: 4096,
+    allowedFileExtensions: ["pdf", "docx"], 
+    browseClass: 'btn btn-success',
+    browseIcon: "<i class=\"fa fa-file\"></i> ",
+    // initialPreview: [data.initialPreview],
+    // initialPreviewAsData: data.initialPreviewAsData,
+    // initialPreviewShowDelete:data.initialPreviewShowDelete,
+    // initialPreviewConfig: [data.initialPreviewConfig],
+    // overwriteInitial: data.overwriteInitial,
+    // maxFileSize: data.maxFileSize,
+    });
+
+
+  // }
+
+  // });
+
 
 });
 
@@ -319,41 +538,28 @@ $(document).ready(function(){
   }
 
 });
-// $(document).ready(function() {
-//     var url_atual =  window.location.href;
-//     var verfificaSeta=false;
-//     document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-//     if(elem.getAttribute("href") == url_atual){
-//           //elem.parentNode.className += " active";
-//           elem.parentNode.id = "seta";
-//           verfificaSeta = true;
-//         }
-//       });
-
-//     if(!verfificaSeta){
-//        document.querySelectorAll("ul.submenu li a").forEach(function (elem,i) {
-//         if(elem.getAttribute("href") == url_atual){
-//           elem.parentNode.parentNode.previousElementSibling.setAttribute("aria-expanded", "true");
-//           elem.parentNode.parentNode.className += " in"; 
-//           elem.parentNode.className += " active";
-//           elem.parentNode.parentNode.parentNode.className += " active";
-//           verfificaSeta=true;
-//         }
-
-//     if(!verfificaSeta){
-//         document.querySelectorAll("li.item-menu a").forEach(function (elem,i) {
-//         if(elem.getAttribute("href") != url_atual && elem.id != '' && elem.id.indexOf(url_atual)){
-//           elem.parentNode.className += " active";
-//           verfificaSeta = true;
-//         }
-//       });
-//     }
 
 
-//       });
-//     }
+/*Seleciona linha da tabela de atribuições de artigos*/
 
-// });
+$('#form_atribuicoes :checkbox').click(function() {
+   var limit = 1;
+   
+   if($(this).hasClass("limited")) {
+      var counter = $('.limited:checked').length;
+      if(counter > limit) {
+        this.checked = false;
+        alert('Você pode selecionar apenas um revisor!');
+      }else{
+         $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
+      }
+   }
+  if(!$(this).hasClass("limited")){
+      $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
+  }
+    
+
+});
 
 
 

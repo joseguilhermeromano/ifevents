@@ -25,10 +25,6 @@ interface InterfaceControl{
       * @return Não apresenta retorno
      */
 
-    public function consultarTudo();
-
-
-
     public function consultar();
 
 

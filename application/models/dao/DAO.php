@@ -12,13 +12,6 @@ interface DAO{
      * Registra o objeto na base de dados
      * @param Não recebe parametros
      * @return Retorna uma array com os dados recuperados
-     */
-    public function consultarTudo();
-    
-    /**
-     * Registra o objeto na base de dados
-     * @param Não recebe parametros
-     * @return Retorna uma array com os dados recuperados
      */           
     public function consultarCodigo($codigo);
 

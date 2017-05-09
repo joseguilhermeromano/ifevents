@@ -25,13 +25,21 @@
                 }
                 
                 public function consultarCodigo($codigo){
-                     $query=$this->db->get_where('submissao',array('subm_id' => $codigo));
-                     return $query;
+                    $this->db->select('*');
+                    $this->db->from('Submissao');
+                    $this->db->where('subm_cd', $codigo);
+                    $query = $this->db->get();
+                     return $query->result_object()[0];
                 }
                 
-                public function consultaPorArtigo($codigo){
-                    $query=$this->db->get_where('submissao',array('subm_arti_cod' => $codigo));
-                     return $query->result();
+                public function consultarPorArtigo($codigo){
+                    $query=$this->db->get_where('submissao',array('subm_arti_cd' => $codigo));
+                     return $query->result_object();
+                }
+
+                public function totalRegistros($artigo_cd){
+                     $query=$this->db->get_where('submissao',array('subm_arti_cd' => $artigo_cd));
+                     return $query->free_result();
                 }
 
                 public function excluir($obj) {

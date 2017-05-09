@@ -6,18 +6,17 @@
 			parent::__construct();
 
 			$this->load->model('dao/SubmitDAO');
-            $this->load->library('upload');
-            $this->load->helper('file');
-            $this->load->helper('download');
 		}
                 
-        public function setaValores(){
-            $this->subm_user_cod=1;
-            $this->subm_dt=date("y-m-d");
-            $this->subm_hora=date("H:i");
-            $this->subm_arq1=$this->upload_arquivo();
-            $this->subm_status=0;
-            $this->subm_arquivo_nm = $_FILES['userfile']['name'];
+        public function setaValores($file_1, $file_2, $artigo_cd){
+            $this->subm_arti_cd = $artigo_cd;
+            $this->subm_versao = $this->SubmitDAO->totalRegistros($artigo_cd) + 1;
+            $this->subm_dt = date("y-m-d");
+            $this->subm_hr = date("H:i");
+            $this->subm_arq1_nm =  $file_1['file_nm'];
+            $this->subm_arq1 = $file_1['file'];
+            $this->subm_arq2_nm = $file_2['file_nm'];
+            $this->subm_arq2 = $file_2['file'];
         }
         
                         

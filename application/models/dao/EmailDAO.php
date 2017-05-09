@@ -30,8 +30,12 @@
                     ));  
         }
 
-        public function consultarTudo() {
-            return null;
+        public function consultarTudo($email) {
+            $this->db->select('*');
+            $this->db->from('Email');
+            $this->db->where('email_email', $email);
+            $query = $this->db->get();
+            return $query->result_object();
         }
         
         public function consultarCodigo($codigo){

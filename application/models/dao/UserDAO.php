@@ -13,7 +13,7 @@ class UserDAO extends CI_Model implements DAO{
             $orig_db_debug = $this->db->db_debug;
 
             $this->db->db_debug = FALSE;
-            $this->db->insert('user', $obj);
+            $this->db->insert('User', $obj);
             if($this->db->error()['code']==1062){
                 throw new Exception('Já existe um usuário cadastrado com o mesmo documento RG!');
             }
@@ -96,8 +96,8 @@ class UserDAO extends CI_Model implements DAO{
                 $loca->loca_cep = $value->loca_cep;
                 $loca->loca_cid = $value->loca_cid;
                 $loca->loca_uf = $value->loca_uf;
-                $loca->abri_num = $value->abri_num;
-                $loca->abri_comp = $value->abri_comp;
+                $loca->loca_num = $value->abri_num;
+                $loca->loca_comp = $value->abri_comp;
             }
             if(empty($email->email_email)){
                 $email->email_email = $value->email_email;

@@ -1,7 +1,8 @@
+<div class="container-fluid">
 <h2><span class="glyphicon glyphicon-home"></span><b> Início</b></h2>
 <hr>
 <br>
-<h4><span class="glyphicon glyphicon-calendar"></span><b> Datas Importantes</b></h4><br>
+<h3><span class="glyphicon glyphicon-calendar"></span><b> Datas Importantes</b></h3><br>
     <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-6">
             <div class="postit">
@@ -69,19 +70,25 @@
         </div>
     </div>
 <br><br>
-<h4><span class="glyphicon glyphicon-alert"></span><b> Notificações</b></h4>
-<br>
-<div class="alert alert-success" role="alert">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</div>
-<div class="alert alert-info" role="alert">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</div>
-<div class="alert alert-warning" role="alert">
-  <strong>Warning!</strong> Better check yourself, you're not looking too good.
-</div>
-<div class="alert alert-danger" role="alert">
-  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+
+<h3><span class="fa fa-flask"></span><b> Eventos Recentes</b></h3><br><br>
+
+ <div class="row">
+    <div class="col-md-6 portfolio-item">
+      <div class="box-shadow">
+        <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
+          <div class="portfolio-caption">
+              <h4>5ª SEMCITEC, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
+                <br>
+                <p>Descrição...</p>
+                <br>
+                <button href="#" class="botao-detalhar">Inscrever em Atividades</button>&nbsp;&nbsp;&nbsp;
+                 <button href="<?= base_url('artigo/cadastrar/'); ?>" class="botao-detalhar-cinza">Submeter Trabalho</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
 </div>
 
 
