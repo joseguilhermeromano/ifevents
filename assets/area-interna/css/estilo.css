@@ -175,22 +175,22 @@
 
 .sidebar-nav li.list-group.panel.active > a::before{
     content:"";
-    display:inline-block;
     position:absolute;
     border:13px solid black;
     border-color: transparent #dae1e8 transparent transparent;
     right: -30px;
-    margin-top:-4px;
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 .sidebar-nav li.list-group.panel.active > a::after{
     content:"";
-    display:inline-block;
     position: absolute;
     border:12px solid white;
     border-color:transparent white transparent transparent;
     right: -31px;
-    margin-top:-3px;
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 
@@ -237,22 +237,22 @@
 } 
 .sidebar-nav li.active a:before{
     content:"";
-    display:inline-block;
     position:absolute;
+    right:-30px;
     border:13px solid black;
     border-color: transparent #dae1e8 transparent transparent;
-    margin-top:-4px;
-    right: -30px;
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 .sidebar-nav li.active a:after{
     content:"";
-    display:inline-block;
     position: absolute;
     border:12px solid white;
     border-color:transparent white transparent transparent;
     right: -31px;
-    margin-top:-3px;
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
 #menu-toggle {
