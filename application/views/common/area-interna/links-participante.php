@@ -19,10 +19,16 @@
     </a>
 </li>
 <li class="item-menu">
-    <a href="<?php echo base_url("contato/cadastrar");?>">
+    <a href="<?php echo base_url("contato/sendEmail/hidden");?>">
     	<span class="glyphicon glyphicon-envelope"></span>  CONTATO
     </a>
 </li>
+<li class="item-menu">
+    <a href="<?php echo base_url("atividade/consultarTudo/hidden");?>">
+    	<span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
+    </a>
+</li>
+
 <li class="item-menu">
     <a href="<?php echo base_url("login/sair");?>">
     	<span class="fa fa-power-off"></span>  SAIR

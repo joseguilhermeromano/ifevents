@@ -1,6 +1,6 @@
-<h2><span class="glyphicon glyphicon-list"></span><b> Atualizar Conferência</b></h2>
+<div class="container-fluid">
+<h2><span class="glyphicon glyphicon-floppy-save"></span><b> Atualizar Tipo de Atividades</b></h2>
 <hr>
-<div class="error"><?php echo validation_errors(); ?></div>
 <br>
 
 <?php
@@ -8,23 +8,22 @@
         echo alert($this->session);
 ?>
 
-<div class="row">
+
 <?php
-	if(!empty($content)):
-    foreach ($content as $data):
-		$descricao = $data->conf_desc;
-		//$codigo = $data->conf_cd;
-    echo form_open_multipart( 'ConferenciaControl/alterar/'.$this->uri->segment(3), 'role="form" class="formsignin"' );?>
+    if(!empty($atividade)):
+    foreach ($atividade as $data):
+        $descricao = $data->tiat_desc;
+        //$codigo = $data->conf_cd;
+    echo form_open_multipart( 'tipoatividade/alterar/'.$this->uri->segment(3), 'role="form" class="formsignin"' );
+?>
 
-		<?php
-			//$data = array( 'name' => 'codigo' );
-			//form_hidden($data, set_value('codigo', $codigo));
-		?>
-
+<div class="row">
     <div class="col-md-12">
         <div class="form-group">
-        <b><?php echo form_label( 'Título', 'titulo' ); ?></b>
-        <?php $data = array( 'name' => 'titulo', 'placeholder' => "Título", 'class' => 'form-control estilo-input', 'value' => $data->conf_nm );
+        <b><?php echo form_label( '*Título', 'titulo' ); ?></b>
+        <?php $data = array( 'name' => 'titulo', 'placeholder' => "Titulo",
+            'class' => 'form-control estilo-input',
+             'value' => $data->tiat_nm );
                echo form_input($data);?>
         </div>
     </div>
@@ -42,10 +41,13 @@
     </div>
 </div>
 
+
 <?php echo '<br><center>'.form_submit("btn_atualizar", "Atualizar",array('class' => 'btn btn-success button',
     "onclick"=>"nicEditors.findEditor('editor').saveContent();"))."</center>";
 
 echo form_close();
+
 endforeach;
 
-endif;?>
+endif; ?>
+</div>

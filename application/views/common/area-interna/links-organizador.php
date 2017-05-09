@@ -49,7 +49,7 @@
     </ul>
 </li> -->
 <li class="item-menu">
-    <a href="<?php echo base_url("organizador/listatodassubmissoes");?>">
+    <a href="<?php echo base_url("atividade/consultarTudo");?>">
         <span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
     </a>
 </li>
@@ -58,15 +58,10 @@
         <span class="fa fa-files-o"></span>  TRABALHOS
     </a>
 </li>
-
-<li class="list-group panel">
-  <a href="#" data-toggle="collapse" data-target="#contatos" data-parent="#sidenav" class="list-group-item list-group-item-success">
-  <span class="glyphicon glyphicon-list"></span> CONTATOS <span class="caret"></span>
-  </a>
-    <ul class="submenu collapse" id="contatos">
-      <li><a href="<?php echo base_url("organizador/listaconferencia");?>" class="list-group-item">LISTA DE CONTATOS</a></li>
-      <li><a href="<?php echo base_url("contato/sendEmail");?>" class="list-group-item">EMAIL</a></li>
-    </ul>
+<li class="item-menu">
+    <a href="<?php echo base_url("contato/consultarTudo");?>">
+        <span class="glyphicon glyphicon-envelope"></span>  CONTATOS
+    </a>
 </li>
 
 <li class="item-menu">

@@ -25,6 +25,30 @@
             </div>
         </div>
 
+        <!-- Modal de Exibição
+        <?php //if(!empty($content)):
+            //foreach( $content as $item ):?>
+            <div id="modalExibir" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Mensagem</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <p><?php //echo $item->cont_msg; ?></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                            <button class="btn btn-success" onclick="Executa();">Continuar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        <?php //endforeach;
+              //endif;?>
+
 
         <!-- Modal de Atualização -->
             <div id="modalAtualizar" class="modal fade">
@@ -128,6 +152,17 @@
                     $(this).animate({left:'0'}, 300); // Aqui volta para o Zero, lugar inicial
                 }
             );
+        }
+    </script>
+
+    <script>
+        function show(msg){
+            if(document.getElementById(msg).style.display== "none"){
+                document.getElementById(msg).style.display = "block";
+            }
+            else {
+                document.getElementById(msg).style.display = "none"
+            }
         }
     </script>
 

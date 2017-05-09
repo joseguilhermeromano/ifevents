@@ -2,7 +2,7 @@
 <h2 class="titulo-pagina"><span class="fa fa-users"></span><b> Usuários</b></h2>
 <hr>
 <br>
-<?php 
+<?php
         $this->load->helper('html');
         echo alert($this->session);
 ?>
@@ -19,8 +19,7 @@
   </div><!-- /row -->
 </form>
 <div class="row">
-    <div class="col-sm-12">
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificaUsers'); ?>' style="float:right"><span class="fa fa-exclamation-triangle"></span> Notificar Usuários</a>
+    <div class="col-sm-12">         
          <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right">
          <i class="fa fa-user-plus" aria-hidden="true"></i> Novo Usuário</a>
     </div>
@@ -30,7 +29,7 @@
     <table class="table ls-table" id="tabela1">
         <thead>
             <tr>
-                    
+
                     <th class="col-xs-3">Nome Completo</th>
                     <th class="col-xs-3">Email</th>
                     <th class="col-xs-2 text-center">Tipo de Acesso</th>
@@ -41,7 +40,7 @@
         <tbody>
 
 
-            <?php 
+            <?php
             if(!empty($users)){
             foreach( $users as $user ){ ?>
 
@@ -55,12 +54,12 @@
                       <div class="text-left" style="display: inline-block">
                           <a class="btn-opcao" href="<?php echo base_url('usuario/alterar/'.$user->user_cd); ?>">
                           <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
-                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalAtivar" 
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalAtivar"
                           onclick="setCodigo('<?php echo $user->user_cd; ?>');
                           setLink('<?php echo base_url("usuario/ativar/")?>');">
                           <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
                           <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
-                          onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
+                          onclick="setCodigo('<?php echo $user->user_cd; ?>');
                           setLink('<?php echo base_url('usuario/desativar/')?>');">
                           <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
                       </div>
@@ -75,7 +74,7 @@
                 <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
 
-            <?php } ?> 
+            <?php } ?>
         </tbody>
     </table>
 </div><!-- /TABELA-->

@@ -10,18 +10,15 @@
             }
 
             public function valida(){
-            	$this->form_validation->set_rules( 'datainicioevento', 'Data de Início do Evento', 'trim|required' );
-            	$this->form_validation->set_rules( 'datafimevento', 'Data de Término do Evento', 'trim|required' );
-            	$this->form_validation->set_rules( 'datainiciopub', 'Data inicial da publicação', 'trim|required' );
-            	$this->form_validation->set_rules( 'datafimpub', 'Data final da publicação', 'trim|required' );
-            	$this->form_validation->set_rules( 'datainisub', 'Data da abertura de submissões de trabalhos', 'trim|required' );
-            	$this->form_validation->set_rules( 'datafimsub', 'Data de encerramento das submissões de trabalhos', 'trim|required' );
-            	$this->form_validation->set_rules( 'qtdminsubrev', 'Qtd mínima de submissões por revisor',
-            	 'integer|trim|required' );
-            	$this->form_validation->set_rules( 'prazorev', 'Prazo máximo de resposta do Revisor',
-            	 'integer|trim|required' );
-            	$this->form_validation->set_rules( 'prazopart', 'Prazo máximo de resposta do Participante',
-            	 'integer|trim|required' );
+            	$this->form_validation->set_rules( 'datainicioevento', 'Data de Início do Evento',   'trim|required' );
+            	$this->form_validation->set_rules( 'datafimevento',    'Data de Término do Evento',  'trim|required' );
+            	$this->form_validation->set_rules( 'datainiciopub',    'Data inicial da publicação', 'trim|required' );
+            	$this->form_validation->set_rules( 'datafimpub',       'Data final da publicação',   'trim|required' );
+            	$this->form_validation->set_rules( 'datainisub',       'Data da abertura de submissões de trabalhos', 'trim|required' );
+            	$this->form_validation->set_rules( 'datafimsub',       'Data de encerramento das submissões de trabalhos', 'trim|required' );
+            	$this->form_validation->set_rules( 'qtdminsubrev',     'Qtd mínima de submissões por revisor','integer|trim|required' );
+            	$this->form_validation->set_rules( 'prazorev',         'Prazo máximo de resposta do Revisor','integer|trim|required' );
+            	$this->form_validation->set_rules( 'prazopart',        'Prazo máximo de resposta do Participante','integer|trim|required' );
             }
 
             public function setaValores(){
@@ -37,4 +34,3 @@
             }
 
     }
-

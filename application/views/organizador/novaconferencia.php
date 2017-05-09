@@ -31,7 +31,7 @@
         <div class="form-group">
         <b><?php echo form_label( 'Descrição', 'descricao' ); ?></b><br>
         	<?php
-        		$data = array( 'name' => 'descricao', 'placeholder' => 'Descrição','cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
+        		$data = array( 'name' => 'descricao', 'placeholder' => 'Descrição', 'id'=>'editor', 'cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
                 echo form_textarea( $data );
         	?>
         </div>

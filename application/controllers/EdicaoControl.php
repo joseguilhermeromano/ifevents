@@ -28,12 +28,12 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
             	array("title"=>"IFEvents - Nova Edição", "edicao" => $this->edicao), 1);
 	}
 
-	public function alterar(){
-
+	public function alterar($codigo){
+		return null;
 	}
 
-	public function excluir(){
-
+	public function excluir($codigo){
+		return null;
 	}
 
 	public function consultar(){

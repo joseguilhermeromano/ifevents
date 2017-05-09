@@ -49,22 +49,35 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function consultar() {
-
+			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
+			$data['title']  = "IFEvents - Email - organizador";
+			$this->chamaView("email", "organizador", $data, 1);
         }
 
 		public function consultarTudo() {
-			return null;
+			$data['content'] = $this->ContatoDAO->consultarTudo();
+			$data['title']  = "IFEvents - Lista Contatos - organizador";
+
+			$this->chamaView("listacontato", "organizador", $data, 1);
         }
 
 
         public function excluir($codigo) {
+			if( $this->ContatoDAO->excluir($this->uri->segment(3)) == false){
+					$this->session->set_flashdata('error', 'Arquivo não pode ser excluido!');
+			}
+		   else{
+					$this->session->set_flashdata('success', 'Arquivo deletado com sucesso!');
+					redirect('contato/consultarTudo/');
+				}
 
         }
 
 		public function sendEmail(){
+			$data['flag'] = $this->uri->segment(3);
+			$data['title'] = "IFEvents - Email - Organizador";
 			if (empty($this->contato->input->post())){
-                $this->chamaView("email", "organizador",
-                    array("title"=>"IFEvents - Email - Organizador"), 1);
+                $this->chamaView("notifica-users", "organizador", $data, 1);
                 return 0;
             }
 			//$data = print_r($this->contato->valida());
@@ -81,8 +94,8 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
 
             }
 
-			$this->chamaView("email", "organizador",
-                    array("title"=>"IFEvents - Email - Organizador"), 1);
+			$this->chamaView("notifica-users", "organizador",
+                    array("title"=>"IFEvents - Email - Organizador"), $data,1);
 		}
 
 		public function enviar(){

@@ -53,11 +53,11 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 	            else{
 					//echo print_r($this->conferencia);
 	                 if($this->ConferenciaDAO->alterar($this->conferencia)==true){
-	                     $this->session->set_flashdata('success', 'O Usuário foi atualizado com sucesso!');
+	                     $this->session->set_flashdata('success', 'O Arquivo foi atualizado com sucesso!');
 	                  	 redirect('conferencia/consultarTudo/');
 
 	                 }else{
-	                     $this->session->set_flashdata('error', 'Não foi possível atualizar o usuário!');
+	                     $this->session->set_flashdata('error', 'Não foi possível atualizar o arquivo!');
 	                 }
 
 	             }
