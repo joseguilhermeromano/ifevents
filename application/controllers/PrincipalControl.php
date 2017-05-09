@@ -119,68 +119,53 @@ class PrincipalControl extends CI_Controller {
 
     }
 
-    public function upload_arquivo($config){
+    public function upload_arquivo($config, $input){
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
 
-        $lista_files = array();
-        $files_errors = array();
-        $files = $_FILES;
+        $file = array();
 
-        for($i=0; $i<count($files['userfile']['name']); $i++)
-        {
-            $_FILES = array();
 
-            foreach( $files['userfile'] as $k=>$v )
-            {
-                $_FILES['userfile'][$k] = $v[$i];                
-            }
-
-            $lista_files[$i]['file_nm'] = $files['userfile']['name'][$i];
+            $file['file_nm'] = $_FILES[$input]['name'];
+            $file['error'] =  false;
             
-            if(!$this->upload->do_upload('userfile')){
-                $file_error = $files['userfile']['name'][$i];
-                array_push($files_errors, $file_error);
+            if(!$this->upload->do_upload($input)){
+                $file['error'] =  true;
+                $file['file_nm'] = null;
+                $file['file'] = null;
             }
             else{
                 $data  = array('upload_data' => $this->upload->data());
-                $file=read_file($data['upload_data']['full_path']);
+                $arquivo=read_file($data['upload_data']['full_path']);
                 //função que deleta o arquivo do diretório temporário
                 unlink($data['upload_data']['full_path']);
-                $lista_files[$i]['file'] = $file;
-
+                $file['file'] = $arquivo;
             }
-
-        }
-
-        if(!empty($files_errors)){
-            if(sizeof($files_errors)>1){
-                $this->session->set_flashdata( 'error', 'Os arquivos <b>('.implode(', ',$files_errors).')</b> não puderam ser enviados! <br>Verifique se os arquivos foram selecionados ou se as extensões são permitidas.' );
-            }else{
-                $this->session->set_flashdata( 'error', 'O arquivo <b>('.$files_erros[0].')</b> não pode ser enviado!<br> Verifique se o arquivo foi selecionado ou se a extensão é uma das permitidas.' );
-            }
-            redirect('artigo/cadastrar');
-        }
         
-        return $lista_files;
+        return $file;
     }
             
-    public function download_arquivo($model){
-        $codigo = $model->input->get("codigo");                
-        $download = $model->SubmitDAO->consultarCodigo($codigo);
+    public function download_arquivo($nomeArquivo, $arquivo){
 
-        if($download->num_rows() > 0){
-            $row  = $download->row();
-
-            $nome = $row->subm_arquivo_nm;
-
-            header("Content-type: application/pdf");
-            header('Content-Disposition: attachment; filename="'.$nome.'"');
-            echo $row->subm_arq1;                   
+        if($arquivo == null){
+            $this->session->set_flashdata('error', 'O arquivo <b>'.$nomeArquivo.'</b> não exite!!!');
         }
-        else{
-            $model->session->set_flashdata('error', 'Esse arquivo não exite!!!');
-        }
+        $tipo = '';
+        switch(pathinfo($nomeArquivo, PATHINFO_EXTENSION)){ // verifica a extensão do arquivo para pegar o tipo
+             case "pdf": $tipo="application/pdf"; break;
+             case "doc": $tipo="application/msword"; break;
+             case "docx": $tipo="application/msword"; break;
+             case "ppt": $tipo="application/vnd.ms-powerpoint"; break;
+             case "gif": $tipo="image/gif"; break;
+             case "png": $tipo="image/png"; break;
+             case "jpg": $tipo="image/jpg"; break;
+          }
+           header("Content-Type: ".$tipo); // informa o tipo do arquivo ao navegador
+           //header("Content-Length: ".filesize($nomeArquivo)); // informa o tamanho do arquivo ao navegador
+           header("Content-Disposition: attachment; filename=".$nomeArquivo); // informa ao navegador que é tipo anexo e faz abrir a janela de download, tambem informa o nome do arquivo
+           echo($arquivo); // lê o arquivo
+           exit; // aborta pós-ações
+
     }
     
     //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight

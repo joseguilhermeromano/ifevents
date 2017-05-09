@@ -78,6 +78,22 @@
             }
         }
 
+        public function consultarPorDataSubmissao($data_atual){
+            $this->db->select("Edicao.*, Conferencia.*, Regra.*");
+            $this->db->from("Edicao");
+            $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd','left');
+            $this->db->join('Regra', 'Edicao.edic_regr_cd = Regra.regr_cd','left');
+            $this->db->where('Regra.regr_subm_abert <=', $data_atual);
+            $this->db->where('Regra.regr_subm_encerr >=', $data_atual);
+            $this->db->order_by('conf_abrev', 'asc');
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                return $query->result_object();
+            }else{
+                return null;
+            }
+        }
+
         public function totalRegistros(){
             return $this->db->count_all("Edicao");
         }

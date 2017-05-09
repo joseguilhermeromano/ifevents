@@ -19,14 +19,21 @@ if ( ! function_exists('alert'))
     	}
 		if ($session->flashdata('error')) {
     		$alert = '<div class="alert alert-danger">' 
-		    .'<h4><b><span class="glyphicon glyphicon-alert"></span> Erro</b></h4>'
+		    .'<h4><b><span class="fa fa-times-circle"></span> Erro</b></h4>'
     		.$session->flashdata('error').'</div>';
     		$session->set_flashdata('error', '');
     		return $alert;
     	}
+    	if ($session->flashdata('warning')) {
+    		$alert = '<div class="alert alert-warning">' 
+		    .'<h4><b><span class="glyphicon glyphicon-alert"></span> Atenção</b></h4>'
+    		.$session->flashdata('warning').'</div>';
+    		$session->set_flashdata('warning', '');
+    		return $alert;
+    	}
     	if($session->flashdata('erros')){
     		$alert = '<div class="alert alert-danger">' 
-		    	.'<h4><b><span class="glyphicon glyphicon-alert"></span> Erro</b></h4>';
+		    	.'<h4><b><span class="fa fa-times-circle"></span> Erro</b></h4>';
     		foreach($session->flashdata('erros') as $erro){
     			$alert .= $erro.'<br>';
     		}
@@ -35,7 +42,7 @@ if ( ! function_exists('alert'))
     	}
     	if(!empty(validation_errors())){
 		    $alert = '<div class="alert alert-danger">'
-		    .'<h4><b><span class="glyphicon glyphicon-alert"></span> Erros de Validação</b></h4>'
+		    .'<h4><b><span class="fa fa-times-circle"></span> Erros de Validação</b></h4>'
 		    .validation_errors().'</div>';
 		    return $alert;
 		}

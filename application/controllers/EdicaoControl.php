@@ -205,4 +205,5 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $data['title']="IFEvents - Edições";
         $this->chamaView("edicoes", "organizador", $data, 1);
 	}
+
 }

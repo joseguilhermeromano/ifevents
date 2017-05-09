@@ -254,15 +254,7 @@
 					,arti_autores	 varchar(200) NOT NULL
 					,arti_orienta    varchar(100) NOT NULL
 					,arti_resumo     varchar(500) NOT NULL
-					,arti_apoio 	 varchar(100) NULL
-					,arti_ulti_alte_dt date 	  NOT NULL
-					,arti_ulti_alte_hr time 	  NOT NULL
-					,arti_arq_1_nm	 varchar(100) NOT NULL
-					,arti_arq_1    	 mediumblob	  NOT NULL
-					,arti_arq_2_nm	 varchar(100) NOT NULL
-					,arti_arq_2    	 mediumblob	  NULL
 					,arti_status     int(11)   	  NOT NULL
-					,arti_inst_cd 	 int(11)	  NOT NULL
 					,arti_moda_cd    int(11)      NOT NULL
 					,arti_eite_cd    int(11)      NOT NULL
 					,arti_user_resp_cd int(11)	  NOT NULL
@@ -407,13 +399,15 @@
 		//Método cria tabela Submissao
 		public function create_table_submissao(){
 			$sql = "CREATE TABLE IF NOT EXISTS Submissao (
-					 subm_cd      int(11)     NOT NULL PRIMARY KEY AUTO_INCREMENT
-					,subm_dt      date        NOT NULL
-					,subm_arq     mediumblob
-					,subm_horario timestamp   NOT NULL
-					,subm_arti_cd int(11)     NOT NULL
-					,subm_user_cd int(11)     NOT NULL
-					,subm_stat_cd int(11)     NOT NULL
+					 subm_cd      int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
+					,subm_versao  int(11)	   NOT NULL
+					,subm_arq1_nm varchar(200) NOT NULL
+					,subm_arq1     mediumblob  NOT NULL
+					,subm_arq2_nm varchar(200) NULL
+					,subm_arq2     mediumblob  NULL
+					,subm_dt      date         NOT NULL
+					,subm_hr	  time         NOT NULL
+					,subm_arti_cd int(11)      NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}

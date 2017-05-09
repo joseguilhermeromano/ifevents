@@ -162,10 +162,67 @@ $(document).ready(function() {
 
 });
 
-/*implanta select 2 nos inputs de modalidade e eixo temático*/
-$(".consultaModalidadeTematica").select2({
+/*implanta select 2 em inputs simples sem consulta ajax*/
+$(".selectComum").select2({
   minimumResultsForSearch: Infinity
 });
+
+$(document).ready(function(){
+
+ $('#teste').change(function () {
+     // var optionSelected = $(this).find("option:selected");
+     // var valueSelected  = optionSelected.val();
+  console.log('teste');
+// var conferencia = {conf_cd : $('.conferencia option:selected').val()};
+// $(".consultaModalidade").select2({
+//     minimumResultsForSearch: Infinity,
+//     ajax: {
+//         url: baseUrl + "modalidade/consultarParaSelect2",
+//         dataType: "json",
+//         type: "POST",
+//         data: conferencia,
+//         processResults: function (data) {
+//             return {
+//                 results: $.map(data, function (item) {
+//                     return {
+//                         text: item.mote_nm,
+//                         id: item.mote_cd
+//                     }
+//                 })
+//             };
+//         }
+//     }
+// });
+
+});
+
+});
+
+
+
+// $(".conferencia").change(function(){
+// var conferencia = {conf_cd : $('#conferencia option:selected').val()};
+// $(".consultaEixo").select2({
+//     minimumResultsForSearch: Infinity,
+//     ajax: {
+//         url: baseUrl + "eixo-tematico/consultarParaSelect2",
+//         dataType: "json",
+//         type: "POST",
+//         data: conferencia,
+//         processResults: function (data) {
+//             return {
+//                 results: $.map(data, function (item) {
+//                     return {
+//                         text: item.mote_nm,
+//                         id: item.mote_cd
+//                     }
+//                 })
+//             };
+//         }
+//     }
+// });
+
+// });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE CONFERÊNCIAS **/
 $(document).ready(function() {
@@ -257,7 +314,7 @@ $("#fileImage").ready(function(){
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
   // initialize with defaults
-$("#fileArtigo").ready(function(){
+$("#file_artigo_1").ready(function(){
 
   // $.ajax({
   // type: "POST",
@@ -266,11 +323,45 @@ $("#fileArtigo").ready(function(){
   // dataType: "json",
   // success: function (data) {
       
-    $("#fileArtigo").fileinput({
+    $("#file_artigo_1").fileinput({
     language: 'pt-BR',
     theme: 'fa',
     showUpload: false,
-    maxFileCount: 2,
+    // maxFileCount: 1,
+    maxFileSize: 4096,
+    allowedFileExtensions: ["pdf", "docx"], 
+    browseClass: 'btn btn-success',
+    browseIcon: "<i class=\"fa fa-file\"></i> ",
+    // initialPreview: [data.initialPreview],
+    // initialPreviewAsData: data.initialPreviewAsData,
+    // initialPreviewShowDelete:data.initialPreviewShowDelete,
+    // initialPreviewConfig: [data.initialPreviewConfig],
+    // overwriteInitial: data.overwriteInitial,
+    // maxFileSize: data.maxFileSize,
+    });
+
+
+  // }
+
+  // });
+
+
+});
+
+$("#file_artigo_2").ready(function(){
+
+  // $.ajax({
+  // type: "POST",
+  // url: baseUrl + "artigo/recuperaArtigo",
+  // async: true,
+  // dataType: "json",
+  // success: function (data) {
+      
+    $("#file_artigo_2").fileinput({
+    language: 'pt-BR',
+    theme: 'fa',
+    showUpload: false,
+    // maxFileCount: 1,
     maxFileSize: 4096,
     allowedFileExtensions: ["pdf", "docx"], 
     browseClass: 'btn btn-success',

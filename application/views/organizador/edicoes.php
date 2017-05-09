@@ -11,7 +11,7 @@
       <div class="col-sm-5">
          <div class="input-group">
                <input type="text" name="busca" class="form-control estilo-botao-busca" 
-               placeholder="Buscar por Edição, ex: 1º Semcitec...">
+               placeholder="Buscar por Edição, ex: 1ª SEMCITEC...">
                <span class="input-group-btn">
                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                </span>
@@ -45,7 +45,7 @@
             if(!empty($edicoes)){
             foreach( $edicoes as $edicao ): ?>
                  <tr> 
-                    <td><?= $edicao->edic_num.'º '.$edicao->conf_abrev ?></td>
+                    <td><?= $edicao->edic_num.'ª '.$edicao->conf_abrev ?></td>
                     <td><?= $edicao->edic_tema ?></td>
                     <td class="text-center"><?= desconverteDataMysql($edicao->regr_even_ini_dt) ?></td>
                     <td class="text-center"><?= desconverteDataMysql($edicao->regr_even_fin_dt) ?></td>

@@ -50,8 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-/* Rotas Corretas */
+/* Rotas Login */
 $route[ 'login/(:any)' ]              = 'LoginControl/$1';
+
 /*Rotas Usuário*/
 $route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
 $route[ 'usuario/ativar/(:num)' ]     = 'UsuarioControl/ativar/$1';
@@ -61,8 +62,15 @@ $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]     = 'EdicaoControl/alterar/$1';
-$route[ 'artigo/listar-atribuicoes' ]             = 'ArtigoControl/listarAtribuicoes';
-$route[ 'artigo/(:any)' ]             = 'ArtigoControl/$1';
+
+/*Rotas Artigo*/
+$route[ 'artigo/listar-atribuicoes' ]           = 'ArtigoControl/listarAtribuicoes';
+$route[ 'artigo/eventos-recentes' ]             = 'ArtigoControl/submissaoEventosRecentes/$1';
+$route[ 'artigo/detalhes-do-trabalho/(:any)' ]  = 'ArtigoControl/detalharTrabalho/$1';
+$route[ 'artigo/download/(:any)/(:any)' ]  = 'ArtigoControl/downloadArtigo/$1/$2';
+$route[ 'artigo/cadastrar/(:any)' ]  = 'ArtigoControl/cadastrar';
+$route[ 'artigo/alterar/(:any)' ]  = 'ArtigoControl/alterar/$1';
+$route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
 
 /*Rotas da Modalidade*/
