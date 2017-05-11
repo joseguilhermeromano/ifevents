@@ -72,6 +72,10 @@ $route[ 'artigo/cadastrar/(:any)' ]  = 'ArtigoControl/cadastrar';
 $route[ 'artigo/alterar/(:any)' ]  = 'ArtigoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
+/*Rotas listagem revisores*/
+$route[ 'revisor/consultar' ]             			= 'UsuarioControl/revisores';
+$route[ 'revisor/convidar' ]             			= 'UsuarioControl/convidarRevisores';
+$route[ 'revisor/(:any)' ]             			= 'UsuarioControl/$1';
 
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]             = 'ModalidadeControl/$1';

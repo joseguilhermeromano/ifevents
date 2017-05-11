@@ -108,7 +108,6 @@
 					,regr_insc_fin_dt       date    NOT NULL
 					,regr_subm_abert        date    NULL
 					,regr_subm_encerr       date    NULL
-					,regr_qtd_min_subm_aval int(3)  NULL
 					,regr_prazo_resp_autor  int(3)  NULL
 					,regr_prazo_resp_aval   int(3)  NULL
 					,regr_dire_subm			mediumblob NULL
@@ -277,7 +276,7 @@
 					,user_email_cd 	  int(11)	   NOT NULL 
 					,user_pass        varchar(100) NOT NULL
 					,user_tele_cd	  int(11)	   NULL
-					,user_qtd_subm	  int(2)	   NULL
+					,user_moda_tema_cds	  int(2)	   NULL
 					,user_stat_cd     int(11)      NOT NULL
 					,UNIQUE(user_rg)
 			) ENGINE=INNODB";

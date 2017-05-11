@@ -100,15 +100,6 @@
         </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-4">
-        <div class="form-group">
-        <b><?php echo form_label( '*Quant. mínima de submissões por revisor', 'qtdminimasubmrev' ); ?></b>
-        <?php $data = array( 'name' => 'qtdminimasubmrev', 'placeholder' => "Quant. mínima de submissões por revisor", 
-            'class' => 'form-control estilo-input',
-             'value' => (isset($regra) ? $regra->regr_qtd_min_subm_aval : ''));
-               echo form_input($data);?>
-        </div>
-    </div>
 </div>
 <div class="row">
     <div class="col-sm-6 col-md-4">

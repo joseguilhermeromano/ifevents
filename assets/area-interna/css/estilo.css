@@ -117,7 +117,8 @@
 }
 
 .sidebar-nav li a span{
-  font-size:13pt;
+  font-size:15pt;
+  margin-right:5px;
 }
 
  .sidebar-nav li a:hover {

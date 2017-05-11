@@ -102,4 +102,27 @@ if ( ! function_exists('alert'))
 		return  preg_replace("/\D/","", $string);
 	}
 
+	function geraModal($idModal){
+
+        $modal = '<div id="modalExcluir" class="modal fade">'
+            .  '<div class="modal-dialog">'
+            .   '<div class="modal-content">'
+            .       '<div class="modal-header">'
+            .           '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
+            .			'<h4 class="modal-title">Excluir</h4>'
+            .       '</div>'
+            .       '<div class="modal-body">'
+            .            '<p>Deseja realmente excluir este registro?</p>'
+            .       '</div>'
+            .       '<div class="modal-footer">'
+            .       '<button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>'
+            .		'<button class="btn btn-success" onclick="Executa();">Continuar</button>'
+            .       '</div>'
+            .    '</div>'
+            .  '</div>'
+        	.'</div>';
+        	
+        	return $modal;
+	}
+
 }

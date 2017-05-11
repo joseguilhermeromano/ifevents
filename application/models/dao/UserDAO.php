@@ -49,6 +49,29 @@ class UserDAO extends CI_Model implements DAO{
         }
     }
 
+    public function consultarRevisores($parametros = null, $limite=null, $numPagina=null, $sort='user_nm', $ordenacao='asc') {
+        $this->db->select("User.*, Edicao_Revisor.*");
+        $this->db->from("User");
+        $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
+        $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
+        $this->db->join('Status', 'User.user_stat_cd = Status.stat_cd','left');
+        $this->db->join('Edicao_Revisor', 'User.user_cd = Edicao_Revisor.edre_user_cd');
+        $this->db->order_by($sort, $ordenacao);
+        if($parametros !== null){
+            foreach ($parametros as $key => $value) {
+                $this->db->where($key.' LIKE ','%'.$value.'%');
+            }
+        }
+        if($limite)
+            $this->db->limit($limite, $numPagina);
+        $query = $this->db->get();
+        if($query->num_rows()>0){
+            return $query->result_object();
+        }else{
+            return null;
+        }
+    }
+
     public function totalRegistros(){
         return $this->db->count_all("User");
     }
@@ -82,7 +105,7 @@ class UserDAO extends CI_Model implements DAO{
                 $user->user_biograf = $value->user_biograf;
                 $user->user_rg = $value->user_rg;
                 $user->user_cpf = $value->user_cpf;
-                $user->user_qtd_subm = $value->user_qtd_subm;
+                $user->user_edic_cd = $value->user_edic_cd;
                 $user->user_email_cd = $value->user_email_cd;
                 $user->user_pass = $value->user_pass;
                 $user->user_tele_cd = $value->user_tele_cd;

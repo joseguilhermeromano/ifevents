@@ -128,15 +128,6 @@
         <textarea name="biografia" placeholder="Biografia:Fale um pouco sobre suas formações! " class="form-control estilo-input" rows="5"><?php echo (isset($user) ? $user->user_biograf : ''); ?></textarea>
         </div>
     </div>
-    <div class="col-sm-6"  id="qtdMaxSubmissaoAval" 
-    <?php echo ($usuario[0]['user_tipo']!= 2 ? 'style="display:none"' : ''); ?> >
-        <div class="form-group floating-label-form-group controls">
-        <b><?php echo form_label( '*Qtd. Máxima de Submissões', 'qtdSubmissoes' ); ?></b>
-        <?php $data = array( 'name' => 'qtdSubmissoes', 'type' => 'text','placeholder' => 'Qtd. Máxima de Submissões','class' => 'form-control estilo-input', 'onkeyup' => "somenteNumeros(this);", "maxlength" => "2",
-            'value' => (isset($user->user_qtd_subm) ? $user->user_qtd_subm : ''));
-              echo form_input( $data );?>
-        </div>
-    </div>
 </div>
 
 

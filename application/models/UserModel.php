@@ -37,11 +37,8 @@
 
              if($user == 3){
                 $this->user_tipo = $this->input->post('tipo_usuario');
-                $this->user_tipo == 2 ?  $this->user_qtd_subm = $this->input->post('qtdSubmissoes') : '';
              }else if ($this->session->userdata('view') == 'cadastro_revisor'){
                 $this->user_tipo = 2;
-                $this->user_qtd_subm = $this->input->post('qtdSubmissoes');
-             }else{
                 $this->user_tipo = 1;
              }
 
@@ -83,13 +80,6 @@
 
             if(empty($this->user_cpf)){
                 $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
-            }
-
-
-
-            if($this->session->userdata('view') == 'cadastro_revisor'||
-                ($user==3 && !empty($this->user_tipo) && $this->user_tipo == 2)){
-                $this->form_validation->set_rules( 'qtdSubmissoes', 'Qtd. Máxima de Submissões', 'integer|trim|required|max_length[2]' );
             }
 
         }

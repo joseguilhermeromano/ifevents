@@ -21,7 +21,6 @@
                         ,'regr_insc_fin_dt' => $obj->regr_insc_fin_dt
                         ,'regr_subm_abert' => $obj->regr_subm_abert
                         ,'regr_subm_encerr' => $obj->regr_subm_encerr
-                        ,'regr_qtd_min_subm_aval' => $obj->regr_qtd_min_subm_aval
                         ,'regr_prazo_resp_autor' => $obj->regr_prazo_resp_autor
                         ,'regr_prazo_resp_aval' => $obj->regr_prazo_resp_aval
                         ,'regr_dire_subm' => $obj->regr_dire_subm

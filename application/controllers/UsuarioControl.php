@@ -340,6 +340,44 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
         }
 
 
+        public function revisores(){
+            $limite = 10;
+            $numPagina =0;
+            $edic_cd = 10;
+            if(null !== $this->input->get('pagina')){
+                $numPagina = $this->input->get('pagina');
+            }
+
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array = array('user_nm'=>$busca, 'edre_edic_cd'=>$edic_cd);
+            }else{
+                $busca=null;
+                $array=null;
+            }
+
+            $data['revisores']=$this->UserDAO->consultarRevisores($array, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $this->UserDAO->totalRegistros();
+            $data['title']="IFEvents - Revisores";
+            $this->chamaView("revisores", "organizador", $data, 1);
+        }
+
+        public function consultarRevisorSelect2(){
+            $data = $this->UserDAO->consultarTudo(array('user_nm' => $this->input->post('term'), 'user_tipo' => 2));
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+
+        public function convidarRevisores(){
+            $revisores = $this->input->post('revisores');
+            foreach($revidores as $key => $revisor){
+                $mensagem = ""
+            }
+
+            
+        }
+
+
         public function excluir($codigo) {
 
         }
