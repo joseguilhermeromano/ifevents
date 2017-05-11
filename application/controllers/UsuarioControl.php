@@ -236,12 +236,13 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
-
+            $mensagemEscrita = $this->load->view("templates-emails/exemplo", 
+                array("mensagem" => $this->input->post("mensagem")), true);
             $notificacao = (object) array(
                 'tipo_notificacao' => $this->input->post('tipo_notificacao'),
                 'emails' => $this->input->post('emails'),
                 'assunto' => $this->input->post('assunto'),
-                'mensagem' => $this->input->post('mensagem'));
+                'mensagem' => $mensagemEscrita);
             $this->form_validation->set_rules( 'tipo_notificacao', 'Notificar', 'trim|required|max_length[11]' );
             if($notificacao->tipo_notificacao == 1){
                 $this->form_validation->set_rules( 'emails[]', 'Emails', 'valid_emails|trim|required|max_length[100]' );
@@ -371,10 +372,14 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
         public function convidarRevisores(){
             $revisores = $this->input->post('revisores');
             foreach($revidores as $key => $revisor){
-                $mensagem = ""
+                $mensagem = "";
             }
 
             
+        }
+
+        public function teste(){
+            $this->load->view('templates-emails/exemplo');
         }
 
 

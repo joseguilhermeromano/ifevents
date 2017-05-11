@@ -111,7 +111,7 @@ class PrincipalControl extends CI_Controller {
         );
 
         if(!$mail->Send()) {
-          echo "Mailer Error: " . $mail->ErrorInfo;
+          // echo "Mailer Error: " . $mail->ErrorInfo;
           return 1;
         } else {
           return 0;
