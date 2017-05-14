@@ -31,6 +31,13 @@ if ( ! function_exists('alert'))
     		$session->set_flashdata('warning', '');
     		return $alert;
     	}
+    	if ($session->flashdata('info')) {
+    		$alert = '<div class="alert alert-info">' 
+		    .'<h4><b><span class="glyphicon glyphicon-info-sign"></span> Informação</b></h4>'
+    		.$session->flashdata('info').'</div>';
+    		$session->set_flashdata('info', '');
+    		return $alert;
+    	}
     	if($session->flashdata('erros')){
     		$alert = '<div class="alert alert-danger">' 
 		    	.'<h4><b><span class="fa fa-times-circle"></span> Erro</b></h4>';

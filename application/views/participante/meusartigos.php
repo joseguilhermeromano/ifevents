@@ -25,7 +25,14 @@
          <a class="btn btn-default margin-button" href='<?php echo site_url('/artigo/eventos-recentes'); ?>' style="float:right">
          <i class="glyphicon glyphicon-open-file" aria-hidden="true"></i> Submeter Novo Trabalho</a>
     
-        <a href="#" class="btn btn-default"  style="float:right" ><span class="glyphicon glyphicon-save-file"></span> Regras de Submissão</a>
+        <div style="float:right" class="btn-group">
+          <a  class="btn btn-default dropdown-toggle margin-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="glyphicon glyphicon-save-file" aria-hidden="true"></i> Regras de Submissão <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">5ª SEMCITEC</a></li>
+          </ul>
+        </div>
     
 </div>
     </div>

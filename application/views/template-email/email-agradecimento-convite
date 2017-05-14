@@ -1,3 +1,13 @@
+
+<html>
+<head>
+    <!-- Bootstrap Core CSS -->
+    <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
+    <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
+    <!-- font awesome --> 
+    <link href="<?php echo base_url ('assets/ambas-areas/css/font-awesome.min.css');?>" rel="stylesheet">
+</head>
+<body>
 <style>
 /***
 User Profile Sidebar by @keenthemes
@@ -95,28 +105,33 @@ Licensed under MIT
                 <div style="line-height: 44px;">
                     <font face="Arial, Helvetica, sans-serif" size="5" color="#57697e" style="font-size: 34px;">
                     <span style="font-family: Arial, Helvetica, sans-serif; font-size: 34px; color: #5e9b75;">
+                    <span class="fa fa-envelope-open-o"></span>
                         Convite
                     </span></font>
                 </div>
                 <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"></div>
             </td></tr>
             <tr><td align="center">
-                <div style="line-height: 24px;">
+                <div style="line-height: 24px;" align="justify">
                     <font face="Arial, Helvetica, sans-serif" size="4" color="#57697e" style="font-size: 15px;">
                     <span style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #57697e;">
-                        Exmo(a) Sr(a) <b>José Guilherme Romano</b>, desejamos saber se você pode nos ajudar
-                        na revisão dos trabalhos para o evento científico <b>5ª SEMCITEC</b>, que ocorrerá entre o período dos dias <b>11/05/2017</b> até <b>11/05/2017</b>.
+                        Caro(a) Sr(a) <b>José Guilherme Romano</b>, desejamos saber se você pode nos ajudar
+                        na revisão dos trabalhos para o evento científico <b>5ª SEMCITEC</b>, que ocorrerá entre o período dos dias <b>11/05/2017</b> até <b>11/05/2017</b>. 
+                        <br><br>Sua colaboração é muito importante para nós!
                     </span></font>
                 </div>
                 <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"></div>
             </td></tr>
             <tr><td align="center">
                 <div style="line-height: 24px;">
-                    <a href="#" target="_blank" class="btn btn-danger block-center">
-                        Aceito Participar
+                    <a href="#" target="_blank" class="btn btn-success block-center">
+                    <b><span class="fa fa-check"></span>
+                        Aceitar</b>
                     </a>
+                    &nbsp;&nbsp;
                     <a href="#" target="_blank" class="btn btn-danger block-center">
-                        Não Aceito Participar
+                    <b><span class="fa fa-times"></span>
+                        Recusar</b>
                     </a>
                 </div>
                 <!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"></div>
@@ -129,7 +144,6 @@ Licensed under MIT
     <!--footer -->
     <tr><td class="iage_footer" align="center" bgcolor="#ffffff">
 
-        »
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr><td align="center" style="padding:20px;flaot:left;width:100%; text-align:center;">
                 <font face="Arial, Helvetica, sans-serif" size="3" color="#96a5b5" style="font-size: 13px;">
@@ -153,4 +167,8 @@ Licensed under MIT
  
 </td></tr>
 </table>
-            
+     <!--bootstrap -->
+        <script src="<?php echo base_url('assets/area-interna/js/jquery-3.2.1.js');?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
+</body>     
+</html>

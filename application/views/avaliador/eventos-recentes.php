@@ -12,7 +12,7 @@
                 <br>
                 <p><?= $evento->conf_desc; ?></p>
                 <br>
-                 <center><a href="<?= base_url('artigo/cadastrar/'.$evento->conf_cd); ?>" class="btn botao-detalhar-cinza">Submeter para este evento</a></center>
+                 <center><a href="<?= base_url('revisao/consultar/'.$evento->conf_cd); ?>" class="btn botao-detalhar-cinza"></a></center>
           </div>
         </div>
     </div>

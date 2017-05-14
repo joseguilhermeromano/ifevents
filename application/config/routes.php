@@ -56,6 +56,7 @@ $route[ 'login/(:any)' ]              = 'LoginControl/$1';
 /*Rotas Usuário*/
 $route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
 $route[ 'usuario/ativar/(:num)' ]     = 'UsuarioControl/ativar/$1';
+$route['usuario/notificar']			  = 'NotificacaoControl/notificaUsers';
 $route[ 'usuario/desativar/(:num)' ]  = 'UsuarioControl/desativar/$1';
 $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
 
@@ -74,7 +75,10 @@ $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
 /*Rotas listagem revisores*/
 $route[ 'revisor/consultar' ]             			= 'UsuarioControl/revisores';
-$route[ 'revisor/convidar' ]             			= 'UsuarioControl/convidarRevisores';
+$route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
+$route[ 'aceitar-convite/(:any)/(:any)' ]             			= 'UsuarioControl/aceiteConviteRevisor/$1/$2';
+$route[ 'recusar-convite/(:any)/(:any)' ]             			= 'UsuarioControl/recusaConviteRevisor/$1/$2';
+$route[ 'revisor/excluir-convite/(:any)/(:any)' ]             			= 'UsuarioControl/excluirConvite/$1/$2';
 $route[ 'revisor/(:any)' ]             			= 'UsuarioControl/$1';
 
 /*Rotas da Modalidade*/
@@ -86,6 +90,9 @@ $route[ 'modalidade/excluir/(:any)' ]             = 'ModalidadeControl/excluir/$
 $route[ 'eixo-tematico/(:any)' ]             = 'EixoTematicoControl/$1';
 $route[ 'eixo-tematico/alterar/(:any)' ]             = 'EixoTematicoControl/alterar/$1';
 $route[ 'eixo-tematico/excluir/(:any)' ]             = 'EixoTematicoControl/excluir/$1';
+
+/*Rotas de Avaliações*/
+$route[ 'revisao/(:any)' ]             = 'AvaliacaoControl/$1';
 
 /*Rotas para Regras*/
 $route[ 'regra-submissao/(:any)' ]             = 'RegraControl/$1';

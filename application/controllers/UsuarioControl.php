@@ -13,6 +13,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->load->Model( 'dao/LocalidadeDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
 			$this->load->Model('UserModel','usuario');
+            $this->load->Model('dao/EdicaoDAO');
             $this->load->Model('EmailModel','email');
             $this->load->Model('TelefoneModel','telefone');
             $this->load->Model('LocalidadeModel','localidade');
@@ -230,82 +231,6 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 			return null;
 		}
 
-        public function notificaUsers(){
-            if (empty($this->input->post())){
-                $this->chamaView("notifica-users", "organizador",
-                    array("title"=>"IFEvents - Nova Notificação"), 1);
-                return true;
-            }
-            $mensagemEscrita = $this->load->view("templates-emails/exemplo", 
-                array("mensagem" => $this->input->post("mensagem")), true);
-            $notificacao = (object) array(
-                'tipo_notificacao' => $this->input->post('tipo_notificacao'),
-                'emails' => $this->input->post('emails'),
-                'assunto' => $this->input->post('assunto'),
-                'mensagem' => $mensagemEscrita);
-            $this->form_validation->set_rules( 'tipo_notificacao', 'Notificar', 'trim|required|max_length[11]' );
-            if($notificacao->tipo_notificacao == 1){
-                $this->form_validation->set_rules( 'emails[]', 'Emails', 'valid_emails|trim|required|max_length[100]' );
-            }
-            $this->form_validation->set_rules( 'assunto', 'Assunto', 'trim|required|max_length[50]' );
-            $this->form_validation->set_rules( 'mensagem', 'Mensagem', 'required' );
-            $users = null;
-            if($notificacao->tipo_notificacao != 1 && $notificacao->tipo_notificacao != -1){
-                switch ($notificacao->tipo_notificacao) {
-                    case '2':
-                        $users = $this->UserDAO->consultarTudo(array('user_tipo' => 1));
-                        break;
-
-                    case '3':
-                        $users = $this->UserDAO->consultarTudo(array('user_tipo' => 2));
-                        break;
-
-                    case '4':
-                        $users = $this->UserDAO->consultarTudo(array('user_tipo' => 3));
-                        break;
-
-                    default:
-                        $users = $this->UserDAO->consultarTudo(null);
-                        break;
-                }
-            }
-            if($this->form_validation->run()){
-                $test=1;
-                $qtd=0;
-                if(!empty($notificacao->emails)){
-                    $qtd= sizeof($notificacao->emails);
-                    foreach ($notificacao->emails as $key => $value) {
-                        $test = $this->envia_email($value,$notificacao->assunto, $notificacao->mensagem);
-                    }
-                }
-                if($users != null){
-                    $qtd= sizeof($users);
-                    foreach ($users as $key => $value) {
-                        $test = $this->envia_email($value->email_email, $notificacao->assunto, $notificacao->mensagem);
-                    }
-                }
-                if($test == 0){
-                    if($qtd > 1){
-                        $mensagem = 'As notificações foram enviados com sucesso!';
-                    }else{
-                        $mensagem = 'A notificação foi enviada com sucesso!';
-                    }
-                    $this->session->set_flashdata('success', $mensagem);
-                }else{
-                    if($qtd > 1){
-                        $mensagem = 'Não foi possível enviar as notificações!';
-                    }else{
-                        $mensagem = 'Não foi possível enviar a notificação!';
-                    }
-                    $this->session->set_flashdata('error', $mensagem);
-                }
-            }
-            $data['title']="IFEvents - Nova Notificação";
-            $data['notificacao'] = $notificacao;
-            $this->chamaView("notifica-users", "organizador",
-                   $data, 1);
-        }
-
         public function consultarEmailSelect(){
             $data = $this->UserDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
@@ -369,17 +294,34 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
-        public function convidarRevisores(){
-            $revisores = $this->input->post('revisores');
-            foreach($revidores as $key => $revisor){
-                $mensagem = "";
+        public function aceiteConviteRevisor($revisor, $evento){
+            $retorno = $this->UserDAO->aceitarRecusarConvite($revisor, $evento, "Convite Aceito");
+            if($retorno == 0){
+                $this->session->set_flashdata('success','O Convite foi aceito com sucesso! É muito gratificante poder contar com sua colaboração!');
+            }else{
+                $this->session->set_flashdata('error','Não foi possível aceitar o convite!');
             }
-
-            
+            redirect('revisao/consultar');
         }
 
-        public function teste(){
-            $this->load->view('templates-emails/exemplo');
+        public function recusaConviteRevisor($revisor, $evento){
+            $retorno = $this->UserDAO->aceitarRecusarConvite($revisor, $evento, "Convite Recusado");
+            if($retorno == 0){
+                $this->session->set_flashdata('success','O Convite foi recusado com sucesso!');
+            }else{
+                $this->session->set_flashdata('error','Não foi possível recusar o convite!');
+            }
+             redirect('revisao/consultar');
+        }
+
+        public function excluirConvite($revisor, $evento){
+            $retorno = $this->UserDAO->excluirConvite($revisor, $evento);
+            if($retorno == 0){
+                $this->session->set_flashdata('success','O Revisor foi removido do evento com sucesso!');
+            }else{
+                $this->session->set_flashdata('error','Não foi possível remover o revisor neste evento!');
+            }
+             redirect('revisor/consultar');
         }
 
 

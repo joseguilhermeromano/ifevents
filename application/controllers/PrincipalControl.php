@@ -17,7 +17,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->helper('file');
         $this->load->helper('download');
         $this->load->library('uploadimage','','img');
-		// $this->load->model('acesso/Autentica');		
+		$this->load->model('acesso/Autentica');		
 	}
 
 	/**

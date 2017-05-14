@@ -457,11 +457,8 @@ $(document).ready(function() {
 /** IMPLANTA O SELECT2 NA CONSULTA DE REVISORES **/
 $(document).ready(function() {
     $(".consultaRevisores").select2({
-    placeholder: "Selecionar Revisor por nome...",
-    multiple: true,
     minimumInputLength: 2,
-    maximumSelectionLength: 1,
-    minimumResultsForSearch: 10,
+    minimumResultsForSearch: Infinity,
     ajax: {
         url: baseUrl + "usuario/consultarRevisorSelect2",
         dataType: "json",

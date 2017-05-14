@@ -32,9 +32,10 @@
             <tr>
                     
                     <th class="col-xs-2">Nome</th>
-                    <th class="text-center col-xs-4">Modalidades</th>
-                    <th class="text-center col-xs-4">Eixos Temáticos</th>
+                    <th class="text-center col-xs-2">Modalidades</th>
+                    <th class="text-center col-xs-3">Eixos Temáticos</th>
                     <th class="text-center col-xs-2">Convite</th>
+                    <th class="text-center col-xs-2">Opções</th>
             </tr>
         </thead>
         <tbody>
@@ -48,10 +49,18 @@
                     <td class="text-center">
                     <?= $revisor->edre_convite_status; ?>
                     </td>
+                    <td class="text-center">
+                    <div class="text-left" style="display: inline-block">
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
+                          onclick="setCodigo('<?= $revisor->user_cd."/".$revisor->edre_edic_cd; ?>'); 
+                          setLink('<?= base_url('revisor/excluir-convite/')?>');">
+                          <span class="fa fa-trash"></span>&#09; Excluir</a>
+                    </div>
+                    </td>
                 </tr>
             <?php endforeach;}else{ ?>
               <tr>
-                <td class="col-xs-12 text-center" colspan="4">Não foram encontrados resultados para a sua busca...</td>
+                <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
             <?php } ?> 
         </tbody>
@@ -75,13 +84,13 @@
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                   <h4 class="modal-title"><span class="fa fa-paper-plane"> Convidar Revisores</h4>
               </div>
-              <div class="modal-body">
               <form action="<?= base_url('revisor/convidar'); ?>" method="POST">
-                <div class="form-group floating-label-form-group controls">
-                    <b><?php echo form_label( 'Selecionar por nome de Revisor', 'revisores' ); ?></b><br>
-                        <select name="revisores[]" class="form-control estilo-input consultaRevisores" multiple="multiple">
+                <div class="modal-body">
+                  <div class="form-group controls">
+                    <b><?php echo form_label( 'Selecionar por nome de Revisor', 'revisor' ); ?></b><br>
+                        <select name="revisor" class="form-control estilo-input consultaRevisores">
                         </select>
-                    </div>
+                  </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
