@@ -44,15 +44,45 @@
             foreach( $revisores as $revisor ): ?>
                  <tr> 
                     <td><?= $revisor->user_nm; ?></td>
-                    <td class="text-center"><?= $revisor->user_moda_tema_cds == null ? 'Ainda não foi informado!' : '' ; ?></td>
-                    <td class="text-center"><?= $revisor->user_moda_tema_cds == null ? 'Ainda não foi informado!' : '' ; ?></td>
                     <td class="text-center">
-                    <?= $revisor->edre_convite_status; ?>
+                      <?php 
+                        if(isset($revisor->modalidadesEixos)){
+                          $modalidades ='';
+                          foreach ($revisor->modalidadesEixos as $key => $value) {
+                            if($value->mote_tipo == 0){
+                              $modalidades .= $modalidades != '' ? ', ' : '';
+                              $modalidades .= $value->mote_nm;
+                            }
+                          }
+                          echo $modalidades;
+                        }else{
+                          echo "Ainda não informado!";
+                        }
+                      ?>
+                    </td>
+                    <td class="text-center">
+                      <?php 
+                        if(isset($revisor->modalidadesEixos)){
+                          $modalidades ='';
+                          foreach ($revisor->modalidadesEixos as $key => $value) {
+                            if($value->mote_tipo == 1){
+                              $modalidades .= $modalidades != '' ? ', ' : '';
+                              $modalidades .= $value->mote_nm;
+                            }
+                          }
+                          echo $modalidades;
+                        }else{
+                          echo "Ainda não informado!";
+                        }
+                      ?>
+                    </td>
+                    <td class="text-center">
+                    <?= $revisor->core_convite_status; ?>
                     </td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
                           <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo('<?= $revisor->user_cd."/".$revisor->edre_edic_cd; ?>'); 
+                          onclick="setCodigo('<?= $revisor->user_cd."/".$revisor->core_conf_cd; ?>'); 
                           setLink('<?= base_url('revisor/excluir-convite/')?>');">
                           <span class="fa fa-trash"></span>&#09; Excluir</a>
                     </div>

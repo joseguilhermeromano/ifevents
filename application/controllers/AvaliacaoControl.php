@@ -26,8 +26,8 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 			$this->session->userdata('usuario')[0]['user_cd'])[0];
 
 
-		if(empty($eventosRevisor->edre_user_cd)){
-			$this->session->set_flashdata('info', 'Ainda não há eventos com o período de revisões aberto!');
+		if(empty($eventosRevisor->core_user_cd)){
+			// $this->session->set_flashdata('info', 'Ainda não há eventos com o período de revisões aberto!');
 			return $this->chamaView("revisoes-pendentes", "avaliador",
         	array("title"=>"IFEvents - Revisões Pendentes"), 1);
 		}
@@ -36,7 +36,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		$eixosTematicos = null;
 		$mensagemModal = null;
 
-		$modalidadesTematicas = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($eventosRevisor->edre_user_cd, $eventosRevisor->edic_conf_cd);
+		$modalidadesTematicas = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($eventosRevisor->core_user_cd, $eventosRevisor->core_conf_cd);
 
 		if($modalidadesTematicas == null){
 			$this->session->set_flashdata('info', 'Você primeiro deve selecionar as modalidades e eixos temáticos dos trabalhos que deseja revisar!<br><a href="#" data-toggle="modal" data-target="#selecionarModalidadesEixos"><b>Clique aqui</b></a> para selecionar as modalidades e eixos temáticos de interesse!');
@@ -62,7 +62,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		        	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal,
 		        	"inputmodalidades" => $inputModalidades, "inputeixos" => $inputEixos), 1);
 			}else{
-				$verifica = $this->ModalidadeTematicaDAO->insereModaTemaRevisor($inputModalidades,$inputEixos,$eventosRevisor->edre_user_cd);
+				$verifica = $this->ModalidadeTematicaDAO->insereModaTemaRevisor($inputModalidades,$inputEixos,$eventosRevisor->core_user_cd);
 				if($verifica==0){
 					$this->session->set_flashdata('success', 'As modalidades e os eixos temáticos foram salvos com sucesso!');
 					$modalidades = null;

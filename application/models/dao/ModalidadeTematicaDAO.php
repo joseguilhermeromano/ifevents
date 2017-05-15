@@ -58,8 +58,8 @@
         public function consultarModaTemaRevisor($revisor, $conferencia){
             $this->db->select("Modalidade_Tematica.*");
             $this->db->from("mote_revisor");
-            $this->db->join('Modalidade_Tematica', 'Modalidade_Tematica.mote_cd = mote_revisor.more_user_cd','left');
-            $this->db->where('mote_revisor.more_user_cd', $revisor);
+            $this->db->join('Modalidade_Tematica', 'Modalidade_Tematica.mote_cd = Mote_Revisor.more_mote_cd','left');
+            $this->db->where('Mote_Revisor.more_user_cd', $revisor);
             $this->db->where('Modalidade_Tematica.mote_conf_cd', $conferencia);
             $this->db->order_by('Modalidade_Tematica.mote_nm', 'asc');
             $query = $this->db->get();

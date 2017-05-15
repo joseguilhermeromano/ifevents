@@ -60,22 +60,22 @@
                         $tipo_usuario = $this->session->userdata('usuario')[0]['user_tipo'];
                         $cd_metodo  = $resultMetodos[0]->meto_cd;
 
-                        $array = array('meto_classe' => $classe, 'meto_metodo' => $metodo);
-                        $qryMetodos = $this->db->where($array)->get('metodo');            
-                        $codigo = $qryMetodos->result()[0]->meto_cd;
+                        // $array = array('meto_classe' => $classe, 'meto_metodo' => $metodo);
+                        // $qryMetodos = $this->db->where($array)->get('metodo');            
+                        // $codigo = $qryMetodos->result()[0]->meto_cd;
 
-                        $array = array('perm_tius_cd' => $tipo_usuario, 'perm_meto_cd' => $codigo);
-                        $qryMetodos = $this->db->where($array)->get('permissao');            
-                        $resultMetodos = $qryMetodos->result();
+                        // $array = array('perm_tius_cd' => $tipo_usuario, 'perm_meto_cd' => $codigo);
+                        // $qryMetodos = $this->db->where($array)->get('permissao');            
+                        // $resultMetodos = $qryMetodos->result();
 
-                        if( count( $resultMetodos ) == 0 ){
-                            $data = array(
-                                'perm_tius_cd' => $tipo_usuario
-                                ,'perm_meto_cd' => $codigo
-                            );
-                            $this->db->insert( 'permissao', $data );                
-                            redirect( base_url( $classe . '/' . $metodo ), 'refresh' );
-                        }
+                        // if( count( $resultMetodos ) == 0 ){
+                        //     $data = array(
+                        //         'perm_tius_cd' => $tipo_usuario
+                        //         ,'perm_meto_cd' => $codigo
+                        //     );
+                        //     $this->db->insert( 'permissao', $data );                
+                        //     redirect( base_url( $classe . '/' . $metodo ), 'refresh' );
+                        // }
 
                     }
                 
