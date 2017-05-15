@@ -592,6 +592,15 @@ $('#form_atribuicoes :checkbox').click(function() {
 
 });
 
+/*Carrega modal autormaiticamente (modalidades e eixos tematicos) area do revisor*/
+$(document).ready(function() {
+  var url = location.href;
+  if(url.indexOf("revisao/consultar") != -1) {
+      $('#selecionarModalidadesEixos').modal('show');
+  }
+   
+});
+
 
 
 

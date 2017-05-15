@@ -265,63 +265,9 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
              $this->consultar();
         }
 
-
-        public function revisores(){
-            $limite = 10;
-            $numPagina =0;
-            $edic_cd = 10;
-            if(null !== $this->input->get('pagina')){
-                $numPagina = $this->input->get('pagina');
-            }
-
-            if( $this->input->get('busca') !== null){
-                $busca = $this->input->get('busca');
-                $array = array('user_nm'=>$busca, 'edre_edic_cd'=>$edic_cd);
-            }else{
-                $busca=null;
-                $array=null;
-            }
-
-            $data['revisores']=$this->UserDAO->consultarRevisores($array, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
-            $data['totalRegistros'] = $this->UserDAO->totalRegistros();
-            $data['title']="IFEvents - Revisores";
-            $this->chamaView("revisores", "organizador", $data, 1);
-        }
-
         public function consultarRevisorSelect2(){
             $data = $this->UserDAO->consultarTudo(array('user_nm' => $this->input->post('term'), 'user_tipo' => 2));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
-        }
-
-        public function aceiteConviteRevisor($revisor, $evento){
-            $retorno = $this->UserDAO->aceitarRecusarConvite($revisor, $evento, "Convite Aceito");
-            if($retorno == 0){
-                $this->session->set_flashdata('success','O Convite foi aceito com sucesso! É muito gratificante poder contar com sua colaboração!');
-            }else{
-                $this->session->set_flashdata('error','Não foi possível aceitar o convite!');
-            }
-            redirect('revisao/consultar');
-        }
-
-        public function recusaConviteRevisor($revisor, $evento){
-            $retorno = $this->UserDAO->aceitarRecusarConvite($revisor, $evento, "Convite Recusado");
-            if($retorno == 0){
-                $this->session->set_flashdata('success','O Convite foi recusado com sucesso!');
-            }else{
-                $this->session->set_flashdata('error','Não foi possível recusar o convite!');
-            }
-             redirect('revisao/consultar');
-        }
-
-        public function excluirConvite($revisor, $evento){
-            $retorno = $this->UserDAO->excluirConvite($revisor, $evento);
-            if($retorno == 0){
-                $this->session->set_flashdata('success','O Revisor foi removido do evento com sucesso!');
-            }else{
-                $this->session->set_flashdata('error','Não foi possível remover o revisor neste evento!');
-            }
-             redirect('revisor/consultar');
         }
 
 

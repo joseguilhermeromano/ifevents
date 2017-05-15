@@ -15,6 +15,7 @@
 				$this->create_table_tipo_parceria();
 				$this->create_table_status();
 				$this->create_table_modalidade_tematica();
+				$this->create_table_mote_revisor();
 				$this->create_table_atividade();
 				$this->create_table_edicao();
 				$this->create_table_organiza();
@@ -176,6 +177,15 @@
 					,mote_tipo varchar(100) NOT NULL
 					,mote_conf_cd int(11)   NOT NULL
 			) ENGINE=INNODB";
+			$this->db->query($sql);
+		}
+
+		public function create_table_mote_revisor(){
+			$sql = "CREATE TABLE IF NOT EXISTS `mote_revisor` (
+					 `more_mote_cd` int(11) NOT NULL,
+					 `more_user_cd` int(11) NOT NULL,
+					 PRIMARY KEY (`more_user_cd`,`more_mote_cd`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 			$this->db->query($sql);
 		}
 

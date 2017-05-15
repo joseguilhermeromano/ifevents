@@ -8,6 +8,8 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		parent::__construct();
 
 		$this->load->Model( 'dao/AvaliacaoDAO' );
+		$this->load->Model( 'dao/EdicaoDAO' );
+		$this->load->Model( 'dao/ModalidadeTematicaDAO' );
 		$this->load->Model( 'AvaliacaoModel','avaliacao' );
 	}
 
@@ -20,8 +22,63 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function consultar(){
+		$eventosRevisor = $this->EdicaoDAO->consultarEventosRevisor(date('y-m-d'),
+			$this->session->userdata('usuario')[0]['user_cd'])[0];
+
+
+		if(empty($eventosRevisor->edre_user_cd)){
+			$this->session->set_flashdata('info', 'Ainda não há eventos com o período de revisões aberto!');
+			return $this->chamaView("revisoes-pendentes", "avaliador",
+        	array("title"=>"IFEvents - Revisões Pendentes"), 1);
+		}
+
+		$modalidades = null;
+		$eixosTematicos = null;
+		$mensagemModal = null;
+
+		$modalidadesTematicas = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($eventosRevisor->edre_user_cd, $eventosRevisor->edic_conf_cd);
+
+		if($modalidadesTematicas == null){
+			$this->session->set_flashdata('info', 'Você primeiro deve selecionar as modalidades e eixos temáticos dos trabalhos que deseja revisar!<br><a href="#" data-toggle="modal" data-target="#selecionarModalidadesEixos"><b>Clique aqui</b></a> para selecionar as modalidades e eixos temáticos de interesse!');
+			$modalidades = $this->ModalidadeTematicaDAO->
+			consultarTudo(array('mote_conf_cd' => $eventosRevisor->edic_conf_cd
+				,'mote_tipo' => 0));
+			$eixosTematicos = $this->ModalidadeTematicaDAO->
+			consultarTudo(array('mote_conf_cd' => $eventosRevisor->edic_conf_cd
+				,'mote_tipo' => 1));
+		}
+
+		if($this->input->post('modalidades') ||
+			$this->input->post('eixos')){
+			$inputModalidades = $this->input->post('modalidades');
+			$inputEixos = $this->input->post('eixos');
+			if(sizeof($inputModalidades) < 1 || sizeof($inputEixos) < 1){
+				$this->load->helper('html');
+				$this->session->set_flashdata('error', 'Você deve selecionar pelo menos uma modalidade e um eixo temático!');
+				$mensagemModal = alert($this->session);
+
+				return $this->chamaView("revisoes-pendentes", "avaliador",
+		        array("title"=>"IFEvents - Revisões Pendentes"
+		        	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal,
+		        	"inputmodalidades" => $inputModalidades, "inputeixos" => $inputEixos), 1);
+			}else{
+				$verifica = $this->ModalidadeTematicaDAO->insereModaTemaRevisor($inputModalidades,$inputEixos,$eventosRevisor->edre_user_cd);
+				if($verifica==0){
+					$this->session->set_flashdata('success', 'As modalidades e os eixos temáticos foram salvos com sucesso!');
+					$modalidades = null;
+					$eixos = null;
+				}else{
+					$this->session->set_flashdata('error', 'Não foi possível salvar as modalidades e os eixos temáticos!');
+				}
+			}
+		}
+
+
+
+		
 		return $this->chamaView("revisoes-pendentes", "avaliador",
-        array("title"=>"IFEvents - Revisões Pendentes"), 1);
+        array("title"=>"IFEvents - Revisões Pendentes"
+        	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal), 1);
 	}
 
 	public function excluir($codigo){

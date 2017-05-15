@@ -73,6 +73,68 @@
     </table>
 </div><!-- /TABELA-->
 
+<?php if(isset($eixosTematicos) && isset($modalidades)){ ?>
+  <!-- Modal -->
+
+  <div id="selecionarModalidadesEixos" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title"><span class="fa fa-check-square-o"></span> Selecione suas Modalidades e Eixos Temáticos</h4>
+              </div>
+              <form action="<?= base_url('revisao/consultar'); ?>" method="POST">
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <?= isset($mensagem) ? $mensagem : '' ?>
+                    <br>
+                    <fieldset class="col-md-12">     
+                      <legend>Modalidades</legend>
+                      
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                        
+                          <?php foreach ($modalidades as $key => $modalidade) { ?>
+                          <div>
+                            <input type="checkbox" id="modalidade_<?= $key; ?>" name="modalidades[]" value="<?= $modalidade->mote_cd; ?>" <?= isset($inputmodalidades) && in_array($modalidade->mote_cd,$inputmodalidades) ? 'checked' : '' ?>>
+                            <label for="modalidade"><?= $modalidade->mote_nm; ?></label>
+                          </div>
+                          <?php } ?>
+                        </div>
+                      </div>
+                      
+                    </fieldset>
+                  </div>
+                  <div class="container-fluid">
+                    <fieldset class="col-md-12">     
+                      <legend>Eixos Temáticos</legend>
+                      
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <?php foreach ($eixosTematicos as $key => $eixo) { ?>
+                          <div>
+                            <input type="checkbox" id="eixo_<?= $key; ?>" name="eixos[]" value="<?= $eixo->mote_cd; ?>"
+                            <?= isset($inputeixos) && in_array($eixo->mote_cd,$inputeixos) ? 'checked' : '' ?>>
+                            <label for="eixo"><?= $eixo->mote_nm; ?></label>
+                          </div>
+                          <?php } ?>
+                      </div>
+                      
+                    </fieldset>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+<?php } ?>
+
+
 
 
 

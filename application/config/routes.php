@@ -74,12 +74,12 @@ $route[ 'artigo/alterar/(:any)' ]  = 'ArtigoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
 /*Rotas listagem revisores*/
-$route[ 'revisor/consultar' ]             			= 'UsuarioControl/revisores';
+$route[ 'revisor/consultar' ]             			= 'EdicaoControl/revisores';
 $route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
-$route[ 'aceitar-convite/(:any)/(:any)' ]             			= 'UsuarioControl/aceiteConviteRevisor/$1/$2';
-$route[ 'recusar-convite/(:any)/(:any)' ]             			= 'UsuarioControl/recusaConviteRevisor/$1/$2';
-$route[ 'revisor/excluir-convite/(:any)/(:any)' ]             			= 'UsuarioControl/excluirConvite/$1/$2';
-$route[ 'revisor/(:any)' ]             			= 'UsuarioControl/$1';
+$route[ 'aceitar-convite/(:any)/(:any)' ]             			= 'EdicaoControl/aceiteConviteRevisor/$1/$2';
+$route[ 'recusar-convite/(:any)/(:any)' ]             			= 'EdicaoControl/recusaConviteRevisor/$1/$2';
+$route[ 'revisor/excluir-convite/(:any)/(:any)' ]             			= 'EdicaoControl/excluirConvite/$1/$2';
+$route[ 'revisor/(:any)' ]             			= 'EdicaoControl/$1';
 
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]             = 'ModalidadeControl/$1';
