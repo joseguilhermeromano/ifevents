@@ -143,11 +143,6 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         }
         
 
-        public function listarAtribuicoes(){
-            $this->chamaView("atribuicoes-submissoes", "organizador",
-                    array("title"=>"IFEvents - Atribuição de Submissões"), 1);
-        }
-
         public function atribuirArtigo(){
 
         }

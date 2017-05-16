@@ -117,7 +117,7 @@
               <form action="<?= base_url('revisor/convidar'); ?>" method="POST">
                 <div class="modal-body">
                   <div class="form-group controls">
-                    <b><?php echo form_label( 'Selecionar por nome de Revisor', 'revisor' ); ?></b><br>
+                    <b><?php echo form_label( 'Selecionar revisor por nome', 'revisor' ); ?></b><br>
                         <select name="revisor" class="form-control estilo-input consultaRevisores">
                         </select>
                   </div>

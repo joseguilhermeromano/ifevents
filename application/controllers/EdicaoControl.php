@@ -235,6 +235,16 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $this->chamaView("revisores", "organizador", $data, 1);
     }
 
+    public function selecionarEvento($edicao){
+        
+        foreach ($this->session->userdata('eventos_recentos') as $key => $value) {
+            if($value->edic_cd == $edicao){
+                $this->session->set_userdata('evento_selecionado',$value);
+            }
+        }
+        redirect('usuario/inicioOrganizador');
+    }
+
     public function aceiteConviteRevisor($revisor, $conferencia){
         $retorno = $this->EdicaoDAO->aceitarRecusarConvite($revisor, $conferencia, "Convite Aceito");
         if($retorno == 0){

@@ -81,6 +81,16 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
         	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal), 1);
 	}
 
+	public function consultarAtribuicoes(){
+		$conf_cd = 1;
+		$data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($conf_cd); 
+		if($data == null){
+			$this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
+		}
+		$this->chamaView("atribuicoes-submissoes", "organizador",
+            array("title"=>"IFEvents - Atribuição de Trabalhos", "atribuicoes" => $data), 1);
+	}
+
 	public function excluir($codigo){
 
 	}

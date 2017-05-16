@@ -17,7 +17,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->helper('file');
         $this->load->helper('download');
         $this->load->library('uploadimage','','img');
-		$this->load->model('acesso/Autentica');		
+		$this->load->model('acesso/Autentica');
 	}
 
 	/**
@@ -33,8 +33,8 @@ class PrincipalControl extends CI_Controller {
     	// $nomeDiretorio = strtolower($nomeDiretorio);
         if ( ! file_exists(APPPATH.'/views/'.$nomeDiretorio.'/'.$view.'.php'))
         {
-                // Caso não exista a págiina, retorna o erro abaixo
-                show_404();
+            // Caso não exista a págiina, retorna o erro abaixo
+            show_404();
         }
         $areaTemplate == 1 ? $header="common/area-interna/header" : $header="common/area-externa/header";
         $areaTemplate == 1 ? $footer="common/area-interna/footer" : $footer="common/area-externa/footer";

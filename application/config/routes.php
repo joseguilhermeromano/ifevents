@@ -68,35 +68,42 @@ $route[ 'edicao/alterar/(:any)' ]     = 'EdicaoControl/alterar/$1';
 $route[ 'artigo/listar-atribuicoes' ]           = 'ArtigoControl/listarAtribuicoes';
 $route[ 'artigo/eventos-recentes' ]             = 'ArtigoControl/submissaoEventosRecentes/$1';
 $route[ 'artigo/detalhes-do-trabalho/(:any)' ]  = 'ArtigoControl/detalharTrabalho/$1';
-$route[ 'artigo/download/(:any)/(:any)' ]  = 'ArtigoControl/downloadArtigo/$1/$2';
-$route[ 'artigo/cadastrar/(:any)' ]  = 'ArtigoControl/cadastrar';
-$route[ 'artigo/alterar/(:any)' ]  = 'ArtigoControl/alterar/$1';
+$route[ 'artigo/download/(:any)/(:any)' ]  		= 'ArtigoControl/downloadArtigo/$1/$2';
+$route[ 'artigo/cadastrar/(:any)' ]  			= 'ArtigoControl/cadastrar';
+$route[ 'artigo/alterar/(:any)' ]  				= 'ArtigoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
 /*Rotas listagem revisores*/
 $route[ 'revisor/consultar' ]             			= 'EdicaoControl/revisores';
 $route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
-$route[ 'aceitar-convite/(:any)/(:any)' ]             			= 'EdicaoControl/aceiteConviteRevisor/$1/$2';
-$route[ 'recusar-convite/(:any)/(:any)' ]             			= 'EdicaoControl/recusaConviteRevisor/$1/$2';
-$route[ 'revisor/excluir-convite/(:any)/(:any)' ]             			= 'EdicaoControl/excluirConvite/$1/$2';
-$route[ 'revisor/(:any)' ]             			= 'EdicaoControl/$1';
+$route[ 'aceitar-convite/(:any)/(:any)' ]           = 'EdicaoControl/aceiteConviteRevisor/$1/$2';
+$route[ 'recusar-convite/(:any)/(:any)' ]           = 'EdicaoControl/recusaConviteRevisor/$1/$2';
+$route[ 'revisor/excluir-convite/(:any)/(:any)' ]   = 'EdicaoControl/excluirConvite/$1/$2';
+$route[ 'revisor/(:any)' ]             				= 'EdicaoControl/$1';
 
 /*Rotas da Modalidade*/
-$route[ 'modalidade/(:any)' ]             = 'ModalidadeControl/$1';
-$route[ 'modalidade/alterar/(:any)' ]             = 'ModalidadeControl/alterar/$1';
-$route[ 'modalidade/excluir/(:any)' ]             = 'ModalidadeControl/excluir/$1';
+$route[ 'modalidade/(:any)' ]          = 'ModalidadeControl/$1';
+$route[ 'modalidade/alterar/(:any)' ]  = 'ModalidadeControl/alterar/$1';
+$route[ 'modalidade/excluir/(:any)' ]  = 'ModalidadeControl/excluir/$1';
 
 /*Rotas dos Eixos Temáticas*/
-$route[ 'eixo-tematico/(:any)' ]             = 'EixoTematicoControl/$1';
-$route[ 'eixo-tematico/alterar/(:any)' ]             = 'EixoTematicoControl/alterar/$1';
-$route[ 'eixo-tematico/excluir/(:any)' ]             = 'EixoTematicoControl/excluir/$1';
+$route[ 'eixo-tematico/(:any)' ]         = 'EixoTematicoControl/$1';
+$route[ 'eixo-tematico/alterar/(:any)' ] = 'EixoTematicoControl/alterar/$1';
+$route[ 'eixo-tematico/excluir/(:any)' ] = 'EixoTematicoControl/excluir/$1';
 
 /*Rotas de Avaliações*/
+$route[ 'revisao/consultar-atribuicoes' ] = 'AvaliacaoControl/consultarAtribuicoes';
 $route[ 'revisao/(:any)' ]             = 'AvaliacaoControl/$1';
 
 /*Rotas para Regras*/
-$route[ 'regra-submissao/(:any)' ]             = 'RegraControl/$1';
-$route[ 'regra-submissao/alterar(:any)' ]             = 'RegraControl/alterar/$1';
+$route[ 'regra-submissao/(:any)' ]        = 'RegraControl/$1';
+$route[ 'regra-submissao/alterar(:any)' ] = 'RegraControl/alterar/$1';
+
+/* Rota para selecionar evento area do organizador*/
+$route[ 'edicao/selecionar-evento/(:any)' ] = 'EdicaoControl/selecionarEvento/$1';
+
+
+
 
 $route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
 $route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';

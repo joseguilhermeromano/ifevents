@@ -132,6 +132,6 @@
 <?php endforeach; ?>
    
 </div>
-<a href='<?= base_url($this->uri->segment(1)."/consultar/") ?>' class='btn btn-default button'>Voltar</a>
+<a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>
 </div>
 

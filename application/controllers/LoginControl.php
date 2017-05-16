@@ -11,6 +11,7 @@ class LoginControl extends PrincipalControl{
                     
                     /*Carregamento de Models*/
                     $this->load->model('UserModel');
+                    $this->load->model('dao/EdicaoDAO');
                      
             }
             
@@ -22,6 +23,9 @@ class LoginControl extends PrincipalControl{
                         redirect($this->session->userdata('link_anterior'));
                     }
                     if($usuario[0]['user_tipo'] == 3){
+                        $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,5);
+                        $this->session->set_userdata('eventos_recentes', $eventosRecentes);
+                        $this->session->set_userdata('evento_selecionado',$eventosRecentes[0]);
                         redirect('usuario/inicioOrganizador');
                     }
                     else if($usuario[0]['user_tipo'] == 2){

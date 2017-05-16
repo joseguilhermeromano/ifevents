@@ -60,7 +60,7 @@
                       <?= somenteLetras($item->arti_autores); ?>
                         
                       </td>
-                      <td class="text-center"><?php echo ($item->arti_status==0 ? "Pronto para a revisão" : "Aprovado"); ?></td>
+                      <td class="text-center"><?= $item->arti_status; ?></td>
                       <td class="text-left">
                         <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$item->arti_cd); ?>" class="btn-opcao">
                           <span class="fa fa-eye"></span>&#09;Detalhar</a><br>
