@@ -83,12 +83,26 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 
 	public function consultarAtribuicoes(){
 		$conf_cd = 1;
-		$data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($conf_cd); 
-		if($data == null){
+		if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $array = array(
+            	  'Artigo.arti_title'=>$busca
+            	, 'mote1.mote_nm' => $busca
+            	, 'mote2.mote_nm' => $busca
+            	, 'mote1.mote_conf_cd' => $conf_cd);
+        }else{
+            $busca=null;
+            $array=array('mote1.mote_conf_cd' => $conf_cd);
+        }
+		$data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($array); 
+		$totalRegistros = sizeof($data);
+		if($data == null && $busca == null){
 			$this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
 		}
 		$this->chamaView("atribuicoes-submissoes", "organizador",
-            array("title"=>"IFEvents - Atribuição de Trabalhos", "atribuicoes" => $data), 1);
+            array("title"=>"IFEvents - Atribuição de Trabalhos"
+            	, "atribuicoes" => $data
+            	, "totalRegistros" => $totalRegistros), 1);
 	}
 
 	public function excluir($codigo){

@@ -32,7 +32,7 @@
             return $this->db->delete('avaliacao');
         }
 
-        public function consultarTrabalhosAindaNaoAtribuidos($conferencia){
+        public function consultarTrabalhosAindaNaoAtribuidos($parametros){
             $this->db->select("
                  Artigo.arti_cd
                 ,Artigo.arti_moda_cd
@@ -45,7 +45,11 @@
             $this->db->join('Artigo', 'Submissao.subm_arti_cd = Artigo.arti_cd','left');
             $this->db->join('Modalidade_Tematica mote1', 'Artigo.arti_moda_cd = mote1.mote_cd','left');
             $this->db->join('Modalidade_Tematica mote2', 'Artigo.arti_eite_cd = mote2.mote_cd','left');
-            $this->db->where('mote1.mote_conf_cd', $conferencia);
+            if($parametros !== null){
+                foreach ($parametros as $key => $value) {
+                    $this->db->or_where($key.' LIKE ','%'.$value.'%');
+                }
+            }
             $this->db->where_not_in('Submissao.subm_cd', 'Avaliacao.aval_subm_cd');
             $query = $this->db->get();
             if($query->num_rows()>0){

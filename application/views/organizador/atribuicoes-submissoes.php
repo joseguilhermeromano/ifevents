@@ -6,23 +6,25 @@
         $this->load->helper('html');
         echo alert($this->session);
 ?>
-<form method="POST" id="form_atribuicoes" action="<?php echo base_url('artigo/listar-atribuicoes'); ?>">
-<div class="row">
-<div class="col-md-12">
 
-<form method="GET" action="<?php echo base_url('modalidade/consultar'); ?>">
-  <div class="row">
-      <div class="col-sm-5">
-         <div class="input-group">
-               <input type="text" name="busca" class="form-control estilo-botao-busca" 
-               placeholder="Buscar por Título de Trabalho...">
-               <span class="input-group-btn">
-                   <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-               </span>
-         </div><!-- /input-group -->
-       </div><!-- /.col-lg-6 -->
-  </div><!-- /row -->
-</form><br><br>
+<div class="row">
+  <div class="col-md-12">
+  <form method="GET" action="<?php echo base_url('revisao/consultar-atribuicoes'); ?>">
+    <div class="row">
+        <div class="col-sm-5">
+           <div class="input-group">
+                 <input type="text" name="busca" class="form-control estilo-botao-busca" 
+                 placeholder="Buscar...">
+                 <span class="input-group-btn">
+                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                 </span>
+           </div><!-- /input-group -->
+         </div><!-- /.col-lg-6 -->
+    </div><!-- /row -->
+  </form><br><br>
+  </div>
+</div>
+<form method="POST" id="form_atribuicoes" action="<?php echo base_url('artigo/listar-atribuicoes'); ?>">
 <div class="row">
     <div class="col-sm-4">
         <div class="form-group controls">
@@ -80,7 +82,7 @@
     </table>
 </div><!-- /TABELA-->
     <div class="text-center">
-    Exibindo de 1 a <?php echo !empty($modalidades) ? sizeof($modalidades) : 0; ?> de um total de <?php echo !empty($modalidades) ? $totalRegistros : 0; ?> registros
+    Exibindo de 1 a <?php echo !empty($atribuicoes) ? sizeof($atribuicoes) : 0; ?> de um total de <?php echo !empty($atribuicoes) ? $totalRegistros : 0; ?> submissões
     </div>
 </div>
 </div>
