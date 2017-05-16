@@ -575,6 +575,7 @@ $(document).ready(function(){
 
 $('#form_atribuicoes :checkbox').click(function() {
    var limit = 1;
+   var checado = false;
    
    if($(this).hasClass("limited")) {
       var counter = $('.limited:checked').length;
@@ -587,6 +588,36 @@ $('#form_atribuicoes :checkbox').click(function() {
    }
   if(!$(this).hasClass("limited")){
       $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
+      var submissoes = [];
+      $("#form_atribuicoes").find("input[name='submissoes[]']").each(function(){
+          if($(this).prop("checked")){
+             submissoes.push($(this).attr('value'));
+             checado = true;
+          }
+
+    });
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "revisao/consultaRevisoresAtribuicao",
+        data: {submissoes: submissoes},
+        async: true,
+        dataType: "json",
+        success: function(lista) {
+            if(lista != null){
+               $(".mensagem").hide();
+              $(".painel-atribuicao").show();
+             
+             $(".consultaRevisoresAtribuicao").select2({ data: [lista] });
+            }else{
+              if(checado==true){
+                $(".mensagem").show();
+              }else{ $(".mensagem").hide();}
+              $(".painel-atribuicao").hide();
+              
+            }
+        }
+    }) 
+
   }
     
 

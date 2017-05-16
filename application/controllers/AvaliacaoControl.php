@@ -105,6 +105,15 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
             	, "totalRegistros" => $totalRegistros), 1);
 	}
 
+	public function consultaRevisoresAtribuicao(){
+		$array = null;
+		if(!empty($this->input->post('submissoes'))){
+			$array = array('id' => 1, 'text' => 'ok!');
+		}
+		$this->output->set_content_type('application/json')->set_output(json_encode($array));
+
+	}
+
 	public function excluir($codigo){
 
 	}

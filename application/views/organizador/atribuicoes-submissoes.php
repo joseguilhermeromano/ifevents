@@ -11,7 +11,7 @@
   <div class="col-md-12">
   <form method="GET" action="<?php echo base_url('revisao/consultar-atribuicoes'); ?>">
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-4">
            <div class="input-group">
                  <input type="text" name="busca" class="form-control estilo-botao-busca" 
                  placeholder="Buscar...">
@@ -25,17 +25,28 @@
   </div>
 </div>
 <form method="POST" id="form_atribuicoes" action="<?php echo base_url('artigo/listar-atribuicoes'); ?>">
+
 <div class="row">
+    <div class="col-sm-12 mensagem" style="display:none">
+      <div class="alert alert-warning"> 
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <h4><b><span class="glyphicon glyphicon-alert"></span> Atenção</b></h4>
+        Não há revisores com as mesmas modalidades e eixos temáticos dos trabalhos selecionados!
+      </div>
+    </div>
+    <div class="painel-atribuicao" style="display:none">
     <div class="col-sm-4">
         <div class="form-group controls">
           <b><?php echo form_label( 'Selecionar revisor por nome', 'revisor' ); ?></b><br>
-              <select name="revisor" class="form-control estilo-input consultaRevisores">
+              <select name="revisor" class="form-control estilo-input consultaRevisoresAtribuicao">
+              <option>teste</option>
               </select>
         </div>
     </div>
     <div class="col-sm-8" style="margin-top:25px">
          <button type="submit" class="btn btn-default margin-button" style="float:left">
          <i class="fa fa-user-plus" aria-hidden="true"></i> Atribuir Revisor</button>
+    </div>
     </div>
 </div><br><br>
 <div class="table-responsive"><!-- TABELA-->
@@ -56,7 +67,7 @@
             foreach( $atribuicoes as $atribuicao ): ?>
                 <tr> 
                     <td class="text-center">
-                        <input type="checkbox">
+                        <input type="checkbox" name="submissoes[]" value="<?= $atribuicao->subm_cd; ?>">
                     </td>
                     <td><?= $atribuicao->arti_title; ?></td>
                     <td class="text-center"><?= $atribuicao->modalidade; ?></td>
