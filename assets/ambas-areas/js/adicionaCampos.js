@@ -573,53 +573,91 @@ $(document).ready(function(){
 
 /*Seleciona linha da tabela de atribuições de artigos*/
 
-$('#form_atribuicoes :checkbox').click(function() {
-   var limit = 1;
-   var checado = false;
-   
-   if($(this).hasClass("limited")) {
-      var counter = $('.limited:checked').length;
-      if(counter > limit) {
-        this.checked = false;
-        alert('Você pode selecionar apenas um revisor!');
-      }else{
-         $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
-      }
-   }
-  if(!$(this).hasClass("limited")){
-      $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
-      var submissoes = [];
-      $("#form_atribuicoes").find("input[name='submissoes[]']").each(function(){
-          if($(this).prop("checked")){
-             submissoes.push($(this).attr('value'));
-             checado = true;
-          }
+// $(function atribuicao() {
+//    var limit = 1;
 
-    });
+
+   
+  // if(!$(this).hasClass("limited")){
+  //     $(this).parent().parent().toggleClass('linhaSelecionadaCheckbox');
+  //     var submissoes = [];
+  //     $("#form_atribuicoes").find("input[name='submissoes[]']").each(function(){
+  //         if($(this).prop("checked")){
+  //            submissoes.push($(this).attr('value'));
+  //            checado = true;
+  //         }
+
+  //   });
+    // $.ajax({
+    //     type: "POST",
+    //     url: baseUrl + "revisao/consultaRevisoresAtribuicao",
+    //     data: {submissoes: submissoes},
+    //     async: true,
+    //     dataType: "json",
+    //     success: function(lista) {
+    //         if(lista != null){
+    //            $(".mensagem").hide();
+    //           $(".painel-atribuicao").show();
+             
+    //          $(".consultaRevisoresAtribuicao").select2({ data: [lista] });
+    //         }else{
+    //           if(checado==true){
+    //             $(".mensagem").show();
+    //           }else{ $(".mensagem").hide();}
+    //           $(".painel-atribuicao").hide();
+              
+    //         }
+    //     }
+    // }) 
+
+    
+
+// });
+
+// (function() {
+//       var linksOnPage = document.querySelectorAll("a.atribuicao");
+//       var link = "";
+//       for (var i = 0; i < linksOnPage.length; i++) {
+//         link = linksOnPage[i];
+//         link.addEventListener("click", function(e){
+//              console.log(e.parent());
+//         });
+//       }
+//     })();
+
+
+$('a.atribuicao').click(function() { 
+    var idsubmissao = $(this).attr('idsubmissao');
+    var idmodalidade = $(this).attr('idmodalidade');
+    var ideixo = $(this).attr('ideixo');
+    $('#form-atribuicao').attr('action', 'revisao/atribuir-revisor/');
+    $('#input-submissao').attr('value', idsubmissao);
+
     $.ajax({
         type: "POST",
         url: baseUrl + "revisao/consultaRevisoresAtribuicao",
-        data: {submissoes: submissoes},
+        data: {modalidade: idmodalidade, eixo: ideixo},
         async: true,
         dataType: "json",
         success: function(lista) {
+
+          console.log(lista);
             if(lista != null){
                $(".mensagem").hide();
-              $(".painel-atribuicao").show();
-             
-             $(".consultaRevisoresAtribuicao").select2({ data: [lista] });
+               $(".painel-atribuicao").show();
+             $(".consultaRevisoresAtribuicao").select2({
+                dataType: "json",
+                data: lista
+             });
             }else{
-              if(checado==true){
                 $(".mensagem").show();
-              }else{ $(".mensagem").hide();}
-              $(".painel-atribuicao").hide();
-              
             }
+
+
+
+
         }
     }) 
-
-  }
-    
 
 });
 

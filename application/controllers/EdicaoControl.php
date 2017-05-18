@@ -224,8 +224,10 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         }
 
         $revisores =$this->EdicaoDAO->consultarRevisores($array, $limite, $numPagina);
-        foreach ($revisores as $revisor) {
-            $revisor->modalidadesEixos = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($revisor->user_cd, $revisor->core_conf_cd);
+        if($revisores !== null){
+            foreach ($revisores as $revisor) {
+                $revisor->modalidadesEixos = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($revisor->user_cd, $revisor->core_conf_cd);
+            }
         }
         $data['revisores'] = $revisores;
         $totalRegistros = count($this->EdicaoDAO->consultarRevisores($array, $limite, $numPagina));

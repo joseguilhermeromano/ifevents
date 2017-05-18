@@ -106,11 +106,22 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function consultaRevisoresAtribuicao(){
-		$array = null;
-		if(!empty($this->input->post('submissoes'))){
-			$array = array('id' => 1, 'text' => 'ok!');
+		$lista = null;
+		$modalidade = $this->input->post('modalidade');
+		$eixo = $this->input->post('eixo');
+
+		if(!empty($modalidade) && !empty($eixo)){
+			$revisores = $this->ModalidadeTematicaDAO->consultarRevisorPorModalidadeTematica($modalidade, $eixo);
+			if($revisores != null){
+				$lista = array();
+				foreach ($revisores as $key => $revisor) {
+					$array = array('id' => $revisor->user_cd, 'text' => $revisor->user_nm);
+					array_push($lista, $array);
+				}
+				
+			}
 		}
-		$this->output->set_content_type('application/json')->set_output(json_encode($array));
+		$this->output->set_content_type('application/json')->set_output(json_encode($lista));
 
 	}
 

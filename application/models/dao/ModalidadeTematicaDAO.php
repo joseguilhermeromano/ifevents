@@ -71,6 +71,28 @@
             
         }
 
+        public function consultarRevisorPorModalidadeTematica($modalidade, $eixo){
+            $this->db->select("User.user_nm, User.user_cd, GROUP_CONCAT(Modalidade_Tematica.mote_cd SEPARATOR ',') as modalidadeTematica");
+            $this->db->from("mote_revisor");
+            $this->db->join('Modalidade_Tematica', 'Modalidade_Tematica.mote_cd = Mote_Revisor.more_mote_cd','left');
+            $this->db->join('User', 'Mote_Revisor.more_user_cd = User.user_cd', 'left');
+            $this->db->order_by('User.user_nm', 'asc');
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                $revisores = array();
+                $consulta =  $query->result_object();
+                foreach ($consulta as $key => $revisor) {
+                    if(in_array($modalidade,explode(',', $revisor->modalidadeTematica)) &&
+                        in_array($eixo,explode(',', $revisor->modalidadeTematica))){
+                        array_push($revisores,$revisor);
+                    }
+                }
+                return $revisores;
+            }else{
+                return null;
+            }
+        }
+
         public function insereModaTemaRevisor($modalidades, $eixos, $revisor){
             foreach ($modalidades as $key => $modalidade) {
                 $this->db->insert('mote_revisor',array('more_mote_cd' => $modalidade, 'more_user_cd' => $revisor));
