@@ -55,8 +55,8 @@
                     <td class="text-center"><?= $revisao->aval_status; ?></td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
-                          <a href=" base_url('modalidade/alterar/'.$modalidade->mote_cd); ?>" class="btn-opcao">
-                          <span class="glyphicon glyphicon-copy"></span>&#09;Prescrever Parecer</a><br>
+                          <a href="<?= base_url('revisao/cadastrar'); ?>" class="btn-opcao">
+                          <span class="glyphicon glyphicon-copy"></span>&#09;Emitir Parecer</a><br>
                           <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$revisao->arti_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-eye-open"></span>&#09;Detalhar Trabalho</a><br>
                           <a href="<?= base_url('artigo/download/1/'.$revisao->subm_cd); ?>" class="btn-opcao">

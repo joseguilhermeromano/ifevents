@@ -8,7 +8,7 @@
     	<span class="glyphicon glyphicon-user"></span>  MEU PERFIL
     </a>
 </li>
-<li class="item-menu">
+<li id="revisao" class="item-menu">
     <a href="<?php echo base_url("revisao/consultar");?>">
     	<span style="float:left;" class="fa fa-files-o"></span> <div style="display:inline-block">REVISÕES <br>PENDENTES</div>
     </a>

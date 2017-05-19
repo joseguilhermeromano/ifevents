@@ -14,7 +14,39 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function cadastrar(){
+		if (empty($this->avaliacao->input->post())){
+    		return $this->chamaView("form-parecer", "avaliador",
+            	array("title"=>"IFEvents - Emitir Parecer",
+            		"tituloh2" => "<h2><span class='glyphicon glyphicon-copy'></span><b> Emitir Parecer</b></h2>"), 1);
+    	}
 
+    	// $this->avaliacao->setaValores();
+    	// $this->avaliacao->valida();
+    		
+
+    	if($this->form_validation->run()){
+
+    		// $this->db->trans_start();
+    		// 	//pegar codigo da conferencia pela sessao (selecionada)
+      //       	$this->modalidade->mote_conf_cd = 1;
+      //       	$this->modalidade->mote_tipo = 0;
+      //       	$this->ModalidadeTematicaDAO->inserir($this->modalidade);
+    		// $this->db->trans_complete();
+
+    		// if($this ->db->trans_status() !== FALSE){
+      //           $this->session->set_flashdata('success', 'A Modalidade foi cadastrada com sucesso!');
+      //           $this->modalidade = null;
+      //       }else{
+      //       	$this->session->set_flashdata('error', 'Não foi possível cadastrar a modalidade!');
+      //       }
+
+    	}
+
+
+    	$this->chamaView("form-parecer", "avaliador",
+            	array("title"=>"IFEvents - Emitir Parecer",
+            	 "tituloh2" => "<h2><span class='fa fa-plus'></span><b> Emitir Parecer</b></h2>",
+            	 "parecer" => $this->avaliacao), 1);
 	}
 
 	public function alterar($codigo){
@@ -25,20 +57,13 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		$eventosRevisor = $this->EdicaoDAO->consultarEventosRevisor(date('y-m-d'),
 			$this->session->userdata('usuario')[0]['user_cd'])[0];
 
-
-		if(empty($eventosRevisor->core_user_cd)){
-			$this->session->set_flashdata('info', 'Ainda não há eventos com o período de revisões aberto!');
-			return $this->chamaView("revisoes-pendentes", "avaliador",
-        	array("title"=>"IFEvents - Revisões Pendentes"), 1);
-		}
-
 		$modalidades = null;
 		$eixosTematicos = null;
 		$mensagemModal = null;
-
+		$modalidadesTematicas = null;
+		if(!empty($eventosRevisor->core_user_cd)){
 		$modalidadesTematicas = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($eventosRevisor->core_user_cd, $eventosRevisor->core_conf_cd);
-
-		if($modalidadesTematicas == null){
+				if($modalidadesTematicas == null){
 			$this->session->set_flashdata('info', 'Você primeiro deve selecionar as modalidades e eixos temáticos dos trabalhos que deseja revisar!<br><a href="#" data-toggle="modal" data-target="#selecionarModalidadesEixos"><b>Clique aqui</b></a> para selecionar as modalidades e eixos temáticos de interesse!');
 			$modalidades = $this->ModalidadeTematicaDAO->
 			consultarTudo(array('mote_conf_cd' => $eventosRevisor->edic_conf_cd
@@ -48,7 +73,6 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 				,'mote_tipo' => 1));
 		}
 
-		echo print_r($modalidadesTematicas);
 
 		if($this->input->post('modalidades') ||
 			$this->input->post('eixos')){
@@ -74,6 +98,9 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 				}
 			}
 		}
+		}
+
+
 
 		$limite = 10;
         $numPagina =0;
@@ -83,14 +110,24 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('arti_title'=>$busca);
+            $array = array('arti_title'=>$busca
+            	,'aval_user_cd' => $this->session->userdata('usuario')[0]['user_cd']);
         }else{
             $busca=null;
-            $array=null;
+            $array=array('aval_user_cd' => $this->session->userdata('usuario')[0]['user_cd']);
         }
 
 		$data = $this->AvaliacaoDAO->consultarTudo($array, $limite,$numPagina);
+		if(empty($data)){
+			$this->session->set_flashdata('info', 'Não há trabalhos para serem revisados!');
+			return $this->chamaView("revisoes-pendentes", "avaliador",
+        	array("title"=>"IFEvents - Revisões Pendentes"), 1);
+		}
+
+
 		$totalRegistros = count($this->AvaliacaoDAO->consultarTudo($array));
+
+
 				return $this->chamaView("revisoes-pendentes", "avaliador",
         array("title"=>"IFEvents - Revisões Pendentes", "revisoes" => $data, "totalRegistros" => $totalRegistros), 1);
 		// return $this->chamaView("revisoes-pendentes", "avaliador",
