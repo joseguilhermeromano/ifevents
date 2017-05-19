@@ -93,6 +93,7 @@ $route[ 'eixo-tematico/excluir/(:any)' ] = 'EixoTematicoControl/excluir/$1';
 
 /*Rotas de Avaliações*/
 $route[ 'revisao/consultar-atribuicoes' ] = 'AvaliacaoControl/consultarAtribuicoes';
+$route[ 'revisao/atribuir-revisor' ] = 'AvaliacaoControl/atribuirRevisor';
 $route[ 'revisao/(:any)' ]             = 'AvaliacaoControl/$1';
 
 /*Rotas para Regras*/

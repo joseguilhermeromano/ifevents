@@ -630,7 +630,7 @@ $('a.atribuicao').click(function() {
     var idsubmissao = $(this).attr('idsubmissao');
     var idmodalidade = $(this).attr('idmodalidade');
     var ideixo = $(this).attr('ideixo');
-    $('#form-atribuicao').attr('action', 'revisao/atribuir-revisor/');
+    $('#form-atribuicao').attr('action', baseUrl + 'revisao/atribuir-revisor/');
     $('#input-submissao').attr('value', idsubmissao);
 
     $.ajax({
@@ -646,6 +646,8 @@ $('a.atribuicao').click(function() {
                $(".mensagem").hide();
                $(".painel-atribuicao").show();
              $(".consultaRevisoresAtribuicao").select2({
+                placeholder: "Selecionar Revisor",
+                multiple: true,
                 dataType: "json",
                 data: lista
              });

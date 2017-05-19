@@ -27,7 +27,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 
 
 		if(empty($eventosRevisor->core_user_cd)){
-			// $this->session->set_flashdata('info', 'Ainda não há eventos com o período de revisões aberto!');
+			$this->session->set_flashdata('info', 'Ainda não há eventos com o período de revisões aberto!');
 			return $this->chamaView("revisoes-pendentes", "avaliador",
         	array("title"=>"IFEvents - Revisões Pendentes"), 1);
 		}
@@ -47,6 +47,8 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 			consultarTudo(array('mote_conf_cd' => $eventosRevisor->edic_conf_cd
 				,'mote_tipo' => 1));
 		}
+
+		echo print_r($modalidadesTematicas);
 
 		if($this->input->post('modalidades') ||
 			$this->input->post('eixos')){
@@ -73,23 +75,36 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 			}
 		}
 
+		$limite = 10;
+        $numPagina =0;
+        if(null !== $this->input->get('pagina')){
+            $numPagina = $this->input->get('pagina');
+        }
 
+        if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $array = array('arti_title'=>$busca);
+        }else{
+            $busca=null;
+            $array=null;
+        }
 
-		
-		return $this->chamaView("revisoes-pendentes", "avaliador",
-        array("title"=>"IFEvents - Revisões Pendentes"
-        	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal), 1);
+		$data = $this->AvaliacaoDAO->consultarTudo($array, $limite,$numPagina);
+		$totalRegistros = count($this->AvaliacaoDAO->consultarTudo($array));
+				return $this->chamaView("revisoes-pendentes", "avaliador",
+        array("title"=>"IFEvents - Revisões Pendentes", "revisoes" => $data, "totalRegistros" => $totalRegistros), 1);
+		// return $this->chamaView("revisoes-pendentes", "avaliador",
+  //       array("title"=>"IFEvents - Revisões Pendentes"
+  //       	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal), 1);
 	}
 
 	public function consultarAtribuicoes(){
 		$conf_cd = 1;
-		if( $this->input->get('busca') !== null){
+		if( $this->input->get('busca') !== ''){
             $busca = $this->input->get('busca');
             $array = array(
-            	  'Artigo.arti_title'=>$busca
-            	, 'mote1.mote_nm' => $busca
-            	, 'mote2.mote_nm' => $busca
-            	, 'mote1.mote_conf_cd' => $conf_cd);
+            	  'mote1.mote_conf_cd' => $conf_cd
+            	  ,'arti_title' => $busca);
         }else{
             $busca=null;
             $array=array('mote1.mote_conf_cd' => $conf_cd);
@@ -123,6 +138,22 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($lista));
 
+	}
+
+	public function atribuirRevisor(){
+		$revisores = $this->input->post('revisores');
+		$submissao = $this->input->post('submissao');
+		if($revisores!==null){
+			$verifica = $this->AvaliacaoDAO->atribuirRevisor($revisores, $submissao);
+			if($verifica == 0){
+				$this->session->set_flashdata("success", "O Trabalho foi atribuído ao revisor com sucesso!");
+			}else{
+				$this->session->set_flashdata("error", "Não foi possível atribuir o trabalho a um revisor!");
+			}
+		}else{
+			$this->session->set_flashdata("error", "Não foi selecionado nenhum revisor!");
+		}
+		$this->consultarAtribuicoes();
 	}
 
 	public function excluir($codigo){

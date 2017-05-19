@@ -6,7 +6,7 @@
         $this->load->helper('html');
         echo alert($this->session);
 ?>
-<form method="GET" action="<?php echo base_url('modalidade/consultar'); ?>">
+<form method="GET" action="<?php echo base_url('revisao/consultar'); ?>">
   <div class="row">
       <div class="col-sm-5">
          <div class="input-group">
@@ -45,30 +45,30 @@
             </tr>
         </thead>
         <tbody>
-<!--             <?php 
-            //if(!empty($modalidades)){
-            //foreach( $modalidades as $modalidade ): ?> -->
+             <?php 
+            if(!empty($revisoes)){
+            foreach( $revisoes as $revisao ): ?> 
                  <tr> 
-                    <td></td>
-                    <td></td>
-                    <td class="text-center"></td>
-                    <td class="text-center"></td>
+                    <td><?= $revisao->arti_title.' ('.$revisao->edic_num.'ª '.$revisao->conf_abrev.')'; ?></td>
+                    <td class="text-center"><?= $revisao->modalidade; ?></td>
+                    <td class="text-center"><?= $revisao->eixo; ?></td>
+                    <td class="text-center"><?= $revisao->aval_status; ?></td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
                           <a href=" base_url('modalidade/alterar/'.$modalidade->mote_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-copy"></span>&#09;Prescrever Parecer</a><br>
-                          <a href=" base_url('modalidade/alterar/'.$modalidade->mote_cd); ?>" class="btn-opcao">
+                          <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$revisao->arti_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-eye-open"></span>&#09;Detalhar Trabalho</a><br>
-                          <a href=" base_url('modalidade/alterar/'.$modalidade->mote_cd); ?>" class="btn-opcao">
+                          <a href="<?= base_url('artigo/download/1/'.$revisao->subm_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-save-file"></span>&#09;Última versão do trabalho</a>
                     </div>
                     </td>
                 </tr>
-            <!-- <?php //endforeach;}else{ ?> -->
+             <?php endforeach;}else{ ?>
               <tr>
                 <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
-<!--             <?php //} ?> --> 
+             <?php } ?> 
         </tbody>
     </table>
 </div><!-- /TABELA-->
@@ -134,6 +134,13 @@
   </div>
 <?php } ?>
 
+
+  <!-- PAGINAÇÃO -->
+    <div class="text-center">
+    Exibindo de 1 a <?php echo !empty($revisoes) ? sizeof($revisoes) : 0; ?> de um total de <?php echo !empty($revisoes) ? $totalRegistros : 0; ?> registros
+    </div>
+    <?= isset($paginacao) ? $paginacao : ''; ?>
+  <!--/ PAGINAÇÃO -->
 
 
 

@@ -14,7 +14,7 @@
         <div class="col-sm-4">
            <div class="input-group">
                  <input type="text" name="busca" class="form-control estilo-botao-busca" 
-                 placeholder="Buscar...">
+                 placeholder="Buscar por título do trabalho...">
                  <span class="input-group-btn">
                      <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                  </span>
@@ -103,8 +103,7 @@
                         <div class="painel-atribuicao" style="display:none">
                         <input type="hidden" name="submissao" id="input-submissao">
                           <b><?php echo form_label( 'Selecionar revisor por nome', 'revisor' ); ?></b><br>
-                              <select name="revisor" class="form-control estilo-input consultaRevisoresAtribuicao">
-                              <option value="-1" selected disabled>Selecione um Revisor</option>
+                              <select name="revisores[]" class="form-control estilo-input consultaRevisoresAtribuicao">
                               </select>
                         </div>
                         </div>
