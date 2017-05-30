@@ -7,7 +7,7 @@ class RevisorControl extends PrincipalControl{
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->Model( 'dao/UsuarioDAO' );
+		$this->load->Model( 'dao/RevisorDAO' );
         $this->load->Model( 'dao/InstituicaoDAO' );
 		$this->load->Model('RevisorModel','revisor');
         $this->load->Model('InstituicaoModel','instituicao');
@@ -44,7 +44,7 @@ class RevisorControl extends PrincipalControl{
         if($this->valida()){
                 $this->db->trans_start();
                 try{
-                    $this->UsuarioDAO->inserir($this->revisor);
+                    $this->RevisorDAO->inserir($this->revisor);
                 }catch(Exception $e){
                     $this->session->set_flashdata('error', $e->getMessage());
                 }
@@ -68,7 +68,7 @@ class RevisorControl extends PrincipalControl{
         $data['tituloForm'] = '<i class="fa fa-pencil" aria-hidden="true"></i><b> Editar Cadastro de Revisor</b>';
 
         if (isset($codigo)){
-          $this->revisor = $this->UsuarioDAO->consultarCodigo($codigo);
+          $this->revisor = $this->RevisorDAO->consultarCodigo($codigo);
           if(!empty($this->input->post())){
 
             $this->setaValores();
@@ -76,7 +76,7 @@ class RevisorControl extends PrincipalControl{
             if($this->valida()){
                     $this->db->trans_start();
                     try{
-                        $this->UsuarioDAO->alterar($this->revisor);
+                        $this->RevisorDAO->alterar($this->revisor);
                     }catch(Exception $e){
                         $this->session->set_flashdata('error', $e->getMessage());
                     }
@@ -101,7 +101,7 @@ class RevisorControl extends PrincipalControl{
       }
 
       public function perfil(){
-        $this->revisor = $this->UsuarioDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
+        $this->revisor = $this->RevisorDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
         if(!empty($this->input->post())){
 
 	        $this->setaValores();
@@ -109,7 +109,7 @@ class RevisorControl extends PrincipalControl{
 	        if($this->valida()){
 	                $this->db->trans_start();
 	                try{
-	                    $this->UsuarioDAO->alterar($this->organizador);
+	                    $this->RevisorDAO->alterar($this->organizador);
 	                }catch(Exception $e){
 	                    $this->session->set_flashdata('error', $e->getMessage());
 	                }
