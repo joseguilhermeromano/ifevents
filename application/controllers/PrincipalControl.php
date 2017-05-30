@@ -17,7 +17,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->helper('file');
         $this->load->helper('download');
         $this->load->library('uploadimage','','img');
-		$this->load->model('acesso/Autentica');
+		//$this->load->model('acesso/Autentica');
 
 	}
 
@@ -84,10 +84,7 @@ class PrincipalControl extends CI_Controller {
     }
 
     public function envia_email($destinatario, $assunto, $mensagem, $remetente='projetoifsp2017@gmail.com'){
-
-
         $this->load->library("MY_phpmailer");
-
         $mail = new PHPMailer();
         $mail->IsSMTP(); //Definimos que usaremos o protocolo SMTP para envio.
         $mail->SMTPAuth = true; //Habilitamos a autenticação do SMTP. (true ou false)
@@ -214,6 +211,5 @@ class PrincipalControl extends CI_Controller {
 
         return null;
     }
-
 
 }

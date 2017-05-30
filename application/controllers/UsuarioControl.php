@@ -233,7 +233,6 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 			return null;
 		}
 
-<<<<<<< HEAD
         public function notificaUsers(){
 			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
             if (empty($this->input->post())){
@@ -315,8 +314,6 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                    $data, 1);
         }
 
-=======
->>>>>>> a04aa208aed25cef92631e3d0db2ae34358dc71b
         public function consultarEmailSelect(){
             $data = $this->UserDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
