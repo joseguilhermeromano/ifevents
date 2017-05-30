@@ -31,10 +31,6 @@
             <li><a href="<?= base_url('organizador/cadastrar'); ?>">Organizador</a></li>
           </ul>
         </div>
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificar'); ?>' style="float:right">
-             <span class="fa fa-exclamation-triangle"></span> Notificar Usuários</a>
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right">
-         <i class="fa fa-user-plus" aria-hidden="true"></i> Novo Usuário</a>
     </div>
 </div>
 <br><br>
