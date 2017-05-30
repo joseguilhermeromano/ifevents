@@ -1,6 +1,5 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-    
 
 	class EmailDAO extends CI_Model{
 
@@ -8,10 +7,10 @@
 			parent::__construct();
 
 		}
+
                 
         public function inserir($email) {
             $orig_db_debug = $this->db->db_debug;
-
             $this->db->db_debug = FALSE;
             $this->db->insert('Email', array('email_email' => $email));
             if($this->db->error()['code']==1062){
@@ -21,6 +20,7 @@
             $this->db->db_debug = $orig_db_debug;
             return $this->db->insert_id();
         }
+
         
         public function alterar($email) {
             $orig_db_debug = $this->db->db_debug;
@@ -41,7 +41,7 @@
             $query = $this->db->get();
             return $query->result_object();
         }
-        
+
         public function consultarCodigo($codigo){
             return null;
         }
@@ -51,11 +51,4 @@
             $this->db->delete('email');
         }
 
-                
-
 }
-
-
-
-
-

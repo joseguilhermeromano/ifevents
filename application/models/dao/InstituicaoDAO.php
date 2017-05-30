@@ -11,17 +11,34 @@ class InstituicaoDAO extends CI_Model implements DAO{
     }
 
     public function inserir($obj) {
-        return $this->db->insert('user', $obj);
-    }
-    
-    public function alterar($obj) {
-        $this->db->where('user_id', $obj->user_id);
-        return $this->db->update('user', $obj);
+        return $this->db->insert('Instituicao', $obj);
     }
 
-    public function consultarTudo() {
-        return null;
+    public function alterar($obj) {
+        $this->db->where('inst_cd', $obj->inst_cd);
+        return $this->db->update('Instituicao', $obj);
     }
+
+
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='inst_nm', $ordenacao='asc') {
+        $this->db->select("inst_cd, inst_nm, inst_desc");
+        $this->db->from("Instituicao");
+        $this->db->order_by($sort, $ordenacao);
+        if($parametros !== null){
+            foreach ($parametros as $key => $value) {
+                $this->db->where($key.' LIKE ','%'.$value.'%');
+            }
+        }
+        if($limite)
+            $this->db->limit($limite, $numPagina);
+            $query = $this->db->get();
+        if($query->num_rows()>0){
+                        return $query->result_object();
+                    }else{
+                        return null;
+                    }
+        }
+
 
      public function consultarCodigo($codigo){
         $this->db->where('inst_cd',$codigo);
@@ -36,7 +53,7 @@ class InstituicaoDAO extends CI_Model implements DAO{
         }
         return null;
      }
-    
+
     public function consultarPorNomeOuAbreviacao($nome){
         // $this->db->like('inst_nm', $nome);
         // $this->db->like('inst_abrev', $nome);
@@ -50,8 +67,8 @@ class InstituicaoDAO extends CI_Model implements DAO{
     }
 
     public function excluir($obj) {
-        $this->db->where('user_id', $obj->user_id);
-        return $this->db->delete('user');
+        $this->db->where('inst_cd', $obj);
+        return $this->db->delete('Instituicao');
     }
 
 }

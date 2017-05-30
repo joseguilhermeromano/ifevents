@@ -50,36 +50,79 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-/* Rotas Login */
-$route[ 'login/(:any)' ]              = 'LoginControl/$1';
+/* Rotas Corretas */
+$route[ 'login/(:any)' ]              			= 'LoginControl/$1';
 
 /*Rotas Usuário*/
-$route[ 'usuario/alterar/(:any)' ]    = 'UsuarioControl/alterar/$1';
-$route[ 'usuario/ativar/(:num)' ]     = 'UsuarioControl/ativar/$1';
-$route['usuario/notificar']			  = 'NotificacaoControl/notificaUsers';
-$route[ 'usuario/desativar/(:num)' ]  = 'UsuarioControl/desativar/$1';
-$route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
-$route['participante/(:any)']		  = 'ParticipanteControl/$1';
-$route['participante/alterar/(:any)']		  = 'ParticipanteControl/alterar/$1';
-$route[ 'revisor/(:any)' ]		  	  = 'RevisorControl/$1';
-$route[ 'revisor/alterar/(:any)' ]		  	  = 'RevisorControl/alterar/$1';
-$route[ 'organizador/(:any)' ]		  	  = 'OrganizadorControl/$1';
-$route[ 'organizador/alterar/(:any)' ]		  	  = 'OrganizadorControl/alterar/$1';
+
+$route[ 'usuario/alterar/(:any)' ]    			= 'UsuarioControl/alterar/$1';
+$route[ 'usuario/ativar/(:num)' ]     			= 'UsuarioControl/ativar/$1';
+$route['usuario/notificar']			  			= 'NotificacaoControl/notificaUsers';
+$route[ 'usuario/desativar/(:num)' ]  			= 'UsuarioControl/desativar/$1';
+$route[ 'usuario/(:any)' ]            			= 'UsuarioControl/$1';
+$route['participante/(:any)']		  			= 'ParticipanteControl/$1';
+$route['participante/alterar/(:any)']		  	= 'ParticipanteControl/alterar/$1';
+$route[ 'revisor/(:any)' ]		  	  			= 'RevisorControl/$1';
+$route[ 'revisor/alterar/(:any)' ]		  	    = 'RevisorControl/alterar/$1';
+$route[ 'organizador/(:any)' ]		  	  		= 'OrganizadorControl/$1';
+$route[ 'organizador/alterar/(:any)' ]		  	= 'OrganizadorControl/alterar/$1';
 
 /*Rotas Edição*/
-$route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
-$route[ 'edicao/alterar/(:any)' ]     = 'EdicaoControl/alterar/$1';
+$route[ 'edicao/(:any)' ]                       = 'EdicaoControl/$1';
+$route[ 'edicao/alterar/(:any)' ]               = 'EdicaoControl/alterar/$1';
+
+//Rotas Atividade
+$route[ 'atividade/(:any)' ]                    = 'AtividadeControl/$1';
+$route[ 'atividade/consultarTudo/(:any)' ]      = 'AtividadeControl/consultarTudo/$1';
+$route[ 'atividade/excluir/(:any)' ]            = 'AtividadeControl/excluir/$1';
+$route[ 'atividade/alterar/(:any)' ]            = 'AtividadeControl/alterar/$1';
+$route[ 'tipoatividade/(:any)' ]                = 'TipoAtividadeControl/$1';
+$route[ 'tipoatividade/excluir/(:any)' ]        = 'TipoAtividadeControl/excluir/$1';
+$route[ 'tipoatividade/alterar/(:any)' ]        = 'TipoAtividadeControl/alterar/$1';
 
 /*Rotas Artigo*/
 $route[ 'artigo/listar-atribuicoes' ]           = 'ArtigoControl/listarAtribuicoes';
 $route[ 'artigo/eventos-recentes' ]             = 'ArtigoControl/submissaoEventosRecentes/$1';
 $route[ 'artigo/detalhes-do-trabalho/(:any)' ]  = 'ArtigoControl/detalharTrabalho/$1';
-$route[ 'artigo/download/(:any)/(:any)' ]  		= 'ArtigoControl/downloadArtigo/$1/$2';
-$route[ 'artigo/cadastrar/(:any)' ]  			= 'ArtigoControl/cadastrar';
-$route[ 'artigo/alterar/(:any)' ]  				= 'ArtigoControl/alterar/$1';
+$route[ 'artigo/download/(:any)/(:any)' ]       = 'ArtigoControl/downloadArtigo/$1/$2';
+$route[ 'artigo/cadastrar/(:any)' ]             = 'ArtigoControl/cadastrar';
+$route[ 'artigo/alterar/(:any)' ]               = 'ArtigoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
+/*Rotas da Modalidade*/
+$route[ 'modalidade/(:any)' ]                   = 'ModalidadeControl/$1';
+$route[ 'modalidade/alterar/(:any)' ]           = 'ModalidadeControl/alterar/$1';
+$route[ 'modalidade/excluir/(:any)' ]           = 'ModalidadeControl/excluir/$1';
+
+/*Rotas dos Eixos Temáticas*/
+$route[ 'eixo-tematico/(:any)' ]                = 'EixoTematicoControl/$1';
+$route[ 'eixo-tematico/alterar/(:any)' ]        = 'EixoTematicoControl/alterar/$1';
+$route[ 'eixo-tematico/excluir/(:any)' ]        = 'EixoTematicoControl/excluir/$1';
+
+/*Rotas para Regras*/
+$route[ 'regra-submissao/(:any)' ]              = 'RegraControl/$1';
+$route[ 'regra-submissao/alterar(:any)' ]       = 'RegraControl/alterar/$1';
+$route[ 'instituicao/(:any)' ]                  = 'InstituicaoControl/$1';
+$route[ 'instituicao/alterar/(:any)' ]          = 'InstituicaoControl/alterar/$1';
+$route[ 'instituicao/excluir/(:any)' ]          = 'InstituicaoControl/excluir/$1';
+$route[ 'submissao/(:any)' ]                    = 'SubmitControl/$1';
+$route[ 'comite/(:any)' ]                       = 'ComiteControl/$1';
+
+//Rotas Contato
+$route[ 'contato/(:any)' ]                      = 'ContatoControl/$1';
+$route[ 'contato/consultar/(:any)' ]            = 'ContatoControl/consultar/$1';
+$route[ 'contato/sendEmail/(:any)' ]            = 'ContatoControl/sendEmail/$1';
+$route[ 'contato/responder/(:any)' ]            = 'ContatoControl/responder/$1';
+$route[ 'contato/excluir/(:any)' ]              = 'ContatoControl/excluir/$1';
+$route[	'(:any)' ]                              = 'InicioControl/$1';
+
+//Rotas Inscricao
+$route['inscricao/(:any)']                      = 'InscricaoControl/$1';
+$route['inscricao/consultarTudo/(:any)']        = 'InscricaoControl/consultarTudo/$1';
+$route['inscricao/inscricao/(:any)/(:num)']     = 'InscricaoControl/inscricao/&1/(:num)';
+$route['inscricao/excluir/(:any)']              = 'InscricaoControl/excluir/$1';
 /*Rotas listagem revisores*/
+
 // $route[ 'revisor/consultar' ]             			= 'EdicaoControl/revisores';
 // $route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
 // $route[ 'aceitar-convite/(:any)/(:any)' ]           = 'EdicaoControl/aceiteConviteRevisor/$1/$2';
@@ -88,38 +131,28 @@ $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 // $route[ 'revisor/(:any)' ]             				= 'EdicaoControl/$1';
 
 /*Rotas da Modalidade*/
-$route[ 'modalidade/(:any)' ]          = 'ModalidadeControl/$1';
-$route[ 'modalidade/alterar/(:any)' ]  = 'ModalidadeControl/alterar/$1';
-$route[ 'modalidade/excluir/(:any)' ]  = 'ModalidadeControl/excluir/$1';
+$route[ 'modalidade/(:any)' ]          			= 'ModalidadeControl/$1';
+$route[ 'modalidade/alterar/(:any)' ]  			= 'ModalidadeControl/alterar/$1';
+$route[ 'modalidade/excluir/(:any)' ]  			= 'ModalidadeControl/excluir/$1';
 
 /*Rotas dos Eixos Temáticas*/
-$route[ 'eixo-tematico/(:any)' ]         = 'EixoTematicoControl/$1';
-$route[ 'eixo-tematico/alterar/(:any)' ] = 'EixoTematicoControl/alterar/$1';
-$route[ 'eixo-tematico/excluir/(:any)' ] = 'EixoTematicoControl/excluir/$1';
+$route[ 'eixo-tematico/(:any)' ]         		= 'EixoTematicoControl/$1';
+$route[ 'eixo-tematico/alterar/(:any)' ] 		= 'EixoTematicoControl/alterar/$1';
+$route[ 'eixo-tematico/excluir/(:any)' ] 		= 'EixoTematicoControl/excluir/$1';
 
 /*Rotas de Avaliações*/
-$route[ 'revisao/consultar-atribuicoes' ] = 'AvaliacaoControl/consultarAtribuicoes';
-$route[ 'revisao/atribuir-revisor' ] = 'AvaliacaoControl/atribuirRevisor';
-$route[ 'revisao/(:any)' ]             = 'AvaliacaoControl/$1';
-
-/*Rotas para Regras*/
-$route[ 'regra-submissao/(:any)' ]        = 'RegraControl/$1';
-$route[ 'regra-submissao/alterar(:any)' ] = 'RegraControl/alterar/$1';
+$route[ 'revisao/consultar-atribuicoes' ]       = 'AvaliacaoControl/consultarAtribuicoes';
+$route[ 'revisao/atribuir-revisor' ]            = 'AvaliacaoControl/atribuirRevisor';
+$route[ 'revisao/(:any)' ]                      = 'AvaliacaoControl/$1';
 
 /* Rota para selecionar evento area do organizador*/
-$route[ 'edicao/selecionar-evento/(:any)' ] = 'EdicaoControl/selecionarEvento/$1';
+$route[ 'edicao/selecionar-evento/(:any)' ]     = 'EdicaoControl/selecionarEvento/$1';
+
+/*Rotas Conferência*/
+$route[ 'conferencia/(:any)' ]                  = 'ConferenciaControl/$1';
+$route[ 'conferencia/alterar/(:any)']           = 'ConferenciaControl/alterar/$1';
+$route[ 'conferencia/excluir/(:any)']           = 'ConferenciaControl/excluir/$1';
 
 
-
-
-$route[ 'instituicao/(:any)' ]        = 'InstituicaoControl/$1';
-$route[ 'submissao/(:any)' ]          = 'SubmitControl/$1';
-$route[ 'comite/(:any)' ]             = 'ComiteControl/$1';
-$route[ 'contato/(:any)' ]            = 'ContatoControl/$1';
-$route[	'(:any)' ]                    = 'InicioControl/$1';
-$route[ 'conferencia/(:any)' ]        = 'ConferenciaControl/$1';
-$route[ 'conferencia/alterar/(:any)'] = 'ConferenciaControl/alterar/$1';
-$route[ 'conferencia/excluir/(:any)'] = 'ConferenciaControl/excluir/$1';
-$route[	'default_controller' ]        = 'InicioControl';
-
-$route[ 'translate_uri_dashes' ]      = FALSE;
+$route[	'default_controller' ]                  = 'InicioControl';
+$route[ 'translate_uri_dashes' ]                = FALSE;

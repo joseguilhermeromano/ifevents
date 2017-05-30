@@ -8,6 +8,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 			parent::__construct();
 
 			$this->load->Model( 'dao/UsuarioDAO' );
+			$this->load->Model( 'dao/ContatoDAO' );
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
@@ -90,6 +91,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     $this->telefone = null;
                     $this->localidade = null;
                     $this->instituicao = null;
+
 
                 }
             }
@@ -236,7 +238,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
-        //busca usuário por nome 
+        //busca usuário por nome
         public function consultarParaSelect2(){
             $data = $this->UsuarioDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));

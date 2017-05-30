@@ -22,19 +22,19 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	}
     	$this->edicao->setaValores();
     	$this->edicao->valida();
-    		
+
 
     	if($this->form_validation->run()){
             $this->edicao->edic_num = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
-            
+
             $this->edicao->edic_img_nm ='img_'.$this->edicao->edic_num.'_'.strtolower($this->conferencia->conf_abrev);
-            
+
 
 	    	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
-		    		
+
 		    		$this->edicao->edic_img = $this->upload_image($this->edicao->edic_img_nm, 'edicoes',
 		    		 null, null, 3543, 1181);
-		    	
+
 	    	}
 
     		$this->db->trans_start();
@@ -71,14 +71,13 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
             	 "edicao" => $this->edicao), 1);
 	}
 
-
 	public function recuperaImagem(){
 		$configInputFile = array();
 
 		if(null !==$this->session->userdata('configInputFile')){
 
 			$configInputFile = $this->session->userdata('configInputFile');
-		
+
 		}
 
 		 $this->output->set_content_type('application/json')->set_output(json_encode($configInputFile));
@@ -97,11 +96,11 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 	    	$configInputFile = array(
             "initialPreview" => "<img src='".base_url($edicao->edic_img)."' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='"
             .basename($edicao->edic_img)."' >",
-            "initialPreviewConfig" => array('caption' => basename($edicao->edic_img), 
+            "initialPreviewConfig" => array('caption' => basename($edicao->edic_img),
                 "size" => filesize($edicao->edic_img)),
             "initialPreviewAsData" => false,
-            "initialPreviewShowDelete" => false,  
-            "initialCaption" =>  basename($edicao->edic_img), 
+            "initialPreviewShowDelete" => false,
+            "initialCaption" =>  basename($edicao->edic_img),
             "maxFileSize" => "1000000",
             "overwriteInitial" => true
             );
@@ -116,19 +115,19 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	}
     	$this->edicao->setaValores();
     	$this->edicao->valida();
-    		
+
 
     	if($this->form_validation->run()){
-             $this->edicao->edic_num = $edicao != null ? $edicao->edic_num : 
+             $this->edicao->edic_num = $edicao != null ? $edicao->edic_num :
              $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
 
             $this->edicao->edic_img_nm ='img_'.$this->edicao->edic_num.'_'.strtolower($this->edicao->conferencia->conf_abrev);
 
 	    	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
-		    		
+
 		    		$this->edicao->edic_img = $this->upload_image($this->edicao->edic_img_nm, 'edicoes',
 		    		 null, null, 3543, 1181);
-		    	
+
 	    	}
 
 			$this->db->trans_start();
@@ -176,7 +175,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	}
 
         redirect('edicao/consultar');
-    	
+
 	}
 
 	public function excluir($codigo){

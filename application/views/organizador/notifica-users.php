@@ -3,7 +3,7 @@
 <hr>
 <br>
 
-<?php 
+<?php
         $this->load->helper('html');
         echo alert($this->session);
 ?>
@@ -23,7 +23,7 @@
     <div class="col-sm-4 col-md-4">
         <div class="form-group floating-label-form-group controls">
         <b>
-        <?php echo form_label( '*Notificar', 'tipo_notificacao' ); ?> 
+        <?php echo form_label( '*Notificar', 'tipo_notificacao' ); ?>
         </b><br>
             <select name="tipo_notificacao" id="tipoNotificacao" class="form-control estilo-input">
                 <option value="-1" selected disabled> Selecionar Tipo de Notificação</option>
@@ -33,13 +33,13 @@
                 <option value="2" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 2 ? 'selected' : ''); ?> >
                     Somente Participantes
                 </option>
-                <option value="3" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 3 ? 'selected' : ''); ?> >  
+                <option value="3" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 3 ? 'selected' : ''); ?> >
                     Somente Revisores
                 </option>
-                <option value="4" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 4 ? 'selected' : ''); ?> >  
+                <option value="4" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 4 ? 'selected' : ''); ?> >
                     Somente Organizadores
                 </option>
-                <option value="5" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 5 ? 'selected' : ''); ?> >  
+                <option value="5" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 5 ? 'selected' : ''); ?> >
                     Todos
                 </option>
             </select>
@@ -47,18 +47,18 @@
     </div>
 </div>
 
-<div class="row" id="notificacoesEmails" <?= ((isset($notificacao) && $notificacao->tipo_notificacao == 1) 
+<div class="row" id="notificacoesEmails" <?= ((isset($notificacao) && $notificacao->tipo_notificacao == 1)
 || isset($notificacao->emails) ? '' : 'style="display:none"'); ?>>
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Emails', 'emails' ); ?></b><br>
             <select name="emails[]" class="form-control estilo-input consultaEmails" multiple="multiple">
-            <?php 
+            <?php
             if(!empty($notificacao->emails)){
                 foreach ($notificacao->emails as $key => $value) {
             ?>
                 <option value="<?php echo $value; ?>" selected><?php echo $value;?></option>
-            <?php 
+            <?php
                 }
             }
             ?>
@@ -71,9 +71,10 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Assunto', 'assunto' ); ?></b>
-        <?php $data = array( 'name' => 'assunto', 'placeholder' => "Assunto", 
-            'class' => 'form-control estilo-input',
-             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
+        <?php $data = array( 'name' => 'assunto',
+                             'placeholder' => "Assunto",
+                             'class' => 'form-control estilo-input',
+                             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
         </div>
     </div>

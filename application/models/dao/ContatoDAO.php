@@ -38,16 +38,35 @@
                 }
 
                 public function consultarTudo() {
-                    return null;
+                    $query=$this->db->select('cont_cd, cont_nm, cont_assunto, cont_email, cont_msg, cont_user_cd')
+            								 ->from('Contato')
+        									 ->get();
+        			if($query->num_rows() > 0){
+                		return $query->result_object();
+            		 }
+            		else{
+                		return FALSE;
+            		}
                 }
 
-                public function consultarCodigo($codigo){
-                    return null;
+                public function consultarCodigo($codigo){                    
+                    $this->db->where('cont_cd', $codigo);
+                    $query = $this->db->get('Contato');
+                    if($query->num_rows() > 0){
+                        return $query->result_object()[0];
+                    }
+                    else{
+                        return FALSE;
+                    }
                 }
 
                 public function excluir($obj) {
-                    $this->db->where('cont_id', $obj->cont_id);
-                    return $this->db->delete('contato');
+                    $this->db->where('cont_cd', $obj);
+                    return $this->db->delete('Contato');
+                }
+
+                public function insertResposta($codigo){
+                    return  $this->db->insert('Resposta', $codigo);
                 }
 
 }

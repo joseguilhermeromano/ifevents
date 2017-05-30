@@ -55,7 +55,7 @@
       <a href="<?php echo base_url('conferencia/consultarTudo');?>" class="list-group-item">CONFERÊNCIAS</a></li>
       <li id="edicao"><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">COMITÊS</a></li>
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">INSTITUIÇÕES</a></li>
+      <li><a href="<?php echo base_url("instituicao/consultarTudo");?>" class="list-group-item">INSTITUIÇÕES</a></li>
   </ul>
 </li>
 
@@ -69,7 +69,7 @@
     </ul>
 </li> -->
 <li class="item-menu">
-    <a href="<?php echo base_url("organizador/listatodassubmissoes");?>">
+    <a href="<?php echo base_url("atividade/consultarTudo");?>">
         <span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
     </a>
 </li>
@@ -93,15 +93,10 @@
       <li id="revisor"><a href="<?php echo base_url("revisor/consultar");?>" class="list-group-item">REVISORES</a></li>
   </ul>
 </li>
-
-<li class="list-group panel">
-  <a href="#" data-toggle="collapse" data-target="#contatos" data-parent="#sidenav" class="list-group-item list-group-item-success">
-  <span class="glyphicon glyphicon-list"></span> CONTATOS <span class="caret"></span>
-  </a>
-    <ul class="submenu collapse" id="contatos">
-      <li><a href="<?php echo base_url("organizador/listaconferencia");?>" class="list-group-item">LISTA DE CONTATOS</a></li>
-      <li><a href="<?php echo base_url("contato/sendEmail");?>" class="list-group-item">EMAIL</a></li>
-    </ul>
+<li class="item-menu">
+    <a href="<?php echo base_url("contato/consultarTudo");?>">
+        <span class="glyphicon glyphicon-envelope"></span>  CONTATOS
+    </a>
 </li>
 
 <li class="item-menu">

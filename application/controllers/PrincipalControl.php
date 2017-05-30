@@ -3,7 +3,7 @@
 if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 
 class PrincipalControl extends CI_Controller {
-	
+
 	function __construct() {
 		parent::__construct ();
 		$this->load->helper ( 'form' );
@@ -17,6 +17,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->helper('file');
         $this->load->helper('download');
         $this->load->library('uploadimage','','img');
+
 		// $this->load->model('acesso/Autentica');
 	}
 
@@ -43,7 +44,7 @@ class PrincipalControl extends CI_Controller {
         $this->load->view($header,$data);
         $this->load->view($nomeDiretorio.'/'.$view, $data);
         $this->load->view($footer);
-        
+
     }
 
     public function geraPaginacao($limite = 10, $totalLinhasTabela = null, $uri=null){
@@ -83,7 +84,7 @@ class PrincipalControl extends CI_Controller {
     public function envia_email($destinatario, $assunto, $mensagem, $remetente='projetoifsp2017@gmail.com'){
 
 
-        $this->load->library("My_PHPMailer");
+        $this->load->library("MY_phpmailer");
 
         $mail = new PHPMailer();
         $mail->IsSMTP(); //Definimos que usaremos o protocolo SMTP para envio.
@@ -126,7 +127,7 @@ class PrincipalControl extends CI_Controller {
 
             $file['file_nm'] = $_FILES[$input]['name'];
             $file['error'] =  false;
-            
+
             if(!$this->upload->do_upload($input)){
                 $file['error'] =  true;
                 $file['file_nm'] = null;
@@ -139,10 +140,10 @@ class PrincipalControl extends CI_Controller {
                 unlink($data['upload_data']['full_path']);
                 $file['file'] = $arquivo;
             }
-        
+
         return $file;
     }
-            
+
     public function download_arquivo($nomeArquivo, $arquivo){
 
         if($arquivo == null){
@@ -165,7 +166,7 @@ class PrincipalControl extends CI_Controller {
            exit; // aborta pós-ações
 
     }
-    
+
     //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight
     public function upload_image($novoNome, $diretorioImg = 'edicoes', $maxWidth=null, $maxHeight=null, $minWidth=null, $minHeight=null){
       $this->img->upload($_FILES['image_field'],'pt_BR');
@@ -185,11 +186,11 @@ class PrincipalControl extends CI_Controller {
 
                         $configInputFile = array(
                         "initialPreview" => "<img src='".base_url($linkImg)."' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='".$novoNome."' >",
-                        "initialPreviewConfig" => array('caption' => $this->img->file_dst_name, 
+                        "initialPreviewConfig" => array('caption' => $this->img->file_dst_name,
                             "size" => $this->img->file_src_size),
                         "initialPreviewAsData" => false,
-                        "initialPreviewShowDelete" => false,  
-                        "initialCaption" => $novoNome, 
+                        "initialPreviewShowDelete" => false,
+                        "initialCaption" => $novoNome,
                         "maxFileSize" => "1000000",
                         "overwriteInitial" => true
                         );

@@ -2,7 +2,7 @@
 <h2 class="titulo-pagina"><span class="fa fa-users"></span><b> Usuários</b></h2>
 <hr>
 <br>
-<?php 
+<?php
         $this->load->helper('html');
         echo alert($this->session);
 ?>
@@ -31,6 +31,10 @@
             <li><a href="<?= base_url('organizador/cadastrar'); ?>">Organizador</a></li>
           </ul>
         </div>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificar'); ?>' style="float:right">
+             <span class="fa fa-exclamation-triangle"></span> Notificar Usuários</a>
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/cadastrar'); ?>' style="float:right">
+         <i class="fa fa-user-plus" aria-hidden="true"></i> Novo Usuário</a>
     </div>
 </div>
 <br><br>
@@ -38,7 +42,7 @@
     <table class="table ls-table" id="tabela1">
         <thead>
             <tr>
-                    
+
                     <th class="col-xs-3">Nome Completo</th>
                     <th class="col-xs-3">Email</th>
                     <th class="col-xs-2 text-center">Tipo de Acesso</th>
@@ -47,9 +51,7 @@
             </tr>
         </thead>
         <tbody>
-
-
-            <?php 
+            <?php
             if(!empty($users)){
             foreach( $users as $user ){ ?>
 
@@ -87,7 +89,7 @@
                 <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
 
-            <?php } ?> 
+            <?php } ?>
         </tbody>
     </table>
 </div><!-- /TABELA-->

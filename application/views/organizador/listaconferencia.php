@@ -2,6 +2,20 @@
 <hr>
 <br>
 
+<div class="error"><?php echo validation_errors(); ?></div>
+<br>
+<?php if ($this->session->flashdata('success')) { ?>
+	<div class="alert alert-success">
+        <?= $this->session->flashdata('success') ?>
+    </div>
+<?php } ?>
+
+<?php if ($this->session->flashdata('error')) { ?>
+    <div class="alert alert-danger">
+        <?= $this->session->flashdata('error') ?>
+    </div>
+<?php } ?>
+
 <div class="row">
     <div class="col-md-6 col-sm-6">
        <div class="input-group">
@@ -36,7 +50,7 @@
                         <td class="text-center"><a href="<?php echo base_url('/conferencia/alterar/'.$item->conf_cd); ?>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                         <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir"
                         onclick="setCodigo('<?php echo $item->conf_cd; ?>');
-                        setLink('<?php echo base_url('conferencia/excluir/')?>');">
+                        setLink('<?php echo base_url('/conferencia/excluir/')?>');">
                         <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
                     </tr>
             <?php endforeach;

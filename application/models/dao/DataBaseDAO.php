@@ -198,8 +198,8 @@
 					,ativ_nm        varchar(100) NOT NULL
 					,ativ_desc      varchar(500) NOT NULL
 					,ativ_dt        date         NOT NULL
-					,ativ_hora_ini  timestamp    NOT NULL
-					,ativ_hora_fin  timestamp    NOT NULL
+					,ativ_hora_ini  time         NOT NULL
+					,ativ_hora_fin  time         NOT NULL
 					,ativ_local     varchar(200) NOT NULL
 					,ativ_vagas_qtd int(3)       NOT NULL
 					,ativ_tiat_cd   int(11)      NOT NULL
@@ -287,6 +287,7 @@
 		//Método cria tabela Usuario
 		public function create_table_usuario(){
 			$sql = "CREATE TABLE IF NOT EXISTS User(
+<<<<<<< HEAD
 					 user_cd          int(11)      									 NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,user_nm          varchar(100) 									 NOT NULL
 					,user_tipo        varchar(2)   									 NOT NULL
@@ -298,6 +299,20 @@
 					,user_pass        varchar(100) 									 NOT NULL
 					,user_tele_cd	  int(11)	  									 NULL
 					,user_status      enum('Não Validado','Ativo','Inativo','')      NOT NULL
+=======
+					 user_cd          int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
+					,user_nm          varchar(100) NOT NULL
+					,user_tipo        varchar(2)   NOT NULL
+					,user_instituicao varchar(100) NULL
+					,user_biograf     varchar(500) NULL
+					,user_rg          varchar(12)  NOT NULL
+					,user_cpf         varchar(14)  NULL
+					,user_email_cd 	  int(11)	   NOT NULL
+					,user_pass        varchar(100) NOT NULL
+					,user_tele_cd	  int(11)	   NULL
+					,user_moda_tema_cds	  int(2)	   NULL
+					,user_stat_cd     int(11)      NOT NULL
+>>>>>>> 5baf46f2b801aaa9fcaeb5c48e526485578a95a7
 					,UNIQUE(user_rg)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
