@@ -7,7 +7,7 @@ class EmailModel extends CI_Model{
             parent::__construct();
 
             $this->load->Model( 'dao/EmailDAO' );
-            $this->load->Model( 'dao/UserDAO' );
+            $this->load->Model( 'dao/UsuarioDAO' );
             
     }
 

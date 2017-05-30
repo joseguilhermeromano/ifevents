@@ -8,7 +8,8 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <!-- Bootstrap Core CSS -->
-        <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
+         <link href="<?php echo base_url ('assets/area-interna/css/bootstrap.min.css');?>" rel="stylesheet">
+<!--         <link href="<?php echo base_url('assets/area-externa/css/bootstrappaper.css'); ?>" rel="stylesheet" type="text/css" media="all" /> -->
         <link href="<?php echo base_url ('assets/area-interna/css/estilo.css');?>" rel="stylesheet">
         <!-- font awesome --> 
         <link href="<?php echo base_url ('assets/ambas-areas/css/font-awesome.min.css');?>" rel="stylesheet">
@@ -33,12 +34,6 @@
     </head>
     <body>
  <div id="wrapper">
-        <?php 
-
-            $usuario = $this->session->userdata('usuario'); 
-            $paginacorrente = $this->session->userdata('view'); 
-
-        ?>
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
              <div class="borda"><!-- borda -->
                 <a href="javascript:void(0)" href="#close-toggle" id="close-toggle" onclick="closeNav()">
@@ -51,8 +46,8 @@
                     </a>
                 </div>
                 <?php
-
-                    switch($usuario[0]['user_tipo']){
+                    $tipoUsuario = $this->session->userdata('usuario')->user_tipo;
+                    switch($tipoUsuario){
                         case 3: 
                             include('links-organizador.php');
                         break;

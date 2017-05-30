@@ -53,18 +53,18 @@
             	array("title"=>"IFEvents - Resultados & Anais"), 0);
 		}
 
-		//Método chama a view que contém formulário de cadastro para participantes
-		public function cadastraParticipante(){
+		// //Método chama a view que contém formulário de cadastro para participantes
+		// public function cadastraParticipante(){
 
-            $this->chamaView("cadastro_participante", "inicio",
-            	array("title"=>"IFEvents - Cadastro de Participantes"), 0);
-		}
+  //           $this->chamaView("cadastro_participante", "inicio",
+  //           	array("title"=>"IFEvents - Cadastro de Participantes"), 0);
+		// }
 
-		public function cadastraRevisor(){
+		// public function cadastraRevisor(){
 
-			$this->chamaView("cadastro_revisor", "inicio",
-            	array("title"=>"IFEvents - Contato"), 0);
-		}
+		// 	$this->chamaView("cadastro_revisor", "inicio",
+  //           	array("title"=>"IFEvents - Contato"), 0);
+		// }
 
 
         //Método que chama a view do login

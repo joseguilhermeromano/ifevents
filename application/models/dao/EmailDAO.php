@@ -1,20 +1,19 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-        
-        include_once 'DAO.php';// Chamar sempre a interface por esta forma!
+    
 
-	class EmailDAO extends CI_Model implements DAO{
+	class EmailDAO extends CI_Model{
 
 		public function __construct(){
 			parent::__construct();
 
 		}
                 
-        public function inserir($obj) {
+        public function inserir($email) {
             $orig_db_debug = $this->db->db_debug;
 
             $this->db->db_debug = FALSE;
-            $this->db->insert('email', $obj);
+            $this->db->insert('Email', array('email_email' => $email));
             if($this->db->error()['code']==1062){
                 throw new Exception('Já existe um usuário cadastrado com este mesmo endereço de E-mail!');
             }
@@ -23,11 +22,16 @@
             return $this->db->insert_id();
         }
         
-        public function alterar($obj) {
-            $this->db->where('email_cd', $obj->email_cd);
+        public function alterar($email) {
+            $orig_db_debug = $this->db->db_debug;
+            $this->db->where('email_email', $email);
             $this->db->update('Email', array(
-                     'email_email' => $obj->email_email
+                     'email_email' => $email
                     ));  
+            if($this->db->error()['code']==1062){
+                throw new Exception('Já existe um usuário cadastrado com este mesmo endereço de E-mail!');
+            }
+            $this->db->db_debug = $orig_db_debug;
         }
 
         public function consultarTudo($email) {

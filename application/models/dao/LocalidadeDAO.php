@@ -9,28 +9,28 @@
 
 		}
 
-        public function inserirEnderecoUser($obj, $user_cd) {
+        public function inserirEnderecoUser($obj) {
             $data= array();
-            $consulta = $this->consultarCep($obj->loca_cep);
+            $consulta = $this->consultarCep($obj->getCep());
 
             if(!empty($consulta)){
                 $data['loca_cd'] = $consulta[0]->loca_cd;
             }
 
             if(empty($data['loca_cd'])){
-                $this->db->insert('Localidade', array('loca_lograd' => $obj->loca_lograd
-                    ,'loca_bairro' => $obj->loca_bairro
-                    ,'loca_cid' => $obj->loca_cid
-                    ,'loca_cep' => $obj->loca_cep
-                    ,'loca_uf' => $obj->loca_uf
+                $this->db->insert('Localidade', array('loca_lograd' => $obj->getLogradouro()
+                    ,'loca_bairro' => $obj->getBairro()
+                    ,'loca_cid' => $obj->getCidade()
+                    ,'loca_cep' => $obj->getCep()
+                    ,'loca_uf' => $obj->getUf()
                     ));
                 $data['loca_cd'] = $this->db->insert_id();
             }
 
-            $this->db->insert('Abriga', array('abri_user_cd' => $user_cd
+            $this->db->insert('Abriga', array('abri_user_cd' => $obj->getCodigo()
             ,'abri_loca_cd' => $data['loca_cd']
-            ,'abri_num' => $obj->loca_num
-            ,'abri_comp' => $obj->loca_comp
+            ,'abri_num' => $obj->getNumero()
+            ,'abri_comp' => $obj->getComplemento()
             ));
 
 
@@ -96,38 +96,38 @@
                     ));
         }
 
-        public function alterarEnderecoUser($obj,$user_cd) {
+        public function alterarEnderecoUser($obj) {
             $data= array();
-            $consulta = $this->consultarCep($obj->loca_cep);
+            $consulta = $this->consultarCep($obj->getCep());
 
             if(!empty($consulta)){
                 $data['loca_cd'] = $consulta[0]->loca_cd;
             }
 
             if(empty($data['loca_cd'])){
-                $this->db->insert('Localidade', array('loca_lograd' => $obj->loca_lograd
-                    ,'loca_bairro' => $obj->loca_bairro
-                    ,'loca_cid' => $obj->loca_cid
-                    ,'loca_cep' => $obj->loca_cep
-                    ,'loca_uf' => $obj->loca_uf
+                $this->db->insert('Localidade', array('loca_lograd' => $obj->getLogradouro()
+                    ,'loca_bairro' => $obj->getBairro()
+                    ,'loca_cid' => $obj->getCidade()
+                    ,'loca_cep' => $obj->getCep()
+                    ,'loca_uf' => $obj->getUf()
                     ));
                 $data['loca_cd'] = $this->db->insert_id();
             }else{
-                $this->db->where('loca_cep', $obj->loca_cep);
-                $this->db->update('Localidade', array('loca_lograd' => $obj->loca_lograd
-                        ,'loca_bairro' => $obj->loca_bairro
-                        ,'loca_cid' => $obj->loca_cid
-                        ,'loca_cep' => $obj->loca_cep
-                        ,'loca_uf' => $obj->loca_uf
+                $this->db->where('loca_cep', $obj->getCep());
+                $this->db->update('Localidade', array('loca_lograd' => $obj->getLogradouro()
+                        ,'loca_bairro' => $obj->getBairro()
+                        ,'loca_cid' => $obj->getCidade()
+                        ,'loca_cep' => $obj->getCep()
+                        ,'loca_uf' => $obj->getUf()
                         ));
             }
 
-            $this->db->where('abri_user_cd', $user_cd);
+            $this->db->where('abri_user_cd', $obj->getCodigo());
             $this->db->update('Abriga', array(
                      'abri_loca_cd' => $data['loca_cd']
-                    ,'abri_user_cd' => $user_cd
-                    ,'abri_num' => $obj->loca_num
-                    ,'abri_comp' => $obj->loca_comp
+                    ,'abri_user_cd' => $obj->getCodigo()
+                    ,'abri_num' => $obj->getNumero()
+                    ,'abri_comp' => $obj->getComplemento()
                     ));
 
         }

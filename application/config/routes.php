@@ -59,6 +59,12 @@ $route[ 'usuario/ativar/(:num)' ]     = 'UsuarioControl/ativar/$1';
 $route['usuario/notificar']			  = 'NotificacaoControl/notificaUsers';
 $route[ 'usuario/desativar/(:num)' ]  = 'UsuarioControl/desativar/$1';
 $route[ 'usuario/(:any)' ]            = 'UsuarioControl/$1';
+$route['participante/(:any)']		  = 'ParticipanteControl/$1';
+$route['participante/alterar/(:any)']		  = 'ParticipanteControl/alterar/$1';
+$route[ 'revisor/(:any)' ]		  	  = 'RevisorControl/$1';
+$route[ 'revisor/alterar/(:any)' ]		  	  = 'RevisorControl/alterar/$1';
+$route[ 'organizador/(:any)' ]		  	  = 'OrganizadorControl/$1';
+$route[ 'organizador/alterar/(:any)' ]		  	  = 'OrganizadorControl/alterar/$1';
 
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]             = 'EdicaoControl/$1';
@@ -74,12 +80,12 @@ $route[ 'artigo/alterar/(:any)' ]  				= 'ArtigoControl/alterar/$1';
 $route[ 'artigo/(:any)' ]             			= 'ArtigoControl/$1';
 
 /*Rotas listagem revisores*/
-$route[ 'revisor/consultar' ]             			= 'EdicaoControl/revisores';
-$route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
-$route[ 'aceitar-convite/(:any)/(:any)' ]           = 'EdicaoControl/aceiteConviteRevisor/$1/$2';
-$route[ 'recusar-convite/(:any)/(:any)' ]           = 'EdicaoControl/recusaConviteRevisor/$1/$2';
-$route[ 'revisor/excluir-convite/(:any)/(:any)' ]   = 'EdicaoControl/excluirConvite/$1/$2';
-$route[ 'revisor/(:any)' ]             				= 'EdicaoControl/$1';
+// $route[ 'revisor/consultar' ]             			= 'EdicaoControl/revisores';
+// $route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
+// $route[ 'aceitar-convite/(:any)/(:any)' ]           = 'EdicaoControl/aceiteConviteRevisor/$1/$2';
+// $route[ 'recusar-convite/(:any)/(:any)' ]           = 'EdicaoControl/recusaConviteRevisor/$1/$2';
+// $route[ 'revisor/excluir-convite/(:any)/(:any)' ]   = 'EdicaoControl/excluirConvite/$1/$2';
+// $route[ 'revisor/(:any)' ]             				= 'EdicaoControl/$1';
 
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]          = 'ModalidadeControl/$1';

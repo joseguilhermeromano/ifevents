@@ -7,12 +7,12 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 		public function __construct(){
 			parent::__construct();
 
-			$this->load->Model( 'dao/UserDAO' );
+			$this->load->Model( 'dao/UsuarioDAO' );
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
-			$this->load->Model('UserModel','usuario');
+			$this->load->Model('UsuarioModel','usuario');
             $this->load->Model('dao/EdicaoDAO');
             $this->load->Model('EmailModel','email');
             $this->load->Model('TelefoneModel','telefone');
@@ -76,7 +76,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                         $tele_cd = $this->TelefoneDAO->inserir($this->telefone);
                         $this->usuario->user_email_cd = $email_cd;
                         $this->usuario->user_tele_cd = $tele_cd;
-                        $user_cd = $this->UserDAO->inserir($this->usuario);
+                        $user_cd = $this->UsuarioDAO->inserir($this->usuario);
                         $this->LocalidadeDAO->inserirEnderecoUser($this->localidade, $user_cd);
                     }catch(Exception $e){
                         $this->session->set_flashdata('error', $e->getMessage());
@@ -103,7 +103,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
         //Chama view alterar do organizador
         public function alterar($codigo) {
             if (isset($codigo)){
-                $data = $this->UserDAO->consultarCodigo($codigo);
+                $data = $this->UsuarioDAO->consultarCodigo($codigo);
                 if(!empty($this->input->post())){
                     $data = $this->atualizaUsuario($data);
                 }
@@ -119,7 +119,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
         public function perfil() {
             if (null !== $this->session->userdata('usuario')){
                 $user = $this->session->userdata('usuario');
-                $data = $this->UserDAO->consultarCodigo($user[0]['user_cd']);
+                $data = $this->UsuarioDAO->consultarCodigo($user[0]['user_cd']);
                 if(empty($this->input->post())){
                     $data['title'] = "IFEvents - Atualizar Registro de Usuário!";
                     $this->chamaView("meuperfil", "usuario", $data, 1);
@@ -167,7 +167,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 }else if($verificaTel!=null){
                     $this->usuario->user_tele_cd = $verificaTel;
                 }else if($data['telefone']->tele_fone != $this->telefone->tele_fone){
-                    $users = $this->UserDAO->consultarTudo();
+                    $users = $this->UsuarioDAO->consultarTudo();
                     $numusers=0;
                     foreach ($users as $key => $value) {
                         $value->user_tele_cd == $data['user']->user_tele_cd ? $numusers++ :'';
@@ -185,7 +185,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     $this->usuario->user_cpf = $this->input->post('cpf');
                 }
 
-                $this->UserDAO->alterar($this->usuario);
+                $this->UsuarioDAO->alterar($this->usuario);
                 $this->LocalidadeDAO->alterarEnderecoUser($this->localidade, $data['user']->user_cd);
                 $this->email->email_cd = $data['user']->user_email_cd;
                 $this->EmailDAO->alterar($this->email);
@@ -193,7 +193,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
                 if($this ->db->trans_status() !== FALSE){
                     $this->session->set_flashdata('success', 'O Usuário foi atualizado com sucesso!');
-                     $data = $this->UserDAO->consultarCodigo($data['user']->user_cd);
+                     $data = $this->UsuarioDAO->consultarCodigo($data['user']->user_cd);
                      $data['title'] = "IFEvents - Atualizar Registro de Usuário!";
                      return $data;
                 }else{
@@ -220,9 +220,9 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                 $array=null;
             }
 
-            $data['users']=$this->UserDAO->consultarTudo($array, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite, $this->UserDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
-            $data['totalRegistros'] = $this->UserDAO->totalRegistros();
+            $data['users']=$this->UsuarioDAO->consultarTudo($array, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite, $this->UsuarioDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $this->UsuarioDAO->totalRegistros();
             $data['title']="IFEvents - Usuários";
             $this->chamaView("usuarios", "organizador", $data, 1);
         }
@@ -232,20 +232,20 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 		}
 
         public function consultarEmailSelect(){
-            $data = $this->UserDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));
+            $data = $this->UsuarioDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
         //busca usuário por nome 
         public function consultarParaSelect2(){
-            $data = $this->UserDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
+            $data = $this->UsuarioDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
 
         public function ativar($user_cd){
             if(!empty($user_cd)){
-                 if($this->UserDAO->ativaDesativa($user_cd, 2)==0){
+                 if($this->UsuarioDAO->ativaDesativa($user_cd, 2)==0){
                     $this->session->set_flashdata('success','O Usuário foi ativado com sucesso!');
                  }else{
                     $this->session->set_flashdata('error','Não foi possível ativar o Usuário!');
@@ -256,7 +256,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 
         public function desativar($user_cd){
             if(!empty($user_cd)){
-                 if($this->UserDAO->ativaDesativa($user_cd, 3)==0){
+                 if($this->UsuarioDAO->ativaDesativa($user_cd, 3)==0){
                     $this->session->set_flashdata('success','O Usuário foi desativado com sucesso!');
                  }else{
                     $this->session->set_flashdata('error','Não foi possível desativar o Usuário!');
@@ -266,7 +266,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function consultarRevisorSelect2(){
-            $data = $this->UserDAO->consultarTudo(array('user_nm' => $this->input->post('term'), 'user_tipo' => 2));
+            $data = $this->UsuarioDAO->consultarTudo(array('user_nm' => $this->input->post('term'), 'user_tipo' => 2));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
