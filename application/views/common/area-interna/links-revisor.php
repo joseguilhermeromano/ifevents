@@ -14,7 +14,7 @@
     </a>
 </li>
 <li class="item-menu">
-    <a href="<?php echo base_url("contato/sendEmail/hidden");?>">
+    <a href="<?php echo base_url("contato/cadastrar");?>">
     	<span class="glyphicon glyphicon-envelope"></span>  CONTATO
     </a>
 </li>

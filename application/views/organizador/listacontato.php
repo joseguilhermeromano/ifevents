@@ -4,18 +4,11 @@
 
 <div class="error"><?php echo validation_errors(); ?></div>
 <br>
-<?php if ($this->session->flashdata('success')) { ?>
-	<div class="alert alert-success">
-        <?= $this->session->flashdata('success') ?>
-    </div>
-<?php } ?>
 
-<?php if ($this->session->flashdata('error')) { ?>
-    <div class="alert alert-danger">
-        <?= $this->session->flashdata('error') ?>
-    </div>
-<?php } ?>
-
+<?php
+    $this->load->helper('html');
+    echo alert($this->session);
+?>
 
 <div class="row">
     <div class="col-md-6 col-sm-6">
@@ -37,10 +30,8 @@
             <tr>
                 <th class="col-md-6">Nome</th>
                 <th><center>Assunto</center></th>
-                <th><center>Email</center></th>
                 <th><center>Mensagem</center></th>
-                <th><center>Responder</center></th>
-                <th><center>Excluir</center></th>
+                <th><center>Opção</center></th>
             </tr>
         </thead>
         <tbody>
@@ -50,16 +41,25 @@
                     <tr>
                         <td><?php echo $item->cont_nm; ?></td>
                         <td class="text-center"><?php echo $item->cont_assunto; ?></td>
-                        <td class="text-center"><?php echo $item->cont_email; ?></td>
-                        <td class="text-center"><h5 onclick= "show  ('msg');"><span class="glyphicon glyphicon-comment"></span></h5>
-                            <div id="msg" style="display: none;">
-                                <p> <?php echo $item->cont_msg; ?> </p>
-                            </div></td>
-                        <td class="text-center"><a href="<?php echo base_url('/contato/consultar/'.$item->cont_cd); ?>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
-                        <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir"
-                        onclick="setCodigo('<?php echo $item->cont_cd; ?>');
-                        setLink('<?php echo base_url('contato/excluir/')?>');">
-                        <span class="glyphicon glyphicon-trash estilo-botao-exclusao"></span></a></td>
+						<td class="text-center"><a href="#"
+									data-container="body"
+									data-toggle="popover"
+									data-placement="bottom"
+									data-content="<?php echo $item->cont_msg; ?>"><?php echo $item->cont_email; ?></span>
+							</a>
+						</td>
+
+						<td <div class="text-left" style="display: inline-block">
+                        		<a class="btn-opcao" href="<?php echo base_url('/contato/consultar/'.$item->cont_cd);?>">
+                            		<span class="glyphicon glyphicon-pencil"></span>&#09;Responder
+								</a><br>
+								<a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
+									onclick="setCodigo('<?php echo $item->cont_cd; ?>');
+									setLink('<?php echo base_url('/contato/excluir/')?>');">
+									<span class="glyphicon glyphicon-remove"></span>&#09;Excluir
+								</a>
+							</div>
+						</td>
                     </tr>
             <?php endforeach;
             endif;?>
@@ -88,3 +88,40 @@
       </li>
     </ul>
 </nav><!-- /Paginação -->
+
+<!-- Modal de Exibição -->
+<style>
+	p{
+		width: 500px;
+		text-align: justify;
+	}
+</style>
+	<div id="modalExibir" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Mensagem</h4>
+				</div>
+				<div class='container'>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="modal-body">
+
+								<p><?php
+									echo "<strong>Nome:</strong> ".$result->cont_nm;
+									echo "<br><strong>Assunto:</strong> ".$result->cont_assunto;
+									echo "<br><br>".$result->cont_msg;
+									?>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+					<button class="btn btn-success" onclick="Executa();">Responder</button>
+				</div>
+			</div>
+		</div>
+	</div>

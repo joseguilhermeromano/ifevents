@@ -25,31 +25,6 @@
             </div>
         </div>
 
-        <!-- Modal de Exibição
-        <?php //if(!empty($content)):
-            //foreach( $content as $item ):?>
-            <div id="modalExibir" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">Mensagem</h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <p><?php //echo $item->cont_msg; ?></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                            <button class="btn btn-success" onclick="Executa();">Continuar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-        <?php //endforeach;
-              //endif;?>
-
-
         <!-- Modal de Atualização -->
             <div id="modalAtualizar" class="modal fade">
                 <div class="modal-dialog">
@@ -108,22 +83,46 @@
             </div>
         </div>
 
+        <!-- Modal de Cancelamento -->
+        <!-- Modal de Exclusão -->
+            <div id="modalCancelar" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Cancelar</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <p>Deseja realmente cancelar a inscrição?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                            <button class="btn btn-success" onclick="Executa();">Continuar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
      <!-- assetststrap Core JavaScript -->
-     <!--bootstrap -->
+     <!--bootsecho trap -->
         <script src="<?php echo base_url('assets/area-interna/js/jquery-3.2.1.js');?>"></script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap.min.js'); ?>"></script>
-    <!-- metodos para as modais --> 
+    <!-- metodos para as modais -->
         <script src="<?php echo base_url('assets/area-interna/js/metodosModais.js'); ?>"></script>
-    <!-- plugin jquery masked input --> 
+    <!-- plugin jquery masked input -->
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
-    <!-- plugins para calendario jquery --> 
+    <!-- plugins para calendario jquery -->
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
         <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
-    <!-- plugin select 2 jquery --> 
+    <!-- plugin select 2 jquery -->
         <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
-    <!-- consultas ajax e implementação de alguns plugins --> 
+    <!-- consultas ajax e implementação de alguns plugins -->
         <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
-    <!-- plugin bootstrap file input --> 
+    <!-- plugin bootstrap file input -->
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-canvas-to-blob.min.js'); ?>">
         </script>
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-sortable.min.js'); ?>"></script>
@@ -176,6 +175,12 @@
                 document.getElementById(msg).style.display = "none"
             }
         }
+    </script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
     </script>
 
 

@@ -1,6 +1,6 @@
 <?php
 	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-        
+
         include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 	class EmailDAO extends CI_Model implements DAO{
@@ -9,10 +9,9 @@
 			parent::__construct();
 
 		}
-                
+
         public function inserir($obj) {
             $orig_db_debug = $this->db->db_debug;
-
             $this->db->db_debug = FALSE;
             $this->db->insert('email', $obj);
             if($this->db->error()['code']==1062){
@@ -22,12 +21,12 @@
             $this->db->db_debug = $orig_db_debug;
             return $this->db->insert_id();
         }
-        
+
         public function alterar($obj) {
             $this->db->where('email_cd', $obj->email_cd);
             $this->db->update('Email', array(
                      'email_email' => $obj->email_email
-                    ));  
+                    ));
         }
 
         public function consultarTudo($email) {
@@ -37,7 +36,7 @@
             $query = $this->db->get();
             return $query->result_object();
         }
-        
+
         public function consultarCodigo($codigo){
             return null;
         }
@@ -47,11 +46,4 @@
             $this->db->delete('email');
         }
 
-                
-
 }
-
-
-
-
-

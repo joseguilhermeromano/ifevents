@@ -51,12 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /* Rotas Corretas */
-$route[ 'login/(:any)' ]                       = 'LoginControl/$1';
+$route[ 'login/(:any)' ]                        = 'LoginControl/$1';
 /*Rotas Usuário*/
-$route[ 'usuario/alterar/(:any)' ]             = 'UsuarioControl/alterar/$1';
-$route[ 'usuario/ativar/(:num)' ]              = 'UsuarioControl/ativar/$1';
-$route[ 'usuario/desativar/(:num)' ]           = 'UsuarioControl/desativar/$1';
-$route[ 'usuario/(:any)' ]                     = 'UsuarioControl/$1';
+$route[ 'usuario/alterar/(:any)' ]              = 'UsuarioControl/alterar/$1';
+$route[ 'usuario/ativar/(:num)' ]               = 'UsuarioControl/ativar/$1';
+$route[ 'usuario/desativar/(:num)' ]            = 'UsuarioControl/desativar/$1';
+$route[ 'usuario/notificaUsers/(:num)']         = 'UsuarioControl/notificaUsers/$1';
+$route[ 'usuario/(:any)' ]                      = 'UsuarioControl/$1';
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]                       = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]               = 'EdicaoControl/alterar/$1';
@@ -94,6 +95,8 @@ $route[ 'regra-submissao/(:any)' ]              = 'RegraControl/$1';
 $route[ 'regra-submissao/alterar(:any)' ]       = 'RegraControl/alterar/$1';
 
 $route[ 'instituicao/(:any)' ]                  = 'InstituicaoControl/$1';
+$route[ 'instituicao/alterar/(:any)' ]          = 'InstituicaoControl/alterar/$1';
+$route[ 'instituicao/excluir/(:any)' ]          = 'InstituicaoControl/excluir/$1';
 $route[ 'submissao/(:any)' ]                    = 'SubmitControl/$1';
 $route[ 'comite/(:any)' ]                       = 'ComiteControl/$1';
 
@@ -101,9 +104,16 @@ $route[ 'comite/(:any)' ]                       = 'ComiteControl/$1';
 $route[ 'contato/(:any)' ]                      = 'ContatoControl/$1';
 $route[ 'contato/consultar/(:any)' ]            = 'ContatoControl/consultar/$1';
 $route[ 'contato/sendEmail/(:any)' ]            = 'ContatoControl/sendEmail/$1';
+$route[ 'contato/responder/(:any)' ]            = 'ContatoControl/responder/$1';
 $route[ 'contato/excluir/(:any)' ]              = 'ContatoControl/excluir/$1';
 
 $route[	'(:any)' ]                              = 'InicioControl/$1';
+
+//Rotas Inscricao
+$route['inscricao/(:any)']                      = 'InscricaoControl/$1';
+$route['inscricao/consultarTudo/(:any)']        = 'InscricaoControl/consultarTudo/$1';
+$route['inscricao/inscricao/(:any)/(:num)']     = 'InscricaoControl/inscricao/&1/(:num)';
+$route['inscricao/excluir/(:any)']              = 'InscricaoControl/excluir/$1';
 
 //Rotas Conferência
 $route[ 'conferencia/(:any)' ]                  = 'ConferenciaControl/$1';

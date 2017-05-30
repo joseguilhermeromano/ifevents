@@ -83,17 +83,21 @@
             $query = $this->db->get();
             return $query->result_array();
         }
-
+//28179869 NPDTNW
 
         public function consultarCodigo($codigo){
-			$this->db->where('conf_cd',$codigo);
-			$query = $this->db->get('Conferencia');
-			if($query->num_rows() > 0){
-				return $query->result_object();
-			}
-			else{
-				return FALSE;
-			}
+			$this->db->select( 'conf_cd, conf_nm, conf_desc' );
+			$this->db->from( 'Conferencia' );
+			$this->db->where( 'conf_cd', $codigo );
+			$query       = $this->db->get();
+			$query       = $query->result_object();
+			$conferencia = (object) array();
+			$consulta    = $query[0];
+			$conferencia->conf_cd   = $consulta->conf_cd;
+			$conferencia->conf_nm   = $consulta->conf_nm;
+			$conferencia->conf_desc = $consulta->conf_desc;
+
+			return $conferencia;
         }
 
         public function excluir($obj) {

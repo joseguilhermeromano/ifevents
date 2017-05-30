@@ -49,11 +49,11 @@
             		}
                 }
 
-                public function consultarCodigo($codigo){
+                public function consultarCodigo($codigo){                    
                     $this->db->where('cont_cd', $codigo);
                     $query = $this->db->get('Contato');
                     if($query->num_rows() > 0){
-                        return $query->result_object();
+                        return $query->result_object()[0];
                     }
                     else{
                         return FALSE;
@@ -63,6 +63,10 @@
                 public function excluir($obj) {
                     $this->db->where('cont_cd', $obj);
                     return $this->db->delete('Contato');
+                }
+
+                public function insertResposta($codigo){
+                    return  $this->db->insert('Resposta', $codigo);
                 }
 
 }

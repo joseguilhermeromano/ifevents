@@ -8,7 +8,7 @@ class EmailModel extends CI_Model{
 
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/UserDAO' );
-            
+
     }
 
     public function setaValores($cadastro = true){
@@ -26,13 +26,11 @@ class EmailModel extends CI_Model{
         	$this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
 
             if($this->input->post('confirmaemail')){
-                $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
+                $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
                     'valid_email|trim|required|max_length[100]|matches[email]' );
             }
         }
 
     }
 
-
 }
-

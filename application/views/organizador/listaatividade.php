@@ -41,27 +41,29 @@
                 <th><center>Término</center></th>
                 <th><center>Local</center></th>
                 <th><center>Vagas</center></th>
-                <?php if($flag != 'hidden'){ ?>
                 <th><center>Opções</center></th>
-                <?php } ?>
+
             </tr>
         </thead>
         <tbody>
             <?php
 
                 if(!empty($content)):
-                    foreach( $content as $item ): ?>
+                    foreach( $content as $item ):
+                        $status = 1;
+             ?>
+
                     <tr>
                         <td><?php echo $item->ativ_nm; ?></td>
                         <td class="text-center"><?php echo $item->ativ_desc; ?></td>
-                        <td class="text-center"><?php echo date("d-m-Y", strtotime($item->ativ_dt)); ?></td>
-                        <td class="text-center"><?php echo $item->ativ_hora_ini; ?></td>
-                        <td class="text-center"><?php echo $item->ativ_hora_fin; ?></td>
+                        <td class="text-center"><?php echo date("d/m/Y", strtotime($item->ativ_dt)); ?></td>
+                        <td class="text-center"><?php echo date("H:i", strtotime($item->ativ_hora_ini)); ?></td>
+                        <td class="text-center"><?php echo date("H:i", strtotime($item->ativ_hora_fin)); ?></td>
                         <td class="text-center"><?php echo $item->ativ_local; ?></td>
                         <td class="text-center"><?php echo $item->ativ_vagas_qtd; ?></td>
                         <?php if($flag != 'hidden'): ?>
                         <td <div class="text-left" style="display: inline-block">
-                        		<a class="btn-opcao" href="<?php echo base_url('/atividade/alterar/'.$item->ativ_cd);  ?>">
+                        		<a class="btn-opcao" href="<?php echo base_url('/atividade/alterar/'.$item->ativ_cd);?>">
                             		<span class="glyphicon glyphicon-pencil"></span>&#09;Editar
 								</a><br>
 								<a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
@@ -71,17 +73,29 @@
 								</a>
 							</div>
 						</td>
-                     <?php endif; ?>
+                    <?php else:?>
+                        <td <div class="text-left" style="display: inline-block">
+                                <a class="btn-opcao" href="<?php echo base_url('/inscricao/inscricao/'.$item->ativ_cd.'/'.$status);?>">
+                                        <span class="glyphicon glyphicon-pencil"></span>&#09;Inscreva-se
+                                </a><br>
 
+                                    <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
+                                        onclick="setCodigo('<?php echo $item->ativ_cd; ?>');
+                                        setLink('<?php echo base_url('/inscricao/excluir/')?>');">
+                                            <span class="glyphicon glyphicon-remove"></span>&#09;Cancelar
+                                    </a>
+
+                            </div>
+                        </td>
+
+                     <?php endif; ?>
                     </tr>
             <?php endforeach;
             endif;?>
-
-
-
         </tbody>
     </table>
 </div><!-- /TABELA-->
+
 <nav><!-- Paginação -->
     <ul class="pagination">
       <li>

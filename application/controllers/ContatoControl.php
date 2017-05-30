@@ -13,7 +13,7 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
 
         public function cadastrar() {
             if (empty($this->contato->input->post())){
-                $this->chamaView("contato", "usuario",
+                $this->chamaView("contato", "avaliador",
                     array("title"=>"IFEvents - Novo Contato"), 1);
                 return 0;
             }
@@ -21,26 +21,16 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
                     $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
             }
             else{
-                $this->contato->setaValores();
-				$config['charset'] = 'utf-8';
-				$config['mailtype'] = 'html';
-				$config['protocol'] = 'smtp';
-				$config['smtp_host'] =  'ssl://smtp.googlemail.com';
-				$config['smtp_port'] = '465';
-				$config['smtp_timeout'] = '30';
-				$config['smtp_user'] = 'projetoifsp2017@gmail.com';
-				$config['smtp_pass'] = 'ifsp2017';
-				$config['newline'] = "\r\n";
 
-				$this->email->initialize($config);
-                if($this->email->send()){
-                    $this->session->set_flashdata('success', 'O email foi enviado com sucesso!');
+                $this->contato->setaValores();
+				if($this->ContatoDAO->inserir($this->contato)==true){
+                    $this->session->set_flashdata('success', 'Mensagem cadastrada com sucesso!');
                 }else{
-                    $this->session->set_flashdata('error', 'Não foi possível enviar o email!');
+                    $this->session->set_flashdata('error', 'Mensagem não cadastrada!');
                 }
 
             }
-            $this->chamaView("contato", "usuario",
+            $this->chamaView("contato", "avaliador",
                     array("title"=>"IFEvents - Novo Contato"), 1);
         }
 
@@ -49,9 +39,9 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function consultar() {
-			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
-			$data['title']  = "IFEvents - Email - organizador";
-			$this->chamaView("email", "organizador", $data, 1);
+			$dados['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
+			$dados['title']  = "IFEvents - Contato - organizador";
+			$this->chamaView("email", "organizador", $dados, 1);
         }
 
 		public function consultarTudo() {
@@ -99,6 +89,32 @@ class ContatoControl extends PrincipalControl implements InterfaceControl{
 		}
 
 		public function enviar(){
+
+		}
+
+		public function responder(){
+
+			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
+			$data['title'] = "IFEvents - Email - Organizador";
+			if (empty($this->contato->input->post())){
+                $this->chamaView("email", "organizador", $data, 1);
+                return 0;
+            }
+			//$data = print_r($this->contato->valida());
+            if( $this->contato->valida()==false){
+                    $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+            }
+            else{
+                $this->contato->setaValores();
+                if($this->envia_email($value,$notificacao->assunto, $notificacao->mensagem) == true){
+                    $this->session->set_flashdata('success', 'Resposta enviada com sucesso!');
+                }else{
+                    $this->session->set_flashdata('error', 'Não foi possível enviar a resposta!');
+                }
+
+            }
+
+			$this->chamaView("email", "organizador", $data, 1);
 
 		}
 

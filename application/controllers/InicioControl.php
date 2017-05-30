@@ -11,17 +11,17 @@
 			// $this->load->model('dao/DataBaseDAO');
 //			$this->DataBaseDAO->create_table_ci_session();
 			// $this->load->model('SubmitModel');
-			// $this->load->model('UserModel');
+			$this->load->model('dao/InscricaoDAO');
 			// $this->model('Autentica');
 		}
 		//Método chama a view principal do sistema (Home)
 		public function index(){
-			
+
 			$this->chamaView("index", "inicio",array("title"=>"IFEvents - Página Inicial - Seja bem vindo!"), 0);
 		}
 
 		public function sobre(){
-			
+
 			$this->chamaView("sobre", "inicio",
             	array("title"=>"IFEvents - Sobre"), 0);
 		}
@@ -34,15 +34,16 @@
 
 
 		public function programacao(){
-
-			$this->chamaView("programacao", "inicio",array("title"=>"IFEvents - Programação do Evento"), 0);
+			$data['programacao'] = $this->InscricaoDAO->consultarTudo();
+			$data['title'] = "IFEvents - Programação do Evento";
+			$this->chamaView("programacao", "inicio", $data, 0);
 		}
 
 		/*Método chama a view que contém links para documentos
 		com as regras para submissão de artigos*/
 
 		public function submissao(){
-			
+
 			$this->chamaView("submissao", "inicio",
             	array("title"=>"IFEvents - Submissão"), 0);
 		}
@@ -90,6 +91,12 @@
 
 			$this->chamaView("noPermission", "inicio",
             	array("title"=>"IFEvents - Erro de Permissão"), 0);
+		}
+
+		public function inscricao(){
+			if($this->session->flashdata('usuario')==null){
+				redirect('login');
+			};
 		}
 
 }

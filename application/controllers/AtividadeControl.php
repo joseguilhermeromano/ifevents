@@ -46,9 +46,9 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
          * @return Não apresenta retorno
          */
         public function alterar($codigo){
-            $data['atividade'] = $this->TipoAtividadeDAO->consultarTudo();
+            $data['tipoAtividade'] = $this->TipoAtividadeDAO->consultarTudo();
             $data['title']  = "IFEvents - Atualiza Atividade - organizador";
-            $data['content'] = $this->AtividadeDAO->consultarCodigo($this->uri->segment(3));
+            $data['atividade'] = $this->AtividadeDAO->consultarCodigo($this->uri->segment(3));
 
             if(!empty($this->input->post())){
                 $this->atividade->setaValores();
@@ -69,7 +69,7 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
 
             }
 
-            $this->chamaView("updateAtividade", "organizador", $data, 1);
+            $this->chamaView("edita-atividade", "organizador", $data, 1);
         }
 
         /**

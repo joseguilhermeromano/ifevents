@@ -8,15 +8,17 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 			parent::__construct();
 
 			$this->load->Model( 'dao/UserDAO' );
+			$this->load->Model( 'dao/ContatoDAO' );
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
-			$this->load->Model('UserModel','usuario');
-            $this->load->Model('EmailModel','email');
-            $this->load->Model('TelefoneModel','telefone');
-            $this->load->Model('LocalidadeModel','localidade');
-            $this->load->Model('InstituicaoModel','instituicao');
+			$this->load->Model( 'UserModel','usuario');
+            $this->load->Model( 'EmailModel','email');
+            $this->load->Model( 'TelefoneModel','telefone');
+            $this->load->Model( 'LocalidadeModel','localidade');
+            $this->load->Model( 'InstituicaoModel','instituicao');
+
 		}
 
 
@@ -89,6 +91,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                     $this->telefone = null;
                     $this->localidade = null;
                     $this->instituicao = null;
+
 
                 }
             }
@@ -231,11 +234,14 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 		}
 
         public function notificaUsers(){
+			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
             if (empty($this->input->post())){
                 $this->chamaView("notifica-users", "organizador",
                     array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
+			$answer  = (object) array(
+				'resposta' => $this->input->post('tipo'));
 
             $notificacao = (object) array(
                 'tipo_notificacao' => $this->input->post('tipo_notificacao'),
@@ -288,6 +294,9 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                         $mensagem = 'As notificações foram enviados com sucesso!';
                     }else{
                         $mensagem = 'A notificação foi enviada com sucesso!';
+						if($answer->resposta == 'resposta'){
+							redirect('contato/consultarTudo');
+						}
                     }
                     $this->session->set_flashdata('success', $mensagem);
                 }else{
@@ -310,7 +319,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
-        //busca usuário por nome 
+        //busca usuário por nome
         public function consultarParaSelect2(){
             $data = $this->UserDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));

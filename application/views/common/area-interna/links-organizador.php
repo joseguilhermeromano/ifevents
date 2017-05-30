@@ -30,7 +30,7 @@
       <a href="<?php echo base_url('conferencia/consultarTudo');?>" class="list-group-item">CONFERÊNCIAS</a></li>
       <li id="edicao"><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
       <li><a href="<?php echo base_url("");?>" class="list-group-item">COMITÊS</a></li>
-      <li><a href="<?php echo base_url("");?>" class="list-group-item">INSTITUIÇÕES</a></li>
+      <li><a href="<?php echo base_url("instituicao/consultarTudo");?>" class="list-group-item">INSTITUIÇÕES</a></li>
   </ul>
 </li>
 

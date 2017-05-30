@@ -7,7 +7,14 @@
         $this->load->helper('html');
         echo alert($this->session);
 ?>
+<div class="row">
+    <br>
+    <div class="col-sm-12">
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/atividade/consultarTudo/'); ?>' style="float:left"><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+    </div>
+</div>
 
+<br><br>
 
 <?php
     echo form_open_multipart( 'atividade/cadastrar', 'role="form" class="formsignin"' );

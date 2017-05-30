@@ -4,32 +4,19 @@
 
 <div class="error"><?php echo validation_errors(); ?></div>
 
-<?php //if ($this->session->flashdata('success')) { ?>
-<!--    <div class="alert alert-success">
-        <?php// $this->session->flashdata('success') ?>
-    </div>
-<?php //} ?>
-
-<?php //if ($this->session->flashdata('empty')) { ?>
-    <div class="alert alert-danger">
-        <?php// $this->session->flashdata('empty') ?>
-    </div>
-<?php //} ?>
-
-<?php //if ($this->session->flashdata('fail')) { ?>
-    <div class="alert alert-danger">
-        <?php //$this->session->flashdata('fail') ?>
-    </div>-->
-<?php //} ?>
-
-
+<?php
+        $this->load->helper('html');
+        echo alert($this->session);
+?>
 
 <?php echo form_open( 'ContatoControl/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 <div class="row">
     <div class="col-md-6">
         <div class="form-group">
         <b><?php echo form_label( 'Nome', 'nome' ); ?></b>
-        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome", 'class' => 'form-control estilo-input' );
+        <?php $data = array( 'name'        => 'nome',
+                             'placeholder' => "Nome",
+                             'class'       => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>

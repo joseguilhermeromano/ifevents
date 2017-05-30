@@ -30,9 +30,9 @@
 					$this->db->set('ativ_tiat_cd', $obj->ativ_tiat_cd);
 		            return $this->db->update('Atividade', $obj);
                 }
-				
+
                 public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='ativ_nm', $ordenacao='asc') {
-                    $this->db->select("ativ_cd, ativ_nm, ativ_desc, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local, ativ_vagas_qtd, ativ_tiat_cd");
+                	$this->db->select("ativ_cd, ativ_nm, ativ_desc, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local, ativ_vagas_qtd, ativ_tiat_cd");
                     $this->db->from("Atividade");
                     $this->db->order_by($sort, $ordenacao);
                     if($parametros !== null){
@@ -51,16 +51,28 @@
                 }
 
                 public function consultarCodigo($codigo){
+					$this->db->select('ativ_cd, ativ_nm, ativ_desc, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local, ativ_vagas_qtd, ativ_tiat_cd');
+					$this->db->from('Atividade');
 					$this->db->where( 'ativ_cd', $codigo );
-					$query = $this->db->get( 'Atividade' );
-					if($query->num_rows() > 0){
-						return $query->result_object();
-					}
-					else{
-						return FALSE;
+					$query = $this->db->get();
+					$query = $query->result_object();
+					$atividade = (object) array();
+					$consulta = $query[0];
+					$atividade->ativ_cd = $consulta->ativ_cd;
+					$atividade->ativ_nm = $consulta->ativ_nm;
+					$atividade->ativ_desc = $consulta->ativ_desc;
+					$atividade->ativ_dt = $consulta->ativ_dt;
+					$atividade->ativ_hora_ini  = $consulta->ativ_hora_ini;
+					$atividade->ativ_hora_fin  = $consulta->ativ_hora_fin;
+					$atividade->ativ_local     = $consulta->ativ_local;
+					$atividade->ativ_vagas_qtd = $consulta->ativ_vagas_qtd;
+					$atividade->ativ_tiat_cd   = $consulta->ativ_tiat_cd;
+
+					return $atividade;
+
 					}
 
-                }
+
 
                 public function excluir($obj) {
                     $this->db->where( 'ativ_cd', $obj );

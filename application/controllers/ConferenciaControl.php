@@ -41,8 +41,8 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 
 		//Método altera dados cadastrados
         public function alterar($codigo) {
-			$data['content'] = $this->ConferenciaDAO->consultarCodigo($this->uri->segment(3));
-			$data['title']  = "IFEvents - Lista Conferencia - organizador";
+			$data['content'] = $this->ConferenciaDAO->consultarCodigo($codigo);
+			$data['title']  = "IFEvents - Edita Conferencia - organizador";
 
 			if(!empty($this->input->post())){
 				$this->conferencia->setaValores();
@@ -53,18 +53,18 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 	            else{
 					//echo print_r($this->conferencia);
 	                 if($this->ConferenciaDAO->alterar($this->conferencia)==true){
-	                     $this->session->set_flashdata('success', 'O Arquivo foi atualizado com sucesso!');
+	                     $this->session->set_flashdata('success', 'A conferência foi atualizado com sucesso!');
 	                  	 redirect('conferencia/consultarTudo/');
 
 	                 }else{
-	                     $this->session->set_flashdata('error', 'Não foi possível atualizar o arquivo!');
+	                     $this->session->set_flashdata('error', 'Não foi possível atualizar a conferência!');
 	                 }
 
 	             }
 
 			}
 
-			$this->chamaView("formUpdate", "organizador", $data, 1);
+			$this->chamaView("edita-conferencia", "organizador", $data, 1);
         }
 
         public function consultar() {

@@ -1,11 +1,6 @@
 <div class="container-fluid">
-<?php if($flag != 'hidden'): ?>
 <h2><span class="fa fa-exclamation-triangle"></span><b> Notificar Usuários</b></h2>
 <hr>
-<?php else: ?>
-<h2><span class="glyphicon glyphicon-envelope"></span><b> Contato</b></h2>
-<hr>
-<?php endif; ?>
 <br>
 
 <?php
@@ -16,7 +11,6 @@
 
 <?php
     echo form_open_multipart( 'usuario/notificaUsers', 'role="form" class="formsignin"' );
-if($flag != 'hidden'):
 ?>
 
 <div id="divCarregando" class="progresso">
@@ -72,39 +66,15 @@ if($flag != 'hidden'):
         </div>
     </div>
 </div>
-<?php else: ?>
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-        <b><?php echo form_label( '*Nome', 'nome' ); ?></b>
-        <?php $data = array( 'name' => 'nome', 'placeholder' => "Nome",
-            'class' => 'form-control estilo-input',
-             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
-               echo form_input($data);?>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-group">
-        <b><?php echo form_label( '*Email', 'email' ); ?></b>
-        <?php $data = array( 'name' => 'email', 'placeholder' => "Email",
-            'class' => 'form-control estilo-input',
-             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
-               echo form_input($data);?>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
 
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Assunto', 'assunto' ); ?></b>
-        <?php $data = array( 'name' => 'assunto', 'placeholder' => "Assunto",
-            'class' => 'form-control estilo-input',
-             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
+        <?php $data = array( 'name' => 'assunto',
+                             'placeholder' => "Assunto",
+                             'class' => 'form-control estilo-input',
+                             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
                echo form_input($data);?>
         </div>
     </div>

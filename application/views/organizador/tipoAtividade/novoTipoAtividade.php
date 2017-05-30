@@ -2,7 +2,13 @@
 <h2><span class="glyphicon glyphicon-floppy-save"></span><b> Cadastrar Tipo de Atividades</b></h2>
 <hr>
 <br>
-
+<div class="row">
+    <br>
+    <div class="col-sm-12">
+         <a class="btn btn-default margin-button" href='<?php echo site_url('/tipoatividade/consultarTudo/'); ?>' style="float:left"><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+    </div>
+</div>
+<br><br>
 <?php
         $this->load->helper('html');
         echo alert($this->session);
@@ -11,6 +17,8 @@
 
 <?php
     echo form_open_multipart( 'tipoatividade/cadastrar', 'role="form" class="formsignin"' );
+
+    $activity = (isset($atividade) ? $atividade->tiat_desc : '');
 ?>
 
 <div class="row">
@@ -24,15 +32,14 @@
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-        <b><?php echo form_label( '*Descrição', 'descricao' ); ?></b>
-        <?php $data = array( 'name' => 'descricao', 'placeholder' => "Descricão",
-            'class' => 'form-control estilo-input',
-             'value' => (isset($notificacao) ? $notificacao->assunto : '') );
-               echo form_input($data);?>
+        <b><?php echo form_label( 'Descrição', 'descricao' ); ?></b><br>
+        	<?php
+        		$data = array( 'name' => 'descricao', 'id'=>'editor', 'cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
+                echo form_textarea( $data, set_value('activity', $activity) );
+        	?>
         </div>
     </div>
 </div>

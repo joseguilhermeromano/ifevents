@@ -24,8 +24,8 @@
     </a>
 </li>
 <li class="item-menu">
-    <a href="<?php echo base_url("atividade/consultarTudo/hidden");?>">
-    	<span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
+    <a href="<?php echo base_url("inscricao/consultarTudo/");?>">
+    	<span class="glyphicon glyphicon-blackboard"></span>  PROGRAMAÇÃO
     </a>
 </li>
 
