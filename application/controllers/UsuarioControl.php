@@ -13,12 +13,12 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
-			$this->load->Model( 'UserModel','usuario');
-            $this->load->Model( 'EmailModel','email');
-            $this->load->Model( 'TelefoneModel','telefone');
-            $this->load->Model( 'LocalidadeModel','localidade');
-            $this->load->Model( 'InstituicaoModel','instituicao');
-
+			$this->load->Model('UserModel','usuario');
+            $this->load->Model('dao/EdicaoDAO');
+            $this->load->Model('EmailModel','email');
+            $this->load->Model('TelefoneModel','telefone');
+            $this->load->Model('LocalidadeModel','localidade');
+            $this->load->Model('InstituicaoModel','instituicao');
 		}
 
 
@@ -233,6 +233,7 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
 			return null;
 		}
 
+<<<<<<< HEAD
         public function notificaUsers(){
 			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
             if (empty($this->input->post())){
@@ -314,6 +315,8 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                    $data, 1);
         }
 
+=======
+>>>>>>> a04aa208aed25cef92631e3d0db2ae34358dc71b
         public function consultarEmailSelect(){
             $data = $this->UserDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
@@ -346,6 +349,11 @@ class UsuarioControl extends PrincipalControl implements InterfaceControl{
                  }
             }
              $this->consultar();
+        }
+
+        public function consultarRevisorSelect2(){
+            $data = $this->UserDAO->consultarTudo(array('user_nm' => $this->input->post('term'), 'user_tipo' => 2));
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
 
 

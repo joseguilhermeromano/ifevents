@@ -15,8 +15,8 @@
 
 
             public function valida(){
-            	$this->form_validation->set_rules( 'nome', 'Denominação', 'alpha|trim|required|max_length[100]' );
-            	$this->form_validation->set_rules( 'descricao', 'Descrição', 'alpha|trim|required|max_length[500]' );
+            	$this->form_validation->set_rules( 'nome', 'Denominação', 'trim|required|max_length[100]' );
+            	$this->form_validation->set_rules( 'descricao', 'Descrição', 'trim|required|max_length[500]' );
             }
 
             public function setaValores(){

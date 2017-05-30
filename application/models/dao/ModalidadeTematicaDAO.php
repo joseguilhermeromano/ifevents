@@ -55,6 +55,60 @@
             return $query->result_object()[0];
         }
 
+        public function consultarModaTemaRevisor($revisor, $conferencia){
+            $this->db->select("Modalidade_Tematica.*");
+            $this->db->from("mote_revisor");
+            $this->db->join('Modalidade_Tematica', 'Modalidade_Tematica.mote_cd = Mote_Revisor.more_mote_cd','left');
+            $this->db->where('Mote_Revisor.more_user_cd', $revisor);
+            $this->db->where('Modalidade_Tematica.mote_conf_cd', $conferencia);
+            $this->db->order_by('Modalidade_Tematica.mote_nm', 'asc');
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                return $query->result_object();
+            }else{
+                return null;
+            }
+            
+        }
+
+        public function consultarRevisorPorModalidadeTematica($modalidade, $eixo){
+            $this->db->select("User.user_nm, User.user_cd, GROUP_CONCAT(Modalidade_Tematica.mote_cd SEPARATOR ',') as modalidadeTematica");
+            $this->db->from("mote_revisor");
+            $this->db->join('Modalidade_Tematica', 'Modalidade_Tematica.mote_cd = Mote_Revisor.more_mote_cd','left');
+            $this->db->join('User', 'Mote_Revisor.more_user_cd = User.user_cd', 'left');
+            $this->db->order_by('User.user_nm', 'asc');
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                $revisores = array();
+                $consulta =  $query->result_object();
+                foreach ($consulta as $key => $revisor) {
+                    if(in_array($modalidade,explode(',', $revisor->modalidadeTematica)) &&
+                        in_array($eixo,explode(',', $revisor->modalidadeTematica))){
+                        array_push($revisores,$revisor);
+                    }
+                }
+                return $revisores;
+            }else{
+                return null;
+            }
+        }
+
+        public function insereModaTemaRevisor($modalidades, $eixos, $revisor){
+            foreach ($modalidades as $key => $modalidade) {
+                $this->db->insert('mote_revisor',array('more_mote_cd' => $modalidade, 'more_user_cd' => $revisor));
+            }
+
+            foreach ($eixos as $key => $eixo) {
+                $this->db->insert('mote_revisor',array('more_mote_cd' => $eixo, 'more_user_cd' => $revisor));
+            }
+
+            if($this->db->affected_rows()){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
         public function excluir($obj) {
             $this->db->where('mote_cd', $obj->mote_cd);
             return $this->db->delete('Modalidade_Tematica');

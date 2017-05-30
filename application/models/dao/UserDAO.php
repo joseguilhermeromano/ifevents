@@ -82,7 +82,6 @@ class UserDAO extends CI_Model implements DAO{
                 $user->user_biograf = $value->user_biograf;
                 $user->user_rg = $value->user_rg;
                 $user->user_cpf = $value->user_cpf;
-                $user->user_qtd_subm = $value->user_qtd_subm;
                 $user->user_email_cd = $value->user_email_cd;
                 $user->user_pass = $value->user_pass;
                 $user->user_tele_cd = $value->user_tele_cd;
@@ -152,6 +151,8 @@ class UserDAO extends CI_Model implements DAO{
             return 1;
         }
     }
+
+
 
     public function excluir($obj) {
     }

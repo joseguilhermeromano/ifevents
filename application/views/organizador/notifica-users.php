@@ -10,7 +10,7 @@
 
 
 <?php
-    echo form_open_multipart( 'usuario/notificaUsers', 'role="form" class="formsignin"' );
+    echo form_open_multipart( 'usuario/notificar', 'role="form" class="formsignin"' );
 ?>
 
 <div id="divCarregando" class="progresso">
@@ -94,7 +94,7 @@
 
 
 
-<?php echo '<br><center>'.form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button',
+<?php echo '<br><center><a href='.base_url($this->uri->segment(1)."/consultar/").' class="btn btn-default button">Voltar</a>&nbsp;&nbsp;'.form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button',
     "onclick"=>"nicEditors.findEditor('editor').saveContent();"))."</center>";
 
 echo form_close();

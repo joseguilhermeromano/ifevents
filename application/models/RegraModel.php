@@ -11,7 +11,6 @@
             public $regr_cd;
             public $regr_subm_abert = null;
             public $regr_subm_encerr = null;
-            public $regr_qtd_min_subm_aval = null;
             public $regr_prazo_resp_autor = null;
             public $regr_prazo_resp_aval = null;
             public $regr_dire_subm = null;

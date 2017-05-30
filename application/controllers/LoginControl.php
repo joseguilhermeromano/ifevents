@@ -11,22 +11,29 @@ class LoginControl extends PrincipalControl{
                     
                     /*Carregamento de Models*/
                     $this->load->model('UserModel');
+                    $this->load->model('dao/EdicaoDAO');
                      
             }
             
             public function entrar(){
                 $usuario = $this->UserModel->login();
+                $this->session->set_userdata('usuario',$usuario);
                 if($usuario!=null){
-                    $this->session->set_userdata('usuario',$usuario);
-                        if($usuario[0]['user_tipo'] == 3){
-                            redirect('usuario/inicioOrganizador');
-                        }
-                        else if($usuario[0]['user_tipo'] == 2){
-                                redirect('usuario/inicioAvaliador');
-                        }	
-                        else{
-                                redirect('usuario/inicioParticipante');
-                        }
+                    if($this->session->userdata('link_anterior')){
+                        redirect($this->session->userdata('link_anterior'));
+                    }
+                    if($usuario[0]['user_tipo'] == 3){
+                        $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,5);
+                        $this->session->set_userdata('eventos_recentes', $eventosRecentes);
+                        $this->session->set_userdata('evento_selecionado',$eventosRecentes[0]);
+                        redirect('usuario/inicioOrganizador');
+                    }
+                    else if($usuario[0]['user_tipo'] == 2){
+                        redirect('usuario/inicioAvaliador');
+                    }	
+                    else{
+                        redirect('usuario/inicioParticipante');
+                    }
                 }else{
                     $this->session->set_flashdata("error","E-mail ou senha incorretos!");
                     redirect('login');

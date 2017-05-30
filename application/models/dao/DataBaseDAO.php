@@ -15,8 +15,10 @@
 				$this->create_table_tipo_parceria();
 				$this->create_table_status();
 				$this->create_table_modalidade_tematica();
+				$this->create_table_mote_revisor();
 				$this->create_table_atividade();
 				$this->create_table_edicao();
+				$this->create_table_conferencia_revisor();
 				$this->create_table_organiza();
 				$this->create_table_sedia();
 				$this->create_table_artigo();
@@ -108,7 +110,6 @@
 					,regr_insc_fin_dt       date    NOT NULL
 					,regr_subm_abert        date    NULL
 					,regr_subm_encerr       date    NULL
-					,regr_qtd_min_subm_aval int(3)  NULL
 					,regr_prazo_resp_autor  int(3)  NULL
 					,regr_prazo_resp_aval   int(3)  NULL
 					,regr_dire_subm			mediumblob NULL
@@ -180,6 +181,15 @@
 			$this->db->query($sql);
 		}
 
+		public function create_table_mote_revisor(){
+			$sql = "CREATE TABLE IF NOT EXISTS `mote_revisor` (
+					 `more_mote_cd` int(11) NOT NULL,
+					 `more_user_cd` int(11) NOT NULL,
+					 PRIMARY KEY (`more_user_cd`,`more_mote_cd`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+			$this->db->query($sql);
+		}
+
 
 		//Método cria a tabela Atividade
 		public function create_table_atividade(){
@@ -218,6 +228,16 @@
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 
+		}
+
+		public function create_table_conferencia_revisor(){
+			$sql = "CREATE TABLE IF NOT EXISTS `Conferencia_Revisor` (
+			 `core_conf_cd` int(11) NOT NULL,
+			 `core_user_cd` int(11) NOT NULL,
+			 `core_convite_status` enum('Aguardando Resposta','Convite Aceito','Convite Recusado','') COLLATE utf8_unicode_ci NOT NULL,
+			 PRIMARY KEY (`core_conf_cd`,`core_user_cd`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+			$this->db->query($sql);
 		}
 
 
@@ -277,7 +297,7 @@
 					,user_email_cd 	  int(11)	   NOT NULL
 					,user_pass        varchar(100) NOT NULL
 					,user_tele_cd	  int(11)	   NULL
-					,user_qtd_subm	  int(2)	   NULL
+					,user_moda_tema_cds	  int(2)	   NULL
 					,user_stat_cd     int(11)      NOT NULL
 					,UNIQUE(user_rg)
 			) ENGINE=INNODB";

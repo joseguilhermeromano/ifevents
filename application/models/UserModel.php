@@ -37,11 +37,8 @@
 
              if($user == 3){
                 $this->user_tipo = $this->input->post('tipo_usuario');
-                $this->user_tipo == 2 ?  $this->user_qtd_subm = $this->input->post('qtdSubmissoes') : '';
              }else if ($this->session->userdata('view') == 'cadastro_revisor'){
                 $this->user_tipo = 2;
-                $this->user_qtd_subm = $this->input->post('qtdSubmissoes');
-             }else{
                 $this->user_tipo = 1;
              }
 
@@ -58,7 +55,7 @@
             if($user==3){
                 $this->form_validation->set_rules( 'tipo_usuario', 'Tipo de Usuário', 'trim|required|max_length[11]' );
             }
-            $this->form_validation->set_rules( 'nome', 'Nome Completo', 'alpha|trim|required|max_length[50]' );
+            $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
             $this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|max_length[100]' );
 
 
@@ -83,13 +80,6 @@
 
             if(empty($this->user_cpf)){
                 $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
-            }
-
-
-
-            if($this->session->userdata('view') == 'cadastro_revisor'||
-                ($user==3 && !empty($this->user_tipo) && $this->user_tipo == 2)){
-                $this->form_validation->set_rules( 'qtdSubmissoes', 'Qtd. Máxima de Submissões', 'integer|trim|required|max_length[2]' );
             }
 
         }

@@ -8,6 +8,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 		parent::__construct();
 
 		$this->load->Model( 'dao/EdicaoDAO' );
+        $this->load->Model( 'dao/ModalidadeTematicaDAO' );
 		$this->load->Model( 'EdicaoModel','edicao' );
 	}
 
@@ -204,5 +205,75 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $data['title']="IFEvents - Edições";
         $this->chamaView("edicoes", "organizador", $data, 1);
 	}
+
+    public function revisores(){
+        $limite = 10;
+        $numPagina =0;
+        $conf_cd = 1;
+        if(null !== $this->input->get('pagina')){
+            $numPagina = $this->input->get('pagina');
+        }
+
+        if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $array = array('user_nm'=>$busca, 'Conferencia_Revisor.core_conf_cd'=>$conf_cd);
+        }else{
+            $busca=null;
+            $array = array('Conferencia_Revisor.core_conf_cd'=>$conf_cd);
+        }
+
+        $revisores =$this->EdicaoDAO->consultarRevisores($array, $limite, $numPagina);
+        if($revisores !== null){
+            foreach ($revisores as $revisor) {
+                $revisor->modalidadesEixos = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($revisor->user_cd, $revisor->core_conf_cd);
+            }
+        }
+        $data['revisores'] = $revisores;
+        $totalRegistros = count($this->EdicaoDAO->consultarRevisores($array, $limite, $numPagina));
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, 'usuario/consultar/?busca='.$busca);
+        $data['totalRegistros'] = $totalRegistros;
+        $data['title']="IFEvents - Revisores";
+        $this->chamaView("revisores", "organizador", $data, 1);
+    }
+
+    public function selecionarEvento($edicao){
+        
+        foreach ($this->session->userdata('eventos_recentos') as $key => $value) {
+            if($value->edic_cd == $edicao){
+                $this->session->set_userdata('evento_selecionado',$value);
+            }
+        }
+        redirect('usuario/inicioOrganizador');
+    }
+
+    public function aceiteConviteRevisor($revisor, $conferencia){
+        $retorno = $this->EdicaoDAO->aceitarRecusarConvite($revisor, $conferencia, "Convite Aceito");
+        if($retorno == 0){
+            $this->session->set_flashdata('success','O Convite foi aceito com sucesso! É muito gratificante poder contar com sua colaboração!');
+        }else{
+            $this->session->set_flashdata('error','Não foi possível aceitar o convite!');
+        }
+        redirect('revisao/consultar');
+    }
+
+    public function recusaConviteRevisor($revisor, $conferencia){
+        $retorno = $this->EdicaoDAO->aceitarRecusarConvite($revisor, $conferencia, "Convite Recusado");
+        if($retorno == 0){
+            $this->session->set_flashdata('success','O Convite foi recusado com sucesso!');
+        }else{
+            $this->session->set_flashdata('error','Não foi possível recusar o convite!');
+        }
+         redirect('revisao/consultar');
+    }
+
+    public function excluirConvite($revisor, $conferencia){
+        $retorno = $this->EdicaoDAO->excluirConvite($revisor, $conferencia);
+        if($retorno == 0){
+            $this->session->set_flashdata('success','O Revisor foi removido do evento com sucesso!');
+        }else{
+            $this->session->set_flashdata('error','Não foi possível remover o revisor neste evento!');
+        }
+         redirect('revisor/consultar');
+    }
 
 }
