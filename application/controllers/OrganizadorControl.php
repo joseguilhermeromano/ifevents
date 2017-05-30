@@ -13,6 +13,11 @@ class OrganizadorControl extends PrincipalControl{
         $this->load->helper('html');
 	}
 
+        public function inicio(){
+            $this->chamaView("index", "organizador",
+                        array("title"=>"IFEvents - Início - Organizador"), 1);
+        }
+
       public function cadastrar(){
         $data['title'] = "IFEvents - Novo Organizador";
         $data['tituloForm'] = '<i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Organizador</b>';

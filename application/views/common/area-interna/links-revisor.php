@@ -1,5 +1,5 @@
 <li class="item-menu">
-    <a href="<?php echo base_url("usuario/inicioAvaliador");?>">
+    <a href="<?php echo base_url("revisor/inicio");?>">
     	<span class="glyphicon glyphicon-home"></span>  INÍCIO
     </a>
 </li>

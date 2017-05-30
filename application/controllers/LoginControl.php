@@ -27,13 +27,13 @@ class LoginControl extends PrincipalControl{
                         $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,5);
                         $this->session->set_userdata('eventos_recentes', $eventosRecentes);
                         $this->session->set_userdata('evento_selecionado',$eventosRecentes[0]);
-                        redirect('usuario/inicioOrganizador');
+                        redirect('organizador/inicio');
                     }
                     else if($usuario->user_tipo == 2){
-                        redirect('usuario/inicioAvaliador');
+                        redirect('revisor/inicio');
                     }	
                     else{
-                        redirect('usuario/inicioParticipante');
+                        redirect('participante/inicio');
                     }
                 }else{
                     $this->session->set_flashdata("error","E-mail ou senha incorretos!");

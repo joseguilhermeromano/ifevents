@@ -13,6 +13,11 @@ class ParticipanteControl extends PrincipalControl{
         $this->load->Model('InstituicaoModel','instituicao');
     	}
 
+      public function inicio(){
+        $this->chamaView("index", "participante",
+                array("title"=>"IFEvents - Início - Participante"), 1);
+      }
+
       public function cadastrar(){
         $usuarioLogado = $this->session->userdata('usuario');
 
