@@ -25,7 +25,7 @@
         <b>
         <?php echo form_label( '*Notificar', 'tipo_notificacao' ); ?>
         </b><br>
-            <select name="tipo_notificacao" id="tipoNotificacao" class="form-control estilo-input">
+            <select name="tipo_notificacao" id="tipoNotificacao" class="form-control estilo-input selectComum">
                 <option value="-1" selected disabled> Selecionar Tipo de Notificação</option>
                 <option value="1" <?= (isset($notificacao) && $notificacao->tipo_notificacao == 1 ? 'selected' : ''); ?> >
                     Especificar e-mails

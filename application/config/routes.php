@@ -57,7 +57,6 @@ $route[ 'login/(:any)' ]              			= 'LoginControl/$1';
 
 $route[ 'usuario/alterar/(:any)' ]    			= 'UsuarioControl/alterar/$1';
 $route[ 'usuario/ativar/(:num)' ]     			= 'UsuarioControl/ativar/$1';
-$route['usuario/notificar']			  			= 'NotificacaoControl/notificaUsers';
 $route[ 'usuario/desativar/(:num)' ]  			= 'UsuarioControl/desativar/$1';
 $route[ 'usuario/(:any)' ]            			= 'UsuarioControl/$1';
 $route['participante/(:any)']		  			= 'ParticipanteControl/$1';
