@@ -91,14 +91,12 @@ $(function(){
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
 $(document).ready(function() {
-    var maximumSelectionLengthVariable = ($(location).attr('href').indexOf('edicao') !== -1) ? 0 : 1;
     $(".consultaInstituicao").select2({
     // tags: true,
-    placeholder: "Instituição (nome abreviado)",
-    multiple: true,
+    placeholder: "Selecionar Instituição por nome",
+    // multiple: true,
     // tokenSeparators: [',', ' '],
     minimumInputLength: 2,
-    maximumSelectionLength: maximumSelectionLengthVariable,
     minimumResultsForSearch: 10,
     ajax: {
         url: baseUrl + "instituicao/consultarParaSelect2",

@@ -7,6 +7,7 @@ class InstituicaoDAO extends CI_Model implements DAO{
 
     public function __construct(){
             parent::__construct('InstituicaoDAO');
+            $this->load->model('InstituicaoModel', 'instituicao');
     }
 
     public function inserir($obj) {
@@ -40,19 +41,18 @@ class InstituicaoDAO extends CI_Model implements DAO{
 
 
      public function consultarCodigo($codigo){
-        $this->db->select('inst_cd, inst_nm, inst_desc');
-        $this->db->from('Instituicao');
-        $this->db->where('inst_cd', $codigo);
-        $query       = $this->db->get();
-        $query       = $query->result_object();
-        $instituicao = (object) array();
-        $consulta    = $query[0];
-        $instituicao->inst_cd   = $consulta->inst_cd;
-        $instituicao->inst_nm   = $consulta->inst_nm;
-        $instituicao->inst_desc = $consulta->inst_desc;
-
-        return $instituicao;
-    }
+        $this->db->where('inst_cd',$codigo);
+        $query = $this->db->get('instituicao');
+        $consulta = $query->result_object()[0];
+        if(!empty($consulta)){
+            $this->instituicao->setCodigo($consulta->inst_cd);
+            $this->instituicao->setNome($consulta->inst_nm);
+            $this->instituicao->setAbreviacao($consulta->inst_abrev);
+            $this->instituicao->setDescricao($consulta->inst_desc);
+            return $this->instituicao;
+        }
+        return null;
+     }
 
     public function consultarPorNomeOuAbreviacao($nome){
         // $this->db->like('inst_nm', $nome);

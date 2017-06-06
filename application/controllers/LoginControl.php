@@ -10,25 +10,26 @@ class LoginControl extends PrincipalControl{
                     parent::__construct();
                     
                     /*Carregamento de Models*/
-                    $this->load->model('UserModel');
+                    $this->load->model('UsuarioModel');
+                    $this->load->model('dao/UsuarioDAO');
                     $this->load->model('dao/EdicaoDAO');
                      
             }
             
             public function entrar(){
-                $usuario = $this->UserModel->login();
+                $usuario = $this->UsuarioDAO->consultarLogin($this->input->post('email'), $this->input->post('senha'));
                 $this->session->set_userdata('usuario',$usuario);
                 if($usuario!=null){
                     if($this->session->userdata('link_anterior')){
                         redirect($this->session->userdata('link_anterior'));
                     }
-                    if($usuario[0]['user_tipo'] == 3){
+                    if($usuario->user_tipo == 3){
                         $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,5);
                         $this->session->set_userdata('eventos_recentes', $eventosRecentes);
                         $this->session->set_userdata('evento_selecionado',$eventosRecentes[0]);
                         redirect('usuario/inicioOrganizador');
                     }
-                    else if($usuario[0]['user_tipo'] == 2){
+                    else if($usuario->user_tipo == 2){
                         redirect('usuario/inicioAvaliador');
                     }	
                     else{

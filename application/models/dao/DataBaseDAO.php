@@ -82,6 +82,7 @@
 					conf_cd   int(11)      NOT NULL  PRIMARY KEY AUTO_INCREMENT
 				   ,conf_nm   varchar(100) NOT NULL
 				   ,conf_desc varchar(500) NOT NULL
+				   ,conf_abrev varchar(50) NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -287,18 +288,17 @@
 		//Método cria tabela Usuario
 		public function create_table_usuario(){
 			$sql = "CREATE TABLE IF NOT EXISTS User(
-					 user_cd          int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-					,user_nm          varchar(100) NOT NULL
-					,user_tipo        varchar(2)   NOT NULL
-					,user_instituicao varchar(100) NULL
-					,user_biograf     varchar(500) NULL
-					,user_rg          varchar(12)  NOT NULL
-					,user_cpf         varchar(14)  NULL
-					,user_email_cd 	  int(11)	   NOT NULL
-					,user_pass        varchar(100) NOT NULL
-					,user_tele_cd	  int(11)	   NULL
-					,user_moda_tema_cds	  int(2)	   NULL
-					,user_stat_cd     int(11)      NOT NULL
+					 user_cd          int(11)      									 NOT NULL PRIMARY KEY AUTO_INCREMENT
+					,user_nm          varchar(100) 									 NOT NULL
+					,user_tipo        varchar(2)   									 NOT NULL
+					,user_instituicao varchar(100) 									 NULL
+					,user_biograf     varchar(500) 									 NULL
+					,user_rg          varchar(12)  									 NOT NULL
+					,user_cpf         varchar(14)  									 NULL
+					,user_email_cd 	  int(11)	   									 NOT NULL
+					,user_pass        varchar(100) 									 NOT NULL
+					,user_tele_cd	  int(11)	  									 NULL
+					,user_status      enum('Não Validado','Ativo','Inativo','')      NOT NULL
 					,UNIQUE(user_rg)
 			) ENGINE=INNODB";
 			$this->db->query($sql);

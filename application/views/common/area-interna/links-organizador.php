@@ -37,7 +37,7 @@
     </a>
 </li>
 <li class="item-menu">
-    <a href="<?php echo base_url("usuario/perfil");?>">
+    <a href="<?php echo base_url("organizador/perfil");?>">
         <span class="glyphicon glyphicon-user"></span>  MEU PERFIL
     </a>
 </li>
