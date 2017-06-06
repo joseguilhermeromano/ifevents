@@ -32,7 +32,7 @@
 
 
 <li class="item-menu">
-    <a href="<?php echo base_url("usuario/inicioOrganizador");?>">
+    <a href="<?php echo base_url("organizador/inicio");?>">
         <span class="glyphicon glyphicon-home"></span>  INÍCIO
     </a>
 </li>

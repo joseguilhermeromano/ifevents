@@ -7,11 +7,16 @@ class ParticipanteControl extends PrincipalControl{
 
     	public function __construct(){
         parent::__construct();
-        $this->load->Model( 'dao/UsuarioDAO' );
+        $this->load->Model( 'dao/ParticipanteDAO' );
         $this->load->Model( 'dao/InstituicaoDAO' );
         $this->load->Model('ParticipanteModel','participante');
         $this->load->Model('InstituicaoModel','instituicao');
     	}
+
+      public function inicio(){
+        $this->chamaView("index", "participante",
+                array("title"=>"IFEvents - Início - Participante"), 1);
+      }
 
       public function cadastrar(){
         $usuarioLogado = $this->session->userdata('usuario');
@@ -41,7 +46,7 @@ class ParticipanteControl extends PrincipalControl{
         if($this->valida()){
                 $this->db->trans_start();
                 try{
-                    $this->UsuarioDAO->inserir($this->participante);
+                    $this->ParticipanteDAO->inserir($this->participante);
                 }catch(Exception $e){
                     $this->session->set_flashdata('error', $e->getMessage());
                 }
@@ -65,7 +70,7 @@ class ParticipanteControl extends PrincipalControl{
         $data['tituloForm'] = '<i class="fa fa-pencil" aria-hidden="true"></i><b> Editar Cadastro de Participante</b>';
 
         if (isset($codigo)){
-          $this->participante = $this->UsuarioDAO->consultarCodigo($codigo);
+          $this->participante = $this->ParticipanteDAO->consultarCodigo($codigo);
           if(!empty($this->input->post())){
 
             $this->setaValores();
@@ -73,7 +78,7 @@ class ParticipanteControl extends PrincipalControl{
             if($this->valida()){
                     $this->db->trans_start();
                     try{
-                        $this->UsuarioDAO->alterar($this->participante);
+                        $this->ParticipanteDAO->alterar($this->participante);
                     }catch(Exception $e){
                         $this->session->set_flashdata('error', $e->getMessage());
                     }
@@ -98,7 +103,7 @@ class ParticipanteControl extends PrincipalControl{
       }
 
       public function perfil(){
-        $this->participante = $this->UsuarioDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
+        $this->participante = $this->ParticipanteDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
         if(!empty($this->input->post())){
 
               $this->setaValores();
@@ -106,7 +111,7 @@ class ParticipanteControl extends PrincipalControl{
               if($this->valida()){
                       $this->db->trans_start();
                       try{
-                          $this->UsuarioDAO->alterar($this->organizador);
+                          $this->ParticipanteDAO->alterar($this->organizador);
                       }catch(Exception $e){
                           $this->session->set_flashdata('error', $e->getMessage());
                       }

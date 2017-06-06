@@ -6,12 +6,17 @@ class OrganizadorControl extends PrincipalControl{
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->Model( 'dao/UsuarioDAO' );
+		$this->load->Model( 'dao/OrganizadorDAO' );
         $this->load->Model( 'dao/InstituicaoDAO' );
 		$this->load->Model('OrganizadorModel','organizador');
         $this->load->Model('InstituicaoModel','instituicao');
         $this->load->helper('html');
 	}
+
+        public function inicio(){
+            $this->chamaView("index", "organizador",
+                        array("title"=>"IFEvents - Início - Organizador"), 1);
+        }
 
       public function cadastrar(){
         $data['title'] = "IFEvents - Novo Organizador";
@@ -26,7 +31,7 @@ class OrganizadorControl extends PrincipalControl{
         if($this->valida(true)){
                 $this->db->trans_start();
                 try{
-                    $this->UsuarioDAO->inserir($this->organizador);
+                    $this->OrganizadorDAO->inserir($this->organizador);
                 }catch(Exception $e){
                     $this->session->set_flashdata('error', $e->getMessage());
                 }
@@ -50,7 +55,7 @@ class OrganizadorControl extends PrincipalControl{
         $data['tituloForm'] = '<i class="fa fa-pencil" aria-hidden="true"></i><b> Editar Cadastro de Organizador</b>';
 
       	if (isset($codigo)){
-                $this->organizador = $this->UsuarioDAO->consultarCodigo($codigo);
+                $this->organizador = $this->OrganizadorDAO->consultarCodigo($codigo);
                 if(!empty($this->input->post())){
 
         	        $this->setaValores(false);
@@ -58,7 +63,7 @@ class OrganizadorControl extends PrincipalControl{
 			        if($this->valida(false)){
 			                $this->db->trans_start();
 			                try{
-			                    $this->UsuarioDAO->alterar($this->organizador);
+			                    $this->OrganizadorDAO->alterar($this->organizador);
 			                }catch(Exception $e){
 			                    $this->session->set_flashdata('error', $e->getMessage());
 			                }
@@ -66,7 +71,7 @@ class OrganizadorControl extends PrincipalControl{
 
 			            if($this ->db->trans_status() !== FALSE){
 			                $this->session->set_flashdata('success', 'O Cadastro foi atualizado com sucesso!');
-                            $this->organizador = $this->UsuarioDAO->consultarCodigo($codigo);
+                            $this->organizador = $this->OrganizadorDAO->consultarCodigo($codigo);
 			            }elseif($this->session->flashdata('error') === null){
 			            	$this->session->set_flashdata('success', 'Não foi possível atualizar os dados do organizador!');	
 			            }
@@ -85,7 +90,7 @@ class OrganizadorControl extends PrincipalControl{
 
 
       public function perfil(){
-        $this->organizador = $this->UsuarioDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
+        $this->organizador = $this->OrganizadorDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
         if(!empty($this->input->post())){
 
 	        $this->setaValores();
@@ -93,7 +98,7 @@ class OrganizadorControl extends PrincipalControl{
 	        if($this->valida()){
 	                $this->db->trans_start();
 	                try{
-	                    $this->UsuarioDAO->alterar($this->organizador);
+	                    $this->OrganizadorDAO->alterar($this->organizador);
 	                }catch(Exception $e){
 	                    $this->session->set_flashdata('error', $e->getMessage());
 	                }
