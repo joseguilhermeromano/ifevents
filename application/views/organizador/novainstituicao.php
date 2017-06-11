@@ -1,6 +1,13 @@
 <h2><span class=""></span><b> Instituição</b></h2>
 <hr>
 <br>
+<div class="row">
+<div class="col-sm-12">
+         <a class="btn btn-default margin-button" href='<?php echo site_url("instituicao/consultarTudo"); ?>' style="float:left"><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+    </div>
+</div>
+<br><br>
+
 
 <?php
         $this->load->helper('html');
@@ -24,7 +31,7 @@
         <div class="form-group">
         <b><?php echo form_label( 'Descricao', 'descricao' ); ?></b><br>
         <textarea name="descricao" placeholder="Descrição" id="editor" rows="10">
-            
+
         </textarea>
         </div>
     </div>

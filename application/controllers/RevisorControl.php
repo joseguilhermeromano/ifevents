@@ -64,7 +64,7 @@ class RevisorControl extends PrincipalControl{
             }
         }
 
-        
+
         return $this->chamaView($view, $diretorioView, $data, $areaLayout);
       }
 
@@ -91,10 +91,10 @@ class RevisorControl extends PrincipalControl{
                    $this->session->set_flashdata('success', 'O Cadastro do revisor foi atualizado com sucesso!');
                     unset($this->organizador);
                 }elseif($this->session->flashdata('error') === null){
-                  $this->session->set_flashdata('success', 'Não foi possível atualizar os dados do revisor!');  
+                  $this->session->set_flashdata('success', 'Não foi possível atualizar os dados do revisor!');
                 }
             }
-             
+
           }
 
         }else{
@@ -124,10 +124,10 @@ class RevisorControl extends PrincipalControl{
 	                $this->session->set_flashdata('success', 'Suas informações foram atualizadas com sucesso!');
 	                unset($this->organizador);
 	            }elseif($this->session->flashdata('error') === null){
-	            	$this->session->set_flashdata('success', 'Não foi possível atualizar as suas informações!');	
+	            	$this->session->set_flashdata('success', 'Não foi possível atualizar as suas informações!');
 	            }
 	        }
-           
+
         }
         $data['title'] = "IFEvents - Atualizar Usuário!";
         $data['tituloForm'] = '<i class="glyphicon glyphicon-user" aria-hidden="true"></i><b> Meu Perfil</b>';
@@ -155,7 +155,7 @@ class RevisorControl extends PrincipalControl{
         $this->form_validation->set_rules( 'complemento', 'Complemento', 'trim|max_length[100]' );
         if($this->input->post('confirmaemail')!==null){
         	$this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
-        	$this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
+        	$this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
         	'valid_email|trim|required|max_length[100]|matches[email]' );
     	}
 
@@ -182,5 +182,5 @@ class RevisorControl extends PrincipalControl{
             $this->revisor->setCidade($this->input->post('cidade'));
             $this->revisor->setUf($this->input->post('uf'));
       }
-      
+
 }

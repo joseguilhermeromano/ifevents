@@ -1,12 +1,12 @@
 
-<?php if ($this->session->userdata('evento_selecionado') !== null && $this->session->userdata('eventos_recentes') !== null ){ 
+<?php if ($this->session->userdata('evento_selecionado') !== null && $this->session->userdata('eventos_recentes') !== null ){
 
 ?>
 
 <li class="list-group panel" >
   <a href="#" data-toggle="collapse" data-target="#selecionarEvento" data-parent="#sidenav" class="list-group-item list-group-item-success">
 
-  <?php 
+  <?php
     $even = $this->session->userdata('evento_selecionado');
     echo  $even->edic_num.'ª '.$even->conf_abrev;
   ?>
@@ -15,7 +15,7 @@
   </a>
     <ul class="submenu collapse" id="selecionarEvento">
 
-    <?php 
+    <?php
         foreach ($this->session->userdata('eventos_recentes') as $key => $evento) {
     ?>
           <li><a href="<?php echo base_url('edicao/selecionar-evento/'.$evento->edic_cd);?>" class="list-group-item">

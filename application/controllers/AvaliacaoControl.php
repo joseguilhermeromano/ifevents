@@ -22,7 +22,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 
     	// $this->avaliacao->setaValores();
     	// $this->avaliacao->valida();
-    		
+
 
     	if($this->form_validation->run()){
 
@@ -146,7 +146,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
             $busca=null;
             $array=array('mote1.mote_conf_cd' => $conf_cd);
         }
-		$data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($array); 
+		$data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($array);
 		$totalRegistros = sizeof($data);
 		if($data == null && $busca == null){
 			$this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
@@ -170,7 +170,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 					$array = array('id' => $revisor->user_cd, 'text' => $revisor->user_nm);
 					array_push($lista, $array);
 				}
-				
+
 			}
 		}
 		$this->output->set_content_type('application/json')->set_output(json_encode($lista));
