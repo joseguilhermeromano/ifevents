@@ -21,7 +21,7 @@
 
 
             //Cadastra um novo telefone
-            $this->db->insert('Telefone', $obj);
+            $this->db->insert('Telefone', array('tele_fone' => $telefone));
             return $this->db->insert_id();
         }
 

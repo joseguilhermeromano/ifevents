@@ -41,9 +41,9 @@ class ParticipanteControl extends PrincipalControl{
                   return $this->chamaView($view, $diretorioView, $data, $areaLayout);
         }
 
-        $this->setaValores();
+        $this->setaValores(true);
 
-        if($this->valida()){
+        if($this->valida(true)){
                 $this->db->trans_start();
                 try{
                     $this->ParticipanteDAO->inserir($this->participante);
@@ -73,9 +73,9 @@ class ParticipanteControl extends PrincipalControl{
           $this->participante = $this->ParticipanteDAO->consultarCodigo($codigo);
           if(!empty($this->input->post())){
 
-            $this->setaValores();
+            $this->setaValores(false);
 
-            if($this->valida()){
+            if($this->valida(false)){
                     $this->db->trans_start();
                     try{
                         $this->ParticipanteDAO->alterar($this->participante);
@@ -106,12 +106,12 @@ class ParticipanteControl extends PrincipalControl{
         $this->participante = $this->ParticipanteDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
         if(!empty($this->input->post())){
 
-              $this->setaValores();
+              $this->setaValores(false);
 
-              if($this->valida()){
+              if($this->valida(false)){
                       $this->db->trans_start();
                       try{
-                          $this->ParticipanteDAO->alterar($this->organizador);
+                          $this->ParticipanteDAO->alterar($this->participante);
                       }catch(Exception $e){
                           $this->session->set_flashdata('error', $e->getMessage());
                       }
@@ -132,17 +132,25 @@ class ParticipanteControl extends PrincipalControl{
         return $this->chamaView("form-participante", "participante", $data, 1);
       }
 
-      private function valida(){
-        $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
+      private function valida($cadastrar){
+        if($cadastrar==true || $this->session->userdata('usuario')->user_tipo == 3){
+          $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
+          $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
+          $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
+          if($this->input->post('confirmaemail')!==null){
+              $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
+              $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
+              'valid_email|trim|required|max_length[100]|matches[email]' );
+          }
+        }
+
         $this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|max_length[100]' );
-        if($this->input->post('senha') !== null){
+        if($this->input->post('senha') !== ''){
             $this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
             $this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha',
             'trim|required|min_length[6]|matches[senha]' );
         }
         $this->form_validation->set_rules( 'biografia', 'Biografia', 'trim|max_length[200]' );
-        $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
-        $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
         $this->form_validation->set_rules( 'logradouro', 'Logradouro', 'required|trim|max_length[200]' );
         $this->form_validation->set_rules( 'bairro', 'Bairro', 'required|trim|max_length[100]' );
         $this->form_validation->set_rules( 'cep', 'CEP', 'required|valid_cep' );
@@ -150,25 +158,25 @@ class ParticipanteControl extends PrincipalControl{
         $this->form_validation->set_rules( 'uf', 'UF', 'required|trim|max_length[2]' );
         $this->form_validation->set_rules( 'numero', 'Número', 'trim|required|max_length[9]' );
         $this->form_validation->set_rules( 'complemento', 'Complemento', 'trim|max_length[100]' );
-        if($this->input->post('confirmaemail')!==null){
-            $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
-            $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
-            'valid_email|trim|required|max_length[100]|matches[email]' );
-        }
+
 
         return $this->form_validation->run();
 
       }
 
-      private function setaValores(){
-            $this->participante->setNomeCompleto(ajustaNomes($this->input->post('nome')));
-            $this->participante->setEmail($this->input->post('email'));
-            $this->participante->setSenha($this->input->post('senha'));
+      private function setaValores($cadastrar){
+            if($cadastrar==true || $this->session->userdata('usuario')->user_tipo == 3){
+              $this->participante->setNomeCompleto(ajustaNomes($this->input->post('nome')));
+              $this->participante->setRg($this->input->post('rg'));
+              $this->participante->setCpf($this->input->post('cpf'));
+              $this->participante->setEmail($this->input->post('email'));
+            }
+            if($this->input->post('confirmasenha') !== ''){
+              $this->participante->setSenha($this->input->post('senha'));
+            }
             $this->participante->setInstituicao($this->instituicao);
             $this->participante->setTelefone($this->input->post('telefone'));
             $this->participante->setValidaEmail(0);
-            $this->participante->setRg($this->input->post('rg'));
-            $this->participante->setCpf($this->input->post('cpf'));
             $this->participante->setStatus('Não Validado');
             $this->participante->setLogradouro($this->input->post('logradouro'));
             $this->participante->setBairro($this->input->post('bairro'));

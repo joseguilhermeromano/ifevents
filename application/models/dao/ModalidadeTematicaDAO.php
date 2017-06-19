@@ -82,8 +82,8 @@
                 $revisores = array();
                 $consulta =  $query->result_object();
                 foreach ($consulta as $key => $revisor) {
-                    if(in_array($modalidade,explode(',', $revisor->modalidadeTematica)) &&
-                        in_array($eixo,explode(',', $revisor->modalidadeTematica))){
+                    if(in_array($modalidade,explode(',', $revisor->modalidadeTematica))==1 &&
+                        in_array($eixo,explode(',', $revisor->modalidadeTematica))==1){
                         array_push($revisores,$revisor);
                     }
                 }

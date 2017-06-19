@@ -11,7 +11,6 @@
                     $this->load->Model( 'dao/ComiteDAO' );
                     $this->load->Model( 'dao/InstituicaoDAO' );
                     $this->load->Model( 'RegraModel');
-                    $this->load->Model( 'RegraModel');
                     $this->load->Model( 'LocalidadeModel');
                     $this->load->Model( 'EmailModel');
                     $this->load->Model( 'TelefoneModel');
@@ -49,16 +48,14 @@
             	$this->parcerias = $this->input->post('parcerias');
                 if($this->parcerias !== null && !empty($this->parcerias)){
                     foreach ($this->parcerias as $key => $value) {
-                        $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value)[0];
+                        $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value);
                     }
                     $this->parcerias = $listaparcerias;
                 }
                 $this->RegraModel->setaValoresRegraEdicao();
                 $this->regra = $this->RegraModel;
-                $this->EmailModel->setaValores(true);
-                $this->email = $this->EmailModel;
-                $this->TelefoneModel->setaValores();
-                $this->telefone = $this->TelefoneModel;
+                $this->email = $this->input->post('email');
+                $this->telefone = $this->input->post('telefone');
                 $this->LocalidadeModel->setaValores();
                 $this->localidade = $this->LocalidadeModel;
                 $this->sedia = (object) array(
@@ -72,7 +69,7 @@
                 /*DADOS DA EDIÇÃO*/
             	$this->form_validation->set_rules( 'conferencia', 'Conferência', 'trim|required|max_length[11]' );
             	$this->form_validation->set_rules( 'comite', 'Comitê', 'trim|required|max_length[11]' );
-            	$this->form_validation->set_rules( 'tema', 'Tema da Edição', 'alpha|trim|required|max_length[100]' );
+            	$this->form_validation->set_rules( 'tema', 'Tema da Edição', 'trim|required|max_length[100]' );
             	$this->form_validation->set_rules( 'linkevento', 'Link do Evento', 
             		'valid_url|trim|required|max_length[100]' );
             	// $this->form_validation->set_rules( 'image_field', 'Imagem do Evento', 'required' );
@@ -86,8 +83,7 @@
                 $this->LocalidadeModel->valida();
 
                 /*DADOS DE CONTATO*/
-                $this->TelefoneModel->valida();
-                $this->EmailModel->valida();               
+                $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required' );            
 
             }
 

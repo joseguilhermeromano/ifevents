@@ -182,11 +182,10 @@
         }
 
         public function consultarRevisores($parametros = null, $limite=null, $numPagina=null, $sort='user_nm', $ordenacao='asc') {
-            $this->db->select("User.*, Conferencia_Revisor.*");
+            $this->db->select("user_cd, user_status, user_nm, Conferencia_Revisor.*");
             $this->db->from("User");
             $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
             $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
-            $this->db->join('Status', 'User.user_stat_cd = Status.stat_cd','left');
             $this->db->join('Conferencia_Revisor', 'User.user_cd = Conferencia_Revisor.core_user_cd', '');
             $this->db->order_by($sort, $ordenacao);
             if($parametros !== null){

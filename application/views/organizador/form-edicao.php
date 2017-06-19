@@ -198,7 +198,7 @@
 <h4 class="subtitulo"><i>Endereço</i></h4><br>
 <div class="row">
     <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'CEP', 'cep' ); ?></b>
         <?php $data = array( 'name' => 'cep', 'placeholder' => 'CEP', 
             'id' => 'campoCep',
@@ -208,7 +208,7 @@
         </div>
     </div>
     <div class="col-sm-8">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'Logradouro', 'logradouro' ); ?></b>
         <?php $data = array( 'name' => 'logradouro', 'placeholder' => 'Logradouro',
             'class' => 'form-control estilo-input',
@@ -219,7 +219,7 @@
 </div>
 <div class="row">
     <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'Bairro', 'bairro' ); ?></b>
         <?php $data = array( 'name' => 'bairro', 'placeholder' => 'Bairro', 
             'class' => 'form-control estilo-input',
@@ -228,7 +228,7 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'Número', 'numero' ); ?></b>
         <?php $data = array( 'name' => 'numero', 'placeholder' => 'Número', 
             'class' => 'form-control estilo-input',
@@ -237,7 +237,7 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'Complemento', 'complemento' ); ?></b>
         <?php $data = array( 'name' => 'complemento', 'placeholder' => 'Complemento', 
             'class' => 'form-control estilo-input',
@@ -248,7 +248,7 @@
 </div>
 <div class="row">
       <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'Cidade', 'cidade' ); ?></b>
         <?php $data = array( 'name' => 'cidade', 'placeholder' => 'Cidade', 
             'class' => 'form-control estilo-input',
@@ -257,7 +257,7 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <div class="form-group floating-label-form-group controls">
+        <div class="form-group controls">
         <b><?php echo form_label( 'UF', 'uf' ); ?></b>
             <select name ="uf" class="form-control estilo-input" id="uf">
             <?php 

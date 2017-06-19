@@ -24,7 +24,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
     	// $this->avaliacao->valida();
     		
 
-    	if($this->form_validation->run()){
+    	// if($this->form_validation->run()){
 
     		// $this->db->trans_start();
     		// 	//pegar codigo da conferencia pela sessao (selecionada)
@@ -34,13 +34,13 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
     		// $this->db->trans_complete();
 
     		// if($this ->db->trans_status() !== FALSE){
-      //           $this->session->set_flashdata('success', 'A Modalidade foi cadastrada com sucesso!');
-      //           $this->modalidade = null;
+                $this->session->set_flashdata('success', 'O Parecer foi emitido com sucesso!');
+                $this->modalidade = null;
       //       }else{
       //       	$this->session->set_flashdata('error', 'Não foi possível cadastrar a modalidade!');
       //       }
 
-    	}
+    	// }
 
 
     	$this->chamaView("form-parecer", "avaliador",
@@ -55,7 +55,7 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 
 	public function consultar(){
 		$eventosRevisor = $this->EdicaoDAO->consultarEventosRevisor(date('y-m-d'),
-			$this->session->userdata('usuario')[0]['user_cd'])[0];
+			$this->session->userdata('usuario')->user_cd);
 
 		$modalidades = null;
 		$eixosTematicos = null;
@@ -111,10 +111,10 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $array = array('arti_title'=>$busca
-            	,'aval_user_cd' => $this->session->userdata('usuario')[0]['user_cd']);
+            	,'aval_user_cd' => $this->session->userdata('usuario')->user_cd);
         }else{
             $busca=null;
-            $array=array('aval_user_cd' => $this->session->userdata('usuario')[0]['user_cd']);
+            $array=array('aval_user_cd' => $this->session->userdata('usuario')->user_cd);
         }
 
 		$data = $this->AvaliacaoDAO->consultarTudo($array, $limite,$numPagina);

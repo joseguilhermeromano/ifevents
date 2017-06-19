@@ -29,23 +29,28 @@ class OrganizadorControl extends PrincipalControl{
         $this->setaValores(true);
 
         if($this->valida(true)){
-                $this->db->trans_start();
-                try{
-                    $this->OrganizadorDAO->inserir($this->organizador);
-                }catch(Exception $e){
-                    $this->session->set_flashdata('error', $e->getMessage());
-                }
-                $this->db->trans_complete();
+
+            $this->db->trans_start();
+            try{
+                $this->OrganizadorDAO->inserir($this->organizador);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
 
             if($this ->db->trans_status() !== FALSE){
                 $this->session->set_flashdata('success', 'O Organizador foi cadastrado com sucesso!');
                 unset($this->organizador);
-            }elseif($this->session->flashdata('error') === null){
+
+            }else{
                 $this->session->set_flashdata('error', 'Não foi possível cadastrar o organizador!');
-                 $data['user'] = $this->organizador;
             }
         }
        
+        if(!empty($this->organizador)){
+            $data['organizador'] = $this->organizador;
+        }
+
         return $this->chamaView("form-organizador", "organizador", $data, 1);
 
       }

@@ -27,10 +27,10 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     	if($this->form_validation->run()){
             $this->edicao->edic_num = $this->EdicaoDAO->consultarUltimaEdicao($this->input->post('conferencia')) + 1;
 
-            $this->edicao->edic_img_nm ='img_'.$this->edicao->edic_num.'_'.strtolower($this->conferencia->conf_abrev);
+            $this->edicao->edic_img_nm ='img_'.$this->edicao->edic_num.'_'.strtolower($this->edicao->conferencia->conf_abrev);
 
 
-	    	if($this->session->userdata('configInputFile') === null ||($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
+	    	if($this->session->userdata('configInputFile') === null || ($this->session->userdata('configInputFile') !== null && !empty($_FILES['image_field']['name']))){
 
 		    		$this->edicao->edic_img = $this->upload_image($this->edicao->edic_img_nm, 'edicoes',
 		    		 null, null, 3543, 1181);
@@ -39,7 +39,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 
     		$this->db->trans_start();
             try{
-            	$email = $this->EmailDAO->consultarTudo($this->edicao->email->email_email)[0];
+            	$email = $this->EmailDAO->consultarTudo($this->edicao->email)[0];
             	if(sizeof($email) == 0){
                 	$this->edicao->edic_email_cd = $this->EmailDAO->inserir($this->edicao->email);
             	}else{
@@ -238,12 +238,12 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 
     public function selecionarEvento($edicao){
         
-        foreach ($this->session->userdata('eventos_recentos') as $key => $value) {
+        foreach ($this->session->userdata('eventos_recentes') as $key => $value) {
             if($value->edic_cd == $edicao){
                 $this->session->set_userdata('evento_selecionado',$value);
             }
         }
-        redirect('usuario/inicioOrganizador');
+        redirect('organizador/inicio');
     }
 
     public function aceiteConviteRevisor($revisor, $conferencia){
