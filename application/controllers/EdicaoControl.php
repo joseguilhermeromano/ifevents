@@ -237,7 +237,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     }
 
     public function selecionarEvento($edicao){
-        
+
         foreach ($this->session->userdata('eventos_recentos') as $key => $value) {
             if($value->edic_cd == $edicao){
                 $this->session->set_userdata('evento_selecionado',$value);

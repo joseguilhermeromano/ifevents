@@ -13,11 +13,11 @@
                   <div class="boxshadow">
                     <?php echo form_open('login/entrar');?>
 
-                    
+
                     <div class="row">
                           <div class="col-md-10 col-md-offset-1">
                             <h1 class="estilo-h1">Login</h1><br>
-                                <?php 
+                                <?php
 
                                       $this->load->helper('html');
                                       echo alert($this->session);
@@ -46,9 +46,9 @@
                                         Entrar
                                         <span class="glyphicon glyphicon-log-in"></span>
                                     </button>
-                                    <br><br>   
+                                    <br><br>
                                     <hr>
-                                    <h4>Não tem uma Conta? <a style="color:#969690;" href="<?php echo base_url('cadastraParticipante'); ?>">Cadastra-se</a></h4>
+                                    <h4>Não tem uma Conta? <a style="color:#969690;" href="<?php echo base_url('participante/cadastrar'); ?>">Cadastra-se</a></h4>
                                 </div>
                           </div>
                         </div>
@@ -62,5 +62,3 @@
     </div>
   </div>
 </div>
-
-

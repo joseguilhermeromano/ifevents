@@ -31,11 +31,11 @@
             <b><?php echo form_label( 'Descrição', 'descricao' ); ?></b><br>
         	  <?php
         		$data = array( 'name' => 'descricao',
-                               'placeholder' => 'Descrição',
-                               'id'=>'editor',
-                               'cols' => 200,
-                               'rows' =>10,
-                               'class' => 'form-control estilo-input' );
+                           'placeholder' => 'Descrição',
+                           'id'=>'editor',
+                           'cols' => 200,
+                           'rows' =>10,
+                           'class' => 'form-control estilo-input' );
                 echo form_textarea( $data, set_value('descricao', $descricao));
         	?>
         </div>

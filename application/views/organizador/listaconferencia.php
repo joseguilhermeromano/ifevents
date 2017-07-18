@@ -35,7 +35,8 @@
         <thead>
             <tr>
                 <th class="col-md-6">Título</th>
-                <th><center>Descrição</center></th>
+								<th><center>Abreviação</center></th>
+								<th><center>Descrição</center></th>
                 <th><center>Editar</center></th>
                 <th><center>Excluir</center></th>
             </tr>
@@ -46,6 +47,7 @@
                     foreach( $content as $item ):?>
                     <tr>
                         <td><?php echo $item->conf_nm; ?></td>
+												<td class="text-center"><?php echo $item->conf_abrev; ?></td>
                         <td class="text-center"><?php echo $item->conf_desc; ?></td>
                         <td class="text-center"><a href="<?php echo base_url('/conferencia/alterar/'.$item->conf_cd); ?>"><span class="glyphicon glyphicon-edit estilo-botao-edicao"></span></a></td>
                         <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalExcluir"

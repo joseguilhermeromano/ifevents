@@ -2,23 +2,48 @@
     if ( !defined( 'BASEPATH' )) exit( 'No direct script access allowed' );
 
     class ConferenciaModel extends CI_Model{
+      private $codigo;
+      private $titulo;
+      private $abreviacao;
+      private $descricao;
 
-            public function __construct(){
-                    parent::__construct();
+      public function getCodigo(){
+        return $this->codigo;
+      }
 
-                    $this->load->Model( 'dao/ConferenciaDAO' );
-            }
+      public function setCodigo($codigo){
+        $this->codigo = $codigo;
+      }
 
-            public function valida(){
-            	$this->form_validation->set_rules(	'titulo', 'Título', 'trim|required|max_length[100]' );
-    			$this->form_validation->set_rules(	'descricao', 'Descrição', 'trim|required|max_length[500]' );
-    			return $this->form_validation->run();
-            }
+      public function getTitulo(){
+        return $this->titulo;
+      }
 
-            public function setaValores(){
-            	$this->conf_nm   = $this->input->post( 'titulo' );
-    			$this->conf_desc = $this->input->post( 'descricao' );
+      public function setTitulo($titulo){
+        $this->titulo = $titulo;
+      }
 
-            }
+      public function getAbreviacao(){
+        return $this->abreviacao;
+      }
+
+      public function setAbreviacao($abreviacao){
+        $this->abreviacao = $abreviacao;
+      }
+
+      public function getDescricao(){
+        return $this->descricao;
+      }
+
+      public function setDescricao($descricao){
+        $this->descricao = $descricao;
+      }
+
+      public function setaValores(){
+        $this->conf_cd    = $this->getCodigo();
+        $this->conf_nm    = $this->getTitulo();
+        $this->conf_abrev = $this->getAbreviacao();
+    		$this->conf_desc  = $this->getDescricao();
+      }
 
     }

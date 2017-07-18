@@ -6,13 +6,13 @@ class UsuarioControl extends PrincipalControl{
 		public function __construct(){
 			parent::__construct();
 
-			$this->load->Model( 'dao/UsuarioDAO' );
-			$this->load->Model( 'dao/ContatoDAO' );
+						$this->load->Model( 'dao/UsuarioDAO' );
+						$this->load->Model( 'dao/ContatoDAO' );
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
-			$this->load->Model('UsuarioModel','usuario');
+						$this->load->Model('UsuarioModel','usuario');
             $this->load->Model('dao/EdicaoDAO');
             $this->load->Model('EmailModel','email');
             $this->load->Model('TelefoneModel','telefone');
@@ -42,20 +42,20 @@ class UsuarioControl extends PrincipalControl{
             $this->chamaView("usuarios", "organizador", $data, 1);
         }
 
-		public function consultarTudo(){
-			return null;
-		}
+				public function consultarTudo(){
+					return null;
+				}
 
 
         public function notificaUsers(){
-			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
+						$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
             if (empty($this->input->post())){
                 $this->chamaView("notifica-users", "organizador",
                     array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
-			$answer  = (object) array(
-				'resposta' => $this->input->post('tipo'));
+						$answer  = (object) array(
+							'resposta' => $this->input->post('tipo'));
 
             $notificacao = (object) array(
                 'tipo_notificacao' => $this->input->post('tipo_notificacao'),
@@ -173,7 +173,7 @@ class UsuarioControl extends PrincipalControl{
                     array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
-            $mensagemEscrita = $this->load->view("template-email/template-email", 
+            $mensagemEscrita = $this->load->view("template-email/template-email",
                 array("corpoMensagem" => $this->input->post("mensagem"), "tituloMensagem" => "Notificação"), true);
             // $mensagemEscrita = $this->input->post("mensagem");
             $notificacao = (object) array(
@@ -235,7 +235,7 @@ class UsuarioControl extends PrincipalControl{
                     }else{
                         $mensagem = 'Não foi possível enviar a notificação!';
                     }
-                    
+
                     $this->session->set_flashdata('error', $mensagem);
                 }
             }

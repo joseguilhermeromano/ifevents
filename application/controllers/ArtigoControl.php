@@ -71,18 +71,18 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível submeter o seu trabalho!');
                 }
-                
+
 
             }
-            
-            
+
+
             return $this->chamaView("novoartigo", "participante", $data, 1);
         }
 
         public function alterar($codigo) {
             $artigo = $this->ArtigoDAO->consultarCodigo($codigo);
             $artigo->aceite_subm_checked = 1;
-            $modalidades = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$artigo->mote_conf_cd, 
+            $modalidades = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$artigo->mote_conf_cd,
                 'mote_tipo'=> 0));
             $eixosTematicos = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$artigo->mote_conf_cd,
              'mote_tipo'=> 1));
@@ -134,14 +134,14 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível submeter o seu trabalho!');
                 }
-                
+
 
             }
-            
-            
+
+
             return $this->chamaView("novoartigo", "participante", $data, 1);
         }
-        
+
 
         public function atribuirArtigo(){
 
@@ -165,7 +165,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             $artigo->eixo = $this->ModalidadeTematicaDAO->consultarCodigo($artigo->arti_eite_cd)->mote_nm;
             $artigo->modalidade = $this->ModalidadeTematicaDAO->consultarCodigo($artigo->arti_moda_cd)->mote_nm;
             $data['artigo'] = $artigo;
-            $data['submissoes']=$this->SubmitDAO->consultarPorArtigo($codigo); 
+            $data['submissoes']=$this->SubmitDAO->consultarPorArtigo($codigo);
             $data['title'] = "IFEvents - Detalhes do Trabalho";
             $this->chamaView("historico-submissao", "usuario", $data, 1);
         }
@@ -184,7 +184,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             public function consultar() {
                 $limite = 10;
                 $numPagina =0;
-                //pegar codigo da conferencia pela sessao 
+                //pegar codigo da conferencia pela sessao
                 $conf_cd = 1;
                 if(null !== $this->input->get('pagina')){
                     $numPagina = $this->input->get('pagina');
@@ -206,7 +206,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             }
 
             public function consultarTudo() {
-               
+
             }
 
             public function submissaoEventosRecentes(){

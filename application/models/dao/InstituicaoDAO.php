@@ -5,19 +5,22 @@ if ( !defined('BASEPATH')) exit ( 'No direct sript access allowed' );
 
 class InstituicaoDAO extends CI_Model implements DAO{
 
-    public function __construct(){
-            parent::__construct('InstituicaoDAO');
-            $this->load->model('InstituicaoModel', 'instituicao');
-    }
+  public function __construct(){
+    parent::__construct('InstituicaoDAO');
+      $this->load->model('InstituicaoModel', 'instituicao');
+  }
 
-    public function inserir($obj) {
-        return $this->db->insert('Instituicao', $obj);
-    }
+  public function inserir($obj) {
+    return $this->db->insert('Instituicao', $obj);
+  }
 
-    public function alterar($obj) {
-        $this->db->where('inst_cd', $obj->inst_cd);
-        return $this->db->update('Instituicao', $obj);
-    }
+  public function alterar($obj) {
+    $this->db->where('inst_cd', $obj->inst_cd);
+    $this->db->set('inst_nm', $obj->inst_nm);
+    $this->db->set('inst_abrev', $obj->inst_abrev);
+    $this->db->set('inst_desc', $obj->inst_desc);
+    return $this->db->update('Instituicao', $obj);
+  }
 
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='inst_nm', $ordenacao='asc') {
@@ -42,7 +45,7 @@ class InstituicaoDAO extends CI_Model implements DAO{
 
      public function consultarCodigo($codigo){
         $this->db->where('inst_cd',$codigo);
-        $query = $this->db->get('instituicao');
+        $query = $this->db->get('Instituicao');
         $consulta = $query->result_object()[0];
         if(!empty($consulta)){
             $this->instituicao->setCodigo($consulta->inst_cd);

@@ -21,10 +21,20 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Título', 'titulo' ); ?></b>
-        <?php $data = array( 'name' => 'titulo', 'placeholder' => 'Título', 'class' => 'form-control estilo-input' );
+        <?php $data = array( 'name' => 'titulo', 'class' => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
+    <b><?php echo form_label( 'Abreviação', 'abreviacao' ); ?></b>
+    <?php $data = array( 'name' => 'abreviacao', 'class' => 'form-control estilo-input' );
+           echo form_input($data);?>
+    </div>
+  </div>
 </div>
 
 <div class="row">

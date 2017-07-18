@@ -61,7 +61,7 @@ class ParticipanteControl extends PrincipalControl{
             }
         }
 
-        
+
         return $this->chamaView($view, $diretorioView, $data, $areaLayout);
       }
 
@@ -88,10 +88,10 @@ class ParticipanteControl extends PrincipalControl{
                     $this->session->set_flashdata('success', 'O Cadastro foi atualizado com sucesso!');
                     unset($this->organizador);
                 }elseif($this->session->flashdata('error') === null){
-                  $this->session->set_flashdata('success', 'Não foi possível atualizar os dados do participante!');  
+                  $this->session->set_flashdata('success', 'Não foi possível atualizar os dados do participante!');
                 }
             }
-             
+
           }
 
         }else{
@@ -121,10 +121,10 @@ class ParticipanteControl extends PrincipalControl{
                       $this->session->set_flashdata('success', 'Suas informações foram atualizadas com sucesso!');
                       unset($this->organizador);
                   }elseif($this->session->flashdata('error') === null){
-                        $this->session->set_flashdata('success', 'Não foi possível atualizar as suas informações!');    
+                        $this->session->set_flashdata('success', 'Não foi possível atualizar as suas informações!');
                   }
               }
-           
+
         }
         $data['title'] = "IFEvents - Meu Perfil";
         $data['tituloForm'] = '<i class="glyphicon glyphicon-user" aria-hidden="true"></i><b> Meu Perfil</b>';
@@ -152,7 +152,7 @@ class ParticipanteControl extends PrincipalControl{
         $this->form_validation->set_rules( 'complemento', 'Complemento', 'trim|max_length[100]' );
         if($this->input->post('confirmaemail')!==null){
             $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
-            $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail', 
+            $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
             'valid_email|trim|required|max_length[100]|matches[email]' );
         }
 
@@ -178,7 +178,7 @@ class ParticipanteControl extends PrincipalControl{
             $this->participante->setCidade($this->input->post('cidade'));
             $this->participante->setUf($this->input->post('uf'));
       }
-      
+
 
 
 }

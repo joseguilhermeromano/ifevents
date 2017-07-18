@@ -36,6 +36,9 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
         public function alterar($codigo) {
         }
         public function consultar() {
+			$data['content'] = $this->ComiteDAO->consultarTudo();
+            $data['title'] = "IFEvents - Comitê - Organizador";
+            $this->chamaView("comite", "organizador", $data, 1);
         }
 
         public function consultarParaSelect2(){

@@ -1,66 +1,65 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
-require_once 'PrincipalControl.php';
-require_once 'InterfaceControl.php';
+	require_once 'PrincipalControl.php';
+	require_once 'InterfaceControl.php';
 
-class InstituicaoControl extends PrincipalControl implements InterfaceControl{
+	class InstituicaoControl extends PrincipalControl implements InterfaceControl{
 
 		public function __construct(){
 			parent::__construct();
-
 			$this->load->Model( 'dao/InstituicaoDAO' );
 			$this->load->Model('InstituicaoModel','instituicao');
 		}
 
-        public function cadastrar() {
-
-            $data['title'] = "IFEvents - Instituicao - Organizador";
-
-            if (empty($this->instituicao->input->post())){
-                $this->chamaView("novainstituicao", "organizador", $data,  1);
-                return true;
-            }
-
-            if( $this->instituicao->valida()==false){
-                    $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-            }
-            else{
-                $this->instituicao->setaValores();
-                if($this->InstituicaoDAO->inserir($this->instituicao)==true){
-                    $this->session->set_flashdata('success', 'Instituição cadastrada com sucesso!');
-                }else{
-                    $this->session->set_flashdata('error', 'Instituição não cadastrada!');
-                }
-
-            }
-
-            $this->chamaView("novainstituicao", "organizador", $data,  1 );
+    public function cadastrar() {
+      if (empty($this->instituicao->input->post())){
+      	$this->chamaView("novainstituicao", "organizador",
+				array("title"=>"IFEvents - Instituicao - Organizador"), 1);
+        return true;
+      }
+			$this->instituicao->setNome($this->input->post("nome"));
+			$this->instituicao->setAbreviacao($this->input->post("abreviacao"));
+			$this->instituicao->setDescricao($this->input->post("descricao"));
+      if( $this->instituicao->valida()==false){
+      	$this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+      }
+      else{
+      	$this->instituicao->setaValores();
+        if($this->InstituicaoDAO->inserir($this->instituicao)==true){
+        	$this->session->set_flashdata('success', 'Instituição cadastrada com sucesso!');
+        }else{
+        	$this->session->set_flashdata('error', 'Instituição não cadastrada!');
         }
+      }
+			$this->chamaView("novainstituicao", "organizador",
+			array("title"=>"IFEvents - Instituicao - Organizador"), 1);
+    }
 
-        public function alterar($codigo) {
-			$data['instituicao'] = $this->InstituicaoDAO->consultarCodigo($codigo);
-			$data['title'] = "IFEvents - Instituicao - organizador" ;
-            if(!empty($this->input->post())){
-				$this->chamaView("edita-instituicao", "organizador", $data, 1);
-                $this->instituicao->setaValores();
-                $this->instituicao->inst_cd = $this->uri->segment(3);
-                 if( $this->instituicao->valida()==false){
-                         $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-                 }
-                else{
-                     if($this->InstituicaoDAO->alterar($this->instituicao)==true){
-                         $this->session->set_flashdata('success', 'O Instituição atualizada com sucesso!');
-                         redirect('instituicao/consultarTudo/');
-
-                     }else{
-                         $this->session->set_flashdata('error', 'Não foi possível atualizar a instituição!');
-                     }
-
-                 }
-
-            }
-
-            $this->chamaView("edita-instituicao", "organizador", $data, 1);
-
+    public function alterar($codigo) {
+			$data['instituicao'] =
+			print_r($this->InstituicaoDAO->consultarCodigo($codigo));
+			//$data['title'] = "IFEvents - Instituicao - organizador" ;
+      if(!empty($this->input->post())){
+				$this->chamaView("edita-instituicao", "organizador",
+				array("title"=>"IFEvents - Instituicao", "organizador"), $data, 1);
+				$this->instituicao->setCodigo($this->input->post($this->uri->segment(3)));
+				$this->instituicao->setNome($this->input->post("nome"));
+				$this->instituicao->setAbreviacao($this->input->post("abreviacao"));
+				$this->instituicao->setDescricao($this->input->post("descricao"));
+        $this->instituicao->setaValores();
+        //$this->instituicao->inst_cd = $this->uri->segment(3);
+        if( $this->instituicao->valida()==false){
+        	$this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+        }
+        else{
+        	if($this->InstituicaoDAO->alterar($this->instituicao)==true){
+          	$this->session->set_flashdata('success', 'O Instituição atualizada com sucesso!');
+            redirect('instituicao/consultarTudo/');
+          }else{
+          	$this->session->set_flashdata('error', 'Não foi possível atualizar a instituição!');
+          }
+        }
+      }
+      $this->chamaView("edita-instituicao", "organizador", $data, 1);
 		}
 
         public function consultarParaSelect2(){

@@ -93,6 +93,7 @@
 			$sql = "CREATE TABLE IF NOT EXISTS Instituicao (
 					 inst_cd   int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,inst_nm   varchar(100) NOT NULL
+					,inst_abrev varchar(10) 
 					,inst_desc varchar(500) NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
