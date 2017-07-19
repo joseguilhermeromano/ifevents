@@ -21,17 +21,12 @@
   echo form_open_multipart( 'ConferenciaControl/alterar/'.$content->conf_cd, 'role="form" class="formsignin"' );?>
 
   <?php
-
-         echo form_hidden('codigo', isset($content->conf_cd) ? $content->conf_cd : '' );?>
-
+  echo form_hidden('codigo', isset($content->conf_cd) ? $content->conf_cd : '' );?>
   <div class="col-md-12">
     <div class="form-group">
       <b><?php echo form_label( 'Título', 'titulo' ); ?></b>
-        <?php $data = array( 'name' => 'titulo',
-                             'placeholder' => "Título",
-                             'class' => 'form-control estilo-input',
-                             'value' =>(isset($content->conf_nm) ? $content->conf_nm : '' ));
-               echo form_input($data);?>
+        <?php $data = array( 'name' => 'titulo', 'class' => 'form-control estilo-input', 'value' =>(isset($content->conf_nm) ? $content->conf_nm : '' ));
+          echo form_input($data);?>
     </div>
   </div>
 </div>
@@ -40,33 +35,24 @@
   <div class="col-md-12">
     <div class="form-group">
       <b><?php echo form_label( 'Abreviação', 'abreviacao' ); ?></b>
-        <?php $data = array( 'name' => 'abreviacao', 'class' => 'form-control estilo-input',
-                             'value' =>(isset($content->conf_abrev) ? $content->conf_abrev : '' ));
-               echo form_input($data);?>
+        <?php $data = array( 'name' => 'abreviacao', 'class' => 'form-control estilo-input', 'value' =>(isset($content->conf_abrev) ? $content->conf_abrev : '' ));
+          echo form_input($data);?>
     </div>
   </div>
 </div>
-
 
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Descrição', 'descricao' ); ?></b><br>
         	<?php
-        		$data = array( 'name' => 'descricao',
-                               'placeholder' => 'Descrição',
-                               'id'=>'editor',
-                               'cols' => 200,
-                               'rows' =>10,
-                               'class' => 'form-control estilo-input' );
-                echo form_textarea( $data, set_value('descricao', $descricao));
-        	?>
+        		$data = array( 'name' => 'descricao', 'id'=>'editor', 'cols' => 200, 'rows' =>10, 'class' => 'form-control estilo-input' );
+              echo form_textarea( $data, set_value('descricao', $descricao));?>
         </div>
     </div>
 </div>
 
 <?php echo '<br><center>'.form_submit("btn_atualizar", "Atualizar",array('class' => 'btn btn-success button',
     "onclick"=>"nicEditors.findEditor('editor').saveContent();"))."</center>";
-
-echo form_close();
+    echo form_close();
 ?>

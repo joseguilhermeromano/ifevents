@@ -53,9 +53,9 @@
       }
 
       public function setaValores(){
-        $this->inst_cd   = $this->getCodigo();
-        $this->inst_nm   = $this->getNome();
-    		$this->inst_desc = $this->getDescricao();
+        $this->inst_cd    = $this->getCodigo();
+        $this->inst_nm    = $this->getNome();
+    		$this->inst_desc  = $this->getDescricao();
         $this->inst_abrev = $this->getAbreviacao();
       }
     }

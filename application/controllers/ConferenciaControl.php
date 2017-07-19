@@ -39,7 +39,6 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
       array("title"=>"IFEvents - Nova Conferencia - Organizador"), 1);
     }
 
-		//Método altera dados cadastrados
     public function alterar($codigo) {
 			$data['content'] = $this->ConferenciaDAO->consultarCodigo($codigo);
 			$data['title']  = "IFEvents - Edita Conferencia - organizador";
@@ -48,8 +47,7 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 				$this->conferencia->setTitulo($this->input->post('titulo'));
 				$this->conferencia->setAbreviacao($this->input->post('abreviacao'));
 				$this->conferencia->setDescricao($this->input->post('descricao'));
-				print_r($this->conferencia->setaValores());
-				//$this->conferencia->conf_cd = $this->uri->segment(3);
+				$this->conferencia->setaValores();
 	      if( $this->valida()==false){
 	      	$this->session->set_flashdata('error', 'Falta preencher alguns campos!');
 	      }

@@ -1,13 +1,13 @@
 <?php
 if ( !defined('BASEPATH')) exit ( 'No direct sript access allowed' );
 
-    include_once 'DAO.php';// Chamar sempre a interface por esta forma!
+  include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 class InstituicaoDAO extends CI_Model implements DAO{
 
   public function __construct(){
     parent::__construct('InstituicaoDAO');
-      $this->load->model('InstituicaoModel', 'instituicao');
+    $this->load->model('InstituicaoModel', 'instituicao');
   }
 
   public function inserir($obj) {
@@ -22,39 +22,32 @@ class InstituicaoDAO extends CI_Model implements DAO{
     return $this->db->update('Instituicao', $obj);
   }
 
-
-    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='inst_nm', $ordenacao='asc') {
-        $this->db->select("inst_cd, inst_nm, inst_desc");
-        $this->db->from("Instituicao");
-        $this->db->order_by($sort, $ordenacao);
-        if($parametros !== null){
-            foreach ($parametros as $key => $value) {
-                $this->db->where($key.' LIKE ','%'.$value.'%');
-            }
-        }
-        if($limite)
-            $this->db->limit($limite, $numPagina);
-            $query = $this->db->get();
-        if($query->num_rows()>0){
-                        return $query->result_object();
-                    }else{
-                        return null;
-                    }
-        }
+  public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='inst_nm', $ordenacao='asc') {
+    $this->db->select("inst_cd, inst_nm, inst_abrev, inst_desc");
+    $this->db->from("Instituicao");
+    $this->db->order_by($sort, $ordenacao);
+    if($parametros !== null){
+      foreach ($parametros as $key => $value) {
+        $this->db->where($key.' LIKE ','%'.$value.'%');
+      }
+    }
+    if($limite)
+      $this->db->limit($limite, $numPagina);
+        $query = $this->db->get();
+    if($query->num_rows()>0){
+      return $query->result_object();
+    }else{
+      return null;
+    }
+  }
 
 
      public function consultarCodigo($codigo){
-        $this->db->where('inst_cd',$codigo);
-        $query = $this->db->get('Instituicao');
-        $consulta = $query->result_object()[0];
-        if(!empty($consulta)){
-            $this->instituicao->setCodigo($consulta->inst_cd);
-            $this->instituicao->setNome($consulta->inst_nm);
-            $this->instituicao->setAbreviacao($consulta->inst_abrev);
-            $this->instituicao->setDescricao($consulta->inst_desc);
-            return $this->instituicao;
-        }
-        return null;
+       $this->db->select( 'inst_cd, inst_nm, inst_abrev, inst_desc' );
+       $this->db->from( 'Instituicao' );
+       $this->db->where( 'inst_cd', $codigo );
+       $query = $this->db->get();
+       return $query->result_object()[0];
      }
 
     public function consultarPorNomeOuAbreviacao($nome){

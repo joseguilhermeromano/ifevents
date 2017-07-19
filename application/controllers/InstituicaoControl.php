@@ -35,18 +35,15 @@
     }
 
     public function alterar($codigo) {
-			$data['instituicao'] =
-			print_r($this->InstituicaoDAO->consultarCodigo($codigo));
-			//$data['title'] = "IFEvents - Instituicao - organizador" ;
+			$data['instituicao'] = $this->InstituicaoDAO->consultarCodigo($codigo);
       if(!empty($this->input->post())){
 				$this->chamaView("edita-instituicao", "organizador",
 				array("title"=>"IFEvents - Instituicao", "organizador"), $data, 1);
-				$this->instituicao->setCodigo($this->input->post($this->uri->segment(3)));
+				$this->instituicao->setCodigo($this->input->post('codigo'));
 				$this->instituicao->setNome($this->input->post("nome"));
 				$this->instituicao->setAbreviacao($this->input->post("abreviacao"));
 				$this->instituicao->setDescricao($this->input->post("descricao"));
         $this->instituicao->setaValores();
-        //$this->instituicao->inst_cd = $this->uri->segment(3);
         if( $this->instituicao->valida()==false){
         	$this->session->set_flashdata('error', 'Falta preencher alguns campos!');
         }
@@ -62,32 +59,28 @@
       $this->chamaView("edita-instituicao", "organizador", $data, 1);
 		}
 
-        public function consultarParaSelect2(){
-            $data = $this->InstituicaoDAO->consultarPorNomeOuAbreviacao($this->instituicao->input->post('term'));
-            $this->output->set_content_type('application/json')->set_output(json_encode($data));
-        }
+    public function consultarParaSelect2(){
+    	$data = $this->InstituicaoDAO->consultarPorNomeOuAbreviacao($this->instituicao->input->post('term'));
+      $this->output->set_content_type('application/json')->set_output(json_encode($data));
+		}
 
-        public function consultar() {
+    public function consultar() {
 
-        }
+    }
 
 		public function consultarTudo(){
-			$data['flag'] = $this->uri->segment(3);
 			$data['content'] = $this->InstituicaoDAO->consultarTudo();
 			$data['title'] = "IFEvents - Instituicao - Organizador";
 			$this->chamaView("listainstituicao", "organizador", $data, 1);
 		}
 
-
-        public function excluir($codigo) {
+    public function excluir($codigo) {
 			if( $this->InstituicaoDAO->excluir($this->uri->segment(3)) == false){
-					$this->session->set_flashdata('error', 'Instituicao não pode ser excluida!');
+				$this->session->set_flashdata('error', 'Instituicao não pode ser excluida!');
 			}
-		   else{
-					$this->session->set_flashdata('success', 'Instituição deletada com sucesso!');
-					redirect('instituicao/consultarTudo/');
-				}
-        }
-
-
+		  else{
+				$this->session->set_flashdata('success', 'Instituição deletada com sucesso!');
+				redirect('instituicao/consultarTudo/');
+			}
+    }
 }
