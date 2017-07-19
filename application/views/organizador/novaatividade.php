@@ -26,7 +26,7 @@
         <b>
         <?php echo form_label( '*Tipo de Atividade', 'tipo_atividade' ); ?>
         </b><br>
-            <select name="tipo_atividade" id="tipoAtividade" class="form-control estilo-input" required>
+            <select name="tipoAtividade" id="tipoAtividade" class="form-control estilo-input" required>
                             <option value="-1" selected disabled> Selecionar Tipo de Atividade </option>
                 <?php  foreach ( $atividade as $item ): ?>
                             <option value="<?php echo $item->tiat_cd ?>"><?php echo $item->tiat_nm; ?></option>
@@ -108,8 +108,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-            <strong><?php echo form_label( '*Quantidade de Vagas', 'vagasQtd' )?></strong>
-                    <?php $data = array( 'name' => 'vagasQtd',
+            <strong><?php echo form_label( '*Quantidade de Vagas', 'quantidadeVagas' )?></strong>
+                    <?php $data = array( 'name' => 'quantidadeVagas',
                                          'placeholder' => 'Quantidade de Vagas',
                                          'class' => 'form-control estilo-input' );
                           echo form_input($data);?>
