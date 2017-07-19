@@ -44,9 +44,9 @@ class RevisorControl extends PrincipalControl{
         }
 
 
-        $this->setaValores();
+        $this->setaValores(true);
 
-        if($this->valida()){
+        if($this->valida(true)){
                 $this->db->trans_start();
                 try{
                     $this->RevisorDAO->inserir($this->revisor);
@@ -76,9 +76,9 @@ class RevisorControl extends PrincipalControl{
           $this->revisor = $this->RevisorDAO->consultarCodigo($codigo);
           if(!empty($this->input->post())){
 
-            $this->setaValores();
+            $this->setaValores(false);
 
-            if($this->valida()){
+            if($this->valida(false)){
                     $this->db->trans_start();
                     try{
                         $this->RevisorDAO->alterar($this->revisor);
@@ -109,9 +109,9 @@ class RevisorControl extends PrincipalControl{
         $this->revisor = $this->RevisorDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
         if(!empty($this->input->post())){
 
-	        $this->setaValores();
+	        $this->setaValores(false);
 
-	        if($this->valida()){
+	        if($this->valida(false)){
 	                $this->db->trans_start();
 	                try{
 	                    $this->RevisorDAO->alterar($this->organizador);
@@ -135,8 +135,17 @@ class RevisorControl extends PrincipalControl{
         return $this->chamaView("form-revisor", "avaliador", $data, 1);
       }
 
-      private function valida(){
-      	$this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
+      private function valida($cadastrar){
+        if($cadastrar==true || $this->session->userdata('usuario')->user_tipo == 3){
+          $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
+          $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
+          $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
+          if($this->input->post('confirmaemail')!==null){
+              $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
+              $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
+              'valid_email|trim|required|max_length[100]|matches[email]' );
+          }
+        }
         $this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|max_length[100]' );
         if($this->input->post('senha') !== null){
         	$this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
@@ -144,8 +153,6 @@ class RevisorControl extends PrincipalControl{
         	'trim|required|min_length[6]|matches[senha]' );
     	}
         $this->form_validation->set_rules( 'biografia', 'Biografia', 'trim|max_length[200]' );
-        $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
-        $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
         $this->form_validation->set_rules( 'logradouro', 'Logradouro', 'required|trim|max_length[200]' );
     	$this->form_validation->set_rules( 'bairro', 'Bairro', 'required|trim|max_length[100]' );
     	$this->form_validation->set_rules( 'cep', 'CEP', 'required|valid_cep' );
@@ -153,23 +160,20 @@ class RevisorControl extends PrincipalControl{
     	$this->form_validation->set_rules( 'uf', 'UF', 'required|trim|max_length[2]' );
         $this->form_validation->set_rules( 'numero', 'Número', 'trim|required|max_length[9]' );
         $this->form_validation->set_rules( 'complemento', 'Complemento', 'trim|max_length[100]' );
-        if($this->input->post('confirmaemail')!==null){
-        	$this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
-        	$this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
-        	'valid_email|trim|required|max_length[100]|matches[email]' );
-    	}
-
         return $this->form_validation->run();
-
       }
 
-      private function setaValores(){
-      	   	$this->revisor->setNomeCompleto(ajustaNomes($this->input->post('nome')));
-            $this->revisor->setEmail($this->input->post('email'));
-            $this->revisor->setSenha($this->input->post('senha'));
+      private function setaValores($cadastrar){
+      	   	if($cadastrar==true || $this->session->userdata('usuario')->user_tipo == 3){
+              $this->revisor->setNomeCompleto(ajustaNomes($this->input->post('nome')));
+              $this->revisor->setRg($this->input->post('rg'));
+              $this->revisor->setCpf($this->input->post('cpf'));
+              $this->revisor->setEmail($this->input->post('email'));
+            }
+            if($this->input->post('confirmasenha') !== ''){
+              $this->revisor->setSenha($this->input->post('senha'));
+            }
             $this->revisor->setInstituicao($this->instituicao);
-            $this->revisor->setRg($this->input->post('rg'));
-            $this->revisor->setCpf($this->input->post('cpf'));
             $this->revisor->setTelefone($this->input->post('telefone'));
             $this->revisor->setBiografia($this->input->post('biografia'));
             $this->revisor->setValidaEmail(0);

@@ -8,7 +8,7 @@
 
   <?php
     $even = $this->session->userdata('evento_selecionado');
-    echo  $even->edic_num.'ª '.$even->conf_abrev;
+    echo  'Evento: '.$even->edic_num.'ª '.$even->conf_abrev;
   ?>
 
   <span class="caret"></span>

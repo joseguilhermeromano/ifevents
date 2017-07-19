@@ -165,10 +165,13 @@ class PrincipalControl extends CI_Controller {
 
     //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight
     public function upload_image($novoNome, $diretorioImg = 'edicoes', $maxWidth=null, $maxHeight=null, $minWidth=null, $minHeight=null){
-      $this->img->upload($_FILES['image_field'],'pt_BR');
+
+    $this->img->upload($_FILES['image_field'],'pt_BR');
+
         if ($this->img->uploaded) {
 
             if($this->img->file_is_image == true){
+                
                 $this->img->image_max_width = $maxWidth;
                 $this->img->image_max_height = $maxHeight;
                 $this->img->image_min_width = $minWidth;
@@ -178,6 +181,7 @@ class PrincipalControl extends CI_Controller {
                 $this->img->file_overwrite = true ;
                 $this->img->Process("application/views/imagens/".$diretorioImg."/");
                 if ($this->img->processed) {
+
                       $linkImg = str_replace("\\", "", $this->img->file_dst_pathname);
 
                         $configInputFile = array(
@@ -192,7 +196,7 @@ class PrincipalControl extends CI_Controller {
                         );
 
                         $this->session->set_userdata('configInputFile',$configInputFile);
-
+                        
                       return $linkImg;
                 } else {
                       $this->session->set_flashdata('error', $this->img->error);
@@ -204,6 +208,7 @@ class PrincipalControl extends CI_Controller {
 
         } else {
             $this->session->set_flashdata('error', $this->img->error);
+            echo $this->img->error;
         }
 
         return null;

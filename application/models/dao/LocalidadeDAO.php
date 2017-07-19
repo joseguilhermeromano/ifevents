@@ -37,6 +37,7 @@
         }
 
         public function inserirEnderecoEdicao($obj,$edic_cd){
+            
             $data= array();
             $consulta = $this->consultarCep($obj->localidade->loca_cep);
 
@@ -56,8 +57,8 @@
 
             $this->db->insert('Sedia', array('sedi_edic_cd' => $edic_cd
             ,'sedi_loca_cd' => $data['loca_cd']
-            ,'sedi_num' => $obj->sedia->loca_num
-            ,'sedi_comp' => $obj->sedia->loca_comp
+            ,'sedi_num' => $obj->sedia->sedi_num
+            ,'sedi_comp' => $obj->sedia->sedi_comp
             ));
         }
 

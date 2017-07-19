@@ -628,6 +628,7 @@ $('a.atribuicao').click(function() {
     var idsubmissao = $(this).attr('idsubmissao');
     var idmodalidade = $(this).attr('idmodalidade');
     var ideixo = $(this).attr('ideixo');
+    console.log(idmodalidade+ideixo);
     $('#form-atribuicao').attr('action', baseUrl + 'revisao/atribuir-revisor/');
     $('#input-submissao').attr('value', idsubmissao);
 
@@ -659,6 +660,77 @@ $('a.atribuicao').click(function() {
         }
     }) 
 
+});
+
+
+//CONSULTA DE CEP USANDO WEBSERVICE VIACEP 
+$(document).ready(function() {
+
+    function limpa_form() {
+        // Limpa valores do formulário de cep.
+        $("#logradouro").val("");
+        $("#bairro").val("");
+        $("#cidade").val("");
+        $("#uf").val("");
+    }
+            
+    //Quando o campo cep perde o foco.
+    $("#campoCep").blur(function() {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                $("#logradouro").val("...");
+                $("#bairro").val("...");
+                $("#cidade").val("...");
+                $("#uf").val("...");
+
+                //Consulta o webservice viacep.com.br/
+                
+                // $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                  $.getJSON("//republicavirtual.com.br/web_cep.php?cep="+ cep +"&formato=json", function(dados) {
+
+                    if (("resultado" in dados) != 0) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#logradouro").val(dados.tipo_logradouro+' '+dados.logradouro);
+                        $("#bairro").val(dados.bairro);
+                        $("#cidade").val(dados.cidade);
+                        // $("#uf").children("option").change().val("MG");
+                        $('#uf option').each(function() {
+                            if($(this).val() == dados.uf) {
+                                $(this).prop("selected", true);
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        limpa_form();
+                        alert("CEP não encontrado.");
+                    }
+                });
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_form();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_form();
+        }
+    });
 });
 
 /*Carrega modal autormaiticamente (modalidades e eixos tematicos) area do revisor*/

@@ -71,7 +71,7 @@
             $this->arti_moda_cd = $this->input->post( 'modalidade' );
             $this->arti_eite_cd = $this->input->post( 'area' );
             $this->arti_resumo = $this->input->post( 'resumo' );
-            $this->arti_user_resp_cd = $this->session->userdata('usuario')[0]['user_cd'];
+            $this->arti_user_resp_cd = $this->session->userdata('usuario')->user_cd;
             $this->arti_status = 0;
             $this->aceite_subm_checked = $this->input->post('aceite');
         }

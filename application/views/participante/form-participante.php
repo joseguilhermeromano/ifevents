@@ -36,6 +36,8 @@
 
         $this->load->helper('html');
         echo alert($this->session);
+        $desbilitaInputs = $this->uri->segment(2) == 'alterar' && $this->session->userdata('usuario')->user_tipo == 3
+        ? "readonly" : "";
                                              ?>
 
 <?php echo form_open_multipart( $this->uri->uri_string(), 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
@@ -47,7 +49,8 @@
         <div class="form-group controls">
         <b><?php echo form_label( '*Nome Completo', 'nome' ); ?></b>
         <?php $data = array( 'name' => 'nome', 'class' => 'form-control estilo-input'
-                            , 'value' => (isset($participante) ? $participante->getNomeCompleto() : ''));
+                            , 'value' => (isset($participante) ? $participante->getNomeCompleto() : '')
+                            , $desbilitaInputs);
                echo form_input($data);?>
         </div>
     </div>
@@ -64,26 +67,81 @@
 </div>
 
 
+<?php   if($this->uri->segment(2) == 'alterar' || $this->uri->segment(2) == 'perfil'){ 
+                                                                                         ?>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group controls">
+        <b><?php echo form_label( 'E-mail', 'email' ); ?></b>
+        <?php $data = array( 'name' => 'emailantigo', 'class' => 'form-control estilo-input'
+            , 'disabled' => 'disabled'
+            , 'value' => (isset($participante) ? $participante->getEmail() : ''));
+              echo form_input( $data );?>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <?php if($this->session->userdata('usuario')->user_tipo == 3){ ?>
+        <a class="btn-toggle btn btn-default" data-element="#novoemail" style="margin-bottom:20px">
+        <i><span class="glyphicon glyphicon-pencil"></span> Alterar Email</i>
+        </a>
+        &nbsp;&nbsp;&nbsp; 
+        <?php } ?>
+        <a class="btn-toggle btn btn-default" data-element="#senha" style="margin-bottom:20px">
+        <i><span class="glyphicon glyphicon-pencil"></span> Alterar Senha</i>
+        </a>
+    </div>
+</div>
+
+<div id='novoemail' style="display:none">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group controls">
+            <b><?php echo form_label( '*Novo e-mail', 'email' ); ?></b>
+            <?php $data = array( 'name' => 'email', 'class' => 'form-control estilo-input');
+                  echo form_input( $data );?>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group controls" id="confirmaemail" >
+            <b><?php echo form_label( '*Confirmar novo e-mail', 'confirmaemail' ); ?></b>
+            <?php $data = array( 'name' => 'confirmaemail', 'class' => 'form-control estilo-input' );
+                  echo form_input( $data );?>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<?php    }else{   ?>
+
+
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group controls">
         <b><?php echo form_label( '*E-mail', 'email' ); ?></b>
         <?php $data = array( 'name' => 'email', 'class' => 'form-control estilo-input',
-         'value' => ( isset($participante) ? $participante->getEmail() : ''));
+         'value' => (isset($organizador) && !empty($organizador->getEmail()) ? $organizador->getEmail() : ''));
               echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="form-group controls">
+        <div class="form-group controls" id="confirmaemail" >
         <b><?php echo form_label( '*Confirmar e-mail', 'confirmaemail' ); ?></b>
         <?php $data = array( 'name' => 'confirmaemail', 'class' => 'form-control estilo-input' );
               echo form_input( $data );?>
         </div>
     </div>
 </div>
+<?php } ?>
 
 
-<div class="row">
+<div class="row" id="senha" 
+<?= $this->uri->segment(2) == 'alterar' || $this->uri->segment(2) == 'perfil'  ? 'style="display:none"' : '' ?>>
     <div class="col-sm-6">
         <div class="form-group controls">
         <b><?php echo form_label( '*Senha', 'senha' ); ?></b>
@@ -113,7 +171,8 @@
             ,'id' => 'campoRG'
             ,'type' => 'text'
             ,'class' => 'form-control estilo-input'
-            ,'value' => ( isset($participante) ? $participante->getRg() : ''));
+            ,'value' => ( isset($participante) ? $participante->getRg() : '')
+            , $desbilitaInputs);
                     echo form_input( $data );?>
         </div>
     </div>
@@ -125,7 +184,8 @@
             ,'id' => 'campoCPF'
             ,'type' => 'text'
             ,'class' => 'form-control estilo-input'
-            ,'value' => ( isset($participante) ? $participante->getCpf() : ''));
+            ,'value' => ( isset($participante) ? $participante->getCpf() : '')
+            , $desbilitaInputs);
                     echo form_input( $data );?>
         </div>
     </div>
@@ -150,6 +210,7 @@
         <b><?php echo form_label( 'Logradouro', 'logradouro' ); ?></b>
         <?php $data = array( 'name' => 'logradouro',
             'class' => 'form-control estilo-input',
+            'id' => 'logradouro',
             'value' => ( isset($participante) ? $participante->getLogradouro() : ''));
               echo form_input( $data );?>
         </div>
@@ -163,6 +224,7 @@
         <b><?php echo form_label( 'Bairro', 'bairro' ); ?></b>
         <?php $data = array( 'name' => 'bairro', 
             'class' => 'form-control estilo-input',
+            'id' => 'bairro',
             'value' => ( isset($participante) ? $participante->getBairro() : ''));
                     echo form_input( $data );?>
         </div>
@@ -194,6 +256,7 @@
         <b><?php echo form_label( 'Cidade', 'cidade' ); ?></b>
         <?php $data = array( 'name' => 'cidade'
             ,'class' => 'form-control estilo-input'
+            ,'id' => 'cidade'
             ,'value' => ( isset($participante) ? $participante->getCidade() : ''));
                     echo form_input( $data );?>
         </div>
@@ -201,13 +264,13 @@
     <div class="col-sm-4">
         <div class="form-group controls">
         <b><?php echo form_label( 'UF', 'uf' ); ?></b>
-            <select name ="uf" class="form-control estilo-input selectComum" id="uf">
+            <select name ="uf" class="form-control estilo-input" id="uf">
             <?php 
 
             $uf = array('AC','AL','AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS', 'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO');
             foreach($uf as $key => $value){
                 if(!isset($participante) && $value == 'SP'){
-                     echo "<option selected>".$value."</option>";
+                     echo "<option>".$value."</option>";
                 }else if(isset($participante) && $participante->getUf() !== null && $participante->getUf() == $value){
 
                     echo "<option selected>".$value."</option>";
@@ -244,7 +307,7 @@
 
 <?php 
     $nomeBotao = $this->uri->segment(2) == "cadastrar" ? "Cadastrar" : "Atualizar";
-    $botaoVoltar = $this->session->userdata('usuario')->user_tipo == 3 ? "<a href='".base_url('usuario/consultar')."' class='btn btn-default button' >Voltar</a>&nbsp;&nbsp;" : '';
+    $botaoVoltar = !empty($this->session->userdata('usuario')) && $this->session->userdata('usuario')->user_tipo == 3 ? "<a href='".base_url('usuario/consultar')."' class='btn btn-default button' >Voltar</a>&nbsp;&nbsp;" : '';
     echo '<br><center>'.$botaoVoltar
     .form_submit("btn_cadastro", $nomeBotao, array('class' => 'btn btn-success button'))."</center>";
 
