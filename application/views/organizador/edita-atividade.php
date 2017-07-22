@@ -57,6 +57,18 @@
 <div class="row">
   <div class="col-md-12">
     <div class="form-group">
+      <b><?php echo form_label( '*Responsavel', 'responsavel' ); ?></b>
+      <?php $data = array( 'name'=> 'responsavel', 'class'=> 'form-control estilo-input',
+                           'value'=>(isset($atividade->ativ_responsavel) ? $atividade->ativ_responsavel: ''));
+                    echo form_input($data);?>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="form-group">
       <b><?php echo form_label( '*Data', 'data' ); ?></b>
       <?php $data = array( 'name'=> 'data', 'class'=> 'form-control estilo-input' );
                     echo form_input($data, set_value('atividadeData', date("d-m-Y", strtotime($atividadeData ))));?>

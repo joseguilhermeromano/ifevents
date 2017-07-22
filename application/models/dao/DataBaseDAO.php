@@ -93,7 +93,7 @@
 			$sql = "CREATE TABLE IF NOT EXISTS Instituicao (
 					 inst_cd   int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 					,inst_nm   varchar(100) NOT NULL
-					,inst_abrev varchar(10) 
+					,inst_abrev varchar(10)
 					,inst_desc varchar(500) NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
@@ -196,16 +196,16 @@
 		//Método cria a tabela Atividade
 		public function create_table_atividade(){
 			$sql = "CREATE TABLE IF NOT EXISTS Atividade(
-					 ativ_cd        int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-					,ativ_nm        varchar(100) NOT NULL
-					,ativ_desc      varchar(500) NOT NULL
-					,ativ_dt        date         NOT NULL
-					,ativ_hora_ini  time         NOT NULL
-					,ativ_hora_fin  time         NOT NULL
-					,ativ_responsavel int(11)	 NOT NULL
-					,ativ_local     varchar(200) NOT NULL
-					,ativ_vagas_qtd int(3)       NOT NULL
-					,ativ_tiat_cd   int(11)      NOT NULL
+					 ativ_cd          int(11)        NOT NULL PRIMARY KEY AUTO_INCREMENT
+					,ativ_nm          varchar(100)   NOT NULL
+					,ativ_desc        varchar(500)   NOT NULL
+					,ativ_responsavel varchar(100)   NOT NULL
+					,ativ_dt          date           NOT NULL
+					,ativ_hora_ini    time           NOT NULL
+					,ativ_hora_fin    time           NOT NULL
+					,ativ_local       varchar(200)   NOT NULL
+					,ativ_vagas_qtd   int(3)         NOT NULL
+					,ativ_tiat_cd     int(11)        NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 

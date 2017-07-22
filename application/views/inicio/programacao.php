@@ -12,8 +12,12 @@ include("application/views/common/area-externa/header-presentation.php");
         <div class="panel-heading accordion-caret">
           <h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">SEGUNDA-FEIRA 17/10/2016</a></h4>
         </div>
-    <?php foreach($programacao as $atividade): ?>
-
+    <?php foreach($programacao as $atividade):
+            foreach ($tipoAtividade as $activity):
+                if($activity->tiat_cd == $atividade->ativ_tiat_cd){
+                    $categoria = $activity->tiat_nm;
+                }
+            endforeach;?>
         <div id="collapseOne" class="panel-collapse collapse in">
           <div class="panel-body">
             <hr class="hr-pontilhado">
@@ -31,11 +35,10 @@ include("application/views/common/area-externa/header-presentation.php");
                   &nbsp;&nbsp;<i class="fa fa-clock-o" aria-hidden="true"></i> Término: <?php echo date("H:i", strtotime($atividade->ativ_hora_fin)); ?>
               </div>
               <div class="col-md-3">
-                  <span class="glyphicon glyphicon-hourglass"></span> Duração: 120 min
-                  &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> Sala: <?php echo $atividade->ativ_local; ?>
+                  &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-map-marker" aria-hidden="true"></i> Local: <?php echo $atividade->ativ_local; ?>
               </div>
               <div class="col-md-3">
-                  <i class="fa fa-check-square-o" aria-hidden="true"></i> Categoria: Workshop
+                  <i class="fa fa-check-square-o" aria-hidden="true"></i> Categoria: <?php echo $categoria; ?>
               </div>
             </div>
             <br><br>
@@ -51,7 +54,9 @@ include("application/views/common/area-externa/header-presentation.php");
           </div>
         </div>
 
-    <?php endforeach; ?>
+            <?php
+
+        endforeach; ?>
       </div>
       <div class="panel panel-default">
         <div class="panel-heading accordion-caret">

@@ -41,8 +41,7 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Título', 'titulo' ); ?></b>
-        <?php $data = array( 'name' => 'titulo', 'placeholder' => "Titulo",
-            'class' => 'form-control estilo-input' );
+        <?php $data = array( 'name' => 'titulo', 'class' => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>
@@ -52,8 +51,7 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Descrição', 'descricao' ); ?></b><br>
-        	<?php
-        		$data = array( 'name' => 'descricao', 'placeholder' => 'Descrição', 'id'=>'editor', 'cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input' );
+        	<?php $data = array( 'name' => 'descricao', 'id'=>'editor', 'cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input' );
                 echo form_textarea( $data );
         	?>
         </div>
@@ -63,9 +61,19 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
+        <b><?php echo form_label( '*Responsável', 'responsavel' ); ?></b>
+        <?php $data = array( 'name' => 'responsavel', 'class' => 'form-control estilo-input' );
+               echo form_input($data);?>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
         <b><?php echo form_label( '*Data', 'data' ); ?></b>
-        <?php $data = array( 'name' => 'data', 'placeholder' => "Data",
-            'class' => 'form-control estilo-input' );
+        <?php $data = array( 'name' => 'data', 'class' => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>
@@ -75,8 +83,7 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Hora do Início', 'início' ); ?></b>
-        <?php $data = array( 'name' => 'inicio', 'placeholder' => "Início",
-            'class' => 'form-control estilo-input' );
+        <?php $data = array( 'name' => 'inicio', 'class' => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>
@@ -86,8 +93,7 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Hora do Término', 'termino' ); ?></b>
-        <?php $data = array( 'name' => 'termino', 'placeholder' => "Término",
-            'class' => 'form-control estilo-input' );
+        <?php $data = array( 'name' => 'termino', 'class' => 'form-control estilo-input' );
                echo form_input($data);?>
         </div>
     </div>
@@ -97,9 +103,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <strong><?php echo form_label( '*Local', 'local'); ?> </strong>
-            <?php $data = array( 'name'        => 'local',
-                                 'placeholder' => 'Local',
-                                 'class'       => 'form-control estilo-input' );
+            <?php $data = array( 'name'=> 'local', 'class'=> 'form-control estilo-input' );
                           echo form_input($data);?>
         </div>
     </div>
@@ -109,9 +113,7 @@
     <div class="col-md-12">
         <div class="form-group">
             <strong><?php echo form_label( '*Quantidade de Vagas', 'quantidadeVagas' )?></strong>
-                    <?php $data = array( 'name' => 'quantidadeVagas',
-                                         'placeholder' => 'Quantidade de Vagas',
-                                         'class' => 'form-control estilo-input' );
+                    <?php $data = array( 'name' => 'quantidadeVagas', 'class' => 'form-control estilo-input' );
                           echo form_input($data);?>
         </div>
     </div>

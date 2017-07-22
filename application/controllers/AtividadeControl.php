@@ -10,7 +10,7 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
     $this->load->Model( 'AtividadeModel','atividade' );
     $this->load->Model( 'dao/TipoAtividadeDAO' );
   }
-      
+
   public function cadastrar(){
     $data['atividade'] = $this->TipoAtividadeDAO->consultarTudo();
     $data['title'] = "IFEvents - Atividade - Organizador";
@@ -84,6 +84,7 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
     $this->atividade->setCodigo($this->input->post('codigo'));
     $this->atividade->setTitulo($this->input->post('titulo'));
     $this->atividade->setDescricao($this->input->post('descricao'));
+    $this->atividade->setResponsavel($this->input->post('responsavel'));
     $this->atividade->setData($this->input->post('data'));
     $this->atividade->setInicio($this->input->post('inicio'));
     $this->atividade->setTermino($this->input->post('termino'));
@@ -95,6 +96,7 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
   public function valida(){
     $this->form_validation->set_rules(	'titulo', 'Titulo', 'trim|required|max_length[100]' );
     $this->form_validation->set_rules(	'descricao', 'Descricao', 'trim|required|max_length[500]' );
+    $this->form_validation->set_rules(	'responsavel', 'Responsavel', 'trim|required|max_length[100]' );
     $this->form_validation->set_rules(	'data', 'Data', 'trim|required|max_length[10]' );
     $this->form_validation->set_rules(	'inicio', 'Hora do Início', 'trim|required' );
     $this->form_validation->set_rules(	'termino', 'Hora do Término', 'trim|required' );

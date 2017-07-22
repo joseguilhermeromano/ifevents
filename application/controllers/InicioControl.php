@@ -12,6 +12,7 @@
 //			$this->DataBaseDAO->create_table_ci_session();
 			// $this->load->model('SubmitModel');
 			$this->load->model('dao/InscricaoDAO');
+			$this->load->model('dao/TipoAtividadeDAO');
 			// $this->model('Autentica');
 		}
 		//Método chama a view principal do sistema (Home)
@@ -34,6 +35,7 @@
 
 
 		public function programacao(){
+			$data['tipoAtividade'] = $this->TipoAtividadeDAO->consultarTudo();
 			$data['programacao'] = $this->InscricaoDAO->consultarTudo();
 			$data['title'] = "IFEvents - Programação do Evento";
 			$this->chamaView("programacao", "inicio", $data, 0);

@@ -36,6 +36,7 @@
             <tr>
                 <th><center>Título</center></th>
                 <th><center>Descrição</center></th>
+                <th><center>Responsável</center></th>
                 <th><center>Data  </center></th>
                 <th><center>Inicio</center></th>
                 <th><center>Término</center></th>
@@ -56,6 +57,7 @@
                     <tr>
                         <td><?php echo $item->ativ_nm; ?></td>
                         <td class="text-center"><?php echo $item->ativ_desc; ?></td>
+                        <td class="text-center"><?php echo $item->ativ_responsavel; ?></td>
                         <td class="text-center"><?php echo date("d/m/Y", strtotime($item->ativ_dt)); ?></td>
                         <td class="text-center"><?php echo date("H:i", strtotime($item->ativ_hora_ini)); ?></td>
                         <td class="text-center"><?php echo date("H:i", strtotime($item->ativ_hora_fin)); ?></td>

@@ -21,6 +21,7 @@ class AtividadeDAO extends CI_Model implements DAO{
 		$this->db->where('ativ_cd', $obj->ativ_cd);
 		$this->db->set('ativ_nm', $obj->ativ_nm);
 		$this->db->set('ativ_desc', $obj->ativ_desc);
+		$this->db->set('ativ_responsavel', $obj->ativ_responsavel);
 		$this->db->set('ativ_dt', $obj->ativ_dt);
 		$this->db->set('ativ_hora_ini', $obj->ativ_hora_ini);
 		$this->db->set('ativ_hora_fin', $obj->ativ_hora_fin);
@@ -31,7 +32,8 @@ class AtividadeDAO extends CI_Model implements DAO{
   }
 
   public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='ativ_nm', $ordenacao='asc') {
-  	$this->db->select("ativ_cd, ativ_nm, ativ_desc, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local, ativ_vagas_qtd, ativ_tiat_cd");
+  	$this->db->select("ativ_cd, ativ_nm, ativ_desc, ativ_responsavel, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local,
+											 ativ_vagas_qtd, ativ_tiat_cd");
     $this->db->from("Atividade");
     $this->db->order_by($sort, $ordenacao);
     if($parametros !== null){
@@ -41,7 +43,7 @@ class AtividadeDAO extends CI_Model implements DAO{
     }
     if($limite)
     	$this->db->limit($limite, $numPagina);
-    $query = $this->db->get();
+    	$query = $this->db->get();
     if($query->num_rows()>0){
     	return $query->result_object();
     }else{
@@ -50,7 +52,8 @@ class AtividadeDAO extends CI_Model implements DAO{
   }
 
   public function consultarCodigo($codigo){
-		$this->db->select('ativ_cd, ativ_nm, ativ_desc, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local, ativ_vagas_qtd, ativ_tiat_cd');
+		$this->db->select('ativ_cd, ativ_nm, ativ_desc, ativ_responsavel, ativ_dt, ativ_hora_ini, ativ_hora_fin,
+										   ativ_local, ativ_vagas_qtd, ativ_tiat_cd');
 		$this->db->from('Atividade');
 		$this->db->where( 'ativ_cd', $codigo );
 		$query = $this->db->get();
@@ -60,6 +63,7 @@ class AtividadeDAO extends CI_Model implements DAO{
 		$atividade->ativ_cd = $consulta->ativ_cd;
 		$atividade->ativ_nm = $consulta->ativ_nm;
 		$atividade->ativ_desc = $consulta->ativ_desc;
+		$atividade->ativ_responsavel = $consulta->ativ_responsavel;
 		$atividade->ativ_dt = $consulta->ativ_dt;
 		$atividade->ativ_hora_ini  = $consulta->ativ_hora_ini;
 		$atividade->ativ_hora_fin  = $consulta->ativ_hora_fin;

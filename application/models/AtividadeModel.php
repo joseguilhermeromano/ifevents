@@ -9,6 +9,7 @@
     private $codigo;
     private $titulo;
     private $descricao;
+    private $responsavel;
     private $data;
     private $inicio;
     private $termino;
@@ -38,6 +39,14 @@
 
     public function setDescricao($descricao){
       $this->descricao = $descricao;
+    }
+
+    public function getResponsavel(){
+      return $this->responsavel;
+    }
+
+    public function setResponsavel($responsavel){
+      $this->responsavel = $responsavel;
     }
 
     public function getData(){
@@ -89,15 +98,16 @@
     }
 
     public function setaValores(){
-      $this->ativ_cd        = $this->getCodigo();
-      $this->ativ_nm        = $this->getTitulo();
-    	$this->ativ_desc      = $this->getDescricao();
-      $this->ativ_dt        = $this->getData();
-      $this->ativ_hora_ini  = $this->getInicio();
-      $this->ativ_hora_fin  = $this->getTermino();
-      $this->ativ_local     = $this->getLocal();
-      $this->ativ_vagas_qtd = $this->getQuantidadeVagas();
-      $this->ativ_tiat_cd   = $this->getTipoAtividade();
+      $this->ativ_cd          = $this->getCodigo();
+      $this->ativ_nm          = $this->getTitulo();
+    	$this->ativ_desc        = $this->getDescricao();
+      $this->ativ_responsavel = $this->getResponsavel();
+      $this->ativ_dt          = $this->getData();
+      $this->ativ_hora_ini    = $this->getInicio();
+      $this->ativ_hora_fin    = $this->getTermino();
+      $this->ativ_local       = $this->getLocal();
+      $this->ativ_vagas_qtd   = $this->getQuantidadeVagas();
+      $this->ativ_tiat_cd     = $this->getTipoAtividade();
     }
 
 }
