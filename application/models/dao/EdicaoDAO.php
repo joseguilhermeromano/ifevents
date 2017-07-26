@@ -37,8 +37,8 @@
                 ,'edic_link' => $obj->getLinkEdicao()
                 ,'edic_img' => $obj->getImagemEdicao()
                 ,'edic_regr_cd' => $obj->getCodigoRegra()
-                ,'edic_comi_cd' => $obj->getComite()->comi_cd
-                ,'edic_conf_cd' => $obj->getConferencia()->conf_cd
+                ,'edic_comi_cd' => $obj->getComite()->getCodigo()
+                ,'edic_conf_cd' => $obj->getConferencia()->getCodigo()
                 ,'edic_email_cd' => $obj->getCodigoEmail()
                 ,'edic_tele_cd' => $obj->getCodigoTelefone()
                     );
@@ -140,10 +140,24 @@
                 $this->db->where('loca_cd', $codigoLocalidade);
                 $this->db->update('Localidade', $parametros);
             }
-            $this->db->where('sedi_edic_cd', $obj->getCodigo());
-            $this->db->update('Sedia', array('sedi_loca_cd' => $codigoLocalidade
-            ,'sedi_num' => $obj->getNumero()
-            ,'sedi_comp' => $obj->getComplemento()));
+            $this->insereAlteraSede($obj, $codigoLocalidade);
+        }
+        
+        private function insereAlteraSede($obj, $codigoLocalidade){
+            $parametros = array('sedi_loca_cd' => $codigoLocalidade
+                    ,'sedi_edic_cd' => $obj->getCodigo()
+                    ,'sedi_num' => $obj->getNumero()
+                    ,'sedi_comp' => $obj->getComplemento());
+            $this->db->select("*");
+            $this->db->from("Sedia");
+            $this->db->where("sedi_edic_cd", $obj->getCodigo());
+            $query = $this->db->get();
+            if($query->num_rows() > 0){
+                $this->db->where('sedi_edic_cd', $obj->getCodigo());
+                $this->db->update('Sedia', $parametros);
+            }else{
+                $this->db->insert('Sedia',$parametros);
+            }
         }
         
         private function consultarCep($cep) {

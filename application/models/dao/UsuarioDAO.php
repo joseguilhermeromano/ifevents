@@ -5,11 +5,104 @@ class UsuarioDAO extends CI_Model{
 
     public function __construct(){
             parent::__construct('UsuarioDAO');
-            $this->load->model('InstituicaoModel', 'instituicao');
-            $this->load->model('dao/LocalidadeDAO');
-            $this->load->model('dao/EmailDAO');
-            $this->load->model('dao/TelefoneDAO');
+        $this->load->model('InstituicaoModel', 'instituicao');
 
+    }
+    
+    public function insereAlteraEmail($email){
+        $this->db->select('*');
+        $this->db->from('Email');
+        $this->db->where('email_email', $email);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result_object()[0]->email_cd;
+        }
+
+        $orig_db_debug = $this->db->db_debug;
+        $this->db->db_debug = FALSE;
+        $this->db->insert('Email', array('email_email' => $email));
+        $this->db->db_debug = $orig_db_debug;
+        return $this->db->insert_id();
+    }
+        
+    public function insereAlteraTelefone($telefone){
+        //Verifica se telefone já está cadastrado, caso afirmativo ele retorna o codigo do telefone
+        $this->db->select('*');
+        $this->db->from('Telefone');
+        $this->db->where('tele_fone', $telefone);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result_object()[0]->tele_cd;
+        }
+
+        //Cadastra um novo telefone
+        $this->db->insert('Telefone', array('tele_fone' => $telefone));
+        return $this->db->insert_id();
+    }
+        
+    public function insereAlteraEndereco($obj){
+        $consulta = $this->consultarCep($obj->getCep());
+        $parametros = array('loca_lograd' => $obj->getLogradouro()
+                ,'loca_bairro' => $obj->getBairro()
+                ,'loca_cid' => $obj->getCidade()
+                ,'loca_cep' => $obj->getCep()
+                ,'loca_uf' => $obj->getUf()
+                );
+        if(empty($consulta)){
+            $this->db->insert('Localidade',$parametros);
+            $codigoLocalidade = $this->db->insert_id();
+        }else{
+            $codigoLocalidade = $consulta->loca_cd;
+            $this->db->where('loca_cd', $codigoLocalidade);
+            $this->db->update('Localidade', $parametros);
+        }
+        $this->insereAlteraAbrigo($obj, $codigoLocalidade);
+    }
+    
+    private function insereAlteraAbrigo($obj, $codigoLocalidade){
+        $parametros = array('abri_loca_cd' => $codigoLocalidade
+                ,'abri_user_cd' => $obj->getCodigo()
+                ,'abri_num' => $obj->getNumero()
+                ,'abri_comp' => $obj->getComplemento());
+        $this->db->select("*");
+        $this->db->from("Abriga");
+        $this->db->where("abri_user_cd", $obj->getCodigo());
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            $this->db->where('abri_user_cd', $obj->getCodigo());
+            $this->db->update('Abriga', $parametros);
+        }else{
+            $this->db->insert('Abriga',$parametros);
+        }
+    }
+        
+    public function consultarCep($cep) {
+        $this->db->select("*");
+        $this->db->from("Localidade");
+        $this->db->where('Localidade.loca_cep',  $cep);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result_object()[0];
+        }
+        return null;
+    }
+    
+    public function consultaEndereco($obj){
+        $this->db->select("Localidade.*, Abriga.*");
+        $this->db->from("Abriga");
+        $this->db->join('Localidade', 'Abriga.abri_loca_cd = Localidade.loca_cd','left');
+        $this->db->where('Abriga.abri_user_cd', $obj->getCodigo());
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            $consulta = $query->result_object()[0];
+            $obj->setCep($consulta->loca_cep);
+            $obj->setLogradouro($consulta->loca_lograd);
+            $obj->setBairro($consulta->loca_bairro);
+            $obj->setNumero($consulta->abri_num);
+            $obj->setComplemento($consulta->abri_comp);
+            $obj->setCidade($consulta->loca_cid);
+            $obj->setUf($consulta->loca_uf);
+        }
     }
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='user_nm', $ordenacao='asc') {

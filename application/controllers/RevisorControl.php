@@ -1,9 +1,9 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 
 require_once 'PrincipalControl.php';
-require_once 'InterfaceControl.php';
+require_once 'UsuarioControl.php';
 
-class RevisorControl extends PrincipalControl{
+class RevisorControl extends UsuarioControl{
 
 	public function __construct(){
 		parent::__construct();
@@ -44,9 +44,10 @@ class RevisorControl extends PrincipalControl{
         }
 
 
-        $this->setaValores(true);
-
-        if($this->valida(true)){
+        $this->setaValores();
+        $data['revisor'] = $this->revisor;
+        
+        if($this->valida()){
                 $this->db->trans_start();
                 try{
                     $this->RevisorDAO->inserir($this->revisor);
@@ -57,10 +58,9 @@ class RevisorControl extends PrincipalControl{
 
             if($this ->db->trans_status() !== FALSE){
                 $this->session->set_flashdata('success', $sucesso);
-                unset($this->revisor);
+                unset($data['revisor']);
             }elseif($this->session->flashdata('error') === null){
             	$this->session->set_flashdata('error', $erro);
-                $data['revisor'] = $this->revisor;
             }
         }
 
@@ -71,14 +71,21 @@ class RevisorControl extends PrincipalControl{
       public function alterar($codigo){
         $data['title'] = "IFEvents - Editar cadastro de revisor";
         $data['tituloForm'] = '<i class="fa fa-pencil" aria-hidden="true"></i><b> Editar Cadastro de Revisor</b>';
-
-        if (isset($codigo)){
+        
+        
           $this->revisor = $this->RevisorDAO->consultarCodigo($codigo);
+          
+          if($this->revisor === null){
+              $this->session->set_flashdata('error', 'Não foi possível identificar'
+                      . ' o revisor no qual se deseja atualizar as informações!');
+              redirect('usuario/consultar');
+          }
+          
           if(!empty($this->input->post())){
 
-            $this->setaValores(false);
+            $this->setaValores();
 
-            if($this->valida(false)){
+            if($this->valida()){
                     $this->db->trans_start();
                     try{
                         $this->RevisorDAO->alterar($this->revisor);
@@ -89,7 +96,7 @@ class RevisorControl extends PrincipalControl{
 
                 if($this ->db->trans_status() !== FALSE){
                    $this->session->set_flashdata('success', 'O Cadastro do revisor foi atualizado com sucesso!');
-                    unset($this->organizador);
+                   $this->revisor = $this->RevisorDAO->consultarCodigo($codigo);
                 }elseif($this->session->flashdata('error') === null){
                   $this->session->set_flashdata('success', 'Não foi possível atualizar os dados do revisor!');
                 }
@@ -97,24 +104,21 @@ class RevisorControl extends PrincipalControl{
 
           }
 
-        }else{
-          $this->session->set_flashdata('error', 'Não foi possível identificar o revisor no qual se deseja atualizar as informações!');
-        }
-
          $data['revisor'] = $this->revisor;
         return $this->chamaView("form-revisor", "avaliador", $data, 1);
       }
 
       public function perfil(){
-        $this->revisor = $this->RevisorDAO->consultarCodigo($this->session->userdata('usuario')->user_cd);
+        $codigo = $this->session->userdata('usuario')->user_cd;
+        $this->revisor = $this->RevisorDAO->consultarCodigo($codigo);
         if(!empty($this->input->post())){
 
-	        $this->setaValores(false);
+	        $this->setaValores();
 
-	        if($this->valida(false)){
+	        if($this->valida()){
 	                $this->db->trans_start();
 	                try{
-	                    $this->RevisorDAO->alterar($this->organizador);
+	                    $this->RevisorDAO->alterar($this->revisor);
 	                }catch(Exception $e){
 	                    $this->session->set_flashdata('error', $e->getMessage());
 	                }
@@ -122,7 +126,7 @@ class RevisorControl extends PrincipalControl{
 
 	            if($this ->db->trans_status() !== FALSE){
 	                $this->session->set_flashdata('success', 'Suas informações foram atualizadas com sucesso!');
-	                unset($this->organizador);
+	                $this->revisor = $this->RevisorDAO->consultarCodigo($codigo);
 	            }elseif($this->session->flashdata('error') === null){
 	            	$this->session->set_flashdata('success', 'Não foi possível atualizar as suas informações!');
 	            }
@@ -135,23 +139,8 @@ class RevisorControl extends PrincipalControl{
         return $this->chamaView("form-revisor", "avaliador", $data, 1);
       }
 
-      private function valida($cadastrar){
-        if($cadastrar==true || $this->session->userdata('usuario')->user_tipo == 3){
-          $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
-          $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
-          $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|max_length[14]' );
-          if($this->input->post('confirmaemail')!==null){
-              $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
-              $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
-              'valid_email|trim|required|max_length[100]|matches[email]' );
-          }
-        }
+      private function valida(){
         $this->form_validation->set_rules( 'instituicao', 'Instituição/Empresa', 'trim|max_length[100]' );
-        if($this->input->post('senha') !== null){
-        	$this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
-        	$this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha',
-        	'trim|required|min_length[6]|matches[senha]' );
-    	}
         $this->form_validation->set_rules( 'biografia', 'Biografia', 'trim|max_length[200]' );
         $this->form_validation->set_rules( 'logradouro', 'Logradouro', 'required|trim|max_length[200]' );
     	$this->form_validation->set_rules( 'bairro', 'Bairro', 'required|trim|max_length[100]' );
@@ -163,21 +152,12 @@ class RevisorControl extends PrincipalControl{
         return $this->form_validation->run();
       }
 
-      private function setaValores($cadastrar){
-      	   	if($cadastrar==true || $this->session->userdata('usuario')->user_tipo == 3){
-              $this->revisor->setNomeCompleto(ajustaNomes($this->input->post('nome')));
-              $this->revisor->setRg($this->input->post('rg'));
-              $this->revisor->setCpf($this->input->post('cpf'));
-              $this->revisor->setEmail($this->input->post('email'));
-            }
-            if($this->input->post('confirmasenha') !== ''){
-              $this->revisor->setSenha($this->input->post('senha'));
-            }
+      private function setaValores(){
+            $this->camposRestritos($this->revisor);
+            $this->obtemSenha($this->revisor);
             $this->revisor->setInstituicao($this->instituicao);
             $this->revisor->setTelefone($this->input->post('telefone'));
             $this->revisor->setBiografia($this->input->post('biografia'));
-            $this->revisor->setValidaEmail(0);
-            $this->revisor->setStatus('Não Validado');
             $this->revisor->setLogradouro($this->input->post('logradouro'));
             $this->revisor->setBairro($this->input->post('bairro'));
             $this->revisor->setNumero($this->input->post('numero'));

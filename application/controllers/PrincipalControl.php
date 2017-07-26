@@ -45,6 +45,17 @@ class PrincipalControl extends CI_Controller {
         $this->load->view($footer);
 
     }
+    
+    public function isOrganizador(){
+        $usuario = $this->session->userdata("usuario");
+        if($usuario===null){
+            return false;
+        }
+        if($usuario->user_tipo == 3){
+            return true;
+        }
+        return false;
+    }
 
     public function geraPaginacao($limite = 10, $totalLinhasTabela = null, $uri=null){
         if($uri==null){
@@ -161,57 +172,6 @@ class PrincipalControl extends CI_Controller {
            echo($arquivo); // lê o arquivo
            exit; // aborta pós-ações
 
-    }
-
-    //$novoNome,$tipos,$maxWidth, $maxHeight, $minWidth, $minHeight
-    public function upload_image($novoNome, $diretorioImg = 'edicoes', $maxWidth=null, $maxHeight=null, $minWidth=null, $minHeight=null){
-
-    $this->img->upload($_FILES['image_field'],'pt_BR');
-
-        if ($this->img->uploaded) {
-
-            if($this->img->file_is_image == true){
-                
-                $this->img->image_max_width = $maxWidth;
-                $this->img->image_max_height = $maxHeight;
-                $this->img->image_min_width = $minWidth;
-                $this->img->image_min_height = $minHeight;
-                $this->img->allowed = array('image/jpg','image/jpeg','image/png', 'image/bmp');
-                $this->img->file_new_name_body = $novoNome;
-                $this->img->file_overwrite = true ;
-                $this->img->Process("application/views/imagens/".$diretorioImg."/");
-                if ($this->img->processed) {
-
-                      $linkImg = str_replace("\\", "", $this->img->file_dst_pathname);
-
-                        $configInputFile = array(
-                        "initialPreview" => "<img src='".base_url($linkImg)."' class='file-preview-image kv-preview-data img-responsive' style='with:auto; height: auto; max-height:160px' title='".$novoNome."' >",
-                        "initialPreviewConfig" => array('caption' => $this->img->file_dst_name,
-                            "size" => $this->img->file_src_size),
-                        "initialPreviewAsData" => false,
-                        "initialPreviewShowDelete" => false,
-                        "initialCaption" => $novoNome,
-                        "maxFileSize" => "1000000",
-                        "overwriteInitial" => true
-                        );
-
-                        $this->session->set_userdata('configInputFile',$configInputFile);
-                        
-                      return $linkImg;
-                } else {
-                      $this->session->set_flashdata('error', $this->img->error);
-                }
-            }else{
-                $this->session->set_flashdata('error', 'O Arquivo selecionado não é uma imagem!');
-            }
-
-
-        } else {
-            $this->session->set_flashdata('error', $this->img->error);
-            echo $this->img->error;
-        }
-
-        return null;
     }
 
 }

@@ -21,7 +21,7 @@
         <b><?php echo form_label( '*Conferência', 'conferencia' ); ?></b><br>
             <select name="conferencia" class="form-control estilo-input consultaConferencia">
             <?php   if(isset($edicao) && !empty($edicao->getConferencia())){   ?>
-                 <option value="<?php echo $edicao->getConferencia()->conf_cd; ?>" selected><?php echo $edicao->getConferencia()->conf_abrev;?></option>
+                 <option value="<?php echo $edicao->getConferencia()->getCodigo(); ?>" selected><?php echo $edicao->getConferencia()->getAbreviacao();?></option>
             <?php   }   ?>
             </select>
         </div>
@@ -31,7 +31,7 @@
         <b><?php echo form_label( '*Comitê', 'comite' ); ?></b><br>
             <select name="comite" class="form-control estilo-input consultaComite">
             <?php   if(isset($edicao) && !empty($edicao->getComite())){   ?>
-          <option value="<?php echo $edicao->getComite()->comi_cd; ?>" selected><?php echo $edicao->getComite()->comi_nm;?></option>
+          <option value="<?php echo $edicao->getComite()->getCodigo(); ?>" selected><?php echo $edicao->getComite()->getNome();?></option>
             <?php   }   ?>
             </select>
         </div>

@@ -3,22 +3,16 @@ require_once 'PrincipalControl.php';
 
 class UsuarioControl extends PrincipalControl{
 
-		public function __construct(){
-			parent::__construct();
+        public function __construct(){
+                parent::__construct();
 
-						$this->load->Model( 'dao/UsuarioDAO' );
-						$this->load->Model( 'dao/ContatoDAO' );
-            $this->load->Model( 'dao/EmailDAO' );
-            $this->load->Model( 'dao/TelefoneDAO' );
-            $this->load->Model( 'dao/LocalidadeDAO' );
+            $this->load->Model( 'dao/UsuarioDAO' );
+            $this->load->Model( 'dao/ContatoDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
-						$this->load->Model('UsuarioModel','usuario');
+            $this->load->Model('UsuarioModel','usuario');
             $this->load->Model('dao/EdicaoDAO');
-            $this->load->Model('EmailModel','email');
-            $this->load->Model('TelefoneModel','telefone');
-            $this->load->Model('LocalidadeModel','localidade');
             $this->load->Model('InstituicaoModel','instituicao');
-		}
+        }
 
         public function consultar() {
             $limite = 10;
@@ -42,10 +36,6 @@ class UsuarioControl extends PrincipalControl{
             $this->chamaView("usuarios", "organizador", $data, 1);
         }
 
-				public function consultarTudo(){
-					return null;
-				}
-
 
         public function notificaUsers(){
 						$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
@@ -54,8 +44,8 @@ class UsuarioControl extends PrincipalControl{
                     array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
-						$answer  = (object) array(
-							'resposta' => $this->input->post('tipo'));
+            $answer  = (object) array(
+                    'resposta' => $this->input->post('tipo'));
 
             $notificacao = (object) array(
                 'tipo_notificacao' => $this->input->post('tipo_notificacao'),
@@ -127,6 +117,56 @@ class UsuarioControl extends PrincipalControl{
             $this->chamaView("notifica-users", "organizador",
                    $data, 1);
         }
+        
+        public function camposRestritos($obj){
+            $cadastro = $obj->getCodigo()=== null ? true : false;
+            
+            if($this->isOrganizador()== false && $cadastro == false){
+                return 0;
+            }
+            
+            $this->form_validation->set_rules( 'nome', 'Nome Completo', 'trim|required|max_length[50]' );
+            $obj->setNomeCompleto($this->input->post('nome'));
+
+            if($cadastro == true || !empty($this->input->post('confirmaemail'))){
+                $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required|max_length[100]' );
+                $this->form_validation->set_rules( 'confirmaemail', 'Confirma E-mail',
+                'valid_email|trim|required|max_length[100]|matches[email]' );
+                $obj->setEmail($this->input->post('email'));
+            }
+            
+             
+            if($cadastro == true || !empty($this->input->post('rg'))){
+                $this->form_validation->set_rules( 'rg', 'RG', 'trim|required|max_length[12]' );
+                $obj->setRg($this->input->post('rg'));
+            }
+            
+            if($cadastro == true || !empty($this->input->post('cpf'))){
+               $this->form_validation->set_rules( 'cpf', 'CPF', 'valid_cpf|trim|required|max_length[14]' );
+               $obj->setCpf($this->input->post('cpf')); 
+            }
+            
+            if($cadastro == true){
+                $obj->setValidaEmail(0);
+                $obj->setStatus('Não Validado');
+            }
+            
+        }
+        
+        public function obtemSenha($obj){
+            if(!empty($this->input->post('confirmasenha'))){
+              $this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
+              $this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha',
+                'trim|required|min_length[6]|matches[senha]' ); 
+              $senha = $this->input->post('senha');
+              $confirmaSenha = $this->input->post('confirmasenha');
+              if($senha == $confirmaSenha){
+                $senha = md5($senha);
+                $obj->setSenha($senha);
+              }
+            }
+        }
+        
 
         public function consultarEmailSelect(){
             $data = $this->UsuarioDAO->consultarTudo(array('Email.email_email' => $this->input->post('term')));

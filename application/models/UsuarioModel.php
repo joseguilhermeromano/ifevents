@@ -1,163 +1,182 @@
 <?php
 
-	if ( !defined( 'BASEPATH' )) exit( 'No direct script access allowed' );
+if ( !defined( 'BASEPATH' )) exit( 'No direct script access allowed' );
 
-	class UsuarioModel extends CI_Model{
-		
-		private $codigo;
-		private $nomecompleto;
-		private $rg;
-		private $cpf;
-		private $email;
-		private $senha;
-		private $instituicao;
-		private $telefone;
-		private $validaemail;
-		private $status;
-		private $logradouro;
-		private $bairro;
-		private $numero;
-		private $complemento;
-		private $cep;
-		private $cidade;
-		private $uf;
+class UsuarioModel extends CI_Model{
 
-		public function getCodigo(){
-			return $this->codigo;
-		}
+        private $codigo;
+        private $nomecompleto;
+        private $rg;
+        private $cpf;
+        private $email;
+        private $senha;
+        private $instituicao;
+        private $telefone;
+        private $validaemail;
+        private $status;
+        private $logradouro;
+        private $bairro;
+        private $numero;
+        private $complemento;
+        private $cep;
+        private $cidade;
+        private $uf;
+        private $codigoEmail;
+        private $codigoTelefone;
 
-		public function getNomeCompleto(){
-			return $this->nomecompleto;
-		}
+        public function getCodigo(){
+                return $this->codigo;
+        }
 
-		public function getRg(){
-			return $this->rg;
-		}
+        public function getCodigoEmail(){
+                return $this->codigoEmail;
+        }
 
-		public function getCpf(){
-			return $this->cpf;
-		}
+        public function getCodigoTelefone(){
+                return $this->codigoTelefone;
+        }
 
-		public function getEmail(){
-			return $this->email;
-		}
+        public function getNomeCompleto(){
+                return $this->nomecompleto;
+        }
 
-		public function getSenha(){
-			return $this->senha;
-		}
+        public function getRg(){
+                return $this->rg;
+        }
 
-		public function getInstituicao(){
-			return $this->instituicao;
-		}
+        public function getCpf(){
+                return $this->cpf;
+        }
 
-		public function getTelefone(){
-			return $this->telefone;
-		}
+        public function getEmail(){
+                return $this->email;
+        }
 
-		public function getValidaEmail(){
-			return $this->validaemail;
-		}
+        public function getSenha(){
+                return $this->senha;
+        }
 
-		public function getStatus(){
-			return $this->status;
-		}
+        public function getInstituicao(){
+                return $this->instituicao;
+        }
 
-		public function getLogradouro(){
-			return $this->logradouro; 
-		}
+        public function getTelefone(){
+                return $this->telefone;
+        }
 
-		public function getBairro(){
-			return $this->bairro;
-		}
+        public function getValidaEmail(){
+                return $this->validaemail;
+        }
 
-		public function getNumero(){
-			return $this->numero;
-		}
+        public function getStatus(){
+                return $this->status;
+        }
 
-		public function getComplemento(){
-			return $this->complemento;
-		}
+        public function getLogradouro(){
+                return $this->logradouro; 
+        }
 
-		public function getCep(){
-			return $this->cep;
-		}
+        public function getBairro(){
+                return $this->bairro;
+        }
 
-		public function getCidade(){
-			return $this->cidade;
-		}
+        public function getNumero(){
+                return $this->numero;
+        }
 
-		public function getUf(){
-			return $this->uf;
-		}
+        public function getComplemento(){
+                return $this->complemento;
+        }
+
+        public function getCep(){
+                return $this->cep;
+        }
+
+        public function getCidade(){
+                return $this->cidade;
+        }
+
+        public function getUf(){
+                return $this->uf;
+        }
 
 
 
-		public function setCodigo($codigo){
-			$this->codigo = $codigo;
-		}
+        public function setCodigo($codigo){
+                $this->codigo = $codigo;
+        }
 
-		public function setNomeCompleto($nomecompleto){
-			$this->nomecompleto = $nomecompleto;
-		}
 
-		public function setRg($rg){
-			$this->rg = $rg;
-		}
+        public function setCodigoEmail($codigo){
+                $this->codigoEmail = $codigo;
+        }
 
-		public function setCpf($cpf){
-			$this->cpf = $cpf;
-		}
+        public function setCodigoTelefone($codigo){
+                $this->codigoTelefone = $codigo;
+        }
 
-		public function setEmail($email){
-			$this->email = $email;
-		}
+        public function setNomeCompleto($nomecompleto){
+                $this->nomecompleto = $nomecompleto;
+        }
 
-		public function setSenha($senha){
-			$this->senha = $senha;
-		}
+        public function setRg($rg){
+                $this->rg = $rg;
+        }
 
-		public function setInstituicao($instituicao){
-			$this->instituicao = $instituicao;
-		}
+        public function setCpf($cpf){
+                $this->cpf = $cpf;
+        }
 
-		public function setTelefone($telefone){
-			$this->telefone = $telefone;
-		}
+        public function setEmail($email){
+                $this->email = $email;
+        }
 
-		public function setValidaEmail($validaemail){
-			$this->validaemail = $validaemail;
-		}
+        public function setSenha($senha){
+                $this->senha = $senha;
+        }
 
-		public function setStatus($status){
-			$this->status = $status;
-		}
+        public function setInstituicao($instituicao){
+                $this->instituicao = $instituicao;
+        }
 
-		public function setLogradouro($logradouro){
-			$this->logradouro = $logradouro; 
-		}
+        public function setTelefone($telefone){
+                $this->telefone = $telefone;
+        }
 
-		public function setBairro($bairro){
-			$this->bairro = $bairro;
-		}
+        public function setValidaEmail($validaemail){
+                $this->validaemail = $validaemail;
+        }
 
-		public function setNumero($numero){
-			$this->numero = $numero;
-		}
+        public function setStatus($status){
+                $this->status = $status;
+        }
 
-		public function setComplemento($complemento){
-			$this->complemento = $complemento;
-		}
+        public function setLogradouro($logradouro){
+                $this->logradouro = $logradouro; 
+        }
 
-		public function setCep($cep){
-			$this->cep = $cep;
-		}
+        public function setBairro($bairro){
+                $this->bairro = $bairro;
+        }
 
-		public function setCidade($cidade){
-			$this->cidade = $cidade;
-		}
+        public function setNumero($numero){
+                $this->numero = $numero;
+        }
 
-		public function setUf($uf){
-			$this->uf = $uf;
-		}
+        public function setComplemento($complemento){
+                $this->complemento = $complemento;
+        }
 
-	}
+        public function setCep($cep){
+                $this->cep = $cep;
+        }
+
+        public function setCidade($cidade){
+                $this->cidade = $cidade;
+        }
+
+        public function setUf($uf){
+                $this->uf = $uf;
+        }
+
+}

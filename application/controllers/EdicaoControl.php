@@ -153,98 +153,103 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         return $novoLink;
     }
 
-        private function geraNomeImagemEdicao(){
-            $nomeImagem = "img_";
-            $nomeImagem .= $this->edicao->getNumeroEdicao()."_";
-            $nomeConferencia = $this->edicao->getConferencia()->conf_abrev;
-            $nomeImagem .= strtolower($nomeConferencia);
-            return $nomeImagem;
+    private function geraNomeImagemEdicao(){
+        $nomeImagem = "img_";
+        $nomeImagem .= $this->edicao->getNumeroEdicao()."_";
+        $nomeConferencia = $this->edicao->getConferencia()->getAbreviacao();
+        $nomeImagem .= strtolower($nomeConferencia);
+        return $nomeImagem;
+    }
+
+    private function geraNumeracaoEdicao($codigoConferencia){
+        if($this->edicao->getNumeroEdicao()!==null){
+            return $this->edicao->getNumeroEdicao();
+        }
+        return $this->EdicaoDAO->consultarUltimaEdicao($codigoConferencia) + 1;
+    }
+
+    public function geraLinkEdicao(){
+        $codigoConferencia = $this->input->post('conf_cd');
+        $linkEdicao = base_url("evento/").$this->geraNumeracaoEdicao($codigoConferencia);
+        $linkEdicao .= "-";
+        $nomeConferencia = $this->ConferenciaDAO->consultarCodigo($codigoConferencia)->getAbreviacao();
+        $linkEdicao .= strtolower($nomeConferencia);
+        $this->output->set_content_type('application/json')->set_output(json_encode($linkEdicao));
+    }
+
+    private function resgataParcerias(){
+        $parceriasView = $this->input->post('parcerias');
+
+        if($parceriasView !== null && !empty($parceriasView)){
+            foreach ($parceriasView as $key => $value) {
+                $parcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value);
+            }
+            return $parcerias;
+        }
+        return null;
+    }
+
+    public function alterar($codigo){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigo);
+        $data = array("title"=>"IFEvents - Editar Edição",
+                "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Edição</b></h2>",
+                "edicao" => $this->edicao);
+        if (empty($this->edicao->input->post())) {
+            return $this->chamaView("form-edicao", "organizador", $data, 1);
         }
 
-	private function geraNumeracaoEdicao($codigoConferencia){
-            if($this->edicao->getNumeroEdicao()!==null){
-                return $this->edicao->getNumeroEdicao();
-            }
-            return $this->EdicaoDAO->consultarUltimaEdicao($codigoConferencia) + 1;
-	}
-        
-        public function geraLinkEdicao(){
-            $codigoConferencia = $this->input->post('conf_cd');
-            $linkEdicao = base_url("evento/").$this->geraNumeracaoEdicao($codigoConferencia);
-            $linkEdicao .= "-";
-            $nomeConferencia = $this->ConferenciaDAO->consultarCodigo($codigoConferencia)->conf_abrev;
-            $linkEdicao .= strtolower($nomeConferencia);
-            $this->output->set_content_type('application/json')->set_output(json_encode($linkEdicao));
-        }
-        
-        private function resgataParcerias(){
-            $parceriasView = $this->input->post('parcerias');
-
-            if($parceriasView !== null && !empty($parceriasView)){
-                foreach ($parceriasView as $key => $value) {
-                    $parcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value);
-                }
-                return $parcerias;
-            }
-            return null;
-        }
-
-	public function alterar($codigo){
-            $edicao = $this->EdicaoDAO->consultarCodigo($codigo);
-            $data = array("title"=>"IFEvents - Editar Edição",
-                    "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Edição</b></h2>",
-                    "edicao" => $edicao);
-            if (empty($this->edicao->input->post())) {
-                return $this->chamaView("form-edicao", "organizador", $data, 1);
-            }
-            
-            $this->setaValores();
-
-            if($this->valida()){
-
-                $this->db->trans_start();
-                $this->EdicaoDAO->alterar($this->edicao);
-                $this->db->trans_complete();
-                if($this ->db->trans_status() === TRUE){
-                    $this->session->set_flashdata('success', 'A Edição foi atualizada com sucesso!');
-                }else{
-                    $this->session->set_flashdata('error', 'Não foi possível atualizar a edição!');
-                    $this->chamaView("form-edicao", "organizador", $data, 1);
-                }
-
-            }
-
+        if($this->edicao === null){
+            $this->session->set_flashdata('error', 'Esta edição não existe!');
             redirect('edicao/consultar');
+        }
 
-	}
+        $this->setaValores();
 
-	public function excluir($codigo){
+        if($this->valida()){
 
-	}
-
-	public function consultar(){
-            $limite = 10;
-            $numPagina =0;
-            if(null !== $this->input->get('pagina')){
-                $numPagina = $this->input->get('pagina');
-            }
-
-            if( $this->input->get('busca') !== null){
-                $busca = $this->input->get('busca');
-                $numEdicao = preg_replace("/\D/","", $busca);
-                $busca =  preg_replace("/[^A-Za-z]/", "", $busca);
-                $array = array('Conferencia.conf_abrev'=>$busca, 'edic_num'=> $numEdicao);
+            $this->db->trans_start();
+            $this->EdicaoDAO->alterar($this->edicao);
+            $this->db->trans_complete();
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'A Edição foi atualizada com sucesso!');
             }else{
-                $busca=null;
-                $array=null;
+                $this->session->set_flashdata('error', 'Não foi possível atualizar a edição!');
+                $this->chamaView("form-edicao", "organizador", $data, 1);
             }
 
-            $data['edicoes']=$this->EdicaoDAO->consultarTudo($array, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite, $this->EdicaoDAO->totalRegistros(), 'edicao/consultar/?busca='.$busca);
-            $data['totalRegistros'] = $this->EdicaoDAO->totalRegistros();
-            $data['title']="IFEvents - Edições";
-            $this->chamaView("edicoes", "organizador", $data, 1);
-	}
+        }
+
+        redirect('edicao/consultar');
+
+    }
+
+    public function excluir($codigo){
+
+    }
+
+    public function consultar(){
+        $limite = 10;
+        $numPagina =0;
+        if(null !== $this->input->get('pagina')){
+            $numPagina = $this->input->get('pagina');
+        }
+
+        if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $numEdicao = preg_replace("/\D/","", $busca);
+            $busca =  preg_replace("/[^A-Za-z]/", "", $busca);
+            $array = array('Conferencia.conf_abrev'=>$busca, 'edic_num'=> $numEdicao);
+        }else{
+            $busca=null;
+            $array=null;
+        }
+
+        $data['edicoes']=$this->EdicaoDAO->consultarTudo($array, $limite, $numPagina);
+        $data['paginacao'] = $this->geraPaginacao($limite, $this->EdicaoDAO->totalRegistros(), 'edicao/consultar/?busca='.$busca);
+        $data['totalRegistros'] = $this->EdicaoDAO->totalRegistros();
+        $data['title']="IFEvents - Edições";
+        $this->chamaView("edicoes", "organizador", $data, 1);
+    }
 
     public function revisores(){
         $limite = 10;
