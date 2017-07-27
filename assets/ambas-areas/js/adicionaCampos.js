@@ -314,33 +314,53 @@ $("#fileImage").ready(function(){
 	var Arquivo = Caminho.substring(Caminho.lastIndexOf('/') + 1);
 	return Arquivo;
     }
-        
-
-//  $.ajax({
-//  type: "POST",
-//  url: baseUrl + "edicao/recuperaImagem",
-//  async: true,
-//  dataType: "json",
-//  success: function (data) {
       
     $("#fileImage").fileinput(
       imagem
-//    initialPreview: "<img src='"+data.link_imagem
-//    +"' class='file-preview-image kv-preview-data img-responsive' "
-//    +"style='with:auto; height: auto; max-height:160px' title='"+data.novo_nome+"' >",
-//    initialPreviewAsData: false,
-//    initialPreviewShowDelete:false,
-//    initialPreviewConfig: [{caption:data.novo_nome, size: data.tamanho}],
-//    overwriteInitial: true,
-//    maxFileSize: "1000000",
     );
+});
 
 
-//  }
 
-//  });
-
-
+$("a.uploadAnaisResultados").click(function(){
+    var codigoEdicao = $(this).attr('codigoedicao');
+    var edicao = 'Upload de Anais & Resultados' + ' (' + $(this).attr('edicao') +')';
+    $('#modalUploadAnaisResultados h4').html(edicao);
+    
+    var arquivos;
+        arquivos = $.ajax({
+          type: "JSON",
+          url: baseUrl+'/edicao/consultarAnaisResultados/' + codigoEdicao,
+          success: function () {
+            return arquivos.getResponseHeader("application/json");
+          }
+        });
+    
+    console.log(codigoEdicao);
+    console.log(edicao);
+    $("#arquivoResultados").fileinput({
+        language: 'pt-BR',
+        theme: 'fa',
+        showUpload: true,
+        maxFileSize: 4096,
+        allowedFileExtensions: ["pdf", "docx"], 
+        browseClass: 'btn btn-success',
+        browseIcon: "<i class=\"fa fa-file\"></i> ",
+        deleteUrl: baseUrl + 'edicao/file-delete-resultados/',
+        uploadUrl: baseUrl + 'edicao/file-upload-resultados/'
+    }, arquivos.resultados);
+    
+    $("#arquivoAnais").fileinput({
+        language: 'pt-BR',
+        theme: 'fa',
+        showUpload: true,
+        maxFileSize: 4096,
+        allowedFileExtensions: ["pdf", "docx"], 
+        browseClass: 'btn btn-success',
+        browseIcon: "<i class=\"fa fa-file\"></i> ",
+        deleteUrl: baseUrl + 'edicao/file-delete-anais/',
+        uploadUrl: baseUrl + 'edicao/file-upload-anais/'
+    }, arquivos.anais);
 });
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
