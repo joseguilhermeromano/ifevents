@@ -29,10 +29,9 @@
 		    return $this->db->update('Atividade', $obj);
         }
 
-        public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='ativ_dt', $ordenacao='asc') {
-        	$this->db->select("ativ_cd, ativ_nm, ativ_desc, ativ_dt, ativ_hora_ini, ativ_hora_fin, ativ_local,
-							   ativ_vagas_qtd, ativ_responsavel, ativ_tiat_cd");
-            $this->db->from("Atividade");
+        public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort=null, $ordenacao='asc') {
+        	$this->db->select("insc_cd, insc_ativ_cd, insc_user_cd");
+            $this->db->from("Inscricao");
             $this->db->order_by($sort, $ordenacao);
             if($parametros !== null){
             	foreach ($parametros as $key => $value) {

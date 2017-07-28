@@ -1,18 +1,17 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
-require_once 'PrincipalControl.php';
+	require_once 'PrincipalControl.php';
 
-class UsuarioControl extends PrincipalControl{
+	class UsuarioControl extends PrincipalControl{
 
 		public function __construct(){
 			parent::__construct();
-
-						$this->load->Model( 'dao/UsuarioDAO' );
-						$this->load->Model( 'dao/ContatoDAO' );
+			$this->load->Model( 'dao/UsuarioDAO' );
+			$this->load->Model( 'dao/ContatoDAO' );
             $this->load->Model( 'dao/EmailDAO' );
             $this->load->Model( 'dao/TelefoneDAO' );
             $this->load->Model( 'dao/LocalidadeDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
-						$this->load->Model('UsuarioModel','usuario');
+			$this->load->Model('UsuarioModel','usuario');
             $this->load->Model('dao/EdicaoDAO');
             $this->load->Model('EmailModel','email');
             $this->load->Model('TelefoneModel','telefone');
@@ -26,7 +25,6 @@ class UsuarioControl extends PrincipalControl{
             if(null !== $this->input->get('pagina')){
                 $numPagina = $this->input->get('pagina');
             }
-
             if( $this->input->get('busca') !== null){
                 $busca = $this->input->get('busca');
                 $array = array('user_nm'=>$busca);
@@ -34,7 +32,6 @@ class UsuarioControl extends PrincipalControl{
                 $busca=null;
                 $array=null;
             }
-
             $data['users']=$this->UsuarioDAO->consultarTudo($array, $limite, $numPagina);
             $data['paginacao'] = $this->geraPaginacao($limite, $this->UsuarioDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
             $data['totalRegistros'] = $this->UsuarioDAO->totalRegistros();
@@ -42,26 +39,22 @@ class UsuarioControl extends PrincipalControl{
             $this->chamaView("usuarios", "organizador", $data, 1);
         }
 
-				public function consultarTudo(){
-					return null;
-				}
-
+		public function consultarTudo(){
+			return null;
+		}
 
         public function notificaUsers(){
-						$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
+			$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
             if (empty($this->input->post())){
                 $this->chamaView("notifica-users", "organizador",
-                    array("title"=>"IFEvents - Nova Notificação"), 1);
+                array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
-						$answer  = (object) array(
-							'resposta' => $this->input->post('tipo'));
-
-            $notificacao = (object) array(
-                'tipo_notificacao' => $this->input->post('tipo_notificacao'),
-                'emails' => $this->input->post('emails'),
-                'assunto' => $this->input->post('assunto'),
-                'mensagem' => $this->input->post('mensagem'));
+			$answer  = (object) array('resposta' => $this->input->post('tipo'));
+            $notificacao = (object) array('tipo_notificacao' => $this->input->post('tipo_notificacao'),
+										  'emails' => $this->input->post('emails'),
+										  'assunto' => $this->input->post('assunto'),
+                						  'mensagem' => $this->input->post('mensagem'));
             $this->form_validation->set_rules( 'tipo_notificacao', 'Notificar', 'trim|required|max_length[11]' );
             if($notificacao->tipo_notificacao == 1){
                 $this->form_validation->set_rules( 'emails[]', 'Emails', 'valid_emails|trim|required|max_length[100]' );
@@ -74,15 +67,12 @@ class UsuarioControl extends PrincipalControl{
                     case '2':
                         $users = $this->UserDAO->consultarTudo(array('user_tipo' => 1));
                         break;
-
                     case '3':
                         $users = $this->UserDAO->consultarTudo(array('user_tipo' => 2));
                         break;
-
                     case '4':
                         $users = $this->UserDAO->consultarTudo(array('user_tipo' => 3));
                         break;
-
                     default:
                         $users = $this->UserDAO->consultarTudo(null);
                         break;
@@ -124,8 +114,7 @@ class UsuarioControl extends PrincipalControl{
             }
             $data['title']="IFEvents - Nova Notificação";
             $data['notificacao'] = $notificacao;
-            $this->chamaView("notifica-users", "organizador",
-                   $data, 1);
+            $this->chamaView("notifica-users", "organizador", $data, 1);
         }
 
         public function consultarEmailSelect(){
@@ -138,7 +127,6 @@ class UsuarioControl extends PrincipalControl{
             $data = $this->UsuarioDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
             $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
-
 
         public function ativar($user_cd){
             if(!empty($user_cd)){
@@ -159,7 +147,7 @@ class UsuarioControl extends PrincipalControl{
                     $this->session->set_flashdata('error','Não foi possível desativar o Usuário!');
                  }
             }
-             $this->consultar();
+            $this->consultar();
         }
 
         public function consultarRevisorSelect2(){
@@ -169,8 +157,7 @@ class UsuarioControl extends PrincipalControl{
 
         public function notificar(){
             if (empty($this->input->post())){
-                $this->chamaView("notifica-users", "organizador",
-                    array("title"=>"IFEvents - Nova Notificação"), 1);
+                $this->chamaView("notifica-users", "organizador", array("title"=>"IFEvents - Nova Notificação"), 1);
                 return true;
             }
             $mensagemEscrita = $this->load->view("template-email/template-email",
@@ -193,15 +180,12 @@ class UsuarioControl extends PrincipalControl{
                     case '2':
                         $users = $this->UsuarioDAO->consultarTudo(array('user_tipo' => 1));
                         break;
-
                     case '3':
                         $users = $this->UsuarioDAO->consultarTudo(array('user_tipo' => 2));
                         break;
-
                     case '4':
                         $users = $this->UsuarioDAO->consultarTudo(array('user_tipo' => 3));
                         break;
-
                     default:
                         $users = $this->UsuarioDAO->consultarTudo(null);
                         break;
@@ -235,17 +219,12 @@ class UsuarioControl extends PrincipalControl{
                     }else{
                         $mensagem = 'Não foi possível enviar a notificação!';
                     }
-
                     $this->session->set_flashdata('error', $mensagem);
                 }
             }
             $data['title']="IFEvents - Nova Notificação";
             $notificacao->mensagem = $this->input->post('mensagem');
             $data['notificacao'] = $notificacao;
-            $this->chamaView("notifica-users", "organizador",
-                   $data, 1);
+            $this->chamaView("notifica-users", "organizador", $data, 1);
         }
-
-
-
 }

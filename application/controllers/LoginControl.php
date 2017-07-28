@@ -1,21 +1,15 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
+    require_once 'PrincipalControl.php';
 
-require_once 'PrincipalControl.php';
+    class LoginControl extends PrincipalControl{
 
-class LoginControl extends PrincipalControl{
-            /*Método construtor faz o carregamento de vários componentes
-            necessários ao funcionamento do sistema*/
-
-            public function __construct(){
-                    parent::__construct();
-                    
-                    /*Carregamento de Models*/
-                    $this->load->model('UsuarioModel');
-                    $this->load->model('dao/UsuarioDAO');
-                    $this->load->model('dao/EdicaoDAO');
-                     
+        public function __construct(){
+            parent::__construct();
+            $this->load->model('UsuarioModel');
+            $this->load->model('dao/UsuarioDAO');
+            $this->load->model('dao/EdicaoDAO');
             }
-            
+
             public function entrar(){
                 $usuario = $this->UsuarioDAO->consultarLogin($this->input->post('email'), $this->input->post('senha'));
                 $this->session->set_userdata('usuario',$usuario);
@@ -31,7 +25,7 @@ class LoginControl extends PrincipalControl{
                     }
                     else if($usuario->user_tipo == 2){
                         redirect('revisor/inicio');
-                    }	
+                    }
                     else{
                         redirect('participante/inicio');
                     }
@@ -40,17 +34,13 @@ class LoginControl extends PrincipalControl{
                     redirect('login');
                 }
             }
-            
+
             public function sair(){
                 $this->session->sess_destroy();
                 redirect('index');
             }
-            
-            public function esqueceuSenha(){
-                
-            }
-            
-            
-            
-    }
 
+            public function esqueceuSenha(){
+
+            }
+    }
