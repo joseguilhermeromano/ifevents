@@ -26,7 +26,7 @@
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="form-control estilo-input consultaInstituicao">
-            <?php   if(isset($organizador)){   ?>
+            <?php    if(isset($organizador) && $organizador->getInstituicao()!==null){   ?>
                 <option value="<?php echo $organizador->getInstituicao()->getCodigo(); ?>" selected>
                     <?php echo $organizador->getInstituicao()->getAbreviacao(); ?> 
                 </option>

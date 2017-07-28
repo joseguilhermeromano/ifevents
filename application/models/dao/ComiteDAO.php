@@ -1,66 +1,64 @@
 <?php
-	if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
-        
-        include_once 'DAO.php';// Chamar sempre a interface por esta forma!
+if ( !defined("BASEPATH")) exit( 'No direct script access allowed');
 
-	class ComiteDAO extends CI_Model implements DAO{
+include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
-		public function __construct(){
-			parent::__construct();
+class ComiteDAO extends CI_Model implements DAO{
 
-		}
+    public function __construct(){
+        parent::__construct();
+        $this->load->model('ComiteModel','comite');
+    }
 
-		public function cadastra( $organizador, $descricao ){
-			$this->comi_organizad = $organizador;
-			$this->comi_desc      = $descricao;
+    public function inserir($obj) {
+        return  $this->db->insert('comite', $obj);
+    }
 
-			$confirma = $this->db->insert( 'Comite', $this );
+    public function alterar($obj) {
+        $this->db->where('comi_id', $obj->arti_id);
+        return $this->db->update('comite', $obj);
+    }
 
-			if ($confirma){
-				$this->session->set_flashdata('success', 'Comitê cadastrado com sucesso' );
-				redirect('OrganizadorControl/comite');
-			}
-			else{
-				$this->session->set_flashdata('fail', 'Comitê não pode ser cadastrado' );
-				redirect('OrganizadorControl/comite');
-			}
-		}
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='comi_nm', $ordenacao='asc') {
+        $this->db->select("*");
+        $this->db->from("Comite");
+        $this->db->order_by($sort, $ordenacao);
+        if($parametros !== null){
+            foreach ($parametros as $key => $value) {
+                $this->db->where($key.' LIKE ','%'.$value.'%');
+            }
+        }
+        if($limite)
+            $this->db->limit($limite, $numPagina);
+        $query = $this->db->get();
+        if($query->num_rows()>0){
+            return $query->result_object();
+        }else{
+            return null;
+        }
+    }
 
-                public function inserir($obj) {
-                    return  $this->db->insert('comite', $obj);
-                }
-                
-                public function alterar($obj) {
-                    $this->db->where('comi_id', $obj->arti_id);
-                    return $this->db->update('comite', $obj);
-                }
+    public function consultarCodigo($codigo){
+        $this->db->select( 'comi_cd, comi_nm, comi_desc' );
+        $this->db->from( 'Comite' );
+        $this->db->where( 'comi_cd', $codigo );
+        $query       = $this->db->get();
+        if($query->num_rows() > 0){
+            $query       = $query->result_object();
+            $consulta    = $query[0];
+            $this->comite->setCodigo($consulta->comi_cd);
+            $this->comite->setNome($consulta->comi_nm);
+            $this->comite->setDescricao($consulta->comi_desc);
 
-                public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='comi_nm', $ordenacao='asc') {
-                    $this->db->select("*");
-                    $this->db->from("Comite");
-                    $this->db->order_by($sort, $ordenacao);
-                    if($parametros !== null){
-                        foreach ($parametros as $key => $value) {
-                            $this->db->where($key.' LIKE ','%'.$value.'%');
-                        }
-                    }
-                    if($limite)
-                        $this->db->limit($limite, $numPagina);
-                    $query = $this->db->get();
-                    if($query->num_rows()>0){
-                        return $query->result_object();
-                    }else{
-                        return null;
-                    }
-                }
-                
-                public function consultarCodigo($codigo){
-                    return null;
-                }
+            return $this->comite;
+        }
 
-                public function excluir($obj) {
-                    $this->db->where('comi_id', $obj->comi_id);
-                    return $this->db->delete('comite');
-                }
+            return null;
+    }
+
+    public function excluir($obj) {
+        $this->db->where('comi_id', $obj->comi_id);
+        return $this->db->delete('comite');
+    }
 
 }

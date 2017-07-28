@@ -45,6 +45,7 @@
         <?php $data = array( 'name' => 'nome', 'class' => 'form-control estilo-input'
                             , 'value' => (isset($revisor) ? $revisor->getNomeCompleto() : '')
                             , $desbilitaInputs);
+               $this->uri->segment(2) == 'perfil' ? $data['disabled'] = 'disabled' : '';
                echo form_input($data);?>
         </div>
     </div>
@@ -52,7 +53,7 @@
         <div class="form-group floating-label-form-group controls">
         <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
             <select name="instituicao" class="form-control estilo-input consultaInstituicao">
-            <?php   if(isset($revisor)){   ?>
+            <?php    if(isset($revisor) && $revisor->getInstituicao()!==null){   ?>
                 <option value="<?php echo $revisor->getInstituicao()->getCodigo(); ?>" selected><?php echo $revisor->getInstituicao()->getAbreviacao() ?></option>
             <?php   }   ?>
             </select>
@@ -178,7 +179,8 @@
             ,'class' => 'form-control estilo-input'
             ,'value' => ( isset($revisor) ? $revisor->getRg() : '')
             , $desbilitaInputs);
-                    echo form_input( $data );?>
+            $this->uri->segment(2) == 'perfil' ? $data['disabled'] = 'disabled' : '';
+            echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-4">
@@ -191,7 +193,8 @@
             ,'class' => 'form-control estilo-input'
             ,'value' => ( isset($revisor) ? $revisor->getCpf() : '')
             , $desbilitaInputs);
-                    echo form_input( $data );?>
+            $this->uri->segment(2) == 'perfil' ? $data['disabled'] = 'disabled' : '';
+            echo form_input( $data );?>
         </div>
     </div>
 </div>

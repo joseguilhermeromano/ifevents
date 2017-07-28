@@ -3,166 +3,337 @@
 
     class EdicaoModel extends CI_Model{
 
-            public function __construct(){
-                    parent::__construct();
+        private $codigo;
+        private $NumeroEdicao;
+        private $tema;
+        private $apresentacao;
+        private $LinkEdicao;
+        private $ImagemEdicao;
+        private $resultados;
+        private $anais;
+        private $comite;
+        private $conferencia;
+        private $parcerias;
+        private $logradouro;
+        private $bairro;
+        private $numero;
+        private $complemento;
+        private $cep;
+        private $cidade;
+        private $uf;
+        private $codigoEmail;
+        private $email;
+        private $codigoTelefone;
+        private $telefone;
 
-                    $this->load->Model( 'dao/EdicaoDAO' );
-                    $this->load->Model( 'dao/ConferenciaDAO' );
-                    $this->load->Model( 'dao/ComiteDAO' );
-                    $this->load->Model( 'dao/InstituicaoDAO' );
-                    $this->load->Model( 'RegraModel');
-                    $this->load->Model( 'LocalidadeModel');
-                    $this->load->Model( 'EmailModel');
-                    $this->load->Model( 'TelefoneModel');
-            }
-
-            public $regra;
-            public $email;
-            public $telefone;
-            public $localidade;
-            public $conferencia;
-            public $comite;
-            public $edic_num;
-            public $sedia;
-            public $edic_cd;
-            public $edic_img;
-            public $edic_email_cd;
-            public $edic_regr_cd;
-            public $edic_conf_cd;
-
-            public function setaValores(){
-
-                if($this->input->post('conferencia')!==null){
-                    $this->edic_conf_cd = $this->input->post('conferencia');
-                    $this->conferencia = $this->ConferenciaDAO->consultarTudo(array('conf_cd' => $this->edic_conf_cd), null, null, 'conf_cd')[0];
-                }
-                
-                if($this->input->post("comite")!==null){
-                    $this->edic_comi_cd = $this->input->post('comite');
-                    $this->comite= $this->ComiteDAO->consultarTudo(array('comi_cd' => $this->edic_comi_cd), null, null, 
-                    'comi_cd')[0];
-                }
-            	$this->edic_tema = $this->input->post('tema');
-            	$this->edic_link = str_replace(base_url(),'', $this->input->post('linkevento'));
-            	$this->edic_apresent = $this->input->post('apresentacao');
-            	$this->parcerias = $this->input->post('parcerias');
-                if($this->parcerias !== null && !empty($this->parcerias)){
-                    foreach ($this->parcerias as $key => $value) {
-                        $listaparcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value);
-                    }
-                    $this->parcerias = $listaparcerias;
-                }
-                $this->RegraModel->setaValoresRegraEdicao();
-                $this->regra = $this->RegraModel;
-                $this->email = $this->input->post('email');
-                $this->telefone = $this->input->post('telefone');
-                $this->LocalidadeModel->setaValores();
-                $this->localidade = $this->LocalidadeModel;
-                $this->sedia = (object) array(
-                        'sedi_num' => $this->input->post('numero'),
-                        'sedi_comp' => $this->input->post('complemento')
-                    );
-            }
-
-            public function valida(){
-
-                /*DADOS DA EDIÇÃO*/
-            	$this->form_validation->set_rules( 'conferencia', 'Conferência', 'trim|required|max_length[11]' );
-            	$this->form_validation->set_rules( 'comite', 'Comitê', 'trim|required|max_length[11]' );
-            	$this->form_validation->set_rules( 'tema', 'Tema da Edição', 'trim|required|max_length[100]' );
-            	$this->form_validation->set_rules( 'linkevento', 'Link do Evento', 
-            		'valid_url|trim|required|max_length[100]' );
-            	// $this->form_validation->set_rules( 'image_field', 'Imagem do Evento', 'required' );
-            	$this->form_validation->set_rules( 'apresentacao', 'Apresentação', 'trim|required' );
-            	$this->form_validation->set_rules( 'parcerias[]', 'Parcerias', 'trim|required' );
-
-                /*REGRAS*/
-                $this->RegraModel->validaRegraEdicao();
-
-                /*DADOS DE ENDEREÇO DA EDIÇÃO*/
-                $this->LocalidadeModel->valida();
-
-                /*DADOS DE CONTATO*/
-                $this->form_validation->set_rules( 'email', 'E-mail', 'valid_email|trim|required' );            
-
-            }
+        //Regras
+        private $codigoRegra;
+        private $DataInicioEvento;
+        private $DataFimEvento;
+        private $DataInicioPublicacao;
+        private $DataFimPublicacao;
+        private $DataInicioInscricao;
+        private $DataFimInscricao;
+        private $DataInicioSubmissao;
+        private $DataFimSubmissao;
+        private $DataInicioAvaliacao;
+        private $DataFimAvaliacao;
+        private $DiretrizesSubmissao;
+        private $DiretrizesAvaliacao;
 
 
-            /**
-             * Converte de numero arabico para romano
-             * @param int $numero numero arabico
-             * @return string numero romano em letras maiusculas
-             */
-            function numero_romano($numero) {
-                if ($numero <= 0 || $numero > 3999) {
-                    return $numero;
-                }
+        public function getCodigo(){
+            return $this->codigo;
+        }
+        
+        public function getCodigoEmail(){
+            return $this->codigoEmail;
+        }
+        
+        public function getCodigoTelefone(){
+            return $this->codigoTelefone;
+        }
+        
+        public function getCodigoRegra(){
+            return $this->codigoRegra;
+        }
 
-                $n = (int)$numero;
-                $y = '';
+        public function getNumeroEdicao(){
+            return $this->NumeroEdicao;
+        }
 
-                // Nivel 1
-                while (($n / 1000) >= 1) {
-                    $y .= 'M';
-                    $n -= 1000;
-                }
-                if (($n / 900) >= 1) {
-                    $y .= 'CM';
-                    $n -= 900;
-                }
-                if (($n / 500) >= 1) {
-                    $y .= 'D';
-                    $n -= 500;
-                }
-                if (($n / 400) >= 1) {
-                    $y .= 'CD';
-                    $n -= 400;
-                }
+        public function getTema(){
+            return $this->tema;
+        }
 
-                // Nivel 2
-                while (($n / 100) >= 1) {
-                    $y .= 'C';
-                    $n -= 100;
-                }
-                if (($n / 90) >= 1) {
-                    $y .= 'XC';
-                    $n -= 90;
-                }
-                if (($n / 50) >= 1) {
-                    $y .= 'L';
-                    $n -= 50;
-                }
-                if (($n / 40) >= 1) {
-                    $y .= 'XL';
-                    $n -= 40;
-                }
+        public function getApresentacao(){
+            return $this->apresentacao;
+        }
 
-                // Nivel 3
-                while (($n / 10) >= 1) {
-                    $y .= 'X';
-                    $n -= 10;
-                }
-                if (($n / 9) >= 1) {
-                    $y .= 'IX';
-                    $n -= 9;
-                }
-                if (($n / 5) >= 1) {
-                    $y .= 'V';
-                    $n -= 5;
-                }
-                if (($n / 4) >= 1) {
-                    $y .= 'IV';
-                    $n -= 4;
-                }
+        public function getLinkEdicao(){
+            return $this->LinkEdicao;
+        }
 
-                // Nivel 4
-                while ($n >= 1) {
-                    $y .= 'I';
-                    $n -= 1;
-                }
+        public function getImagemEdicao(){
+            return $this->ImagemEdicao;
+        }
 
-                return $y;
-            }
+        public function getResultados(){
+            return $this->resultados;
+        }
+
+        public function getAnais(){
+            return $this->anais;
+        }
+
+        public function getComite(){
+            return $this->comite;
+        }
+
+        public function getConferencia(){
+            return $this->conferencia;
+        }
+
+        //Getters de endereço da Edição
+
+        public function getCep(){
+            return $this->cep;
+        }
+        
+        public function getLogradouro(){
+            return $this->logradouro;
+        }
+
+        public function getBairro(){
+            return $this->bairro;
+        }
+
+        public function getNumero(){
+            return $this->numero;
+        }
+
+        public function getComplemento(){
+            return $this->complemento;
+        }
+
+        public function getCidade(){
+            return $this->cidade;
+        }
+
+        public function getUf(){
+            return $this->uf;
+        }
+
+        public function getEmail(){
+            return $this->email;
+        }
+
+        public function getTelefone(){
+            return $this->telefone;
+        }
+
+        //Getters de regras da Edição 
+
+        public function getDataInicioEvento(){
+            return $this->DataInicioEvento;
+        }
+
+        public function getDataFimEvento(){
+            return $this->DataFimEvento;
+        }
+
+        public function getDataInicioInscricao(){
+            return $this->DataInicioInscricao;
+        }
+
+        public function getDataFimInscricao(){
+            return $this->DataFimInscricao;
+        }
+        
+        public function getDataInicioPublicacao(){
+            return $this->DataInicioPublicacao;
+        }
+
+        public function getDataFimPublicacao(){
+            return $this->DataFimPublicacao;
+        }
+
+        public function getDataInicioSubmissao(){
+            return $this->DataInicioSubmissao;
+        }
+
+        public function getDataFimSubmissao(){
+            return $this->DataFimSubmissao;
+        }
+
+        public function getDataInicioAvaliacao(){
+            return $this->DataInicioAvaliacao;
+        }
+
+        public function getDataFimAvaliacao(){
+            return $this->DataFimAvaliacao;
+        }
+
+        public function getDiretrizesSubmissao(){
+            return $this->DiretrizesSubmissao;
+        }
+
+        public function getDiretrizesAvaliacao(){
+            return $this->DiretrizesAvaliacao;
+        }
+
+        public function getParcerias(){
+            return $this->parcerias;
+        }
+
+
+
+        //Setters 
+        
+        public function setCodigo($codigo){
+            $this->codigo = $codigo;
+        }
+        
+        public function setCodigoEmail($codigoEmail){
+            $this->codigoEmail = $codigoEmail;
+        }
+        
+        public function setCodigoTelefone($codigoTelefone){
+            $this->codigoTelefone = $codigoTelefone;
+        }
+        
+        public function setCodigoRegra($codigoRegra){
+            $this->codigoRegra = $codigoRegra;
+        }
+
+        public function setNumeroEdicao($NumeroEdicao){
+            $this->NumeroEdicao = $NumeroEdicao;
+        }
+
+        public function setTema($tema){
+            $this->tema = $tema;
+        }
+
+        public function setApresentacao($apresentacao){
+            $this->apresentacao = $apresentacao;
+        }
+
+        public function setLinkEdicao($LinkEdicao){
+            $this->LinkEdicao = $LinkEdicao;
+        }
+
+        public function setImagemEdicao($ImagemEdicao){
+            $this->ImagemEdicao = $ImagemEdicao;
+        }
+
+        public function setResultados($resultados){
+            $this->resultados = $resultados;
+        }
+
+        public function setAnais($anais){
+            $this->anais = $anais;
+        }
+
+        public function setComite($comite){
+            $this->comite = $comite;
+        }
+
+        public function setConferencia($conferencia){
+            $this->conferencia = $conferencia;
+        }
+
+        //setters de endereço da Edição
+        
+        public function setCep($cep){
+            $this->cep = $cep;
+        }
+
+        public function setLogradouro($logradouro){
+            $this->logradouro = $logradouro;
+        }
+
+        public function setBairro($bairro){
+            $this->bairro = $bairro;
+        }
+
+        public function setNumero($numero){
+            $this->numero = $numero;
+        }
+
+        public function setComplemento($complemento){
+            $this->complemento = $complemento;
+        }
+
+        public function setCidade($cidade){
+            $this->cidade = $cidade;
+        }
+
+        public function setUf($uf){
+            $this->uf = $uf;
+        }
+
+        public function setEmail($email){
+            $this->email = $email;
+        }
+
+        public function setTelefone($telefone){
+            $this->telefone = $telefone;
+        }
+
+        //setters de regras da Edição 
+
+        public function setDataInicioEvento($DataInicioEvento){
+            $this->DataInicioEvento = $DataInicioEvento;
+        }
+
+        public function setDataFimEvento($DataFimEvento){
+            $this->DataFimEvento = $DataFimEvento;
+        }
+
+        public function setDataInicioInscricao($DataInicioInscricao){
+            $this->DataInicioInscricao = $DataInicioInscricao;
+        }
+
+        public function setDataFimInscricao($DataFimInscricao){
+            $this->DataFimInscricao = $DataFimInscricao;
+        }
+        
+        public function setDataInicioPublicacao($DataInicioPublicacao){
+            $this->DataInicioPublicacao = $DataInicioPublicacao;
+        }
+
+        public function setDataFimPublicacao($DataFimPublicacao){
+            $this->DataFimPublicacao = $DataFimPublicacao;
+        }
+
+        public function setDataInicioSubmissao($DataInicioSubmissao){
+            $this->DataInicioSubmissao = $DataInicioSubmissao;
+        }
+
+        public function setDataFimSubmissao($DataFimSumbissao){
+            $this->DataFimSumbissao = $DataFimSumbissao;
+        }
+
+        public function setDataInicioAvaliacao($DataInicioAvaliacao){
+            $this->DataInicioAvaliacao = $DataInicioAvaliacao;
+        }
+
+        public function setDataFimAvaliacao($DataFimAvaliacao){
+            $this->DataFimAvaliacao = $DataFimAvaliacao;
+        }
+
+        public function setDiretrizesSubmissao($DiretrizesSubmissao){
+            $this->DiretrizesSubmissao = $DiretrizesSubmissao;
+        }
+
+        public function setDiretrizesAvaliacao($DiretrizesAvaliacao){
+            $this->DiretrizesAvaliacao = $DiretrizesAvaliacao;
+        }
+
+        public function setParcerias($parcerias){
+            $this->parcerias = $parcerias;
+        }
+
 
     }
 

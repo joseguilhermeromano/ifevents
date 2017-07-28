@@ -31,14 +31,15 @@
             <b><?php echo form_label( '*Nome Completo', 'nome' ); ?></b>
                 <?php $data = array( 'name' => 'nome', 'class' => 'form-control estilo-input',
                                      'value' => (isset($participante) ? $participante->getNomeCompleto() : ''), $desbilitaInputs);
-               echo form_input($data);?>
+                $this->uri->segment(2) == 'perfil' ? $data['disabled'] = 'disabled' : '';
+                echo form_input($data);?>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group floating-label-form-group controls">
             <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
                 <select name="instituicao" class="form-control estilo-input consultaInstituicao">
-                    <?php   if(isset($participante)){   ?>
+                    <?php   if(isset($participante) && $participante->getInstituicao()!==null){   ?>
                     <option value="<?php echo $participante->getInstituicao()->getCodigo(); ?>" selected>
                                   <?php echo $participante->getInstituicao()->getAbreviacao() ?></option>
                       <?php } ?>
@@ -139,7 +140,8 @@
             <b><?php echo form_label( '*RG', 'rg' ); ?></b>
                <?php $data = array( 'name' => 'rg', 'id' => 'campoRG', 'type' => 'text', 'class' => 'form-control estilo-input',
                                     'value' => ( isset($participante) ? $participante->getRg() : ''), $desbilitaInputs);
-                    echo form_input( $data );?>
+                $this->uri->segment(2) == 'perfil' ? $data['disabled'] = 'disabled' : ''; 
+               echo form_input( $data );?>
         </div>
     </div>
     <div class="col-sm-4">
@@ -147,7 +149,8 @@
             <b><?php echo form_label( 'CPF', 'cpf' ); ?></b>
                <?php $data = array( 'name' => 'cpf', 'id' => 'campoCPF', 'type' => 'text', 'class' => 'form-control estilo-input',
                                     'value' => ( isset($participante) ? $participante->getCpf() : ''), $desbilitaInputs);
-                     echo form_input( $data );?>
+                $this->uri->segment(2) == 'perfil' ? $data['disabled'] = 'disabled' : '';      
+               echo form_input( $data );?>
         </div>
     </div>
 </div>

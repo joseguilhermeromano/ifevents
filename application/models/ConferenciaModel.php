@@ -2,6 +2,7 @@
     if ( !defined( 'BASEPATH' )) exit( 'No direct script access allowed' );
 
     class ConferenciaModel extends CI_Model{
+        
       private $codigo;
       private $titulo;
       private $abreviacao;
@@ -37,13 +38,6 @@
 
       public function setDescricao($descricao){
         $this->descricao = $descricao;
-      }
-
-      public function setaValores(){
-        $this->conf_cd    = $this->getCodigo();
-        $this->conf_nm    = $this->getTitulo();
-        $this->conf_abrev = $this->getAbreviacao();
-    		$this->conf_desc  = $this->getDescricao();
       }
 
     }

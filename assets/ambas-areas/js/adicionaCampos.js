@@ -227,11 +227,11 @@ $(document).ready(function() {
     $(".consultaConferencia").select2({
     // tags: true,
     placeholder: "Conferência (consulta por denominação)",
-    multiple: true,
+    multiple: false,
     // tokenSeparators: [',', ' '],
     minimumInputLength: 2,
     maximumSelectionLength: 1,
-    minimumResultsForSearch: 10,
+    minimumResultsForSearch: Infinity,
     ajax: {
         url: baseUrl + "conferencia/consultarParaSelect2",
         dataType: "json",
@@ -264,14 +264,13 @@ $(document).ready(function(){
     var conferencia = {conf_cd : $('.consultaConferencia option:selected').val()};
     $.ajax({
         type: "POST",
-        url: baseUrl + "edicao/geraNumeracaoEdicao",
+        url: baseUrl + "edicao/geraLinkEdicao",
         data: conferencia,
         async: true,
         dataType: "json",
         success: function(data) {
             $('#linkEvento').val('');
-            $('#linkEvento').val($('#linkEvento').val()
-              + baseUrl + 'evento/' + data + '-' + $('.consultaConferencia option:selected').text().toLowerCase());
+            $('#linkEvento').val(data);
         }
     }); 
   });
@@ -280,34 +279,88 @@ $(document).ready(function(){
 // /**CARREGA PLUGIN FILE UPLOAD BOOTSTRAP**/
   // initialize with defaults
 $("#fileImage").ready(function(){
+    
+    var imagem = {
+     language: 'pt-BR'
+    ,theme: 'fa'
+    ,showUpload: false
+    ,browseClass: 'btn btn-success'
+    ,browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> "};
 
-  $.ajax({
-  type: "POST",
-  url: baseUrl + "edicao/recuperaImagem",
-  async: true,
-  dataType: "json",
-  success: function (data) {
+    if($("#link_imagem").val()!=""){
+    var nomeArquivo = extrairNomeArquivo($("#link_imagem").val());
+     var tam;
+        tam = $.ajax({
+          type: "HEAD",
+          url: baseUrl+$("#link_imagem").val(),
+          success: function () {
+            return tam.getResponseHeader("Content-Length");
+          }
+        });
+        imagem.initialPreview = "<img src='"+baseUrl+$("#link_imagem").val()
+    +"' class='file-preview-image kv-preview-data img-responsive' title='"
+    +nomeArquivo+"' "
+    +"style='with:auto; height: auto; max-height:160px' >";
+    imagem.initialPreviewAsData = false;
+    imagem.initialPreviewShowDelete = false;
+    imagem.initialPreviewConfig = [{caption:nomeArquivo, size: tam}];
+    imagem.overwriteInitial = true;
+    imagem.maxFileSize = "1000000";
+    }
+    
+    
+    function extrairNomeArquivo(Caminho){
+	Caminho 	= Caminho.replace("/\/g", "/");
+	var Arquivo = Caminho.substring(Caminho.lastIndexOf('/') + 1);
+	return Arquivo;
+    }
       
-    $("#fileImage").fileinput({
-    language: 'pt-BR',
-    theme: 'fa',
-    showUpload: false,
-    browseClass: 'btn btn-success',
-    browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
-    initialPreview: [data.initialPreview],
-    initialPreviewAsData: data.initialPreviewAsData,
-    initialPreviewShowDelete:data.initialPreviewShowDelete,
-    initialPreviewConfig: [data.initialPreviewConfig],
-    overwriteInitial: data.overwriteInitial,
-    maxFileSize: data.maxFileSize,
-    });
+    $("#fileImage").fileinput(
+      imagem
+    );
+});
 
 
-  }
 
-  });
-
-
+$("a.uploadAnaisResultados").click(function(){
+    var codigoEdicao = $(this).attr('codigoedicao');
+    var edicao = 'Upload de Anais & Resultados' + ' (' + $(this).attr('edicao') +')';
+    $('#modalUploadAnaisResultados h4').html(edicao);
+    
+    var arquivos;
+        arquivos = $.ajax({
+          type: "JSON",
+          url: baseUrl+'/edicao/consultarAnaisResultados/' + codigoEdicao,
+          success: function () {
+            return arquivos.getResponseHeader("application/json");
+          }
+        });
+    
+    console.log(codigoEdicao);
+    console.log(edicao);
+    $("#arquivoResultados").fileinput({
+        language: 'pt-BR',
+        theme: 'fa',
+        showUpload: true,
+        maxFileSize: 4096,
+        allowedFileExtensions: ["pdf", "docx"], 
+        browseClass: 'btn btn-success',
+        browseIcon: "<i class=\"fa fa-file\"></i> ",
+        deleteUrl: baseUrl + 'edicao/file-delete-resultados/',
+        uploadUrl: baseUrl + 'edicao/file-upload-resultados/'
+    }, arquivos.resultados);
+    
+    $("#arquivoAnais").fileinput({
+        language: 'pt-BR',
+        theme: 'fa',
+        showUpload: true,
+        maxFileSize: 4096,
+        allowedFileExtensions: ["pdf", "docx"], 
+        browseClass: 'btn btn-success',
+        browseIcon: "<i class=\"fa fa-file\"></i> ",
+        deleteUrl: baseUrl + 'edicao/file-delete-anais/',
+        uploadUrl: baseUrl + 'edicao/file-upload-anais/'
+    }, arquivos.anais);
 });
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
@@ -385,11 +438,11 @@ $(document).ready(function() {
     $(".consultaComite").select2({
     // tags: true,
     placeholder: "Comitê (consulta por denominação)",
-    multiple: true,
+    multiple: false,
     // tokenSeparators: [',', ' '],
     minimumInputLength: 2,
     maximumSelectionLength: 1,
-    minimumResultsForSearch: 10,
+    minimumResultsForSearch: Infinity,
     ajax: {
         url: baseUrl + "comite/consultarParaSelect2",
         dataType: "json",
@@ -663,7 +716,7 @@ $('a.atribuicao').click(function() {
 });
 
 
-//CONSULTA DE CEP USANDO WEBSERVICE VIACEP 
+//CONSULTA DE CEP USANDO WEBSERVICE REPUBLICA VIRTUAL 
 $(document).ready(function() {
 
     function limpa_form() {
@@ -696,8 +749,6 @@ $(document).ready(function() {
                 $("#uf").val("...");
 
                 //Consulta o webservice viacep.com.br/
-                
-                // $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
                   $.getJSON("//republicavirtual.com.br/web_cep.php?cep="+ cep +"&formato=json", function(dados) {
 

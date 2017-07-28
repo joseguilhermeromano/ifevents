@@ -55,13 +55,13 @@
                     <div class="text-left" style="display: inline-block">
                           <a href="<?= base_url('edicao/alterar/'.$edicao->edic_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
-                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalUploadAnaisResultados"
                           onclick="setCodigo('<?= $edicao->edic_cd; ?>'); 
                           setLink('<?= base_url('edicao/desativar/')?>');">
                           <span class="fa fa-trash"></span>&#09;Excluir</a><br>
-                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo('<?php //echo $user->user_cd; ?>'); 
-                          setLink('<?php //echo base_url('usuario/desativar/')?>');">
+                          <a href="#" class="btn-opcao uploadAnaisResultados" data-toggle="modal" data-target="#modalUploadAnaisResultados"
+                          codigoedicao="<?= $edicao->edic_cd; ?>" 
+                          edicao="<?= $edicao->edic_num.'ª '.$edicao->conf_abrev ?>">
                           <span class="glyphicon glyphicon-open-file"></span>&#09;Upload Anais & Resultados</a>
                     </div>
                     </td>
@@ -74,6 +74,71 @@
         </tbody>
     </table>
 </div><!-- /TABELA-->
+
+
+<!-- Modal -->
+
+  <div id="modalUploadAnaisResultados" class="modal fade">
+      <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h4 class="modal-title"><span class="fa fa-upload"></span></h4>
+              </div>
+              
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    
+                    <br>
+                    <fieldset class="col-md-12">     
+                      <legend class="text-center">Anais</legend>
+                      
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                    <b><?php echo form_label( 'Upload de Anais de Evento', 'arquivo_anais' ); ?></b>
+                                        <?php $data = array( 'name' => 'arquivo_anais', 'id' => 'arquivoAnais','type' => 'file',  
+                                          'class' =>'file-uploading');
+                                          echo form_upload($data);?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      
+                    </fieldset>
+                  </div>
+                  <div class="container-fluid">
+                    <fieldset class="col-md-12">     
+                      <legend class="text-center">Resultados</legend>
+                      
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                    <b><?php echo form_label( 'Upload de Resultados', 'arquivo_resultados' ); ?></b>
+                                        <?php $data = array( 'name' => 'arquivo_resultados', 'id' => 'arquivoResultados','type' => 'file',  
+                                          'class' =>'file-uploading');
+                                          echo form_upload($data);?>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                     </div>
+                      
+                    </fieldset>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" aria-hidden="true">Concluído</button>
+                </div>
+          </div>
+      </div>
+  </div>
 
   <!-- PAGINAÇÃO -->
     <div class="text-center">
