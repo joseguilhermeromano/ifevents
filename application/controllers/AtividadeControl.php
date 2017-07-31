@@ -65,7 +65,7 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
 		}
 		else{
 		    $this->session->set_flashdata('success', 'Arquivo deletado com sucesso!');
-				redirect('atividade/consultarTudo/');
+				$this->consultarTudo();
 		}
   }
 
