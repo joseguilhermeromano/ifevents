@@ -39,6 +39,8 @@
                 ,'edic_regr_cd' => $obj->getCodigoRegra()
                 ,'edic_comi_cd' => $obj->getComite()->getCodigo()
                 ,'edic_conf_cd' => $obj->getConferencia()->getCodigo()
+                ,'edic_anais' => $obj->getAnais()
+                ,'edic_result' => $obj->getResultados()
                 ,'edic_email_cd' => $obj->getCodigoEmail()
                 ,'edic_tele_cd' => $obj->getCodigoTelefone()
                     );

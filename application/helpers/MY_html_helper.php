@@ -92,4 +92,11 @@ if ( ! function_exists('alert'))
     function somenteNumeros($string){
             return  preg_replace("/\D/","", $string);
     }
+    
+    
+    function format_size($size) {
+      $sizes = array(" Bytes", " KB", " MB", " GB", " TB", " PB", " EB", " ZB", " YB");
+      if ($size == 0) { return('n/a'); } else {
+      return (round($size/pow(1024, ($i = floor(log($size, 1024)))), 2)); }
+    }
 }

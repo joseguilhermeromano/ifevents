@@ -291,12 +291,14 @@ $("#fileImage").ready(function(){
     var nomeArquivo = extrairNomeArquivo($("#link_imagem").val());
      var tam;
         tam = $.ajax({
-          type: "HEAD",
+          dataType: "HEAD",
+          async: false,
           url: baseUrl+$("#link_imagem").val(),
-          success: function () {
-            return tam.getResponseHeader("Content-Length");
+          success: function (data) {
+            return data.getResponseHeader("Content-Length");
           }
         });
+        console.log(tam);
         imagem.initialPreview = "<img src='"+baseUrl+$("#link_imagem").val()
     +"' class='file-preview-image kv-preview-data img-responsive' title='"
     +nomeArquivo+"' "
@@ -322,45 +324,40 @@ $("#fileImage").ready(function(){
 
 
 
-$("a.uploadAnaisResultados").click(function(){
+ $('.uploadAnaisResultados').on('click',function(e){
     var codigoEdicao = $(this).attr('codigoedicao');
     var edicao = 'Upload de Anais & Resultados' + ' (' + $(this).attr('edicao') +')';
     $('#modalUploadAnaisResultados h4').html(edicao);
     
-    var arquivos;
-        arquivos = $.ajax({
-          type: "JSON",
-          url: baseUrl+'/edicao/consultarAnaisResultados/' + codigoEdicao,
-          success: function () {
-            return arquivos.getResponseHeader("application/json");
-          }
-        });
+    function getAnaisResultados(anais, resultados){
+        $.ajax({    
+        type: "POST",
+        url: baseUrl+'edicao/consulta-anais-e-resultados/' + codigoEdicao,
+        async: false,
+        dataType: "json",
+        success: function(data) {
+             anais(data.anais);
+             resultados(data.resultados);
+        }});
+    }
     
-    console.log(codigoEdicao);
-    console.log(edicao);
-    $("#arquivoResultados").fileinput({
-        language: 'pt-BR',
-        theme: 'fa',
-        showUpload: true,
-        maxFileSize: 4096,
-        allowedFileExtensions: ["pdf", "docx"], 
-        browseClass: 'btn btn-success',
-        browseIcon: "<i class=\"fa fa-file\"></i> ",
-        deleteUrl: baseUrl + 'edicao/file-delete-resultados/',
-        uploadUrl: baseUrl + 'edicao/file-upload-resultados/'
-    }, arquivos.resultados);
+     
+    getAnaisResultados(function(anais){
+        console.log(anais);
+        var input = $("#arquivoAnais");
+        if (input.data('fileinput')) {
+            input.fileinput('destroy');
+        }
+        input.fileinput('refresh', anais);
+    }, function(resultados){
+        var input = $("#arquivoResultados");
+        if (input.data('fileinput')) {
+            input.fileinput('destroy');
+        }
+        input.fileinput('refresh',resultados);
+    });
     
-    $("#arquivoAnais").fileinput({
-        language: 'pt-BR',
-        theme: 'fa',
-        showUpload: true,
-        maxFileSize: 4096,
-        allowedFileExtensions: ["pdf", "docx"], 
-        browseClass: 'btn btn-success',
-        browseIcon: "<i class=\"fa fa-file\"></i> ",
-        deleteUrl: baseUrl + 'edicao/file-delete-anais/',
-        uploadUrl: baseUrl + 'edicao/file-upload-anais/'
-    }, arquivos.anais);
+    
 });
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
@@ -792,8 +789,6 @@ $(document).ready(function() {
   }
    
 });
-
-
 
 
 

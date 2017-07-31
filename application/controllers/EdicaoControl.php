@@ -14,6 +14,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $this->load->Model( 'dao/InstituicaoDAO' );
         $this->load->Model( 'dao/ModalidadeTematicaDAO' );
         $this->load->Model( 'EdicaoModel','edicao' );
+        $this->load->helper('html');
     }
 
     public function cadastrar(){
@@ -97,31 +98,109 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         return $this->form_validation->run();
     }
     
+    public function consultarAnaisResultados($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        $data['anais'] = $this->configPlugin();
+        $data['anais']['deleteUrl'] = base_url('edicao/file-delete-anais/').$codigoEdicao;
+        $data['anais']['uploadUrl'] = base_url('edicao/file-upload-anais/').$codigoEdicao;
+        $data['resultados'] = $this->configPlugin();
+        $data['resultados']['deleteUrl'] = base_url('edicao/file-delete-resultados/').$codigoEdicao;
+        $data['resultados']['uploadUrl'] = base_url('edicao/file-upload-resultados/').$codigoEdicao;
+        $linkAnais = $this->edicao->getAnais();
+        $linkResultados = $this->edicao->getResultados();
+        $data['anais'] = $this->PreviewAnaisResultados($data['anais'],$linkAnais);
+        $data['resultados'] = $this->PreviewAnaisResultados($data['resultados'],$linkResultados); 
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
     
-    private function upload_imagem(){
-        $this->LimparPastaTemp();
-        $this->img->upload($_FILES['image_field'],'pt_BR');
-        if (!$this->img->uploaded) {
-            $this->session->set_flashdata('error', $this->img->error);
-            return null;
+    private function configPlugin(){
+        return $configPlugin = array(
+             "language" => "pt-BR"
+            ,"theme" => "fa"
+            ,"showUpload" => true
+            ,"overwriteInitial" => true
+            ,"maxFileSize"=> 4096
+            ,"allowedFileExtensions" => array("pdf", "docx") 
+            ,"priviewFileType" => "any"
+            ,"browseClass"=> "btn btn-success"
+            ,"browseIcon" => '<i class="fa fa-file"></i>' 
+        );
+    }
+    
+    private function PreviewAnaisResultados($array, $linkArquivo){
+        if($linkArquivo!==null){
+            $array['initialPreview'] = base_url($linkArquivo);
+            $array['initialPreviewAsData'] = true;
+            $array['initialPreviewConfig'] = array(array(
+            "type" => 'pdf'
+            ,"caption" => basename($linkArquivo)
+            , "size" => filesize($linkArquivo)
+            , "showDelete" => true
+            , "showZoom" => true));  
         }
-        if($this->img->file_is_image == false){
-            $this->session->set_flashdata('error', 'O Arquivo selecionado não é uma imagem!');
-            return null;
-        }    
-        $this->img->image_max_width = 3544;
-        $this->img->image_max_height = 1182;
-        $this->img->image_min_width = 3543;
-        $this->img->image_min_height = 1181;
-        $this->img->allowed = array('image/jpg','image/jpeg','image/png', 'image/bmp');
-        $this->img->file_overwrite = true ;
-        $this->img->Process("temp/");
-        if ($this->img->processed) {
-            $linkImg = str_replace("\\", "", $this->img->file_dst_pathname);
-            return $linkImg;
+        return $array;
+    }
+    
+    public function uploadFileAnais($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
         }
-        $this->session->set_flashdata('error', $this->img->error);
-        return null;
+        $novoNomeArquivo = 'anais_'.$this->edicao->getNumeroEdicao().'_';
+        $novoNomeArquivo .= strtolower($this->edicao->getConferencia()->getAbreviacao());
+        $diretorio = 'application/views/arquivos/edicoes/anais/';
+        $linkArquivo = $this->upload_arquivo('arquivo_anais',$diretorio,$novoNomeArquivo);
+        if($linkArquivo === null){
+            $data['error'] = $this->session->flashdata('error');
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $this->edicao->setAnais($linkArquivo);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarAnaisResultados($codigoEdicao);
+    }
+    
+    public function deleteFileAnais($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        unlink($this->edicao->getAnais());
+        $this->edicao->setAnais(null);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarAnaisResultados($codigoEdicao);
+    }
+    
+    public function uploadFileResultados($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $novoNomeArquivo = 'resultados_'.$this->edicao->getNumeroEdicao().'_';
+        $novoNomeArquivo .= strtolower($this->edicao->getConferencia()->getAbreviacao());
+        $diretorio = 'application/views/arquivos/edicoes/resultados/';
+        $linkArquivo = $this->upload_arquivo('arquivo_resultados',$diretorio,$novoNomeArquivo);
+        if($linkArquivo === null){
+            $data['error'] = $this->session->flashdata('error');
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $this->edicao->setResultados($linkArquivo);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarAnaisResultados($codigoEdicao);
+    }
+    
+    public function deleteFileResultados($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        unlink($this->edicao->getResultados());
+        $this->edicao->setResultados(null);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarAnaisResultados($codigoEdicao);
     }
     
     private function obtemImagem(){
@@ -134,7 +213,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         }
             
         if($inputImagemCarregada != null){
-            $ExisteLinkTemp = $this->upload_imagem();
+            $ExisteLinkTemp = $this->upload_arquivo('image_field', 'temp/', $this->geraNomeImagemEdicao());
         }
         
         if($this->valida()==true){

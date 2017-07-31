@@ -11,12 +11,12 @@ class PrincipalControl extends CI_Controller {
 		$this->load->helper ( 'security' );
 		$this->load->helper ( 'language' );
 		$this->load->library('form_validation');
-        $this->load->model('dao/DataBaseDAO');
+                $this->load->model('dao/DataBaseDAO');
 		$this->load->library("session");
-        $this->load->library('upload');
-        $this->load->helper('file');
-        $this->load->helper('download');
-        $this->load->library('uploadimage','','img');
+                $this->load->library('upload');
+                $this->load->helper('file');
+                $this->load->helper('download');
+                $this->load->library('uploadimage','','file');
 		//$this->load->model('acesso/Autentica');
 	}
 
@@ -125,31 +125,7 @@ class PrincipalControl extends CI_Controller {
 
     }
 
-    public function upload_arquivo($config, $input){
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
-
-        $file = array();
-
-
-            $file['file_nm'] = $_FILES[$input]['name'];
-            $file['error'] =  false;
-
-            if(!$this->upload->do_upload($input)){
-                $file['error'] =  true;
-                $file['file_nm'] = null;
-                $file['file'] = null;
-            }
-            else{
-                $data  = array('upload_data' => $this->upload->data());
-                $arquivo=read_file($data['upload_data']['full_path']);
-                //função que deleta o arquivo do diretório temporário
-                unlink($data['upload_data']['full_path']);
-                $file['file'] = $arquivo;
-            }
-
-        return $file;
-    }
+    
 
     public function download_arquivo($nomeArquivo, $arquivo){
 
@@ -172,6 +148,38 @@ class PrincipalControl extends CI_Controller {
            echo($arquivo); // lê o arquivo
            exit; // aborta pós-ações
 
+    }
+    
+    public function upload_arquivo($inputName, $linkUpload, $novoNomeArquivo = null){
+        $this->LimparPastaTemp();
+        $this->file->upload($_FILES[$inputName],'pt_BR');
+        if (!$this->file->uploaded) {
+            $this->session->set_flashdata('error', $this->file->error);
+            return false;
+        }
+        $this->file->file_new_name_body = $novoNomeArquivo;
+        $this->file->file_overwrite = true ;
+        $this->file->Process($linkUpload);
+        if ($this->file->processed) {
+            $linkImg = str_replace("\\", "", $this->file->file_dst_pathname);
+            return $linkImg;
+        }
+        $this->session->set_flashdata('error', $this->file->error);
+        return null;
+    }
+    
+    public function LimparPastaTemp(){
+        $pasta = "temp/";
+        if(is_dir($pasta)){
+            $diretorio = dir($pasta);
+
+            while($arquivo = $diretorio->read()){
+                if(($arquivo != '.') && ($arquivo != '..')){
+                    unlink($pasta.$arquivo);
+                }    
+            }
+            $diretorio->close();
+        }
     }
 
 }

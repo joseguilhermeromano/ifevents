@@ -950,3 +950,9 @@ h3{
     padding: 5px 5px 5px 10px; 
     background-color: #ffffff;
   }
+  
+/*Corrige bug ao abrir duas modais ao mesmo tempo*/
+#modalUploadAnaisResultados .modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}

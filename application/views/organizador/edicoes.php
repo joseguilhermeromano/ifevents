@@ -31,12 +31,10 @@
         <thead>
             <tr>
                     
-                    <th class="col-xs-3">Edição</th>
-                    <th class="col-xs-2">Tema</th>
-                    <th class="col-xs-1 text-center">Início</th>
-                    <th class="col-xs-1 text-center">Término</th>
-                    <th class="col-xs-1 text-center">Anais</th>
-                    <th class="col-xs-1 text-center">Resultados</th>
+                    <th class="text-center">Edição</th>
+                    <th class="">Tema</th>
+                    <th class="text-center">Início</th>
+                    <th class="text-center">Término</th>
                     <th class="text-center" style="width:auto">Opções</th>
             </tr>
         </thead>
@@ -45,12 +43,10 @@
             if(!empty($edicoes)){
             foreach( $edicoes as $edicao ): ?>
                  <tr> 
-                    <td><?= $edicao->edic_num.'ª '.$edicao->conf_abrev ?></td>
-                    <td><?= $edicao->edic_tema ?></td>
+                    <td class="text-center"><?= $edicao->edic_num.'ª '.$edicao->conf_abrev ?></td>
+                    <td class="col-md-5"><?= $edicao->edic_tema ?></td>
                     <td class="text-center"><?= desconverteDataMysql($edicao->regr_even_ini_dt) ?></td>
                     <td class="text-center"><?= desconverteDataMysql($edicao->regr_even_fin_dt) ?></td>
-                    <td class="text-center"><?= $edicao->edic_result === NULL ? 'Não submetido' : '' ?></td>
-                    <td class="text-center"><?= $edicao->edic_anais === NULL ? 'Não submetido' : '' ?></td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
                           <a href="<?= base_url('edicao/alterar/'.$edicao->edic_cd); ?>" class="btn-opcao">
@@ -59,16 +55,16 @@
                           onclick="setCodigo('<?= $edicao->edic_cd; ?>'); 
                           setLink('<?= base_url('edicao/desativar/')?>');">
                           <span class="fa fa-trash"></span>&#09;Excluir</a><br>
-                          <a href="#" class="btn-opcao uploadAnaisResultados" data-toggle="modal" data-target="#modalUploadAnaisResultados"
-                          codigoedicao="<?= $edicao->edic_cd; ?>" 
+                          <a href="#" class="btn-opcao uploadAnaisResultados"  data-target="#modalUploadAnaisResultados"
+                          codigoedicao="<?= $edicao->edic_cd; ?>" data-toggle="modal"
                           edicao="<?= $edicao->edic_num.'ª '.$edicao->conf_abrev ?>">
-                          <span class="glyphicon glyphicon-open-file"></span>&#09;Upload Anais & Resultados</a>
+                          <span class="glyphicon glyphicon-open-file"></span>&#09; Anais & Resultados</a>
                     </div>
                     </td>
                 </tr>
             <?php endforeach;}else{ ?>
               <tr>
-                <td class="col-xs-12 text-center" colspan="7">Não foram encontrados resultados para a sua busca...</td>
+                <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
               </tr>
             <?php } ?> 
         </tbody>

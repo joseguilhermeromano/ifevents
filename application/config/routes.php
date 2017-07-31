@@ -66,6 +66,12 @@ $route[ 'organizador/alterar/(:any)' ]		  	  = 'OrganizadorControl/alterar/$1';
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]                       = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]               = 'EdicaoControl/alterar/$1';
+$route[ 'edicao/consulta-anais-e-resultados/(:any)' ] = 'EdicaoControl/consultarAnaisResultados/$1';
+$route[ 'edicao/file-delete-anais/(:any)' ] = 'EdicaoControl/deleteFileAnais/$1';
+$route[ 'edicao/file-upload-anais/(:any)' ] = 'EdicaoControl/uploadFileAnais/$1';
+$route[ 'edicao/file-delete-resultados/(:any)' ] = 'EdicaoControl/deleteFileResultados/$1';
+$route[ 'edicao/file-upload-resultados/(:any)' ] = 'EdicaoControl/uploadFileResultados/$1';
+
 //Rotas Atividade
 $route[ 'atividade/(:any)' ]                    = 'AtividadeControl/$1';
 $route[ 'atividade/consultarTudo/(:any)' ]      = 'AtividadeControl/consultarTudo/$1';
