@@ -84,12 +84,12 @@
   <span class="fa fa-files-o"></span>  TRABALHOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="trabalhos">
-       <li><a href="<?php echo base_url("regra-submissao/consultar");?>" class="list-group-item">REGRAS</a></li>
+       <li><a href="<?php echo base_url("regras-submissao");?>" class="list-group-item">REGRAS</a></li>
       <li id="modalidade" class="item-menu">
       <a href="<?php echo base_url('modalidade/consultar');?>" class="list-group-item">MODALIDADES</a></li>
       <li id="eixo-tematico"><a href="<?php echo base_url('eixo-tematico/consultar');?>" class="list-group-item">EIXOS TEMÁTICOS</a></li>
       <li><a href="<?php echo base_url("revisao/consultar-atribuicoes");?>" class="list-group-item">ATRIBUIÇÃO DE SUBMISSÕES</a></li>
-      <li><a href="<?php echo base_url("regra-submissao/consultar");?>" class="list-group-item">RESULTADOS</a></li>
+      <li><a href="<?php echo base_url("");?>" class="list-group-item">RESULTADOS</a></li>
       <li id="revisor"><a href="<?php echo base_url("revisor/consultaRevisoresAtribuicao");?>" class="list-group-item">REVISORES</a></li>
   </ul>
 </li>

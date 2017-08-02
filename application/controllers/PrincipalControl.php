@@ -161,8 +161,8 @@ class PrincipalControl extends CI_Controller {
         $this->file->file_overwrite = true ;
         $this->file->Process($linkUpload);
         if ($this->file->processed) {
-            $linkImg = str_replace("\\", "", $this->file->file_dst_pathname);
-            return $linkImg;
+            $link = str_replace("\\", "", $this->file->file_dst_pathname);
+            return $link;
         }
         $this->session->set_flashdata('error', $this->file->error);
         return null;

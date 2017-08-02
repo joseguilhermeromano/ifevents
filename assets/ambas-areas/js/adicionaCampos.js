@@ -323,7 +323,7 @@ $("#fileImage").ready(function(){
 });
 
 
-
+/* Upload de Anais e Resultados*/
  $('.uploadAnaisResultados').on('click',function(e){
     var codigoEdicao = $(this).attr('codigoedicao');
     var edicao = 'Upload de Anais & Resultados' + ' (' + $(this).attr('edicao') +')';
@@ -343,7 +343,6 @@ $("#fileImage").ready(function(){
     
      
     getAnaisResultados(function(anais){
-        console.log(anais);
         var input = $("#arquivoAnais");
         if (input.data('fileinput')) {
             input.fileinput('destroy');
@@ -356,9 +355,40 @@ $("#fileImage").ready(function(){
         }
         input.fileinput('refresh',resultados);
     });
-    
-    
 });
+
+/* Upload de Diretrizes de Submissão e Revisão*/
+ $('#arquivoSubmissao #arquivoRevisao').ready(function(){
+    var codigoEdicao = $('#codigoEdicao').val();
+    
+    function getSubmissaoRevisao(submissao, revisao){
+        $.ajax({    
+        type: "POST",
+        url: baseUrl+'edicao/consulta-regras-submissao-e-revisao/' + codigoEdicao,
+        async: false,
+        dataType: "json",
+        success: function(data) {
+             submissao(data.submissao);
+             revisao(data.revisao);
+        }});
+    }
+    
+     
+    getSubmissaoRevisao(function(submissao){
+        var input = $("#arquivoSubmissao");
+        if (input.data('fileinput')) {
+            input.fileinput('destroy');
+        }
+        input.fileinput('refresh', submissao);
+    }, function(revisao){
+        var input = $("#arquivoRevisao");
+        if (input.data('fileinput')) {
+            input.fileinput('destroy');
+        }
+        input.fileinput('refresh',revisao);
+    });
+});
+
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
   // initialize with defaults

@@ -72,6 +72,15 @@ $route[ 'edicao/file-upload-anais/(:any)' ] = 'EdicaoControl/uploadFileAnais/$1'
 $route[ 'edicao/file-delete-resultados/(:any)' ] = 'EdicaoControl/deleteFileResultados/$1';
 $route[ 'edicao/file-upload-resultados/(:any)' ] = 'EdicaoControl/uploadFileResultados/$1';
 
+$route[ 'edicao/consulta-regras-submissao-e-revisao/(:any)' ] = 
+        'EdicaoControl/consultarRegrasSubmissaoRevisao/$1';
+$route[ 'edicao/file-delete-submissao/(:any)' ] = 'EdicaoControl/deleteRegrasSubmissao/$1';
+$route[ 'edicao/file-upload-submissao/(:any)' ] = 'EdicaoControl/uploadRegrasSubmissao/$1';
+$route[ 'edicao/file-delete-revisao/(:any)' ] = 'EdicaoControl/deleteRegrasRevisao/$1';
+$route[ 'edicao/file-upload-revisao/(:any)' ] = 'EdicaoControl/uploadRegrasRevisao/$1';
+
+$route[ 'regras-submissao' ]       = 'EdicaoControl/atualizaRegras';
+
 //Rotas Atividade
 $route[ 'atividade/(:any)' ]                    = 'AtividadeControl/$1';
 $route[ 'atividade/consultarTudo/(:any)' ]      = 'AtividadeControl/consultarTudo/$1';
@@ -96,9 +105,8 @@ $route[ 'modalidade/excluir/(:any)' ]           = 'ModalidadeControl/excluir/$1'
 $route[ 'eixo-tematico/(:any)' ]                = 'EixoTematicoControl/$1';
 $route[ 'eixo-tematico/alterar/(:any)' ]        = 'EixoTematicoControl/alterar/$1';
 $route[ 'eixo-tematico/excluir/(:any)' ]        = 'EixoTematicoControl/excluir/$1';
-/*Rotas para Regras*/
-$route[ 'regra-submissao/(:any)' ]              = 'RegraControl/$1';
-$route[ 'regra-submissao/alterar(:any)' ]       = 'RegraControl/alterar/$1';
+
+/*Rotas de Instituição*/
 $route[ 'instituicao/(:any)' ]                  = 'InstituicaoControl/$1';
 $route[ 'instituicao/alterar/(:any)' ]          = 'InstituicaoControl/alterar/$1';
 $route[ 'instituicao/excluir/(:any)' ]          = 'InstituicaoControl/excluir/$1';

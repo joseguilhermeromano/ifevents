@@ -310,8 +310,8 @@
             $this->DataInicioSubmissao = $DataInicioSubmissao;
         }
 
-        public function setDataFimSubmissao($DataFimSumbissao){
-            $this->DataFimSumbissao = $DataFimSumbissao;
+        public function setDataFimSubmissao($DataFimSubmissao){
+            $this->DataFimSubmissao = $DataFimSubmissao;
         }
 
         public function setDataInicioAvaliacao($DataInicioAvaliacao){

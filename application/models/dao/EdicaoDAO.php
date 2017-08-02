@@ -58,8 +58,8 @@
                ,'regr_subm_encerr' => converteDataMysql($obj->getDataFimSubmissao())
                ,'regr_revi_abert' => converteDataMysql($obj->getDataInicioAvaliacao())
                ,'regr_revi_encerr' => converteDataMysql($obj->getDataFimAvaliacao())
-               ,'regr_dire_subm' => converteDataMysql($obj->getDiretrizesSubmissao())
-               ,'regr_dire_aval' => converteDataMysql($obj->getDiretrizesAvaliacao())
+               ,'regr_dire_subm' => $obj->getDiretrizesSubmissao()
+               ,'regr_dire_aval' => $obj->getDiretrizesAvaliacao()
                );
         }
         

@@ -113,6 +113,8 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
     
+    
+    
     private function configPlugin(){
         return $configPlugin = array(
              "language" => "pt-BR"
@@ -201,6 +203,84 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $this->edicao->setResultados(null);
         $this->EdicaoDAO->alterar($this->edicao);
         $this->consultarAnaisResultados($codigoEdicao);
+    }
+    
+    
+    public function consultarRegrasSubmissaoRevisao($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        $data['submissao'] = $this->configPlugin();
+        $data['submissao']['deleteUrl'] = base_url('edicao/file-delete-submissao/').$codigoEdicao;
+        $data['submissao']['uploadUrl'] = base_url('edicao/file-upload-submissao/').$codigoEdicao;
+        $data['revisao'] = $this->configPlugin();
+        $data['revisao']['deleteUrl'] = base_url('edicao/file-delete-revisao/').$codigoEdicao;
+        $data['revisao']['uploadUrl'] = base_url('edicao/file-upload-revisao/').$codigoEdicao;
+        $linkSubmissao = $this->edicao->getDiretrizesSubmissao();
+        $linkRevisao = $this->edicao->getDiretrizesAvaliacao();
+        $data['submissao'] = $this->PreviewAnaisResultados($data['submissao'],$linkSubmissao);
+        $data['revisao'] = $this->PreviewAnaisResultados($data['revisao'],$linkRevisao); 
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+    
+    public function uploadRegrasSubmissao($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $novoNomeArquivo = 'DireSubm_'.$this->edicao->getNumeroEdicao().'_';
+        $novoNomeArquivo .= strtolower($this->edicao->getConferencia()->getAbreviacao());
+        $diretorio = 'application/views/arquivos/edicoes/diretrizes/submissao/';
+        $linkArquivo = $this->upload_arquivo('arquivo_submissao',$diretorio,$novoNomeArquivo);
+        if($linkArquivo === null){
+            $data['error'] = $this->session->flashdata('error');
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $this->edicao->setDiretrizesSubmissao($linkArquivo);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarRegrasSubmissaoRevisao($codigoEdicao);
+    }
+    
+    public function deleteRegrasSubmissao($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        unlink($this->edicao->getDiretrizesSubmissao());
+        $this->edicao->setDiretrizesSubmissao(null);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarRegrasSubmissaoRevisao($codigoEdicao);
+    }
+    
+    public function uploadRegrasRevisao($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $novoNomeArquivo = 'DireRev_'.$this->edicao->getNumeroEdicao().'_';
+        $novoNomeArquivo .= strtolower($this->edicao->getConferencia()->getAbreviacao());
+        $diretorio = 'application/views/arquivos/edicoes/diretrizes/revisao/';
+        $linkArquivo = $this->upload_arquivo('arquivo_revisao',$diretorio,$novoNomeArquivo);
+        if($linkArquivo === null){
+            $data['error'] = $this->session->flashdata('error');
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        $this->edicao->setDiretrizesAvaliacao($linkArquivo);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarRegrasSubmissaoRevisao($codigoEdicao);
+    }
+    
+    public function deleteRegrasRevisao($codigoEdicao){
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        if($this->edicao === null){
+            $data['error'] = "A Edição informada não existe!";
+            $this->output->set_content_type('application/json')->set_output(json_encode($data));
+        }
+        unlink($this->edicao->getDiretrizesAvaliacao());
+        $this->edicao->setDiretrizesAvaliacao(null);
+        $this->EdicaoDAO->alterar($this->edicao);
+        $this->consultarRegrasSubmissaoRevisao($codigoEdicao);
     }
     
     private function obtemImagem(){
@@ -359,7 +439,30 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $data['title']="IFEvents - Revisores";
         $this->chamaView("revisores", "organizador", $data, 1);
     }
+    public function atualizaRegras(){
+        $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+        $this->edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+        $data['title']="IFEvents - Regras de Submissão de Trabalhos";
+        $data['regra'] = $this->edicao;
+        if(!empty($this->input->post())){
+            $this->edicao->setDataInicioSubmissao($this->input->post('datainiciosubm'));
+            $this->edicao->setDataFimSubmissao($this->input->post('datafimsubm'));
+            $this->edicao->setDataInicioAvaliacao($this->input->post('datainiciorev'));
+            $this->edicao->setDataFimAvaliacao($this->input->post('datafimrev'));
 
+            $this->db->trans_start();
+            $this->EdicaoDAO->alterar($this->edicao);
+            $this->db->trans_complete();
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'As Regras foram atualizadas com sucesso!');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível atualizar as regras!');
+            }
+        }
+        $this->chamaView("regras-submissao", "organizador", $data ,1);
+    }
+    
+    
     public function selecionarEvento($edicao){
         
         foreach ($this->session->userdata('eventos_recentes') as $key => $value) {
