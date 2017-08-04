@@ -9,14 +9,19 @@ class ComiteDAO extends CI_Model implements DAO{
         parent::__construct();
         $this->load->model('ComiteModel','comite');
     }
+    
+    private function obtemValores($obj){
+        return array('comi_nm' => $obj->getNome()
+                ,'comi_desc' => $obj->getDescricao());
+    }
 
     public function inserir($obj) {
-        return  $this->db->insert('comite', $obj);
+        return  $this->db->insert('comite', $this->obtemValores($obj));
     }
 
     public function alterar($obj) {
-        $this->db->where('comi_id', $obj->arti_id);
-        return $this->db->update('comite', $obj);
+        $this->db->where('comi_cd', $obj->getCodigo());
+        return $this->db->update('comite', $this->obtemValores($obj));
     }
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null
@@ -57,8 +62,8 @@ class ComiteDAO extends CI_Model implements DAO{
             return null;
     }
 
-    public function excluir($obj) {
-        $this->db->where('comi_id', $obj->comi_id);
+    public function excluir($codigo) {
+        $this->db->where('comi_cd', $codigo);
         return $this->db->delete('comite');
     }
     

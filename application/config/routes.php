@@ -111,7 +111,12 @@ $route[ 'instituicao/(:any)' ]                  = 'InstituicaoControl/$1';
 $route[ 'instituicao/alterar/(:any)' ]          = 'InstituicaoControl/alterar/$1';
 $route[ 'instituicao/excluir/(:any)' ]          = 'InstituicaoControl/excluir/$1';
 $route[ 'submissao/(:any)' ]                    = 'SubmitControl/$1';
+
+//Rotas para Comitê
 $route[ 'comite/(:any)' ]                       = 'ComiteControl/$1';
+$route[ 'comite/alterar/(:any)' ]                       = 'ComiteControl/alterar/$1';
+$route[ 'comite/excluir/(:any)' ]                       = 'ComiteControl/excluir/$1';
+
 //Rotas Contato
 $route[ 'contato/(:any)' ]                      = 'ContatoControl/$1';
 $route[ 'contato/consultar/(:any)' ]            = 'ContatoControl/consultar/$1';

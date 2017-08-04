@@ -49,7 +49,7 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 
     public function alterar($codigo){
         $this->conferencia = $this->ConferenciaDAO->consultarCodigo($codigo);
-        $data = array("title"=>"IFEvents - Editar Conferência",
+        $data = array("title"=>"IFEvents -  Conferência",
                 "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Conferência</b></h2>",
                 "conferencia" => $this->conferencia);
         if (empty($this->input->post())) {

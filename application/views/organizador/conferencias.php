@@ -20,9 +20,9 @@
                    </div><!-- /.col-lg-6 -->
             </form>
 
-		<div class="col-md-8 col-sm-8">
-  		<a class="btn btn-default hidden-xs" href='<?php echo site_url('/conferencia/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Conferência</a>
-  	</div>
+            <div class="col-md-8 col-sm-8">
+                <a class="btn btn-default hidden-xs" href='<?php echo site_url('/conferencia/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Conferência</a>
+            </div>
 	</div>
 <br><br>
 	<div class="table-responsive"><!-- TABELA-->

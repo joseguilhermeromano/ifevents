@@ -8,7 +8,7 @@
 ?>
 <div class="row">
     <form method="GET" action="<?php echo base_url('comite/consultar'); ?>">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
            <div class="input-group">
                  <input type="text" name="busca" class="form-control estilo-botao-busca" 
                  placeholder="Buscar por Denominação...">
@@ -18,6 +18,11 @@
            </div><!-- /input-group -->
          </div><!-- /.col-lg-6 -->
     </form>
+    
+    <div class="col-md-8 col-sm-8">
+        <a class="btn btn-default hidden-xs" href='<?= base_url('/comite/cadastrar'); ?>' style="float:right">
+            <span class="glyphicon glyphicon-plus"></span> Novo Comitê</a>
+    </div>
 </div><!-- /row -->
 <br><br>
 <div class="table-responsive"><!-- TABELA-->
