@@ -8,17 +8,20 @@ class ConferenciaDAO extends CI_Model implements DAO{
         parent::__construct('ConferenciaDAO');
         $this->load->model('ConferenciaModel', 'conferencia');
     }
+    
+    private function obtemValores($obj){
+        return array('conf_nm' => $obj->getTitulo()
+                ,'conf_abrev' => $obj->getAbreviacao()
+                ,'conf_desc' => $obj->getDescricao());
+    }
 
     public function inserir($obj) {
-        return $this->db->insert('Conferencia', $obj);
+        return $this->db->insert('Conferencia', $this->obtemValores($obj));
     }
 
     public function alterar($obj) {
-        $this->db->where('conf_cd', $obj->conf_cd);
-        $this->db->set('conf_nm', $obj->conf_nm);
-        $this->db->set('conf_abrev', $obj->conf_abrev);
-        $this->db->set('conf_desc', $obj->conf_desc);
-        return $this->db->update('Conferencia', $obj);
+        $this->db->where('conf_cd', $obj->getCodigo());
+        return $this->db->update('Conferencia', $this->obtemValores($obj));
     }
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null

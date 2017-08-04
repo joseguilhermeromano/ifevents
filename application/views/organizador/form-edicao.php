@@ -10,7 +10,10 @@
 
 
 <?php
-    echo form_open_multipart( $this->uri->segment(2) != 'alterar' ? 'edicao/cadastrar/' : $this->uri->uri_string(), 'role="form" class="formsignin"' );
+    $segmento = $this->uri->segment(2);
+    $linkCadastro = 'edicao/cadastrar/';
+    $linkAltera = $this->uri->uri_string();
+    echo form_open_multipart( $segmento != 'alterar' ? $linkCadastro : $linkAltera, 'role="form" class="formsignin"' );
 ?>
 
 <h4 class="subtitulo"><i>Dados da Edição</i></h4><br>
@@ -320,7 +323,10 @@
 </div>
 
 
-<?php echo "<br><center><a href='".base_url($this->uri->segment(1)."/consultar/")."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;".form_submit("btn_atualizar", $this->uri->segment(2) != 'alterar' ? 'Cadastrar' : 'Atualizar',array('class' => 'btn btn-success button'))."</center>";
+<?php echo "<br><center><a href='".base_url("edicao/consultar/")."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
+        .form_submit("btn_atualizar"
+                , $segmento != 'alterar' ? 'Cadastrar' : 'Atualizar'
+                ,array('class' => 'btn btn-success button'))."</center>";
     echo form_close();
 ?>
 </div>
