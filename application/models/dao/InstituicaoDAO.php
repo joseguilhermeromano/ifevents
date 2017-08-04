@@ -1,22 +1,29 @@
 <?php
 if ( !defined('BASEPATH')) exit ( 'No direct sript access allowed' );
 
-    include_once 'DAO.php';// Chamar sempre a interface por esta forma!
+include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 class InstituicaoDAO extends CI_Model implements DAO{
 
     public function __construct(){
-            parent::__construct('InstituicaoDAO');
-            $this->load->model('InstituicaoModel', 'instituicao');
+        parent::__construct('InstituicaoDAO');
+        $this->load->model('InstituicaoModel', 'instituicao');
+    }
+    
+    private function obtemValores($obj){
+        return array('inst_nm' => $obj->getNome()
+                ,'inst_abrev' => $obj->getAbreviacao()
+                ,'inst_desc' => $obj->getDescricao()
+                ,'inst_logo' => $obj->getLogo());
     }
 
     public function inserir($obj) {
-        return $this->db->insert('Instituicao', $obj);
+        return $this->db->insert('Instituicao', $this->obtemValores($obj));
     }
 
     public function alterar($obj) {
-        $this->db->where('inst_cd', $obj->inst_cd);
-        return $this->db->update('Instituicao', $obj);
+        $this->db->where('inst_cd', $obj->getCodigo());
+        return $this->db->update('Instituicao', $this->obtemValores($obj));
     }
 
 
@@ -63,12 +70,12 @@ class InstituicaoDAO extends CI_Model implements DAO{
         $this->db->where('inst_nm LIKE', '%'.$nome.'%');
         $this->db->or_where('inst_abrev LIKE', '%'.$nome.'%');
         $this->db->order_by("inst_nm", "asc");
-		$query = $this->db->get();
-		return $query->result_array();
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
-    public function excluir($obj) {
-        $this->db->where('inst_cd', $obj);
+    public function excluir($codigo) {
+        $this->db->where('inst_cd', $codigo);
         return $this->db->delete('Instituicao');
     }
     

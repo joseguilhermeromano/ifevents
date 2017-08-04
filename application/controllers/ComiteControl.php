@@ -129,7 +129,7 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
     private function setaValores(){
      	$this->comite->setNome($this->input->post('denominacao'));
      	$this->comite->setDescricao($this->input->post('descricao'));
-     }
+    }
 
 
 }

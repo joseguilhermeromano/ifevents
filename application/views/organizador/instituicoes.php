@@ -8,7 +8,7 @@
 ?>
 <div class="row">
     <form method="GET" action="<?php echo base_url('instituicao/consultar'); ?>">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
            <div class="input-group">
                  <input type="text" name="busca" class="form-control estilo-botao-busca" 
                  placeholder="Buscar por Nome ou Abreviação...">
@@ -18,10 +18,9 @@
            </div><!-- /input-group -->
          </div><!-- /.col-lg-6 -->
     </form>
-</div>
-<div class="row">
-  <div class="col-sm-12">
-    <a class="btn btn-default margin-button" href='<?php echo site_url('/instituicao/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Instituição</a>
+  <div class="col-sm-8">
+    <a class="btn btn-default margin-button" href='<?= base_url('/instituicao/cadastrar'); ?>' style="float:right">
+        <span class="glyphicon glyphicon-plus"></span> Nova Instituição</a>
   </div>
 </div>
 <br><br>

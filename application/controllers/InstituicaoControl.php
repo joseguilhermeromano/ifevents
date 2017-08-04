@@ -1,68 +1,83 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
-	require_once 'PrincipalControl.php';
-	require_once 'InterfaceControl.php';
+require_once 'PrincipalControl.php';
+require_once 'InterfaceControl.php';
 
-	class InstituicaoControl extends PrincipalControl implements InterfaceControl{
+class InstituicaoControl extends PrincipalControl implements InterfaceControl{
 
-		public function __construct(){
-			parent::__construct();
-			$this->load->Model( 'dao/InstituicaoDAO' );
-			$this->load->Model('InstituicaoModel','instituicao');
-		}
-
-    public function cadastrar() {
-      if (empty($this->instituicao->input->post())){
-      	$this->chamaView("novainstituicao", "organizador",
-				array("title"=>"IFEvents - Instituicao - Organizador"), 1);
-        return true;
-      }
-			$this->instituicao->setNome($this->input->post("nome"));
-			$this->instituicao->setAbreviacao($this->input->post("abreviacao"));
-			$this->instituicao->setDescricao($this->input->post("descricao"));
-      if( $this->instituicao->valida()==false){
-      	$this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-      }
-      else{
-      	$this->instituicao->setaValores();
-        if($this->InstituicaoDAO->inserir($this->instituicao)==true){
-        	$this->session->set_flashdata('success', 'Instituição cadastrada com sucesso!');
-        }else{
-        	$this->session->set_flashdata('error', 'Instituição não cadastrada!');
-        }
-      }
-			$this->chamaView("novainstituicao", "organizador",
-			array("title"=>"IFEvents - Instituicao - Organizador"), 1);
+    public function __construct(){
+        parent::__construct();
+        $this->load->Model( 'dao/InstituicaoDAO' );
+        $this->load->Model('InstituicaoModel','instituicao');
     }
 
-    public function alterar($codigo) {
-			$data['instituicao'] = $this->InstituicaoDAO->consultarCodigo($codigo);
-      if(!empty($this->input->post())){
-				$this->chamaView("edita-instituicao", "organizador",
-				array("title"=>"IFEvents - Instituicao", "organizador"), $data, 1);
-				$this->instituicao->setCodigo($this->input->post('codigo'));
-				$this->instituicao->setNome($this->input->post("nome"));
-				$this->instituicao->setAbreviacao($this->input->post("abreviacao"));
-				$this->instituicao->setDescricao($this->input->post("descricao"));
-        $this->instituicao->setaValores();
-        if( $this->instituicao->valida()==false){
-        	$this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+    public function cadastrar() {
+        $data = array("title"=>"IFEvents - Nova Instituição",
+                    "tituloh2" => "<h2><span class='fa fa-calendar-plus-o'></span><b> Nova Instituição</b></h2>");
+        if (empty($this->input->post())){
+            return $this->chamaView("form-instituicao", "organizador",$data, 1);
         }
-        else{
-        	if($this->InstituicaoDAO->alterar($this->instituicao)==true){
-          	$this->session->set_flashdata('success', 'O Instituição atualizada com sucesso!');
-            redirect('instituicao/consultarTudo/');
-          }else{
-          	$this->session->set_flashdata('error', 'Não foi possível atualizar a instituição!');
-          }
-        }
-      }
-      $this->chamaView("edita-instituicao", "organizador", $data, 1);
-		}
 
+        $this->setaValores();
+        $data['instituicao'] = $this->instituicao;
+
+        if($this->valida()){
+
+            $this->db->trans_start();
+            try{
+                $this->InstituicaoDAO->inserir($this->instituicao);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
+
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'A Instituição foi cadastrada com sucesso!');
+                unset($data['instituicao']);
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível cadastrar a nova instituição!');
+            }
+
+        }
+
+        $this->chamaView("form-instituicao", "organizador", $data, 1);
+    }
+
+    public function alterar($codigo){
+        $this->instituicao = $this->InstituicaoDAO->consultarCodigo($codigo);
+        $data = array("title"=>"IFEvents - Atualizar Instituição",
+                "tituloh2" => "<h2><span class='glyphicon glyphicon-pencil'></span><b> Atualizar Instituição</b></h2>",
+                "instituicao" => $this->instituicao);
+        if (empty($this->input->post())) {
+            return $this->chamaView("form-instituicao", "organizador", $data, 1);
+        }
+
+        if($this->instituicao === null){
+            $this->session->set_flashdata('error', 'Esta Instituição não existe!');
+            redirect('instituicao/consultar');
+        }
+
+        $this->setaValores();
+
+        if($this->valida()){
+
+            $this->db->trans_start();
+            $this->InstituicaoDAO->alterar($this->instituicao);
+            $this->db->trans_complete();
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'A Instituição foi atualizada com sucesso!');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível atualizar a instituição!');
+                $this->chamaView("form-instituicao", "organizador", $data, 1);
+            }
+
+        }
+        redirect('instituicao/consultar');
+    }
+        
     public function consultarParaSelect2(){
     	$data = $this->InstituicaoDAO->consultarPorNomeOuAbreviacao($this->instituicao->input->post('term'));
-      $this->output->set_content_type('application/json')->set_output(json_encode($data));
-		}
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
 
     public function consultar() {
         $limite = 10;
@@ -84,11 +99,37 @@
     }
 
     public function excluir($codigo) {
-        if( $this->InstituicaoDAO->excluir($this->uri->segment(3)) == false){
-            $this->session->set_flashdata('error', 'Instituicao não pode ser excluida!');
-        }else{
-            $this->session->set_flashdata('success', 'Instituição deletada com sucesso!');
-            redirect('instituicao/consultarTudo/');
+        if($codigo !== null){
+            $this->db->trans_start();
+            try{
+                $this->InstituicaoDAO->excluir($codigo);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
+
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'A instiuição foi excluída com sucesso!');
+            }
         }
+        if($codigo === null || $this ->db->trans_status()==false ){
+            $this->session->set_flashdata('error', 'Não foi possível excluir a Instituição!');
+        }
+        redirect('instituicao/consultar');
+    }
+    
+    private function valida(){
+            $this->form_validation->set_rules(	'nome', 'Nome', 'trim|required|max_length[100]' );
+            $this->form_validation->set_rules(	'abreviacao', 'Abreviação', 'trim|required|max_length[100]' );
+            $this->form_validation->set_rules(	'descricao', 'Descrição', 'trim|required|max_length[500]' );
+            return $this->form_validation->run();
+    }
+
+    private function setaValores(){
+     	$this->instituicao->setNome($this->input->post('nome'));
+        $abreviacao = strtoupper($this->input->post('abreviacao'));
+        $this->instituicao->setAbreviacao($abreviacao);
+        $this->instituicao->setLogo(base_url());
+     	$this->instituicao->setDescricao($this->input->post('descricao'));
     }
 }

@@ -43,7 +43,7 @@
                     
                     
                     <td class="text-center"><?php echo $item->comi_nm; ?></td>
-                    <td class="text-center"><?php echo $item->comi_desc; ?></td>
+                    <td><?php echo $item->comi_desc; ?></td>
                     <td class="text-center">
                         <div class="text-left" style="display: inline-block">
                             <a href="<?= base_url('comite/alterar/'.$item->comi_cd); ?>" class="btn-opcao">
