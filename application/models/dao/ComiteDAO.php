@@ -19,23 +19,24 @@ class ComiteDAO extends CI_Model implements DAO{
         return $this->db->update('comite', $obj);
     }
 
-    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='comi_nm', $ordenacao='asc') {
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null
+        , $sort='comi_nm', $ordenacao='asc') {
         $this->db->select("*");
         $this->db->from("Comite");
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
             foreach ($parametros as $key => $value) {
-                $this->db->where($key.' LIKE ','%'.$value.'%');
+                $this->db->or_where($key.' LIKE ','%'.$value.'%');
             }
         }
-        if($limite)
+        if($limite){
             $this->db->limit($limite, $numPagina);
+        }
         $query = $this->db->get();
         if($query->num_rows()>0){
             return $query->result_object();
-        }else{
-            return null;
         }
+            return null;
     }
 
     public function consultarCodigo($codigo){
@@ -59,6 +60,10 @@ class ComiteDAO extends CI_Model implements DAO{
     public function excluir($obj) {
         $this->db->where('comi_id', $obj->comi_id);
         return $this->db->delete('comite');
+    }
+    
+    public function totalRegistros(){
+        return $this->db->count_all("Comite");
     }
 
 }

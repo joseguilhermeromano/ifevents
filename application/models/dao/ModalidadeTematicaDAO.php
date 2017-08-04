@@ -28,8 +28,9 @@
                     $this->db->where($key.' LIKE ','%'.$value.'%');
                 }
             }
-            if($limite)
+            if($limite){
                 $this->db->limit($limite, $numPagina);
+            }
             $query = $this->db->get();
             if($query->num_rows()>0){
                 return $query->result_object();

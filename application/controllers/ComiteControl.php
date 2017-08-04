@@ -36,9 +36,22 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
         public function alterar($codigo) {
         }
         public function consultar() {
-			$data['content'] = $this->ComiteDAO->consultarTudo();
-            $data['title'] = "IFEvents - Comitê - Organizador";
-            $this->chamaView("comite", "organizador", $data, 1);
+            $limite = 10;
+            $numPagina =0;
+            $busca=null;
+            $array=null;
+            if(null !== $this->input->get('pagina')){
+                $numPagina = $this->input->get('pagina');
+            }
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array = array('comi_nm' => $busca);
+            }
+            $data['comites']=$this->ComiteDAO->consultarTudo($array, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite, $this->ComiteDAO->totalRegistros(), 'comite/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $this->ComiteDAO->totalRegistros();
+            $data['title']="IFEvents - Comitês";
+            $this->chamaView("comites", "organizador", $data, 1);
         }
 
         public function consultarParaSelect2(){

@@ -52,10 +52,10 @@
   </a>
     <ul class="submenu collapse" id="eventos">
       <li class="item-menu">
-      <a href="<?php echo base_url('conferencia/consultarTudo');?>" class="list-group-item">CONFERÊNCIAS</a></li>
+      <a href="<?php echo base_url('conferencia/consultar');?>" class="list-group-item">CONFERÊNCIAS</a></li>
       <li id="edicao"><a href="<?php echo base_url('edicao/consultar');?>" class="list-group-item">EDIÇÕES</a></li>
       <li><a href="<?php echo base_url("comite/consultar");?>" class="list-group-item">COMITÊS</a></li>
-      <li><a href="<?php echo base_url("instituicao/consultarTudo");?>" class="list-group-item">INSTITUIÇÕES</a></li>
+      <li><a href="<?php echo base_url("instituicao/consultar");?>" class="list-group-item">INSTITUIÇÕES</a></li>
   </ul>
 </li>
 

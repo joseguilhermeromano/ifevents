@@ -20,24 +20,25 @@ class InstituicaoDAO extends CI_Model implements DAO{
     }
 
 
-    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='inst_nm', $ordenacao='asc') {
-        $this->db->select("inst_cd, inst_nm, inst_desc");
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null
+        , $sort='inst_nm', $ordenacao='asc') {
+        $this->db->select("*");
         $this->db->from("Instituicao");
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
             foreach ($parametros as $key => $value) {
-                $this->db->where($key.' LIKE ','%'.$value.'%');
+                $this->db->or_where($key.' LIKE ','%'.$value.'%');
             }
         }
-        if($limite)
+        if($limite){
             $this->db->limit($limite, $numPagina);
-            $query = $this->db->get();
-        if($query->num_rows()>0){
-                        return $query->result_object();
-                    }else{
-                        return null;
-                    }
         }
+        $query = $this->db->get();
+        if($query->num_rows()>0){
+            return $query->result_object();
+        }
+            return null;
+    }
 
 
      public function consultarCodigo($codigo){
@@ -69,6 +70,10 @@ class InstituicaoDAO extends CI_Model implements DAO{
     public function excluir($obj) {
         $this->db->where('inst_cd', $obj);
         return $this->db->delete('Instituicao');
+    }
+    
+    public function totalRegistros(){
+        return $this->db->count_all("Instituicao");
     }
 
 }

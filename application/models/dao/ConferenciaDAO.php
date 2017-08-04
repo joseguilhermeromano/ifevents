@@ -21,25 +21,24 @@ class ConferenciaDAO extends CI_Model implements DAO{
         return $this->db->update('Conferencia', $obj);
     }
 
-    public function consultarTudo($parametros = null, $limite=null, 
-        $numPagina=null, $sort='conf_nm', $ordenacao='asc') {
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null
+        , $sort='conf_nm', $ordenacao='asc') {
         $this->db->select("*");
         $this->db->from("Conferencia");
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
-                foreach ($parametros as $key => $value) {
-                $this->db->where($key.' LIKE ','%'.$value.'%');
-          }
+            foreach ($parametros as $key => $value) {
+                $this->db->or_where($key.' LIKE ','%'.$value.'%');
+            }
         }
         if($limite){
-                $this->db->limit($limite, $numPagina);
+            $this->db->limit($limite, $numPagina);
         }
         $query = $this->db->get();
         if($query->num_rows()>0){
-                return $query->result_object();
-                                }else{
-                return null;
+            return $query->result_object();
         }
+            return null;
     }
 
     public function consultarPorNomeOuAbreviacao($nome){
@@ -71,6 +70,10 @@ class ConferenciaDAO extends CI_Model implements DAO{
         return null;
     }
 
+    public function totalRegistros(){
+        return $this->db->count_all("Conferencia");
+    }
+    
     public function excluir($obj) {
       $this->db->where('conf_cd', $obj);
       return $this->db->delete('Conferencia');

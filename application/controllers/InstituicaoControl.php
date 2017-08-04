@@ -65,22 +65,30 @@
 		}
 
     public function consultar() {
-
+        $limite = 10;
+        $numPagina =0;
+        $busca=null;
+        $array=null;
+        if(null !== $this->input->get('pagina')){
+            $numPagina = $this->input->get('pagina');
+        }
+        if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $array = array('inst_nm' => $busca, 'inst_abrev' => $busca);
+        }
+        $data['instituicoes']=$this->InstituicaoDAO->consultarTudo($array, $limite, $numPagina);
+        $data['paginacao'] = $this->geraPaginacao($limite, $this->InstituicaoDAO->totalRegistros(), 'instituicao/consultar/?busca='.$busca);
+        $data['totalRegistros'] = $this->InstituicaoDAO->totalRegistros();
+        $data['title']="IFEvents - Instituições";
+        $this->chamaView("instituicoes", "organizador", $data, 1);
     }
 
-		public function consultarTudo(){
-			$data['content'] = $this->InstituicaoDAO->consultarTudo();
-			$data['title'] = "IFEvents - Instituicao - Organizador";
-			$this->chamaView("listainstituicao", "organizador", $data, 1);
-		}
-
     public function excluir($codigo) {
-			if( $this->InstituicaoDAO->excluir($this->uri->segment(3)) == false){
-				$this->session->set_flashdata('error', 'Instituicao não pode ser excluida!');
-			}
-		  else{
-				$this->session->set_flashdata('success', 'Instituição deletada com sucesso!');
-				redirect('instituicao/consultarTudo/');
-			}
+        if( $this->InstituicaoDAO->excluir($this->uri->segment(3)) == false){
+            $this->session->set_flashdata('error', 'Instituicao não pode ser excluida!');
+        }else{
+            $this->session->set_flashdata('success', 'Instituição deletada com sucesso!');
+            redirect('instituicao/consultarTudo/');
+        }
     }
 }
