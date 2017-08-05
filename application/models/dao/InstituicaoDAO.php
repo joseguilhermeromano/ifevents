@@ -57,6 +57,7 @@ class InstituicaoDAO extends CI_Model implements DAO{
             $this->instituicao->setNome($consulta->inst_nm);
             $this->instituicao->setAbreviacao($consulta->inst_abrev);
             $this->instituicao->setDescricao($consulta->inst_desc);
+            $this->instituicao->setLogo($consulta->inst_logo);
             return $this->instituicao;
         }
         return null;

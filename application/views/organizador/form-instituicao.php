@@ -8,14 +8,14 @@
     echo alert($this->session);
 ?>
 
+<?php
+    $segmento = $this->uri->segment(2);
+    $linkCadastro = 'instituicao/cadastrar/';
+    $linkAltera = $this->uri->uri_string();
+    echo form_open_multipart( $segmento != 'alterar' ? $linkCadastro : $linkAltera, 'role="form" class="formsignin"' );
+?>
+
 <div class="row">
-    <?php
-        $segmento = $this->uri->segment(2);
-        $linkCadastro = 'instituicao/cadastrar/';
-        $linkAltera = $this->uri->uri_string();
-        echo form_open_multipart( $segmento != 'alterar' ? $linkCadastro : $linkAltera
-                , 'role="form" class="formsignin"' );
-    ?>
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Nome', 'nome' ); ?></b>
@@ -34,9 +34,9 @@
         <b><?php echo form_label( 'Abreviação', 'abreviacao' ); ?></b><br>
         	<?php  
         		$data = array( 'name' => 'abreviacao'
-                            , 'placeholder' => 'Descrição'
+                            , 'placeholder' => 'Abreviação'
                             ,'class' => 'form-control estilo-input'
-                            , 'value' => isset($instituicao) ? $instituicao->getDescricao() : '');
+                            , 'value' => isset($instituicao) ? $instituicao->getAbreviacao() : '');
                 echo form_input( $data ); 
         	?>
         </div>
@@ -47,8 +47,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group">
-        <b><?php echo form_label( 'Logo da Instituição', 'image_field' ); ?></b>
-            <?php $data = array( 'name' => 'image_field', 'id' => 'fileImage','type' => 'file',  
+        <b><?php echo form_label( 'Logo da instituição', 'image_field' ); ?></b>
+            <?php $data = array( 'name' => 'image_field', 'id' => 'imagemInstituicao','type' => 'file',  
               'class' =>'file-uploading');
               echo form_upload($data);?>
         <input type="hidden" name="link_imagem_salva" id="link_imagem" 

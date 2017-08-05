@@ -278,48 +278,52 @@ $(document).ready(function(){
 
 // /**CARREGA PLUGIN FILE UPLOAD BOOTSTRAP**/
   // initialize with defaults
-$("#fileImage").ready(function(){
-    
-    var imagem = {
-     language: 'pt-BR'
-    ,theme: 'fa'
-    ,showUpload: false
-    ,browseClass: 'btn btn-success'
-    ,browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> "};
-
-    if($("#link_imagem").val()!=""){
-    var nomeArquivo = extrairNomeArquivo($("#link_imagem").val());
-     var tam;
-        tam = $.ajax({
-          dataType: "HEAD",
-          async: false,
-          url: baseUrl+$("#link_imagem").val(),
-          success: function (data) {
-            return data.getResponseHeader("Content-Length");
-          }
+$("#imagemInstituicao").ready(function(){
+        
+        function getImagem(imagem){
+            $.ajax({    
+                type: "POST",
+                data: {link: $("#link_imagem").val()},
+                url: baseUrl+'instituicao/resgataImagem',
+                async: false,
+                dataType: "json",
+                success:function(data) {
+                    imagem(data);
+                }
+            });
+        }
+        
+        getImagem(function(imagem){ 
+            var input = $("#imagemInstituicao");
+            if (input.data('fileinput')) {
+                input.fileinput('destroy');
+            }
+            input.fileinput(imagem, 'refresh');
         });
-        console.log(tam);
-        imagem.initialPreview = "<img src='"+baseUrl+$("#link_imagem").val()
-    +"' class='file-preview-image kv-preview-data img-responsive' title='"
-    +nomeArquivo+"' "
-    +"style='with:auto; height: auto; max-height:160px' >";
-    imagem.initialPreviewAsData = false;
-    imagem.initialPreviewShowDelete = false;
-    imagem.initialPreviewConfig = [{caption:nomeArquivo, size: tam}];
-    imagem.overwriteInitial = true;
-    imagem.maxFileSize = "1000000";
-    }
-    
-    
-    function extrairNomeArquivo(Caminho){
-	Caminho 	= Caminho.replace("/\/g", "/");
-	var Arquivo = Caminho.substring(Caminho.lastIndexOf('/') + 1);
-	return Arquivo;
-    }
-      
-    $("#fileImage").fileinput(
-      imagem
-    );
+});
+
+$("#imagemEdicao").ready(function(){
+        
+        function getImagem(imagem){
+            $.ajax({    
+                type: "POST",
+                data: {link: $("#link_imagem").val()},
+                url: baseUrl+'edicao/resgataImagem',
+                async: false,
+                dataType: "json",
+                success:function(data) {
+                    imagem(data);
+                }
+            });
+        }
+        
+        getImagem(function(imagem){ 
+            var input = $("#imagemEdicao");
+            if (input.data('fileinput')) {
+                input.fileinput('destroy');
+            }
+            input.fileinput(imagem, 'refresh');
+        });
 });
 
 
@@ -347,13 +351,13 @@ $("#fileImage").ready(function(){
         if (input.data('fileinput')) {
             input.fileinput('destroy');
         }
-        input.fileinput('refresh', anais);
+        input.fileinput(anais,'refresh');
     }, function(resultados){
         var input = $("#arquivoResultados");
         if (input.data('fileinput')) {
             input.fileinput('destroy');
         }
-        input.fileinput('refresh',resultados);
+        input.fileinput(resultados,'refresh');
     });
 });
 
@@ -379,13 +383,13 @@ $("#fileImage").ready(function(){
         if (input.data('fileinput')) {
             input.fileinput('destroy');
         }
-        input.fileinput('refresh', submissao);
+        input.fileinput(submissao,'refresh');
     }, function(revisao){
         var input = $("#arquivoRevisao");
         if (input.data('fileinput')) {
             input.fileinput('destroy');
         }
-        input.fileinput('refresh',revisao);
+        input.fileinput(revisao,'refresh');
     });
 });
 

@@ -108,8 +108,8 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $data['resultados']['uploadUrl'] = base_url('edicao/file-upload-resultados/').$codigoEdicao;
         $linkAnais = $this->edicao->getAnais();
         $linkResultados = $this->edicao->getResultados();
-        $data['anais'] = $this->PreviewAnaisResultados($data['anais'],$linkAnais);
-        $data['resultados'] = $this->PreviewAnaisResultados($data['resultados'],$linkResultados); 
+        $data['anais'] = $this->PreviewInputFile($data['anais'],$linkAnais);
+        $data['resultados'] = $this->PreviewInputFile($data['resultados'],$linkResultados); 
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
     
@@ -129,7 +129,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         );
     }
     
-    private function PreviewAnaisResultados($array, $linkArquivo){
+    private function PreviewInputFile($array, $linkArquivo){
         if($linkArquivo!==null){
             $array['initialPreview'] = base_url($linkArquivo);
             $array['initialPreviewAsData'] = true;
@@ -216,8 +216,8 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $data['revisao']['uploadUrl'] = base_url('edicao/file-upload-revisao/').$codigoEdicao;
         $linkSubmissao = $this->edicao->getDiretrizesSubmissao();
         $linkRevisao = $this->edicao->getDiretrizesAvaliacao();
-        $data['submissao'] = $this->PreviewAnaisResultados($data['submissao'],$linkSubmissao);
-        $data['revisao'] = $this->PreviewAnaisResultados($data['revisao'],$linkRevisao); 
+        $data['submissao'] = $this->PreviewInputFile($data['submissao'],$linkSubmissao);
+        $data['revisao'] = $this->PreviewInputFile($data['revisao'],$linkRevisao); 
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
     
@@ -301,6 +301,46 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         }
         
         return $ExisteLinkTemp;
+    }
+    
+    public function resgataImagem(){
+        $link = $this->input->post('link');
+        $data = $this->configInputImagem();
+        if($link !== ''){
+            $data = $this->PreviewImagem($data, $link);
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+    
+    private function configInputImagem(){
+        return $configPlugin = array(
+             "language" => "pt-BR"
+            ,"theme" => "fa"
+            ,"showUpload" => false
+            ,"overwriteInitial" => true
+            ,"maxFileSize"=> 4096
+            ,"allowedFileExtensions" => array("jpg", "png", "jpeg", "gif") 
+            ,"priviewFileType" => "any"
+            ,"browseClass"=> "btn btn-success"
+            ,"browseIcon" => "<i class='glyphicon glyphicon-picture'></i>"
+            ,"maxImageWidth" => 3543
+            ,"minImageWidth" => 960
+            ,"maxImageHeight" => 1181
+            ,"minImageHeight" => 602
+        );
+    }
+    
+    private function PreviewImagem($array, $linkArquivo){
+        if($linkArquivo!==null){
+            $array['initialPreview'] = base_url($linkArquivo);
+            $array['initialPreviewAsData'] = true;
+            $array['initialPreviewConfig'] = array(array(
+            "caption" => basename($linkArquivo)
+            , "size" => filesize($linkArquivo)
+            , "showDelete" => false
+            , "showZoom" => true));  
+        }
+        return $array;
     }
     
     private function salvaImagemDefinitivo($linkTemporario){

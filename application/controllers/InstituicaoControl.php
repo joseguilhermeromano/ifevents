@@ -119,17 +119,92 @@ class InstituicaoControl extends PrincipalControl implements InterfaceControl{
     }
     
     private function valida(){
-            $this->form_validation->set_rules(	'nome', 'Nome', 'trim|required|max_length[100]' );
-            $this->form_validation->set_rules(	'abreviacao', 'Abreviação', 'trim|required|max_length[100]' );
-            $this->form_validation->set_rules(	'descricao', 'Descrição', 'trim|required|max_length[500]' );
-            return $this->form_validation->run();
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|required|max_length[100]' );
+        $this->form_validation->set_rules('abreviacao', 'Abreviação', 'trim|required|max_length[100]' );
+        $this->form_validation->set_rules('descricao', 'Descrição', 'trim|required|max_length[500]' );
+        return $this->form_validation->run();
     }
 
     private function setaValores(){
      	$this->instituicao->setNome($this->input->post('nome'));
         $abreviacao = strtoupper($this->input->post('abreviacao'));
         $this->instituicao->setAbreviacao($abreviacao);
-        $this->instituicao->setLogo(base_url());
+        $this->instituicao->setLogo($this->obtemImagem());
      	$this->instituicao->setDescricao($this->input->post('descricao'));
+    }
+    
+    private function obtemImagem(){
+        $ExisteLinkTemp = $this->input->post('link_imagem_salva');
+        $inputImagemCarregada = $_FILES['image_field']['name'];
+        
+        
+        if($ExisteLinkTemp == null && $inputImagemCarregada == null){
+            $this->form_validation->set_rules( 'image_field', 'Logo da Instituição', 'required' );
+            return null;
+        }
+            
+        if($inputImagemCarregada != null){
+            $ExisteLinkTemp = $this->upload_arquivo('image_field', 'temp/', $this->geraNomeLogo());
+            $this->session->set_flashdata('imagem_temp',$ExisteLinkTemp);
+        }
+        
+        if($this->valida()==true){
+            return $this->salvaImagemDefinitivo($ExisteLinkTemp);
+        }
+        
+        return $ExisteLinkTemp;
+    }
+    
+    private function salvaImagemDefinitivo($linkTemporario){
+        $nomeImagem = $this->geraNomeLogo();
+        $extensaoArquivo = strrchr($linkTemporario, '.');
+        $novoLink = 'application/views/imagens/instituicoes/'.$nomeImagem;
+        $novoLink .= $extensaoArquivo;
+        rename($linkTemporario,$novoLink);
+        return $novoLink;
+    }
+
+    private function geraNomeLogo(){
+        $nomeImagem = "logo_";
+        $nomeImagem .= strtolower($this->instituicao->getAbreviacao());
+        return $nomeImagem;
+    }
+    
+    public function resgataImagem(){
+        $link = $this->input->post('link');
+        $data = $this->configInputImagem();
+        if($link !== ''){
+            $data = $this->PreviewImagem($data, $link);
+        }
+        $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+    
+    private function configInputImagem(){
+        return $configPlugin = array(
+             "language" => "pt-BR"
+            ,"theme" => "fa"
+            ,"showUpload" => false
+            ,"overwriteInitial" => true
+            ,"maxFileSize"=> 4096
+            ,"allowedFileExtensions" => array("jpg", "png", "jpeg", "gif") 
+            ,"priviewFileType" => "any"
+            ,"browseClass"=> "btn btn-success"
+            ,"browseIcon" => "<i class='glyphicon glyphicon-picture'></i>"
+            ,"maxImageWidth" => 250
+            ,"maxImageHeight" => 150
+        );
+    }
+    
+    private function PreviewImagem($array, $linkArquivo){
+        if($linkArquivo!==null){
+            $array['initialPreview'] = base_url($linkArquivo);
+            $array['initialPreviewAsData'] = true;
+            $array['initialPreviewConfig'] = array(array(
+            "caption" => basename($linkArquivo)
+            , "size" => filesize($linkArquivo)
+            , "showDelete" => false
+            , "showZoom" => true));  
+        }
+        return $array;
     }
 }

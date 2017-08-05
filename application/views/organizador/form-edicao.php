@@ -66,7 +66,7 @@
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( '*Imagem do Evento', 'image_field' ); ?></b>
-            <?php $data = array( 'name' => 'image_field', 'id' => 'fileImage','type' => 'file',  
+            <?php $data = array( 'name' => 'image_field', 'id' => 'imagemEdicao','type' => 'file',  
               'class' =>'file-uploading');
               echo form_upload($data);?>
         <input type="hidden" name="link_imagem_salva" id="link_imagem" value="<?= isset($edicao) ? $edicao->getImagemEdicao() : ''; ?>">
