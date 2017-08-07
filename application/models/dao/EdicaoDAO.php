@@ -12,6 +12,8 @@
                 $this->load->model('ConferenciaModel', 'conferencia');
                 $this->load->model('InstituicaoModel', 'instituicao');
                 $this->load->model('ComiteModel', 'comite');
+                $this->load->model('dao/ConferenciaDAO');
+                $this->load->model('dao/ComiteDAO');
         }
                 
         public function inserir($obj) {
@@ -325,83 +327,6 @@
                 return $parcerias;
              }
              return null;
-        }
-
-        public function consultarRevisores($parametros = null, $limite=null, $numPagina=null, $sort='user_nm', $ordenacao='asc') {
-            $this->db->select("user_cd, user_status, user_nm, Conferencia_Revisor.*");
-            $this->db->from("User");
-            $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
-            $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
-            $this->db->join('Conferencia_Revisor', 'User.user_cd = Conferencia_Revisor.core_user_cd', '');
-            $this->db->order_by($sort, $ordenacao);
-            if($parametros !== null){
-                foreach ($parametros as $key => $value) {
-                    $this->db->where($key.' LIKE ','%'.$value.'%');
-                }
-            }
-            if($limite){
-                $this->db->limit($limite, $numPagina);
-            }
-            $query = $this->db->get();
-            if($query->num_rows()>0){
-                return $query->result_object();
-            }else{
-                return null;
-            }
-        }
-
-        public function totalRegistrosRevisores(){
-            return 0;
-        }
-
-        public function convidarRevisor($revisor, $conferencia){
-
-            $this->db->where('core_conf_cd', $conferencia);
-            $this->db->where('core_user_cd', $revisor);
-            $this->db->where('core_convite_status', 'Aguardando Resposta');
-            $this->db->or_where('core_convite_status', 'Convite Recusado');
-            $query = $this->db->get('Conferencia_Revisor');
-            if($query->num_rows() == 0){
-                $this->db->insert('Conferencia_Revisor', array(
-                    'core_conf_cd' => $conferencia
-                    ,'core_user_cd' => $revisor
-                    ,'core_convite_status' => 'Aguardando Resposta'
-                    ));
-            }else{ 
-                $this->session->set_flashdata('info', 'Você já adicionou este revisor ao evento!');
-                return redirect('revisor/consultar'); 
-            }
-
-            if($this->db->affected_rows()){
-                return 0;
-            }else{
-                return 1;
-            }
-
-        }
-
-        public function aceitarRecusarConvite($revisor, $evento, $opcao){
-            $this->db->where('core_user_cd', $revisor);
-            $this->db->where('core_conf_cd', $evento);
-            $this->db->where('core_convite_status', 'Aguardando Resposta');
-            $this->db->update('Conferencia_Revisor', array('core_convite_status' => $opcao));
-
-            if($this->db->affected_rows()){
-                return 0;
-            }else{
-                return 1;
-            }
-        }
-
-        public function excluirConvite($revisor, $evento){
-            $this->db->where('core_user_cd', $revisor);
-            $this->db->where('core_conf_cd', $evento);
-            $this->db->delete('Conferencia_Revisor');
-            if($this->db->affected_rows()){
-                return 0;
-            }else{
-                return 1;
-            }
         }
 
         public function consultarEventosRevisor($data_atual, $revisor){

@@ -34,80 +34,6 @@ class UsuarioControl extends PrincipalControl{
         $this->chamaView("usuarios", "organizador", $data, 1);
     }
 
-    public function notificaUsers(){
-		$data['content'] = $this->ContatoDAO->consultarCodigo($this->uri->segment(3));
-        if (empty($this->input->post())){
-            $this->chamaView("notifica-users", "organizador",
-            array("title"=>"IFEvents - Nova Notificação"), 1);
-            return true;
-        }
-        $answer = (object) array('resposta' => $this->input->post('tipo'));
-        $notificacao = (object) array('tipo_notificacao' => $this->input->post('tipo_notificacao'),
-									  'emails' => $this->input->post('emails'),
-									  'assunto' => $this->input->post('assunto'),
-        	  						  'mensagem' => $this->input->post('mensagem'));
-        $this->form_validation->set_rules( 'tipo_notificacao', 'Notificar', 'trim|required|max_length[11]' );
-        if($notificacao->tipo_notificacao == 1){
-            $this->form_validation->set_rules( 'emails[]', 'Emails', 'valid_emails|trim|required|max_length[100]' );
-        }
-        $this->form_validation->set_rules( 'assunto', 'Assunto', 'trim|required|max_length[50]' );
-        $this->form_validation->set_rules( 'mensagem', 'Mensagem', 'required' );
-        $users = null;
-        if($notificacao->tipo_notificacao != 1 && $notificacao->tipo_notificacao != -1){
-        	switch ($notificacao->tipo_notificacao) {
-            	case '2':
-                    $users = $this->UserDAO->consultarTudo(array('user_tipo' => 1));
-                    break;
-                case '3':
-                    $users = $this->UserDAO->consultarTudo(array('user_tipo' => 2));
-                    break;
-                case '4':
-                    $users = $this->UserDAO->consultarTudo(array('user_tipo' => 3));
-                    break;
-                default:
-                    $users = $this->UserDAO->consultarTudo(null);
-                    break;
-            }
-    	}
-        if($this->form_validation->run()){
-        	$test=1;
-            $qtd=0;
-            if(!empty($notificacao->emails)){
-                $qtd= sizeof($notificacao->emails);
-                foreach ($notificacao->emails as $key => $value) {
-                    $test = $this->envia_email($value,$notificacao->assunto, $notificacao->mensagem);
-                }
-            }
-            if($users != null){
-            	$qtd= sizeof($users);
-                foreach ($users as $key => $value) {
-                    $test = $this->envia_email($value->email_email, $notificacao->assunto, $notificacao->mensagem);
-                }
-            }
-            if($test == 0){
-            	if($qtd > 1){
-                	$mensagem = 'As notificações foram enviados com sucesso!';
-                }else{
-                    $mensagem = 'A notificação foi enviada com sucesso!';
-					if($answer->resposta == 'resposta'){
-						redirect('contato/consultarTudo');
-					}
-                }
-                $this->session->set_flashdata('success', $mensagem);
-            }else{
-                if($qtd > 1){
-                    $mensagem = 'Não foi possível enviar as notificações!';
-                }else{
-                    $mensagem = 'Não foi possível enviar a notificação!';
-                }
-                    $this->session->set_flashdata('error', $mensagem);
-            }
-        }
-        $data['title']="IFEvents - Nova Notificação";
-        $data['notificacao'] = $notificacao;
-        $this->chamaView("notifica-users", "organizador", $data, 1);
-    }
-
     public function camposRestritos($obj){
     	$cadastro = $obj->getCodigo()=== null ? true : false;
         if($this->isOrganizador()== false && $cadastro == false){
@@ -181,82 +107,90 @@ class UsuarioControl extends PrincipalControl{
         }
         $this->consultar();
     }
-
-    public function consultarRevisorSelect2(){
-        $data = $this->UsuarioDAO->consultarTudo(array('user_nm' => $this->input->post('term'), 'user_tipo' => 2));
-        $this->output->set_content_type('application/json')->set_output(json_encode($data));
-    }
-
-    public function notificar(){
-        if (empty($this->input->post())){
-            $this->chamaView("notifica-users", "organizador",
-                array("title"=>"IFEvents - Nova Notificação"), 1);
-            return true;
-        }
-        $mensagemEscrita = $this->load->view("template-email/template-email",
-            array("corpoMensagem" => $this->input->post("mensagem"), "tituloMensagem" => "Notificação"), true);
-            // $mensagemEscrita = $this->input->post("mensagem");
-        $notificacao = (object) array('tipo_notificacao' => $this->input->post('tipo_notificacao'),
-                					  'emails' => $this->input->post('emails'),
-                 					  'assunto' => $this->input->post('assunto'),
-                					  'mensagem' => $mensagemEscrita);
+    
+    private function validaNotificacao(){
         $this->form_validation->set_rules( 'tipo_notificacao', 'Notificar', 'trim|required|max_length[11]' );
-        if($notificacao->tipo_notificacao == 1){
+        if($this->input->post('tipo_notificacao') == 1){
             $this->form_validation->set_rules( 'emails[]', 'Emails', 'valid_emails|trim|required|max_length[100]' );
         }
         $this->form_validation->set_rules( 'assunto', 'Assunto', 'trim|required|max_length[50]' );
         $this->form_validation->set_rules( 'mensagem', 'Mensagem', 'required' );
-        $users = null;
-        if($notificacao->tipo_notificacao != 1 && $notificacao->tipo_notificacao != -1){
-            switch ($notificacao->tipo_notificacao) {
-            	case '2':
-                    $users = $this->UsuarioDAO->consultarTudo(array('user_tipo' => 1));
-                    break;
-                case '3':
-                    $users = $this->UsuarioDAO->consultarTudo(array('user_tipo' => 2));
-                    break;
-                case '4':
-                    $users = $this->UsuarioDAO->consultarTudo(array('user_tipo' => 3));
-                    break;
-                default:
-                    $users = $this->UsuarioDAO->consultarTudo(null);
-                    break;
-            }
+        return $this->form_validation->run();
+    }
+    
+    private function setaValoresNotificacao(){
+        $dataMensagem = array("tituloMensagem" => "Notificação"
+            ,"corpoMensagem" => $this->input->post("mensagem"));
+        $mensagem = $dataMensagem['corpoMensagem'];
+        
+        if($this->validaNotificacao()){
+            $mensagem = $this->load->view("template-email/template-email", $dataMensagem, true);
         }
-        if($this->form_validation->run()){
-            $test=1;
-            $qtd=0;
-            if(!empty($notificacao->emails)){
-                $qtd= sizeof($notificacao->emails);
-                foreach ($notificacao->emails as $key => $value) {
-                    $test = $this->envia_email($value,$notificacao->assunto, $notificacao->mensagem);
-                }
-            }
-            if($users != null){
-                $qtd= sizeof($users);
-                foreach ($users as $key => $value) {
-                    $test = $this->envia_email($value->email_email, $notificacao->assunto, $notificacao->mensagem);
-                }
-            }
-            if($test == 0){
-                if($qtd > 1){
-                    $mensagem = 'As notificações foram enviados com sucesso!';
-                }else{
-                    $mensagem = 'A notificação foi enviada com sucesso!';
-                }
-                $this->session->set_flashdata('success', $mensagem);
-            }else{
-                if($qtd > 1){
-                    $mensagem = 'Não foi possível enviar as notificações!';
-            	}else{
-                    $mensagem = 'Não foi possível enviar a notificação!';
-                }
-                $this->session->set_flashdata('error', $mensagem);
-            }
+        
+        return (object) array(
+            'tipo_notificacao' => $this->input->post('tipo_notificacao')
+           ,'emails' => $this->input->post('emails')
+           ,'assunto' => $this->input->post('assunto')
+           ,'mensagem' => $mensagem
+        );
+    }
+    
+    private function disparaNotificacao($objetos, $notificacao){
+        foreach ($objetos as $key => $value) {
+            $test = $this->envia_email($value->email_email
+                    , $notificacao->assunto
+                    , $notificacao->mensagem);
         }
-        $data['title']="IFEvents - Nova Notificação";
-        $notificacao->mensagem = $this->input->post('mensagem');
-        $data['notificacao'] = $notificacao;
+        return $test; 
+    }
+    
+    private function sucessoErroNotificacao($test, $qtd, $notificacao){
+        if($test == 0){
+            $fimMsg = " com sucesso!";
+            $mensagem = $qtd > 1 ? 'As notificações foram enviados'.$fimMsg
+                    : 'A notificação foi enviada'.$fimMsg;
+            $this->session->set_flashdata('success', $mensagem);
+            return null;
+        }else{
+            $inicioMsg = 'Não foi possível enviar ';
+            $mensagem = $qtd > 1 ? $inicioMsg.'as notificações!'
+                    : $inicioMsg.'a notificação'; 
+            $this->session->set_flashdata('error', $mensagem);
+        }
+        return $notificacao;
+    }
+
+    public function notificar(){
+        $data = array("title"=>"IFEvents - Nova Notificação");
+        if (!empty($this->input->post())){
+            $notificacao = $this->setaValoresNotificacao();
+            if($this->validaNotificacao()){
+                switch ($notificacao->tipo_notificacao) {
+                    case '1':
+                        $qtd= sizeof($notificacao->emails);
+                        foreach ($notificacao->emails as $key => $value) {
+                            $test = $this->envia_email($value
+                                    ,$notificacao->assunto
+                                    ,$notificacao->mensagem);
+                        }
+                        break;
+                    case '2' || '3' || '4':
+                        $data = array('user_tipo' => $notificacao->tipo_notificacao - 1);
+                        $users = $this->UsuarioDAO->consultarTudo($data);
+                        $qtd= sizeof($users);
+                        $test = $this->disparaNotificacao($users, $notificacao);
+                        break;
+                    case '5':
+                        $data = array('user_status' => 'Ativo');
+                        $users = $this->UsuarioDAO->consultarTudo($data);
+                        $qtd= sizeof($users);
+                        $test = $this->disparaNotificacao($users, $notificacao);
+                        break;
+                }
+                $notificacao = $this->sucessoErroNotificacao($test, $qtd, $notificacao);
+            }
+            $data['notificacao'] = $notificacao;   
+        }
         $this->chamaView("notifica-users", "organizador", $data, 1);
     }
 }

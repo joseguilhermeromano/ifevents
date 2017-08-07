@@ -50,19 +50,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-/* Rotas Corretas */
-$route[ 'login/(:any)' ]              			    = 'LoginControl/$1';
+/* Rotas Login */
+$route[ 'login/(:any)' ]                        = 'LoginControl/$1';
 /*Rotas Usuário*/
-$route[ 'usuario/alterar/(:any)' ]    			    = 'UsuarioControl/alterar/$1';
-$route[ 'usuario/ativar/(:num)' ]     			    = 'UsuarioControl/ativar/$1';
-$route[ 'usuario/desativar/(:num)' ]  			    = 'UsuarioControl/desativar/$1';
-$route[ 'usuario/(:any)' ]            			    = 'UsuarioControl/$1';
-$route[ 'participante/(:any)']		  			      = 'ParticipanteControl/$1';
-$route[ 'participante/alterar/(:any)']		  	  = 'ParticipanteControl/alterar/$1';
-$route[ 'revisor/(:any)' ]		  	  			      = 'RevisorControl/$1';
-$route[ 'revisor/alterar/(:any)' ]		  	      = 'RevisorControl/alterar/$1';
-$route[ 'organizador/(:any)' ]		  	  		    = 'OrganizadorControl/$1';
-$route[ 'organizador/alterar/(:any)' ]		  	  = 'OrganizadorControl/alterar/$1';
+$route[ 'usuario/alterar/(:any)' ]              = 'UsuarioControl/alterar/$1';
+$route[ 'usuario/ativar/(:num)' ]               = 'UsuarioControl/ativar/$1';
+$route[ 'usuario/desativar/(:num)' ]            = 'UsuarioControl/desativar/$1';
+$route[ 'usuario/(:any)' ]                      = 'UsuarioControl/$1';
+$route[ 'participante/(:any)']                  = 'ParticipanteControl/$1';
+$route[ 'participante/alterar/(:any)']		= 'ParticipanteControl/alterar/$1';
+$route[ 'organizador/(:any)' ]		  	= 'OrganizadorControl/$1';
+$route[ 'organizador/alterar/(:any)' ]		= 'OrganizadorControl/alterar/$1';
+
+/*Rotas listagem revisores*/
+$route[ 'revisor/consultar-revisores' ] = 'RevisorControl/consultarRevisoresConvidados';
+$route[ 'revisor/alterar/(:any)' ]                  = 'RevisorControl/alterar/$1';
+$route[ 'revisor/convidar' ]                        = 'RevisorControl/convidarRevisor';
+$route[ 'aceitar-convite/(:any)/(:any)' ]           = 'RevisorControl/aceiteConviteRevisor/$1/$2';
+$route[ 'recusar-convite/(:any)/(:any)' ]           = 'RevisorControl/recusaConviteRevisor/$1/$2';
+$route[ 'revisor/excluir-convite/(:any)/(:any)' ]   = 'RevisorControl/excluirConvite/$1/$2';
+$route[ 'revisor/(:any)' ]                          = 'RevisorControl/$1';
+
+
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]                       = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]               = 'EdicaoControl/alterar/$1';
@@ -129,13 +138,7 @@ $route['inscricao/(:any)']                      = 'InscricaoControl/$1';
 $route['inscricao/consultarTudo/(:any)']        = 'InscricaoControl/consultarTudo/$1';
 $route['inscricao/inscricao/(:any)/(:num)']     = 'InscricaoControl/inscricao/&1/(:num)';
 $route['inscricao/excluir/(:any)']              = 'InscricaoControl/excluir/$1';
-/*Rotas listagem revisores*/
-// $route[ 'revisor/consultar' ]             			= 'EdicaoControl/revisores';
-// $route[ 'revisor/convidar' ]             			= 'NotificacaoControl/convidarRevisor';
-// $route[ 'aceitar-convite/(:any)/(:any)' ]           = 'EdicaoControl/aceiteConviteRevisor/$1/$2';
-// $route[ 'recusar-convite/(:any)/(:any)' ]           = 'EdicaoControl/recusaConviteRevisor/$1/$2';
-// $route[ 'revisor/excluir-convite/(:any)/(:any)' ]   = 'EdicaoControl/excluirConvite/$1/$2';
-// $route[ 'revisor/(:any)' ]             				= 'EdicaoControl/$1';
+
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]          			= 'ModalidadeControl/$1';
 $route[ 'modalidade/alterar/(:any)' ]  			= 'ModalidadeControl/alterar/$1';

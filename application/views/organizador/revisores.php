@@ -6,7 +6,7 @@
         $this->load->helper('html');
         echo alert($this->session);
 ?>
-<form method="GET" action="<?php echo base_url('revisor/consultar'); ?>">
+<form method="GET" action="<?php echo base_url('revisor/consultar-revisores'); ?>">
   <div class="row">
       <div class="col-sm-5">
          <div class="input-group">
@@ -45,39 +45,13 @@
                  <tr> 
                     <td><?= $revisor->user_nm; ?></td>
                     <td class="text-center">
-                      <?php 
-                        if(isset($revisor->modalidadesEixos)){
-                          $modalidades ='';
-                          foreach ($revisor->modalidadesEixos as $key => $value) {
-                            if($value->mote_tipo == 0){
-                              $modalidades .= $modalidades != '' ? ', ' : '';
-                              $modalidades .= $value->mote_nm;
-                            }
-                          }
-                          echo $modalidades;
-                        }else{
-                          echo "Ainda não informado!";
-                        }
-                      ?>
+                        <?= $revisor->modalidadesEixos->modalidades;?>
                     </td>
                     <td class="text-center">
-                      <?php 
-                        if(isset($revisor->modalidadesEixos)){
-                          $modalidades ='';
-                          foreach ($revisor->modalidadesEixos as $key => $value) {
-                            if($value->mote_tipo == 1){
-                              $modalidades .= $modalidades != '' ? ', ' : '';
-                              $modalidades .= $value->mote_nm;
-                            }
-                          }
-                          echo $modalidades;
-                        }else{
-                          echo "Ainda não informado!";
-                        }
-                      ?>
+                        <?= $revisor->modalidadesEixos->eixos;?>
                     </td>
                     <td class="text-center">
-                    <?= $revisor->core_convite_status; ?>
+                         <?= $revisor->core_convite_status; ?>
                     </td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
@@ -99,7 +73,7 @@
 
   <!-- PAGINAÇÃO -->
     <div class="text-center">
-    Exibindo de 1 a <?php echo !empty($modalidades) ? sizeof($modalidades) : 0; ?> de um total de <?php echo !empty($modalidades) ? $totalRegistros : 0; ?> registros
+    Exibindo de 1 a <?php echo !empty($revisores) ? sizeof($revisores) : 0; ?> de um total de <?php echo !empty($revisores) ? $totalRegistros : 0; ?> registros
     </div>
     <?= isset($paginacao) ? $paginacao : ''; ?>
   <!--/ PAGINAÇÃO -->

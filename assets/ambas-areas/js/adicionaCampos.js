@@ -542,7 +542,7 @@ $(document).ready(function() {
     minimumInputLength: 2,
     minimumResultsForSearch: Infinity,
     ajax: {
-        url: baseUrl + "usuario/consultarRevisorSelect2",
+        url: baseUrl + "revisor/consultarRevisorSelect2",
         dataType: "json",
         type: "POST",
         data: function (params) {
