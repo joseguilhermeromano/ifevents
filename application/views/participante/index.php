@@ -70,25 +70,44 @@
         </div>
     </div>
 <br><br>
-
+<?php 
+            $eventosRecentes = $this->session->userdata('eventos_recentes');
+            $numeroColunas = 2;
+            $linhas = 0;
+            if($eventosRecentes !== null){
+?>
 <h3><span class="fa fa-flask"></span><b> Eventos Recentes</b></h3><br><br>
+    <div class="row">
+<?php   
 
- <div class="row">
-    <div class="col-md-6 portfolio-item">
-      <div class="box-shadow">
-        <img src="<?php echo base_url("assets/area-externa/img/semcitec01.jpg"); ?>" class="img-responsive" alt="">
-          <div class="portfolio-caption">
-              <h4>5ª SEMCITEC, <span class="glyphicon glyphicon-calendar">09/02/2017</span></h4>
-                <br>
-                <p>Descrição...</p>
-                <br>
-                <button href="#" class="botao-detalhar">Inscrever em Atividades</button>&nbsp;&nbsp;&nbsp;
-                 <button href="<?= base_url('artigo/cadastrar/'); ?>" class="botao-detalhar-cinza">Submeter Trabalho</button>
-          </div>
-        </div>
+                foreach($eventosRecentes as $evento):
+                    
+?>
+
+            <div class="col-md-6 portfolio-item">
+              <div class="box-shadow">
+                <img src="<?= base_url($evento->edic_img); ?>" class="img-responsive" alt="">
+                  <div class="portfolio-caption">
+                      <h4><?= $evento->edic_num; ?>ª <?= $evento->conf_abrev; ?>, 
+                          <span class="glyphicon glyphicon-calendar"></span>
+                            <?= desconverteDataMysql($evento->regr_even_ini_dt); ?></h4>
+                        <br>
+                        <p><?= $evento->edic_apresent; ?></p>
+                        <br>
+                         <a href="<?= base_url('artigo/cadastrar/'.$evento->edic_cd); ?>" 
+                          class="botao-detalhar-cinza"> Submeter Trabalho</a>
+                  </div>
+                </div>
+            </div>
+        <?php 
+                $linhas++;
+                if($linhas % $numeroColunas == 0){ 
+                    echo '</div><div class="row">';
+                }
+                endforeach;
+            }
+        ?>
     </div>
-  </div>
-
 </div>
 
 

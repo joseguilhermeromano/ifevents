@@ -17,6 +17,8 @@ class PrincipalControl extends CI_Controller {
                 $this->load->helper('file');
                 $this->load->helper('download');
                 $this->load->library('uploadimage','','file');
+                $this->load->model('dao/EdicaoDAO');
+                $this->guardaUltimasUrlsAcessadas();
 		//$this->load->model('acesso/Autentica');
 	}
 
@@ -55,6 +57,42 @@ class PrincipalControl extends CI_Controller {
             return true;
         }
         return false;
+    }
+    
+    public function consultarUltimosTresEventos(){
+        $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,3, null, 'edic_cd','desc');
+        if($eventosRecentes === null){
+            $this->session->set_flahsdata('info', 'Não há eventos cadastrados no sistema!');
+        }
+        $this->session->set_userdata('eventos_recentes', $eventosRecentes);
+        if($this->session->userdata('eventos_recentes')=== null){ 
+            $this->session->set_userdata('evento_selecionado',$eventosRecentes[0]);
+        }
+    }
+    
+    private function guardaUltimasUrlsAcessadas(){
+        $urlAtual = $this->uri->uri_string();
+        $uris = $this->session->userdata('uris');
+        
+        if($uris === null){
+            $uris = array('ultima' => $urlAtual,'penultima' => null);
+            $this->session->set_userdata('uris', $uris);
+            return;
+        }
+        
+        if($uris['penultima'] === null){
+           $uris['penultima'] = $uris['ultima'];
+           $this->session->set_userdata('uris', $uris);
+           return;
+        }
+        
+        if($urlAtual != $uris['ultima']){
+           $uris['penultima'] = $uris['ultima'];
+           $uris['ultima'] = $urlAtual;
+           $this->session->set_userdata('uris', $uris);
+           return;
+        } 
+        
     }
 
     public function geraPaginacao($limite = 10, $totalLinhasTabela = null, $uri=null){

@@ -1,14 +1,17 @@
 
-<?php if ($this->session->userdata('evento_selecionado') !== null && $this->session->userdata('eventos_recentes') !== null ){
+<?php 
+    if ($this->session->userdata('evento_selecionado') !== null 
+        && $this->session->userdata('eventos_recentes') !== null ){
 
 ?>
 
 <li class="list-group panel" >
-  <a href="#" data-toggle="collapse" data-target="#selecionarEvento" data-parent="#sidenav" class="list-group-item list-group-item-success">
+  <a href="#" data-toggle="collapse" data-target="#selecionarEvento" 
+     data-parent="#sidenav" class="list-group-item list-group-item-success">
 
   <?php
     $even = $this->session->userdata('evento_selecionado');
-    echo  'Evento: '.$even->edic_num.'ª '.$even->conf_abrev;
+    echo  $even->edic_num.'ª '.$even->conf_abrev;
   ?>
 
   <span class="caret"></span>
@@ -18,7 +21,8 @@
     <?php
         foreach ($this->session->userdata('eventos_recentes') as $key => $evento) {
     ?>
-          <li><a href="<?php echo base_url('edicao/selecionar-evento/'.$evento->edic_cd);?>" class="list-group-item">
+          <li><a href="<?php echo base_url('organizador/selecionar-evento/'.$evento->edic_cd);?>" 
+                 class="list-group-item">
           <?= $evento->edic_num.'ª '.$evento->conf_abrev; ?>
           </a></li>
     <?php
@@ -47,7 +51,8 @@
     </a>
 </li>
 <li class="item-menu list-group panel" >
-  <a href="#" data-toggle="collapse" data-target="#eventos" data-parent="#sidenav" class="list-group-item list-group-item-success">
+  <a href="#" data-toggle="collapse" data-target="#eventos" data-parent="#sidenav" 
+     class="list-group-item list-group-item-success">
   <span class="fa fa-flask"></span> EVENTOS <span class="caret"></span>
   </a>
     <ul class="submenu collapse" id="eventos">

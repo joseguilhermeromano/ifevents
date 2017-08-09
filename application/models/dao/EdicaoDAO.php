@@ -172,7 +172,8 @@
             return $query->result_object()[0];
         }
 
-        public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='edic_num', $ordenacao='asc') {
+        public function consultarTudo($parametros = null, $limite=null, 
+                $numPagina=null, $sort='edic_num', $ordenacao='asc') {
             $this->db->select("*");
             $this->db->from("Edicao");
             $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd','left');

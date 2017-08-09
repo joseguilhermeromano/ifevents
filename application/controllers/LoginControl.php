@@ -11,14 +11,16 @@
             }
 
             public function entrar(){
-                $usuario = $this->UsuarioDAO->consultarLogin($this->input->post('email'), $this->input->post('senha'));
+                $usuario = $this->UsuarioDAO->consultarLogin(
+                          $this->input->post('email')
+                        , $this->input->post('senha'));
                 $this->session->set_userdata('usuario',$usuario);
                 if($usuario!=null){
                     if($this->session->userdata('link_anterior')){
                         redirect($this->session->userdata('link_anterior'));
                     }
                     if($usuario->user_tipo == 3){
-                        $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,5);
+                        $eventosRecentes = $this->EdicaoDAO->consultarTudo(null,3, null, 'edic_cd','desc');
                         $this->session->set_userdata('eventos_recentes', $eventosRecentes);
                         $this->session->set_userdata('evento_selecionado',$eventosRecentes[0]);
                         redirect('organizador/inicio');

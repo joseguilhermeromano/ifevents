@@ -63,14 +63,14 @@ class UsuarioControl extends PrincipalControl{
 
     public function obtemSenha($obj){
         if(!empty($this->input->post('confirmasenha'))){
-         	$this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
-          	$this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha',
-          	'trim|required|min_length[6]|matches[senha]' );
-          	$senha = $this->input->post('senha');
-          	$confirmaSenha = $this->input->post('confirmasenha');
-          	if($senha == $confirmaSenha){
-            	$senha = md5($senha);
-            	$obj->setSenha($senha);
+            $this->form_validation->set_rules( 'senha', 'Senha', 'trim|required|min_length[6]' );
+            $this->form_validation->set_rules( 'confirmasenha', 'Confirma Senha',
+            'trim|required|min_length[6]|matches[senha]' );
+            $senha = $this->input->post('senha');
+            $confirmaSenha = $this->input->post('confirmasenha');
+            if($senha == $confirmaSenha){
+                $senha = md5($senha);
+                $obj->setSenha($senha);
             }
         }
     }
@@ -88,7 +88,7 @@ class UsuarioControl extends PrincipalControl{
 
     public function ativar($user_cd){
         if(!empty($user_cd)){
-        	if($this->UsuarioDAO->ativaDesativa($user_cd, 2)==0){
+            if($this->UsuarioDAO->ativaDesativa($user_cd, 2)==0){
             	$this->session->set_flashdata('success','O Usuário foi ativado com sucesso!');
             }else{
                 $this->session->set_flashdata('error','Não foi possível ativar o Usuário!');
@@ -99,7 +99,7 @@ class UsuarioControl extends PrincipalControl{
 
     public function desativar($user_cd){
     	if(!empty($user_cd)){
-        	if($this->UsuarioDAO->ativaDesativa($user_cd, 3)==0){
+            if($this->UsuarioDAO->ativaDesativa($user_cd, 3)==0){
                 $this->session->set_flashdata('success','O Usuário foi desativado com sucesso!');
             }else{
                 $this->session->set_flashdata('error','Não foi possível desativar o Usuário!');
@@ -193,4 +193,6 @@ class UsuarioControl extends PrincipalControl{
         }
         $this->chamaView("notifica-users", "organizador", $data, 1);
     }
+    
+    
 }

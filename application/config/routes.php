@@ -61,6 +61,8 @@ $route[ 'participante/(:any)']                  = 'ParticipanteControl/$1';
 $route[ 'participante/alterar/(:any)']		= 'ParticipanteControl/alterar/$1';
 $route[ 'organizador/(:any)' ]		  	= 'OrganizadorControl/$1';
 $route[ 'organizador/alterar/(:any)' ]		= 'OrganizadorControl/alterar/$1';
+/* Rota para selecionar evento area do organizador*/
+$route[ 'organizador/selecionar-evento/(:any)' ] = 'OrganizadorControl/selecionarEventoMenu/$1';
 
 /*Rotas listagem revisores*/
 $route[ 'revisor/consultar-revisores' ] = 'RevisorControl/consultarRevisoresConvidados';
@@ -151,8 +153,7 @@ $route[ 'eixo-tematico/excluir/(:any)' ] 		= 'EixoTematicoControl/excluir/$1';
 $route[ 'revisao/consultar-atribuicoes' ]   = 'AvaliacaoControl/consultarAtribuicoes';
 $route[ 'revisao/atribuir-revisor' ]        = 'AvaliacaoControl/atribuirRevisor';
 $route[ 'revisao/(:any)' ]                  = 'AvaliacaoControl/$1';
-/* Rota para selecionar evento area do organizador*/
-$route[ 'edicao/selecionar-evento/(:any)' ] = 'EdicaoControl/selecionarEvento/$1';
+
 /*Rotas Conferência*/
 $route[ 'conferencia/(:any)' ]              = 'ConferenciaControl/$1';
 $route[ 'conferencia/alterar/(:any)']       = 'ConferenciaControl/alterar/$1';

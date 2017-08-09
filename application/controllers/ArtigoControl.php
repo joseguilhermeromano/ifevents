@@ -4,142 +4,84 @@ require_once 'InterfaceControl.php';
 
 class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
-		public function __construct(){
-			parent::__construct();
+        public function __construct(){
+                parent::__construct();
 
-			$this->load->Model( 'dao/ArtigoDAO' );
-			$this->load->Model('ArtigoModel','artigo');
-            $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
-            $this->load->Model('dao/ModalidadeTematicaDAO');
-            $this->load->Model('SubmitModel','submissao');
-            $this->load->Model('dao/SubmitDAO');
-            $this->load->Model('dao/EdicaoDAO');
-		}
-
-        public function cadastrar() {
-            $conf_cd = $this->uri->segment(3);
-            if($conf_cd == '' || $conf_cd === null){
-                $this->session->set_flashdata('error', 'Não foi selecionado nenhum evento que apresente submissões abertas!');
+                $this->load->Model( 'dao/ArtigoDAO' );
+                $this->load->Model('ArtigoModel','artigo');
+                $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
+                $this->load->Model('dao/ModalidadeTematicaDAO');
+                $this->load->Model('SubmitModel','submissao');
+                $this->load->Model('dao/SubmitDAO');
+                $this->load->Model('dao/EdicaoDAO');
+        }
+        
+        private function consultarModalidadesEixos(){
+            $codigoEdicao = $this->uri->segment(3);
+            if($codigoEdicao == ''){
+                $this->session->set_flashdata('error', 'Não foi selecionado nenhum '
+                        . 'evento que apresente submissões abertas!');
                 redirect('artigo/consultar');
             }
-            $modalidades = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$conf_cd, 'mote_tipo'=> 0));
-            $eixosTematicos = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$conf_cd, 'mote_tipo'=> 1));
-            $data = array("title"=>"IFEvents - Novo Trabalho"
-                ,"modalidades" => $modalidades
-                ,"eixos" => $eixosTematicos);
+            $edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+            $consulta = array('mote_conf_cd'=>$edicao->getConferencia()->getCodigo()
+                    , 'mote_tipo'=> 0);
+            $modalidades = $this->ModalidadeTematicaDAO->consultarTudo($consulta);
+            $consulta['mote_tipo'] = 1;
+            $eixosTematicos = $this->ModalidadeTematicaDAO->consultarTudo($consulta);
+            
+            $data['modalidades'] = $modalidades;
+            $data['eixos'] = $eixosTematicos;
+            $data['regrasSubmissao'] = $edicao->getDiretrizesSubmissao();
+            return $data;
+        }
 
-            if (empty($this->artigo->input->post())){
-                return $this->chamaView("novoartigo", "participante", $data, 1);
-            }
+        public function cadastrar() {            
+            $data = $this->consultarModalidadesEixos(); 
 
-            $this->artigo->valida();
-            $this->artigo->setaValores();
-
-            if($this->form_validation->run()){
-                $data['artigo'] = $this->artigo;
-
-                $config['upload_path']   = 'upload';
-                $config['allowed_types'] = 'pdf|docx';
-                $config['max_size']      =  4096;
-
-                $file_1 = $this->upload_arquivo($config, 'file_artigo_1');
-                $file_2 = $this->upload_arquivo($config, 'file_artigo_2');
-
-
-                if($file_1['error'] == true){
-                    $this->session->set_flashdata('error', 'O Trabalho sem identificação não pode ser enviado!<br>
-                        Verifique se o arquivo foi selecionado corretamente e se sua permissão é uma das permitidas!');
-                    return $this->chamaView("novoartigo", "participante", $data, 1);
-                }
-
-                if($file_2['error'] == true){
-                   $this->session->set_flashdata('error', 'O Trabalho identificado não pode ser enviado!<br>
-                        Verifique se o arquivo foi selecionado corretamente e se sua permissão é uma das permitidas!');
-                    return $this->chamaView("novoartigo", "participante", $data, 1);
-                }
-
+            $this->setaValores();
+            $data['artigo'] = $this->artigo;
+            if($this->valida() && !empty($this->input->post())){
 
                 $this->db->trans_start();
-                    $artigo_cd =  $this->ArtigoDAO->inserir($this->artigo);
-                    $this->submissao->setaValores($file_1, $file_2, $artigo_cd);
-                    $this->SubmitDAO->inserir($this->submissao);
+                    $codigoArtigo =  $this->ArtigoDAO->inserir($this->artigo);
                 $this->db->trans_complete();
 
-                if($this ->db->trans_status() !== FALSE){
+                if($this ->db->trans_status() === TRUE){
                     $this->session->set_flashdata('success', 'O seu trabalho foi submetido com sucesso!');
-                    $data['artigo'] = null;
+                    unset($data['artigo']);
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível submeter o seu trabalho!');
                 }
 
-
             }
-
-
-            return $this->chamaView("novoartigo", "participante", $data, 1);
+            $data['title'] = 'IFEvents - Novo Trabalho';
+            $data['tituloh2'] = "<h2><span class='fa fa-file'></span><b> Novo Trabalho</b></h2>";
+            return $this->chamaView("form-artigo", "participante", $data, 1);
         }
 
         public function alterar($codigo) {
-            $artigo = $this->ArtigoDAO->consultarCodigo($codigo);
-            $artigo->aceite_subm_checked = 1;
-            $modalidades = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$artigo->mote_conf_cd,
-                'mote_tipo'=> 0));
-            $eixosTematicos = $this->ModalidadeTematicaDAO->consultarTudo(array('mote_conf_cd'=>$artigo->mote_conf_cd,
-             'mote_tipo'=> 1));
-            $data = array("title"=>"IFEvents - Novo Trabalho"
-                ,"modalidades" => $modalidades
-                ,"eixos" => $eixosTematicos
-                ,"artigo" => $artigo);
-
-            if (empty($this->artigo->input->post())){
-                return $this->chamaView("novoartigo", "participante", $data, 1);
-            }
-
-            $this->artigo->valida();
-            $this->artigo->setaValores();
-
-            if($this->form_validation->run()){
-                $data['artigo'] = $this->artigo;
-
-                $config['upload_path']   = 'upload';
-                $config['allowed_types'] = 'pdf|docx';
-                $config['max_size']      =  4096;
-
-                $file_1 = $this->upload_arquivo($config, 'file_artigo_1');
-                $file_2 = $this->upload_arquivo($config, 'file_artigo_2');
-
-
-                if($file_1['error'] == true){
-                    $this->session->set_flashdata('error', 'O Trabalho sem identificação não pode ser enviado!<br>
-                        Verifique se o arquivo foi selecionado corretamente e se sua permissão é uma das permitidas!');
-                    return $this->chamaView("novoartigo", "participante", $data, 1);
-                }
-
-                if($file_2['error'] == true){
-                   $this->session->set_flashdata('error', 'O Trabalho identificado não pode ser enviado!<br>
-                        Verifique se o arquivo foi selecionado corretamente e se sua permissão é uma das permitidas!');
-                    return $this->chamaView("novoartigo", "participante", $data, 1);
-                }
-
+            $data = $this->consultarModalidadesEixos(); 
+            $this->artigo = $this->ArtigoDAO->consultarCodigo($codigo);
+            $this->setaValores();
+            $data['artigo'] = $this->artigo;
+            if($this->valida() && !empty($this->input->post())){
 
                 $this->db->trans_start();
-                    $artigo_cd =  $this->ArtigoDAO->inserir($this->artigo);
-                    $this->submissao->setaValores($file_1, $file_2, $artigo_cd);
-                    $this->SubmitDAO->inserir($this->submissao);
+                    $codigoArtigo =  $this->ArtigoDAO->inserir($this->artigo);
                 $this->db->trans_complete();
 
-                if($this ->db->trans_status() !== FALSE){
-                    $this->session->set_flashdata('success', 'O seu trabalho foi submetido com sucesso!');
-                    $data['artigo'] = null;
+                if($this ->db->trans_status() === TRUE){
+                    $this->session->set_flashdata('success', 'O seu trabalho foi atualizado com sucesso!');
+                    unset($data['artigo']);
                 }else{
-                    $this->session->set_flashdata('error', 'Não foi possível submeter o seu trabalho!');
+                    $this->session->set_flashdata('error', 'Não foi possível atualizar o seu trabalho!');
                 }
 
-
             }
-
-
-            return $this->chamaView("novoartigo", "participante", $data, 1);
+            $data['title'] = 'IFEvents - Atualizar dados do trabalho';
+            $data['tituloh2'] = "<h2><span class='fa fa-file'></span><b> Atualizar dados do Trabalho</b></h2>";
+            return $this->chamaView("form-artigo", "participante", $data, 1);
         }
 
 
@@ -181,46 +123,106 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
 
 
-            public function consultar() {
-                $limite = 10;
-                $numPagina =0;
-                //pegar codigo da conferencia pela sessao
-                $conf_cd = 1;
-                if(null !== $this->input->get('pagina')){
-                    $numPagina = $this->input->get('pagina');
+        public function consultar() {
+            $limite = 10;
+            $numPagina =0;
+            //pegar codigo da conferencia pela sessao
+            $conf_cd = 1;
+            if(null !== $this->input->get('pagina')){
+                $numPagina = $this->input->get('pagina');
+            }
+
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array = array('Artigo.arti_title'=>$busca);
+            }else{
+                $busca=null;
+                $array=null;
+            }
+
+            $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite, $this->ArtigoDAO->totalRegistros(), 'artigo/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros();
+            $data['title']="IFEvents - Meus Trabalhos";
+            $this->chamaView("meusartigos", "participante", $data, 1);
+        }
+
+        public function consultarTudo() {
+
+        }
+
+        public function submissaoEventosRecentes(){
+            $data['eventos'] = $this->EdicaoDAO->consultarPorDataSubmissao(date('Y-m-d'));
+            if(empty($data['eventos'])){
+                $this->session->set_flashdata("warning","Não há eventos com submissões abertas no momento!");
+                redirect('artigo/consultar');
+            }
+            $data['title']="IFEvents - Submissão de Trabalhos - Eventos Recentes";
+            $this->chamaView("eventos-recentes", "participante", $data, 1);
+        }
+
+        public function excluir($codigo) {
+        }
+
+        private function valida(){
+            $this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[100]' );		
+            $this->form_validation->set_rules( 'autor[]', 'Autor(es)', 'trim|required|max_length[200]' );
+            $this->form_validation->set_rules( 'modalidade', 'Tipo de Modalidade', 'required' );
+            $this->form_validation->set_rules( 'area', 'Eixo Temático', 'required' );		
+            $this->form_validation->set_rules( 'orientador', 'Orientador', 'trim|required|max_length[100]' );
+            $this->form_validation->set_rules( 'resumo', 'Resumo', 'trim|required|max_length[500]' );
+            if(!$this->aceita_subm()){
+                $this->form_validation->set_rules( 'aceite', 'Aceite', 'callback_aceita_subm' );
+            }
+            return $this->form_validation->run();
+        }
+
+        public function aceita_subm(){
+            if ($this->input->post('aceite') || $this->artigo->getCodigo()!==null){
+                $this->session->set_flashdata('checked','checked');
+                return TRUE;
+            }
+            else{
+                $error = 'Por favor, leia e aceite as diretrizes de submissão de trabalhos científicos.';
+                $this->form_validation->set_message('aceita_subm', $error);
+                return FALSE;
+            }
+        }
+        
+        private function obtemStringAutores($arrayAutores){
+            if(null !== $arrayAutores){
+                 natcasesort($arrayAutores);
+                $i = 0;
+                $codigo_autores = array();
+                foreach ($arrayAutores as $key => $value) {
+                    if(preg_match("/\d+/", htmlentities($value)) > 0){
+                        $codigo_autores[$i] = somenteNumeros($value);
+                        $i++;
+                    }
+                    $this->autores[$key] =  $value;
                 }
 
-                if( $this->input->get('busca') !== null){
-                    $busca = $this->input->get('busca');
-                    $array = array('Artigo.arti_title'=>$busca);
-                }else{
-                    $busca=null;
-                    $array=null;
-                }
-
-                $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
-                $data['paginacao'] = $this->geraPaginacao($limite, $this->ArtigoDAO->totalRegistros(), 'artigo/consultar/?busca='.$busca);
-                $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros();
-                $data['title']="IFEvents - Meus Trabalhos";
-                $this->chamaView("meusartigos", "participante", $data, 1);
+                return implode(', ', $arrayAutores);
             }
-
-            public function consultarTudo() {
-
+        }
+        
+        private function setaValores(){
+            $this->artigo->setTitulo($this->input->post( 'titulo' ));
+            $arrayAutores = $this->input->post( 'autor' );
+            $stringAutores = $this->obtemStringAutores($arrayAutores);
+            $this->artigo->setAutores($stringAutores);
+            $this->artigo->setOrientador($this->input->post( 'orientador' ));
+            $this->artigo->setModalidade($this->input->post( 'modalidade' ));
+            $this->artigo->setEixoTematico($this->input->post( 'area' ));
+            $this->artigo->setResumo($this->input->post( 'resumo' ));
+            $codigoAutorResp = $this->session->userdata('usuario')->user_cd;
+            $this->artigo->setCodigoAutorResponsavel($codigoAutorResp);
+            if($this->artigo->getStatus()===null){
+                $this->artigo->setStatus('Aguardando Revisão!');
             }
+        }
+            
 
-            public function submissaoEventosRecentes(){
-                $data['eventos'] = $this->EdicaoDAO->consultarPorDataSubmissao(date('Y-m-d'));
-                if(empty($data['eventos'])){
-                    $this->session->set_flashdata("warning","Não há eventos com submissões abertas no momento!");
-                    redirect('artigo/consultar');
-                }
-                $data['title']="IFEvents - Submissão de Trabalhos - Eventos Recentes";
-                $this->chamaView("eventos-recentes", "participante", $data, 1);
-            }
-
-            public function excluir($codigo) {
-            }
 
 
 }

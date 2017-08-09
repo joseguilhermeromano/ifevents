@@ -9,29 +9,30 @@
 			parent::__construct();
 
 		}
+                
+                private function obtemValores($obj){
+                    return array('arti_title' => $obj->getTitulo()
+                    ,'arti_autores' => $obj->getAutores()
+                    ,'arti_orienta' => $obj->getOrientador()
+                    ,'arti_resumo' => $obj->getResumo()
+                    ,'arti_status' => $obj->getStatus()
+                    ,'arti_moda_cd' => $obj->getModalidade()
+                    ,'arti_eite_cd' => $obj->getEixoTematico()
+                    ,'arti_user_resp_cd' => $obj->getCodigoAutorResponsavel());
+                }
 
                 public function inserir($obj) {
-                    $this->db->insert('Artigo', 
-                    array(
-                    'arti_title' => $obj->arti_title
-                    ,'arti_autores' => $obj->arti_autores
-                    ,'arti_orienta' => $obj->arti_orienta
-                    ,'arti_resumo' => $obj->arti_resumo
-                    ,'arti_status' => $obj->arti_status
-                    ,'arti_moda_cd' => $obj->arti_moda_cd
-                    ,'arti_eite_cd' => $obj->arti_eite_cd
-                    ,'arti_user_resp_cd' => $obj->arti_user_resp_cd
-                    ));
-
+                    $this->db->insert('Artigo', $this->obtemValores($obj));
                     return $this->db->insert_id();
                 }
 
                 public function alterar($obj) {
-                    $this->db->where('arti_id', $obj->arti_id);
-                    return $this->db->update('artigo', $obj);
+                    $this->db->where('arti_id', $obj->getCodigo());
+                    return $this->db->update('artigo', $this->obtemValores($obj));
                 }
 
-                public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='arti_title', $ordenacao='asc') {
+                public function consultarTudo($parametros = null, $limite=null,
+                        $numPagina=null, $sort='arti_title', $ordenacao='asc') {
                     $this->db->select("*");
                     $this->db->from("Artigo");
                     // $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd','left');
@@ -42,8 +43,9 @@
                             $this->db->where($key.' LIKE ','%'.$value.'%');
                         }
                     }
-                    if($limite)
+                    if($limite){
                         $this->db->limit($limite, $numPagina);
+                    }
                     $query = $this->db->get();
                     if($query->num_rows()>0){
                         return $query->result_object();
@@ -61,8 +63,24 @@
                      $this->db->from("Artigo");
                      $this->db->join('Modalidade_Tematica', 'Artigo.arti_cd = Modalidade_Tematica.mote_cd','left');
                      $this->db->where('arti_cd', $codigo);
-                     $query = $this->db->get();
-                     return $query->result_object()[0];
+                     $query       = $this->db->get();
+                    if($query->num_rows() > 0){
+                        $consulta       = $query->result_object()[0];
+
+                        $this->artigo->setCodigo($consulta->arti_cd);
+                        $this->artigo->setTitulo($consulta->arti_title);
+                        $this->artigo->setOrientador($consulta->arti_orienta);
+                        $this->artigo->setAutores($consulta->arti_autores);
+                        $this->artigo->setResumo($consulta->arti_resumo);
+                        $this->artigo->setStatus($consulta->arti_status);
+                        $this->artigo->setEixoTematico($consulta->arti_eite_cd);
+                        $this->artigo->setModalidade($consulta->arti_moda_cd);
+                        $this->artigo->setCodigoAutorResponsavel($consulta->arti_user_resp_cd);
+
+                        return $this->artigo;
+                    }
+
+                    return null;
                 }
 
                 public function excluir($obj) {

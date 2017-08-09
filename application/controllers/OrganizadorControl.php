@@ -6,14 +6,15 @@ class OrganizadorControl extends UsuarioControl{
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->Model( 'dao/OrganizadorDAO' );
-        $this->load->Model( 'dao/InstituicaoDAO' );
-		$this->load->Model('OrganizadorModel','organizador');
-        $this->load->Model('InstituicaoModel','instituicao');
-        $this->load->helper('html');
+            $this->load->Model( 'dao/OrganizadorDAO' );
+            $this->load->Model( 'dao/InstituicaoDAO' );
+            $this->load->Model('OrganizadorModel','organizador');
+            $this->load->Model('InstituicaoModel','instituicao');
+            $this->load->helper('html');
 	}
 
         public function inicio(){
+            $this->consultarUltimosTresEventos();
             $this->chamaView("index", "organizador",
                         array("title"=>"IFEvents - Início - Organizador"), 1);
         }
@@ -153,6 +154,16 @@ class OrganizadorControl extends UsuarioControl{
             $this->organizador->setCidade($this->input->post('cidade'));
             $this->organizador->setUf($this->input->post('uf'));
       }
+      
+      
+    public function selecionarEventoMenu($edicao){
+        foreach ($this->session->userdata('eventos_recentes') as $key => $value) {
+            if($value->edic_cd === $edicao){
+                $this->session->set_userdata('evento_selecionado',$value);
+            }
+        }
+        redirect('organizador/inicio');
+    }
 
       
 }

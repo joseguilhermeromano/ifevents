@@ -6,16 +6,16 @@
 <?php 
     $this->load->helper('html');
     echo alert($this->session);
+
+    $segmento = $this->uri->segment(2);
+    $linkCadastro = 'conferencia/cadastrar/';
+    $linkAltera = $this->uri->uri_string();
+    echo form_open_multipart( $segmento != 'alterar' ? $linkCadastro : $linkAltera
+            , 'role="form" class="formsignin"' );
 ?>
 
 <div class="row">
-    <?php
-        $segmento = $this->uri->segment(2);
-        $linkCadastro = 'conferencia/cadastrar/';
-        $linkAltera = $this->uri->uri_string();
-        echo form_open_multipart( $segmento != 'alterar' ? $linkCadastro : $linkAltera
-                , 'role="form" class="formsignin"' );
-    ?>
+    
     <div class="col-md-12">
         <div class="form-group">
         <b><?php echo form_label( 'Título', 'titulo' ); ?></b>

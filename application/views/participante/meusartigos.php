@@ -25,15 +25,6 @@
          <a class="btn btn-default margin-button" href='<?php echo site_url('/artigo/eventos-recentes'); ?>' style="float:right">
          <i class="glyphicon glyphicon-open-file" aria-hidden="true"></i> Submeter Novo Trabalho</a>
     
-        <div style="float:right" class="btn-group">
-          <a  class="btn btn-default dropdown-toggle margin-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-save-file" aria-hidden="true"></i> Regras de Submissão <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">5ª SEMCITEC</a></li>
-          </ul>
-        </div>
-    
 </div>
     </div>
 </div>
@@ -64,13 +55,9 @@
                       <td class="text-left">
                         <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$item->arti_cd); ?>" class="btn-opcao">
                           <span class="fa fa-eye"></span>&#09;Detalhar</a><br>
-                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo('<?php //echo $user->user_cd; ?>'); 
-                          setLink('<?php //echo base_url('usuario/desativar/')?>');">
+                          <a href="<?= base_url('artigo/alterar/'.$item->arti_cd); ?>" class="btn-opcao" >
                           <span class="glyphicon glyphicon-open-file"></span>&#09;Editar/Nova Submissão</a><br>
-                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo(' //$edicao->edic_cd; ?>'); 
-                          setLink('<?= base_url('edicao/desativar/')?>');">
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir">
                           <span class="fa fa-close"></span>&#09;Cancelar</a>
                       </td>
                   </tr>

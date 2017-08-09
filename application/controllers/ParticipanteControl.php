@@ -13,6 +13,7 @@ class ParticipanteControl extends UsuarioControl{
     	}
 
       public function inicio(){
+        $this->consultarUltimosTresEventos();
         $this->chamaView("index", "participante",
                 array("title"=>"IFEvents - Início - Participante"), 1);
       }
