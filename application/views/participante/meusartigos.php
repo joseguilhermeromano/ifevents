@@ -33,11 +33,11 @@
     <table class="table ls-table" id="tabela1">
         <thead>
             <tr>
-                    
-                    <th class="col-md-6">Título</th>
-                    <th class="text-center">Autor(es)</th>
+                    <th class="col-md-2 text-center">Evento</th>
+                    <th class="col-md-4">Título</th>
+                    <th class="col-md-2 text-center">Autor(es)</th>
                     <th><center>Situação</center></th>
-                    <th class="text-center"> Opções </th>
+                    <th class="col-md-2 text-center"> Opções </th>
             </tr>
         </thead>
         <tbody>
@@ -45,7 +45,7 @@
             if(!empty($itens)){
               foreach( $itens as $item ):?>
                   <tr>
-
+                      <td class="text-center"><?= $item->edic_num.'ª '.$item->conf_abrev ?></td>
                       <td><?php echo $item->arti_title; ?></td>
                       <td class="text-center">
                       <?= somenteLetras($item->arti_autores); ?>
@@ -53,12 +53,30 @@
                       </td>
                       <td class="text-center"><?= $item->arti_status; ?></td>
                       <td class="text-left">
-                        <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$item->arti_cd); ?>" class="btn-opcao">
+                          
+                          
+                          <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$item->arti_cd); ?>" class="btn-opcao">
                           <span class="fa fa-eye"></span>&#09;Detalhar</a><br>
+                          
+                          <?php if($item->arti_status == 'Aprovado com ressalvas'){?>
+                                <a href="<?= base_url('submissao/cadastrar/'.$item->arti_cd); ?>" class="btn-opcao" >
+                                <span class="fa fa-plus"></span>&#09;Nova Submissão</a><br>
+                          <?php }?> 
+                                
+                          <?php if($item->arti_status == 'Pronto para a revisão'){?>      
                           <a href="<?= base_url('artigo/alterar/'.$item->arti_cd); ?>" class="btn-opcao" >
-                          <span class="glyphicon glyphicon-open-file"></span>&#09;Editar/Nova Submissão</a><br>
-                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir">
+                          <span class="glyphicon glyphicon-open-file"></span>&#09;Editar Submissão</a><br>
+                          <?php } ?>
+                          
+                          
+                          <?php if($item->arti_status != 'Cancelado'){ ?>
+                          <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalCancelar"
+                             onclick="setCodigo('<?= $item->arti_cd; ?>'); 
+                            setLink('<?= base_url('artigo/cancelar/')?>')">
                           <span class="fa fa-close"></span>&#09;Cancelar</a>
+                          <?php }?>
+                          
+                          
                       </td>
                   </tr>
             <?php endforeach;}else{ ?>
@@ -69,6 +87,26 @@
         </tbody>
     </table>
 </div><!-- /TABELA-->
+
+<!-- Modal Cancelar Artigo -->
+<div id="modalCancelar" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Cancelar Revisão de Trabalho</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>Deseja realmente cancelar a revisão do seu trabalho?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button class="btn btn-success" onclick="Executa();">Continuar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
   <!-- PAGINAÇÃO -->
     <div class="text-center">

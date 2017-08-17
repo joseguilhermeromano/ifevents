@@ -137,7 +137,7 @@
 				,mote_nm   varchar(100) NOT NULL
 				,mote_desc varchar(500) NOT NULL
 				,mote_tipo varchar(100) NOT NULL
-				,mote_conf_cd int(11)   NOT NULL
+				,mote_edic_cd int(11)   NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -222,18 +222,23 @@
 
 		//Método cria tabela Artigo
 		public function create_table_artigo(){
-			$sql = "CREATE TABLE IF NOT EXISTS Artigo(
-				arti_cd          int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-				,arti_title      varchar(100) NOT NULL
-				,arti_autores	 varchar(200) NOT NULL
-				,arti_orienta    varchar(100) NOT NULL
-				,arti_resumo     varchar(500) NOT NULL
-				,arti_status     int(11)   	  NOT NULL
-				,arti_moda_cd    int(11)      NOT NULL
-				,arti_eite_cd    int(11)      NOT NULL
-				,arti_user_resp_cd int(11)	  NOT NULL
-			) ENGINE=INNODB";
-			$this->db->query($sql);
+                    $sql = "CREATE TABLE IF NOT EXISTS Artigo(
+                        arti_cd int(11) NOT NULL AUTO_INCREMENT
+                       ,arti_title varchar(100) COLLATE utf8_unicode_ci NOT NULL
+                       ,arti_autores varchar(200) COLLATE utf8_unicode_ci NOT NULL
+                       ,arti_orienta varchar(100) COLLATE utf8_unicode_ci NOT NULL
+                       ,arti_resumo varchar(500) COLLATE utf8_unicode_ci NOT NULL
+                       ,arti_status enum('Pronto para a revisão'
+                           ,'Aguardando Revisão'
+                           ,'Aprovado'
+                           ,'Aprovado com ressalvas'
+                           ,'Reprovado'
+                           ,'Cancelado') COLLATE utf8_unicode_ci NOT NULL
+                       ,arti_moda_cd int(11) NOT NULL
+                       ,arti_eite_cd int(11) NOT NULL
+                       ,PRIMARY KEY (arti_cd)
+                    ) ENGINE=INNODB";
+                    $this->db->query($sql);
 		}
 
 		//Método cria tabela Usuario
@@ -284,6 +289,7 @@
 				autor_respons tinyint
 				,auto_user_cd int(11) NOT NULL
 				,auto_arti_cd int(11)  NOT NULL
+                                ,PRIMARY KEY (`auto_user_cd`,`auto_arti_cd`)
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}

@@ -11,7 +11,6 @@
         private $eixoTematico;
         private $resumo;
         private $autorResponsavel;
-        private $codigo_autores;
         private $status;
 
         public function getCodigo(){

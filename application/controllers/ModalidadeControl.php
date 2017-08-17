@@ -26,8 +26,8 @@ class ModalidadeControl extends PrincipalControl implements InterfaceControl{
     	if($this->form_validation->run()){
 
     		$this->db->trans_start();
-    			//pegar codigo da conferencia pela sessao (selecionada)
-            	$this->modalidade->mote_conf_cd = 1;
+                $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            	$this->modalidade->mote_edic_cd = $codigoEdicao; 
             	$this->modalidade->mote_tipo = 0;
             	$this->ModalidadeTematicaDAO->inserir($this->modalidade);
     		$this->db->trans_complete();
@@ -64,9 +64,8 @@ class ModalidadeControl extends PrincipalControl implements InterfaceControl{
 
     	if($this->form_validation->run()){
 
-    		$this->db->trans_start();
-    			//pegar codigo da conferencia pela sessao (selecionada)
-    			$this->modalidade->mote_conf_cd = 1;
+                $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            	$this->modalidade->mote_edic_cd = $codigoEdicao; 
             	$this->modalidade->mote_tipo = 1;
             	$this->ModalidadeTematicaDAO->alterar($this->modalidade);
     		$this->db->trans_complete();
@@ -85,26 +84,28 @@ class ModalidadeControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function consultar(){
-		$limite = 10;
-        $numPagina =0;
-        //pegar codigo da conferencia pela sessao 
-        $conf_cd = 1;
+	$limite = 10;
+        $numPagina =0; 
+        $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
         if(null !== $this->input->get('pagina')){
             $numPagina = $this->input->get('pagina');
         }
 
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('mote_nm'=>$busca, 'mote_tipo' => '0');
+            $array = array('mote_nm'=>$busca
+                    , 'mote_tipo' => '0'
+                    , 'mote_edic_cd' => $codigoEdicao);
         }else{
             $busca=null;
-            $array=array('mote_tipo'=>0);
+            $array=array('mote_tipo'=>0
+                ,'mote_edic_cd' => $codigoEdicao);
         }
         
 
         $data['modalidades']=$this->ModalidadeTematicaDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->ModalidadeTematicaDAO->totalRegistros($conf_cd, 0), 'modalidade/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->ModalidadeTematicaDAO->totalRegistros($conf_cd, 0);
+        $data['paginacao'] = $this->geraPaginacao($limite, $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 0), 'modalidade/consultar/?busca='.$busca);
+        $data['totalRegistros'] = $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 0);
          $data['title']="IFEvents - Modalidades";
         $this->chamaView("modalidades", "organizador", $data ,1);
 	}

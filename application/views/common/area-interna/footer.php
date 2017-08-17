@@ -125,11 +125,10 @@
     <!-- plugin bootstrap file input -->
         <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-canvas-to-blob.min.js'); ?>">
         </script>
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-sortable.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-purify.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-fileinput.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-theme.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/area-interna/js/pt-BR.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/js/plugins/sortable.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/js/fileinput.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/themes/explorer/theme.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/js/locales/pt-BR.js'); ?>"></script>
     <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

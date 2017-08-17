@@ -41,10 +41,11 @@
     <div class="col-sm-12">
         <div class="form-group">
         <b><?php echo form_label( 'Autor(es) ', 'autor' ); ?></b><br>
-            <select name="autor[]" class="form-control consultaUsuario" multiple="multiple">
+            <select name="autores[]" class="form-control consultaUsuario" multiple="multiple">
             <?php if(isset($artigo) && $artigo->getAutores()!==null){ ?>
                 <?php foreach ($artigo->getAutores() as $key => $value) { ?>
-                    <option selected value="<?= $value; ?>"> <?= somenteLetras($value); ?> </option>
+                <option selected value="<?= $value; ?>">
+                 <?= somenteLetras($value); ?> </option>
                 <?php }?>
             <?php } ?>
             </select>
@@ -92,26 +93,6 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-        <b><?php echo form_label( 'Selecionar trabalho sem identificação', 'file_artigo_1' ); ?></b>
-        <?php $data = array( 'name' => 'file_artigo_1'
-            ,'id' => 'file_artigo_1'
-            , 'class' => 'form-control estilo-input file-loading');
-              echo form_upload($data);?>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-        <b><?php echo form_label( 'Selecionar trabalho com identificação', 'file_artigo_2' ); ?></b>
-        <?php $data = array( 'name' => 'file_artigo_2'
-            ,'id' => 'file_artigo_2'
-            , 'class' => 'form-control estilo-input file-loading');
-              echo form_upload($data);?>
-        </div>
-    </div>
-</div>
-<div class="row">
     <div class="col-sm-12">
         <b><?php echo form_label( 'Resumo', 'resumo' ); ?></b><br>
         <?php   $data = array( 'name' => 'resumo'
@@ -144,7 +125,7 @@
 </div>
 <?php echo "<br><center><a href='".base_url("artigo/consultar/")."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
         .form_submit("btn_atualizar"
-                , $segmento != 'alterar' ? 'Cadastrar' : 'Atualizar'
+                , "Próximo"
                 ,array('class' => 'btn btn-success button'))."</center>";
     echo form_close();
 ?>

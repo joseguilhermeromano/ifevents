@@ -166,10 +166,18 @@ class PrincipalControl extends CI_Controller {
     
 
     public function download_arquivo($nomeArquivo, $arquivo){
-
         if($arquivo == null){
             $this->session->set_flashdata('error', 'O arquivo <b>'.$nomeArquivo.'</b> não exite!!!');
         }
+        $tipo = $this->retornarHeaderParaArquivo($nomeArquivo);
+        header("Content-Type: ".$tipo); // informa o tipo do arquivo ao navegador
+        //header("Content-Length: ".filesize($nomeArquivo)); // informa o tamanho do arquivo ao navegador
+        header("Content-Disposition: attachment; filename=".$nomeArquivo); // informa ao navegador que é tipo anexo e faz abrir a janela de download, tambem informa o nome do arquivo
+        echo($arquivo); // lê o arquivo
+        exit; // aborta pós-ações
+    }
+    
+    private function retornarHeaderParaArquivo($nomeArquivo){
         $tipo = '';
         switch(pathinfo($nomeArquivo, PATHINFO_EXTENSION)){ // verifica a extensão do arquivo para pegar o tipo
              case "pdf": $tipo="application/pdf"; break;
@@ -180,12 +188,23 @@ class PrincipalControl extends CI_Controller {
              case "png": $tipo="image/png"; break;
              case "jpg": $tipo="image/jpg"; break;
           }
-           header("Content-Type: ".$tipo); // informa o tipo do arquivo ao navegador
-           //header("Content-Length: ".filesize($nomeArquivo)); // informa o tamanho do arquivo ao navegador
-           header("Content-Disposition: attachment; filename=".$nomeArquivo); // informa ao navegador que é tipo anexo e faz abrir a janela de download, tambem informa o nome do arquivo
-           echo($arquivo); // lê o arquivo
-           exit; // aborta pós-ações
+        return $tipo;
+    }
+    
+    
+    public function visualiza_arquivo($nomeArquivo, $arquivo){
+        if($arquivo == null){
+            $this->session->set_flashdata('error', 'O arquivo <b>'.$nomeArquivo.'</b> não exite!!!');
+        }
+        $tipo = $this->retornarHeaderParaArquivo($nomeArquivo);
+        header('Content-Type: '.$tipo);
+        header('Content-Length: ' . strlen($arquivo));
+        header('Content-Disposition: inline; filename="'.$nomeArquivo.'"');
+        header('Cache-Control: private, max-age=0, must-revalidate');
+        header('Pragma: public');
+        ini_set('zlib.output_compression','0');
 
+        echo $arquivo;
     }
     
     public function upload_arquivo($inputName, $linkUpload, $novoNomeArquivo = null){

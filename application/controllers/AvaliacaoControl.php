@@ -136,25 +136,25 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function consultarAtribuicoes(){
-		$conf_cd = 1;
-		if( $this->input->get('busca') !== ''){
+            $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            if( $this->input->get('busca') !== ''){
             $busca = $this->input->get('busca');
             $array = array(
-            	  'mote1.mote_conf_cd' => $conf_cd
-            	  ,'arti_title' => $busca);
-        }else{
-            $busca=null;
-            $array=array('mote1.mote_conf_cd' => $conf_cd);
-        }
-		$data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($array);
-		$totalRegistros = sizeof($data);
-		if($data == null && $busca == null){
-			$this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
-		}
-		$this->chamaView("atribuicoes-submissoes", "organizador",
+                  'mote1.mote_edic_cd' => $codigoEdicao
+                  ,'arti_title' => $busca);
+            }else{
+                $busca=null;
+                $array=array('mote1.mote_edic_cd' => $codigoEdicao);
+            }
+            $data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($array);
+            $totalRegistros = sizeof($data);
+            if($data == null && $busca == null){
+                    $this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
+            }
+            $this->chamaView("atribuicoes-submissoes", "organizador",
             array("title"=>"IFEvents - Atribuição de Trabalhos"
-            	, "atribuicoes" => $data
-            	, "totalRegistros" => $totalRegistros), 1);
+            , "atribuicoes" => $data
+            , "totalRegistros" => $totalRegistros), 1);
 	}
 
 	public function consultaRevisoresAtribuicao(){

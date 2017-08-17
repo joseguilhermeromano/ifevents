@@ -19,7 +19,8 @@
             return $this->db->update('Modalidade_Tematica', $obj);
         }
 
-        public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='mote_nm', $ordenacao='asc') {
+        public function consultarTudo($parametros = null, $limite=null, $numPagina=null,
+            $sort='mote_nm', $ordenacao='asc') {
             $this->db->select("*");
             $this->db->from("Modalidade_Tematica");
             $this->db->order_by($sort, $ordenacao);
@@ -39,10 +40,10 @@
             }
         }
 
-        public function totalRegistros($conf_cd,$mote_tipo){
+        public function totalRegistros($codigoEdicao,$mote_tipo){
             $this->db->select('*');
             $this->db->from('Modalidade_Tematica');
-            $this->db->where('mote_conf_cd', $conf_cd);
+            $this->db->where('mote_edic_cd', $codigoEdicao);
             $this->db->where('mote_tipo', $mote_tipo);
             $query = $this->db->get();
             return $query->num_rows();
@@ -56,12 +57,12 @@
             return $query->result_object()[0];
         }
 
-        public function consultarModaTemaRevisor($revisor, $conferencia){
+        public function consultarModaTemaRevisor($revisor, $edicao){
             $this->db->select("Modalidade_Tematica.*");
             $this->db->from("mote_revisor");
             $this->db->join('Modalidade_Tematica', 'Modalidade_Tematica.mote_cd = Mote_Revisor.more_mote_cd','left');
             $this->db->where('Mote_Revisor.more_user_cd', $revisor);
-            $this->db->where('Modalidade_Tematica.mote_conf_cd', $conferencia);
+            $this->db->where('Modalidade_Tematica.mote_edic_cd', $edicao);
             $this->db->order_by('Modalidade_Tematica.mote_nm', 'asc');
             $query = $this->db->get();
             if($query->num_rows()>0){

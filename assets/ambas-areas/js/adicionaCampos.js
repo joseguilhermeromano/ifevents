@@ -130,7 +130,7 @@ $(document).ready(function() {
     tags: true,
     placeholder: "Buscar autor inscrito por nome",
     multiple: true,
-    // tokenSeparators: [',', ' '],
+    tokenSeparators: [','],
     minimumInputLength: 2,
     // maximumSelectionLength: maximumSelectionLengthVariable,
     minimumResultsForSearch: 10,
@@ -395,73 +395,42 @@ $("#imagemEdicao").ready(function(){
 
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
-  // initialize with defaults
-$("#file_artigo_1").ready(function(){
-
-  // $.ajax({
-  // type: "POST",
-  // url: baseUrl + "artigo/recuperaArtigo",
-  // async: true,
-  // dataType: "json",
-  // success: function (data) {
-      
-    $("#file_artigo_1").fileinput({
-    language: 'pt-BR',
-    theme: 'fa',
-    showUpload: false,
-    // maxFileCount: 1,
-    maxFileSize: 4096,
-    allowedFileExtensions: ["pdf", "docx"], 
-    browseClass: 'btn btn-success',
-    browseIcon: "<i class=\"fa fa-file\"></i> ",
-    // initialPreview: [data.initialPreview],
-    // initialPreviewAsData: data.initialPreviewAsData,
-    // initialPreviewShowDelete:data.initialPreviewShowDelete,
-    // initialPreviewConfig: [data.initialPreviewConfig],
-    // overwriteInitial: data.overwriteInitial,
-    // maxFileSize: data.maxFileSize,
-    });
-
-
-  // }
-
-  // });
-
-
-});
-
-$("#file_artigo_2").ready(function(){
-
-  // $.ajax({
-  // type: "POST",
-  // url: baseUrl + "artigo/recuperaArtigo",
-  // async: true,
-  // dataType: "json",
-  // success: function (data) {
-      
-    $("#file_artigo_2").fileinput({
-    language: 'pt-BR',
-    theme: 'fa',
-    showUpload: false,
-    // maxFileCount: 1,
-    maxFileSize: 4096,
-    allowedFileExtensions: ["pdf", "docx"], 
-    browseClass: 'btn btn-success',
-    browseIcon: "<i class=\"fa fa-file\"></i> ",
-    // initialPreview: [data.initialPreview],
-    // initialPreviewAsData: data.initialPreviewAsData,
-    // initialPreviewShowDelete:data.initialPreviewShowDelete,
-    // initialPreviewConfig: [data.initialPreviewConfig],
-    // overwriteInitial: data.overwriteInitial,
-    // maxFileSize: data.maxFileSize,
-    });
-
-
-  // }
-
-  // });
-
-
+$("#arqSemIdent #arqComIdent").ready(function(){
+        
+        function getArquivo(input,arquivo){
+            $.ajax({    
+                type: "POST",
+                data: {link: $(input).val()},
+                url: baseUrl+'submissao/obtemDadosArtigo',
+                async: false,
+                dataType: "json",
+                success:function(data) {
+                    data.previewFileExtSettings = [{ "doc" : function(ext) {
+                        return ext.match(/(doc|docx)$/i);
+                    }}];
+                    console.log(data);
+                    arquivo(data);
+                }
+            });
+        }
+        var linkSemIdent = '#linkArqSemIdent';
+        var linkComIdent = '#linkArqComIdent';
+        
+        getArquivo(linkSemIdent,function(arquivo){ 
+            var input = $("#arqSemIdent");
+            if (input.data('fileinput')) {
+                input.fileinput('destroy');
+            }
+            input.fileinput(arquivo,'refresh');
+        });
+        
+        getArquivo(linkComIdent,function(arquivo){ 
+            var input = $("#arqComIdent");
+            if (input.data('fileinput')) {
+                input.fileinput('destroy');
+            }
+            input.fileinput(arquivo, 'refresh');
+        });
 });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE COMITÊS **/

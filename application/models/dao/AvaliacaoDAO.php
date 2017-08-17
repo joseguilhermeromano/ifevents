@@ -19,16 +19,16 @@
             return $this->db->update('avaliacao', $obj);
         }
 
-        public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='arti_title', $ordenacao='asc') {
+        public function consultarTudo($parametros = null, $limite=null, $numPagina=null,
+                $sort='arti_title', $ordenacao='asc') {
             $this->db->select("Artigo.arti_title, Artigo.arti_cd, Edicao.edic_num, Conferencia.conf_abrev,
-							   mote1.mote_nm as modalidade, mote2.mote_nm as eixo, aval_status, Submissao.subm_cd");
+            mote1.mote_nm as modalidade, mote2.mote_nm as eixo, aval_status, Submissao.subm_cd");
             $this->db->from("Avaliacao");
             $this->db->join('Submissao', 'Avaliacao.aval_subm_cd = Submissao.subm_cd', 'left');
             $this->db->join('Artigo', 'Submissao.subm_arti_cd = Artigo.arti_cd', 'left');
             $this->db->join('Modalidade_Tematica mote1', 'Artigo.arti_moda_cd = mote1.mote_cd','left');
             $this->db->join('Modalidade_Tematica mote2', 'Artigo.arti_eite_cd = mote2.mote_cd','left');
-            $this->db->join('Conferencia', 'mote1.mote_conf_cd = Conferencia.conf_cd','left');
-            $this->db->join('Edicao', 'Conferencia.conf_cd = Edicao.edic_conf_cd','left');
+            $this->db->join('Edicao', 'mote1.mote_edic_cd = Edicao.edic_cd','left');
             $this->db->join('Regra', 'Edicao.edic_regr_cd = Regra.regr_cd','left');
             $this->db->where('Regra.regr_revi_abert <=', date('y-m-d'));
             $this->db->where('Regra.regr_revi_encerr >=', date('y-m-d'));

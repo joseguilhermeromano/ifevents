@@ -104,9 +104,9 @@ $route[ 'tipoatividade/alterar/(:any)' ]        = 'TipoAtividadeControl/alterar/
 $route[ 'artigo/listar-atribuicoes' ]           = 'ArtigoControl/listarAtribuicoes';
 $route[ 'artigo/eventos-recentes' ]             = 'ArtigoControl/submissaoEventosRecentes/$1';
 $route[ 'artigo/detalhes-do-trabalho/(:any)' ]  = 'ArtigoControl/detalharTrabalho/$1';
-$route[ 'artigo/download/(:any)/(:any)' ]       = 'ArtigoControl/downloadArtigo/$1/$2';
 $route[ 'artigo/cadastrar/(:any)' ]             = 'ArtigoControl/cadastrar';
 $route[ 'artigo/alterar/(:any)' ]               = 'ArtigoControl/alterar/$1';
+$route[ 'artigo/cancelar/(:any)' ]               = 'ArtigoControl/cancelarArtigo/$1';
 $route[ 'artigo/(:any)' ]             			    = 'ArtigoControl/$1';
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]                   = 'ModalidadeControl/$1';
@@ -121,7 +121,17 @@ $route[ 'eixo-tematico/excluir/(:any)' ]        = 'EixoTematicoControl/excluir/$
 $route[ 'instituicao/(:any)' ]                  = 'InstituicaoControl/$1';
 $route[ 'instituicao/alterar/(:any)' ]          = 'InstituicaoControl/alterar/$1';
 $route[ 'instituicao/excluir/(:any)' ]          = 'InstituicaoControl/excluir/$1';
-$route[ 'submissao/(:any)' ]                    = 'SubmitControl/$1';
+$route[ 'submissao/alterar/(:any)' ]            = 'SubmissaoControl/alterar/$1';
+$route[ 'submissao/cadastrar/(:any)' ]            = 'SubmissaoControl/cadastrar/$1';
+$route[ 'submissao/download-artigo/'
+    . 'sem-identificacao/(:any)' ] = 'SubmissaoControl/downloadArtigoSemIdent/$1';
+$route[ 'submissao/download-artigo/'
+    . 'com-identificacao/(:any)' ] = 'SubmissaoControl/downloadArtigoComIdent/$1';
+$route[ 'submissao/visualizar-artigo/'
+    . 'sem-identificacao/(:any)' ] = 'SubmissaoControl/visualizarArtigoSemIdent/$1';
+$route[ 'submissao/visualizar-artigo/'
+    . 'com-identificacao/(:any)' ] = 'SubmissaoControl/visualizarArtigoComIdent/$1';
+$route[ 'submissao/(:any)' ]            = 'SubmissaoControl/$1';
 
 //Rotas para Comitê
 $route[ 'comite/(:any)' ]                       = 'ComiteControl/$1';

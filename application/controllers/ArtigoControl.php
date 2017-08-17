@@ -11,47 +11,45 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 $this->load->Model('ArtigoModel','artigo');
                 $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
                 $this->load->Model('dao/ModalidadeTematicaDAO');
-                $this->load->Model('SubmitModel','submissao');
-                $this->load->Model('dao/SubmitDAO');
                 $this->load->Model('dao/EdicaoDAO');
         }
         
-        private function consultarModalidadesEixos(){
-            $codigoEdicao = $this->uri->segment(3);
-            if($codigoEdicao == ''){
+        private function consultarModalidadesEixos($codigoEdicao){
+            if($codigoEdicao === null){
                 $this->session->set_flashdata('error', 'Não foi selecionado nenhum '
                         . 'evento que apresente submissões abertas!');
                 redirect('artigo/consultar');
             }
-            $edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
-            $consulta = array('mote_conf_cd'=>$edicao->getConferencia()->getCodigo()
-                    , 'mote_tipo'=> 0);
+            
+            $consulta = array('mote_edic_cd'=>$codigoEdicao
+            , 'mote_tipo'=> 0);
             $modalidades = $this->ModalidadeTematicaDAO->consultarTudo($consulta);
             $consulta['mote_tipo'] = 1;
             $eixosTematicos = $this->ModalidadeTematicaDAO->consultarTudo($consulta);
             
             $data['modalidades'] = $modalidades;
             $data['eixos'] = $eixosTematicos;
+            $edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
             $data['regrasSubmissao'] = $edicao->getDiretrizesSubmissao();
             return $data;
         }
 
-        public function cadastrar() {            
-            $data = $this->consultarModalidadesEixos(); 
+        public function cadastrar() {
+            $codigoEdicao = $this->uri->segment(3);
+            $data = $this->consultarModalidadesEixos($codigoEdicao); 
 
             $this->setaValores();
             $data['artigo'] = $this->artigo;
             if($this->valida() && !empty($this->input->post())){
 
                 $this->db->trans_start();
-                    $codigoArtigo =  $this->ArtigoDAO->inserir($this->artigo);
+                    $codigoArtigo =  $this->ArtigoDAO->inserir($this->artigo); 
                 $this->db->trans_complete();
 
                 if($this ->db->trans_status() === TRUE){
-                    $this->session->set_flashdata('success', 'O seu trabalho foi submetido com sucesso!');
-                    unset($data['artigo']);
+                   redirect('submissao/cadastrar/'.$codigoArtigo);
                 }else{
-                    $this->session->set_flashdata('error', 'Não foi possível submeter o seu trabalho!');
+                    $this->session->set_flashdata('error', 'Não foi possível cadastrar o seu trabalho!');
                 }
 
             }
@@ -61,24 +59,26 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function alterar($codigo) {
-            $data = $this->consultarModalidadesEixos(); 
             $this->artigo = $this->ArtigoDAO->consultarCodigo($codigo);
-            $this->setaValores();
-            $data['artigo'] = $this->artigo;
-            if($this->valida() && !empty($this->input->post())){
-
-                $this->db->trans_start();
-                    $codigoArtigo =  $this->ArtigoDAO->inserir($this->artigo);
-                $this->db->trans_complete();
-
-                if($this ->db->trans_status() === TRUE){
-                    $this->session->set_flashdata('success', 'O seu trabalho foi atualizado com sucesso!');
-                    unset($data['artigo']);
-                }else{
-                    $this->session->set_flashdata('error', 'Não foi possível atualizar o seu trabalho!');
+            $this->aceita_subm();
+            $codigoEdicao = $this->artigo->getModalidade()->mote_edic_cd;
+            $data = $this->consultarModalidadesEixos($codigoEdicao); 
+            if(!empty($this->input->post())){
+                $this->setaValores();
+                if($this->valida()){
+                    $this->db->trans_start();
+                        $this->ArtigoDAO->alterar($this->artigo);
+                        redirect('submissao/alterar/'.$this->artigo->getCodigo());
+                    $this->db->trans_complete();
+                    if($this ->db->trans_status() === TRUE){
+                        $this->session->set_flashdata('success', 'O seu trabalho foi atualizado com sucesso!');
+                        redirect('artigo/consultar');
+                    }else{
+                        $this->session->set_flashdata('error', 'Não foi possível atualizar o seu trabalho!');
+                    }
                 }
-
             }
+            $data['artigo'] = $this->artigo;
             $data['title'] = 'IFEvents - Atualizar dados do trabalho';
             $data['tituloh2'] = "<h2><span class='fa fa-file'></span><b> Atualizar dados do Trabalho</b></h2>";
             return $this->chamaView("form-artigo", "participante", $data, 1);
@@ -87,19 +87,6 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
         public function atribuirArtigo(){
 
-        }
-
-        private function submeterArtigo(){
-            if($this->upload_arquivo($this->submissao)!=null){
-                $this->submissao->setaValores();
-                if($this->SubmitDAO->inserir($this->submissao)==true){
-                    $this->session->set_flashdata( 'success', 'A Submissão foi realizada com sucesso!' );
-                }else{
-                    $this->session->set_flashdata( 'error', 'Não foi possível realizar a submissão!' );
-                }
-            }else{
-                $this->session->set_flashdata( 'error', 'O arquivo não foi selecionado!' );
-            }
         }
 
         public function detalharTrabalho($codigo){
@@ -112,43 +99,28 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             $this->chamaView("historico-submissao", "usuario", $data, 1);
         }
 
-        public function downloadArtigo($numArq, $submissao_cd){
-            $submissao = $this->SubmitDAO->consultarCodigo($submissao_cd);
-            if($numArq <= 1){
-                return $this->download_arquivo($submissao->subm_arq1_nm,$submissao->subm_arq1);
-            }else{
-                return $this->download_arquivo($submissao->subm_arq2_nm,$submissao->subm_arq2);
-            }
-        }
-
 
 
         public function consultar() {
             $limite = 10;
             $numPagina =0;
-            //pegar codigo da conferencia pela sessao
-            $conf_cd = 1;
             if(null !== $this->input->get('pagina')){
                 $numPagina = $this->input->get('pagina');
             }
-
-            if( $this->input->get('busca') !== null){
+            $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+            $array = array('Autoria.auto_user_cd' => $codigoUsuario);
+            $busca = $this->input->get('busca');
+            if($busca !== null){
                 $busca = $this->input->get('busca');
-                $array = array('Artigo.arti_title'=>$busca);
-            }else{
-                $busca=null;
-                $array=null;
+                $array['Artigo.arti_title']= $busca;
             }
-
             $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite, $this->ArtigoDAO->totalRegistros(), 'artigo/consultar/?busca='.$busca);
+            $data['paginacao'] = $this->geraPaginacao($limite
+                    , $this->ArtigoDAO->totalRegistros()
+                    , 'artigo/consultar/?busca='.$busca);
             $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros();
             $data['title']="IFEvents - Meus Trabalhos";
             $this->chamaView("meusartigos", "participante", $data, 1);
-        }
-
-        public function consultarTudo() {
-
         }
 
         public function submissaoEventosRecentes(){
@@ -163,10 +135,30 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
         public function excluir($codigo) {
         }
-
+        
+        public function cancelarArtigo($codigoArtigo){
+            $this->artigo = $this->ArtigoDAO->consultarCodigo($codigoArtigo);
+            $status = $this->artigo->getStatus();
+            if($status == 'Aprovado' || $status == 'Reprovado'){
+                $this->session->set_flashdata('error', 'Sua submissão já está fechada! '
+                        . 'Não é possível cancelar!');
+                redirect('artigo/consultar');
+            }
+            $this->artigo->setStatus('Cancelado');
+            $this->db->trans_start();
+                $this->ArtigoDAO->alterar($this->artigo);
+            $this->db->trans_complete();
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'Sua submissão foi cancelada com sucesso!');
+                redirect('artigo/consultar');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível cancelar a sua submissão!');
+            }
+        }
+        
         private function valida(){
             $this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[100]' );		
-            $this->form_validation->set_rules( 'autor[]', 'Autor(es)', 'trim|required|max_length[200]' );
+            $this->form_validation->set_rules( 'autores[]', 'Autor(es)', 'trim|required|max_length[200]' );
             $this->form_validation->set_rules( 'modalidade', 'Tipo de Modalidade', 'required' );
             $this->form_validation->set_rules( 'area', 'Eixo Temático', 'required' );		
             $this->form_validation->set_rules( 'orientador', 'Orientador', 'trim|required|max_length[100]' );
@@ -178,7 +170,8 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function aceita_subm(){
-            if ($this->input->post('aceite') || $this->artigo->getCodigo()!==null){
+            if ($this->input->post('aceite') 
+                    || $this->artigo->getCodigo()!==null){
                 $this->session->set_flashdata('checked','checked');
                 return TRUE;
             }
@@ -189,31 +182,19 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             }
         }
         
-        private function obtemStringAutores($arrayAutores){
-            if(null !== $arrayAutores){
-                 natcasesort($arrayAutores);
-                $i = 0;
-                $codigo_autores = array();
-                foreach ($arrayAutores as $key => $value) {
-                    if(preg_match("/\d+/", htmlentities($value)) > 0){
-                        $codigo_autores[$i] = somenteNumeros($value);
-                        $i++;
-                    }
-                    $this->autores[$key] =  $value;
-                }
-
-                return implode(', ', $arrayAutores);
-            }
-        }
+        
         
         private function setaValores(){
             $this->artigo->setTitulo($this->input->post( 'titulo' ));
-            $arrayAutores = $this->input->post( 'autor' );
-            $stringAutores = $this->obtemStringAutores($arrayAutores);
-            $this->artigo->setAutores($stringAutores);
+            $arrayAutores = $this->input->post( 'autores' );
+            $this->artigo->setAutores($arrayAutores);
             $this->artigo->setOrientador($this->input->post( 'orientador' ));
-            $this->artigo->setModalidade($this->input->post( 'modalidade' ));
-            $this->artigo->setEixoTematico($this->input->post( 'area' ));
+            $codigoModalidade = $this->input->post( 'modalidade' );
+            $modalidade = $this->ModalidadeTematicaDAO->consultarCodigo($codigoModalidade);
+            $this->artigo->setModalidade($modalidade);
+            $codigoEixo = $this->input->post( 'area' );
+            $eixo = $this->ModalidadeTematicaDAO->consultarCodigo($codigoEixo);
+            $this->artigo->setEixoTematico($eixo);
             $this->artigo->setResumo($this->input->post( 'resumo' ));
             $codigoAutorResp = $this->session->userdata('usuario')->user_cd;
             $this->artigo->setCodigoAutorResponsavel($codigoAutorResp);

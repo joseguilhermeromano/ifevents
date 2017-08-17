@@ -20,7 +20,9 @@
         <script src="<?php echo base_url ('assets/area-interna/nicedit/nicEdit-latest.js');?>"></script>
         <!--plugin bootstrap-input-file --> 
         <link href="<?php 
-         echo base_url ('assets/area-interna/css/bootstrap-file-input-fileinput.css');?>" rel="stylesheet">
+         echo base_url ('assets/area-interna/file-input/css/fileinput.css');?>" rel="stylesheet">
+        <link href="<?php 
+         echo base_url ('assets/area-interna/file-input/themes/explorer/theme.css');?>" rel="stylesheet">
             <script type="text/javascript">
               //<![CDATA[
                 bkLib.onDomLoaded(function() {

@@ -26,8 +26,8 @@ class EixoTematicoControl extends PrincipalControl implements InterfaceControl{
     	if($this->form_validation->run()){
 
     		$this->db->trans_start();
-    			//pegar codigo da conferencia pela sessao (selecionada)
-    			$this->areaTematica->mote_conf_cd = 1;
+    		$codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            	$this->modalidade->mote_edic_cd = $codigoEdicao; 
             	$this->areaTematica->mote_tipo = 1;
             	$this->ModalidadeTematicaDAO->inserir($this->areaTematica);
     		$this->db->trans_complete();
@@ -65,8 +65,8 @@ class EixoTematicoControl extends PrincipalControl implements InterfaceControl{
     	if($this->form_validation->run()){
 
     		$this->db->trans_start();
-    			//pegar codigo da conferencia pela sessao (selecionada)
-    			$this->areaTematica->mote_conf_cd = 1;
+    		$codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            	$this->modalidade->mote_edic_cd = $codigoEdicao; 
             	$this->areaTematica->mote_tipo = 1;
             	$this->ModalidadeTematicaDAO->alterar($this->areaTematica);
     		$this->db->trans_complete();
@@ -87,23 +87,25 @@ class EixoTematicoControl extends PrincipalControl implements InterfaceControl{
 	public function consultar(){
 		$limite = 10;
         $numPagina =0;
-        //pegar codigo da conferencia pela sessao 
-        $conf_cd = 1;
+        $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
         if(null !== $this->input->get('pagina')){
             $numPagina = $this->input->get('pagina');
         }
 
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('Modalidade_Tematica.mote_nm'=>$busca, 'Modalidade_Tematica.mote_tipo' => 1);
+            $array = array('mote_nm'=>$busca
+                    , 'mote_tipo' => '1'
+                    , 'mote_edic_cd' => $codigoEdicao);
         }else{
             $busca=null;
-            $array=array('mote_tipo'=>1);
+            $array=array('mote_tipo'=>1
+                ,'mote_edic_cd' => $codigoEdicao);
         }
 
         $data['areasTematicas']=$this->ModalidadeTematicaDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->ModalidadeTematicaDAO->totalRegistros($conf_cd, 1), 'area-tematica/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->ModalidadeTematicaDAO->totalRegistros($conf_cd, 1);
+        $data['paginacao'] = $this->geraPaginacao($limite, $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 1), 'area-tematica/consultar/?busca='.$busca);
+        $data['totalRegistros'] = $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 1);
         $data['title']="IFEvents - Eixos Temáticos";
         $this->chamaView("areas-tematicas", "organizador", $data, 1);
 	}
