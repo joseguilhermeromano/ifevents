@@ -123,11 +123,13 @@
     <!-- consultas ajax e implementação de alguns plugins -->
         <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
     <!-- plugin bootstrap file input -->
-        <script src="<?php echo base_url('assets/area-interna/js/bootstrap-file-input-canvas-to-blob.min.js'); ?>">
-        </script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/js/plugins/piexif.min.js'); ?>" type="text/javascript"></script>
         <script src="<?php echo base_url('assets/area-interna/file-input/js/plugins/sortable.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/js/plugins/purify.min.js'); ?>" type="text/javascript"></script>
         <script src="<?php echo base_url('assets/area-interna/file-input/js/fileinput.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/themes/fa/theme.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/file-input/themes/explorer/theme.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/area-interna/file-input/themes/gly/theme.js'); ?>"></script>
         <script src="<?php echo base_url('assets/area-interna/file-input/js/locales/pt-BR.js'); ?>"></script>
     <script>
     $("#menu-toggle").click(function(e) {

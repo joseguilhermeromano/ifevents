@@ -162,6 +162,8 @@ class SubmissaoControl extends PrincipalControl{
     }
     
     private function configInput(){
+        $extensoes = array("pdf", "doc", "docx",
+            "ppt", "pptx", "jpg", "jpeg","gif", "png");
         return $configPlugin = array(
              "language" => "pt-BR"
             ,"theme" => 'explorer'
@@ -169,30 +171,32 @@ class SubmissaoControl extends PrincipalControl{
             ,"showUpload" => false
             ,"overwriteInitial" => true
             ,"maxFileSize"=> 4096
-            ,"allowedFileExtensions" => array("pdf", "doc", "docx", "txt") 
-            ,"allowedPreviewTypes" => array("doc", "docx", "pdf","text")
+            ,"allowedFileExtensions" => $extensoes 
+            ,"allowedPreviewTypes" => $extensoes
             ,"browseClass"=> "btn btn-success"
             ,"browseIcon" => "<i class='fa fa-file'></i>"
         );
     }
     
     private function PreviewInput($array, $link){
-        $ext = str_replace('.','',strrchr($link, '.'));
-        $array['initialPreview'] = base_url($link);
-        $array['initialPreviewAsData'] = true ;
-        $array['initialPreviewConfig'] = array(array(
-         "caption" => basename($link)
-        , "type" => $ext == 'pdf' ? $ext : 'text'
-        , "size" => filesize($link)
-        , "showDelete" => false
-        , "showZoom" =>  $ext == 'pdf' ? true : false));
-        $array['preferIconicPreview'] = true;
-        $array['previewFileIconSettings'] = array(
-             "pdf" => '<i class="fa fa-file-pdf-o text-danger"></i>'
-            ,"doc" => '<i class="fa fa-file-word-o text-primary"></i>'
-            ,"txt" => '<i class="fa fa-file-text-o text-info"></i>'
-        );
-        $array['previewFileExtSettings'] = array();
+        if($link !== null){
+            $ext = str_replace('.','',strrchr($link, '.'));
+            $array['initialPreview'] = base_url($link);
+            $array['initialPreviewAsData'] = true ;
+            $array['initialPreviewConfig'] = array(array(
+             "caption" => basename($link)
+            , "type" => $ext == 'pdf' ? $ext : 'text'
+            , "size" => filesize($link)
+            , "showDelete" => false
+            , "showZoom" =>  $ext == 'pdf' ? true : false));
+            $array['preferIconicPreview'] = true;
+            $array['previewFileIconSettings'] = array(
+                 "pdf" => '<i class="fa fa-file-pdf-o text-danger"></i>'
+                ,"doc" => '<i class="fa fa-file-word-o text-primary"></i>'
+                ,"txt" => '<i class="fa fa-file-text-o text-info"></i>'
+            );
+            $array['previewFileExtSettings'] = array();
+        }
         return $array;
     }
     

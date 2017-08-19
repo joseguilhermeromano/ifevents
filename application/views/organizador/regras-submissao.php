@@ -85,8 +85,9 @@ echo form_close();
         <div class="form-group">
             <input type="hidden" id="codigoEdicao" name="codigoEdicao" value="<?=$regra->getCodigo();?>">
         <b><?php echo form_label( 'Upload de Diretrizes de Submissão de Artigos', 'arquivo_submissao' ); ?></b>
-            <?php $data = array( 'name' => 'arquivo_submissao'
-               , 'id' => 'arquivoSubmissao'
+            <?php $data = array( 
+                'name' => 'arquivo_submissao'
+               , 'id' => 'dire_submissao'
                ,'type' => 'file'
                ,'class' =>'file-uploading');
               echo form_upload($data);?>
@@ -95,8 +96,11 @@ echo form_close();
     <div class="col-xs-12 col-md-6">
         <div class="form-group">
         <b><?php echo form_label( 'Upload de Diretrizes de Revisão', 'arquivo_revisao' ); ?></b>
-            <?php $data = array( 'name' => 'arquivo_revisao', 'id' => 'arquivoRevisao','type' => 'file',  
-              'class' =>'file-uploading');
+            <?php $data = array( 
+                 'name' => 'arquivo_revisao'
+                , 'id' => 'dire_revisao'
+                ,'type' => 'file'
+                ,'class' =>'file-uploading');
               echo form_upload($data);?>
         </div>
     </div>

@@ -362,7 +362,7 @@ $("#imagemEdicao").ready(function(){
 });
 
 /* Upload de Diretrizes de Submissão e Revisão*/
- $('#arquivoSubmissao #arquivoRevisao').ready(function(){
+ $('#dire_submissao, #dire_revisao').ready(function(){
     var codigoEdicao = $('#codigoEdicao').val();
     
     function getSubmissaoRevisao(submissao, revisao){
@@ -372,6 +372,7 @@ $("#imagemEdicao").ready(function(){
         async: false,
         dataType: "json",
         success: function(data) {
+            console.log(data);
              submissao(data.submissao);
              revisao(data.revisao);
         }});
@@ -379,13 +380,13 @@ $("#imagemEdicao").ready(function(){
     
      
     getSubmissaoRevisao(function(submissao){
-        var input = $("#arquivoSubmissao");
+        var input = $("#dire_submissao");
         if (input.data('fileinput')) {
             input.fileinput('destroy');
         }
         input.fileinput(submissao,'refresh');
     }, function(revisao){
-        var input = $("#arquivoRevisao");
+        var input = $("#dire_revisao");
         if (input.data('fileinput')) {
             input.fileinput('destroy');
         }
@@ -395,7 +396,7 @@ $("#imagemEdicao").ready(function(){
 
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
-$("#arqSemIdent #arqComIdent").ready(function(){
+$("#arqSemIdent, #arqComIdent").ready(function(){
         
         function getArquivo(input,arquivo){
             $.ajax({    
@@ -408,7 +409,6 @@ $("#arqSemIdent #arqComIdent").ready(function(){
                     data.previewFileExtSettings = [{ "doc" : function(ext) {
                         return ext.match(/(doc|docx)$/i);
                     }}];
-                    console.log(data);
                     arquivo(data);
                 }
             });

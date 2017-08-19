@@ -117,27 +117,35 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     private function configPlugin(){
         return $configPlugin = array(
              "language" => "pt-BR"
-            ,"theme" => "fa"
+            ,"theme" => 'explorer'
+            , "hideThumbnailContent" => true
             ,"showUpload" => true
-            ,"overwriteInitial" => true
+            ,"overwriteInitial" => false
             ,"maxFileSize"=> 4096
-            ,"allowedFileExtensions" => array("pdf", "docx") 
-            ,"priviewFileType" => "any"
+            ,"allowedFileExtensions" => array("pdf", "doc", "docx") 
+            ,"allowedPreviewTypes" => array("doc", "docx", "pdf")
             ,"browseClass"=> "btn btn-success"
-            ,"browseIcon" => '<i class="fa fa-file"></i>' 
+            ,"browseIcon" => "<i class='fa fa-file'></i>"
         );
     }
     
-    private function PreviewInputFile($array, $linkArquivo){
-        if($linkArquivo!==null){
-            $array['initialPreview'] = base_url($linkArquivo);
-            $array['initialPreviewAsData'] = true;
+    private function PreviewInputFile($array, $link){
+        if($link !== null){
+            $ext = str_replace('.','',strrchr($link, '.'));
+            $array['initialPreview'] = base_url($link);
+            $array['initialPreviewAsData'] = true ;
             $array['initialPreviewConfig'] = array(array(
-            "type" => 'pdf'
-            ,"caption" => basename($linkArquivo)
-            , "size" => filesize($linkArquivo)
+             "type" => $ext == 'pdf' ? $ext : 'text'
+            ,"caption" => basename($link)
+            , "size" => filesize($link)
             , "showDelete" => true
-            , "showZoom" => true));  
+            , "showZoom" =>  $ext == 'pdf' ? true : false));
+            $array['preferIconicPreview'] = true;
+            $array['previewFileIconSettings'] = array(
+                 "pdf" => '<i class="fa fa-file-pdf-o text-danger"></i>'
+                ,"text" => '<i class="fa fa-file-word-o text-primary"></i>'
+                ,"txt" => '<i class="fa fa-file-text-o text-info"></i>'
+            );
         }
         return $array;
     }
