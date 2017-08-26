@@ -59,7 +59,8 @@
                           <span class="glyphicon glyphicon-copy"></span>&#09;Emitir Parecer</a><br>
                           <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$revisao->arti_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-eye-open"></span>&#09;Detalhar Trabalho</a><br>
-                          <a href="<?= base_url('artigo/download/1/'.$revisao->subm_cd); ?>" class="btn-opcao">
+                          <a href="<?= base_url('submissao/download-artigo/'
+                        . 'sem-identificacao/'.$revisao->subm_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-save-file"></span>&#09;Última versão do trabalho</a>
                     </div>
                     </td>

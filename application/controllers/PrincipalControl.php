@@ -19,7 +19,7 @@ class PrincipalControl extends CI_Controller {
                 $this->load->library('uploadimage','','file');
                 $this->load->model('dao/EdicaoDAO');
                 $this->guardaUltimasUrlsAcessadas();
-		//$this->load->model('acesso/Autentica');
+//		$this->load->model('acesso/Autentica');
 	}
 
 	/**
@@ -154,13 +154,11 @@ class PrincipalControl extends CI_Controller {
             )
         );
 
-        if(!$mail->Send()) {
-          // echo "Mailer Error: " . $mail->ErrorInfo;
-          return 1;
-        } else {
-          return 0;
+        if($mail->Send()) {
+          return true;
         }
-
+          // echo "Mailer Error: " . $mail->ErrorInfo;
+        return false;
     }
 
     
@@ -170,11 +168,20 @@ class PrincipalControl extends CI_Controller {
             $this->session->set_flashdata('error', 'O arquivo <b>'.$nomeArquivo.'</b> não exite!!!');
         }
         $tipo = $this->retornarHeaderParaArquivo($nomeArquivo);
+        header('Content-Description: File Transfer');
         header("Content-Type: ".$tipo); // informa o tipo do arquivo ao navegador
-        //header("Content-Length: ".filesize($nomeArquivo)); // informa o tamanho do arquivo ao navegador
-        header("Content-Disposition: attachment; filename=".$nomeArquivo); // informa ao navegador que é tipo anexo e faz abrir a janela de download, tambem informa o nome do arquivo
-        echo($arquivo); // lê o arquivo
-        exit; // aborta pós-ações
+        // informa ao navegador que é tipo anexo e faz abrir a janela de download, 
+        // tambem informa o nome do arquivo
+        header('Content-Disposition: attachment; filename="'.$nomeArquivo.'"'); 
+        header('Content-Transfer-Encoding: binary'); 
+        header('Expires: 0'); 
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0'); 
+        header('Pragma: public'); 
+        header("Content-Length: ".strlen($arquivo)); // informa o tamanho do arquivo ao navegador
+        ob_clean();
+        ob_flush();
+        print $arquivo;
+        exit;
     }
     
     private function retornarHeaderParaArquivo($nomeArquivo){
@@ -182,11 +189,13 @@ class PrincipalControl extends CI_Controller {
         switch(pathinfo($nomeArquivo, PATHINFO_EXTENSION)){ // verifica a extensão do arquivo para pegar o tipo
              case "pdf": $tipo="application/pdf"; break;
              case "doc": $tipo="application/msword"; break;
-             case "docx": $tipo="application/msword"; break;
+             case "docx": $tipo="application/vnd.openxmlformats-officedocument.wordprocessingml.document"; break;
+             case "pptx": $tipo="application/vnd.openxmlformats-officedocument.presentationml.presentation"; break;
              case "ppt": $tipo="application/vnd.ms-powerpoint"; break;
              case "gif": $tipo="image/gif"; break;
              case "png": $tipo="image/png"; break;
              case "jpg": $tipo="image/jpg"; break;
+             case "jpeg": $tipo="image/jpeg"; break;
           }
         return $tipo;
     }

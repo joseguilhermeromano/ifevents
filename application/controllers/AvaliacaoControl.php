@@ -9,16 +9,17 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 
 		$this->load->Model( 'dao/AvaliacaoDAO' );
 		$this->load->Model( 'dao/EdicaoDAO' );
+                $this->load->Model( 'dao/RevisorDAO' );
 		$this->load->Model( 'dao/ModalidadeTematicaDAO' );
 		$this->load->Model( 'AvaliacaoModel','avaliacao' );
 	}
 
 	public function cadastrar(){
-		if (empty($this->avaliacao->input->post())){
+            if (empty($this->avaliacao->input->post())){
     		return $this->chamaView("form-parecer", "avaliador",
             	array("title"=>"IFEvents - Emitir Parecer",
             		"tituloh2" => "<h2><span class='glyphicon glyphicon-copy'></span><b> Emitir Parecer</b></h2>"), 1);
-    	}
+            }
 
     	// $this->avaliacao->setaValores();
     	// $this->avaliacao->valida();
@@ -52,88 +53,119 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 	public function alterar($codigo){
 
 	}
-
+        
+        private function consultaModaEixosParaSelecionar($codigoEdicao, $data){
+            
+            $this->session->set_flashdata('info', 'Você primeiro deve selecionar'
+            . ' as modalidades e eixos temáticos dos trabalhos que'
+            . ' deseja revisar!'
+            . '<br>'
+            . '<a href="#" data-toggle="modal" data-target="#selecionarModalidadesEixos">'
+            . '<b>Clique aqui</b>'
+            . '</a>'
+            . ' para selecionar as modalidades e eixos temáticos de interesse!');
+            
+            $consulta = array('mote_edic_cd' => $codigoEdicao,'mote_tipo' => 0);    
+            $data['modalidades'] = $this->ModalidadeTematicaDAO->consultarTudo($consulta);
+            $consulta['mote_tipo'] = 1;
+            $data['eixosTematicos'] = $this->ModalidadeTematicaDAO->consultarTudo($consulta);
+            return $data;
+        }
+        
+        private function insereModaEixosSelecionados($modalidades, $eixos, $codigoRevisor){
+            $inseriu = $this->ModalidadeTematicaDAO->insereModaTemaRevisor
+            ($modalidades,$eixos, $codigoRevisor);
+            if($inseriu == true){
+                $this->session->set_flashdata('success', 'As modalidades e '
+                . 'os eixos temáticos foram salvos com sucesso!');
+                return;
+            }
+            $this->session->set_flashdata('error', 'Não foi possível salvar'
+            . ' as modalidades e os eixos temáticos!');
+            return;
+        }
+        
+        private function selecionarModalidadesEixos($codigoEdicao, $codigoRevisor){
+            $inputModalidades = $this->input->post('modalidades');
+            $inputEixos = $this->input->post('eixos');
+            
+            $data = array("title"=>"IFEvents - Revisões Pendentes"
+            ,"inputmodalidades" => $inputModalidades
+            , "inputeixos" => $inputEixos);
+                
+            if(sizeof($inputModalidades) >= 1 || sizeof($inputEixos) >= 1){
+                $this->insereModaEixosSelecionados($inputModalidades, 
+                    $inputEixos, $codigoRevisor);
+                redirect('revisao/consultar');
+            }
+            
+            $this->load->helper('html');
+            $this->session->set_flashdata('warning', 'Você deve selecionar'
+            . ' pelo menos uma modalidade e um eixo temático!');
+            $data['mensagem'] = alert($this->session);
+            
+            $data = $this->consultaModaEixosParaSelecionar($codigoEdicao, $data);
+            
+            return $this->chamaView("revisoes-pendentes", "avaliador", $data, 1); 
+        }
+        
+        private function selecionouModaEixos($codigoEdicao, $codigoRevisor){
+            $consulta = $this->ModalidadeTematicaDAO
+            ->consultarModaTemaRevisor($codigoEdicao, $codigoRevisor);
+            if($consulta !== null){
+                return true;
+            }
+            return false;
+        }
+        
 	public function consultar(){
-		$eventosRevisor = $this->EdicaoDAO->consultarEventosRevisor(date('y-m-d'),
-			$this->session->userdata('usuario')->user_cd);
+            $dataAtual = date('y-m-d');
+            $codigoRevisor = $this->session->userdata('usuario')->user_cd;
+            $codigoEdicao = $this->EdicaoDAO
+                ->consultarUltimoEventoRevisor($dataAtual, $codigoRevisor);
+            
+            if($codigoEdicao == null){
+                $this->session->set_flashdata("warning", "Não há eventos com o período "
+                . "de revisões em aberto ou você talvez não tenha aceitado o convite"
+                . " para participar das revisões! <br>Por favor, verique o seu e-mail!");
+                $data['title'] = "IFEvents - Revisões Pendentes";
+                return $this->chamaView("revisoes-pendentes", "avaliador", $data, 1);
+            }
+            
+            $selecinouModaEixos = $this->selecionouModaEixos($codigoEdicao,$codigoRevisor);
 
-		$modalidades = null;
-		$eixosTematicos = null;
-		$mensagemModal = null;
-		$modalidadesTematicas = null;
-		if(!empty($eventosRevisor->core_user_cd)){
-		$modalidadesTematicas = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor($eventosRevisor->core_user_cd, $eventosRevisor->core_conf_cd);
-				if($modalidadesTematicas == null){
-			$this->session->set_flashdata('info', 'Você primeiro deve selecionar as modalidades e eixos temáticos dos trabalhos que deseja revisar!<br><a href="#" data-toggle="modal" data-target="#selecionarModalidadesEixos"><b>Clique aqui</b></a> para selecionar as modalidades e eixos temáticos de interesse!');
-			$modalidades = $this->ModalidadeTematicaDAO->
-			consultarTudo(array('mote_conf_cd' => $eventosRevisor->edic_conf_cd
-				,'mote_tipo' => 0));
-			$eixosTematicos = $this->ModalidadeTematicaDAO->
-			consultarTudo(array('mote_conf_cd' => $eventosRevisor->edic_conf_cd
-				,'mote_tipo' => 1));
-		}
-
-
-		if($this->input->post('modalidades') ||
-			$this->input->post('eixos')){
-			$inputModalidades = $this->input->post('modalidades');
-			$inputEixos = $this->input->post('eixos');
-			if(sizeof($inputModalidades) < 1 || sizeof($inputEixos) < 1){
-				$this->load->helper('html');
-				$this->session->set_flashdata('error', 'Você deve selecionar pelo menos uma modalidade e um eixo temático!');
-				$mensagemModal = alert($this->session);
-
-				return $this->chamaView("revisoes-pendentes", "avaliador",
-		        array("title"=>"IFEvents - Revisões Pendentes"
-		        	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal,
-		        	"inputmodalidades" => $inputModalidades, "inputeixos" => $inputEixos), 1);
-			}else{
-				$verifica = $this->ModalidadeTematicaDAO->insereModaTemaRevisor($inputModalidades,$inputEixos,$eventosRevisor->core_user_cd);
-				if($verifica==0){
-					$this->session->set_flashdata('success', 'As modalidades e os eixos temáticos foram salvos com sucesso!');
-					$modalidades = null;
-					$eixos = null;
-				}else{
-					$this->session->set_flashdata('error', 'Não foi possível salvar as modalidades e os eixos temáticos!');
-				}
-			}
-		}
-		}
-
-
-
-		$limite = 10;
-        $numPagina =0;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
-
-        if( $this->input->get('busca') !== null){
-            $busca = $this->input->get('busca');
-            $array = array('arti_title'=>$busca
-            	,'aval_user_cd' => $this->session->userdata('usuario')->user_cd);
-        }else{
-            $busca=null;
-            $array=array('aval_user_cd' => $this->session->userdata('usuario')->user_cd);
-        }
-
-		$data = $this->AvaliacaoDAO->consultarTudo($array, $limite,$numPagina);
-		if(empty($data)){
-			$this->session->set_flashdata('info', 'Não há trabalhos para serem revisados!');
-			return $this->chamaView("revisoes-pendentes", "avaliador",
-        	array("title"=>"IFEvents - Revisões Pendentes"), 1);
-		}
-
-
-		$totalRegistros = count($this->AvaliacaoDAO->consultarTudo($array));
-
-
-				return $this->chamaView("revisoes-pendentes", "avaliador",
-        array("title"=>"IFEvents - Revisões Pendentes", "revisoes" => $data, "totalRegistros" => $totalRegistros), 1);
-		// return $this->chamaView("revisoes-pendentes", "avaliador",
-  //       array("title"=>"IFEvents - Revisões Pendentes"
-  //       	, "modalidades" => $modalidades, "eixosTematicos" => $eixosTematicos, "mensagem" => $mensagemModal), 1);
+            if($selecinouModaEixos == false){
+                return $this->selecionarModalidadesEixos($codigoEdicao, $codigoRevisor);
+            }
+            
+            $this->consultarRevisoesPendentes($codigoRevisor);
 	}
+        
+        private function consultarRevisoesPendentes($codigoRevisor){
+            $data = array("title"=>"IFEvents - Revisões Pendentes");
+            $limite = 10;
+            $pagina = $this->input->get('pagina');
+            $numPagina = $pagina !== null ? $pagina : 0;
+            $consulta = array('aval_user_cd' => $codigoRevisor);
+            $busca = $this->input->get('busca');
+            
+            if( $busca!== null){
+                $consulta['arti_title'] = $busca;
+            }
+
+            $revisoesPendentes = $this->AvaliacaoDAO->consultarTudo($consulta,
+                $limite,$numPagina);
+            
+            if(!empty($revisoesPendentes)){
+                $totalRegistros = count($this->AvaliacaoDAO->consultarTudo($consulta));
+                $data['revisoes'] = $revisoesPendentes;
+                $data['totalRegistros'] = $totalRegistros;
+            }else{
+                $this->session->set_flashdata('info', 'Não há trabalhos para serem revisados!');
+            }
+
+            return $this->chamaView("revisoes-pendentes", "avaliador", $data, 1);
+        }
 
 	public function consultarAtribuicoes(){
             $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
@@ -163,7 +195,8 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		$eixo = $this->input->post('eixo');
 
 		if(!empty($modalidade) && !empty($eixo)){
-			$revisores = $this->ModalidadeTematicaDAO->consultarRevisorPorModalidadeTematica($modalidade, $eixo);
+			$revisores = $this->ModalidadeTematicaDAO->
+                        consultarRevisorPorModalidadeTematica($modalidade, $eixo);
 			if($revisores != null){
 				$lista = array();
 				foreach ($revisores as $key => $revisor) {

@@ -330,21 +330,18 @@
              return null;
         }
 
-        public function consultarEventosRevisor($data_atual, $revisor){
-            $this->db->select("Conferencia_Revisor.*, Edicao.edic_conf_cd");
-            $this->db->from("Conferencia_Revisor, Mote_Revisor");
-            $this->db->join('Edicao', 'Conferencia_Revisor.core_conf_cd = Edicao.edic_conf_cd','left');
-            $this->db->join('Modalidade_Tematica', 
-                'Conferencia_Revisor.core_conf_cd = Modalidade_Tematica.mote_conf_cd','left');
+        public function consultarUltimoEventoRevisor($dataAtual, $codigoRevisor){
+            $this->db->select("edic_cd");
+            $this->db->from("Edicao_Revisor");
+            $this->db->join('Edicao', 'Edicao_Revisor.edre_edic_cd = Edicao.edic_cd','left');
             $this->db->join('Regra', 'Edicao.edic_regr_cd = Regra.regr_cd','left');
-            $this->db->where('Regra.regr_revi_abert <=', $data_atual);
-            $this->db->where('Regra.regr_revi_encerr >=', $data_atual);
-            $this->db->where('Conferencia_Revisor.core_user_cd', $revisor);
-            $this->db->where('Conferencia_Revisor.core_convite_status', 'Convite Aceito');
-            $this->db->where('mote_cd NOT IN (SELECT more_mote_cd FROM Mote_Revisor where more_user_cd = '.$revisor.')');
+            $this->db->where('Regra.regr_revi_abert <=', $dataAtual);
+            $this->db->where('Regra.regr_revi_encerr >=', $dataAtual);
+            $this->db->where('Edicao_Revisor.edre_user_cd', $codigoRevisor);
+            $this->db->where('Edicao_Revisor.edre_convite_status', 'Convite Aceito');
             $query = $this->db->get();
             if($query->num_rows()>0){
-                return $query->result_object();
+                return $query->result_object()[0]->edic_cd;
             }else{
                 return null;
             }

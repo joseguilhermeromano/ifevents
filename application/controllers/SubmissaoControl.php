@@ -22,6 +22,9 @@ class SubmissaoControl extends PrincipalControl{
             if($this->valida()){
                 $this->db->trans_start();
                     $this->SubmissaoDAO->inserir($this->submissao);
+                    $artigo = $this->ArtigoDAO->consultarCodigo($codigoArtigo);
+                    $artigo->setStatus("Pronto para a revisão");
+                    $this->ArtigoDAO->alterar($artigo);
                 $this->db->trans_complete();
                 if($this ->db->trans_status() === TRUE){
                     $this->session->set_flashdata('success', 'O seu trabalho foi submetido com sucesso!');

@@ -106,11 +106,11 @@ class RevisorDAO extends UsuarioDAO{
     
     public function consultarRevisoresConvidados($parametros = null, $limite=null, 
         $numPagina=null, $sort='user_nm', $ordenacao='asc') {
-        $this->db->select("user_cd, user_status, user_nm, Conferencia_Revisor.*");
+        $this->db->select("user_cd, user_status, user_nm, Edicao_Revisor.*");
         $this->db->from("User");
         $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
         $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
-        $this->db->join('Conferencia_Revisor', 'User.user_cd = Conferencia_Revisor.core_user_cd', '');
+        $this->db->join('Edicao_Revisor', 'User.user_cd = Edicao_Revisor.edre_user_cd', '');
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
             foreach ($parametros as $key => $value) {
@@ -129,21 +129,23 @@ class RevisorDAO extends UsuarioDAO{
         return $this->obtemModalidadesEixos($revisores);
     }
     
-    public function totalRevisoresConvidados($conf_cd){
+    public function totalRevisoresConvidados($codigoEdicao){
         $this->db->select("*");
-        $this->db->from("Conferencia_Revisor");
-        $this->db->where("core_conf_cd", $conf_cd);
-        $this->db->where("core_convite_status", "Convite Aceito");
-        $this->db->or_where("core_convite_status", "Aguardando Resposta");
+        $this->db->from("Edicao_Revisor");
+        $this->db->where("edre_edic_cd", $codigoEdicao);
+        $this->db->where("edre_convite_status", "Convite Aceito");
+        $this->db->or_where("edre_convite_status", "Aguardando Resposta");
         $query = $this->db->get();
         $total = $query->num_rows();
         return $total;
     }
     
     private function obtemModalidadesEixos($consulta){
+        
         foreach ($consulta as $revisor) {
-            $modalidadesEixos = $this->ModalidadeTematicaDAO
-            ->consultarModaTemaRevisor($revisor->user_cd, $revisor->core_conf_cd);
+            
+            $modalidadesEixos = $this->ModalidadeTematicaDAO->consultarModaTemaRevisor
+            ($revisor->edre_edic_cd, $revisor->user_cd);
             $revisor->modalidadesEixos = $this->stringModalidadesEixos($modalidadesEixos);
         }
         return $consulta;
@@ -174,17 +176,17 @@ class RevisorDAO extends UsuarioDAO{
         return $objeto;
     }
     
-    public function convidarRevisor($revisor, $conferencia){
-        $this->db->where('core_conf_cd', $conferencia);
-        $this->db->where('core_user_cd', $revisor);
-        $this->db->where('core_convite_status', 'Aguardando Resposta');
-        $this->db->or_where('core_convite_status', 'Convite Recusado');
-        $query = $this->db->get('Conferencia_Revisor');
+    public function convidarRevisor($codigoRevisor, $codigoEdicao){
+        $this->db->where('edre_edic_cd', $codigoEdicao);
+        $this->db->where('edre_user_cd', $codigoRevisor);
+        $this->db->where('edre_convite_status', 'Aguardando Resposta');
+        $this->db->or_where('edre_convite_status', 'Convite Recusado');
+        $query = $this->db->get('Edicao_Revisor');
         if($query->num_rows() == 0){
-            $this->db->insert('Conferencia_Revisor', array(
-                'core_conf_cd' => $conferencia
-                ,'core_user_cd' => $revisor
-                ,'core_convite_status' => 'Aguardando Resposta'
+            $this->db->insert('Edicao_Revisor', array(
+                'edre_edic_cd' => $codigoEdicao
+                ,'edre_user_cd' => $codigoRevisor
+                ,'edre_convite_status' => 'Aguardando Resposta'
                 ));
         }else{ 
             $this->session->set_flashdata('info', 'Você já adicionou este revisor ao evento!');
@@ -192,33 +194,33 @@ class RevisorDAO extends UsuarioDAO{
         }
 
         if($this->db->affected_rows()){
-            return 0;
+            return true;
         }
-            return 1;
+            return false;
     }
     
+    
+    
     public function aceitarRecusarConvite($revisor, $evento, $opcao){
-        $this->db->where('core_user_cd', $revisor);
-        $this->db->where('core_conf_cd', $evento);
-        $this->db->where('core_convite_status', 'Aguardando Resposta');
-        $this->db->update('Conferencia_Revisor', array('core_convite_status' => $opcao));
+        $this->db->where('edre_user_cd', $revisor);
+        $this->db->where('edre_edic_cd', $evento);
+        $this->db->where('edre_convite_status', 'Aguardando Resposta');
+        $this->db->update('Edicao_Revisor', array('edre_convite_status' => $opcao));
 
         if($this->db->affected_rows()){
-            return 0;
-        }else{
-            return 1;
+            return true;
         }
+        return false;
     }
 
     public function excluirConvite($revisor, $evento){
-        $this->db->where('core_user_cd', $revisor);
-        $this->db->where('core_conf_cd', $evento);
-        $this->db->delete('Conferencia_Revisor');
+        $this->db->where('edre_user_cd', $revisor);
+        $this->db->where('edre_edic_cd', $evento);
+        $this->db->delete('Edicao_Revisor');
         if($this->db->affected_rows()){
-            return 0;
-        }else{
-            return 1;
+            return true;
         }
+        return false;
     }
 
 }

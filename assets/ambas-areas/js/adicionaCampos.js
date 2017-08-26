@@ -91,73 +91,76 @@ $(function(){
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE INSTITUIÇÕES **/
 $(document).ready(function() {
-    $(".consultaInstituicao").select2({
-    // tags: true,
-    placeholder: "Selecionar Instituição por nome",
-    // multiple: true,
-    // tokenSeparators: [',', ' '],
-    minimumInputLength: 2,
-    minimumResultsForSearch: 10,
-    ajax: {
-        url: baseUrl + "instituicao/consultarParaSelect2",
-        dataType: "json",
-        type: "POST",
-        data: function (params) {
+    if($(".consultaInstituicao").length){
+            $(".consultaInstituicao").select2({
+            // tags: true,
+            placeholder: "Selecionar Instituição por nome",
+            // multiple: true,
+            // tokenSeparators: [',', ' '],
+            minimumInputLength: 2,
+            minimumResultsForSearch: 10,
+            ajax: {
+                url: baseUrl + "instituicao/consultarParaSelect2",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
 
-            var queryParameters = {
-                term: params.term
-            }
-            return queryParameters;
-        },
-        processResults: function (data) {
-            return {
-                results: $.map(data, function (item) {
-                    return {
-                        text: item.inst_abrev,
-                        title: item.inst_nm,
-                        id: item.inst_cd
+                    var queryParameters = {
+                        term: params.term
                     }
-                })
-            };
-        }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.inst_abrev,
+                                title: item.inst_nm,
+                                id: item.inst_cd
+                            }
+                        })
+                    };
+                }
+            }
+        });
     }
-});
-
 });
 
 $(document).ready(function() {
-    $(".consultaUsuario").select2({
-    tags: true,
-    placeholder: "Buscar autor inscrito por nome",
-    multiple: true,
-    tokenSeparators: [','],
-    minimumInputLength: 2,
-    // maximumSelectionLength: maximumSelectionLengthVariable,
-    minimumResultsForSearch: 10,
-    ajax: {
-        url: baseUrl + "usuario/consultarParaSelect2",
-        dataType: "json",
-        type: "POST",
-        data: function (params) {
+    
+    if($(".consultaUsuario").length){
+            $(".consultaUsuario").select2({
+            tags: true,
+            placeholder: "Buscar autor inscrito por nome",
+            multiple: true,
+            tokenSeparators: [','],
+            minimumInputLength: 2,
+            // maximumSelectionLength: maximumSelectionLengthVariable,
+            minimumResultsForSearch: 10,
+            ajax: {
+                url: baseUrl + "usuario/consultarParaSelect2",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
 
-            var queryParameters = {
-                term: params.term
-            }
-            return queryParameters;
-        },
-        processResults: function (data) {
-            return {
-                results: $.map(data, function (item) {
-                    return {
-                        text: item.user_nm,
-                        id: item.user_nm + "-" + item.user_cd
+                    var queryParameters = {
+                        term: params.term
                     }
-                })
-            };
-        }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.user_nm,
+                                id: item.user_nm + "-" + item.user_cd
+                            }
+                        })
+                    };
+                }
+            }
+        });
     }
-});
-
 });
 
 /*implanta select 2 em inputs simples sem consulta ajax*/
@@ -224,61 +227,64 @@ $(document).ready(function(){
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE CONFERÊNCIAS **/
 $(document).ready(function() {
-    $(".consultaConferencia").select2({
-    // tags: true,
-    placeholder: "Conferência (consulta por denominação)",
-    multiple: false,
-    // tokenSeparators: [',', ' '],
-    minimumInputLength: 2,
-    maximumSelectionLength: 1,
-    minimumResultsForSearch: Infinity,
-    ajax: {
-        url: baseUrl + "conferencia/consultarParaSelect2",
-        dataType: "json",
-        type: "POST",
-        data: function (params) {
+    if($(".consultaConferencia").length){
+            $(".consultaConferencia").select2({
+            // tags: true,
+            placeholder: "Conferência (consulta por denominação)",
+            multiple: false,
+            // tokenSeparators: [',', ' '],
+            minimumInputLength: 2,
+            maximumSelectionLength: 1,
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: baseUrl + "conferencia/consultarParaSelect2",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
 
-            var queryParameters = {
-                term: params.term
-            }
-            return queryParameters;
-        },
-        processResults: function (data) {
-            return {
-                results: $.map(data, function (item) {
-                    return {
-                        text: item.conf_abrev,
-                        id: item.conf_cd
+                    var queryParameters = {
+                        term: params.term
                     }
-                })
-            };
-        }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.conf_abrev,
+                                id: item.conf_cd
+                            }
+                        })
+                    };
+                }
+            }
+        });
     }
-});
-
 });
 
 /**GERA O LINK DA NOVA EDIÇÃO**/
 $(document).ready(function(){
-  $('.consultaConferencia').change(function(){
-    var conferencia = {conf_cd : $('.consultaConferencia option:selected').val()};
-    $.ajax({
-        type: "POST",
-        url: baseUrl + "edicao/geraLinkEdicao",
-        data: conferencia,
-        async: true,
-        dataType: "json",
-        success: function(data) {
-            $('#linkEvento').val('');
-            $('#linkEvento').val(data);
-        }
-    }); 
-  });
+  if($(".consultaConferencia").length){
+        $('.consultaConferencia').change(function(){
+          var conferencia = {conf_cd : $('.consultaConferencia option:selected').val()};
+          $.ajax({
+              type: "POST",
+              url: baseUrl + "edicao/geraLinkEdicao",
+              data: conferencia,
+              async: true,
+              dataType: "json",
+              success: function(data) {
+                  $('#linkEvento').val('');
+                  $('#linkEvento').val(data);
+              }
+          }); 
+        });
+  }
 });
 
 // /**CARREGA PLUGIN FILE UPLOAD BOOTSTRAP**/
   // initialize with defaults
-$("#imagemInstituicao").ready(function(){
+$(document).ready(function(){
         
         function getImagem(imagem){
             $.ajax({    
@@ -292,17 +298,18 @@ $("#imagemInstituicao").ready(function(){
                 }
             });
         }
-        
-        getImagem(function(imagem){ 
-            var input = $("#imagemInstituicao");
-            if (input.data('fileinput')) {
-                input.fileinput('destroy');
-            }
-            input.fileinput(imagem, 'refresh');
-        });
+        if($("#imagemInstituicao").length){
+            getImagem(function(imagem){ 
+                var input = $("#imagemInstituicao");
+                if (input.data('fileinput')) {
+                    input.fileinput('destroy');
+                } 
+                input.fileinput(imagem, 'refresh');
+            });
+        }
 });
 
-$("#imagemEdicao").ready(function(){
+$(document).ready(function(){
         
         function getImagem(imagem){
             $.ajax({    
@@ -316,14 +323,15 @@ $("#imagemEdicao").ready(function(){
                 }
             });
         }
-        
-        getImagem(function(imagem){ 
-            var input = $("#imagemEdicao");
-            if (input.data('fileinput')) {
-                input.fileinput('destroy');
-            }
-            input.fileinput(imagem, 'refresh');
-        });
+        if($("#imagemEdicao").length){
+            getImagem(function(imagem){ 
+                var input = $("#imagemEdicao");
+                if (input.data('fileinput')) {
+                    input.fileinput('destroy');
+                }
+                input.fileinput(imagem, 'refresh');
+            });
+        }
 });
 
 
@@ -362,7 +370,7 @@ $("#imagemEdicao").ready(function(){
 });
 
 /* Upload de Diretrizes de Submissão e Revisão*/
- $('#dire_submissao, #dire_revisao').ready(function(){
+ $(document).ready(function(){
     var codigoEdicao = $('#codigoEdicao').val();
     
     function getSubmissaoRevisao(submissao, revisao){
@@ -378,25 +386,26 @@ $("#imagemEdicao").ready(function(){
         }});
     }
     
-     
-    getSubmissaoRevisao(function(submissao){
-        var input = $("#dire_submissao");
-        if (input.data('fileinput')) {
-            input.fileinput('destroy');
-        }
-        input.fileinput(submissao,'refresh');
-    }, function(revisao){
-        var input = $("#dire_revisao");
-        if (input.data('fileinput')) {
-            input.fileinput('destroy');
-        }
-        input.fileinput(revisao,'refresh');
-    });
+    if($("#dire_submissao").length && $("#dire_revisao").length){
+        getSubmissaoRevisao(function(submissao){
+            var input = $("#dire_submissao");
+            if (input.data('fileinput')) {
+                input.fileinput('destroy');
+            }
+            input.fileinput(submissao,'refresh');
+        }, function(revisao){
+            var input = $("#dire_revisao");
+            if (input.data('fileinput')) {
+                input.fileinput('destroy'); 
+            }
+            input.fileinput(revisao,'refresh');
+        });
+    }
 });
 
 
 // /**CARREGA PLUGIN FILE UPLOAD para upload de arquivos pdf doc etc BOOTSTRAP**/
-$("#arqSemIdent, #arqComIdent").ready(function(){
+$(document).ready(function(){
         
         function getArquivo(input,arquivo){
             $.ajax({    
@@ -415,125 +424,130 @@ $("#arqSemIdent, #arqComIdent").ready(function(){
         }
         var linkSemIdent = '#linkArqSemIdent';
         var linkComIdent = '#linkArqComIdent';
-        
-        getArquivo(linkSemIdent,function(arquivo){ 
-            var input = $("#arqSemIdent");
-            if (input.data('fileinput')) {
-                input.fileinput('destroy');
-            }
-            input.fileinput(arquivo,'refresh');
-        });
-        
-        getArquivo(linkComIdent,function(arquivo){ 
-            var input = $("#arqComIdent");
-            if (input.data('fileinput')) {
-                input.fileinput('destroy');
-            }
-            input.fileinput(arquivo, 'refresh');
-        });
+        if($("#arqSemIdent").length && $("#arqComIdent").length){
+            getArquivo(linkSemIdent,function(arquivo){ 
+                var input = $("#arqSemIdent");
+                if (input.data('fileinput')) {
+                    input.fileinput('destroy');
+                }
+                input.fileinput(arquivo,'refresh');
+            });
+
+            getArquivo(linkComIdent,function(arquivo){ 
+                var input = $("#arqComIdent");
+                if (input.data('fileinput')) {
+                    input.fileinput('destroy');
+                }
+                input.fileinput(arquivo, 'refresh');
+            });
+        }
 });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE COMITÊS **/
 $(document).ready(function() {
-    $(".consultaComite").select2({
-    // tags: true,
-    placeholder: "Comitê (consulta por denominação)",
-    multiple: false,
-    // tokenSeparators: [',', ' '],
-    minimumInputLength: 2,
-    maximumSelectionLength: 1,
-    minimumResultsForSearch: Infinity,
-    ajax: {
-        url: baseUrl + "comite/consultarParaSelect2",
-        dataType: "json",
-        type: "POST",
-        data: function (params) {
+    if($(".consultaComite").length){
+            $(".consultaComite").select2({
+            // tags: true,
+            placeholder: "Comitê (consulta por denominação)",
+            multiple: false,
+            // tokenSeparators: [',', ' '],
+            minimumInputLength: 2,
+            maximumSelectionLength: 1,
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: baseUrl + "comite/consultarParaSelect2",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
 
-            var queryParameters = {
-                term: params.term
-            }
-            return queryParameters;
-        },
-        processResults: function (data) {
-            return {
-                results: $.map(data, function (item) {
-                    return {
-                        text: item.comi_nm,
-                        id: item.comi_cd
+                    var queryParameters = {
+                        term: params.term
                     }
-                })
-            };
-        }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.comi_nm,
+                                id: item.comi_cd
+                            }
+                        })
+                    };
+                }
+            }
+        });
     }
-});
-
 });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE E-mails **/
 $(document).ready(function() {
-    $(".consultaEmails").select2({
-    tags: true,
-    placeholder: "Emails",
-    multiple: true,
-    // tokenSeparators: [',', ' '],
-    minimumInputLength: 2,
-     // maximumSelectionLength: 20,
-    minimumResultsForSearch: 10,
-    ajax: {
-        url: baseUrl + "usuario/consultarEmailSelect",
-        dataType: "json",
-        type: "POST",
-        data: function (params) {
+    
+    if($(".consultaEmails").length){
+            $(".consultaEmails").select2({
+            tags: true,
+            placeholder: "Emails",
+            multiple: true,
+            // tokenSeparators: [',', ' '],
+            minimumInputLength: 2,
+             // maximumSelectionLength: 20,
+            minimumResultsForSearch: 10,
+            ajax: {
+                url: baseUrl + "usuario/consultarEmailSelect",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
 
-            var queryParameters = {
-                term: params.term
-            }
-            return queryParameters;
-        },
-        processResults: function (data) {
-            return {
-                results: $.map(data, function (item) {
-                    return {
-                        text: item.email_email,
-                        id: item.email_email
+                    var queryParameters = {
+                        term: params.term
                     }
-                })
-            };
-        }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.email_email,
+                                id: item.email_email
+                            }
+                        })
+                    };
+                }
+            }
+        });
     }
-});
-
 });
 
 /** IMPLANTA O SELECT2 NA CONSULTA DE REVISORES **/
 $(document).ready(function() {
-    $(".consultaRevisores").select2({
-    minimumInputLength: 2,
-    minimumResultsForSearch: Infinity,
-    ajax: {
-        url: baseUrl + "revisor/consultarRevisorSelect2",
-        dataType: "json",
-        type: "POST",
-        data: function (params) {
+    if($(".consultaRevisores").length){
+            $(".consultaRevisores").select2({
+            minimumInputLength: 2,
+            minimumResultsForSearch: Infinity,
+            ajax: {
+                url: baseUrl + "revisor/consultarRevisorSelect2",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
 
-            var queryParameters = {
-                term: params.term
-            }
-            return queryParameters;
-        },
-        processResults: function (data) {
-            return {
-                results: $.map(data, function (item) {
-                    return {
-                        text: item.user_nm,
-                        id: item.user_cd
+                    var queryParameters = {
+                        term: params.term
                     }
-                })
-            };
-        }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.user_nm,
+                                id: item.user_cd
+                            }
+                        })
+                    };
+                }
+            }
+        });
     }
-});
-
 });
 
 /** Trava campo para aceitar somente números **/

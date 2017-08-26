@@ -29,6 +29,7 @@
             $this->db->join('Modalidade_Tematica mote1', 'Artigo.arti_moda_cd = mote1.mote_cd','left');
             $this->db->join('Modalidade_Tematica mote2', 'Artigo.arti_eite_cd = mote2.mote_cd','left');
             $this->db->join('Edicao', 'mote1.mote_edic_cd = Edicao.edic_cd','left');
+            $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd','left');
             $this->db->join('Regra', 'Edicao.edic_regr_cd = Regra.regr_cd','left');
             $this->db->where('Regra.regr_revi_abert <=', date('y-m-d'));
             $this->db->where('Regra.regr_revi_encerr >=', date('y-m-d'));

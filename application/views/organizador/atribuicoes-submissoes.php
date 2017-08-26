@@ -47,9 +47,11 @@
                     <td class="text-center"><?= $atribuicao->modalidade; ?></td>
                     <td class="text-center"><?= $atribuicao->eixo; ?></td>
                     <td class="text-center">
-                        <a href="<?= base_url('artigo/download/1/'.$atribuicao->subm_cd); ?>">Sem identificação</a>
+                        <a href="<?= base_url('submissao/download-artigo/'
+                        . 'sem-identificacao/'.$atribuicao->subm_cd); ?>" >Sem identificação</a>
                         <br> 
-                        <a href="<?= base_url('artigo/download/2/'.$atribuicao->subm_cd); ?>">Com identificação</a>
+                       <a href="<?= base_url('submissao/download-artigo/'
+                        . 'com-identificacao/'.$atribuicao->subm_cd); ?>">Com identificação</a>
                     </td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">

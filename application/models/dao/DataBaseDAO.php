@@ -11,7 +11,7 @@
 				$this->create_table_tipo_parceria();  	   $this->create_table_status();
 				$this->create_table_modalidade_tematica(); $this->create_table_mote_revisor();
 				$this->create_table_atividade(); 	       $this->create_table_edicao();
-				$this->create_table_conferencia_revisor(); $this->create_table_organiza();
+				$this->create_table_edicao_revisor(); $this->create_table_edicao_revisor();
 				$this->create_table_sedia();               $this->create_table_artigo();
 				$this->create_table_usuario(); 		       $this->create_table_participa();
 				$this->create_table_pertence();            $this->create_table_autoria();
@@ -188,14 +188,14 @@
 			$this->db->query($sql);
 		}
 
-		public function create_table_conferencia_revisor(){
-			$sql = "CREATE TABLE IF NOT EXISTS `Conferencia_Revisor` (
-				`core_conf_cd` int(11) NOT NULL,
-			 	`core_user_cd` int(11) NOT NULL,
-			 	`core_convite_status` enum('Aguardando Resposta','Convite Aceito','Convite Recusado','') COLLATE utf8_unicode_ci NOT NULL,
-			 	PRIMARY KEY (`core_conf_cd`,`core_user_cd`)
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-			$this->db->query($sql);
+		public function create_table_edicao_revisor(){
+                    $sql = "CREATE TABLE IF NOT EXISTS `edicao_revisor` (
+                    `edre_edic_cd` int(11) NOT NULL,
+                    `edre_user_cd` int(11) NOT NULL,
+                    `edre_convite_status` enum('Aguardando Resposta','Convite Aceito','Convite Recusado','') COLLATE utf8_unicode_ci NOT NULL,
+                    PRIMARY KEY (`edre_edic_cd`,`edre_user_cd`)
+                   ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+                    $this->db->query($sql);
 		}
 
 		//Método cria a tabela Organiza

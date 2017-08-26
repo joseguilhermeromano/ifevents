@@ -51,12 +51,12 @@
                         <?= $revisor->modalidadesEixos->eixos;?>
                     </td>
                     <td class="text-center">
-                         <?= $revisor->core_convite_status; ?>
+                         <?= $revisor->edre_convite_status; ?>
                     </td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
                           <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                          onclick="setCodigo('<?= $revisor->user_cd."/".$revisor->core_conf_cd; ?>'); 
+                          onclick="setCodigo('<?= $revisor->user_cd."/".$revisor->edre_edic_cd; ?>'); 
                           setLink('<?= base_url('revisor/excluir-convite/')?>');">
                           <span class="fa fa-trash"></span>&#09; Excluir</a>
                     </div>

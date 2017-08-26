@@ -12,6 +12,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
                 $this->load->Model('dao/ModalidadeTematicaDAO');
                 $this->load->Model('dao/EdicaoDAO');
+                $this->load->Model('dao/SubmissaoDAO');
         }
         
         private function consultarModalidadesEixos($codigoEdicao){
@@ -59,6 +60,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         }
 
         public function alterar($codigo) {
+            $this->verificaPrimeiraSubmissao($codigo);
             $this->artigo = $this->ArtigoDAO->consultarCodigo($codigo);
             $this->aceita_subm();
             $codigoEdicao = $this->artigo->getModalidade()->mote_edic_cd;
@@ -85,16 +87,17 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         }
 
 
-        public function atribuirArtigo(){
-
+        private function verificaPrimeiraSubmissao($codigoArtigo){
+            $consulta = $this->SubmissaoDAO->totalRegistros($codigoArtigo);
+            if($consulta <= 1){
+                return;
+            }
+             redirect('submissao/alterar/'.$codigoArtigo);
         }
 
         public function detalharTrabalho($codigo){
-            $artigo=$this->ArtigoDAO->consultarCodigo($codigo);
-            $artigo->eixo = $this->ModalidadeTematicaDAO->consultarCodigo($artigo->arti_eite_cd)->mote_nm;
-            $artigo->modalidade = $this->ModalidadeTematicaDAO->consultarCodigo($artigo->arti_moda_cd)->mote_nm;
-            $data['artigo'] = $artigo;
-            $data['submissoes']=$this->SubmitDAO->consultarPorArtigo($codigo);
+            $data['artigo'] = $this->ArtigoDAO->consultarCodigo($codigo);
+            $data['submissoes'] = $this->SubmissaoDAO->consultarPorArtigo($codigo);
             $data['title'] = "IFEvents - Detalhes do Trabalho";
             $this->chamaView("historico-submissao", "usuario", $data, 1);
         }

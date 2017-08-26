@@ -177,8 +177,8 @@ class RevisorControl extends UsuarioControl{
         $limite = 10;
         $numPagina =0;
         $busca = null;
-        $conf_cd = $this->session->userdata('evento_selecionado')->edic_conf_cd;
-        $array = array('Conferencia_Revisor.core_conf_cd'=>$conf_cd);
+        $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+        $array = array('Edicao_Revisor.edre_edic_cd'=>$codigoEdicao);
         
         if(null !== $this->input->get('pagina')){
             $numPagina = $this->input->get('pagina');
@@ -186,13 +186,13 @@ class RevisorControl extends UsuarioControl{
 
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('user_nm'=>$busca, 'Conferencia_Revisor.core_conf_cd'=>$conf_cd);
+            $array = array('user_nm'=>$busca, 'Edicao_Revisor.edre_edic_cd'=>$codigoEdicao);
         }
         
         $data['revisores'] = $this->RevisorDAO->consultarRevisoresConvidados
         ($array, $limite, $numPagina);
         
-        $totalRegistros = $this->RevisorDAO->totalRevisoresConvidados($conf_cd);
+        $totalRegistros = $this->RevisorDAO->totalRevisoresConvidados($codigoEdicao);
         $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, 'revisor/consultar/?busca='.$busca);
         $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Revisores";
@@ -201,21 +201,18 @@ class RevisorControl extends UsuarioControl{
     
     public function convidarRevisor(){
         $edic_cd = $this->session->userdata("evento_selecionado")->edic_cd;
-        $conf_cd = $this->session->userdata("evento_selecionado")->edic_conf_cd;
         $rev_cd = $this->input->post('revisor');
         $edicao = $this->EdicaoDAO->consultarCodigo($edic_cd);
-        $verificaEnvio = 1;
         $rev = $this->RevisorDAO->consultarCodigo($rev_cd);
-        $verificaRevisor = $this->RevisorDAO->convidarRevisor($rev_cd, $conf_cd);
+        $convidou = $this->RevisorDAO->convidarRevisor($rev_cd, $edic_cd);
 
-        $verificaRevisor == 1 ? exit : ''; 
-        $data = $this->stringMensagemConvite($rev, $edicao, $conf_cd);
+        $data = $this->stringMensagemConvite($rev, $edicao);
+        $mensagem = $this->load->view('template-email/template-email',$data, true);
+        $enviouConvite = $this->envia_email($rev->getEmail(), 
+            'Convite para Revisão', $mensagem);               
 
-        $verificaEnvio = $this->envia_email($rev->getEmail(), 'Convite para Revisão', 
-            $this->load->view('template-email/template-email',$data, true));               
 
-
-        if($verificaEnvio <= 0){
+        if($convidou == true && $enviouConvite == true){
             $this->session->set_flashdata('success', 'O Convite foi enviado com sucesso!');
         }else{
             $this->session->set_flashdata('error', 'Não foi possível enviar o convite!');
@@ -224,7 +221,7 @@ class RevisorControl extends UsuarioControl{
         redirect('revisor/consultar-revisores');
     }
     
-    private function stringMensagemConvite($rev, $edicao, $conf_cd){
+    private function stringMensagemConvite($rev, $edicao){
         $tituloMensagem = '<span>';
         $tituloMensagem .= '<img src="http://www.plantcitylock.com/plantcit/images/email.png" width="33">';
         $tituloMensagem .= '</span>Convite';
@@ -233,19 +230,19 @@ class RevisorControl extends UsuarioControl{
         $corpoMensagem .= ' desejamos saber se você pode nos ajudar na revisão dos trabalhos ';
         $corpoMensagem .= 'para o evento científico <b>'.$edicao->getNumeroEdicao();
         $corpoMensagem .= 'ª '.$edicao->getConferencia()->getAbreviacao().'</b>, que ocorrerá entre o período dos dias <b>';
-        $corpoMensagem .= desconverteDataMysql($edicao->getDataInicioAvaliação()).'</b> até <b>';
-        $corpoMensagem .= desconverteDataMysql($edicao->getDataFimAvaliação());
+        $corpoMensagem .= desconverteDataMysql($edicao->getDataInicioAvaliacao()).'</b> até <b>';
+        $corpoMensagem .= desconverteDataMysql($edicao->getDataFimAvaliacao());
         $corpoMensagem .='</b>.<br><br>Sua colaboração é muito importante para nós!<br><br></center>';
         $corpoMensagem .= '<center>';
-        $corpoMensagem .= '<a href="'.base_url('aceitar-convite/'.$rev->getCodigo().'/'.$conf_cd);
+        $corpoMensagem .= '<a href="'.base_url('aceitar-convite/'.$rev->getCodigo().'/'.$edicao->getCodigo());
         $corpoMensagem .= '" target="_blank" class="block-center">';
         $corpoMensagem .= '<b>Aceitar</b></button></a>&nbsp;&nbsp;';
-        $corpoMensagem .= '<a href="'.base_url('recusar-convite/'.$rev->getCodigo().'/'.$conf_cd);
+        $corpoMensagem .= '<a href="'.base_url('recusar-convite/'.$rev->getCodigo().'/'.$edicao->getCodigo());
         $corpoMensagem .= '" target="_blank"block-center"><b>Recusar</b></a>';
         $corpoMensagem .= '</center>';
         $corpoMensagem .= '<br><center>'
-                . '<b>Obs.:</b> Sua identidade será mantida em absoluto sigilo.'
-                . '</center>';
+            . '<b>Obs.:</b> Sua identidade será mantida em absoluto sigilo.'
+            . '</center>';
 
         $data['tituloMensagem'] = $tituloMensagem;
         $data['corpoMensagem'] = $corpoMensagem;
@@ -253,29 +250,32 @@ class RevisorControl extends UsuarioControl{
     }
     
     
-    public function aceiteConviteRevisor($revisor, $conferencia){
-        $retorno = $this->RevisorDAO->aceitarRecusarConvite($revisor, $conferencia, "Convite Aceito");
-        if($retorno == 0){
-            $this->session->set_flashdata('success','O Convite foi aceito com sucesso! É muito gratificante poder contar com sua colaboração!');
+    public function aceiteConviteRevisor($codigoRevisor, $codigoEdicao){
+        $aceite = $this->RevisorDAO->aceitarRecusarConvite
+                ($codigoRevisor, $codigoEdicao, "Convite Aceito");
+        if($aceite == true){
+            $this->session->set_flashdata('success','O Convite foi aceito com sucesso! '
+            . 'É muito gratificante poder contar com sua colaboração!');
         }else{
             $this->session->set_flashdata('error','Não foi possível aceitar o convite!');
         }
-        redirect('revisao/consultar-revisores');
+        redirect('revisao/consultar');
     }
 
-    public function recusaConviteRevisor($revisor, $conferencia){
-        $retorno = $this->RevisorDAO->aceitarRecusarConvite($revisor, $conferencia, "Convite Recusado");
-        if($retorno == 0){
+    public function recusaConviteRevisor($codigoRevisor, $codigoEdicao){
+        $recusa = $this->RevisorDAO->aceitarRecusarConvite
+                ($codigoRevisor, $codigoEdicao, "Convite Recusado");
+        if($recusa == true){
             $this->session->set_flashdata('success','O Convite foi recusado com sucesso!');
         }else{
             $this->session->set_flashdata('error','Não foi possível recusar o convite!');
         }
-         redirect('revisao/consultar-revisores');
+         redirect('revisao/consultar');
     }
 
     public function excluirConvite($revisor, $conferencia){
-        $retorno = $this->RevisorDAO->excluirConvite($revisor, $conferencia);
-        if($retorno == 0){
+        $excluiu = $this->RevisorDAO->excluirConvite($revisor, $conferencia);
+        if($excluiu == true){
             $this->session->set_flashdata('success','O Revisor foi removido do evento com sucesso!');
         }else{
             $this->session->set_flashdata('error','Não foi possível remover o revisor neste evento!');

@@ -17,8 +17,8 @@
                     ,'arti_orienta' => $obj->getOrientador()
                     ,'arti_resumo' => $obj->getResumo()
                     ,'arti_status' => $obj->getStatus()
-                    ,'arti_moda_cd' => $obj->getModalidade()->moda_cd
-                    ,'arti_eite_cd' => $obj->getEixoTematico()->eite_cd);
+                    ,'arti_moda_cd' => $obj->getModalidade()->mote_cd
+                    ,'arti_eite_cd' => $obj->getEixoTematico()->mote_cd);
                 }
 
                 public function inserir($obj) {

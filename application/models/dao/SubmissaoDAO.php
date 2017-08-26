@@ -4,10 +4,10 @@ include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 
 class SubmissaoDAO extends CI_Model implements DAO{
 
-    function SubmitDAO(){
+    function SubmissaoDAO(){
             parent::__construct();
             $this->load->library('upload');
-            $this->load->model('SubmissaoModel');
+            $this->load->model('SubmissaoModel', 'submissao');
             $this->load->model('dao/ArtigoDAO');
     }
 
@@ -62,17 +62,18 @@ class SubmissaoDAO extends CI_Model implements DAO{
     
     
     private function setaValores($consulta){
-        $this->submissao->setCodigo($consulta->subm_cd);
+        $submissao = new $this->submissao;
+        $submissao->setCodigo($consulta->subm_cd);
         $artigo = $this->ArtigoDAO->consultarCodigo($consulta->subm_arti_cd);
-        $this->submissao->setArtigo($artigo);
-        $this->submissao->setVersao($consulta->subm_versao);
-        $this->submissao->setData(desconverteDataMysql($consulta->subm_dt));
-        $this->submissao->setHora($consulta->subm_hr);
-        $this->submissao->setNomeArqSemIdent($consulta->subm_arq1_nm);
-        $this->submissao->setNomeArqComIdent($consulta->subm_arq2_nm);
-        $this->submissao->setArqSemIdent($consulta->subm_arq1);
-        $this->submissao->setArqComIdent($consulta->subm_arq2);
-        return $this->submissao;
+        $submissao->setArtigo($artigo);
+        $submissao->setVersao($consulta->subm_versao);
+        $submissao->setData(desconverteDataMysql($consulta->subm_dt));
+        $submissao->setHora($consulta->subm_hr);
+        $submissao->setNomeArqSemIdent($consulta->subm_arq1_nm);
+        $submissao->setNomeArqComIdent($consulta->subm_arq2_nm);
+        $submissao->setArqSemIdent($consulta->subm_arq1);
+        $submissao->setArqComIdent($consulta->subm_arq2);
+        return $submissao;
     }
 
     public function consultarCodigo($codigo){
@@ -102,13 +103,24 @@ class SubmissaoDAO extends CI_Model implements DAO{
     }
 
     public function consultarPorArtigo($codigo){
-        $query=$this->db->get_where('submissao',array('subm_arti_cd' => $codigo));
-         return $query->result_object();
+        $query = $this->db->get_where('submissao',array('subm_arti_cd' => $codigo));
+        $submissoes = array();
+        if($query->num_rows()>0){
+            $consulta = $query->result_object();
+            foreach($consulta as $row){
+                $submissao = $this->setaValores($row);
+                array_push($submissoes, $submissao);
+                unset($submissao);
+            }
+            return $submissoes;
+        }else{
+            return null;
+        } 
     }
 
     public function totalRegistros($artigo_cd){
          $query=$this->db->get_where('submissao',array('subm_arti_cd' => $artigo_cd));
-         return $query->free_result();
+         return $query->num_rows();
     }
 
     public function excluir($obj) {
