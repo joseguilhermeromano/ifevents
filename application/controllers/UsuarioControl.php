@@ -28,7 +28,8 @@ class UsuarioControl extends PrincipalControl{
             $array=null;
         }
         $data['users']=$this->UsuarioDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->UsuarioDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
+        $data['paginacao'] = $this->geraPaginacao($limite, 
+        $this->UsuarioDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
         $data['totalRegistros'] = $this->UsuarioDAO->totalRegistros();
         $data['title']="IFEvents - Usuários";
         $this->chamaView("usuarios", "organizador", $data, 1);

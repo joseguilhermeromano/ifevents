@@ -6,7 +6,9 @@ class UsuarioDAO extends CI_Model{
     public function __construct(){
             parent::__construct('UsuarioDAO');
         $this->load->model('InstituicaoModel', 'instituicao');
-
+        $this->load->model('dao/OrganizadorDAO');
+        $this->load->model('dao/ParticipanteDAO');
+        $this->load->model('dao/RevisorDAO');
     }
     
     public function insereAlteraEmail($email){
@@ -157,6 +159,26 @@ class UsuarioDAO extends CI_Model{
         $query = $this->db->get();
         return $query->result_object()[0];
     }
+    
+    public function consultarCodigo($codigo){
+        $this->db->select("user_tipo");
+        $this->db->from("User");
+        $this->db->where('user_cd', $codigo);
+        $query = $this->db->get();
+        $tipo = $query->result_object()[0]->user_tipo;
+        $user= null;
+        switch($tipo){
+            case "3":
+                $user = $this->OrganizadorDAO->consultarCodigo($codigo);
+                break;
+            case "2":
+                $user = $this->RevisorDAO->consultarCodigo($codigo);
+                break;
+            default:
+                $user = $this->ParticipanteDAO->consultarCodigo($codigo);
+        }
+        return $user;
+    }   
 
     public function ativaDesativa($user_cd, $situacao){
         $this->db->where('user_cd',$user_cd);

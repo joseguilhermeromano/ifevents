@@ -130,8 +130,8 @@ class Autentica extends CI_Model{
         */
         if($this->usuarioLogado() == true){
             $consulta = $this->verificaLinkSalvo($consulta);
-            //return $this->atribuiPermissaoClasseMetodoAUsuario($consulta);
-            return $this->verificaPermissaoParaMetodoClasse($consulta->meto_cd);
+            return $this->atribuiPermissaoClasseMetodoAUsuario($consulta);
+            //return $this->verificaPermissaoParaMetodoClasse($consulta->meto_cd);
         }
 
         $this->session->set_flashdata('error', 'Você precisa estar logado para acessar esta página!');

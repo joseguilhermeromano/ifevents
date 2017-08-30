@@ -12,7 +12,9 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 $this->load->Model('ModalidadeTematicaModel', 'modalidadeTematica');
                 $this->load->Model('dao/ModalidadeTematicaDAO');
                 $this->load->Model('dao/EdicaoDAO');
+                $this->load->Model('dao/AvaliacaoDAO');
                 $this->load->Model('dao/SubmissaoDAO');
+                $this->load->Model('dao/UsuarioDAO');
         }
         
         private function consultarModalidadesEixos($codigoEdicao){
@@ -199,13 +201,13 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             $eixo = $this->ModalidadeTematicaDAO->consultarCodigo($codigoEixo);
             $this->artigo->setEixoTematico($eixo);
             $this->artigo->setResumo($this->input->post( 'resumo' ));
-            $codigoAutorResp = $this->session->userdata('usuario')->user_cd;
-            $this->artigo->setCodigoAutorResponsavel($codigoAutorResp);
+            $codigoAutor = $this->session->userdata('usuario')->user_cd;
+            $autorResp = $this->UsuarioDAO->consultarCodigo($codigoAutor);
+            $this->artigo->setAutorResponsavel($autorResp);
             if($this->artigo->getStatus()===null){
                 $this->artigo->setStatus('Aguardando Revisão!');
             }
         }
-            
 
 
 

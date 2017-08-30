@@ -193,7 +193,8 @@ class RevisorControl extends UsuarioControl{
         ($array, $limite, $numPagina);
         
         $totalRegistros = $this->RevisorDAO->totalRevisoresConvidados($codigoEdicao);
-        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, 'revisor/consultar/?busca='.$busca);
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros,
+        'revisor/consultar/?busca='.$busca);
         $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Revisores";
         $this->chamaView("revisores", "organizador", $data, 1);

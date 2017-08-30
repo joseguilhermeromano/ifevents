@@ -160,6 +160,9 @@ $route[ 'eixo-tematico/(:any)' ]         		= 'EixoTematicoControl/$1';
 $route[ 'eixo-tematico/alterar/(:any)' ] 		= 'EixoTematicoControl/alterar/$1';
 $route[ 'eixo-tematico/excluir/(:any)' ] 		= 'EixoTematicoControl/excluir/$1';
 /*Rotas de Avaliações*/
+$route[ 'revisao/divulgar-varios-resultados' ]  = 'AvaliacaoControl/divulgarVariosResultados';
+$route[ 'revisao/divulgar-resultado/(:any)' ]    = 'AvaliacaoControl/divulgarResultado/$1';
+$route[ 'revisao/consultar-resultados' ]   = 'AvaliacaoControl/consultarResultadosRevisoes';
 $route[ 'revisao/consultar-atribuicoes' ]   = 'AvaliacaoControl/consultarAtribuicoes';
 $route[ 'revisao/atribuir-revisor' ]        = 'AvaliacaoControl/atribuirRevisor';
 $route[ 'revisao/(:any)' ]                  = 'AvaliacaoControl/$1';

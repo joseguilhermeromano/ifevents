@@ -17,7 +17,7 @@
             return $this->codigo;
         }
         
-        public function getCodigoAutorResponsavel(){
+        public function getAutorResponsavel(){
             return $this->autorResponsavel;
         }
         
@@ -54,7 +54,7 @@
             $this->codigo = $codigo;
         }
         
-        public function setCodigoAutorResponsavel($autorResponsavel){
+        public function setAutorResponsavel($autorResponsavel){
             $this->autorResponsavel = $autorResponsavel;
         }
         

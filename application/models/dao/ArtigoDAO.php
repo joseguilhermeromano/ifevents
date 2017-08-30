@@ -8,6 +8,7 @@
 		public function __construct(){
                     parent::__construct();
                     $this->load->model('dao/ModalidadeTematicaDAO');
+                    $this->load->model('dao/UsuarioDAO');
                     $this->load->model('ArtigoModel', 'artigo');
 		}
                 
@@ -23,7 +24,7 @@
 
                 public function inserir($obj) {
                     $autores = $obj->getAutores();
-                    $autorResp = $obj->getCodigoAutorResponsavel();
+                    $autorResp = $obj->getAutorResponsavel()->getCodigo();
                     $obj->setAutores($this->obtemStringAutores($autores));
                     $this->db->insert('Artigo', $this->obtemValores($obj));
                     $codigoArtigo = $this->db->insert_id();
@@ -33,7 +34,7 @@
 
                 public function alterar($obj) {
                     $autores = $obj->getAutores();
-                    $autorResp = $obj->getCodigoAutorResponsavel();
+                    $autorResp = $obj->getAutorResponsavel()->getCodigo();
                     $obj->setAutores($this->obtemStringAutores($autores));
                     $this->db->where('arti_cd', $obj->getCodigo());
                     $this->db->update('artigo', $this->obtemValores($obj));
@@ -108,7 +109,8 @@
                         $modalidade = $this->ModalidadeTematicaDAO
                                 ->consultarCodigo($consulta->arti_moda_cd);
                         $this->artigo->setModalidade($modalidade);
-                        $this->artigo->setCodigoAutorResponsavel($consulta->auto_user_cd);
+                        $autorResponsavel = $this->UsuarioDAO->consultarCodigo($consulta->auto_user_cd);
+                        $this->artigo->setAutorResponsavel($autorResponsavel);
 
                         return $this->artigo;
                     }

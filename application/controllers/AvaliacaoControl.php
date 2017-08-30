@@ -10,6 +10,8 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		$this->load->Model( 'dao/AvaliacaoDAO' );
 		$this->load->Model( 'dao/EdicaoDAO' );
                 $this->load->Model( 'dao/RevisorDAO' );
+                $this->load->Model( 'dao/ArtigoDAO' );
+                $this->load->Model( 'dao/SubmissaoDAO' );
 		$this->load->Model( 'dao/ModalidadeTematicaDAO' );
 		$this->load->Model( 'AvaliacaoModel','avaliacao' );
 	}
@@ -160,6 +162,8 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
                 $totalRegistros = count($this->AvaliacaoDAO->consultarTudo($consulta));
                 $data['revisoes'] = $revisoesPendentes;
                 $data['totalRegistros'] = $totalRegistros;
+                $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros
+                , 'revisao/consultar/?busca='.$busca);
             }else{
                 $this->session->set_flashdata('info', 'Não há trabalhos para serem revisados!');
             }
@@ -170,10 +174,10 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 	public function consultarAtribuicoes(){
             $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
             if( $this->input->get('busca') !== ''){
-            $busca = $this->input->get('busca');
-            $array = array(
-                  'mote1.mote_edic_cd' => $codigoEdicao
-                  ,'arti_title' => $busca);
+                $busca = $this->input->get('busca');
+                $array = array(
+                      'mote1.mote_edic_cd' => $codigoEdicao
+                      ,'arti_title' => $busca);
             }else{
                 $busca=null;
                 $array=array('mote1.mote_edic_cd' => $codigoEdicao);
@@ -209,26 +213,121 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		$this->output->set_content_type('application/json')->set_output(json_encode($lista));
 
 	}
+        
+        public function consultarResultadosRevisoes(){
+            $limite= 10;
+            $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            $busca= $this->input->get('busca');
+            $array=array('mote_edic_cd' => $codigoEdicao);
+            $pagina = $this->input->get('pagina');
+            $numPagina = $pagina !== null ? $pagina : 0;
+            if( !empty($busca) ){
+                $array['arti_title'] = $busca;
+            }
+            $resultadosRevisoes = $this->AvaliacaoDAO->
+                consultarResultadosRevisoes($array,$limite, $numPagina);
+            $totalRegistros = count( $resultadosRevisoes );
+            $data['resultadosRevisoes'] = $resultadosRevisoes;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros
+                , 'revisao/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $totalRegistros;
+            $data['title'] = "IFEvents - Resultados das Revisões";
+            $this->chamaView("resultados-revisoes", "organizador", $data, 1);
+        }
 
 	public function atribuirRevisor(){
-		$revisores = $this->input->post('revisores');
-		$submissao = $this->input->post('submissao');
-		if($revisores!==null){
-			$verifica = $this->AvaliacaoDAO->atribuirRevisor($revisores, $submissao);
-			if($verifica == 0){
-				$this->session->set_flashdata("success", "O Trabalho foi atribuído ao revisor com sucesso!");
-			}else{
-				$this->session->set_flashdata("error", "Não foi possível atribuir o trabalho a um revisor!");
-			}
-		}else{
-			$this->session->set_flashdata("error", "Não foi selecionado nenhum revisor!");
-		}
-		$this->consultarAtribuicoes();
+            $revisores = $this->input->post('revisores');
+            $submissao = $this->input->post('submissao');
+            if($revisores!==null){
+                $verifica = $this->AvaliacaoDAO->atribuirRevisor($revisores, $submissao);
+                $artigo = $this->SubmissaoDAO->consultarCodigo($submissao)->getArtigo();
+                $artigo->setStatus('Aguardando Revisão');
+                $this->ArtigoDAO->alterar($artigo);
+                if($verifica == 0){
+                    $this->session->set_flashdata("success", 
+                    "O Trabalho foi atribuído ao revisor com sucesso!");
+                }else{
+                    $this->session->set_flashdata("error", 
+                    "Não foi possível atribuir o trabalho a um revisor!");
+                }
+            }else{
+                $this->session->set_flashdata("error",
+                "Não foi selecionado nenhum revisor!");
+            }
+            $this->consultarAtribuicoes();
 	}
 
 	public function excluir($codigo){
 
 	}
+        
+        
+        private function atualizaResultadoArtigo($revisao){
+            $resultadoRevisao = $revisao->getStatus();
+            $this->artigo = $revisao->getSubmissao()->getArtigo();
+            $resultadoArtigo = '';
+            switch($resultadoRevisao){
+                case "Revisão Aprovada":
+                    $resultadoArtigo = "Aprovado";
+                    $this->artigo->setStatus($resultadoArtigo);
+                    break;
+                case "Revisão aprovada com ressalvas":
+                    $resultadoArtigo = "Aprovado com ressalvas";
+                    $this->artigo->setStatus($resultadoArtigo);
+                    break;
+                default: 
+                    $resultadoArtigo = "Reprovado";
+                    $this->artigo->setStatus($resultadoArtigo);
+            }
+            $this->ArtigoDAO->alterar($this->artigo);
+            return $resultadoArtigo;
+        }
+        
+        public function divulgarResultado($codigoRevisao){
+           if($this->DisparaEmailDivulgacaoResultado($codigoRevisao)){
+               $this->session->set_flashdata('success', 'O Resultado foi divulgado com sucesso!');
+           }else{
+               $this->session->set_flashdata('error', 'Não foi possível divulgar o resultado do Trabalho!');
+           }
+           redirect('revisao/consultar-resultados');
+        }
+        
+        public function divulgarVariosResultados(){
+            $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            $array=array('mote_edic_cd' => $codigoEdicao);
+            $revisoes = $this->AvaliacaoDAO->
+                consultarResultadosRevisoes($array);
+            $resultado = false;
+            if(count($revisoes) > 0){
+                foreach($revisoes as $revisao){
+                    $resultado = $this->DisparaEmailDivulgacaoResultado($revisao->aval_cd);
+                }
+            }
+            
+            if($resultado == true){
+                 $this->session->set_flashdata('success', 'Os Resultados foram divulgados com sucesso!');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível divulgar os resultados dos Trabalhos!');
+            }
+            redirect('revisao/consultar-resultados');
+        }
+         
+        
+        private function DisparaEmailDivulgacaoResultado($codigoRevisao){
+           $revisao = $this->AvaliacaoDAO->consultarCodigo($codigoRevisao);
+           $tituloArtigo = $revisao->getSubmissao()->getArtigo()->getTitulo();
+           $resultadoArtigo = $this->atualizaResultadoArtigo($revisao);
+           $data['tituloMensagem'] = "Resultado da Revisão";
+           $data['corpoMensagem'] = "Prezado participante, o trabalho de cujo o título "
+            . "<b>".$tituloArtigo."</b> obteve o seguinte resultado na revisão "
+            . "<b>Trabalho ".strtolower($resultadoArtigo)."</b>! Por favor, consulte na plataforma "
+            . "para maiores informações!";
+           $assunto = "Resultado da Revisão - ".$tituloArtigo; 
+           $destinatario = $revisao->getSubmissao()->getArtigo()
+            ->getAutorResponsavel()->getEmail();
+           $mensagem = $this->load->view("template-email/template-email", $data, true);
+           return $this->envia_email($destinatario, $assunto, $mensagem);
+        }
 
 
 

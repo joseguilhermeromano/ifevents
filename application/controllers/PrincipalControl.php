@@ -19,7 +19,7 @@ class PrincipalControl extends CI_Controller {
                 $this->load->library('uploadimage','','file');
                 $this->load->model('dao/EdicaoDAO');
                 $this->guardaUltimasUrlsAcessadas();
-//		$this->load->model('acesso/Autentica');
+		$this->load->model('acesso/Autentica');
 	}
 
 	/**
@@ -129,7 +129,8 @@ class PrincipalControl extends CI_Controller {
         return $paginacao;
     }
 
-    public function envia_email($destinatario, $assunto, $mensagem, $remetente='projetoifsp2017@gmail.com'){
+    public function envia_email($destinatario, $assunto, $mensagem, 
+        $remetente='projetoifsp2017@gmail.com'){
         $this->load->library("MY_phpmailer");
         $mail = new PHPMailer();
         $mail->IsSMTP(); //Definimos que usaremos o protocolo SMTP para envio.
