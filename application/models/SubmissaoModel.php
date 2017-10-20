@@ -11,6 +11,7 @@ class SubmissaoModel extends CI_Model{
     private $nomeArqSemIdent;
     private $arqComIdent;
     private $arqSemIdent;
+    private $avaliacao;
     
     public function getCodigo(){
         return $this->codigo;
@@ -46,6 +47,10 @@ class SubmissaoModel extends CI_Model{
     
     public function getArqSemIdent(){
         return $this->arqSemIdent;
+    }
+    
+    public function getAvaliacao(){
+        return $this->avaliacao;
     }
     
     
@@ -85,15 +90,8 @@ class SubmissaoModel extends CI_Model{
         $this->arqSemIdent = $arqSemIdent;
     }
     
-    public function setaValores($file_1, $file_2, $artigo_cd){
-        $this->subm_arti_cd = $artigo_cd;
-        $this->subm_versao = $this->SubmitDAO->totalRegistros($artigo_cd) + 1;
-        $this->subm_dt = date("y-m-d");
-        $this->subm_hr = date("H:i");
-        $this->subm_arq1_nm =  $file_1['file_nm'];
-        $this->subm_arq1 = $file_1['file'];
-        $this->subm_arq2_nm = $file_2['file_nm'];
-        $this->subm_arq2 = $file_2['file'];
+    public function setAvaliacao($avaliacao){
+        $this->avaliacao = $avaliacao;
     }
         
                         

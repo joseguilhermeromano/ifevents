@@ -211,8 +211,8 @@ class SubmissaoControl extends PrincipalControl{
     
     public function downloadArtigoComIdent($codigoSubmissao){
         $submissao = $this->SubmissaoDAO->consultarCodigo($codigoSubmissao);
-        return $this->download_arquivo($submissao->getNomeArqSemIdent()
-                ,$submissao->getArqSemIdent());
+        return $this->download_arquivo($submissao->getNomeArqComIdent()
+                ,$submissao->getArqComIdent());
     }
     
 }

@@ -3,58 +3,59 @@
 <hr>
 <br>
 <div class="row">
-<div class="col-md-12">
-    <div class="panel panel-info">
-        <div class="panel-heading hidden-xs" id="header_1" >
-            <b>Detalhes do Trabalho</b>
-        </div>
-        <div class="panel-body" id="Painel_1">
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table">
-                        <thead>
-                            <th colspan="2" class="text-center">Informações Gerais</th>
-                        </thead>
-                        <tbody>
-                             
-                            <tr>
-                                <th class="col-xs-4">Título</th>
-                                <td><?=  $artigo->getTitulo(); ?></td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-4">Orientador</th>
-                                <td><?= $artigo->getOrientador(); ?></td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-4">Autores</th>
-                                <td><?= somenteLetras(implode(', ',$artigo->getAutores())); ?></td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-4">Eixo Temático</th>
-                                <td><?= $artigo->getEixoTematico()->mote_nm ?></td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-4">Modalidade</th>
-                                <td><?= $artigo->getModalidade()->mote_nm ?></td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-4">Situação</th>
-                                <td><?= $artigo->getStatus() ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <table class="table">
-                        <thead>
-                            <th colspan="1" class="text-center">Resumo</th>
-                        </thead>
-                        <tbody>
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading hidden-xs" id="header_1" >
+                <b>Detalhes do Trabalho</b>
+            </div>
+            <div class="panel-body" id="Painel_1">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead>
+                                <th colspan="2" class="text-center">Informações Gerais</th>
+                            </thead>
+                            <tbody>
+
                                 <tr>
-                                    <td><?= $artigo->getResumo(); ?></td>
+                                    <th class="col-xs-4">Título</th>
+                                    <td><?=  $artigo->getTitulo(); ?></td>
                                 </tr>
-                        </tbody>
-                    </table>
+                                <tr>
+                                    <th class="col-xs-4">Orientador</th>
+                                    <td><?= $artigo->getOrientador(); ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-xs-4">Autores</th>
+                                    <td><?= somenteLetras(implode(', ',$artigo->getAutores())); ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-xs-4">Eixo Temático</th>
+                                    <td><?= $artigo->getEixoTematico()->mote_nm ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-xs-4">Modalidade</th>
+                                    <td><?= $artigo->getModalidade()->mote_nm ?></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-xs-4">Situação</th>
+                                    <td><?= $artigo->getStatus() ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead>
+                                <th colspan="1" class="text-center">Resumo</th>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td><?= $artigo->getResumo(); ?></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,36 +109,34 @@ $linhas = 0;
                     <?php } ?>
                 </tbody>
             </table>
-
-            <div class="panel panel-danger">
-                <!-- Versão para Celular-->
-                <div class="panel-heading" id="header_3" 
-                     onclick="javascript: MostrarEsconderPainel('#Painel_3','#header_3 b');">
-                    <b><span class="glyphicon glyphicon-triangle-right"></span> Revisões</b> 
-                </div>
-              <div class="panel-body" id="Painel_3" style="display:none">
-                    <table class="table">
-                        <thead>
-                            <th colspan="2" class="text-center">Versão da submissão Avaliada: </th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th class="col-xs-3">Data</th>
-                                <td>07/10/206</td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-3">Resultado</th>
-                                <td>Aceito com solicitação de alterações</td>
-                            </tr>
-                            <tr>
-                                <th class="col-xs-3">Parecer do Revisor</th>
-                                <td>Parabéns, você realizou um ótimo trabalho!</td>
-                            </tr>
-                        </tbody>
-                    </table>
-              </div>
-            </div>
-            
+            <br>
+            <?php if(!empty($submissao->getAvaliacao())){ ?>
+            <table class="table">
+                <thead>
+                    <th colspan="2" class="text-center">Avaliação </th>
+                </thead>
+                <tbody>
+                    <?php if($this->session->userdata("usuario")->user_tipo != 1 ){?>
+                    <tr>
+                        <th class="col-xs-3">Revisor</th>
+                        <td><?= $submissao->getAvaliacao()->getRevisor()->getNomeCompleto(); ?></td>
+                    </tr>
+                    <?php } ?>
+                    <tr>
+                        <th class="col-xs-3">Data</th>
+                        <td><?= desconverteDataMysql($submissao->getAvaliacao()->getData()); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="col-xs-3">Resultado</th>
+                        <td><?= $submissao->getAvaliacao()->getStatus(); ?></td>
+                    </tr>
+                    <tr>
+                        <th class="col-xs-3">Parecer do Revisor</th>
+                        <td><?= $submissao->getAvaliacao()->getParecer(); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <?php } ?>
       </div>
     </div>
 </div>
@@ -148,7 +147,6 @@ $linhas = 0;
         echo '</div><div class="row">';
     }
     endforeach; ?>
-</div>
 </div>
 <a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>
 </div>

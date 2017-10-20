@@ -10,7 +10,7 @@
         echo alert($this->session);
 ?>
 
-<?php echo form_open_multipart( 'revisao/cadastrar', 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
+<?php echo form_open_multipart( $this->uri->uri_string(), 'role="form" class="formsignin" enctype="multipart/form-data"' ); ?>
 
 <div class="row">
 </div>

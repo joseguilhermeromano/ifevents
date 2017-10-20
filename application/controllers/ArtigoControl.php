@@ -127,6 +127,29 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             $data['title']="IFEvents - Meus Trabalhos";
             $this->chamaView("meusartigos", "participante", $data, 1);
         }
+        
+        public function consultaResultadosFinais(){
+            $limite = 10;
+            $numPagina =0;
+            if(null !== $this->input->get('pagina')){
+                $numPagina = $this->input->get('pagina');
+            }
+            $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+            $array['mote1.mote_edic_cd'] = $codigoEdicao;
+            $busca = $this->input->get('busca');
+            if($busca !== null){
+                $busca = $this->input->get('busca');
+                $array['Artigo.arti_title']= $busca;
+            }
+            $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
+            $data['paginacao'] = $this->geraPaginacao($limite
+                    , $this->ArtigoDAO->totalRegistros()
+                    , 'artigo/consultar/?busca='.$busca);
+            $data['totalRegistros'] = $this->ArtigoDAO->totalRegistrosResultadosFinais();
+            $data['title']="IFEvents - Resultados finais dos trabalhos";
+            $this->chamaView("resultados-finais-artigos", "organizador", $data, 1);
+        }
 
         public function submissaoEventosRecentes(){
             $data['eventos'] = $this->EdicaoDAO->consultarPorDataSubmissao(date('Y-m-d'));

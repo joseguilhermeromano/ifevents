@@ -96,6 +96,7 @@
       <li id="revisor"><a href="<?php echo base_url("revisor/consultar-revisores");?>" class="list-group-item">REVISORES</a></li>
       <li><a href="<?php echo base_url("revisao/consultar-atribuicoes");?>" class="list-group-item">ATRIBUIÇÃO DE SUBMISSÕES</a></li>
       <li><a href="<?php echo base_url("revisao/consultar-resultados");?>" class="list-group-item">RESULTADOS DAS REVISÕES</a></li>
+      <li><a href="<?php echo base_url("artigo/resultados-finais");?>" class="list-group-item">RESULTADOS FINAIS DOS TRABALHOS</a></li>
   </ul>
 </li>
 <li class="item-menu">

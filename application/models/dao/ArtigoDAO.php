@@ -57,20 +57,21 @@
                 }
 
                 public function consultarTudo($parametros = null, $limite=null,
-                        $numPagina=null, $sort='arti_title', $ordenacao='asc') {
-                    $this->db->select("Artigo.*, Autoria.autor_respons, Conferencia.conf_abrev,"
-                            . "Edicao.edic_num");
+                    $numPagina=null, $sort='arti_title', $ordenacao='asc') {
+                    $this->db->select("Artigo.arti_title, Artigo.arti_status, Artigo.arti_cd"
+                            . ", mote1.mote_nm as modalidade, mote2.mote_nm as eixo");
                     $this->db->from("Artigo");
-                    $this->db->join('Autoria', 'Artigo.arti_cd = Autoria.auto_arti_cd','left');
-                    $this->db->join('Modalidade_Tematica', 'Artigo.arti_moda_cd = Modalidade_Tematica.mote_cd','left');
-                    $this->db->join('Edicao', 'Modalidade_Tematica.mote_edic_cd= Edicao.edic_cd','left');
-                    $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd','left');
+                    $this->db->join('Modalidade_Tematica mote1', 'Artigo.arti_moda_cd = mote1.mote_cd','left');
+                    $this->db->join('Modalidade_Tematica mote2', 'Artigo.arti_eite_cd = mote2.mote_cd','left');
+                    $this->db->join('Edicao', 'Modalidade_Tematica mote1.mote_edic_cd= Edicao.edic_cd','left');
                     $this->db->order_by($sort, $ordenacao);
-                    if($parametros !== null){
+                    if($parametros!==null){
                         foreach ($parametros as $key => $value) {
                             $this->db->where($key.' LIKE ','%'.$value.'%');
                         }
                     }
+                    $this->db->where('arti_status LIKE ','%Aprovado%');
+                    $this->db->or_where('arti_status LIKE ','%Reprovado%');
                     if($limite){
                         $this->db->limit($limite, $numPagina);
                     }
@@ -81,9 +82,19 @@
                         return null;
                     }
                 }
+                
 
                 public function totalRegistros(){
                     return $this->db->count_all("Artigo");
+                }
+                
+                public function totalRegistrosResultadosFinais(){
+                     $this->db->select('*');
+                     $this->db->from('Artigo');
+                     $this->db->where('arti_status', 'Aprovado');
+                     $this->db->or_where('arti_status', 'Reprovado');
+                     $result = $this->db->get();
+                     return $result->num_rows();
                 }
 
                 public function consultarCodigo($codigo){

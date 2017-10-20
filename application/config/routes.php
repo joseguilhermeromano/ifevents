@@ -106,7 +106,8 @@ $route[ 'artigo/eventos-recentes' ]             = 'ArtigoControl/submissaoEvento
 $route[ 'artigo/detalhes-do-trabalho/(:any)' ]  = 'ArtigoControl/detalharTrabalho/$1';
 $route[ 'artigo/cadastrar/(:any)' ]             = 'ArtigoControl/cadastrar';
 $route[ 'artigo/alterar/(:any)' ]               = 'ArtigoControl/alterar/$1';
-$route[ 'artigo/cancelar/(:any)' ]               = 'ArtigoControl/cancelarArtigo/$1';
+$route[ 'artigo/cancelar/(:any)' ]              = 'ArtigoControl/cancelarArtigo/$1';
+$route[ 'artigo/resultados-finais' ]            = 'ArtigoControl/consultaResultadosFinais';
 $route[ 'artigo/(:any)' ]             			    = 'ArtigoControl/$1';
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]                   = 'ModalidadeControl/$1';
@@ -165,6 +166,7 @@ $route[ 'revisao/divulgar-resultado/(:any)' ]    = 'AvaliacaoControl/divulgarRes
 $route[ 'revisao/consultar-resultados' ]   = 'AvaliacaoControl/consultarResultadosRevisoes';
 $route[ 'revisao/consultar-atribuicoes' ]   = 'AvaliacaoControl/consultarAtribuicoes';
 $route[ 'revisao/atribuir-revisor' ]        = 'AvaliacaoControl/atribuirRevisor';
+$route[ 'revisao/emitir-parecer/(:any)' ]        = 'AvaliacaoControl/emitirParecer/$1';
 $route[ 'revisao/(:any)' ]                  = 'AvaliacaoControl/$1';
 
 /*Rotas Conferência*/

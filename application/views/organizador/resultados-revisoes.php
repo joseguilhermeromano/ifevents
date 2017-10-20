@@ -38,8 +38,8 @@
         </thead>
         <tbody>
             <?php 
-            if(!empty($resultadosRevisoes)){
-            foreach( $resultadosRevisoes as $resultado ): ?>
+            if(!empty($itens)){
+            foreach( $itens as $resultado ): ?>
                  <tr> 
                     <td><?= $resultado->arti_title; ?></td>
                     <td class="text-center">
@@ -70,8 +70,8 @@
 
   <!-- PAGINAÇÃO -->
     <div class="text-center">
-    Exibindo de 1 a <?php echo !empty($resultadosRevisoes) ? sizeof($resultadosRevisoes) : 0; ?> 
-    de um total de <?php echo !empty($resultadosRevisoes) ? $totalRegistros : 0; ?> registros
+    Exibindo de 1 a <?php echo !empty($itens) ? sizeof($itens) : 0; ?> 
+    de um total de <?php echo !empty($itens) ? $totalRegistros : 0; ?> registros
     </div>
     <?= isset($paginacao) ? $paginacao : ''; ?>
   <!--/ PAGINAÇÃO -->

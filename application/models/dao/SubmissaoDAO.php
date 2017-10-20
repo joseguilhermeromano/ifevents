@@ -5,10 +5,11 @@ include_once 'DAO.php';// Chamar sempre a interface por esta forma!
 class SubmissaoDAO extends CI_Model implements DAO{
 
     function SubmissaoDAO(){
-            parent::__construct();
-            $this->load->library('upload');
-            $this->load->model('SubmissaoModel', 'submissao');
-            $this->load->model('dao/ArtigoDAO');
+        parent::__construct();
+        $this->load->library('upload');
+        $this->load->model('SubmissaoModel', 'submissao');
+        $this->load->model('dao/ArtigoDAO');
+        $this->load->model('dao/AvaliacaoDAO');
     }
 
     public function inserir($obj) {
@@ -73,12 +74,15 @@ class SubmissaoDAO extends CI_Model implements DAO{
         $submissao->setNomeArqComIdent($consulta->subm_arq2_nm);
         $submissao->setArqSemIdent($consulta->subm_arq1);
         $submissao->setArqComIdent($consulta->subm_arq2);
+        $avaliacao = $this->AvaliacaoDAO->consultarPorCodigoSubmissao($consulta->subm_cd);
+        $submissao->setAvaliacao($avaliacao);
         return $submissao;
     }
 
     public function consultarCodigo($codigo){
-        $this->db->select('*');
+        $this->db->select('Submissao.*, Avaliacao.aval_cd');
         $this->db->from('Submissao');
+        $this->db->join('Avaliacao', 'Submissao.subm_cd = Avaliacao.aval_subm_cd','left');
         $this->db->where('subm_cd', $codigo);
         $query = $this->db->get();
         if($query->num_rows()>0){
@@ -89,8 +93,9 @@ class SubmissaoDAO extends CI_Model implements DAO{
     }
     
     public function consultarUltimaSubmissao($codigoArtigo){
-        $this->db->select('*');
+        $this->db->select('Submissao.*, Avaliacao.aval_cd');
         $this->db->from('Submissao');
+        $this->db->join('Avaliacao', 'Submissao.subm_cd = Avaliacao.aval_subm_cd','left');
         $this->db->where('subm_arti_cd', $codigoArtigo);
         $this->db->order_by('subm_cd', 'desc');
         $query = $this->db->get();
@@ -103,7 +108,11 @@ class SubmissaoDAO extends CI_Model implements DAO{
     }
 
     public function consultarPorArtigo($codigo){
-        $query = $this->db->get_where('submissao',array('subm_arti_cd' => $codigo));
+        $this->db->select('Submissao.*, Avaliacao.aval_cd');
+        $this->db->from('Submissao');
+        $this->db->join('Avaliacao', 'Submissao.subm_cd = Avaliacao.aval_subm_cd','left');
+        $this->db->where('subm_arti_cd', $codigo);
+        $query = $this->db->get();
         $submissoes = array();
         if($query->num_rows()>0){
             $consulta = $query->result_object();

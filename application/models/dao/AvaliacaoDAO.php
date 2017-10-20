@@ -11,20 +11,30 @@ class AvaliacaoDAO extends CI_Model implements DAO{
         $this->load->model('dao/SubmissaoDAO');
         $this->load->model('dao/UsuarioDAO');
     }
+    
+    private function obtemValores($obj){
+        return array('aval_cd' => $obj->getCodigo()
+        ,'aval_parecer' => $obj->getParecer()
+        ,'aval_dt' => $obj->getData()
+        ,'aval_horario' => $obj->getHora()
+        ,'aval_status' => $obj->getStatus()
+        ,'aval_user_cd' => $obj->getRevisor()->getCodigo()
+        ,'aval_subm_cd' => $obj->getSubmissao()->getCodigo());
+    }
 
     public function inserir($obj) {
         return $this->db->insert('avaliacao', $obj);
     }
 
     public function alterar($obj) {
-        $this->db->where('aval_id', $obj->aval_id);
-        return $this->db->update('avaliacao', $obj);
+        $this->db->where('aval_cd', $obj->getCodigo());
+        return $this->db->update('avaliacao', $this->obtemValores($obj));
     }
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null,
             $sort='arti_title', $ordenacao='asc') {
         $this->db->select("Artigo.arti_title, Artigo.arti_cd, Edicao.edic_num, Conferencia.conf_abrev,
-        mote1.mote_nm as modalidade, mote2.mote_nm as eixo, aval_status, Submissao.subm_cd");
+        mote1.mote_nm as modalidade, mote2.mote_nm as eixo, aval_status, aval_cd, Submissao.subm_cd");
         $this->db->from("Avaliacao");
         $this->db->join('Submissao', 'Avaliacao.aval_subm_cd = Submissao.subm_cd', 'left');
         $this->db->join('Artigo', 'Submissao.subm_arti_cd = Artigo.arti_cd', 'left');
@@ -35,6 +45,7 @@ class AvaliacaoDAO extends CI_Model implements DAO{
         $this->db->join('Regra', 'Edicao.edic_regr_cd = Regra.regr_cd','left');
         $this->db->where('Regra.regr_revi_abert <=', date('y-m-d'));
         $this->db->where('Regra.regr_revi_encerr >=', date('y-m-d'));
+        $this->db->where('aval_status', "Revisão Pendente");
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
             foreach ($parametros as $key => $value) {
@@ -72,6 +83,37 @@ class AvaliacaoDAO extends CI_Model implements DAO{
         }
 
        return null;
+    }
+    
+    public function consultarPorCodigoSubmissao($codigo){
+       $this->db->select("*");
+        $this->db->from("Avaliacao");
+        $this->db->where('aval_subm_cd', $codigo);
+        $query       = $this->db->get();
+        if($query->num_rows() > 0){
+            $consulta       = $query->result_object()[0];
+            $this->revisao->setCodigo($consulta->aval_cd);
+            $this->revisao->setData($consulta->aval_dt);
+            $this->revisao->setHora($consulta->aval_horario);
+            $this->revisao->setStatus($consulta->aval_status);
+            $this->revisao->setParecer($consulta->aval_parecer);
+            $usuario = $this->UsuarioDAO->consultarCodigo($consulta->aval_user_cd);
+            $this->revisao->setRevisor($usuario);
+            return $this->revisao;
+        }
+
+       return null; 
+    }
+    
+    private function setaValores($consulta){
+        $this->revisao->setCodigo($consulta->aval_cd);
+        $this->revisao->setData($consulta->aval_dt);
+        $this->revisao->setHora($consulta->aval_horario);
+        $this->revisao->setStatus($consulta->aval_status);
+        $this->revisao->setParecer($consulta->aval_parecer);
+        $usuario = $this->UsuarioDAO->consultarCodigo($consulta->aval_user_cd);
+        $this->revisao->setRevisor($usuario);
+        return $this->revisao;
     }
 
     public function excluir($obj) {

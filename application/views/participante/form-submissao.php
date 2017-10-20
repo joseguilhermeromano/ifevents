@@ -39,8 +39,7 @@
     </div>
 </div>
 
-<?php echo "<br><center><a href='".base_url("artigo/alterar/".$this->uri->segment(3))
-        ."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
+<?php echo "<br><center><a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
         .form_submit("btn_atualizar"
                 , $segmento != 'alterar' ? 'Cadastrar' : 'Atualizar'
                 ,array('class' => 'btn btn-success button'))."</center>";

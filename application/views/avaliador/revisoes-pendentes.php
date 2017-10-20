@@ -19,18 +19,6 @@
        </div><!-- /.col-lg-6 -->
   </div><!-- /row -->
 </form>
-<div class="row">
-    <div class="col-sm-12">
-         <div style="float:right" class="btn-group">
-          <a  class="btn btn-default dropdown-toggle margin-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="glyphicon glyphicon-save-file" aria-hidden="true"></i> Regras de Avaliação <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">5ª SEMCITEC</a></li>
-          </ul>
-        </div>
-    </div>
-</div>
 <br><br>
 <div class="table-responsive"><!-- TABELA-->
     <table class="table ls-table" id="tabela1">
@@ -55,7 +43,7 @@
                     <td class="text-center"><?= $revisao->aval_status; ?></td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
-                          <a href="<?= base_url('revisao/cadastrar'); ?>" class="btn-opcao">
+                          <a href="<?= base_url('revisao/emitir-parecer/'.$revisao->aval_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-copy"></span>&#09;Emitir Parecer</a><br>
                           <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$revisao->arti_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-eye-open"></span>&#09;Detalhar Trabalho</a><br>

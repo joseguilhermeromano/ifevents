@@ -2,7 +2,7 @@
 require_once 'PrincipalControl.php';
 require_once 'InterfaceControl.php';
 
-class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
+class AvaliacaoControl extends PrincipalControl{
 
 	public function __construct(){
 		parent::__construct();
@@ -16,41 +16,47 @@ class AvaliacaoControl extends PrincipalControl implements InterfaceControl{
 		$this->load->Model( 'AvaliacaoModel','avaliacao' );
 	}
 
-	public function cadastrar(){
+	public function emitirParecer($codigoRevisao){
+            $data = array("title"=>"IFEvents - Emitir Parecer",
+            "tituloh2" => "<h2><span class='glyphicon glyphicon-copy'></span><b> Emitir Parecer</b></h2>");
             if (empty($this->avaliacao->input->post())){
-    		return $this->chamaView("form-parecer", "avaliador",
-            	array("title"=>"IFEvents - Emitir Parecer",
-            		"tituloh2" => "<h2><span class='glyphicon glyphicon-copy'></span><b> Emitir Parecer</b></h2>"), 1);
+    		return $this->chamaView("form-parecer", "avaliador", $data, 1);
             }
+            $this->avaliacao = $this->AvaliacaoDAO->consultarCodigo($codigoRevisao);
+            $this->setaValores();
 
-    	// $this->avaliacao->setaValores();
-    	// $this->avaliacao->valida();
+            if($this->valida()){
 
+                $this->db->trans_start();
+                $this->AvaliacaoDAO->alterar($this->avaliacao);
+                $this->db->trans_complete();
 
-    	// if($this->form_validation->run()){
+                if($this ->db->trans_status() !== FALSE){
+                    $this->session->set_flashdata('success', 'O Parecer foi emitido com sucesso!');
+                    redirect("revisao/consultar");
+                }else{
+                   $this->session->set_flashdata('error', 'Não foi possível emitir o parecer!');
+                }
 
-    		// $this->db->trans_start();
-    		// 	//pegar codigo da conferencia pela sessao (selecionada)
-      //       	$this->modalidade->mote_conf_cd = 1;
-      //       	$this->modalidade->mote_tipo = 0;
-      //       	$this->ModalidadeTematicaDAO->inserir($this->modalidade);
-    		// $this->db->trans_complete();
-
-    		// if($this ->db->trans_status() !== FALSE){
-                $this->session->set_flashdata('success', 'O Parecer foi emitido com sucesso!');
-                $this->modalidade = null;
-      //       }else{
-      //       	$this->session->set_flashdata('error', 'Não foi possível cadastrar a modalidade!');
-      //       }
-
-    	// }
-
-
-    	$this->chamaView("form-parecer", "avaliador",
-            	array("title"=>"IFEvents - Emitir Parecer",
-            	 "tituloh2" => "<h2><span class='fa fa-plus'></span><b> Emitir Parecer</b></h2>",
-            	 "parecer" => $this->avaliacao), 1);
+            }
+            $data['parecer'] = $this->avaliacao;
+            $this->chamaView("form-parecer", "avaliador", $data, 1);
+            
 	}
+        
+        private function valida(){
+            $this->form_validation->set_rules(	'resultado', 'Resultado', 'trim|required|max_length[100]' );
+            $this->form_validation->set_rules(	'observacoes', 'Observações', 'trim|required|max_length[50]' );
+            return $this->form_validation->run();
+        }
+
+        private function setaValores(){
+            date_default_timezone_set('America/Sao_Paulo');
+            $this->avaliacao->setStatus($this->input->post('resultado'));
+            $this->avaliacao->setParecer($this->input->post('observacoes'));
+            $this->avaliacao->setData(date('y-m-d'));
+            $this->avaliacao->setHora(date('H:i'));
+        }
 
 	public function alterar($codigo){
 

@@ -9,7 +9,6 @@ class AvaliacaoModel extends CI_Model{
     private $hora; 
     private $status;
     private $revisor;
-    private $submissao;
     
     public function getCodigo(){
         return $this->codigo;
@@ -62,10 +61,6 @@ class AvaliacaoModel extends CI_Model{
     
     public function setRevisor($revisor){
         $this->revisor = $revisor;
-    }
-    
-    public function setSubmissao($submissao){
-        $this->submissao = $submissao;
     }
 }
 

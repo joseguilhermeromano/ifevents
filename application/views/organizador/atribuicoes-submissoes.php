@@ -60,6 +60,8 @@
                           idmodalidade="<?= $atribuicao->arti_moda_cd; ?>" ideixo="<?= $atribuicao->arti_eite_cd; ?>"
                           data-toggle="modal" data-target="#atribuirRevisor" >
                           <span class="fa fa-user-plus"></span>&#09;Atribuir Revisor</a><br>
+                          <a href="<?= base_url('revisao/emitir-parecer/'.$atribuicao->subm_cd); ?>" class="btn-opcao">
+                          <span class="fa fa-pencil-square-o"></span>&#09;Emitir parecer final</a><br>
                           <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$atribuicao->arti_cd); ?>" class="btn-opcao">
                           <span class="fa fa-eye"></span>&#09;Detalhar</a><br>
                     </div>
