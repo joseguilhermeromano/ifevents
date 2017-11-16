@@ -56,7 +56,7 @@
                     }
                 }
 
-                public function consultarTudo($parametros = null, $limite=null,
+                public function consultarResultadosFinais($parametros = null, $limite=null,
                     $numPagina=null, $sort='arti_title', $ordenacao='asc') {
                     $this->db->select("Artigo.arti_title, Artigo.arti_status, Artigo.arti_cd"
                             . ", mote1.mote_nm as modalidade, mote2.mote_nm as eixo");
@@ -83,14 +83,73 @@
                     }
                 }
                 
-
-                public function totalRegistros(){
-                    return $this->db->count_all("Artigo");
+                public function consultarTudo($parametros = null, $limite=null,
+                    $numPagina=null, $sort='arti_title', $ordenacao='asc') {
+                    $this->db->select("Artigo.*, Autoria.autor_respons, Conferencia.conf_abrev, Edicao.edic_num"
+                            . ", mote1.mote_nm as modalidade, mote2.mote_nm as eixo");
+                    $this->db->from("Artigo");
+                    $this->db->join('Autoria', 'Artigo.arti_cd = Autoria.auto_arti_cd','left');
+                    $this->db->join('Modalidade_Tematica', 'Artigo.arti_moda_cd = Modalidade_Tematica.mote_cd','left');
+                    $this->db->join('Edicao', 'Modalidade_Tematica.mote_edic_cd= Edicao.edic_cd','left');
+                    $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd','left');
+                    $this->db->join('Modalidade_Tematica mote1', 'Artigo.arti_moda_cd = mote1.mote_cd','left');
+                    $this->db->join('Modalidade_Tematica mote2', 'Artigo.arti_eite_cd = mote2.mote_cd','left');
+                    $this->db->order_by($sort, $ordenacao);
+                    if($parametros!==null){
+                        foreach ($parametros as $key => $value) {
+                            $this->db->where($key.' LIKE ','%'.$value.'%');
+                        }
+                    }
+                    if($limite){
+                        $this->db->limit($limite, $numPagina);
+                    }
+                    $query = $this->db->get();
+                    if($query->num_rows()>0){
+                        return $query->result_object();
+                    }else{
+                        return null;
+                    }
                 }
                 
-                public function totalRegistrosResultadosFinais(){
+                public function totalTrabalhosAndamento($codigoAutor){
+                    $this->db->join('Autoria', 'Artigo.arti_cd = Autoria.auto_arti_cd','left');
+                    $this->db->where('auto_user_cd', $codigoAutor);
+                    $this->db->where('arti_status', 'Pronto para a revisão');
+                    $this->db->or_where('arti_status', 'Aguardando Revisão');
+                    return count($this->db->get("Artigo"));
+                }
+                
+                public function totalTrabalhosFinalizadosAutor($codigoAutor){
+                    $this->db->join('Autoria', 'Artigo.arti_cd = Autoria.auto_arti_cd','left');
+                    $this->db->where('auto_user_cd', $codigoAutor);
+                    $this->db->where('autor_respons', 1);
+                    $this->db->where('arti_status', 'Aprovado');
+                    $this->db->or_where('arti_status', 'Reprovado');
+                    return count($this->db->get("Artigo"));
+                }
+
+                public function totalRegistros($codigoAutor){
+                    $this->db->join('Autoria', 'Artigo.arti_cd = Autoria.auto_arti_cd','left');
+                    $this->db->where('auto_user_cd', $codigoAutor);
+                    $this->db->where('autor_respons', 1);
+                    return count($this->db->get("Artigo"));
+                }
+                
+                public function totalArtigosPorEdicao($codigoEdicao){
+                    $this->db->join('Modalidade_Tematica', 'Artigo.arti_moda_cd = Modalidade_Tematica.mote_cd','left');
+                    $this->db->join('Edicao', 'Modalidade_Tematica.mote_edic_cd= Edicao.edic_cd','left');
+                    $this->db->where('mote_edic_cd', $codigoEdicao);
+                    return count($this->db->get("Artigo"));
+                }
+                
+                public function totalRegistrosResultadosFinais($codigoEdicao = null){
                      $this->db->select('*');
                      $this->db->from('Artigo');
+                     $this->db->join('Modalidade_Tematica', 'Artigo.arti_moda_cd = Modalidade_Tematica.mote_cd','left');
+                     $this->db->join('Edicao', 'Modalidade_Tematica.mote_edic_cd= Edicao.edic_cd','left');
+                     if($codigoEdicao!=null){
+                         $this->db->where('mote_edic_cd', $codigoEdicao);
+                     }
                      $this->db->where('arti_status', 'Aprovado');
                      $this->db->or_where('arti_status', 'Reprovado');
                      $result = $this->db->get();

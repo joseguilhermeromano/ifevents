@@ -10,35 +10,28 @@ class RevisorControl extends UsuarioControl{
         $this->load->Model( 'dao/RevisorDAO' );
         $this->load->Model( 'dao/InstituicaoDAO' );
         $this->load->Model( 'dao/EdicaoDAO' );
+        $this->load->Model( 'dao/AvaliacaoDAO' );
         $this->load->Model('RevisorModel','revisor');
         $this->load->Model('InstituicaoModel','instituicao');
     }
 
     public function inicio(){
-        $this->chamaView("index", "avaliador",
-        array("title"=>"IFEvents - Início - Avaliador"), 1);
+        $this->consultarUltimosTresEventos();
+        $data = array("title"=>"IFEvents - Início - Avaliador");
+        $codigoRevisor = $this->session->userdata('usuario')->user_cd; 
+        $data['totalRevisoes']=$this->AvaliacaoDAO->totalTrabalhosAtribuidos($codigoRevisor);
+        $this->chamaView("index", "avaliador", $data, 1);
     }
-
+    
+    /*MÉTODO EXCLUSIVO DA ÁREA DO ORGANIZADOR */
     public function cadastrar(){
-
-        $usuarioLogado = $this->session->userdata('usuario');
-
-        $view = "form-revisor";
-        $diretorioView = "avaliador";
-        $data['title'] = "IFEvents - Cadastro de Revisores";
-        $data['tituloForm'] = "Cadastro de Revisores";
-        $areaLayout = 0;
-        $erro = 'Não foi possível realizar o seu cadastro!';
-        $sucesso = 'Seu cadastro foi efetuado com sucesso!';
-
-
-        if( $usuarioLogado !== null && $usuarioLogado->user_tipo == 3 ){
-            $data['title'] = "IFEvents - Novo Revisor";
-            $data['tituloForm'] = '<i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Revisor</b>';
-            $areaLayout = 1;
-            $erro = 'Não foi possível cadastrar o revisor!';
-            $sucesso = 'O Cadastro do revisor foi efetuado com sucesso!';
-        }
+        $view ="form-revisor";
+        $diretorioView = "revisor";
+        $data['title'] = "IFEvents - Novo Revisor";
+        $data['tituloForm'] = '<i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Revisor</b>';
+        $areaLayout = 1;
+        $erro = 'Não foi possível cadastrar o revisor!';
+        $sucesso = 'O Cadastro do revisor foi efetuado com sucesso!';
 
         if (empty($this->input->post())){
             return $this->chamaView($view, $diretorioView, $data, $areaLayout);
@@ -62,6 +55,44 @@ class RevisorControl extends UsuarioControl{
                 unset($data['revisor']);
             }elseif($this->session->flashdata('error') === null){
             	$this->session->set_flashdata('error', $erro);
+            }
+        }
+
+
+        return $this->chamaView($view, $diretorioView, $data, $areaLayout);
+      }
+      
+      public function cadastrarExternoRevisor(){
+        $view ="cadastro_revisores";
+        $diretorioView = "inicio";
+        $data['title'] = "IFEvents - Cadastro de Revisores";
+        $areaLayout = 0;
+        $erro = 'Não foi possível realizar o seu cadastro!';
+        $sucesso = 'Seu cadastro foi realizado com sucesso!Por favor, '
+        . 'verifique seu e-mail e confirme o cadastro';
+
+        if (empty($this->input->post())){
+            return $this->chamaView($view, $diretorioView, $data, $areaLayout);
+        }
+
+
+        $this->setaValores();
+        $data['revisor'] = $this->revisor;
+
+        if($this->valida()){
+                $this->db->trans_start();
+                try{
+                    $this->RevisorDAO->inserir($this->revisor);
+                }catch(Exception $e){
+                    $this->session->set_flashdata('error', $e->getMessage());
+                }
+                $this->db->trans_complete();
+
+            if($this ->db->trans_status() !== FALSE){
+                $this->session->set_flashdata('success', $sucesso);
+                unset($data['revisor']);
+            }elseif($this->session->flashdata('error') === null){
+                $this->session->set_flashdata('error', $erro);
             }
         }
 

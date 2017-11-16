@@ -117,7 +117,7 @@ class PrincipalControl extends CI_Controller {
         $config['prev_tag_open'] ='<li>';
         $config['prev_tag_close'] = '</li>';
         $config['full_tag_open'] = '<nav class="text-center">
-        <ul class="pagination">';
+        <ul class="pagination" id="ajaxPagination">';
         $config['full_tag_close'] = '</ul></nav>';
         $config['total_rows'] = $totalLinhasTabela;
         $config['per_page'] = $limite;

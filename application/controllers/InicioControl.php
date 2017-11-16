@@ -10,15 +10,17 @@
 			parent::__construct();
 			// $this->load->model('dao/DataBaseDAO');
 //			$this->DataBaseDAO->create_table_ci_session();
-			// $this->load->model('SubmitModel');
 			$this->load->model('dao/InscricaoDAO');
+                        $this->load->model('dao/AtividadeDAO');
 			$this->load->model('dao/TipoAtividadeDAO');
-			// $this->model('Autentica');
 		}
 		//Método chama a view principal do sistema (Home)
 		public function index(){
-
-			$this->chamaView("index", "inicio",array("title"=>"IFEvents - Página Inicial - Seja bem vindo!"), 0);
+                    $data = array("title"=>"IFEvents - Página Inicial - Seja bem vindo!");
+                    $data['tresUltimosEventos']  = $this->EdicaoDAO->consultarTudo(null,3, null, 'edic_cd','desc');
+                    $data['todasEdicoes'] = $this->EdicaoDAO->consultarTudo();
+                    $data['todasConferencias'] = $this->ConferenciaDAO->consultarTudo();
+                    $this->chamaView("index", "inicio",$data, 0);
 		}
 
 		public function sobre(){
@@ -28,73 +30,38 @@
 		}
 
 		public function evento(){
-
-			$this->chamaView("evento", "inicio",
-            	array("title"=>"IFEvents - Sobre o Evento"), 0);
+                    $data = array("title"=>"IFEvents - Sobre o Evento");
+                    $uri = $this->uri->uri_string();
+                    $this->session->set_userdata("link_evento_selecionado", $uri);
+                    $evento = $this->EdicaoDAO->consultarPorLink($uri);
+                    $data['evento'] = $evento;
+                    $data['programacoes'] = $this->programacao($data,$evento->getCodigo());
+                    $this->chamaView("evento", "inicio",$data, 0);
 		}
 
 
-		public function programacao(){
-			$data['tipoAtividade'] = $this->TipoAtividadeDAO->consultarTudo();
-			$data['programacao'] = $this->InscricaoDAO->consultarTudo();
-			$data['title'] = "IFEvents - Programação do Evento";
-			$this->chamaView("programacao", "inicio", $data, 0);
+		private function programacao($data, $codigoEvento){
+                    $array = array('ativ_edic_cd' => $codigoEvento);
+                    $consulta = $this->AtividadeDAO->consultarTudo($array);
+                    return $consulta;
 		}
 
-		/*Método chama a view que contém links para documentos
-		com as regras para submissão de artigos*/
+                //Método que chama a view do login
+                public function login(){
 
-		public function submissao(){
+                    $this->chamaView("login", "inicio",
+                        array("title"=>"IFEvents - Login"), 0);
+                }
 
-			$this->chamaView("submissao", "inicio",
-            	array("title"=>"IFEvents - Submissão"), 0);
-		}
-
-		public function resultadosAnais(){
-
-			$this->chamaView("resultados_anais", "inicio",
-            	array("title"=>"IFEvents - Resultados & Anais"), 0);
-		}
-
-		// //Método chama a view que contém formulário de cadastro para participantes
-		public function cadastraParticipante(){
-            redirect('participante/cadastrar');
-		}
-
-		public function cadastraRevisor(){
-			redirect('revisor/cadastrar');
-		}
-
-
-        //Método que chama a view do login
-        public function login(){
-
-            $this->chamaView("login", "inicio",
-            	array("title"=>"IFEvents - Login"), 0);
-        }
-
-		public function contato(){
-
-			$this->chamaView("contato", "inicio",
-            	array("title"=>"IFEvents - Contato"), 0);
-		}
 
 		public function recuperaSenha(){
-
-            $this->chamaView("recupera_senha", "inicio",
-            	array("title"=>"IFEvents - Recuperação de Senha"), 0);
+                    $this->chamaView("recupera_senha", "inicio",
+                    array("title"=>"IFEvents - Recuperação de Senha"), 0);
 		}
 
 		public function noPermission(){
-
 			$this->chamaView("noPermission", "inicio",
             	array("title"=>"IFEvents - Erro de Permissão"), 0);
-		}
-
-		public function inscricao(){
-			if($this->session->flashdata('usuario')==null){
-				redirect('login');
-			};
 		}
 
 }

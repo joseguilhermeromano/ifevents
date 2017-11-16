@@ -58,7 +58,9 @@ class SubmissaoControl extends PrincipalControl{
                 $this->db->trans_complete();
                 if($this ->db->trans_status() === TRUE){
                     $this->session->set_flashdata('success', 'O seu trabalho foi atualizado com sucesso!');
-                    redirect('artigo/consultar');
+                    $url = $this->isOrganizador() == true ? 'revisao/consultar-atribuicoes'
+                    :'artigo/consultar'; 
+                    redirect($url);
                 }else{
                     $this->session->set_flashdata('error', 'Não foi possível atualizar o seu trabalho!');
                 }

@@ -1,28 +1,6 @@
-<?php 
-    if(empty($this->session->userdata('usuario'))){ 
-
-                                                                    ?>
-<div id="cadastro" class="section">         
-    <div class="container">
-    <div class="col-lg-10 col-lg-offset-1">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1 class="estilo-h1"><?= $tituloForm; ?></h1>
-                <br>
-            </div>
-        </div>
-         
-         <div class="row">
-            <div class="col-lg-12">
-
-<?php }else{ ?>
-
-
 <div class="container-fluid">                  
 <h2><?= $tituloForm; ?></h2>
 <hr>
-
-<?php } ?>
 
 <br>
 
@@ -324,25 +302,7 @@
       echo form_close();
 ?>
 
-
-<?php 
-
-    if(empty($this->session->userdata('usuario'))){ 
-
-                                                                    ?>
-
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-
-
-<?php }else{ ?>
-
-</div>
-
-<?php } ?>
 
 
 

@@ -11,7 +11,7 @@ class SubmissaoModel extends CI_Model{
     private $nomeArqSemIdent;
     private $arqComIdent;
     private $arqSemIdent;
-    private $avaliacao;
+    private $avaliacoes;
     
     public function getCodigo(){
         return $this->codigo;
@@ -49,8 +49,8 @@ class SubmissaoModel extends CI_Model{
         return $this->arqSemIdent;
     }
     
-    public function getAvaliacao(){
-        return $this->avaliacao;
+    public function getAvaliacoes(){
+        return $this->avaliacoes;
     }
     
     
@@ -90,8 +90,8 @@ class SubmissaoModel extends CI_Model{
         $this->arqSemIdent = $arqSemIdent;
     }
     
-    public function setAvaliacao($avaliacao){
-        $this->avaliacao = $avaliacao;
+    public function setAvaliacoes($avaliacoes){
+        $this->avaliacoes = $avaliacoes;
     }
         
                         

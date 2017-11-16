@@ -72,11 +72,9 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 if($this->valida()){
                     $this->db->trans_start();
                         $this->ArtigoDAO->alterar($this->artigo);
-                        redirect('submissao/alterar/'.$this->artigo->getCodigo());
                     $this->db->trans_complete();
                     if($this ->db->trans_status() === TRUE){
-                        $this->session->set_flashdata('success', 'O seu trabalho foi atualizado com sucesso!');
-                        redirect('artigo/consultar');
+                        redirect('submissao/alterar/'.$codigo);
                     }else{
                         $this->session->set_flashdata('error', 'Não foi possível atualizar o seu trabalho!');
                     }
@@ -109,6 +107,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         public function consultar() {
             $limite = 10;
             $numPagina =0;
+            $autor = $this->session->userdata('usuario')->user_cd;
             if(null !== $this->input->get('pagina')){
                 $numPagina = $this->input->get('pagina');
             }
@@ -121,9 +120,9 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             }
             $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
             $data['paginacao'] = $this->geraPaginacao($limite
-                    , $this->ArtigoDAO->totalRegistros()
+                    , $this->ArtigoDAO->totalRegistros($autor)
                     , 'artigo/consultar/?busca='.$busca);
-            $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros();
+            $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros($autor);
             $data['title']="IFEvents - Meus Trabalhos";
             $this->chamaView("meusartigos", "participante", $data, 1);
         }
@@ -142,7 +141,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
                 $busca = $this->input->get('busca');
                 $array['Artigo.arti_title']= $busca;
             }
-            $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
+            $data['itens']=$this->ArtigoDAO->consultarResultadosFinais($array, $limite, $numPagina);
             $data['paginacao'] = $this->geraPaginacao($limite
                     , $this->ArtigoDAO->totalRegistros()
                     , 'artigo/consultar/?busca='.$busca);
@@ -224,9 +223,14 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
             $eixo = $this->ModalidadeTematicaDAO->consultarCodigo($codigoEixo);
             $this->artigo->setEixoTematico($eixo);
             $this->artigo->setResumo($this->input->post( 'resumo' ));
-            $codigoAutor = $this->session->userdata('usuario')->user_cd;
-            $autorResp = $this->UsuarioDAO->consultarCodigo($codigoAutor);
-            $this->artigo->setAutorResponsavel($autorResp);
+            $campoAutorResp = $this->input->post("autorrespons");
+            $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+            $codigoAutor = $this->isOrganizador() == true 
+            ? $campoAutorResp : $codigoUsuario;
+            if(!empty($codigoAutor)){
+                $autorResp = $this->UsuarioDAO->consultarCodigo($codigoAutor);
+                $this->artigo->setAutorResponsavel($autorResp);
+            }
             if($this->artigo->getStatus()===null){
                 $this->artigo->setStatus('Aguardando Revisão!');
             }

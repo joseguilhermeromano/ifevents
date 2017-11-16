@@ -60,36 +60,42 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
         $this->setaValores();
 
         if($this->valida()){
-
             $this->db->trans_start();
             $this->ComiteDAO->alterar($this->comite);
             $this->db->trans_complete();
             if($this ->db->trans_status() === TRUE){
                 $this->session->set_flashdata('success', 'O Comitê foi atualizado com sucesso!');
+                redirect('comite/consultar');
             }else{
                 $this->session->set_flashdata('error', 'Não foi possível atualizar o comitê!');
                 $this->chamaView("form-conferencia", "organizador", $data, 1);
             }
 
         }
-        redirect('comite/consultar');
+        $this->chamaView("form-comite", "organizador", $data, 1);
     }
     
     public function consultar() {
-        $limite = 10;
-        $numPagina =0;
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
         $busca=null;
-        $array=null;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
+        $array= null;
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $array = array('comi_nm' => $busca);
         }
-        $data['comites']=$this->ComiteDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->ComiteDAO->totalRegistros(), 'comite/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->ComiteDAO->totalRegistros();
+        $consulta = $this->ComiteDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->ComiteDAO->consultarTudo($array));
+        $totalRegTabela = $this->ComiteDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'comite/consultar/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['comites']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Comitês";
         $this->chamaView("comites", "organizador", $data, 1);
     }
@@ -121,14 +127,16 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
     
     
     private function valida(){
-            $this->form_validation->set_rules(	'denominacao', 'denominacao', 'trim|required|max_length[100]' );
-            $this->form_validation->set_rules(	'descricao', 'Descrição', 'trim|required|max_length[500]' );
-            return $this->form_validation->run();
+        $this->form_validation->set_rules('denominacao', 'denominacao', 'trim|required|max_length[100]');
+        $this->form_validation->set_rules('descricao', 'Descrição', 'trim|required|max_length[500]');
+        $this->form_validation->set_rules('equipe', 'Equipe', 'trim|required');
+        return $this->form_validation->run();
     }
 
     private function setaValores(){
      	$this->comite->setNome($this->input->post('denominacao'));
      	$this->comite->setDescricao($this->input->post('descricao'));
+        $this->comite->setEquipe($this->input->post('equipe'));
     }
 
 

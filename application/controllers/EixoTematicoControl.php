@@ -85,29 +85,30 @@ class EixoTematicoControl extends PrincipalControl implements InterfaceControl{
 	}
 
 	public function consultar(){
-		$limite = 10;
-        $numPagina =0;
-        $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
-
-        if( $this->input->get('busca') !== null){
-            $busca = $this->input->get('busca');
-            $array = array('mote_nm'=>$busca
-                    , 'mote_tipo' => '1'
-                    , 'mote_edic_cd' => $codigoEdicao);
-        }else{
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
             $busca=null;
-            $array=array('mote_tipo'=>1
-                ,'mote_edic_cd' => $codigoEdicao);
-        }
-
-        $data['areasTematicas']=$this->ModalidadeTematicaDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 1), 'area-tematica/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 1);
-        $data['title']="IFEvents - Eixos Temáticos";
-        $this->chamaView("areas-tematicas", "organizador", $data, 1);
+            $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+            $array= $array=array('mote_tipo'=> 1
+                    ,'mote_edic_cd' => $codigoEdicao);
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array['mote_nm'] = $busca;
+            }
+            $consulta = $this->ModalidadeTematicaDAO->consultarTudo($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->ModalidadeTematicaDAO->consultarTudo($array));
+            $totalRegTabela = $this->ModalidadeTematicaDAO->totalRegistros($codigoEdicao, 0);
+            $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+            $hrefPaginacao = 'modalidade/consultar/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+            $data['areasTematicas']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegistros;
+            $data['title']="IFEvents - Eixos Temáticos";
+            $this->chamaView("areas-tematicas", "organizador", $data, 1);   
 	}
 
 	public function excluir($codigo){

@@ -16,13 +16,15 @@ class AvaliacaoControl extends PrincipalControl{
 		$this->load->Model( 'AvaliacaoModel','avaliacao' );
 	}
 
-	public function emitirParecer($codigoRevisao){
-            $data = array("title"=>"IFEvents - Emitir Parecer",
-            "tituloh2" => "<h2><span class='glyphicon glyphicon-copy'></span><b> Emitir Parecer</b></h2>");
-            if (empty($this->avaliacao->input->post())){
+	public function emitirEditarParecer($codigoRevisao){
+            $this->avaliacao = $this->AvaliacaoDAO->consultarCodigo($codigoRevisao);
+            $data = array("title"=>"IFEvents - Emitir/Editar Parecer",
+            "tituloh2" => "<h2><span class='fa fa-pencil-square-o'></span><b> Emitir/Editar Parecer</b></h2>");
+            if (empty($this->input->post())){
+                $data['avaliacao'] = $this->avaliacao;
     		return $this->chamaView("form-parecer", "avaliador", $data, 1);
             }
-            $this->avaliacao = $this->AvaliacaoDAO->consultarCodigo($codigoRevisao);
+            $parecer = $this->avaliacao->getParecer();
             $this->setaValores();
 
             if($this->valida()){
@@ -32,16 +34,59 @@ class AvaliacaoControl extends PrincipalControl{
                 $this->db->trans_complete();
 
                 if($this ->db->trans_status() !== FALSE){
-                    $this->session->set_flashdata('success', 'O Parecer foi emitido com sucesso!');
-                    redirect("revisao/consultar");
+                    $mensagem = $parecer === null ? 'O Parecer foi emitido com sucesso!'
+                    : 'O Parecer foi editado com sucesso!';
+                    $this->session->set_flashdata('success', $mensagem);
+                    $url = $this->isOrganizador() == true ? "revisao/consultar-resultados"
+                        : "revisao/consultar";
+                    redirect($url);
                 }else{
                    $this->session->set_flashdata('error', 'Não foi possível emitir o parecer!');
                 }
 
             }
-            $data['parecer'] = $this->avaliacao;
+            $data['avaliacao'] = $this->avaliacao;
             $this->chamaView("form-parecer", "avaliador", $data, 1);
             
+	}
+        
+        public function emitirParecerFinal($codigoSubm){
+            $data = array("title"=>"IFEvents - Emitir Parecer Final",
+            "tituloh2" => "<h2><span class='fa fa-gavel'></span><b> Emitir Parecer Final</b></h2>");
+            $data['avaliacao'] = $this->avaliacao;
+            if (empty($this->input->post())){
+    		return $this->chamaView("form-parecer", "avaliador", $data, 1);
+            }
+            $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+            $revisor = $this->OrganizadorDAO->consultarCodigo($codigoUsuario);
+            $submissao = $this->SubmissaoDAO->consultarCodigo($codigoSubm);
+            $urlAnterior= $this->input->post('url_anterior');
+            $this->avaliacao->setRevisor($revisor);
+            $this->avaliacao->setConfirmaRevisao(1);
+            $this->avaliacao->setSubmissao($submissao);
+            $this->setaValores();
+
+            if($this->valida()){
+
+                $this->db->trans_start();
+                $codigoRevisao = $this->AvaliacaoDAO->inserir($this->avaliacao);
+                $parecerFinal = $this->DisparaEmailDivulgacaoResultado($codigoRevisao);
+                $this->db->trans_complete();
+                
+
+                if($this ->db->trans_status() !== FALSE && $parecerFinal == true){
+                    $this->session->set_flashdata('success', 'O Parecer Final '
+                    . 'para <b>'.$submissao->getArtigo()->getTitulo().'</b> foi emitido com sucesso!');
+                    redirect($urlAnterior);
+                }else{
+                   $this->session->set_flashdata('error', 'Não foi possível emitir o parecer final para <b>'
+                   .$submissao->getArtigo()->getTitulo().'</b>!');
+                }
+
+            }
+            $data['avaliacao'] = $this->avaliacao;
+            $data['urlAnterior']= $urlAnterior;
+            $this->chamaView("form-parecer", "avaliador", $data, 1);  
 	}
         
         private function valida(){
@@ -235,7 +280,7 @@ class AvaliacaoControl extends PrincipalControl{
             $totalRegistros = count( $resultadosRevisoes );
             $data['resultadosRevisoes'] = $resultadosRevisoes;
             $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros
-                , 'revisao/consultar/?busca='.$busca);
+                , 'revisao/consultar-resultados/?busca='.$busca);
             $data['totalRegistros'] = $totalRegistros;
             $data['title'] = "IFEvents - Resultados das Revisões";
             $this->chamaView("resultados-revisoes", "organizador", $data, 1);
@@ -333,6 +378,24 @@ class AvaliacaoControl extends PrincipalControl{
             ->getAutorResponsavel()->getEmail();
            $mensagem = $this->load->view("template-email/template-email", $data, true);
            return $this->envia_email($destinatario, $assunto, $mensagem);
+        }
+        
+        public function confirmarResultadoRevisao($codigoRevisao){
+            $revisao = $this->AvaliacaoDAO->consultarCodigo($codigoRevisao);
+            $revisao->setConfirmaRevisao(1);
+            
+            $this->db->trans_start();
+            $this->AvaliacaoDAO->alterar($revisao);
+            $this->db->trans_complete();
+
+            if($this ->db->trans_status() !== FALSE){
+                $this->session->set_flashdata('success', 'O Resultado da revisão foi confirmado com sucesso!');
+                redirect("revisao/consultar");
+            }else{
+               $this->session->set_flashdata('error', 'Não foi possível confirmar o resultado da revisão!');
+            }
+            
+            redirect('revisao/consultar');
         }
 
 

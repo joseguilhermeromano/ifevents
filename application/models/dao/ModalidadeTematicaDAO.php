@@ -53,7 +53,10 @@ class ModalidadeTematicaDAO extends CI_Model implements DAO{
         $this->db->from('Modalidade_Tematica');
         $this->db->where('mote_cd', $codigo);
         $query = $this->db->get();
-        return $query->result_object()[0];
+        if($query->num_rows()>0){
+            return $query->result_object()[0];
+        }
+        return null;
     }
 
     public function consultarModaTemaRevisor($codigoEdicao, $codigoRevisor){

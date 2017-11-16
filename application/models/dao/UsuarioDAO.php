@@ -107,25 +107,25 @@ class UsuarioDAO extends CI_Model{
         }
     }
 
-    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='user_nm', $ordenacao='asc') {
+    public function consultarTudo($parametros = null, $limite=null, $numPagina=null, 
+        $sort='user_nm', $ordenacao='asc') {
         $this->db->select("user_nm, user_status, user_tipo, user_cd, email_email, tius_nm");
         $this->db->from("User");
         $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
         $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
-            foreach ($parametros as $key => $value) {
-                $this->db->where($key.' LIKE ','%'.$value.'%');
-            }
+                $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
+                $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
         }
-        if($limite)
+        if($limite){
             $this->db->limit($limite, $numPagina);
+        }
         $query = $this->db->get();
         if($query->num_rows()>0){
             return $query->result_object();
-        }else{
-            return null;
         }
+            return null;
     }
 
     public function totalRegistros(){
@@ -151,7 +151,7 @@ class UsuarioDAO extends CI_Model{
     }
     
     public function consultarLogin($email, $senha){
-        $this->db->select("user_cd, user_nm, user_tipo");
+        $this->db->select("user_cd, user_nm, user_tipo, email_email");
         $this->db->from("Email");
         $this->db->join('User', 'User.user_email_cd = Email.email_cd');
         $this->db->where('Email.email_email', $email);

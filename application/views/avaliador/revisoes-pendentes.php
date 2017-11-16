@@ -40,11 +40,26 @@
                     <td><?= $revisao->arti_title.' ('.$revisao->edic_num.'ª '.$revisao->conf_abrev.')'; ?></td>
                     <td class="text-center"><?= $revisao->modalidade; ?></td>
                     <td class="text-center"><?= $revisao->eixo; ?></td>
-                    <td class="text-center"><?= $revisao->aval_status; ?></td>
+                    <td class="text-center"><?php 
+                        echo $revisao->aval_status;
+                        if($revisao->aval_confirm == 0 && $revisao->aval_status!= "Revisão Pendente"){
+                            echo "<br>(Resultado não confirmado)";
+                        }
+                    ?></td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
+                        
+                          <?php if($revisao->aval_status!= "Revisão Pendente"){ ?>
+                        
+                            <a class="btn-opcao" data-toggle="modal" data-target="#modalConfirmarRevisao" 
+                            onclick="setCodigo('<?php echo $revisao->aval_cd; ?>');
+                            setLink('<?php echo base_url("revisao/confirmar-revisao/")?>');">
+                            <span class="fa fa-gavel"></span>&#09;Confirmar Resultado</a><br>
+                          
+                          <?php }?>
+                          
                           <a href="<?= base_url('revisao/emitir-parecer/'.$revisao->aval_cd); ?>" class="btn-opcao">
-                          <span class="glyphicon glyphicon-copy"></span>&#09;Emitir Parecer</a><br>
+                          <span class="fa fa-pencil-square-o"></span>&#09;Emitir/Editar Parecer</a><br>
                           <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$revisao->arti_cd); ?>" class="btn-opcao">
                           <span class="glyphicon glyphicon-eye-open"></span>&#09;Detalhar Trabalho</a><br>
                           <a href="<?= base_url('submissao/download-artigo/'

@@ -1,8 +1,6 @@
+<div class="container-fluid">
 <h2> <span class="glyphicon glyphicon-list"> </span> <b> Lista de Contatos </b> </h2>
 <hr>
-<br>
-
-<div class="error"><?php echo validation_errors(); ?></div>
 <br>
 
 <?php
@@ -11,83 +9,77 @@
 ?>
 
 <div class="row">
-    <div class="col-md-6 col-sm-6">
-       <div class="input-group">
-         <input type="text" class="form-control estilo-botao-busca" placeholder="Buscar por Título...">
-         <span class="input-group-btn">
-             <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-         </span>
-       </div><!-- /input-group -->
-     </div><!-- /.col-lg-6 -->
-    <div class="col-md-6 col-sm-6">
-         <a class="btn btn-default hidden-xs" href='<?php echo site_url('/contato/sendEmail'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Enviar Email</a>
-    </div>
+    <form method="GET" action="<?php echo base_url('contato/consultarTudo'); ?>">
+        <div class="col-sm-4">
+           <div class="input-group">
+                 <input type="text" name="busca" class="form-control estilo-botao-busca" 
+                 placeholder="Buscar por Nome do Contato...">
+                 <span class="input-group-btn">
+                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                 </span>
+           </div><!-- /input-group -->
+         </div><!-- /.col-lg-6 -->
+    </form>
 </div><!-- /row -->
 <br><br>
 <div class="table-responsive"><!-- TABELA-->
     <table class="table ls-table" id="tabela1">
         <thead>
             <tr>
-                <th class="col-md-6">Nome</th>
-                <th><center>Assunto</center></th>
-                <th><center>Mensagem</center></th>
-                <th><center>Opção</center></th>
+                <th class="col-md-3">Nome</th>
+                <th class="col-md-3">Assunto</th>
+                <th><center>E-mail</center></th>
+                <th class="col-md-2"><center>Mensagem</center></th>
+                <th class="col-md-2"><center>Status</center></th>
+                <th class="col-md-2"><center>Opção</center></th>
             </tr>
         </thead>
         <tbody>
             <?php
-                if(!empty($content)):
+                if(!empty($content)){
                     foreach( $content as $item ):?>
                     <tr>
                         <td><?php echo $item->cont_nm; ?></td>
-                        <td class="text-center"><?php echo $item->cont_assunto; ?></td>
+                        <td><?php echo $item->cont_assunto; ?></td>
+                        <td class="text-center"><?php echo $item->cont_email; ?></td>
 						<td class="text-center"><a href="#"
+                                                                        class="btn-opcao"
 									data-container="body"
 									data-toggle="popover"
 									data-placement="bottom"
-									data-content="<?php echo $item->cont_msg; ?>"><?php echo $item->cont_email; ?></span>
+                                                                        data-content="<?php echo $item->cont_msg; ?>">
+                                                <i class="fa fa-envelope-open btn-"></i>&nbsp;Ver Mensagem
 							</a>
 						</td>
-
-						<td <div class="text-left" style="display: inline-block">
-                        		<a class="btn-opcao" href="<?php echo base_url('/contato/consultar/'.$item->cont_cd);?>">
-                            		<span class="glyphicon glyphicon-pencil"></span>&#09;Responder
-								</a><br>
-								<a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-									onclick="setCodigo('<?php echo $item->cont_cd; ?>');
-									setLink('<?php echo base_url('/contato/excluir/')?>');">
-									<span class="glyphicon glyphicon-remove"></span>&#09;Excluir
-								</a>
-							</div>
+                        <td class="text-center"><?= $item->cont_status == 0 ? 'Não Respondido' : 'Respondido' ?></td>
+                                                <td class="text-center"> 
+                                                    <div class="text-left" style="display: inline-block">
+                                                        <a class="btn-opcao" href="<?php echo base_url('/contato/responder/'.$item->cont_cd);?>">
+                                                            <span class="glyphicon glyphicon-pencil"></span>&#09;Responder
+                                                        </a><br>
+                                                        <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
+                                                            onclick="setCodigo('<?php echo $item->cont_cd; ?>');
+                                                            setLink('<?php echo base_url('/contato/excluir/')?>');">
+                                                            <span class="glyphicon glyphicon-remove"></span>&#09;Excluir
+                                                        </a>
+                                                    </div>
 						</td>
                     </tr>
-            <?php endforeach;
-            endif;?>
-
-
-
+            <?php endforeach; }else{ ?>
+              <tr>
+                <td class="col-xs-12 text-center" colspan="6">Não foram encontrados resultados para a sua busca...</td>
+              </tr>
+            <?php } ?>
         </tbody>
     </table>
 </div><!-- /TABELA-->
-<nav><!-- Paginação -->
-    <ul class="pagination">
-      <li>
-        <a href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <li><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li>
-        <a href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-</nav><!-- /Paginação -->
+
+ <!-- PAGINAÇÃO -->
+    <div class="text-center">
+    Exibindo de 1 a <?= !empty($content) ? sizeof($content) : 0; ?> de um total de <?= !empty($content) ? $totalRegistros : 0; ?> registros
+    </div>
+    <?= isset($paginacao) ? $paginacao : ''; ?>
+  <!--/ PAGINAÇÃO -->
 
 <!-- Modal de Exibição -->
 <style>
@@ -125,3 +117,4 @@
 			</div>
 		</div>
 	</div>
+</div>

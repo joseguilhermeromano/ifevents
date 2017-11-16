@@ -19,15 +19,17 @@
     <div class="col-md-12">
         <b><?php echo form_label( 'Resultado', 'resultado' ); ?></b><br>
         <select name="resultado" class="form-control selectComum estilo-input">
-          <?php if(!isset($avaliacao)){ ?>
+          <?php if($avaliacao->getStatus() === null 
+                  || $avaliacao->getStatus() == 'Revisão Pendente'){ ?>
             <option value="-1" selected disabled>Selecionar Resultado...</option>
           <?php } ?>
+            
           <option value="Revisão Aprovada" 
-          <?= isset($avaliacao) && $avaliacao->aval_status == 'Revisão Aprovada' ? 'selected' : '' ?>>Revisão Aprovada</option>
-          <option value="Revisão Aprovada com Ressalvas" 
-          <?= isset($avaliacao) && $avaliacao->aval_status == 'Revisão Aprovada com Ressalvas' ? 'selected' : '' ?>>Revisão Aprovada com Ressalvas</option>
+          <?= $avaliacao->getStatus() == 'Revisão Aprovada' ? 'selected' : '' ?>>Revisão Aprovada</option>
+          <option value="Revisão aprovada com ressalvas" 
+          <?= $avaliacao->getStatus() == 'Revisão aprovada com ressalvas' ? 'selected' : '' ?>>Revisão aprovada com ressalvas</option>
           <option value="Revisão Reprovada" 
-          <?= isset($avaliacao) && $avaliacao->aval_status == 'Revisão Reprovada' ? 'selected' : '' ?>>Revisão Reprovada</option>
+          <?= $avaliacao->getStatus() == 'Revisão Reprovada' ? 'selected' : '' ?>>Revisão Reprovada</option>
         </select>
     </div>
 </div>
@@ -37,7 +39,8 @@
         <b><?php echo form_label( 'Observações', 'observacoes' ); ?></b><br>
         <?php   $data = array( 'name' => 'observacoes', 'id' => 'editor','placeholder' => 'Observações','cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
                     echo form_textarea( $data, set_value('observacoes', 
-                    isset($avaliacao->aval_parecer) ? $avaliacao->parecer : '')); ?>
+                    $avaliacao->getParecer()!== null ? $avaliacao->getParecer() : '')); ?>
+        <input type="hidden" name="url_anterior" value="<?= isset($urlAnterior) ? $urlAnterior :  $_SERVER['HTTP_REFERER']; ?>">
     </div>
 </div>
 <?php echo "<br><center><a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;".form_submit("btn_cadastro", "Enviar",array('class' => 'btn btn-success button'))."</center>";

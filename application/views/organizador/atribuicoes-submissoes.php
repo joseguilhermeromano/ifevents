@@ -8,7 +8,6 @@
 ?>
 
 <div class="row">
-  <div class="col-md-12">
   <form method="GET" action="<?php echo base_url('revisao/consultar-atribuicoes'); ?>">
     <div class="row">
         <div class="col-sm-4">
@@ -21,11 +20,13 @@
            </div><!-- /input-group -->
          </div><!-- /.col-lg-6 -->
     </div><!-- /row -->
-  </form><br><br>
-  </div>
+  </form>
+    <div class="col-md-12 col-sm-12">
+        <?php $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd; ?>
+        <a class="btn btn-default hidden-xs" href='<?= base_url("artigo/cadastrar/".$codigoEdicao); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Nova Submissão</a>
+    </div>
 </div>
-<!-- <form method="POST" id="form_atribuicoes" action="<?php //echo base_url('artigo/listar-atribuicoes'); ?>"> -->
-
+<br><br>
 
 <div class="table-responsive"><!-- TABELA-->
     <table class="table ls-table" id="tabela1">
@@ -55,13 +56,15 @@
                     </td>
                     <td class="text-center">
                     <div class="text-left" style="display: inline-block">
+                          <a href="<?= base_url('artigo/alterar/'.$atribuicao->arti_cd); ?>" class="btn-opcao" >
+                          <span class="fa fa-pencil-square-o"></span>&#09;Editar dados do Trabalho</a><br>
                           <a href="#" class="btn-opcao atribuicao"  
                           idsubmissao="<?= $atribuicao->subm_cd; ?>"
                           idmodalidade="<?= $atribuicao->arti_moda_cd; ?>" ideixo="<?= $atribuicao->arti_eite_cd; ?>"
                           data-toggle="modal" data-target="#atribuirRevisor" >
                           <span class="fa fa-user-plus"></span>&#09;Atribuir Revisor</a><br>
-                          <a href="<?= base_url('revisao/emitir-parecer/'.$atribuicao->subm_cd); ?>" class="btn-opcao">
-                          <span class="fa fa-pencil-square-o"></span>&#09;Emitir parecer final</a><br>
+                          <a href="<?= base_url('revisao/emitir-parecer-final/'.$atribuicao->subm_cd); ?>" class="btn-opcao">
+                          <span class="fa fa-gavel"></span>&#09;Emitir parecer final</a><br>
                           <a href="<?= base_url('artigo/detalhes-do-trabalho/'.$atribuicao->arti_cd); ?>" class="btn-opcao">
                           <span class="fa fa-eye"></span>&#09;Detalhar</a><br>
                     </div>

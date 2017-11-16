@@ -18,8 +18,8 @@
     	<span class="glyphicon glyphicon-envelope"></span>  CONTATO
     </a>
 </li>
-<li class="item-menu">
-    <a href="<?php echo base_url("atividade/consultarTudo/hidden");?>">
+<li id ="atividade" class="item-menu">
+    <a href="<?php echo base_url("atividade/consultarTudo/");?>">
     	<span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
     </a>
 </li>

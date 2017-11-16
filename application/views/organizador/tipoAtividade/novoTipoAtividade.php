@@ -1,13 +1,6 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-floppy-save"></span><b> Cadastrar Tipo de Atividades</b></h2>
+<h2><span class="fa fa-plus"></span><b> Cadastrar Tipo de Atividades</b></h2>
 <hr>
-<br>
-<div class="row">
-    <br>
-    <div class="col-sm-12">
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/tipoatividade/consultarTudo/'); ?>' style="float:left"><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
-    </div>
-</div>
 <br><br>
 <?php
         $this->load->helper('html');
@@ -44,7 +37,7 @@
     </div>
 </div>
 
-<?php echo '<br><center>'.form_submit("btn_atualizar", "Enviar", array('class' => 'btn btn-success button' ))."</center>";
+<?php echo "<br><center><a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;".form_submit("btn_atualizar", "Enviar", array('class' => 'btn btn-success button' ))."</center>";
 
 echo form_close();
 ?>

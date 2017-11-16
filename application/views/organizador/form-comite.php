@@ -45,10 +45,28 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+        <b><?php echo form_label( 'Equipe', 'equipe' ); ?></b><br>
+        	<?php  
+        		$data = array( 'name' => 'equipe'
+                            , 'placeholder' => 'Equipe'
+                            ,'cols' => 200
+                            , 'rows' =>10
+                            ,'class' => 'form-control estilo-input'
+                            ,'id' => 'editor'
+                            , 'value' => isset($comite) ? $comite->getEquipe() : '');
+                echo form_textarea( $data ); 
+        	?>
+        </div>
+    </div>
+</div>
+
 <?php echo "<br><center><a href='".base_url("comite/consultar/")."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
         .form_submit("btn_atualizar"
                 , $segmento != 'alterar' ? 'Cadastrar' : 'Atualizar'
-                ,array('class' => 'btn btn-success button'))."</center>";
+                ,array('class' => 'btn btn-success button', 'onclick' => "nicEditors.findEditor('editor').saveContent();"))."</center>";
     echo form_close();
 ?>
 </div>

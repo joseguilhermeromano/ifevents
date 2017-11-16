@@ -8,7 +8,9 @@ class AvaliacaoModel extends CI_Model{
     private $data;
     private $hora; 
     private $status;
+    private $confirmaRevisao;
     private $revisor;
+    private $submissao;
     
     public function getCodigo(){
         return $this->codigo;
@@ -28,6 +30,10 @@ class AvaliacaoModel extends CI_Model{
     
     public function getStatus(){
         return $this->status;
+    }
+    
+    public function getConfirmaRevisao(){
+        return $this->confirmaRevisao;
     }
     
     public function getRevisor(){
@@ -59,8 +65,16 @@ class AvaliacaoModel extends CI_Model{
         $this->status = $status;
     }
     
+    public function setConfirmaRevisao($confirmaRevisao){
+        $this->confirmaRevisao = $confirmaRevisao;
+    }
+    
     public function setRevisor($revisor){
         $this->revisor = $revisor;
+    }
+    
+    public function setSubmissao($submissao){
+        $this->submissao = $submissao;
     }
 }
 

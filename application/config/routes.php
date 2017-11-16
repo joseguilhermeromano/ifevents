@@ -77,6 +77,7 @@ $route[ 'revisor/(:any)' ]                          = 'RevisorControl/$1';
 /*Rotas Edição*/
 $route[ 'edicao/(:any)' ]                       = 'EdicaoControl/$1';
 $route[ 'edicao/alterar/(:any)' ]               = 'EdicaoControl/alterar/$1';
+$route[ 'edicao/excluir/(:any)' ]               = 'EdicaoControl/excluir/$1';
 $route[ 'edicao/consulta-anais-e-resultados/(:any)' ] = 'EdicaoControl/consultarAnaisResultados/$1';
 $route[ 'edicao/file-delete-anais/(:any)' ] = 'EdicaoControl/deleteFileAnais/$1';
 $route[ 'edicao/file-upload-anais/(:any)' ] = 'EdicaoControl/uploadFileAnais/$1';
@@ -97,6 +98,8 @@ $route[ 'atividade/(:any)' ]                    = 'AtividadeControl/$1';
 $route[ 'atividade/consultarTudo/(:any)' ]      = 'AtividadeControl/consultarTudo/$1';
 $route[ 'atividade/excluir/(:any)' ]            = 'AtividadeControl/excluir/$1';
 $route[ 'atividade/alterar/(:any)' ]            = 'AtividadeControl/alterar/$1';
+$route[ 'atividade/inscrever/(:any)' ]            = 'AtividadeControl/inscreverEmAtividade/$1';
+$route[ 'atividade/cancelar-inscricao/(:any)' ]            = 'AtividadeControl/cancelarInscricaoAtividade/$1';
 $route[ 'tipoatividade/(:any)' ]                = 'TipoAtividadeControl/$1';
 $route[ 'tipoatividade/excluir/(:any)' ]        = 'TipoAtividadeControl/excluir/$1';
 $route[ 'tipoatividade/alterar/(:any)' ]        = 'TipoAtividadeControl/alterar/$1';
@@ -145,11 +148,9 @@ $route[ 'contato/consultar/(:any)' ]            = 'ContatoControl/consultar/$1';
 $route[ 'contato/sendEmail/(:any)' ]            = 'ContatoControl/sendEmail/$1';
 $route[ 'contato/responder/(:any)' ]            = 'ContatoControl/responder/$1';
 $route[ 'contato/excluir/(:any)' ]              = 'ContatoControl/excluir/$1';
-$route[	'(:any)' ]                              = 'InicioControl/$1';
 //Rotas Inscricao
 $route['inscricao/(:any)']                      = 'InscricaoControl/$1';
 $route['inscricao/consultarTudo/(:any)']        = 'InscricaoControl/consultarTudo/$1';
-$route['inscricao/inscricao/(:any)/(:num)']     = 'InscricaoControl/inscricao/&1/(:num)';
 $route['inscricao/excluir/(:any)']              = 'InscricaoControl/excluir/$1';
 
 /*Rotas da Modalidade*/
@@ -166,12 +167,21 @@ $route[ 'revisao/divulgar-resultado/(:any)' ]    = 'AvaliacaoControl/divulgarRes
 $route[ 'revisao/consultar-resultados' ]   = 'AvaliacaoControl/consultarResultadosRevisoes';
 $route[ 'revisao/consultar-atribuicoes' ]   = 'AvaliacaoControl/consultarAtribuicoes';
 $route[ 'revisao/atribuir-revisor' ]        = 'AvaliacaoControl/atribuirRevisor';
-$route[ 'revisao/emitir-parecer/(:any)' ]        = 'AvaliacaoControl/emitirParecer/$1';
+$route[ 'revisao/emitir-parecer/(:any)' ]        = 'AvaliacaoControl/emitirEditarParecer/$1';
+$route[ 'revisao/emitir-parecer-final/(:any)' ]        = 'AvaliacaoControl/emitirParecerFinal/$1';
+$route[ 'revisao/confirmar-revisao/(:any)' ]        = 'AvaliacaoControl/confirmarResultadoRevisao/$1';
 $route[ 'revisao/(:any)' ]                  = 'AvaliacaoControl/$1';
 
 /*Rotas Conferência*/
 $route[ 'conferencia/(:any)' ]              = 'ConferenciaControl/$1';
 $route[ 'conferencia/alterar/(:any)']       = 'ConferenciaControl/alterar/$1';
 $route[ 'conferencia/excluir/(:any)']       = 'ConferenciaControl/excluir/$1';
+
+/*Rotas Início*/
+$route[	'inicio/cadastrar/participante' ]              = 'ParticipanteControl/cadastrarExternoParticipante';
+$route[	'inicio/cadastrar/revisor' ]                   = 'RevisorControl/cadastrarExternoRevisor';
+$route[	'inicio/contato' ]                   = 'ContatoControl/contatoAreaExterna';
+$route[	'(:any)' ]                   = 'InicioControl/$1';
+$route[	'evento/(:any)' ]              = 'InicioControl/evento';
 $route[	'default_controller' ]              = 'InicioControl';
 $route[ 'translate_uri_dashes' ]            = FALSE;

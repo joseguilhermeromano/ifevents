@@ -8,34 +8,32 @@ class ParticipanteControl extends UsuarioControl{
         parent::__construct();
         $this->load->Model( 'dao/ParticipanteDAO' );
         $this->load->Model( 'dao/InstituicaoDAO' );
+        $this->load->Model( 'dao/ArtigoDAO' );
         $this->load->Model('ParticipanteModel','participante');
         $this->load->Model('InstituicaoModel','instituicao');
     	}
 
       public function inicio(){
         $this->consultarUltimosTresEventos();
-        $this->chamaView("index", "participante",
-                array("title"=>"IFEvents - Início - Participante"), 1);
+        $data = array("title"=>"IFEvents - Início - Participante");
+        $consulta = array('arti_status'=> 'Pronto para a revisão'
+        ,'arti_status' => 'Aguardando Revisão');
+        $codigoAutor = $this->session->userdata('usuario')->user_cd;
+        $data['trabalhosAndamento']=$this->ArtigoDAO->totalTrabalhosAndamento($codigoAutor);
+        $data['totalTrabalhos']=$this->ArtigoDAO->totalRegistros($codigoAutor);
+        $data['trabalhosFinalizados']=$this->ArtigoDAO->totalTrabalhosFinalizadosAutor($codigoAutor);
+        $this->chamaView("index", "participante", $data, 1);
       }
-
+      
+      /*MÉTODO EXCLUSIVO DA ÁREA DO ORGANIZADOR */
       public function cadastrar(){
-        $usuarioLogado = $this->session->userdata('usuario');
-
-        $view = "form-participante";
+        $view ="form-participante";
         $diretorioView = "participante";
-        $data['title'] = "IFEvents - Cadastro de Participantes";
-        $data['tituloForm'] = "Cadastro de Participantes";
-        $areaLayout = 0;
-        $sucesso = 'Seu cadastro foi efetuado com sucesso!';
-        $erro = 'Não foi possível realizar o seu cadastro!';
-
-        if( $usuarioLogado !== null && $usuarioLogado->user_tipo == 3 ){
-            $data['title'] = "IFEvents - Novo Participante";
-            $data['tituloForm'] = '<i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Participante</b>';
-            $areaLayout = 1;
-            $sucesso = 'O Cadastro do Participante foi efetuado com sucesso!';
-            $erro = 'Não foi possível realizar o cadastro do Participante!';
-        }
+        $data['title'] = "IFEvents - Novo Participante";
+        $data['tituloForm'] = '<i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Participante</b>';
+        $areaLayout = 1;
+        $sucesso = 'O Cadastro do Participante foi efetuado com sucesso!';
+        $erro = 'Não foi possível realizar o cadastro do Participante!';
 
         if (empty($this->input->post())){
                   return $this->chamaView($view, $diretorioView, $data, $areaLayout);
@@ -62,6 +60,41 @@ class ParticipanteControl extends UsuarioControl{
         }
 
 
+        return $this->chamaView($view, $diretorioView, $data, $areaLayout);
+      }
+      
+      public function cadastrarExternoParticipante(){
+        $view ="cadastro_participantes";
+        $diretorioView = "inicio";
+        $data['title'] = "IFEvents - Cadastro de Participantes";
+        $areaLayout = 0;
+        $erro = 'Não foi possível realizar o seu cadastro!';
+        $sucesso = 'Seu cadastro foi realizado com sucesso!Por favor, '
+        . 'verifique seu e-mail e confirme o cadastro';
+
+        if (empty($this->input->post())){
+                  return $this->chamaView($view, $diretorioView, $data, $areaLayout);
+        }
+
+        $this->setaValores();
+        $data['participante'] = $this->participante;
+
+        if($this->valida()){
+                $this->db->trans_start();
+                try{
+                    $this->ParticipanteDAO->inserir($this->participante);
+                }catch(Exception $e){
+                    $this->session->set_flashdata('error', $e->getMessage());
+                }
+                $this->db->trans_complete();
+
+            if($this ->db->trans_status() !== FALSE){
+                $this->session->set_flashdata('success', $sucesso);
+                unset($data['participante']);
+            }elseif($this->session->flashdata('error') === null){
+                $this->session->set_flashdata('error', $erro);
+            }
+        }
         return $this->chamaView($view, $diretorioView, $data, $areaLayout);
       }
 

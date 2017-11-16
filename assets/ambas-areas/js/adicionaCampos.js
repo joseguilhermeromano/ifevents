@@ -1,3 +1,80 @@
+/*CODIGO AJAX PARA AS PAGINAÇÕES*/
+$(document).ready(function(){
+  //Ao clicar em um link da paginação será executada essa rotina
+  $("#ajaxPagination li a").on("click",function(){
+
+    //recupera a url do link clicado
+    var URL_pagina = $(this).attr('href');
+
+    $.ajax({
+      //define o método da requisição
+      method: 'GET',
+      //define a url da requisição
+      url: URL_pagina,
+      //define o tipo de retorno
+      dataType: 'html',
+      //em caso de sucesso da requisição à url, executa a rotina
+      success:function(response){
+        //se retornou algum conteúdo, então exibe dentro da div cujo ID é
+        //RegistrosPagina, caso contrário exibe o texto informando que não
+        //foram localizados os registros
+        if(response){
+              $('#RegistrosPagina').remove();
+              var atualizaListagem = $(response).find('#RegistrosPagina');
+              $('#ListagemRegistros').html(atualizaListagem);
+        }else{
+          $('#RegistrosPagina').html('<p class="alert alert-info">Nenhum registro localizado.</p>', function() {});
+        }
+      },
+      //em caso de erro, diz que a página não existe
+      error: function(){
+        $('#RegistrosPagina').html('<p class="alert alert-info">Página inexistente</p>');
+      }
+    });
+
+    //bloqueia a abertura da url definida no atributo href do link
+    return false;
+  });
+});
+
+/*CODIGO AJAX PARA AS BUSCAS*/
+$(document).ready(function(){
+  //Ao clicar em um link da paginação será executada essa rotina
+  $("#busca").on("keyup",function(){
+
+    //recupera a url do link clicado
+    var URL_pagina = baseUrl+uri_string;
+
+    $.ajax({
+      //define o método da requisição
+      method: 'GET',
+      //define a url da requisição
+      url: URL_pagina,
+      //define o tipo de retorno
+      dataType: 'html',
+        data: {busca: $(this).val(), limitereg: $('#limitereg').val()},
+      success: function (response) {
+            //se retornou algum conteúdo, então exibe dentro da div cujo ID é
+            //RegistrosPagina, caso contrário exibe o texto informando que não
+            //foram localizados os registros
+            if(response){
+              $('#RegistrosPagina').remove();
+              var atualizaListagem = $(response).find('#RegistrosPagina');
+              $('#ListagemRegistros').html(atualizaListagem);
+            }else{
+              $('#RegistrosPagina').html('<p class="alert alert-info">Nenhum registro localizado.</p>', function() {});
+            }   
+        },
+     error: function(){
+        $('#RegistrosPagina').html('<p class="alert alert-info">Página inexistente</p>');
+      }
+    });
+
+    //bloqueia a abertura da url definida no atributo href do link
+    //return false;
+  });
+});
+
 /** FORMATAÇÃO DE CAMPOS NO PADRÃO MASKED INPUT**/
 jQuery(function($){
    $.mask.definitions['~']='[+-]';
@@ -128,8 +205,46 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     
-    if($(".consultaUsuario").length){
-            $(".consultaUsuario").select2({
+    if($(".consultaUnicoUsuario").length){
+            $(".consultaUnicoUsuario").select2({
+            tags: true,
+            placeholder: "Buscar autor inscrito por nome",
+            multiple: true,
+            tokenSeparators: [','],
+            minimumInputLength: 2,
+            maximumSelectionLength: 1,
+            minimumResultsForSearch: 10,
+            ajax: {
+                url: baseUrl + "usuario/consultarParaSelect2",
+                dataType: "json",
+                type: "POST",
+                data: function (params) {
+
+                    var queryParameters = {
+                        term: params.term
+                    }
+                    return queryParameters;
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: item.user_nm,
+                                id: item.user_nm + "-" + item.user_cd
+                            }
+                        })
+                    };
+                }
+            }
+        });
+    }
+});
+
+
+$(document).ready(function() {
+    
+    if($(".consultaVariosUsuarios").length){
+            $(".consultaVariosUsuarios").select2({
             tags: true,
             placeholder: "Buscar autor inscrito por nome",
             multiple: true,

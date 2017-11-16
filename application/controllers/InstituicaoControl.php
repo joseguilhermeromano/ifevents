@@ -80,20 +80,26 @@ class InstituicaoControl extends PrincipalControl implements InterfaceControl{
     }
 
     public function consultar() {
-        $limite = 10;
-        $numPagina =0;
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
         $busca=null;
-        $array=null;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
+        $array= null;
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $array = array('inst_nm' => $busca, 'inst_abrev' => $busca);
         }
-        $data['instituicoes']=$this->InstituicaoDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->InstituicaoDAO->totalRegistros(), 'instituicao/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->InstituicaoDAO->totalRegistros();
+        $consulta = $this->InstituicaoDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->InstituicaoDAO->consultarTudo($array));
+        $totalRegTabela = $this->InstituicaoDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'instituicao/consultar/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['instituicoes']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Instituições";
         $this->chamaView("instituicoes", "organizador", $data, 1);
     }

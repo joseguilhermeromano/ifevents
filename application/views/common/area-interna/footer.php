@@ -82,6 +82,25 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Modal de Confirmar Revisao -->
+        <div id="modalConfirmarRevisao" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Confirmar Revisão</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja realmente confirmar o resultado desta revisão?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" onclick="Executa();">Sim</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Não</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Modal de Cancelamento -->
         <!-- Modal de Exclusão -->

@@ -6,18 +6,19 @@
         $this->load->helper('html');
         echo alert($this->session);
 ?>
-<form method="GET" action="<?php echo base_url('usuario/consultar'); ?>">
+<form role="form" action="<?= base_url('usuario/consultar'); ?>" method="get" name="form-busca">
   <div class="row">
       <div class="col-sm-5">
          <div class="input-group">
-               <input type="text" name="busca" class="form-control estilo-botao-busca" placeholder="Buscar por Nome...">
+               <input type="text" name="busca" id="busca" value="<?= isset($busca) ? $busca : ''?>" 
+                      class="form-control estilo-botao-busca" placeholder="Buscar por Nome ou E-mail..."
+                      <?= isset($busca) ? 'autofocus' : ''?>>
                <span class="input-group-btn">
                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                </span>
          </div><!-- /input-group -->
        </div><!-- /.col-lg-6 -->
   </div><!-- /row -->
-</form>
 <div class="row">
     <div class="col-sm-12">
          <a class="btn btn-default margin-button" href='<?php echo site_url('/usuario/notificar'); ?>' style="float:right"><span class="fa fa-exclamation-triangle"></span> Notificar Usuários</a>
@@ -33,68 +34,85 @@
         </div>
     </div>
 </div>
-<br><br>
-<div class="table-responsive"><!-- TABELA-->
-    <table class="table ls-table" id="tabela1">
-        <thead>
-            <tr>
-
-                    <th class="col-xs-3">Nome Completo</th>
-                    <th class="col-xs-3">Email</th>
-                    <th class="col-xs-2 text-center">Tipo de Acesso</th>
-                    <th class="col-xs-1 text-center">Status</th>
-                    <th class="col-xs-3 text-center">Opções</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if(!empty($users)){
-            foreach( $users as $user ){ ?>
-
-
-                <tr>
-                    <td><?php echo $user->user_nm; ?></td>
-                    <td><?php echo $user->email_email; ?></td>
-                    <td class="text-center"><?php echo $user->tius_nm; ?></td>
-                    <td class="text-center"><?php echo $user->user_status; ?></td>
-                    <td class="text-center">
-                      <div class="text-left" style="display: inline-block">
-                          <a class="btn-opcao" href="<?php echo base_url(strtolower($user->tius_nm).'/alterar/'.$user->user_cd); ?>">
-                          <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
-                          <?php if($user->user_status != 'Ativo'){ ?>
-                            <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalAtivar" 
-                            onclick="setCodigo('<?php echo $user->user_cd; ?>');
-                            setLink('<?php echo base_url("usuario/ativar/")?>');">
-                            <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
-                          <?php }?>
-                          <?php if($user->user_status != 'Inativo'){ ?>
-                            <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
-                            onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
-                            setLink('<?php echo base_url('usuario/desativar/')?>');">
-                            <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
-                          <?php }?>
-                      </div>
-                    </td>
-                </tr>
-
-
-            <?php } }else{ ?>
-
-
-              <tr>
-                <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
-              </tr>
-
-            <?php } ?>
-        </tbody>
-    </table>
-</div><!-- /TABELA-->
-
-  <!-- PAGINAÇÃO -->
-    <div class="text-center">
-    Exibindo de 1 a <?php echo !empty($users) ? sizeof($users) : 0; ?> de um total de <?php echo !empty($users) ? $totalRegistros : 0; ?> registros
+<br>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <?php echo form_label( 'Número de Registros:', 'limite'); ?>
+            <select name="limitereg" id="limitereg" class="selectComum form-control" onchange="document.forms['form-busca'].submit();">
+                <option value="10" <?= $limiteReg == "10" ? 'selected' : ''?>>10</option>
+                <option value="25" <?= $limiteReg == "25" ? 'selected' : ''?>>25</option>
+                <option value="50" <?= $limiteReg == "50" ? 'selected' : ''?>>50</option>
+                <option value="100" <?= $limiteReg == "100" ? 'selected' : ''?>>100</option>
+                <option value="500"<?= $limiteReg == "500" ? 'selected' : ''?> >500</option>
+                <option value="0"<?= $limiteReg == "0" ? 'selected' : ''?> >Tudo</option>
+            </select>
+        </div>
     </div>
-    <?php echo $paginacao; ?>
-  <!--/ PAGINAÇÃO -->
+</form><br>
+<div class="row" id="ListagemRegistros">
+    <div class="col-md-12" id="RegistrosPagina">
+        <div class="table-responsive"><!-- TABELA-->
+            <table class="table ls-table" id="tabela1">
+                <thead>
+                    <tr>
 
+                            <th class="col-xs-3">Nome Completo</th>
+                            <th class="col-xs-3">Email</th>
+                            <th class="col-xs-2 text-center">Tipo de Acesso</th>
+                            <th class="col-xs-1 text-center">Status</th>
+                            <th class="col-xs-3 text-center">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    if(!empty($users)){
+                    foreach( $users as $user ){ ?>
+
+
+                        <tr>
+                            <td><?php echo $user->user_nm; ?></td>
+                            <td><?php echo $user->email_email; ?></td>
+                            <td class="text-center"><?php echo $user->tius_nm; ?></td>
+                            <td class="text-center"><?php echo $user->user_status; ?></td>
+                            <td class="text-center">
+                              <div class="text-left" style="display: inline-block">
+                                  <a class="btn-opcao" href="<?php echo base_url(strtolower($user->tius_nm).'/alterar/'.$user->user_cd); ?>">
+                                  <span class="glyphicon glyphicon-pencil"></span>&#09;Ver/Editar</a><br>
+                                  <?php if($user->user_status != 'Ativo'){ ?>
+                                    <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalAtivar" 
+                                    onclick="setCodigo('<?php echo $user->user_cd; ?>');
+                                    setLink('<?php echo base_url("usuario/ativar/")?>');">
+                                    <span class="glyphicon glyphicon-ok"></span>&#09;Ativar</a><br>
+                                  <?php }?>
+                                  <?php if($user->user_status != 'Inativo'){ ?>
+                                    <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalDesativar"
+                                    onclick="setCodigo('<?php echo $user->user_cd; ?>'); 
+                                    setLink('<?php echo base_url('usuario/desativar/')?>');">
+                                    <span class="glyphicon glyphicon-remove"></span>&#09;Desativar</a>
+                                  <?php }?>
+                              </div>
+                            </td>
+                        </tr>
+
+
+                    <?php } }else{ ?>
+
+
+                      <tr>
+                        <td class="col-xs-12 text-center" colspan="5">Não foram encontrados resultados para a sua busca...</td>
+                      </tr>
+
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div><!-- /TABELA-->
+
+        <!-- PAGINAÇÃO -->
+          <div class="text-center">
+          Exibindo de 1 a <?php echo !empty($users) ? sizeof($users) : 0; ?> de um total de <?php echo !empty($users) ? $totalRegistros : 0; ?> registros
+          </div>
+          <?php echo $paginacao; ?>
+        <!--/ PAGINAÇÃO -->
+    </div>
+</div>
 </div>

@@ -1,8 +1,7 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
   require_once 'PrincipalControl.php';
-  require_once 'InterfaceControl.php';
 
-class AtividadeControl extends PrincipalControl implements InterfaceControl{
+class AtividadeControl extends PrincipalControl{
 
   public function __construct(){
     parent::__construct();
@@ -23,7 +22,6 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
       $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
     }
     else{
-      $this->atividade->setaValores();
       if($this->AtividadeDAO->inserir($this->atividade)==true){
         $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
       }else{
@@ -32,6 +30,36 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
     }
     $this->chamaView("novaatividade", "organizador", $data,  1 );
   }
+  
+    public function inscreverEmAtividade($codigoAtividade){
+        $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+        
+        $this->db->trans_start();
+        try{
+            $this->AtividadeDAO->inscrever($codigoAtividade,$codigoUsuario);
+        }catch(Exception $e){
+            $this->session->set_flashdata('error', $e->getMessage());
+            redirect('atividade/consultarTudo');
+        }
+        $this->db->trans_complete();
+        
+        if($this ->db->trans_status() === true){
+            $this->session->set_flashdata('success', 'Inscrição realizada com sucesso!');
+        }else{
+            $this->session->set_flashdata('error', 'Não foi possível efetuar a inscrição!');
+        }
+        redirect('atividade/consultarTudo');
+    }
+    
+    public function cancelarInscricaoAtividade($codigoAtividade){
+        $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+        if($this->AtividadeDAO->cancelarInscricao($codigoAtividade,$codigoUsuario)==true){
+            $this->session->set_flashdata('success', 'Inscrição cancelada com sucesso!');
+        }else{
+            $this->session->set_flashdata('error', 'Não foi cancelar a inscricao!');
+        }
+        redirect('atividade/consultarTudo');
+    }
 
         /**
          * Alterar um valor existente na base de dados
@@ -43,7 +71,6 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
     $data['atividade'] = $this->AtividadeDAO->consultarCodigo($this->uri->segment(3));
     if(!empty($this->input->post())){
       $this->recebeValores();
-      $this->atividade->setaValores();
       if( $this->valida()==false){
         $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
       }
@@ -61,23 +88,41 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
 
   public function excluir($codigo){
     if( $this->AtividadeDAO->excluir($this->uri->segment(3)) == false){
-		    $this->session->set_flashdata('error', 'Arquivo não pode ser excluido!');
-		}
-		else{
-		    $this->session->set_flashdata('success', 'Arquivo deletado com sucesso!');
-				$this->consultarTudo();
-		}
+	$this->session->set_flashdata('error', 'Atividade não pode ser excluida!');
+    }
+    else{
+        $this->session->set_flashdata('success', 'A Atividade foi excluída com sucesso!');
+        $this->consultarTudo();
+    }
   }
 
   public function consultarTudo(){
-    $data['flag'] = $this->uri->segment(3);
-    $data['content'] = $this->AtividadeDAO->consultarTudo();
-    $data['title'] = "IFEvents - Atividades - Organizador";
-    $this->chamaView("listaatividade", "organizador", $data, 1);
-  }
-
-  public function consultar(){
-
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
+        $busca=null;
+        $array= null;
+        if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $numEdicao = preg_replace("/\D/","", $busca);
+            $evento =  preg_replace("/[^A-Za-z]/", "", $busca);
+            $array = array('Conferencia.conf_abrev'=>$evento
+                    , 'edic_num'=> $numEdicao
+                    ,'ativ_nm'  => $busca);
+        }
+        $consulta = $this->AtividadeDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->AtividadeDAO->consultarTudo($array));
+        $totalRegTabela = $this->AtividadeDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'atividade/consultarTudo/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['content']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
+        $data['title']="IFEvents - Atividades";
+        $this->chamaView("listaatividade", "organizador", $data, 1);     
   }
 
   public function recebeValores(){
@@ -91,6 +136,7 @@ class AtividadeControl extends PrincipalControl implements InterfaceControl{
     $this->atividade->setLocal($this->input->post('local'));
     $this->atividade->setQuantidadeVagas($this->input->post('quantidadeVagas'));
     $this->atividade->setTipoAtividade($this->input->post('tipoAtividade'));
+    $this->atividade->setCodigoEdicao($this->session->userdata('evento_selecionado')->edic_cd);
   }
 
   public function valida(){

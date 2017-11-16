@@ -15,22 +15,27 @@ class UsuarioControl extends PrincipalControl{
     }
 
     public function consultar() {
-        $limite = 10;
-        $numPagina =0;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
+        $busca=null;
+        $array= array('user_nm' => null, 'email_email'=>null);
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('user_nm'=>$busca);
-        }else{
-            $busca=null;
-            $array=null;
+            $array['user_nm'] = $busca;
+            $array['email_email'] = $busca;
         }
-        $data['users']=$this->UsuarioDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, 
-        $this->UsuarioDAO->totalRegistros(), 'usuario/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->UsuarioDAO->totalRegistros();
+        $consulta = $this->UsuarioDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->UsuarioDAO->consultarTudo($array));
+        $totalRegTabela = $this->UsuarioDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'usuario/consultar/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['users']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Usuários";
         $this->chamaView("usuarios", "organizador", $data, 1);
     }

@@ -32,6 +32,7 @@
             </script>
         <script type="text/javascript">
             var baseUrl = "<?php echo base_url(''); ?>";
+            var uri_string = "<?php echo $this->uri->uri_string(); ?>";
         </script>
     </head>
     <body>

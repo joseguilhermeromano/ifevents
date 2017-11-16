@@ -1,22 +1,6 @@
-<?php
-    if(empty($this->session->userdata('usuario'))){ ?>
-<div id="cadastro" class="section">
-    <div class="container">
-        <div class="col-lg-10 col-lg-offset-1">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1 class="estilo-h1"><?= $tituloForm; ?></h1>
-                    <br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-<?php
-    }else{ ?>
-                    <div class="container-fluid">
+<div class="container-fluid">
 <h2><?= $tituloForm; ?></h2>
 <hr>
-<?php } ?>
 <br>
 <?php
     $this->load->helper('html');
@@ -100,7 +84,7 @@
         <div class="form-group controls">
             <b><?php echo form_label( '*E-mail', 'email' ); ?></b>
             <?php $data = array( 'name' => 'email', 'class' => 'form-control estilo-input',
-                                 'value' => (isset($organizador) && !empty($organizador->getEmail()) ? $organizador->getEmail() : ''));
+                                 'value' => (isset($participante) && !empty($participante->getEmail()) ? $participante->getEmail() : ''));
                           echo form_input( $data );?>
         </div>
     </div>
@@ -253,12 +237,5 @@
         .form_submit("btn_cadastro", $nomeBotao, array('class' => 'btn btn-success button'))."</center>";
         echo form_fieldset_close();
         echo form_close();
-        if(empty($this->session->userdata('usuario'))){ ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php   }else{ ?>
+    ?>
 </div>
-<?php } ?>

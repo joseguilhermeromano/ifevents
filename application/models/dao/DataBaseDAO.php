@@ -93,6 +93,7 @@
 				comi_cd    int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
 				,comi_nm   varchar(100) NOT NULL
 				,comi_desc varchar(500) NOT NULL
+                                ,comi_equipe text       NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -164,6 +165,7 @@
 				,ativ_local       varchar(200)   NOT NULL
 				,ativ_vagas_qtd   int(3)         NOT NULL
 				,ativ_tiat_cd     int(11)        NOT NULL
+                                ,ativ_edic_cd     int(11)        NOT NULL
 			) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -171,17 +173,17 @@
 		//Método cria tabela Edicao
 		public function create_table_edicao(){
 			$sql = "CREATE TABLE IF NOT EXISTS Edicao(
-				edic_cd        int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-				,edic_num      int(11)      NOT NULL
-				,edic_tema 	   varchar(100) NOT NULL
-				,edic_apresent varchar(500) NOT NULL
-				,edic_link     varchar(200) NOT NULL
-				,edic_img      varchar(200) NOT NULL
-				,edic_result   varchar(100) NOT NULL
-				,edic_anais    varchar(500) NOT NULL
-				,edic_regr_cd  int(11)      NOT NULL
-				,edic_comi_cd  int(11)      NOT NULL
-				,edic_conf_cd  int(11)      NOT NULL
+				edic_cd        int(11)          NOT NULL PRIMARY KEY AUTO_INCREMENT
+				,edic_num      int(11)          NOT NULL
+				,edic_tema     varchar(100)     NOT NULL
+				,edic_apresent text             NOT NULL
+				,edic_link     varchar(200)     NOT NULL
+				,edic_img      varchar(200)     NOT NULL
+				,edic_result   varchar(100)     NOT NULL
+				,edic_anais    varchar(500)     NOT NULL
+				,edic_regr_cd  int(11)          NOT NULL
+				,edic_comi_cd  int(11)          NOT NULL
+				,edic_conf_cd  int(11)          NOT NULL
 				,edic_email_cd int(11)		NOT NULL
 				,edic_tele_cd  int(11)		NOT NULL
 			) ENGINE=INNODB";
@@ -302,7 +304,7 @@
 				,cont_assunto varchar(100) NOT NULL
 				,cont_email   varchar(100) NOT NULL
 				,cont_msg     varchar(500) NOT NULL
-				,cont_user_cd int(11)      NOT NULL
+				,cont_status  tinyint(1)   NOT NULL
 		    ) ENGINE=INNODB";
 			$this->db->query($sql);
 		}
@@ -380,12 +382,15 @@
 		public function create_table_avaliacao(){
 			$sql = "CREATE TABLE IF NOT EXISTS Avaliacao (
 				aval_cd       int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-				,aval_desc    varchar(500) NOT NULL
-				,aval_nota    float(2, 2)  NOT NULL
+				,aval_parecer    varchar(500) NOT NULL
 				,aval_dt      date         NOT NULL
 				,aval_horario timestamp    NOT NULL
-				,aval_arq     mediumblob
-				,aval_stat_cd int(11)      NOT NULL
+				,aval_status  enum('Revisão Pendente'
+                                              ,'Revisão Aprovada'
+                                              ,'Revisão aprovada com ressalvas'
+                                              ,'Revisão Reprovada') 
+                                              COLLATE utf8_unicode_ci NOT NULL
+                                ,aval_confirm tinyint(1)   NOT NULL
 				,aval_user_cd int(11)      NOT NULL
 				,aval_subm_cd int(11)      NOT NULL
 		    ) ENGINE=INNODB";
@@ -437,6 +442,7 @@
 				 insc_cd      int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT
 				,insc_ativ_cd int(11) NOT NULL
 				,insc_user_cd int(11) NOT NULL
+                                ,UNIQUE KEY insc_ativ_cd (insc_ativ_cd,insc_user_cd)
 			)ENGINE=INNODB";
 			$this->db->query($sql);
 		}

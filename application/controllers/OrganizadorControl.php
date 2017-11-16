@@ -7,16 +7,29 @@ class OrganizadorControl extends UsuarioControl{
 	public function __construct(){
 		parent::__construct();
             $this->load->Model( 'dao/OrganizadorDAO' );
+            $this->load->Model( 'dao/ArtigoDAO' );
             $this->load->Model( 'dao/InstituicaoDAO' );
+            $this->load->Model( 'dao/AvaliacaoDAO' );
+            $this->load->Model( 'dao/ContatoDAO' );
             $this->load->Model('OrganizadorModel','organizador');
             $this->load->Model('InstituicaoModel','instituicao');
             $this->load->helper('html');
 	}
 
         public function inicio(){
+            $data = array("title"=>"IFEvents - Início - Organizador");
             $this->consultarUltimosTresEventos();
-            $this->chamaView("index", "organizador",
-                        array("title"=>"IFEvents - Início - Organizador"), 1);
+            $edicaoAtual = $this->session->userdata('evento_selecionado')->edic_cd;
+            $totalTrabalhos = $this->ArtigoDAO->totalArtigosPorEdicao($edicaoAtual);
+            $trabalhosAvaliados = $this->ArtigoDAO->totalRegistrosResultadosFinais($edicaoAtual);
+            $data['trabalhosNaoAvaliados'] = $totalTrabalhos - $trabalhosAvaliados;
+            $data['trabalhosAvaliados'] =$trabalhosAvaliados;
+            $consulta = array('mote1.mote_edic_cd' => $edicaoAtual);
+            $submissoesNaoAtribuidos = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($consulta);
+            $data['novasSubmissoes'] = count($submissoesNaoAtribuidos);
+            $data['novasMensagens'] = $this->ContatoDAO->totalNaoRespondidos();
+            $data['evento'] = $this->EdicaoDAO->consultarCodigo($edicaoAtual);
+            $this->chamaView("index", "organizador", $data, 1);
         }
 
       public function cadastrar(){

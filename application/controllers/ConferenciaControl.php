@@ -33,6 +33,7 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
             if($this ->db->trans_status() === TRUE){
                 $this->session->set_flashdata('success', 'A Conferência foi cadastrada com sucesso!');
                 unset($data['conferencia']);
+                redirect('conferencia/consultar');
             }else{
                 $this->session->set_flashdata('error', 'Não foi possível cadastrar a nova conferência!');
             }
@@ -70,30 +71,37 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
             $this->db->trans_complete();
             if($this ->db->trans_status() === TRUE){
                 $this->session->set_flashdata('success', 'A Conferência foi atualizada com sucesso!');
+                redirect('conferencia/consultar');
             }else{
                 $this->session->set_flashdata('error', 'Não foi possível atualizar a conferência!');
                 $this->chamaView("form-conferencia", "organizador", $data, 1);
             }
 
         }
-        redirect('conferencia/consultar');
+        $this->chamaView("form-conferencia", "organizador", $data, 1);
     }
 
     public function consultar() {
-    	$limite = 10;
-        $numPagina =0;
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
         $busca=null;
-        $array=null;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
+        $array= null;
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $array = array('conf_nm' => $busca, 'conf_abrev' => $busca);
         }
-        $data['content']=$this->ConferenciaDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->ConferenciaDAO->totalRegistros(), 'conferencia/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->ConferenciaDAO->totalRegistros();
+        $consulta = $this->ConferenciaDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->ConferenciaDAO->consultarTudo($array));
+        $totalRegTabela = $this->ConferenciaDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'conferencia/consultar/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['content']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Conferências";
         $this->chamaView("conferencias", "organizador", $data, 1);
     }

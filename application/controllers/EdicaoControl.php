@@ -12,6 +12,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
         $this->load->Model( 'dao/ConferenciaDAO' );
         $this->load->Model( 'dao/ComiteDAO' );
         $this->load->Model( 'dao/InstituicaoDAO' );
+        $this->load->Model( 'InstituicaoModel' );
         $this->load->Model( 'EdicaoModel','edicao' );
         $this->load->helper('html');
     }
@@ -385,10 +386,17 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 
     private function resgataParcerias(){
         $parceriasView = $this->input->post('parcerias');
-
         if($parceriasView !== null && !empty($parceriasView)){
-            foreach ($parceriasView as $key => $value) {
-                $parcerias[$key] = $this->InstituicaoDAO->consultarCodigo($value);
+            $parcerias = new ArrayObject();
+            foreach ($parceriasView as $value) {
+                $parceria = new InstituicaoModel();
+                $consulta = $this->InstituicaoDAO->consultarCodigo($value);
+                $parceria->setCodigo($consulta->getCodigo());
+                $parceria->setNome($consulta->getNome());
+                $parceria->setDescricao($consulta->getDescricao());
+                $parceria->setLogo($consulta->getLogo());
+                $parcerias->append($parceria);
+                unset($parceria);
             }
             return $parcerias;
         }
@@ -430,29 +438,49 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
     }
 
     public function excluir($codigo){
+        if($codigo !== null){
+            $this->db->trans_start();
+            try{
+                $edicao = $this->EdicaoDAO->consultarCodigo($codigo);
+                $this->EdicaoDAO->excluir($edicao);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
 
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'A Edição foi excluída com sucesso!');
+            }
+        }
+        if($codigo === null || $this ->db->trans_status()==false ){
+            $this->session->set_flashdata('error', 'Não foi possível excluir o registro de Edição!');
+        }
+        redirect('edicao/consultar');
     }
 
     public function consultar(){
-        $limite = 10;
-        $numPagina =0;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
-
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
+        $busca=null;
+        $array= null;
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $numEdicao = preg_replace("/\D/","", $busca);
             $busca =  preg_replace("/[^A-Za-z]/", "", $busca);
             $array = array('Conferencia.conf_abrev'=>$busca, 'edic_num'=> $numEdicao);
-        }else{
-            $busca=null;
-            $array=null;
         }
-
-        $data['edicoes']=$this->EdicaoDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite, $this->EdicaoDAO->totalRegistros(), 'edicao/consultar/?busca='.$busca);
-        $data['totalRegistros'] = $this->EdicaoDAO->totalRegistros();
+        $consulta = $this->EdicaoDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->EdicaoDAO->consultarTudo($array));
+        $totalRegTabela = $this->EdicaoDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'edicao/consultar/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['edicoes']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Edições";
         $this->chamaView("edicoes", "organizador", $data, 1);
     }

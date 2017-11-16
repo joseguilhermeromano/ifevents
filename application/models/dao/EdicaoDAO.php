@@ -66,8 +66,7 @@
         }
         
         private function insereAlteraParcerias($obj){
-            $this->db->where('apoia_edic_cd', $obj->getCodigo());
-            $this->db->delete('Apoia');
+            $this->db->delete('Apoia', array('apoia_edic_cd' => 22));
             if(null !==$obj->getParcerias()){
                 foreach ($obj->getParcerias() as $key => $value) {
                     $this->db->insert('Apoia', 
@@ -235,6 +234,21 @@
             $this->db->where('Edicao.edic_cd', $codigo);
             $query = $this->db->get();
             $consulta = $query->result_object()[0];
+            return $this->setaValores($consulta);
+        }
+        
+        public function consultarPorLink($uri){
+            $this->db->select("Edicao.*, Email.*, Telefone.* ");
+            $this->db->from("Edicao");
+            $this->db->join('Email', 'Edicao.edic_email_cd = Email.email_cd','left');
+            $this->db->join('Telefone', 'Edicao.edic_tele_cd = Telefone.tele_cd','left');
+            $this->db->where('Edicao.edic_link', $uri);
+            $query = $this->db->get();
+            $consulta = $query->result_object()[0];
+            return $this->setaValores($consulta);
+        }
+        
+        private function setaValores($consulta){
             $conferencia = $this->ConferenciaDAO->consultarCodigo($consulta->edic_conf_cd);
             $comite = $this->ComiteDAO->consultarCodigo($consulta->edic_comi_cd);
             $this->edicao->setConferencia($conferencia);
@@ -310,7 +324,7 @@
         }
         
         private function consultaParcerias($codigoEdicao){
-             $this->db->select("inst_cd, inst_abrev, inst_nm");
+             $this->db->select("*");
              $this->db->from("Instituicao");
              $this->db->join('Apoia', 'Instituicao.inst_cd = Apoia.apoia_inst_cd','left');
              $this->db->where('Apoia.apoia_edic_cd', $codigoEdicao);
@@ -318,11 +332,13 @@
              if($query->num_rows() > 0){
                 $consulta = $query->result();
                 $parcerias = new ArrayObject();
-                foreach ($consulta as $key => $value) {
+                foreach ($consulta as $key => $obj) {
                     $parceria = new $this->instituicao;
-                    $parceria->setCodigo($value->inst_cd);
-                    $parceria->setNome($value->inst_nm);
-                    $parceria->setAbreviacao($value->inst_abrev);
+                    $parceria->setCodigo($obj->inst_cd);
+                    $parceria->setNome($obj->inst_nm);
+                    $parceria->setAbreviacao($obj->inst_abrev);
+                    $parceria->setDescricao($obj->inst_desc);
+                    $parceria->setLogo($obj->inst_logo);
                     $parcerias->append($parceria);
                 }
                 return $parcerias;
@@ -348,7 +364,7 @@
         }
 
         public function excluir($obj) {
-            $this->db->where('ende_id', $obj->ende_id);
+            $this->db->where('edic_cd', $obj->getCodigo());
             return $this->db->delete('edicao');
         }
             

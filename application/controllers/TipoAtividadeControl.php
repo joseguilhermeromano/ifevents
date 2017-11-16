@@ -1,9 +1,8 @@
 <?php if ( !defined( 'BASEPATH') ) exit( 'No direct script access allowed');
 
   require_once 'PrincipalControl.php';
-  require_once 'InterfaceControl.php';
 
-class TipoAtividadeControl extends PrincipalControl implements InterfaceControl{
+class TipoAtividadeControl extends PrincipalControl{
 
   public function __construct(){
     parent::__construct();
@@ -12,25 +11,26 @@ class TipoAtividadeControl extends PrincipalControl implements InterfaceControl{
     }
 
     public function cadastrar() {
-      if (empty($this->tipoatividade->input->post())){
-        $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade",
-        array("title"=>"IFEvents - Tipo de Atividade - Organizador"), 1);
-        return 0;
-      }
-      $this->recebeValores();
-      if( $this->valida()==false){
-        $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-      }
-      else{
-        $this->tipoatividade->setaValores();
-        if($this->TipoAtividadeDAO->inserir($this->tipoatividade)==true){
-          $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
-        }else{
-          $this->session->set_flashdata('error', 'Atividade não cadastrada!');
+        if (empty($this->tipoatividade->input->post())){
+          $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade",
+          array("title"=>"IFEvents - Tipo de Atividade - Organizador"), 1);
+          return 0;
         }
-      }
-      $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade",
-      array("title"=>"IFEvents - Tipo de Atividade - organizador"), 1);
+        $this->recebeValores();
+        if( $this->valida()==false){
+          $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+        }
+        else{
+          $this->tipoatividade->setaValores();
+          if($this->TipoAtividadeDAO->inserir($this->tipoatividade)==true){
+            $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
+            redirect('tipoatividade/consultarTudo');
+          }else{
+            $this->session->set_flashdata('error', 'Atividade não cadastrada!');
+          }
+        }
+        $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade",
+        array("title"=>"IFEvents - Tipo de Atividade - organizador"), 1);
     }
 
     public function listaconferencia(){
@@ -59,24 +59,38 @@ class TipoAtividadeControl extends PrincipalControl implements InterfaceControl{
     	$this->chamaView("updateTipoAtividade", "organizador/tipoAtividade", $data, 1);
     }
 
-    public function consultar() {
-      $data['content'] = $this->ConferenciaDAO->consultarCodigo($codigo);
-    	$data['title']  = "IFEvents - Lista Conferencia - organizador";
-    	$this->chamaView("formUpdate", "organizador", $data, 1);
-    }
-
     public function consultarTudo() {
-      $data['atividade'] = $this->TipoAtividadeDAO->consultarTudo();
-    	$data['title']  = "IFEvents - Lista Tipo de Conferencia - organizador";
-      $this->chamaView("listatipoatividade", "organizador", $data, 1);
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
+        $busca=null;
+        $array= null;
+        if( $this->input->get('busca') !== null){
+            $busca = $this->input->get('busca');
+            $array = array('tiat_nm' => $busca);
+        }
+        $consulta = $this->TipoAtividadeDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->TipoAtividadeDAO->consultarTudo($array));
+        $totalRegTabela = $this->TipoAtividadeDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'tipoatividade/consultarTudo/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['atividade']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
+        $data['title']="IFEvents - Tipos de Atividades";
+        $this->chamaView("listatipoatividade", "organizador", $data, 1);
     }
-
-		public function excluir($codigo) {
+    
+    
+    public function excluir($codigo) {
       if( $this->TipoAtividadeDAO->excluir($this->uri->segment(3)) == false){
-    	   $this->session->set_flashdata('error', 'Arquivo não pode ser excluido!');
+    	   $this->session->set_flashdata('error', 'Tipo de atividade não pode ser excluida!');
       }
     	else{
-    	   $this->session->set_flashdata('success', 'Arquivo deletado com sucesso!');
+    	   $this->session->set_flashdata('success', 'Tipo de atividade excluída com sucesso!');
     		 redirect('tipoatividade/consultarTudo/');
     	}
     }

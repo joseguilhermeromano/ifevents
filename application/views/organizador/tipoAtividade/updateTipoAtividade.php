@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<?php echo '<br><center>'.form_submit("btn_atualizar", "Atualizar",array('class' => 'btn btn-success button',
+<?php echo "<br><center><a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;".form_submit("btn_atualizar", "Atualizar",array('class' => 'btn btn-success button',
     "onclick"=>"nicEditors.findEditor('editor').saveContent();"))."</center>";
     echo form_close();
     endforeach;

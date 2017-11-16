@@ -62,27 +62,34 @@
                 </span>
               </a></li>
 
+              
+              <?php 
+                $uri = $this->session->userdata('link_evento_selecionado');
+                if(!empty($uri)){
+                $partes = explode("/", $uri);
+                $string = strtoupper($partes[sizeof($partes)-1]);
+                $nomeEvento = str_replace("-", "º ", $string);
+              ?>
+              <li><a href="<?php echo base_url($uri); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
+                <span>
+                  <span><?= $nomeEvento; ?></span>
+                  <span class="hidden-xs"><?= $nomeEvento; ?></span>
+                </span>
+              </a></li>
+              <?php }?>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle hover-effect" data-toggle="dropdown" role="button" aria-expanded="false">
                 <span>
-                  <span>Evento <b class="caret"></b></span>
-                  <span class="hidden-xs">Evento <b class="caret"></b></span>
+                  <span>Cadastro <b class="caret"></b></span>
+                  <span class="hidden-xs">Cadastro <b class="caret"></b></span>
                 </span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("evento"); ?>">Sobre o Evento</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("programacao"); ?>">Programação</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("submissao"); ?>">Submissão</a></li>
-                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("resultadosAnais"); ?>">Resultados e Anais</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("inicio/cadastrar/participante"); ?>">Participante</a></li>
+                  <li><a data-toggle="collapse" data-target=".navbar-collapse.in" href="<?php echo base_url("inicio/cadastrar/revisor"); ?>">Revisor</a></li>
                 </ul>
               </li>
-              <li><a href="<?php echo base_url("/cadastraParticipante"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in"  class="hover-effect">
-                <span>
-                  <span>CADASTRO</span>
-                  <span class="hidden-xs">CADASTRO</span>
-                </span>
-              </a></li>
-              <li><a href="<?php echo base_url("/contato"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
+              <li><a href="<?php echo base_url("/inicio/contato"); ?>" data-toggle="collapse" data-target=".navbar-collapse.in" class="hover-effect">
                 <span>
                   <span>CONTATO</span>
                   <span class="hidden-xs">CONTATO</span>

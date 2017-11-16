@@ -1,3 +1,4 @@
+<?php $tipoUsuarioLogado = $this->session->userdata("usuario")->user_tipo; ?>
 <div class="container-fluid">
 <h2><span class="fa fa-file-text-o"></span><b> Detalhes do Trabalho</b></h2>
 <hr>
@@ -22,12 +23,20 @@
                                     <td><?=  $artigo->getTitulo(); ?></td>
                                 </tr>
                                 <tr>
+                                    <?php if($tipoUsuarioLogado != 2){?>
                                     <th class="col-xs-4">Orientador</th>
                                     <td><?= $artigo->getOrientador(); ?></td>
+                                    <?php }?>
                                 </tr>
                                 <tr>
                                     <th class="col-xs-4">Autores</th>
                                     <td><?= somenteLetras(implode(', ',$artigo->getAutores())); ?></td>
+                                </tr>
+                                <tr>
+                                    <?php if($tipoUsuarioLogado != 2){?>
+                                    <th class="col-xs-4">Autor Responsável</th>
+                                    <td><?= $artigo->getAutorResponsavel()->getNomeCompleto() ?></td>
+                                    <?php }?>
                                 </tr>
                                 <tr>
                                     <th class="col-xs-4">Eixo Temático</th>
@@ -88,7 +97,8 @@ $linhas = 0;
                 <tbody>
                     <tr>
                         <th class="col-xs-2">Data/Hora</th>
-                        <td><?= desconverteDataMysql($submissao->getData()); ?> às <?= date('H:i',(int) $submissao->getHora()); ?> </td>
+                        <td><?= desconverteDataMysql($submissao->getData()); ?> 
+                            às <?= date('H:i',(int) $submissao->getHora()); ?> </td>
                     </tr>
                     <tr>
                         <th class="col-xs-2">Arquivo sem identificação</th>
@@ -96,7 +106,7 @@ $linhas = 0;
                         . 'sem-identificacao/'.$submissao->getCodigo()); ?>" class="btn-opcao">
                         <span class="glyphicon glyphicon-save-file"></span> <?= $submissao->getNomeArqSemIdent(); ?></a></td>
                     </tr>
-                    <?php if($this->session->userdata("usuario")->user_tipo != 2 ){ ?>
+                    <?php if($tipoUsuarioLogado != 2 ){ ?>
                     <tr>
                         <th class="col-xs-2">Arquivo com identificação</th>
                         <td>
@@ -110,33 +120,40 @@ $linhas = 0;
                 </tbody>
             </table>
             <br>
-            <?php if(!empty($submissao->getAvaliacao())){ ?>
+            <?php 
+                $avaliacoes = $submissao->getAvaliacoes();
+                if(!empty($avaliacoes)){ 
+                    foreach($avaliacoes as $avaliacao):
+            ?>
             <table class="table">
                 <thead>
                     <th colspan="2" class="text-center">Avaliação </th>
                 </thead>
                 <tbody>
-                    <?php if($this->session->userdata("usuario")->user_tipo != 1 ){?>
+                    <?php if($tipoUsuarioLogado != 1 ){?>
                     <tr>
                         <th class="col-xs-3">Revisor</th>
-                        <td><?= $submissao->getAvaliacao()->getRevisor()->getNomeCompleto(); ?></td>
+                        <td><?= $avaliacao->getRevisor()->getNomeCompleto(); ?></td>
                     </tr>
                     <?php } ?>
                     <tr>
-                        <th class="col-xs-3">Data</th>
-                        <td><?= desconverteDataMysql($submissao->getAvaliacao()->getData()); ?></td>
+                        <th class="col-xs-3">Data/Hora</th>
+                        <td><?= desconverteDataMysql($avaliacao->getData()); ?>
+                        às <?= date('H:i',(int) $avaliacao->getHora()); ?></td>
                     </tr>
                     <tr>
                         <th class="col-xs-3">Resultado</th>
-                        <td><?= $submissao->getAvaliacao()->getStatus(); ?></td>
+                        <td><?= $avaliacao->getStatus(); ?></td>
                     </tr>
                     <tr>
                         <th class="col-xs-3">Parecer do Revisor</th>
-                        <td><?= $submissao->getAvaliacao()->getParecer(); ?></td>
+                        <td><?= $avaliacao->getParecer(); ?></td>
                     </tr>
                 </tbody>
             </table>
-            <?php } ?>
+            <?php 
+                    endforeach;
+                } ?>
       </div>
     </div>
 </div>

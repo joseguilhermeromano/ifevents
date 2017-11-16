@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2><span class="glyphicon glyphicon-floppy-save"></span><b> Cadastrar Atividades</b></h2>
+<h2><span class="fa fa-plus"></span><b> Cadastrar Atividades</b></h2>
 <hr>
 <br>
 
@@ -7,14 +7,8 @@
         $this->load->helper('html');
         echo alert($this->session);
 ?>
-<div class="row">
-    <br>
-    <div class="col-sm-12">
-         <a class="btn btn-default margin-button" href='<?php echo site_url('/atividade/consultarTudo/'); ?>' style="float:left"><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
-    </div>
-</div>
 
-<br><br>
+
 
 <?php
     echo form_open_multipart( 'atividade/cadastrar', 'role="form" class="formsignin"' );
@@ -119,7 +113,7 @@
     </div>
 </div>
 
-<?php echo '<br><center>'.form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button',
+<?php echo "<br><center><a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;".form_submit("btn_atualizar", "Enviar",array('class' => 'btn btn-success button',
     "onclick"=>"nicEditors.findEditor('editor').saveContent();"))."</center>";
 
 echo form_close();

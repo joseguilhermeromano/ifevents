@@ -2,7 +2,7 @@
     require_once 'PrincipalControl.php';
     require_once 'InterfaceControl.php';
 
-    class InscricaoControl extends PrincipalControl implements InterfaceControl{
+    class InscricaoControl extends PrincipalControl{
 
         public function __construct(){
             parent::__construct();
@@ -30,7 +30,7 @@
         }
 
         public function alterar($codigo){
-            $this->consultar();
+            $this->atividade = $this->AtividadeDAO->consultarCodigo($codigo);
             $this->atividade->setaValores();
             $this->AtividadeDAO->alterar($this->atividade);
         }

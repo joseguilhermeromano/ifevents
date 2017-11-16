@@ -63,7 +63,7 @@ class SubmissaoDAO extends CI_Model implements DAO{
     
     
     private function setaValores($consulta){
-        $submissao = new $this->submissao;
+        $submissao = new SubmissaoModel();
         $submissao->setCodigo($consulta->subm_cd);
         $artigo = $this->ArtigoDAO->consultarCodigo($consulta->subm_arti_cd);
         $submissao->setArtigo($artigo);
@@ -74,15 +74,14 @@ class SubmissaoDAO extends CI_Model implements DAO{
         $submissao->setNomeArqComIdent($consulta->subm_arq2_nm);
         $submissao->setArqSemIdent($consulta->subm_arq1);
         $submissao->setArqComIdent($consulta->subm_arq2);
-        $avaliacao = $this->AvaliacaoDAO->consultarPorCodigoSubmissao($consulta->subm_cd);
-        $submissao->setAvaliacao($avaliacao);
+        $avaliacoes = $this->AvaliacaoDAO->consultarPorCodigoSubmissao($consulta->subm_cd);
+        $submissao->setAvaliacoes($avaliacoes);
         return $submissao;
     }
 
     public function consultarCodigo($codigo){
-        $this->db->select('Submissao.*, Avaliacao.aval_cd');
+        $this->db->select('*');
         $this->db->from('Submissao');
-        $this->db->join('Avaliacao', 'Submissao.subm_cd = Avaliacao.aval_subm_cd','left');
         $this->db->where('subm_cd', $codigo);
         $query = $this->db->get();
         if($query->num_rows()>0){
@@ -93,9 +92,8 @@ class SubmissaoDAO extends CI_Model implements DAO{
     }
     
     public function consultarUltimaSubmissao($codigoArtigo){
-        $this->db->select('Submissao.*, Avaliacao.aval_cd');
+        $this->db->select('*');
         $this->db->from('Submissao');
-        $this->db->join('Avaliacao', 'Submissao.subm_cd = Avaliacao.aval_subm_cd','left');
         $this->db->where('subm_arti_cd', $codigoArtigo);
         $this->db->order_by('subm_cd', 'desc');
         $query = $this->db->get();
@@ -112,13 +110,14 @@ class SubmissaoDAO extends CI_Model implements DAO{
         $this->db->from('Submissao');
         $this->db->join('Avaliacao', 'Submissao.subm_cd = Avaliacao.aval_subm_cd','left');
         $this->db->where('subm_arti_cd', $codigo);
+        $this->db->group_by('subm_cd');
         $query = $this->db->get();
-        $submissoes = array();
+        $submissoes = new ArrayObject(); 
         if($query->num_rows()>0){
             $consulta = $query->result_object();
             foreach($consulta as $row){
                 $submissao = $this->setaValores($row);
-                array_push($submissoes, $submissao);
+                $submissoes->append($submissao);
                 unset($submissao);
             }
             return $submissoes;

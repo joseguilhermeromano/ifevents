@@ -41,7 +41,7 @@
     <div class="col-sm-12">
         <div class="form-group">
         <b><?php echo form_label( 'Autor(es) ', 'autor' ); ?></b><br>
-            <select name="autores[]" class="form-control consultaUsuario" multiple="multiple">
+            <select name="autores[]" class="form-control consultaVariosUsuarios" multiple="multiple">
             <?php if(isset($artigo) && $artigo->getAutores()!==null){ ?>
                 <?php foreach ($artigo->getAutores() as $key => $value) { ?>
                 <option selected value="<?= $value; ?>">
@@ -53,6 +53,23 @@
     </div>
 </div>
 
+<?php if($this->session->userdata('usuario')->user_tipo == 3){ ?>
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+        <b><?php echo form_label( 'Autor Responsável ', 'autorrespons' ); ?></b><br>
+            <select name="autorrespons" class="form-control consultaUnicoUsuario" multiple="multiple">
+            <?php if(isset($artigo) && $artigo->getAutorResponsavel()!== null){ ?>
+                
+                <option selected value="<?= $artigo->getAutorResponsavel()->getCodigo(); ?>">
+                 <?= $artigo->getAutorResponsavel()->getNomeCompleto(); ?> </option>
+                
+            <?php } ?>
+            </select>
+        </div>
+    </div>
+</div>
+<?php }?>
 
 <div class="row">
 
@@ -107,7 +124,7 @@
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 col-offset-sm-9">
+    <div class="col-xs-6 col-xs-offset-2">
 
          <a class="btn btn-default margin-button" href='<?= site_url($regrasSubmissao); ?>' 
             style="float:right" target="_blank">
@@ -123,7 +140,7 @@
         Declaro que li e concordo com as diretrizes de submissão de trabalhos para este evento.
     </div>
 </div>
-<?php echo "<br><center><a href='".base_url("artigo/consultar/")."' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
+<?php echo "<br><center><a href='javascript: window.history.back();' class='btn btn-default button'>Voltar</a>&nbsp;&nbsp;"
         .form_submit("btn_atualizar"
                 , "Próximo"
                 ,array('class' => 'btn btn-success button'))."</center>";

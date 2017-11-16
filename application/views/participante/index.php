@@ -2,73 +2,80 @@
 <h2><span class="glyphicon glyphicon-home"></span><b> Início</b></h2>
 <hr>
 <br>
-<h3><span class="glyphicon glyphicon-calendar"></span><b> Datas Importantes</b></h3><br>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-6">
-            <div class="postit">
-                <i class="pin"></i>
-                <div class="postit-conteudo">
-                    <div class="postit-data">
-                        25
+<div class="mensagem-entrada">Olá, Sr(a) <b><?= $this->session->userdata('usuario')->user_nm; ?></b>! Seja bem vindo à plataforma <b>IFEVENTS!</b></div><br>
+<h4><span class="glyphicon glyphicon-alert"></span><b> Indicadores de Desempenho</b></h4>
+<br>
+ <div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="glyphicon glyphicon-open-file fa-4x"></i>
                     </div>
-                    <div class="postit-mes-ano">
-                        Fev 2016
-                    </div>
-                    <div class="postit-detalhes">
-                        Entrega final do Trabalho.
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6">
-            <div class="postit">
-                <i class="pin"></i>
-                <div class="postit-conteudo">
-                    <div class="postit-data">
-                        26
-                    </div>
-                    <div class="postit-mes-ano">
-                        Fev 2016
-                    </div>
-                    <div class="postit-detalhes">
-                        Entrega final do Trabalho.
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"><?= isset($totalTrabalhos) ? $totalTrabalhos : 0?></div>
+                        <div class="font-panel"><b>Trabalhos Submetidos!</b></div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6">
-            <div class="postit">
-                <i class="pin"></i>
-                <div class="postit-conteudo">
-                    <div class="postit-data">
-                        27
-                    </div>
-                    <div class="postit-mes-ano">
-                        Fev 2016
-                    </div>
-                    <div class="postit-detalhes">
-                        Entrega final do Trabalho.
-                    </div>
+            <a href="<?= base_url('artigo/consultar') ;?>">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver Detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                    <div class="clearfix"></div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6 col-xs-6">
-            <div class="postit">
-                <i class="pin"></i>
-                <div class="postit-conteudo">
-                    <div class="postit-data">
-                        28
-                    </div>
-                    <div class="postit-mes-ano">
-                        Fev 2016
-                    </div>
-                    <div class="postit-detalhes">
-                        Entrega final do Trabalho.
-                    </div>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="fa fa-exclamation-circle fa-4x"></i>
+                    </div>
+                    <div class="col-xs-10 text-right">
+                        <div class="huge"><?= isset($trabalhosAndamento) ? $trabalhosAndamento : 0?></div>
+                        <div class="font-panel"><b>Trabalhos em andamento!</b></div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?= base_url('artigo/consultar'); ?>">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver Detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <i class="fa fa-check fa-4x"></i>
+                    </div>
+                    <div class="col-xs-10 text-right">
+                        <div class="huge"><?= isset($trabalhosFinalizados) ? $trabalhosFinalizados : 0?></div>
+                        <div class="font-panel"><b>Trabalhos finalizados!</b></div>
+                    </div>
+                </div>
+            </div>
+            <a href="<?= base_url('artigo/consultar'); ?>">
+                <div class="panel-footer">
+                    <span class="pull-left">Ver Detalhes</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 <br><br>
 <?php 
             $eventosRecentes = $this->session->userdata('eventos_recentes');
@@ -76,7 +83,7 @@
             $linhas = 0;
             if($eventosRecentes !== null){
 ?>
-<h3><span class="fa fa-flask"></span><b> Eventos Recentes</b></h3><br><br>
+<h4><span class="fa fa-flask"></span><b> Eventos Recentes</b></h4><br>
     <div class="row">
 <?php   
 
@@ -92,10 +99,12 @@
                           <span class="glyphicon glyphicon-calendar"></span>
                             <?= desconverteDataMysql($evento->regr_even_ini_dt); ?></h4>
                         <br>
-                        <p><?= $evento->edic_apresent; ?></p>
+                        <p class="text-justify"><?= $evento->conf_desc; ?></p>
                         <br>
                          <a href="<?= base_url('artigo/cadastrar/'.$evento->edic_cd); ?>" 
                           class="botao-detalhar-cinza"> Submeter Trabalho</a>
+                         <a href="<?= base_url('atividade/consultarTudo?busca='.$evento->edic_num.'º '.$evento->conf_abrev); ?>" 
+                          class="botao-detalhar"> Inscrever em atividades</a>
                   </div>
                 </div>
             </div>

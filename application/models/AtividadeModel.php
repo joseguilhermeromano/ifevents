@@ -16,6 +16,7 @@
     private $local;
     private $quantidadeVagas;
     private $tipoAtividade;
+    private $codigoEdicao;
 
     public function getCodigo(){
       return $this->codigo;
@@ -96,18 +97,13 @@
     public function setTipoAtividade($tipoAtividade){
       $this->tipoAtividade = $tipoAtividade;
     }
+    
+    public function getCodigoEdicao(){
+      return $this->codigoEdicao;
+    }
 
-    public function setaValores(){
-      $this->ativ_cd          = $this->getCodigo();
-      $this->ativ_nm          = $this->getTitulo();
-    	$this->ativ_desc        = $this->getDescricao();
-      $this->ativ_responsavel = $this->getResponsavel();
-      $this->ativ_dt          = $this->getData();
-      $this->ativ_hora_ini    = $this->getInicio();
-      $this->ativ_hora_fin    = $this->getTermino();
-      $this->ativ_local       = $this->getLocal();
-      $this->ativ_vagas_qtd   = $this->getQuantidadeVagas();
-      $this->ativ_tiat_cd     = $this->getTipoAtividade();
+    public function setCodigoEdicao($codigoEdicao){
+      $this->codigoEdicao = $codigoEdicao;
     }
 
 }

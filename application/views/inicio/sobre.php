@@ -1,3 +1,19 @@
+<div id="inicio">
+  <div class="inicio-header">
+    <div class="banner">
+      <img class="img-responsive banner-image" src="<?php echo base_url("assets/area-externa/img/banner-sobre.jpg"); ?>" width="100%">
+    </div>
+    <div class="display-middle margin-top">
+      <h4>IFEVENTS</h4>
+      <h1>Quem somos ?</h1>
+      <hr>
+        <!-- arrow bounce --> 
+        <div class="agileits-arrow bounce animated"><a href="#sobre" class="scroll"><i class="glyphicon glyphicon-menu-down" aria-hidden="true"></i></a></div>
+        <!-- //arrow bounce -->
+    </div>
+  </div>
+</div>
+
 <!-- Container (Sobre Section) -->
 <div id="sobre" class="section">
   <div class="container">
