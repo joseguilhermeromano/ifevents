@@ -1,6 +1,5 @@
 <?php if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
 require_once 'PrincipalControl.php';
-require_once 'InterfaceControl.php';
 
 class AvaliacaoControl extends PrincipalControl{
 
@@ -102,10 +101,6 @@ class AvaliacaoControl extends PrincipalControl{
             $this->avaliacao->setData(date('y-m-d'));
             $this->avaliacao->setHora(date('H:i'));
         }
-
-	public function alterar($codigo){
-
-	}
         
         private function consultaModaEixosParaSelecionar($codigoEdicao, $data){
             
@@ -181,67 +176,74 @@ class AvaliacaoControl extends PrincipalControl{
                 $this->session->set_flashdata("warning", "Não há eventos com o período "
                 . "de revisões em aberto ou você talvez não tenha aceitado o convite"
                 . " para participar das revisões! <br>Por favor, verique o seu e-mail!");
-                $data['title'] = "IFEvents - Revisões Pendentes";
-                return $this->chamaView("revisoes-pendentes", "avaliador", $data, 1);
-            }
-            
-            $selecinouModaEixos = $this->selecionouModaEixos($codigoEdicao,$codigoRevisor);
+            }else{
+                $selecinouModaEixos = $this->selecionouModaEixos($codigoEdicao,$codigoRevisor);
 
-            if($selecinouModaEixos == false){
-                return $this->selecionarModalidadesEixos($codigoEdicao, $codigoRevisor);
+                if($selecinouModaEixos == false){
+                    return $this->selecionarModalidadesEixos($codigoEdicao, $codigoRevisor);
+                }
             }
-            
             $this->consultarRevisoesPendentes($codigoRevisor);
 	}
         
         private function consultarRevisoesPendentes($codigoRevisor){
-            $data = array("title"=>"IFEvents - Revisões Pendentes");
-            $limite = 10;
-            $pagina = $this->input->get('pagina');
-            $numPagina = $pagina !== null ? $pagina : 0;
-            $consulta = array('aval_user_cd' => $codigoRevisor);
-            $busca = $this->input->get('busca');
-            
-            if( $busca!== null){
-                $consulta['arti_title'] = $busca;
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
+            $array= array('aval_user_cd' => $codigoRevisor);
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array['arti_title'] = $busca;
             }
-
-            $revisoesPendentes = $this->AvaliacaoDAO->consultarTudo($consulta,
-                $limite,$numPagina);
-            
-            if(!empty($revisoesPendentes)){
-                $totalRegistros = count($this->AvaliacaoDAO->consultarTudo($consulta));
-                $data['revisoes'] = $revisoesPendentes;
-                $data['totalRegistros'] = $totalRegistros;
-                $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros
-                , 'revisao/consultar/?busca='.$busca);
-            }else{
-                $this->session->set_flashdata('info', 'Não há trabalhos para serem revisados!');
-            }
-
+            $consulta = $this->AvaliacaoDAO->consultarTudo($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->AvaliacaoDAO->consultarTudo($array));
+            $totalRegTabela = $this->AvaliacaoDAO->totalRevisoesPendentes($codigoRevisor);
+            $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+            $hrefPaginacao = 'revisao/consultar/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+            $data['revisoes']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegistros;
+            $data['title']="IFEvents - Revisões Pendentes";
             return $this->chamaView("revisoes-pendentes", "avaliador", $data, 1);
         }
 
 	public function consultarAtribuicoes(){
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
             $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
-            if( $this->input->get('busca') !== ''){
+            $array=array('mote1.mote_edic_cd' => $codigoEdicao);
+            if( $this->input->get('busca') !== null){
                 $busca = $this->input->get('busca');
                 $array = array(
                       'mote1.mote_edic_cd' => $codigoEdicao
                       ,'arti_title' => $busca);
-            }else{
-                $busca=null;
-                $array=array('mote1.mote_edic_cd' => $codigoEdicao);
             }
-            $data = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($array);
-            $totalRegistros = sizeof($data);
-            if($data == null && $busca == null){
-                    $this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
+            $consulta = $this->AvaliacaoDAO
+                ->consultarTrabalhosAindaNaoAtribuidos($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->AvaliacaoDAO
+                ->consultarTrabalhosAindaNaoAtribuidos($array));
+            if($consulta == null){
+                $this->session->set_flashdata('info', 'Não há trabalhos para serem atribuídos!');
             }
-            $this->chamaView("atribuicoes-submissoes", "organizador",
-            array("title"=>"IFEvents - Atribuição de Trabalhos"
-            , "atribuicoes" => $data
-            , "totalRegistros" => $totalRegistros), 1);
+            $consultaNovasSubm = array('mote1.mote_edic_cd' => $codigoEdicao);
+            $submNaoAtrib = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($consultaNovasSubm);
+            $totalRegTabela = count($submNaoAtrib);
+            $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+            $hrefPaginacao = 'revisao/consultar-atribuicoes/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+            $data['atribuicoes']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegistros;
+            $data['title']="IFEvents - Atribuição de Trabalhos";
+            $this->chamaView("atribuicoes-submissoes", "organizador", $data, 1);
 	}
 
 	public function consultaRevisoresAtribuicao(){
@@ -266,21 +268,28 @@ class AvaliacaoControl extends PrincipalControl{
 	}
         
         public function consultarResultadosRevisoes(){
-            $limite= 10;
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
             $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
-            $busca= $this->input->get('busca');
             $array=array('mote_edic_cd' => $codigoEdicao);
-            $pagina = $this->input->get('pagina');
-            $numPagina = $pagina !== null ? $pagina : 0;
-            if( !empty($busca) ){
+            if( $this->input->get('busca') !== null){
+                $busca= $this->input->get('busca');
                 $array['arti_title'] = $busca;
             }
-            $resultadosRevisoes = $this->AvaliacaoDAO->
-                consultarResultadosRevisoes($array,$limite, $numPagina);
-            $totalRegistros = count( $resultadosRevisoes );
-            $data['resultadosRevisoes'] = $resultadosRevisoes;
-            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros
-                , 'revisao/consultar-resultados/?busca='.$busca);
+            $consulta = $this->AvaliacaoDAO->
+                consultarResultadosRevisoes($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->AvaliacaoDAO->
+                consultarResultadosRevisoes($array));
+            $totalRegTabela = $this->AvaliacaoDAO->totalResultadosRevisao($codigoEdicao);
+            $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+            $hrefPaginacao = 'revisao/consultar-resultados/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+            $data['resultadosRevisoes']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
             $data['totalRegistros'] = $totalRegistros;
             $data['title'] = "IFEvents - Resultados das Revisões";
             $this->chamaView("resultados-revisoes", "organizador", $data, 1);

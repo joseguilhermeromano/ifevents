@@ -25,20 +25,31 @@
         </div>
     </div><!-- /row --><br><br>
     <div class="row">
-        <div class="form-group col-md-3">
-            <?php echo form_label( 'Número de Registros:', 'limite'); ?>
-            <select name="limitereg" id="limitereg" class="selectComum form-control" onchange="document.forms['form-busca'].submit();">
-                <option value="10" <?= $limiteReg == "10" ? 'selected' : ''?>>10</option>
-                <option value="25" <?= $limiteReg == "25" ? 'selected' : ''?>>25</option>
-                <option value="50" <?= $limiteReg == "50" ? 'selected' : ''?>>50</option>
-                <option value="100" <?= $limiteReg == "100" ? 'selected' : ''?>>100</option>
-                <option value="500"<?= $limiteReg == "500" ? 'selected' : ''?> >500</option>
-                <option value="0"<?= $limiteReg == "0" ? 'selected' : ''?> >Tudo</option>
-            </select>
+        <div class="col-lg-2 col-lg-offset-10 
+             col-md-3 col-md-offset-9 
+             col-sm-4 col-sm-offset-8 
+             col-xs-6 col-xs-offset-6
+             form-group">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                    <p style="font-size: 13px; margin-top:10px">
+                        <?php echo form_label( 'Registros:', 'limite'); ?>
+                    </p>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                    <select name="limitereg" id="limitereg" class="selectComum form-control estilo-input" onchange="document.forms['form-busca'].submit();">
+                        <option value="10" <?= $limiteReg == "10" ? 'selected' : ''?>>10</option>
+                        <option value="25" <?= $limiteReg == "25" ? 'selected' : ''?>>25</option>
+                        <option value="50" <?= $limiteReg == "50" ? 'selected' : ''?>>50</option>
+                        <option value="100" <?= $limiteReg == "100" ? 'selected' : ''?>>100</option>
+                        <option value="500"<?= $limiteReg == "500" ? 'selected' : ''?> >500</option>
+                        <option value="0"<?= $limiteReg == "0" ? 'selected' : ''?> >Tudo</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 </form>
-<br>
 <div class="row" id="ListagemRegistros">
     <div class="col-md-12" id="RegistrosPagina">
         <div class="table-responsive"><!-- TABELA-->

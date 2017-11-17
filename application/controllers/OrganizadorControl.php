@@ -21,8 +21,8 @@ class OrganizadorControl extends UsuarioControl{
             $this->consultarUltimosTresEventos();
             $edicaoAtual = $this->session->userdata('evento_selecionado')->edic_cd;
             $totalTrabalhos = $this->ArtigoDAO->totalArtigosPorEdicao($edicaoAtual);
-            $trabalhosAvaliados = $this->ArtigoDAO->totalRegistrosResultadosFinais($edicaoAtual);
-            $data['trabalhosNaoAvaliados'] = $totalTrabalhos - $trabalhosAvaliados;
+            $trabalhosAvaliados = $this->ArtigoDAO->totalResultadosFinaisArtigos($edicaoAtual);
+            $data['trabalhosNaoAvaliados'] = $this->AvaliacaoDAO->totalResultadosRevisao($edicaoAtual);
             $data['trabalhosAvaliados'] =$trabalhosAvaliados;
             $consulta = array('mote1.mote_edic_cd' => $edicaoAtual);
             $submissoesNaoAtribuidos = $this->AvaliacaoDAO->consultarTrabalhosAindaNaoAtribuidos($consulta);

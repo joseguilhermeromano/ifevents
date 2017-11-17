@@ -74,22 +74,26 @@ class ContatoControl extends PrincipalControl{
     }
     
     public function consultarTudo(){
-        $limite = 10;
-        $numPagina =0;
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
         $busca=null;
-        $array=null;
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
+        $array= null;
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $array = array('cont_nm' => $busca);
         }
-        $data['content']=$this->ContatoDAO->consultarTudo($array, $limite, $numPagina);
-        $data['paginacao'] = $this->geraPaginacao($limite
-                , $this->ContatoDAO->totalRegistros()
-                , 'contato/consultarTudo/?busca='.$busca);
-        $data['totalRegistros'] = $this->ContatoDAO->totalRegistros();
+        $consulta = $this->ContatoDAO->consultarTudo($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->ContatoDAO->consultarTudo($array));
+        $totalRegTabela = $this->ContatoDAO->totalRegistros();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'contato/consultarTudo/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['content']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
+        $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Lista de Contatos";
         $this->chamaView("listacontato", "organizador", $data, 1);
     }

@@ -115,8 +115,8 @@ class UsuarioDAO extends CI_Model{
         $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
-                $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
-                $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
+            $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
+            $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
         }
         if($limite){
             $this->db->limit($limite, $numPagina);

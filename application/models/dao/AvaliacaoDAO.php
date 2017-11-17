@@ -192,6 +192,15 @@ class AvaliacaoDAO extends CI_Model implements DAO{
         $this->db->where('edre_user_cd', $codigoRevisor);
         return count($this->db->get());
     }
+    
+    public function totalResultadosRevisao($codigoEdicao){
+        return count($this->consultarResultadosRevisoes
+           (array('mote_edic_cd' => $codigoEdicao)));
+    }
+    
+    public function totalRevisoesPendentes($codigoRevisor){
+        return count($this->consultarTudo(array('aval_user_cd' => $codigoRevisor)));
+    }
 
     public function atribuirRevisor($revisores, $submissao){
         foreach ($revisores as $key => $value) {

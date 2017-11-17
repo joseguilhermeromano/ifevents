@@ -88,12 +88,12 @@
       <a href="<?php echo base_url('modalidade/consultar');?>" class="list-group-item">MODALIDADES</a></li>
       <li id="eixo-tematico"><a href="<?php echo base_url('eixo-tematico/consultar');?>" class="list-group-item">EIXOS TEMÁTICOS</a></li>
       <li id="revisor"><a href="<?php echo base_url("revisor/consultar-revisores");?>" class="list-group-item">REVISORES</a></li>
-      <li><a href="<?php echo base_url("revisao/consultar-atribuicoes");?>" class="list-group-item">ATRIBUIÇÃO DE SUBMISSÕES</a></li>
-      <li><a href="<?php echo base_url("revisao/consultar-resultados");?>" class="list-group-item">RESULTADOS DAS REVISÕES</a></li>
-      <li><a href="<?php echo base_url("artigo/resultados-finais");?>" class="list-group-item">RESULTADOS FINAIS DOS TRABALHOS</a></li>
+      <li id="consultar-atribuicoes"><a href="<?php echo base_url("revisao/consultar-atribuicoes");?>" class="list-group-item">ATRIBUIÇÃO DE SUBMISSÕES</a></li>
+      <li id="consultar-resultados"><a href="<?php echo base_url("revisao/consultar-resultados");?>" class="list-group-item">RESULTADOS DAS REVISÕES</a></li>
+      <li id="resultados-finais"><a href="<?php echo base_url("artigo/resultados-finais");?>" class="list-group-item">RESULTADOS FINAIS DOS TRABALHOS</a></li>
   </ul>
 </li>
-<li class="item-menu">
+<li class="item-menu" id="contato">
     <a href="<?php echo base_url("contato/consultarTudo");?>">
         <span class="glyphicon glyphicon-envelope"></span>  CONTATOS
     </a>

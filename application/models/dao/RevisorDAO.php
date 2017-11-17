@@ -222,5 +222,15 @@ class RevisorDAO extends UsuarioDAO{
         }
         return false;
     }
+    
+    public function totalRegRevConvidados() {
+        $this->db->select("user_cd, user_status, user_nm, Edicao_Revisor.*");
+        $this->db->from("User");
+        $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
+        $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
+        $this->db->join('Edicao_Revisor', 'User.user_cd = Edicao_Revisor.edre_user_cd', '');
+        $query = $this->db->get();
+        return count($query->result_object());
+    }
 
 }

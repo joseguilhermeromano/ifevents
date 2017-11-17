@@ -105,47 +105,53 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
 
 
         public function consultar() {
-            $limite = 10;
-            $numPagina =0;
-            $autor = $this->session->userdata('usuario')->user_cd;
-            if(null !== $this->input->get('pagina')){
-                $numPagina = $this->input->get('pagina');
-            }
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
             $codigoUsuario = $this->session->userdata('usuario')->user_cd;
             $array = array('Autoria.auto_user_cd' => $codigoUsuario);
-            $busca = $this->input->get('busca');
-            if($busca !== null){
+            if( $this->input->get('busca') !== null){
                 $busca = $this->input->get('busca');
                 $array['Artigo.arti_title']= $busca;
             }
-            $data['itens']=$this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite
-                    , $this->ArtigoDAO->totalRegistros($autor)
-                    , 'artigo/consultar/?busca='.$busca);
-            $data['totalRegistros'] = $this->ArtigoDAO->totalRegistros($autor);
+            $consulta = $this->ArtigoDAO->consultarTudo($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->ArtigoDAO->consultarTudo($array));
+            $totalRegTabela = $this->ArtigoDAO->totalArtigosParticipante($codigoUsuario);
+            $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+            $hrefPaginacao = 'artigo/consultar/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+            $data['itens']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegistros;
             $data['title']="IFEvents - Meus Trabalhos";
             $this->chamaView("meusartigos", "participante", $data, 1);
         }
         
         public function consultaResultadosFinais(){
-            $limite = 10;
-            $numPagina =0;
-            if(null !== $this->input->get('pagina')){
-                $numPagina = $this->input->get('pagina');
-            }
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
             $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
-            $codigoUsuario = $this->session->userdata('usuario')->user_cd;
             $array['mote1.mote_edic_cd'] = $codigoEdicao;
-            $busca = $this->input->get('busca');
-            if($busca !== null){
+            if( $this->input->get('busca') !== null){
                 $busca = $this->input->get('busca');
                 $array['Artigo.arti_title']= $busca;
             }
-            $data['itens']=$this->ArtigoDAO->consultarResultadosFinais($array, $limite, $numPagina);
-            $data['paginacao'] = $this->geraPaginacao($limite
-                    , $this->ArtigoDAO->totalRegistros()
-                    , 'artigo/consultar/?busca='.$busca);
-            $data['totalRegistros'] = $this->ArtigoDAO->totalRegistrosResultadosFinais();
+            $consulta = $this->ArtigoDAO->consultarResultadosFinais($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->ArtigoDAO->consultarResultadosFinais($array));
+            $totalRegTabela = $this->ArtigoDAO->totalResultadosFinaisArtigos($codigoEdicao);
+            $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+            $hrefPaginacao = 'artigo/resultados-finais/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+            $data['itens']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegistros;
             $data['title']="IFEvents - Resultados finais dos trabalhos";
             $this->chamaView("resultados-finais-artigos", "organizador", $data, 1);
         }

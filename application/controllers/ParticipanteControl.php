@@ -20,7 +20,7 @@ class ParticipanteControl extends UsuarioControl{
         ,'arti_status' => 'Aguardando Revisão');
         $codigoAutor = $this->session->userdata('usuario')->user_cd;
         $data['trabalhosAndamento']=$this->ArtigoDAO->totalTrabalhosAndamento($codigoAutor);
-        $data['totalTrabalhos']=$this->ArtigoDAO->totalRegistros($codigoAutor);
+        $data['totalTrabalhos']=$this->ArtigoDAO->totalArtigosParticipante($codigoAutor);
         $data['trabalhosFinalizados']=$this->ArtigoDAO->totalTrabalhosFinalizadosAutor($codigoAutor);
         $this->chamaView("index", "participante", $data, 1);
       }

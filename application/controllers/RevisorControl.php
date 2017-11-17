@@ -205,27 +205,29 @@ class RevisorControl extends UsuarioControl{
     }
     
     public function consultarRevisoresConvidados(){
-        $limite = 10;
-        $numPagina =0;
-        $busca = null;
+        $getLimiteReg = $this->input->get('limitereg');
+        $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+        $getPagina = $this->input->get('pagina');
+        $numPagina = $getPagina !== null ? $getPagina : 0;
+        $busca=null;
         $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
         $array = array('Edicao_Revisor.edre_edic_cd'=>$codigoEdicao);
-        
-        if(null !== $this->input->get('pagina')){
-            $numPagina = $this->input->get('pagina');
-        }
-
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
-            $array = array('user_nm'=>$busca, 'Edicao_Revisor.edre_edic_cd'=>$codigoEdicao);
+            $array = array('user_nm'=>$busca
+            , 'Edicao_Revisor.edre_edic_cd'=>$codigoEdicao);
         }
-        
-        $data['revisores'] = $this->RevisorDAO->consultarRevisoresConvidados
-        ($array, $limite, $numPagina);
-        
-        $totalRegistros = $this->RevisorDAO->totalRevisoresConvidados($codigoEdicao);
-        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros,
-        'revisor/consultar/?busca='.$busca);
+        $consulta = $this->RevisorDAO->
+            consultarRevisoresConvidados($array, $limite, $numPagina);
+        $totalRegConsulta = count($this->RevisorDAO->
+            consultarRevisoresConvidados($array));
+        $totalRegTabela = $this->RevisorDAO->totalRegRevConvidados();
+        $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
+        $hrefPaginacao = 'revisor/consultar-revisores/?busca='.$busca.'&limitereg='.$limite;
+        $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
+        $data['revisores']= $consulta;
+        $data['busca']= $busca;
+        $data['limiteReg']= $limite;
         $data['totalRegistros'] = $totalRegistros;
         $data['title']="IFEvents - Revisores";
         $this->chamaView("revisores", "organizador", $data, 1);
