@@ -20,6 +20,8 @@ class RevisorControl extends UsuarioControl{
         $data = array("title"=>"IFEvents - Início - Avaliador");
         $codigoRevisor = $this->session->userdata('usuario')->user_cd; 
         $data['totalRevisoes']=$this->AvaliacaoDAO->totalTrabalhosAtribuidos($codigoRevisor);
+        $data['revisoesAndamento']=$this->AvaliacaoDAO->totalRevisoesPendentes($codigoRevisor);
+        $data['revisoesFinalizadas'] = $this->AvaliacaoDAO->totalRevisoesFinalizadas($codigoRevisor);
         $this->chamaView("index", "avaliador", $data, 1);
     }
     

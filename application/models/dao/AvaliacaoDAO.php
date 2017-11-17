@@ -171,7 +171,7 @@ class AvaliacaoDAO extends CI_Model implements DAO{
                 $this->db->where($key.' LIKE ','%'.$value.'%');
             }
         }
-        $this->db->where('arti_status', 'Aguardando Revisão');
+            $this->db->where('arti_status', 'Aguardando Revisão');
         if($limite){
             $this->db->limit($limite, $numPagina);
         }
@@ -200,6 +200,21 @@ class AvaliacaoDAO extends CI_Model implements DAO{
     
     public function totalRevisoesPendentes($codigoRevisor){
         return count($this->consultarTudo(array('aval_user_cd' => $codigoRevisor)));
+    }
+    
+    public function totalRevisoesFinalizadas($codigoRevisor){
+        $this->db->select("*");
+        $this->db->from("Avaliacao");
+        $this->db->join('Submissao', 'Avaliacao.aval_subm_cd = Submissao.subm_cd', 'left');
+        $this->db->join('Artigo', 'Submissao.subm_arti_cd = Artigo.arti_cd', 'left');
+        $this->db->join('Modalidade_Tematica', 'Artigo.arti_moda_cd = Modalidade_Tematica.mote_cd','left');
+        $this->db->join('Edicao', 'Modalidade_Tematica.mote_edic_cd = Edicao.edic_cd','left');
+        $this->db->join('Edicao_Revisor', 'Edicao.edic_cd = Edicao_Revisor.edre_edic_cd','left');
+        $this->db->group_by('subm_cd');
+        $this->db->where('edre_user_cd', $codigoRevisor);
+        $this->db->where('aval_status <>', 'Revisão Pendente');
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 
     public function atribuirRevisor($revisores, $submissao){
