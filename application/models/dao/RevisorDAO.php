@@ -26,6 +26,7 @@ class RevisorDAO extends UsuarioDAO{
             ,'user_biograf'     =>  $obj->getBiografia()
             ,'user_pass'        =>  $obj->getSenha()
             ,'user_status'      =>  $obj->getStatus()
+            ,'user_token'      =>  $obj->getToken()
             ,'user_tele_cd'     =>  $obj->getCodigoTelefone()
             ,'user_email_cd'    =>  $obj->getCodigoEmail()
         );
@@ -72,7 +73,7 @@ class RevisorDAO extends UsuarioDAO{
 
     public function consultarCodigo($codigo){
 
-        $this->db->select("  user_cd, user_nm, user_rg ,user_cpf, user_tipo, 
+        $this->db->select("  user_cd, user_nm, user_rg ,user_cpf, user_tipo,user_token, 
         user_biograf,user_status,user_pass, user_instituicao,email_email,tele_fone");
 
         $this->db->from("User");
@@ -97,6 +98,7 @@ class RevisorDAO extends UsuarioDAO{
         $this->revisor->setTelefone($consulta->tele_fone);
         $this->revisor->setSenha($consulta->user_pass);
         $this->revisor->setStatus($consulta->user_status);
+        $this->revisor->setToken($consulta->user_token);
         $this->consultaEndereco($this->revisor);
         
         return $this->revisor;

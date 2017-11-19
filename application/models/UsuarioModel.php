@@ -12,7 +12,7 @@ class UsuarioModel extends CI_Model{
         private $senha;
         private $instituicao;
         private $telefone;
-        private $validaemail;
+        private $token;
         private $status;
         private $logradouro;
         private $bairro;
@@ -64,8 +64,8 @@ class UsuarioModel extends CI_Model{
                 return $this->telefone;
         }
 
-        public function getValidaEmail(){
-                return $this->validaemail;
+        public function getToken(){
+                return $this->token;
         }
 
         public function getStatus(){
@@ -143,8 +143,8 @@ class UsuarioModel extends CI_Model{
                 $this->telefone = $telefone;
         }
 
-        public function setValidaEmail($validaemail){
-                $this->validaemail = $validaemail;
+        public function setToken($token){
+                $this->token = $token;
         }
 
         public function setStatus($status){

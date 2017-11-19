@@ -3,7 +3,7 @@
 <br>
 <div class="mensagem-entrada">Olá, Sr(a) Organizador(a) <b><?= $this->session->userdata('usuario')->user_nm; ?></b>! Seja bem vindo à plataforma <b>IFEVENTS!</b></div><br>
 
-<h3><span class="glyphicon glyphicon-alert"></span><b> Indicadores de Desempenho</b></h3>
+<h4><span class="glyphicon glyphicon-alert"></span><b> Indicadores de Desempenho</b></h4>
 <br>
  <div class="row">
     <div class="col-lg-3 col-sm-6">

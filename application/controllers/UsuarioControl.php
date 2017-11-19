@@ -62,9 +62,26 @@ class UsuarioControl extends PrincipalControl{
            $obj->setCpf($this->input->post('cpf'));
         }
         if($cadastro == true){
-            $obj->setValidaEmail(0);
+            $string="IFEVENTS-TOKEN-USUARIO-LOGIN-";
+            $token = md5($string.uniqid());
+            $obj->setToken($token);
+            $this->disparaEmailDeValidacao($obj);
             $obj->setStatus('Não Validado');
         }
+    }
+    
+    private function disparaEmailDeValidacao($obj){
+        $linkValidcao = base_url("usuario/validar?token=".$obj->getToken());
+        $mensagem = "Caro(a) <b>".$obj->getNomeCompleto()."</b>, precisamos ativar sua "
+        . "conta de usuário da plataforma <b>IFEVENTS!</b><br>"
+        .'Por favor, <a href ="'.$linkValidcao.'"> Clique aqui </a>'
+        . ' para ativarmos a sua conta!';
+        $dataMensagem = array("tituloMensagem" => "Validação de Usuário"
+            ,"corpoMensagem" => $mensagem);
+        $htmlMensagem = $this->load->view("template-email/template-email", $dataMensagem, true);
+        $this->envia_email($obj->getEmail()
+                    , 'validação de conta de usuário da plataforma IFEVENTS'
+                    , $htmlMensagem);
     }
 
     public function obtemSenha($obj){
@@ -90,6 +107,25 @@ class UsuarioControl extends PrincipalControl{
     public function consultarParaSelect2(){
         $data = $this->UsuarioDAO->consultarTudo(array('User.user_nm' => $this->input->post('term')));
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+    
+    public function validar(){
+        $token = $this->input->get('token');
+        if(empty($token)){
+            $this->session->set_flashdata('error', 'Não foi possível validar este usuário! '
+            . 'Token não informado!');
+            redirect('/login');
+        }
+        $consulta = array('user_token' => $token);
+        $usuario = $this->UsuarioDAO->consultarTudo($consulta)[0];
+        if($usuario->user_status == 'Não Validado' 
+        && $this->UsuarioDAO->ativaDesativa($usuario->user_cd, 2)==0){
+            $this->session->set_flashdata('success','O Usuário foi validado com sucesso! '
+            . 'Por favor, entre com o login e senha cadastrados!');
+        }else{
+            $this->session->set_flashdata('error','Não foi possível validar o Usuário!');
+        }
+        redirect('/login');
     }
 
     public function ativar($user_cd){

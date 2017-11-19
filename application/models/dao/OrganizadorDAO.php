@@ -23,6 +23,7 @@ class OrganizadorDAO extends UsuarioDAO{
             ,'user_cpf'         =>  $obj->getCpf()
             ,'user_pass'        =>  $obj->getSenha()
             ,'user_status'      =>  $obj->getStatus()
+            ,'user_token'      =>   $obj->getToken()
             ,'user_tele_cd'     =>  $obj->getCodigoTelefone()
             ,'user_email_cd'    =>  $obj->getCodigoEmail()
         );
@@ -69,7 +70,7 @@ class OrganizadorDAO extends UsuarioDAO{
 
     public function consultarCodigo($codigo){
 
-        $this->db->select("  user_cd, user_nm, user_rg ,user_cpf, user_tipo,
+        $this->db->select("  user_cd, user_nm, user_rg ,user_cpf, user_tipo,user_token,
                             user_status,user_pass, user_instituicao,email_email,tele_fone");
 
         $this->db->from("User");
@@ -93,6 +94,7 @@ class OrganizadorDAO extends UsuarioDAO{
         $this->organizador->setTelefone($consulta->tele_fone);
         $this->organizador->setSenha($consulta->user_pass);
         $this->organizador->setStatus($consulta->user_status);
+        $this->organizador->setToken($consulta->user_token);
         $this->consultaEndereco($this->organizador);
         
         return $this->organizador;

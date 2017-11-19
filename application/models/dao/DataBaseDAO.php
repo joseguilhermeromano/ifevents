@@ -257,6 +257,7 @@
 				,user_pass        varchar(100) NOT NULL
 				,user_tele_cd	  int(11)	  NULL
 				,user_status      enum('Não Validado','Ativo','Inativo','') NOT NULL
+                                ,user_token       varchar(100) NOT NULL
 				,UNIQUE(user_rg)
 			) ENGINE=INNODB";
 			$this->db->query($sql);

@@ -12,6 +12,7 @@
 //			$this->DataBaseDAO->create_table_ci_session();
 			$this->load->model('dao/InscricaoDAO');
                         $this->load->model('dao/AtividadeDAO');
+                        $this->load->model('dao/UsuarioDAO');
 			$this->load->model('dao/TipoAtividadeDAO');
 		}
 		//Método chama a view principal do sistema (Home)
@@ -54,10 +55,86 @@
                 }
 
 
-		public function recuperaSenha(){
-                    $this->chamaView("recupera_senha", "inicio",
-                    array("title"=>"IFEvents - Recuperação de Senha"), 0);
+		public function esqueciMinhaSenha(){
+                    $email = $this->input->post("email");
+                    if($email === null){
+                        return $this->chamaView("esqueci_senha", "inicio",
+                        array("title"=>"IFEvents - Esqueci minha senha"), 0);
+                    }
+                    $consulta = array('user_nm' => null, 'email_email' => $email);
+                    $usuario = $this->UsuarioDAO->consultarTudo($consulta, 1)[0];
+                    if(!empty($usuario)){
+                        $this->disparaEmailRedefinicaoSenha($usuario);
+                    }else{
+                        $this->session->set_flashdata('error', 'Não existe em nossa base de dados '
+                        . 'um usuário com este mesmo endereço de e-mail!');
+                    }
+                    $this->chamaView("esqueci_senha", "inicio",
+                        array("title"=>"IFEvents - Esqueci minha senha"), 0);
 		}
+                
+                private function disparaEmailRedefinicaoSenha($usuario){
+                    $linkValidcao = base_url("redefinir-senha?token=".$usuario->user_token);
+                    $mensagem = "Caro(a) <b>".$usuario->user_nm."</b>, este e-mail se refere "
+                    . "a redefinião de senha da sua conta de usuário da plataforma <b>IFEVENTS!</b><br>"
+                    .'Por favor, <a href ="'.$linkValidcao.'"> Clique aqui </a>'
+                    . ' para redefinir a sua senha!';
+                    $dataMensagem = array("tituloMensagem" => "Redefinição de Senha"
+                        ,"corpoMensagem" => $mensagem);
+                    $htmlMensagem = $this->load->view("template-email/template-email", $dataMensagem, true);
+                    $test = $this->envia_email($usuario->email_email
+                    , 'Redefinição de senha de usuário da plataforma IFEVENTS'
+                    , $htmlMensagem);
+                    if($test){
+                        $this->session->set_flashdata('success','Um e-mail de redefinição'
+                        . ' de senha foi enviado para '
+                        . '<b>'.$usuario->email_email.'</b>! Por favor, '
+                        . 'verifique a mensagem na sua caixa de entrada!');
+                    }else{
+                        $this->session->set_flashdata('error', 'Não foi possível enviar o e-mail'
+                        . ' de redefinião de senha para <b>'.$usuario->email_email.'</b>!');
+                    }
+                }
+                
+                public function redefinirSenha(){
+                    $senha = $this->input->post("novasenha");
+                    $confirma = $this->input->post("confirmasenha");
+                    $token = $this->input->get("token");
+                    if($token === null){
+                        $this->session->set_flashdata('error', 'Não foi possível redefinir sua senha '
+                        . 'pois não o identificamos!');
+                        $this->chamaView("erro-sucesso-redefinicao-senha", "inicio",
+                        array("title"=>"IFEvents - Redefinição de Senha"), 0);
+                    }
+                    if($senha === null || $confirma === null){
+                        return $this->chamaView("redefinir_senha", "inicio",
+                        array("title"=>"IFEvents - Redefinição de senha"), 0);
+                    }
+                    if($senha != $confirma){
+                        $this->session->set_flashdata('error', 'As senhas informadas são diferentes!');
+                        return $this->chamaView("redefinir_senha", "inicio",
+                        array("title"=>"IFEvents - Redefinição de senha"), 0);
+                    }
+                    $novaSenha = md5($senha);
+                    
+                    $this->db->trans_start();
+                    try{
+                        $this->UsuarioDAO->redefinirSenha($token, $novaSenha);
+                    }catch(Exception $e){
+                        $this->session->set_flashdata('error', $e->getMessage());
+                    }
+                    $this->db->trans_complete();
+                    if($this ->db->trans_status() === TRUE){
+                        $this->session->set_flashdata('success', 'Senha Redefinida com sucesso!');
+                    }else{
+                        $this->session->set_flashdata('error', 'Não foi possível redefinir a senha! '
+                        . 'Tente novamente mais tarde!');
+                    }
+                    
+                    $this->chamaView("erro-sucesso-redefinicao-senha", "inicio",
+                        array("title"=>"IFEvents - Redefinição de Senha"), 0);
+                    
+                }
 
 		public function noPermission(){
 			$this->chamaView("noPermission", "inicio",

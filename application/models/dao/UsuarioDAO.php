@@ -109,14 +109,18 @@ class UsuarioDAO extends CI_Model{
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null, 
         $sort='user_nm', $ordenacao='asc') {
-        $this->db->select("user_nm, user_status, user_tipo, user_cd, email_email, tius_nm");
+        $this->db->select("user_nm, user_status,user_token, user_tipo, user_cd, email_email, tius_nm");
         $this->db->from("User");
         $this->db->join('Email', 'User.user_email_cd = Email.email_cd','left');
         $this->db->join('tipo_usuario', 'User.user_tipo = tipo_usuario.tius_cd','left');
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
-            $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
-            $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
+            if(isset($parametros['user_token'])){
+                $this->db->where('user_token',$parametros['user_token']);
+            }else{
+                $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
+                $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
+            }
         }
         if($limite){
             $this->db->limit($limite, $numPagina);
@@ -151,7 +155,7 @@ class UsuarioDAO extends CI_Model{
     }
     
     public function consultarLogin($email, $senha){
-        $this->db->select("user_cd, user_nm, user_tipo, email_email");
+        $this->db->select("user_cd, user_nm, user_tipo, email_email, user_status");
         $this->db->from("Email");
         $this->db->join('User', 'User.user_email_cd = Email.email_cd');
         $this->db->where('Email.email_email', $email);
@@ -183,6 +187,16 @@ class UsuarioDAO extends CI_Model{
     public function ativaDesativa($user_cd, $situacao){
         $this->db->where('user_cd',$user_cd);
         $this->db->update('User',array('user_status' => $situacao));
+        if($this->db->affected_rows()){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+    
+    public function redefinirSenha($token, $novaSenha){
+        $this->db->where('user_token', $token);
+        $this->db->update('User', array('user_pass' => $novaSenha));
         if($this->db->affected_rows()){
             return 0;
         }else{

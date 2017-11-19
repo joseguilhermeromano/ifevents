@@ -5071,7 +5071,7 @@ a.thumbnail.active {
   color: #3d8b40;
 }
 .alert-info {
-  background-color: #e1bee7;
+  background-color: #4286f4;
   border-color: #cba4dd;
   color: #9c27b0;
 }
@@ -7598,7 +7598,7 @@ input[type="checkbox"]:disabled:checked:after,
   background-color: #4caf50;
 }
 .alert-info {
-  background-color: #9c27b0;
+  background-color: #4286f4;
 }
 .alert-warning {
   background-color: #ff9800;
