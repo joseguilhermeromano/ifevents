@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<h2> <span class="glyphicon glyphicon-list"> </span> <b> Lista de Contatos </b> </h2>
+<h2> <span class="glyphicon glyphicon-list"> </span> <b> Lista de Mensagens </b> </h2>
 <hr>
 <br>
 
@@ -109,41 +109,4 @@
             <?php endif; ?>
         </div>
     </div>
-        
-        <!-- Modal de Exibição -->
-        <style>
-                p{
-                        width: 500px;
-                        text-align: justify;
-                }
-        </style>
-	<div id="modalExibir" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h4 class="modal-title">Mensagem</h4>
-				</div>
-				<div class='container'>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="modal-body">
-
-								<p><?php
-									echo "<strong>Nome:</strong> ".$result->cont_nm;
-									echo "<br><strong>Assunto:</strong> ".$result->cont_assunto;
-									echo "<br><br>".$result->cont_msg;
-									?>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-					<button class="btn btn-success" onclick="Executa();">Responder</button>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>

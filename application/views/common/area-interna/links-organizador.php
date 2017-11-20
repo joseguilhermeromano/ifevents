@@ -63,16 +63,6 @@
       <li id="instituicao"><a href="<?php echo base_url("instituicao/consultar");?>" class="list-group-item">INSTITUIÇÕES</a></li>
   </ul>
 </li>
-
-
-<!-- <li class="list-group panel">
-  <a href="#" data-toggle="collapse" data-target="#teste" data-parent="#sidenav" class="list-group-item list-group-item-success">
-  <span class="glyphicon glyphicon-user"></span> USUÁRIOS <span class="caret"></span>
-  </a>
-    <ul class="submenu collapse" id="teste">
-      <li><a href="<?php echo base_url("usuario/consultar");?>" class="list-group-item">LISTAR TUDO</a></li>
-    </ul>
-</li> -->
 <li class="item-menu" id="atividade">
     <a href="<?php echo base_url("atividade/consultarTudo");?>">
         <span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
@@ -95,7 +85,7 @@
 </li>
 <li class="item-menu" id="contato">
     <a href="<?php echo base_url("contato/consultarTudo");?>">
-        <span class="glyphicon glyphicon-envelope"></span>  CONTATOS
+        <span class="glyphicon glyphicon-envelope"></span>  MENSAGENS
     </a>
 </li>
 

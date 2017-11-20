@@ -39,7 +39,7 @@
  <div id="wrapper">
         <div id="sidebar-wrapper"><!-- sidebar-wrapper -->
              <div class="borda"><!-- borda -->
-                <a href="javascript:void(0)" href="#close-toggle" id="close-toggle" onclick="closeNav()">
+                <a href="javascript:void(0)" href="#close-toggle" id="close-toggle" class="hidden-lg hidden-md" onclick="closeNav()">
                     <span class="glyphicon">&times;</span>
                 </a>
             <ul class="sidebar-nav" id="sidenav">
@@ -70,7 +70,7 @@
 
         <div id="page-content-wrapper">
         <!-- Use any element to open the sidenav -->
-        <a href="#menu-toggle" id="menu-toggle">
+        <a href="#menu-toggle" id="menu-toggle" class="hidden-lg hidden-md">
             <span onclick="openNav()" class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
 

@@ -3,6 +3,7 @@
                 </div><!-- /#row -->
             </div><!-- /#container-fluid-->
         </div><!-- /#page-content-wrapper -->
+        <div class="clear"></div>
     </div><!-- /#wrapper -->
 
     <!-- Modal de Exclusão -->
