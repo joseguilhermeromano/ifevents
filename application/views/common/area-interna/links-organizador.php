@@ -63,10 +63,15 @@
       <li id="instituicao"><a href="<?php echo base_url("instituicao/consultar");?>" class="list-group-item">INSTITUIÇÕES</a></li>
   </ul>
 </li>
-<li class="item-menu" id="atividade">
-    <a href="<?php echo base_url("atividade/consultarTudo");?>">
-        <span class="glyphicon glyphicon-blackboard"></span>  ATIVIDADES
-    </a>
+<li class="item-menu list-group panel" >
+  <a href="#" data-toggle="collapse" data-target="#atividade" data-parent="#sidenav" class="list-group-item list-group-item-success">
+  <span class="glyphicon glyphicon-blackboard"></span>  PROGRAMAÇÃO <span class="caret"></span>
+  </a>
+    <ul class="submenu collapse" id="atividade">
+      <li id="tipoatividade" class="item-menu"><a href="<?php echo base_url("tipoatividade/consultarTudo");?>" class="list-group-item">TIPOS DE ATIVIDADE</a></li>
+      <li id="atividade" class="item-menu"><a href="<?php echo base_url("atividade/consultarTudo");?>" class="list-group-item">ATIVIDADES</a></li>
+      <li id="inscricao" class="item-menu"><a href="<?php echo base_url("inscricao/consultar");?>" class="list-group-item">INSCRIÇÕES</a></li>
+  </ul>
 </li>
 <li class="item-menu list-group panel" >
   <a href="#" data-toggle="collapse" data-target="#trabalhos" data-parent="#sidenav" class="list-group-item list-group-item-success">

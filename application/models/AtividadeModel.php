@@ -16,7 +16,7 @@
     private $local;
     private $quantidadeVagas;
     private $tipoAtividade;
-    private $codigoEdicao;
+    private $edicao;
 
     public function getCodigo(){
       return $this->codigo;
@@ -98,12 +98,12 @@
       $this->tipoAtividade = $tipoAtividade;
     }
     
-    public function getCodigoEdicao(){
-      return $this->codigoEdicao;
+    public function getEdicao(){
+      return $this->edicao;
     }
 
-    public function setCodigoEdicao($codigoEdicao){
-      $this->codigoEdicao = $codigoEdicao;
+    public function setEdicao($edicao){
+      $this->edicao = $edicao;
     }
 
 }

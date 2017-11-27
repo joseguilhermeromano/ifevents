@@ -6,7 +6,9 @@ class AtividadeDAO extends CI_Model implements DAO{
 
     public function __construct(){
             parent::__construct();
-
+            $this->load->model('AtividadeModel', 'atividade');
+            $this->load->model('dao/TipoAtividadeDAO');
+            $this->load->model('dao/EdicaoDAO');
     }
     
     private function obtemValores($obj){
@@ -19,8 +21,8 @@ class AtividadeDAO extends CI_Model implements DAO{
                 ,'ativ_hora_fin' => $obj->getTermino()
                 ,'ativ_local' => $obj->getLocal()
                 ,'ativ_vagas_qtd' => $obj->getQuantidadeVagas()
-                ,'ativ_tiat_cd' => $obj->getTipoAtividade()
-                ,'ativ_edic_cd' => $obj->getCodigoEdicao());
+                ,'ativ_tiat_cd' => $obj->getTipoAtividade()->getCodigo()
+                ,'ativ_edic_cd' => $obj->getEdicao()->getCodigo());
     }
 
     public function inserir($obj) {
@@ -105,21 +107,22 @@ class AtividadeDAO extends CI_Model implements DAO{
         $this->db->from('Atividade');
         $this->db->where( 'ativ_cd', $codigo );
         $query = $this->db->get();
-        $query = $query->result_object();
-        $atividade = (object) array();
-        $consulta = $query[0];
-        $atividade->ativ_cd = $consulta->ativ_cd;
-        $atividade->ativ_nm = $consulta->ativ_nm;
-        $atividade->ativ_desc = $consulta->ativ_desc;
-        $atividade->ativ_responsavel = $consulta->ativ_responsavel;
-        $atividade->ativ_dt = $consulta->ativ_dt;
-        $atividade->ativ_hora_ini  = $consulta->ativ_hora_ini;
-        $atividade->ativ_hora_fin  = $consulta->ativ_hora_fin;
-        $atividade->ativ_local     = $consulta->ativ_local;
-        $atividade->ativ_vagas_qtd = $consulta->ativ_vagas_qtd;
-        $atividade->ativ_tiat_cd   = $consulta->ativ_tiat_cd;
-        $atividade->ativ_edic_cd   = $consulta->ativ_edic_cd;
-        return $atividade;
+        $consulta = $query->result_object()[0];
+        $this->atividade->setCodigo($consulta->ativ_cd);
+        $this->atividade->setTitulo($consulta->ativ_nm);
+        $this->atividade->setDescricao($consulta->ativ_desc);
+        $this->atividade->setResponsavel($consulta->ativ_responsavel);
+        $this->atividade->setData($consulta->ativ_dt);
+        $this->atividade->setInicio($consulta->ativ_hora_ini);
+        $this->atividade->setTermino($consulta->ativ_hora_fin);
+        $this->atividade->setLocal($consulta->ativ_local);
+        $this->atividade->setQuantidadeVagas($consulta->ativ_vagas_qtd);
+        $tipoAtividade = $this->TipoAtividadeDAO->consultarCodigo(
+        $consulta->ativ_tiat_cd);
+        $this->atividade->setTipoAtividade($tipoAtividade);
+        $edicao = $this->EdicaoDAO->consultarCodigo($consulta->ativ_edic_cd);
+        $this->atividade->setEdicao($edicao);
+        return $this->atividade;
     }
 
     public function excluir($obj) {

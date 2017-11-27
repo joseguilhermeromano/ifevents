@@ -24,7 +24,7 @@
 }
 
 #sidebar-wrapper {
-    position: relative;
+    position: absolute;
     width: 0;
     margin-left: -210px;
     height: 100%;
@@ -53,6 +53,7 @@
     padding: 15px;
     background:#fff;
     border-left:1px solid #dae1e8;
+    z-index: 1;
 }
 
 @media(max-width: 949px){

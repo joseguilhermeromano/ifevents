@@ -32,7 +32,6 @@ class ConferenciaControl extends PrincipalControl implements InterfaceControl{
 
             if($this ->db->trans_status() === TRUE){
                 $this->session->set_flashdata('success', 'A Conferência foi cadastrada com sucesso!');
-                unset($data['conferencia']);
                 redirect('conferencia/consultar');
             }else{
                 $this->session->set_flashdata('error', 'Não foi possível cadastrar a nova conferência!');

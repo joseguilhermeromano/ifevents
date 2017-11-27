@@ -11,24 +11,36 @@ class AtividadeControl extends PrincipalControl{
   }
 
   public function cadastrar(){
-    $data['atividade'] = $this->TipoAtividadeDAO->consultarTudo();
+    $data['tipoAtividade'] = $this->TipoAtividadeDAO->consultarTudo();
     $data['title'] = "IFEvents - Atividade - Organizador";
     if (empty($this->atividade->input->post())){
       $this->chamaView("novaatividade", "organizador", $data,  1);
       return true;
     }
-    $this->recebeValores();
-    if( $this->valida()==false){
-      $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+    
+    $this->setaValores();
+    $data['atividade'] = $this->atividade;
+
+    if($this->valida()){
+
+        $this->db->trans_start();
+        try{
+            $this->AtividadeDAO->inserir($this->atividade);
+        }catch(Exception $e){
+            $this->session->set_flashdata('error', $e->getMessage());
+        }
+        $this->db->trans_complete();
+
+        if($this ->db->trans_status() === TRUE){
+            $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
+            redirect('atividade/consultarTudo');
+            }else{
+                $this->session->set_flashdata('error', 'Atividade não cadastrada!');
+        }
+
     }
-    else{
-      if($this->AtividadeDAO->inserir($this->atividade)==true){
-        $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
-      }else{
-        $this->session->set_flashdata('error', 'Atividade não cadastrada!');
-      }
-    }
-    $this->chamaView("novaatividade", "organizador", $data,  1 );
+
+    $this->chamaView("novaatividade", "organizador", $data, 1);
   }
   
     public function inscreverEmAtividade($codigoAtividade){
@@ -70,19 +82,30 @@ class AtividadeControl extends PrincipalControl{
     $data['title']  = "IFEvents - Atualiza Atividade - organizador";
     $data['atividade'] = $this->AtividadeDAO->consultarCodigo($this->uri->segment(3));
     if(!empty($this->input->post())){
-      $this->recebeValores();
-      if( $this->valida()==false){
-        $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-      }
-      else{
-        if($this->AtividadeDAO->alterar($this->atividade)==true){
-          $this->session->set_flashdata('success', 'O Atividade atualizada com sucesso!');
-          redirect('atividade/consultarTudo/');
-        }else{
-          $this->session->set_flashdata('error', 'Não foi possível atualizar a atividade!');
+        
+        $this->setaValores();
+        $data['atividade'] = $this->atividade;
+
+        if($this->valida()){
+
+            $this->db->trans_start();
+            try{
+                $this->AtividadeDAO->alterar($this->atividade);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
+
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'O Atividade atualizada com sucesso!');
+                redirect('atividade/consultarTudo/');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível atualizar a atividade!');
+            }
+
         }
-      }
     }
+
     $this->chamaView("edita-atividade", "organizador", $data, 1);
   }
 
@@ -125,7 +148,7 @@ class AtividadeControl extends PrincipalControl{
         $this->chamaView("listaatividade", "organizador", $data, 1);     
   }
 
-  public function recebeValores(){
+  public function setaValores(){
     $this->atividade->setCodigo($this->input->post('codigo'));
     $this->atividade->setTitulo($this->input->post('titulo'));
     $this->atividade->setDescricao($this->input->post('descricao'));
@@ -135,8 +158,12 @@ class AtividadeControl extends PrincipalControl{
     $this->atividade->setTermino($this->input->post('termino'));
     $this->atividade->setLocal($this->input->post('local'));
     $this->atividade->setQuantidadeVagas($this->input->post('quantidadeVagas'));
-    $this->atividade->setTipoAtividade($this->input->post('tipoAtividade'));
-    $this->atividade->setCodigoEdicao($this->session->userdata('evento_selecionado')->edic_cd);
+    $codigoTipoAtiv = $this->input->post('tipoAtividade');
+    $tipoAtividade = $this->TipoAtividadeDAO->consultarCodigo($codigoTipoAtiv);
+    $this->atividade->setTipoAtividade($tipoAtividade);
+    $codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
+    $edicao = $this->EdicaoDAO->consultarCodigo($codigoEdicao);
+    $this->atividade->setEdicao($edicao);
   }
 
   public function valida(){
@@ -147,7 +174,7 @@ class AtividadeControl extends PrincipalControl{
     $this->form_validation->set_rules(	'inicio', 'Hora do Início', 'trim|required' );
     $this->form_validation->set_rules(	'termino', 'Hora do Término', 'trim|required' );
     $this->form_validation->set_rules(	'local', 'Loca do Evento', 'trim|required|max_length[100]' );
-    $this->form_validation->set_rules(	'quantidadeVagas', 'Quantidade de vagas', 'integer|trim|required|max_length[10]' );
+    $this->form_validation->set_rules(	'quantidadeVagas', 'Vagas', 'integer|trim|required|max_length[10]' );
     $this->form_validation->set_rules(	'tipoAtividade', 'Tipo de Atividade', 'integer|trim|required|max_length[11]' );
     return $this->form_validation->run();
   }

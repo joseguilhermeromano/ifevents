@@ -65,8 +65,8 @@
                 <table class="table ls-table" id="tabela1">
                     <thead>
                         <tr>
-                            <th>Evento</th>
                             <th>Título</th>
+                            <th>Categoria</th>
                             <th>Descrição</th>
                             <th>Responsável</th>
                             <th><center>Data  </center></th>
@@ -87,8 +87,8 @@
                          ?>
 
                                 <tr>
-                                    <td class="text-center"><?php echo $item->edic_num.'º '.$item->conf_abrev; ?></td>
-                                    <td class="col-sm-2"><?php echo $item->ativ_nm; ?></td>
+                                    <td class="col-sm-2"><?php echo $item->ativ_nm.'<br>('.$item->edic_num.'º '.$item->conf_abrev.')'; ?></td>
+                                    <td class="text-center"><?php echo $item->tiat_nm; ?></td>
                                     <td class="text-left"><?php echo $item->ativ_desc; ?></td>
                                     <td class="text-left"><?php echo $item->ativ_responsavel; ?></td>
                                     <td class="text-left"><?php echo date("d/m/Y", strtotime($item->ativ_dt)); ?></td>
@@ -97,28 +97,30 @@
                                     <td class="text-center"><?php echo $item->ativ_local; ?></td>
                                     <td class="text-center"><?php echo $item->vagas_ocupadas."/".$item->ativ_vagas_qtd; ?></td>
                                     <?php if($tipoUsuario == 3): ?>
-                                    <td class="col-sm-1"><div class="text-left" style="display: inline-block">
-                                                    <a class="btn-opcao" href="<?php echo base_url('/atividade/alterar/'.$item->ativ_cd);?>">
-                                                    <span class="glyphicon glyphicon-pencil"></span>&#09;Editar
-                                                                            </a><br>
-                                                                            <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
-                                                                                    onclick="setCodigo('<?php echo $item->ativ_cd; ?>');
-                                                                                    setLink('<?php echo base_url('/atividade/excluir/')?>');">
-                                                                                    <span class="glyphicon glyphicon-remove"></span>&#09;Excluir
-                                                                            </a>
-                                                                    </div>
-                                                            </td>
+                                    <td class="col-sm-1">
+                                        <div class="text-left" style="display: inline-block">
+                                            <a class="btn-opcao" href="<?php echo base_url('/atividade/alterar/'.$item->ativ_cd);?>">
+                                                <span class="glyphicon glyphicon-pencil"></span>&#09;Editar
+                                            </a><br>
+                                            <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalExcluir"
+                                                    onclick="setCodigo('<?php echo $item->ativ_cd; ?>');
+                                                    setLink('<?php echo base_url('/atividade/excluir/')?>');">
+                                                    <span class="glyphicon glyphicon-remove"></span>&#09;Excluir
+                                            </a>
+                                        </div>
+                                    </td>
                                 <?php else:?>
-                                    <td class="col-sm-2"> <div class="text-left" style="display: inline-block">
+                                    <td class="col-sm-2"> 
+                                        <div class="text-left" style="display: inline-block">
                                             <a class="btn-opcao" href="<?php echo base_url('/atividade/inscrever/'.$item->ativ_cd);?>">
                                                     <span class="glyphicon glyphicon-pencil"></span>&#09;Inscreva-se
                                             </a><br>
 
-                                                <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalCancelar"
-                                                    onclick="setCodigo('<?php echo $item->ativ_cd; ?>');
-                                                    setLink('<?php echo base_url('/atividade/cancelar-inscricao/')?>');">
-                                                        <span class="glyphicon glyphicon-remove"></span>&#09;Cancelar
-                                                </a>
+                                            <a href="#" class="btn-opcao" data-toggle="modal" data-target="#modalCancelar"
+                                                onclick="setCodigo('<?php echo $item->ativ_cd; ?>');
+                                                setLink('<?php echo base_url('/atividade/cancelar-inscricao/')?>');">
+                                                    <span class="glyphicon glyphicon-remove"></span>&#09;Cancelar
+                                            </a>
 
                                         </div>
                                     </td>
@@ -142,5 +144,6 @@
               <!--/ PAGINAÇÃO -->
         </div>
     </div>
+    
 </div>
 

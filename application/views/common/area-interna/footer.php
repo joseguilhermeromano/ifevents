@@ -104,7 +104,6 @@
         </div>
 
         <!-- Modal de Cancelamento -->
-        <!-- Modal de Exclusão -->
             <div id="modalCancelar" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">

@@ -9,7 +9,6 @@
             $this->load->Model( 'dao/InscricaoDAO' );
             $this->load->Model( 'InscricaoModel','inscricao' );
             $this->load->Model( 'dao/AtividadeDAO' );
-            $this->load->Model( 'AtividadeModel','atividade' );
         }
 
         public function cadastrar(){
@@ -39,49 +38,88 @@
             if( $this->InscricaoDAO->excluir($this->uri->segment(3))== false ){
                 $this->session->set_flashdata('error', 'Participação não pode ser cancelado!');
                 $this->consultarTudo();
-			}
-		    else{
-			    $this->session->set_flashdata('success', 'Participação Cancelada!');
+                }
+            else{
+                $this->session->set_flashdata('success', 'Participação Cancelada!');
                 $this->alterar($this->uri->segment(3));
                 $this->consultarTudo();
-			}
+            }
         }
-
-        public function consultarTudo(){
-            $data['inscrito'] = $this->InscricaoDAO->consultarTudo();
-            $data['content']  = $this->AtividadeDAO->consultarTudo();
-            $data['title'] = "IFEvents - Lista Programacao - Participante";
-            $this->chamaView("listaprogramacao", "participante", $data, 1);
+        
+        public function atribuirPresenca($codigoInscricao){
+            $this->inscricao = $this->InscricaoDAO->consultarCodigo($codigoInscricao);
+            $nomeUsuario = $this->inscricao->getUsuario()->getNomeCompleto();
+            if($this->inscricao !== null){
+                $this->inscricao->setStatus('Participou');
+                $this->db->trans_start();
+                    $this->InscricaoDAO->alterar($this->inscricao);
+                $this->db->trans_complete();
+                
+                if($this ->db->trans_status() === true){
+                    $this->session->set_flashdata('success', 'A Presença foi '
+                    . 'atribuída com sucesso para <b>'
+                    .$nomeUsuario.'</b>!');
+                }else{
+                    $this->session->set_flashdata('error', 'Não foi possível '
+                    . 'atribuir a presença para <b>'
+                    .$nomeUsuario. '</b>!');
+                }
+                redirect('inscricao/consultar');
+            }
+            
+            $this->session->set_flashdata('error', 'A inscrição informada é inválida!');
+            redirect('inscricao/consultar');
+            
+        }
+        
+        public function atribuirFalta($codigoInscricao){
+            $this->inscricao = $this->InscricaoDAO->consultarCodigo($codigoInscricao);
+            $nomeUsuario = $this->inscricao->getUsuario()->getNomeCompleto();
+            if($this->inscricao !== null){
+                $this->db->trans_start();
+                    $this->inscricao->setStatus('Não Participou');
+                    $this->InscricaoDAO->alterar($this->inscricao);
+                $this->db->trans_complete();
+                
+                if($this ->db->trans_status() === true){
+                    $this->session->set_flashdata('success', 'A Falta foi'
+                    . ' atribuída com sucesso para <b>'
+                    .$nomeUsuario.'</b>!');
+                }else{
+                    $this->session->set_flashdata('error', 'Não foi possível'
+                    . ' atribuir a falta para <b>'
+                    .$nomeUsuario. '</b>!');
+                }
+                redirect('inscricao/consultar');
+            }
+            
+            $this->session->set_flashdata('error', 'A Inscrição informada é inválida!');
+            redirect('inscricao/consultar');
+            
         }
 
         public function consultar(){
-            $data['item'] = $this->AtividadeDAO->consultarCodigo($this->uri->segment(3));
-            $this->atividade->setCodigo($data['item']->ativ_cd);
-            $this->atividade->setTitulo($data['item']->ativ_nm);
-            $this->atividade->setDescricao($data['item']->ativ_desc);
-            $this->atividade->setResponsavel($data['item']->ativ_responsavel);
-            $this->atividade->setData($data['item']->ativ_dt);
-            $this->atividade->setInicio($data['item']->ativ_hora_ini);
-            $this->atividade->setTermino($data['item']->ativ_hora_fin);
-            $this->atividade->setLocal($data['item']->ativ_local);
-            if($data['item']->ativ_vagas_qtd > 0 && $this->uri->segment(4) == 1){
-                $this->atividade->setQuantidadeVagas($data['item']->ativ_vagas_qtd -= 1);
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
+            $codigoEdicao =  $this->session->userdata('evento_selecionado')->edic_cd;
+            $array= array('edic_cd'=>$codigoEdicao, 'ativ_nm' => null, 'user_nm' => null);
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $array['ativ_nm']  = $busca;
+                $array['user_nm']  = $busca;
             }
-            else if($data['item']->ativ_vagas_qtd > 0 && $this->uri->segment(4) == 0){
-                $this->atividade->setQuantidadeVagas($data['item']->ativ_vagas_qtd += 1);
-            }
-            $this->atividade->setTipoAtividade($data['item']->ativ_tiat_cd);
-        }
-
-        public function recebeValores(){
-            $this->inscricao->setCodigoAtividade($this->uri->segment(3));
-            $this->inscricao->setCodigoUsuario($this->session->userdata('usuario')->user_cd);
-        }
-
-        public function listarEventos(){
-            $data['inscrito'] = $this->InscricaoDAO->consultarTudo();
-            $data['content']  = $this->AtividadeDAO->consultarTudo();
-            $data['title'] = "IFEvents - Meus Eventos - Participante";
-            $this->chamaView("meusEventos", "participante", $data, 1);
+            $consulta = $this->InscricaoDAO->consultarTudo($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->InscricaoDAO->consultarTudo($array));
+            $hrefPaginacao = 'inscricao/consultar/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegConsulta, $hrefPaginacao);
+            $data['content']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegConsulta;
+            $data['title']="IFEvents - Inscricoes";
+            $this->chamaView("lista-inscritos-atividade", "organizador", $data, 1);   
         }
 }

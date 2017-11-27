@@ -33,7 +33,7 @@ class ComiteControl extends PrincipalControl implements InterfaceControl{
 
             if($this ->db->trans_status() === TRUE){
                 $this->session->set_flashdata('success', 'O Comitê foi cadastrado com sucesso!');
-                unset($data['comite']);
+                redirect('comite/consultar');
             }else{
                 $this->session->set_flashdata('error', 'Não foi possível cadastrar o novo Comitê!');
             }

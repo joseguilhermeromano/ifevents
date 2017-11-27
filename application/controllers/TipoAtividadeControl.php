@@ -11,26 +11,36 @@ class TipoAtividadeControl extends PrincipalControl{
     }
 
     public function cadastrar() {
-        if (empty($this->tipoatividade->input->post())){
-          $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade",
-          array("title"=>"IFEvents - Tipo de Atividade - Organizador"), 1);
-          return 0;
+        $data = array("title"=>"IFEvents - Tipo de Atividade - organizador");
+        if (empty($this->input->post())){
+            return $this->chamaView("novoTipoAtividade"
+                , "organizador/tipoAtividade",$data, 1);
         }
-        $this->recebeValores();
-        if( $this->valida()==false){
-          $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
+
+        $this->setaValores();
+        $data['tipoAtividade'] = $this->tipoatividade;
+
+        if($this->valida() === true){
+
+            $this->db->trans_start();
+            try{
+                $this->TipoAtividadeDAO->inserir($this->tipoatividade);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
+
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
+                redirect('tipoatividade/consultarTudo');
+            }else{
+                $this->session->set_flashdata('error', 'Atividade não cadastrada!');
+            }
+
         }
-        else{
-          $this->tipoatividade->setaValores();
-          if($this->TipoAtividadeDAO->inserir($this->tipoatividade)==true){
-            $this->session->set_flashdata('success', 'Atividade cadastrada com sucesso!');
-            redirect('tipoatividade/consultarTudo');
-          }else{
-            $this->session->set_flashdata('error', 'Atividade não cadastrada!');
-          }
-        }
-        $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade",
-        array("title"=>"IFEvents - Tipo de Atividade - organizador"), 1);
+
+        $this->chamaView("novoTipoAtividade", "organizador/tipoAtividade", $data, 1);
+        
     }
 
     public function listaconferencia(){
@@ -39,24 +49,36 @@ class TipoAtividadeControl extends PrincipalControl{
     }
 
     public function alterar($codigo) {
-      $data['atividade'] = $this->TipoAtividadeDAO->consultarCodigo($this->uri->segment(3));
-    	$data['title']  = "IFEvents - Novo Tipo Atividade - organizador";
-    	if(!empty($this->input->post())){
-        $this->recebeValores();
-    	  $this->tipoatividade->setaValores();
-    	  if( $this->valida()==false){
-    	     $this->session->set_flashdata('error', 'Falta preencher alguns campos!');
-    	  }
-    	  else{
-    	     if($this->TipoAtividadeDAO->alterar($this->tipoatividade)==true){
-    	        $this->session->set_flashdata('success', 'Tipo de atividade atualizado com sucesso!');
-    	        redirect('tipoatividade/consultarTudo/');
-    	     }else{
-    	        $this->session->set_flashdata('error', 'Não foi possível atualizar o tipo de atividade!');
-    	     }
-    	  }
-    	}
-    	$this->chamaView("updateTipoAtividade", "organizador/tipoAtividade", $data, 1);
+        $data = array("title"=>"IFEvents - Tipo de Atividade - organizador");
+        $data['tipoAtividade'] = $this->TipoAtividadeDAO->consultarCodigo($codigo);
+        if (empty($this->input->post())){
+            return $this->chamaView("updateTipoAtividade"
+                , "organizador/tipoAtividade",$data, 1);
+        }
+
+        $this->setaValores();
+        $data['tipoAtividade'] = $this->tipoatividade;
+
+        if($this->valida() === true){
+
+            $this->db->trans_start();
+            try{
+                $this->TipoAtividadeDAO->inserir($this->tipoatividade);
+            }catch(Exception $e){
+                $this->session->set_flashdata('error', $e->getMessage());
+            }
+            $this->db->trans_complete();
+
+            if($this ->db->trans_status() === TRUE){
+                $this->session->set_flashdata('success', 'Atividade atualizada com sucesso!');
+                redirect('tipoatividade/consultarTudo');
+            }else{
+                $this->session->set_flashdata('error', 'Não foi possível atualizar a atividade!');
+            }
+
+        }
+
+        $this->chamaView("updateTipoAtividade", "organizador/tipoAtividade", $data, 1);
     }
 
     public function consultarTudo() {
@@ -100,8 +122,7 @@ class TipoAtividadeControl extends PrincipalControl{
       $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
 
-    public function recebeValores(){
-      $this->tipoatividade->setCodigo($this->input->post('codigo'));
+    public function setaValores(){
       $this->tipoatividade->setTitulo($this->input->post('titulo'));
       $this->tipoatividade->setDescricao($this->input->post('descricao'));
     }

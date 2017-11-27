@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h2> <span class="glyphicon glyphicon-blackboard"> </span> <b> Tipo de Atividades </b> </h2>
+    <h2> <span class="glyphicon glyphicon-blackboard"> </span> <b> Tipos de Atividade </b> </h2>
     <hr>
     <br>
     <?php
@@ -22,8 +22,7 @@
         <div class="row">
           <br>
           <div class="col-sm-12">
-            <a class="btn btn-default margin-button" href='<?php echo site_url('/tipoatividade/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Tipo Atividade</a>
-            <a class="btn btn-default margin-button" href='<?php echo site_url('/atividade/consultarTudo'); ?>' style="float:left"><span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar</a>
+              <a class="btn btn-default margin-button" href='<?php echo site_url('/tipoatividade/cadastrar'); ?>' style="float:right"><span class="glyphicon glyphicon-plus"></span> Novo Tipo Atividade</a>
           </div>
         </div>
         <br><br>
@@ -60,9 +59,9 @@
               <table class="table ls-table" id="tabela1">
                 <thead>
                   <tr>
-                    <th><center>Título</center></th>
-                    <th>Descrição</th>
-                    <th><center>Opções</center></th>
+                    <th class="col-md-3"><center>Denominação</center></th>
+                    <th class="col-md-6">Descrição</th>
+                    <th class="col-md-3"><center>Opções</center></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,7 +69,7 @@
                   if(!empty($atividade)){
                     foreach( $atividade as $item ):?>
                     <tr>
-                        <td><?php echo $item->tiat_nm; ?></td>
+                        <td class="text-center"><?php echo $item->tiat_nm; ?></td>
                         <td class="text-left"><?php echo $item->tiat_desc; ?></td>
                         <td class="text-center">
                             <div class="text-left" style="display: inline-block">

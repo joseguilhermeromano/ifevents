@@ -8,38 +8,43 @@
             $this->load->Model( 'dao/InscricaoDAO' );
         }
 
-        private $codigoInscricao;
-        private $codigoAtividade;
-        private $codigoUsuario;
+        private $codigo;
+        private $atividade;
+        private $usuario;
+        private $status;
 
-        public function getCodigoInscricao(){
-            return $this->codigoInscricao;
+        
+        public function getCodigo(){
+            return $this->codigo;
         }
-
-        public function setCodigoInscricao($codigoInscricao){
-            $this->codigoInscricao = $codigoInscricao;
+        
+        public function getAtividade(){
+            return $this->atividade;
         }
-
-        public function getCodigoAtividade(){
-            return $this->codigoAtividade;
+        
+        public function getUsuario(){
+            return $this->usuario;
         }
-
-        public function setCodigoAtividade($codigoAtividade){
-            $this->codigoAtividade = $codigoAtividade;
+        
+        public function getStatus(){
+            return $this->status;
         }
-
-        public function getCodigoUsuario(){
-            return $this->codigoUsuario;
+        
+        
+        public function setCodigo($codigo){
+            $this->codigo = $codigo;
         }
-
-        public function setCodigoUsuario($codigoUsuario){
-            $this->codigoUsuario = $codigoUsuario;
+        
+        public function setAtividade($atividade){
+            $this->atividade = $atividade;
         }
-
-        public function setaValores(){
-            $this->insc_cd      = $this->getCodigoInscricao();
-    		$this->insc_ativ_cd = $this->getCodigoAtividade();
-            $this->insc_user_cd = $this->getCodigoUsuario();
+        
+        public function setUsuario($usuario){
+            $this->usuario = $usuario;
+        }
+        
+        public function setStatus($status){
+            $this->status = $status;
         }
 
     }

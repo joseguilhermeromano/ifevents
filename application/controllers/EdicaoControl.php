@@ -39,7 +39,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
 
             if($this ->db->trans_status() === TRUE){
                 $this->session->set_flashdata('success', 'A Edição foi cadastrada com sucesso!');
-                unset($data['edicao']);
+                redirect('edicao/consultar');
             }else{
                 $this->session->set_flashdata('error', 'Não foi possível cadastrar a nova edição!');
             }

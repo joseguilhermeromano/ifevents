@@ -10,8 +10,6 @@
 
 <?php
     echo form_open_multipart( 'tipoatividade/cadastrar', 'role="form" class="formsignin"' );
-
-    $activity = (isset($atividade) ? $atividade->tiat_desc : '');
 ?>
 
 <div class="row">
@@ -20,7 +18,7 @@
         <b><?php echo form_label( '*Título', 'titulo' ); ?></b>
         <?php $data = array( 'name' => 'titulo', 'placeholder' => "Titulo",
             'class' => 'form-control estilo-input',
-             'value' => (isset($atividade) ? $atividade->tiat_nm : '') );
+             'value' => (isset($tipoAtividade) ? $tipoAtividade->getTitulo() : '') );
                echo form_input($data);?>
         </div>
     </div>
@@ -30,8 +28,14 @@
         <div class="form-group">
         <b><?php echo form_label( 'Descrição', 'descricao' ); ?></b><br>
         	<?php
-        		$data = array( 'name' => 'descricao', 'id'=>'editor', 'cols' => 200, 'rows' =>10,'class' => 'form-control estilo-input');
-                echo form_textarea( $data, set_value('activity', $activity) );
+        		$data = array( 'name' => 'descricao'
+                            , 'id'=>'editor'
+                            , 'cols' => 200
+                            , 'rows' =>10
+                            ,'class' => 'form-control estilo-input');
+                echo form_textarea( $data
+                                    , set_value('activity'
+                                        ,(isset($tipoAtividade) ? $tipoAtividade->getDescricao() : '')) );
         	?>
         </div>
     </div>

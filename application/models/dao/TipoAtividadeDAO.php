@@ -4,14 +4,11 @@ class TipoAtividadeDAO extends CI_Model implements DAO{
 
     public function __construct(){
       parent::__construct();
+      $this->load->model('TipoAtividadeModel', 'tipoAtividade');
     }
 
     public function inserir($obj) {
       return $this->db->insert( 'Tipo_atividade', $obj );
-    }
-
-    public function ultimoId(){
-      //return $this->db->insert_id();
     }
 
     public function alterar($obj) {
@@ -44,11 +41,13 @@ class TipoAtividadeDAO extends CI_Model implements DAO{
       $this->db->where('tiat_cd', $codigo);
       $query = $this->db->get('Tipo_atividade');
       if($query->num_rows() > 0){
-        return $query->result_object();
+        $consulta = $query->result_object()[0];
+        $this->tipoAtividade->setCodigo($consulta->tiat_cd);
+        $this->tipoAtividade->setTitulo($consulta->tiat_nm);
+        $this->tipoAtividade->setDescricao($consulta->tiat_desc);
+        return $this->tipoAtividade;
       }
-      else{
         return false;
-      }
     }
 
     public function excluir($obj) {

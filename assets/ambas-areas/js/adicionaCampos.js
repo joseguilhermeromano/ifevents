@@ -91,10 +91,10 @@ jQuery(function($){
         }
     }).trigger('focusout');
    $("#campoRG").mask("99.999.999-9");
+   $(".campoHora").mask("99:99");
     $("#campoCPF").mask("999.999.999-99");
    $("#campoCep").mask("99999-999");
    $("#campoSenha").mask("***-****");
-   $('#campoQtdMaxSubmissaoAvaliador').mask('#');
    
 });
 

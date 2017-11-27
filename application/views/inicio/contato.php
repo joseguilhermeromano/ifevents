@@ -34,6 +34,7 @@
                                             <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:coordenacao@ifsp.edu.br">coordenacao@ifsp.edu.br</a></li>
                                     </ul>
                             </div>
+                            <div class="container-fluid">
                             <div class="col-md-8 wthree_contact_left">
                                 <h4>Formulário de Contato</h4>
                                 <form action="<?= base_url('inicio/contato'); ?>" method="post">
@@ -43,15 +44,17 @@
                                         <div class="col-md-6 wthree_contact_left_grid">
                                             <input type="email" name="email" placeholder="E-mail" value="<?= isset($contato) ? $contato->getEmail() : ''?>">
                                         </div>
+                                    <br><br>
                                         <div class="col-md-12 wthree_contact_left_grid">
                                             <input type="text" name="assunto" placeholder="Assunto*" value="<?= isset($contato) ? $contato->getAssunto() : ''?>">
                                         </div>
                                         <textarea  name="mensagem" placeholder="Mensagem..."><?= isset($contato) ? $contato->getMensagem() : ''?></textarea>
-                                        <input type="submit" value="Enviar">
-                                        <input type="reset" value="Limpar">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Enviar">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" value="Limpar">
                                 </form>
                             </div>
                             <div class="clearfix"> </div>
+                            </div>
                             <br><br>
                             <div class="row wthree_contact_left">
                                 <h4>Como nos encontrar...</h4>
