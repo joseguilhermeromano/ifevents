@@ -118,8 +118,16 @@ class UsuarioDAO extends CI_Model{
             if(isset($parametros['user_token'])){
                 $this->db->where('user_token',$parametros['user_token']);
             }else{
-                $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
-                $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
+                if(isset($parametros['user_tipo'])){
+                    $this->db->where('user_tipo',$parametros['user_tipo']);
+                }
+                if(isset($parametros['user_nm'])){
+                    $this->db->or_where('user_nm LIKE ',$parametros['user_nm'].'%');
+                }
+                
+                if(isset($parametros['email_email'])){
+                    $this->db->or_where('email_email LIKE ',$parametros['email_email'].'%');
+                }
             }
         }
         if($limite){

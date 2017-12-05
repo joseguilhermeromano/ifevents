@@ -191,7 +191,7 @@ class ArtigoControl extends PrincipalControl implements InterfaceControl{
         
         private function valida(){
             $this->form_validation->set_rules( 'titulo','Título', 'trim|required|max_length[100]' );		
-            $this->form_validation->set_rules( 'autores[]', 'Autor(es)', 'trim|required|max_length[200]' );
+            $this->form_validation->set_rules( 'autores[]', 'Autor(es)', 'trim|max_length[500]' );
             $this->form_validation->set_rules( 'modalidade', 'Tipo de Modalidade', 'required' );
             $this->form_validation->set_rules( 'area', 'Eixo Temático', 'required' );		
             $this->form_validation->set_rules( 'orientador', 'Orientador', 'trim|required|max_length[100]' );

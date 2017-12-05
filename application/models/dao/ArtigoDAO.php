@@ -46,14 +46,20 @@ class ArtigoDAO extends CI_Model implements DAO{
             $this->db->delete('Autoria');
             foreach ($autores as $key => $value) {
                 $codigoUser = somenteNumeros($value);
-                if($codigoUser){
+                if(!empty($codigoUser)){
                     $this->db->insert('Autoria'
                     ,array('auto_user_cd' => $codigoUser
                     ,'auto_arti_cd'=> $codigoAtigo
                     ,'autor_respons' 
-                    => $codigoUser == $autorResp ? 1 : 0 ));
+                    => 0 ));
                 }
             }
+
+             $this->db->insert('Autoria'
+                    ,array('auto_user_cd' => $autorResp
+                    ,'auto_arti_cd'=> $codigoAtigo
+                    ,'autor_respons' 
+                    => 1 ));
         }
 
         public function consultarResultadosFinais($parametros = null, $limite=null,

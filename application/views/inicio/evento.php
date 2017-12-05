@@ -92,27 +92,32 @@
 
 
 <!--PROGRAMAÇÃO -->
-
+<?php if(!empty($DiasSemana) && !empty($programacoes)): ?>
 <div id ="programacao" class="section">
     <div class="container">
         <h1 class="estilo-h1">PROGRAMAÇÃO</h1>
         <br>
-        <?php if(isset($programacoes)): 
-
-           foreach($programacoes as $atividade): 
+        <?php 
+          $i=0;
+           foreach($DiasSemana as $dia): 
 
          ?>
         <div class="row">
              <div class="col-sm-10 col-sm-offset-1 col-xs-12">
-                 <div class="panel-group" id="accordion_<?= $atividade->ativ_cd; ?>">
+                 <div class="panel-group" id="accordion_<?= $i; ?>">
                     <div class="panel panel-default">
                       <div class="panel-heading accordion-caret">
-                        <?php $data = desconverteDataMysql($atividade->ativ_dt); ?>
+                        <?php $data = desconverteDataMysql($dia->ativ_dt); ?>
                         <h4 class="panel-title"><a class="accordion-toggle collapsed" data-toggle="collapse" 
-                        data-parent="#accordion_<?= $atividade->ativ_cd; ?>" href="#collapseOne_<?= $atividade->ativ_cd; ?>"><?= $atividade->DiaDaSemana.' - '.$data; ?></a></h4>
+                        data-parent="#accordion_<?= $i; ?>" href="#collapseOne_<?= $i; ?>"><?= $dia->DiaDaSemana.' - '.$data; ?></a></h4>
                       </div>
-                      <div id="collapseOne_<?= $atividade->ativ_cd; ?>" class="panel-collapse collapse">
+                      <div id="collapseOne_<?= $i; ?>" class="panel-collapse collapse">
                         <div class="panel-body">
+
+                        <?php foreach($programacoes as $atividade): 
+                                if($atividade->DiaDaSemana == $dia->DiaDaSemana):
+                        ?>
+
                           <hr class="hr-pontilhado">
                           <h4><?= $atividade->ativ_nm; ?></h4>
 
@@ -136,7 +141,6 @@
                           </div>
                           <br>
                           <i class="fa fa-users" aria-hidden="true"></i> Responsável: <?php echo $atividade->ativ_responsavel; ?>
-
                           <br><br>
                           <p>
                               <b>Descrição:</b> <?php echo $atividade->ativ_desc; ?>
@@ -145,6 +149,13 @@
                           <br>
                           <a class="btn btn-primary margin-button" href="<?php echo base_url('/atividade/inscrever/'.$atividade->ativ_cd); ?>" 
                           style="float:right"><span class="fa fa-check-square-o" aria-hidden="true"></span> Inscrever-se</a>
+                          <br><br><br>
+
+                        <?php 
+                                endif;
+                              endforeach; ?>
+
+
                         </div>
                       </div>
                       </div>
@@ -152,10 +163,12 @@
              </div>
         </div>
          <?php 
+                $i++;
                  endforeach;
-             endif; ?>
+         ?>
     </div>
 </div>
+<?php endif; ?>
 <!-- /PROGRAMAÇÃO -->
 
 <!-- DIRETRIZES DE SUBMISSÃO E REVISÃO -->
@@ -209,19 +222,14 @@
             <div class="carousel slide media-carousel" id="media">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    <li data-target="#media" data-slide-to="0" class="active"></li>
                     <?php                 
                         $numeroColunas = 3;
-                        $linhas = count($evento->getParcerias()) % $numeroColunas; 
-                        $i=1;
-                        foreach($evento->getParcerias() as $parceria):    
-                        $i++;
-                        if($linhas > 1 && $i % $numeroColunas == 0){
+                        $linhas = ceil(count($evento->getParcerias()) / $numeroColunas); 
+                        for($i=0; $i<$linhas; $i++):
                     ?>
-                            <li data-target="#media" data-slide-to="<?= $i; ?>"></li>
+                  <li data-target="#media" data-slide-to="<?= $i; ?>" class="<?= $i==0 ? 'active' : ''?>"></li>
                     <?php
-                        }
-                        endforeach;
+                        endfor;
                     ?>
                 </ol>
               <div id="carousel-inner" class="carousel-inner">
@@ -229,8 +237,8 @@
                             <div class="row">
                 <?php
                     $numeroColunas = 3;
-                    $linhas = count($evento->getParcerias()) % $numeroColunas; 
-                    $i=0;
+                    $linhas = count($evento->getParcerias()); 
+                    $i=1;
                     foreach($evento->getParcerias() as $parceria):
                 ?>
                             <div class="col-md-4 horizontal-center-content-col">
@@ -241,10 +249,11 @@
                               </a>
                             </div>       
                 <?php 
-                    $i++;
-                    if($linhas > 0 && $i % $numeroColunas == 0){ 
+                    
+                    if($i % $numeroColunas == 0 && $i < $linhas){ 
                         echo '</div></div><div class="item"><div class="row">';
                     }
+                    $i++;
                     endforeach;
                 ?>
                           </div>

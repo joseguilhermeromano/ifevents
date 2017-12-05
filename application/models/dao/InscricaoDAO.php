@@ -42,9 +42,16 @@ class InscricaoDAO extends CI_Model implements DAO{
         $this->db->join('Conferencia', 'Edicao.edic_conf_cd = Conferencia.conf_cd', 'left');
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
-            $this->db->where('edic_cd', $parametros['edic_cd']);
-            $this->db->where('ativ_nm like ', $parametros['ativ_nm'].'%');
-            $this->db->or_where('user_nm like ', $parametros['user_nm'].'%');
+            if(!isset($parametros['insc_user_cd'])){
+                $this->db->where('edic_cd', $parametros['edic_cd']);
+                $this->db->where('ativ_nm like ', $parametros['ativ_nm'].'%');
+                $this->db->or_where('user_nm like ', $parametros['user_nm'].'%');
+            }else{
+                $this->db->where("insc_user_cd = ".$parametros['insc_user_cd']
+                    ." AND (ativ_nm like '".$parametros['ativ_nm']."%' "
+                        . "OR edic_num = '".$parametros['edic_num']."' "
+                        . "OR conf_abrev like '".$parametros['conf_abrev']."%')");
+            }
         }
         if($limite){
             $this->db->limit($limite, $numPagina);

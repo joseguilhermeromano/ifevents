@@ -13,7 +13,7 @@
             public function entrar(){
                 $usuario = $this->UsuarioDAO->consultarLogin(
                           $this->input->post('email')
-                        , $this->input->post('senha'));
+                        , md5($this->input->post('senha')));
                 $this->session->set_userdata('usuario',$usuario);
                 
                 
@@ -53,9 +53,5 @@
             public function sair(){
                 $this->session->sess_destroy();
                 redirect('index');
-            }
-
-            public function esqueceuSenha(){
-
             }
     }

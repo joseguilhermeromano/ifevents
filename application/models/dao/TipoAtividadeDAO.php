@@ -7,15 +7,19 @@ class TipoAtividadeDAO extends CI_Model implements DAO{
       $this->load->model('TipoAtividadeModel', 'tipoAtividade');
     }
 
+    private function obtemValores($obj){
+        return array('tiat_cd' => $obj->getCodigo()
+                ,'tiat_nm' => $obj->getTitulo()
+                ,'tiat_desc' => $obj->getDescricao());
+    }
+
     public function inserir($obj) {
-      return $this->db->insert( 'Tipo_atividade', $obj );
+      return $this->db->insert( 'Tipo_atividade', $this->obtemValores($obj));
     }
 
     public function alterar($obj) {
-      $this->db->where('tiat_cd', $obj->tiat_cd);
-      $this->db->set('tiat_nm', $obj->tiat_nm);
-      $this->db->set('tiat_desc', $obj->tiat_desc);
-      return $this->db->update('Tipo_atividade', $obj);
+      $this->db->where('tiat_cd', $obj->getCodigo());
+      return $this->db->update('Tipo_atividade', $this->obtemValores($obj));
     }
 
     public function consultarTudo($parametros = null, $limite=null, $numPagina=null, $sort='tiat_nm', $ordenacao='asc') {

@@ -122,4 +122,36 @@
             $data['title']="IFEvents - Inscricoes";
             $this->chamaView("lista-inscritos-atividade", "organizador", $data, 1);   
         }
+        
+        public function consultarMinhasAtividades(){
+            $codigoUsuario = $this->session->userdata('usuario')->user_cd;
+            $getLimiteReg = $this->input->get('limitereg');
+            $limite = $getLimiteReg !== null ? $getLimiteReg : 10;
+            $getPagina = $this->input->get('pagina');
+            $numPagina = $getPagina !== null ? $getPagina : 0;
+            $busca=null;
+            $array= array('insc_user_cd' => $codigoUsuario
+                    , 'edic_num' => null
+                    , 'conf_abrev' => null
+                    , 'ativ_nm' => null);
+            $totalRegistros = count($this->InscricaoDAO->consultarTudo($array));
+            if( $this->input->get('busca') !== null){
+                $busca = $this->input->get('busca');
+                $numEdicao = preg_replace("/\D/","", $busca);
+                $evento =  preg_replace("/[^A-Za-z]/", "", $busca);
+                $array['edic_num']  = $numEdicao;
+                $array['conf_abrev']  = $evento;
+                $array['ativ_nm']  = $busca;
+            }
+            $consulta = $this->InscricaoDAO->consultarTudo($array, $limite, $numPagina);
+            $totalRegConsulta = count($this->InscricaoDAO->consultarTudo($array));
+            $hrefPaginacao = 'inscricao/minhas-atividades/?busca='.$busca.'&limitereg='.$limite;
+            $data['paginacao'] = $this->geraPaginacao($limite, $totalRegConsulta, $hrefPaginacao);
+            $data['content']= $consulta;
+            $data['busca']= $busca;
+            $data['limiteReg']= $limite;
+            $data['totalRegistros'] = $totalRegistros;
+            $data['title']="IFEvents - Minhas Atividades";
+            $this->chamaView("minhas-atividades", "participante", $data, 1);
+        }
 }

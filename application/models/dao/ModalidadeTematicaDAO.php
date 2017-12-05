@@ -14,7 +14,7 @@ class ModalidadeTematicaDAO extends CI_Model implements DAO{
     }
 
     public function alterar($obj) {
-        $this->db->where('mote_id', $obj->mote_id);
+        $this->db->where('mote_cd', $obj->mote_cd);
         return $this->db->update('Modalidade_Tematica', $obj);
     }
 

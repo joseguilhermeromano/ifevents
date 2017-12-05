@@ -107,7 +107,7 @@
                           </tr>
                     <?php endforeach;}else{ ?>
                       <tr>
-                        <td class="col-xs-12 text-center" colspan="4">Não há trabalhos submetidos...</td>
+                        <td class="col-xs-12 text-center" colspan="5">Não há trabalhos submetidos...</td>
                       </tr>
                     <?php } ?> 
                 </tbody>

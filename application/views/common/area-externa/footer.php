@@ -3,10 +3,9 @@
     <div class="container">
       <div class="col-md-5 w3agile_footer_grid">
         <h3>Sobre</h3>
-        <p>O IFEvents é uma plataforma interativa de eventos, criado especialmente
-            para atender as necessidades do IFSP Câmpus Guarulhos!</p>
-        <br>
-        <p>Seja bem vindo e aproveite ao máximo os eventos da instituição!</p>
+        <p>O IFEVENTS é uma plataforma interativa de eventos, criado especialmente
+            para atender as necessidades do IFSP - Câmpus Guarulhos!</p>
+            <br><p>Seja bem vindo e aproveite ao máximo os eventos da instituição!</p>
           <br>
           <a href="#">
             <div class="footer-logo"></div>
@@ -17,7 +16,7 @@
        <ul>
           <li><a href="<?php echo base_url('index'); ?>">Início</a></li>
           <li><a href="<?php echo base_url('sobre'); ?>">Sobre</a></li>
-          <li><a href="<?php echo base_url('cadastraParticipante'); ?>">Cadastro</a></li>
+          <li><a href="<?php echo base_url('inicio/cadastrar/participante'); ?>">Cadastro</a></li>
           <li><a href="<?php echo base_url('contato'); ?>">Contato</a></li>
           <li><a href="<?php echo base_url('login'); ?>">Login</a></li>
         </ul>
@@ -42,7 +41,7 @@
   <div class="agileinfo_copy_right">
     <div class="container">
       <div class="agileinfo_copy_right_left">
-        <p>© 2017 IFEvents. Todos os direitos reservados</p>
+        <p>© 2017 IFEVENTS. Todos os direitos reservados. Desenvolvido por <a href="<?= base_url('sobre'); ?>">equipe.</a></p>
       </div>
       <div class="clearfix"> </div>
     </div>
@@ -54,6 +53,13 @@
   <i class="glyphicon glyphicon-menu-up"></i>
 </a>
 
+<script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+
 
 <script src="<?php echo base_url('assets/area-externa/js/jquery.min.js');?>"></script> 
 <script src="<?php echo base_url('assets/area-externa/js/jquery.easing.min.js'); ?>"></script>   
@@ -61,12 +67,12 @@
 <script src="<?php echo base_url('assets/area-externa/js/classie.js'); ?>"></script>
 <script src="<?php echo base_url('assets/area-externa/js/cbpAnimatedHeader.js'); ?>"></script> 
 <script src="<?php echo base_url('assets/area-externa/js/slideanim.js'); ?>"></script> 
-<script src="<?php echo base_url('assets/area-externa/js/codigos.js'); ?>"></script>
+<script src="<?php echo base_url('assets/area-externa/js/efeitos.js'); ?>"></script>
 <script src="<?php echo base_url('assets/ambas-areas/js/jquery.maskedinput.js');?>"></script>
 <script src="<?php echo base_url('assets/ambas-areas/js/jquery-ui.js');?>"></script>
 <script src="<?php echo base_url('assets/ambas-areas/js/jquery.dataTables.min.js');?>"></script>
 <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
-<script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
+<script src="<?php echo base_url('assets/ambas-areas/js/funcoes-jquery-ajax.js');?>"></script>
 
 </body>
 </html>

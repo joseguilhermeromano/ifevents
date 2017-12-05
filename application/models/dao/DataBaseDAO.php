@@ -5,51 +5,34 @@ class DataBaseDAO extends CI_Model{
         public function __construct(){
             parent::__construct();
             $this->load->database(); 			       
-            $this->create_table_tipo_funcao();
             $this->create_table_tipo_atividade();      
             $this->create_table_conferencia();
             $this->create_table_instituicao();         
             $this->create_table_regra();
             $this->create_table_comite(); 		       
-            $this->create_table_localidade();
-            $this->create_table_tipo_parceria();  	   
-            $this->create_table_status();
+            $this->create_table_localidade(); 	   
             $this->create_table_modalidade_tematica(); 
             $this->create_table_mote_revisor();
             $this->create_table_atividade(); 	       
             $this->create_table_edicao();
             $this->create_table_edicao_revisor(); 
-            $this->create_table_edicao_revisor();
             $this->create_table_sedia();               
             $this->create_table_artigo();
-            $this->create_table_usuario(); 		       
-            $this->create_table_participa();
-            $this->create_table_pertence();            
+            $this->create_table_usuario(); 		                  
             $this->create_table_autoria();
             $this->create_table_contato();             
             $this->create_table_email();
             $this->create_table_telefone(); 	       
-            $this->create_table_executa();
             $this->create_table_abriga();              
             $this->create_table_apoia();
             $this->create_table_submissao();           
-            $this->create_table_avaliacao();
-            $this->create_table_contem();              
+            $this->create_table_avaliacao();             
             $this->create_table_metodo();
             $this->create_table_permissao();           
             $this->create_table_tipo_usuario();
             $this->create_table_Inscricao();
         }
 
-        //Método cria a tabela Tipo_Funcao 01
-        public function create_table_tipo_funcao(){
-                $sql ="CREATE TABLE IF NOT EXISTS Tipo_Funcao(
-                        tifu_cd    int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-                        ,tifu_nm   varchar(100) NOT NULL
-                        ,tifu_desc varchar(500) NOT NULL
-                ) ENGINE = INNODB";
-                $this->db->query($sql);
-        }
 
         //Método cria a tabela Tipo_atividade
         public function create_table_tipo_atividade(){
@@ -128,26 +111,6 @@ class DataBaseDAO extends CI_Model{
                 $this->db->query($sql);
         }
 
-        //Método cria tabela Tipo_parceria
-        public function create_table_tipo_parceria(){
-                $sql = "CREATE TABLE IF NOT EXISTS Tipo_parceria (
-                        tipa_cd    int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-                        ,tipa_nm   varchar(100) NOT NULL
-                        ,tipa_desc varchar(500) NOT NULL
-            ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
-        //Método cria tabela Status
-        public function create_table_status(){
-                $sql = "CREATE TABLE IF NOT EXISTS Status (
-                        stat_cd    int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
-                        ,stat_nm   varchar(100) NOT NULL
-                        ,stat_desc varchar(500) NOT NULL
-            ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
         //Método cria tabela Modalidade_Tematica
         public function create_table_modalidade_tematica(){
                 $sql = "CREATE TABLE IF NOT EXISTS Modalidade_Tematica (
@@ -175,7 +138,7 @@ class DataBaseDAO extends CI_Model{
                         ativ_cd           int(11)        NOT NULL PRIMARY KEY AUTO_INCREMENT
                         ,ativ_nm          varchar(100)   NOT NULL
                         ,ativ_desc        varchar(500)   NOT NULL
-                        ,ativ_responsavel varchar(100)   NOT NULL
+                        ,ativ_responsavel varchar(500)   NOT NULL
                         ,ativ_dt          date           NOT NULL
                         ,ativ_hora_ini    time           NOT NULL
                         ,ativ_hora_fin    time           NOT NULL
@@ -217,15 +180,6 @@ class DataBaseDAO extends CI_Model{
             $this->db->query($sql);
         }
 
-        //Método cria a tabela Organiza
-        public function create_table_organiza(){
-                $sql = "CREATE TABLE IF NOT EXISTS Organiza(
-                        orga_ativ_cd int(11)
-                        ,orga_edic_cd int(11)
-                ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
         //Método cria tabela sedia
         public function create_table_sedia(){
                 $sql = "CREATE TABLE IF NOT EXISTS Sedia(
@@ -244,7 +198,7 @@ class DataBaseDAO extends CI_Model{
             $sql = "CREATE TABLE IF NOT EXISTS Artigo(
                 arti_cd int(11) NOT NULL AUTO_INCREMENT
                ,arti_title varchar(100) COLLATE utf8_unicode_ci NOT NULL
-               ,arti_autores varchar(200) COLLATE utf8_unicode_ci NOT NULL
+               ,arti_autores varchar(500) COLLATE utf8_unicode_ci NOT NULL
                ,arti_orienta varchar(100) COLLATE utf8_unicode_ci NOT NULL
                ,arti_resumo varchar(500) COLLATE utf8_unicode_ci NOT NULL
                ,arti_status enum('Pronto para a revisão'
@@ -265,8 +219,8 @@ class DataBaseDAO extends CI_Model{
                 $sql = "CREATE TABLE IF NOT EXISTS User(
                         user_cd           int(11)      NOT NULL PRIMARY KEY AUTO_INCREMENT
                         ,user_nm          varchar(100) NOT NULL
-                        ,user_tipo        varchar(2)   NOT NULL
-                        ,user_instituicao varchar(100) NULL
+                        ,user_tipo        int(11)   NOT NULL
+                        ,user_instituicao int(11) NULL
                         ,user_biograf     varchar(500) NULL
                         ,user_rg          varchar(12)  NOT NULL
                         ,user_cpf         varchar(14)  NULL
@@ -279,28 +233,7 @@ class DataBaseDAO extends CI_Model{
                 ) ENGINE=INNODB";
                 $this->db->query($sql);
         }
-
-        //Método cria tabela participante
-        public function create_table_participa(){
-                $sql = "CREATE TABLE IF NOT EXISTS Participa(
-                        parti_cd    int(11)      NOT NULL
-                        ,parti_func varchar(100) NOT NULL
-                        ,comi_cd    int(11)      NOT NULL
-                        ,user_cd    int(11)      NOT NULL
-                        ,PRIMARY KEY(comi_cd,user_cd,parti_cd)
-                ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
-        //Método cria tabela pertence
-        public function create_table_pertence(){
-                $sql = "CREATE TABLE IF NOT EXISTS Pertence(
-                        pert_user_cd  int(11) NOT NULL
-                        ,pert_inst_cd int(11) NOT NULL
-                ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
+        
         //Método cria tabela Autoria
         public function create_table_autoria(){
                 $sql = "CREATE TABLE IF NOT EXISTS Autoria (
@@ -340,18 +273,6 @@ class DataBaseDAO extends CI_Model{
                 $sql = "CREATE TABLE IF NOT EXISTS Telefone (
                         tele_cd         int(11)     NOT NULL PRIMARY KEY AUTO_INCREMENT
                         ,tele_fone      varchar(15) NOT NULL
-                ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
-        //Método cria tabela Executa
-        public function create_table_executa(){
-                $sql = "CREATE TABLE IF NOT EXISTS Executa (
-                        exec_tipo       varchar(100) NOT NULL
-                        ,exec_presen    varchar(2)   NOT NULL
-                        ,exec_certifica mediumblob   NOT NULL
-                        ,exec_user_cd   int(11)		 NOT NULL
-                        ,exec_ativ_cd   int(11)      NOT NULL
                 ) ENGINE=INNODB";
                 $this->db->query($sql);
         }
@@ -409,15 +330,6 @@ class DataBaseDAO extends CI_Model{
                         ,aval_confirm tinyint(1)   NOT NULL
                         ,aval_user_cd int(11)      NOT NULL
                         ,aval_subm_cd int(11)      NOT NULL
-            ) ENGINE=INNODB";
-                $this->db->query($sql);
-        }
-
-        //Método cria tabela Contem
-        public function create_table_contem(){
-                $sql = "CREATE TABLE IF NOT EXISTS Contem (
-                        conta_mote_cd  int(11) NOT NULL
-                        ,conta_edic_cd int(11) NOT NULL
             ) ENGINE=INNODB";
                 $this->db->query($sql);
         }

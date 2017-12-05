@@ -125,7 +125,12 @@ class AtividadeControl extends PrincipalControl{
         $getPagina = $this->input->get('pagina');
         $numPagina = $getPagina !== null ? $getPagina : 0;
         $busca=null;
-        $array= null;
+        $array = null;
+        $evento = null;
+        if($this->isOrganizador()==true){
+            $evento = $this->session->userdata('evento_selecionado')->edic_cd;
+            $array= array('ativ_edic_cd' => $evento);
+        }
         if( $this->input->get('busca') !== null){
             $busca = $this->input->get('busca');
             $numEdicao = preg_replace("/\D/","", $busca);
@@ -136,7 +141,7 @@ class AtividadeControl extends PrincipalControl{
         }
         $consulta = $this->AtividadeDAO->consultarTudo($array, $limite, $numPagina);
         $totalRegConsulta = count($this->AtividadeDAO->consultarTudo($array));
-        $totalRegTabela = $this->AtividadeDAO->totalRegistros();
+        $totalRegTabela = $this->AtividadeDAO->totalRegistros($evento);
         $totalRegistros = !empty($busca) ? $totalRegConsulta : $totalRegTabela;
         $hrefPaginacao = 'atividade/consultarTudo/?busca='.$busca.'&limitereg='.$limite;
         $data['paginacao'] = $this->geraPaginacao($limite, $totalRegistros, $hrefPaginacao);
@@ -149,7 +154,6 @@ class AtividadeControl extends PrincipalControl{
   }
 
   public function setaValores(){
-    $this->atividade->setCodigo($this->input->post('codigo'));
     $this->atividade->setTitulo($this->input->post('titulo'));
     $this->atividade->setDescricao($this->input->post('descricao'));
     $this->atividade->setResponsavel($this->input->post('responsavel'));
@@ -169,7 +173,7 @@ class AtividadeControl extends PrincipalControl{
   public function valida(){
     $this->form_validation->set_rules(	'titulo', 'Titulo', 'trim|required|max_length[100]' );
     $this->form_validation->set_rules(	'descricao', 'Descricao', 'trim|required|max_length[500]' );
-    $this->form_validation->set_rules(	'responsavel', 'Responsavel', 'trim|required|max_length[100]' );
+    $this->form_validation->set_rules(	'responsavel', 'Responsavel', 'trim|required|max_length[500]' );
     $this->form_validation->set_rules(	'data', 'Data', 'trim|required|max_length[10]' );
     $this->form_validation->set_rules(	'inicio', 'Hora do Início', 'trim|required' );
     $this->form_validation->set_rules(	'termino', 'Hora do Término', 'trim|required' );

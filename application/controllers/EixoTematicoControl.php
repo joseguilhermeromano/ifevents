@@ -27,7 +27,7 @@ class EixoTematicoControl extends PrincipalControl implements InterfaceControl{
 
     		$this->db->trans_start();
     		$codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
-            	$this->modalidade->mote_edic_cd = $codigoEdicao; 
+            	$this->areaTematica->mote_edic_cd = $codigoEdicao; 
             	$this->areaTematica->mote_tipo = 1;
             	$this->ModalidadeTematicaDAO->inserir($this->areaTematica);
     		$this->db->trans_complete();
@@ -66,7 +66,8 @@ class EixoTematicoControl extends PrincipalControl implements InterfaceControl{
 
     		$this->db->trans_start();
     		$codigoEdicao = $this->session->userdata('evento_selecionado')->edic_cd;
-            	$this->modalidade->mote_edic_cd = $codigoEdicao; 
+                $this->areaTematica->mote_cd = $codigo;
+            	$this->areaTematica->mote_edic_cd = $codigoEdicao; 
             	$this->areaTematica->mote_tipo = 1;
             	$this->ModalidadeTematicaDAO->alterar($this->areaTematica);
     		$this->db->trans_complete();

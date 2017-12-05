@@ -2,10 +2,24 @@
                     </div><!-- /#col-lg-12 -->
                 </div><!-- /#row -->
             </div><!-- /#container-fluid-->
+<!--            <footer id="rodape">            
+                <div class="container-fluid">
+                    <div class="row">
+                    <hr>
+                      <div class="col-lg-12">
+                        <div class="col-md-8">
+                          <a href="#">Terms of Service</a> | <a href="#">Privacy</a>    
+                        </div>
+                        <div class="col-md-4">
+                          <p class="muted pull-right">© 2013 Company Name.</p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </footer>        -->
         </div><!-- /#page-content-wrapper -->
         <div class="clear"></div>
     </div><!-- /#wrapper -->
-
     <!-- Modal de Exclusão -->
         <div id="modalExcluir" class="modal fade">
             <div class="modal-dialog">
@@ -140,7 +154,7 @@
     <!-- plugin select 2 jquery -->
         <script src="<?php echo base_url('assets/ambas-areas/js/select2.min.js');?>"></script>
     <!-- consultas ajax e implementação de alguns plugins -->
-        <script src="<?php echo base_url('assets/ambas-areas/js/adicionaCampos.js');?>"></script>
+        <script src="<?php echo base_url('assets/ambas-areas/js/funcoes-jquery-ajax.js');?>"></script>
     <!-- plugin bootstrap file input -->
         <script src="<?php echo base_url('assets/area-interna/file-input/js/plugins/piexif.min.js'); ?>" type="text/javascript"></script>
         <script src="<?php echo base_url('assets/area-interna/file-input/js/plugins/sortable.min.js'); ?>"></script>

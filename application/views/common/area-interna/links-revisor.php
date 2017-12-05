@@ -19,7 +19,7 @@
   </a>
     <ul class="submenu collapse" id="atividade">
       <li id="atividade" class="item-menu"><a href="<?php echo base_url("atividade/consultarTudo");?>" class="list-group-item">ATIVIDADES</a></li>
-      <li id="inscricao" class="item-menu"><a href="<?php echo base_url("atividade/minhas-atividades");?>" class="list-group-item">MINHAS ATIVIDADES</a></li>
+      <li id="inscricao" class="item-menu"><a href="<?php echo base_url("inscricao/minhas-atividades");?>" class="list-group-item">MINHAS ATIVIDADES</a></li>
   </ul>
 </li>
 <li class="item-menu">

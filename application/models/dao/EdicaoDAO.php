@@ -26,7 +26,7 @@
             
             $obj->setCodigo($this->db->insert_id());
             
-            $this->inserirEnderecoEdicao($obj);
+            $this->insereAlteraEnderecoEdicao($obj);
             $this->insereAlteraParcerias($obj);
             
         }
@@ -66,7 +66,7 @@
         }
         
         private function insereAlteraParcerias($obj){
-            $this->db->delete('Apoia', array('apoia_edic_cd' => 22));
+            $this->db->delete('Apoia', array('apoia_edic_cd' => $obj->getCodigo()));
             if(null !==$obj->getParcerias()){
                 foreach ($obj->getParcerias() as $key => $value) {
                     $this->db->insert('Apoia', 

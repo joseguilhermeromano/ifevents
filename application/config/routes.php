@@ -149,10 +149,11 @@ $route[ 'contato/sendEmail/(:any)' ]            = 'ContatoControl/sendEmail/$1';
 $route[ 'contato/responder/(:any)' ]            = 'ContatoControl/responder/$1';
 $route[ 'contato/excluir/(:any)' ]              = 'ContatoControl/excluir/$1';
 //Rotas Inscricao
-$route['inscricao/(:any)']                      = 'InscricaoControl/$1';
+$route['inscricao/minhas-atividades']           = 'InscricaoControl/consultarMinhasAtividades';
 $route['inscricao/atribuir-presenca/(:any)']    = 'InscricaoControl/atribuirPresenca/$1';
 $route['inscricao/atribuir-falta/(:any)']       = 'InscricaoControl/atribuirFalta/$1';
 $route['inscricao/excluir/(:any)']              = 'InscricaoControl/excluir/$1';
+$route['inscricao/(:any)']                      = 'InscricaoControl/$1';
 
 /*Rotas da Modalidade*/
 $route[ 'modalidade/(:any)' ]          			= 'ModalidadeControl/$1';

@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group floating-label-form-group controls">
+                            <div class="form-group controls">
                             <b><?php echo form_label( 'Instituição', 'instituicao' ); ?></b><br>
                                 <select name="instituicao" class="form-control estilo-input consultaInstituicao">
                                 <?php    if(isset($revisor) && $revisor->getInstituicao()!==null){   ?>

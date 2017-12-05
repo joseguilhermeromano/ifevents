@@ -28,7 +28,7 @@ class RevisorControl extends UsuarioControl{
     /*MÉTODO EXCLUSIVO DA ÁREA DO ORGANIZADOR */
     public function cadastrar(){
         $view ="form-revisor";
-        $diretorioView = "revisor";
+        $diretorioView = "avaliador";
         $data['title'] = "IFEvents - Novo Revisor";
         $data['tituloForm'] = '<i class="fa fa-user-plus" aria-hidden="true"></i><b> Novo Revisor</b>';
         $areaLayout = 1;

@@ -11,7 +11,7 @@
 
             public $mote_cd;
             public $mote_tipo;
-            public $mote_conf_cd;
+            public $mote_edic_cd;
 
 
             public function valida(){

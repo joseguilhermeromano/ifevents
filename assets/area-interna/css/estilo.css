@@ -5,6 +5,12 @@
  */
 @import 'https://fonts.googleapis.com/css?family=Playball';
 
+/*html, body {
+    margin: 0!important;
+    padding: 0!important;
+    min-height: 100%!important;
+}*/
+
  body {
     overflow:auto;
  }
@@ -17,6 +23,7 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     background:#f7f7f7;
+    min-height: 100%;
 }
 
 #wrapper.toggled {
@@ -27,7 +34,7 @@
     position: absolute;
     width: 0;
     margin-left: -210px;
-    height: 100%;
+    min-height: 100%;
 /*    overflow-y: auto;
     overflow-x: hidden;*/
 /*    overflow: hidden;*/
@@ -50,10 +57,10 @@
 #page-content-wrapper {
     width: 100%;
     position: relative;
-    padding: 15px;
     background:#fff;
     border-left:1px solid #dae1e8;
-    z-index: 1;
+    min-height: 100%!important;
+    padding:15px;
 }
 
 @media(max-width: 949px){
@@ -429,7 +436,7 @@ label{
 .postit:after {     
    content: "";
   position:absolute;
-  z-index:-1;
+  z-index: -1;
   right:-0px; bottom:20px;
   width:120px;
   height: 25px;
@@ -450,7 +457,7 @@ label{
   position: absolute;
   left: 50%;
   top: -3px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .pin:after {
@@ -1042,4 +1049,16 @@ h3{
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+
+
+#rodape{
+    background-color: #fff;
+    position:absolute;
+    bottom: 0!important;
+    left:0;
+    margin-left: 10px!important;
+    margin-bottom: 5px!important;
+    width:100%;
+    height: 20%;
 }

@@ -31,28 +31,29 @@
 		}
 
 		public function evento(){
-                    $data = array("title"=>"IFEvents - Sobre o Evento");
-                    $uri = $this->uri->uri_string();
-                    $this->session->set_userdata("link_evento_selecionado", $uri);
-                    $evento = $this->EdicaoDAO->consultarPorLink($uri);
-                    $data['evento'] = $evento;
-                    $data['programacoes'] = $this->programacao($data,$evento->getCodigo());
-                    $this->chamaView("evento", "inicio",$data, 0);
+            $data = array("title"=>"IFEvents - Sobre o Evento");
+            $uri = $this->uri->uri_string();
+            $this->session->set_userdata("link_evento_selecionado", $uri);
+            $evento = $this->EdicaoDAO->consultarPorLink($uri);
+            $data['evento'] = $evento;
+            $data= $this->programacao($data,$evento->getCodigo());
+            $this->chamaView("evento", "inicio",$data, 0);
 		}
 
 
 		private function programacao($data, $codigoEvento){
-                    $array = array('ativ_edic_cd' => $codigoEvento);
-                    $consulta = $this->AtividadeDAO->consultarTudo($array);
-                    return $consulta;
+            $array = array('ativ_edic_cd' => $codigoEvento);
+            $data['programacoes'] = $this->AtividadeDAO->consultarTudo($array);
+            $data['DiasSemana'] = $this->AtividadeDAO->consultarDiasSemanaProgramacao($codigoEvento);
+            return $data;
 		}
 
-                //Método que chama a view do login
-                public function login(){
+        //Método que chama a view do login
+        public function login(){
 
-                    $this->chamaView("login", "inicio",
-                        array("title"=>"IFEvents - Login"), 0);
-                }
+            $this->chamaView("login", "inicio",
+                array("title"=>"IFEvents - Login"), 0);
+        }
 
 
 		public function esqueciMinhaSenha(){

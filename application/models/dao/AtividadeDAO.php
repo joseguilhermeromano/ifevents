@@ -72,14 +72,18 @@ class AtividadeDAO extends CI_Model implements DAO{
         when 4 then 'Sexta-feira'
         when 5 then 'Sábado'
         when 6 then 'Domingo'                 
-        END) AS DiaDaSemana,");
+        END) AS DiaDaSemana");
         $this->db->from("Atividade");
         $this->db->join("Tipo_atividade","Atividade.ativ_tiat_cd = Tipo_atividade.tiat_cd", "left");
         $this->db->join("Edicao","Atividade.ativ_edic_cd = Edicao.edic_cd", "left");
         $this->db->join("Conferencia","Edicao.edic_conf_cd = Conferencia.conf_cd", "left");
         $this->db->join("Inscricao as i","Atividade.ativ_cd = i.insc_ativ_cd", "left");
+        $this->db->group_by('ativ_cd');
         $this->db->order_by($sort, $ordenacao);
         if($parametros !== null){
+              if(!empty($parametros['ativ_edic_cd'])){
+                $this->db->where('ativ_edic_cd',$parametros['ativ_edic_cd']);
+              }
               if(!empty($parametros['Conferencia.conf_abrev'])){
                 $this->db->or_where('Conferencia.conf_abrev LIKE ','%'.$parametros['Conferencia.conf_abrev'].'%');
               }
@@ -94,7 +98,28 @@ class AtividadeDAO extends CI_Model implements DAO{
             $this->db->limit($limite, $numPagina);
         }
         $query = $this->db->get();
-        if($query->result_object()[0]->ativ_cd !== null){
+        if($query->num_rows() >0){
+            return $query->result_object();
+        }
+            return null;
+    }
+
+    public function consultarDiasSemanaProgramacao($codigoEdicao){
+        $this->db->select("(CASE WEEKDAY(ativ_dt) 
+        when 0 then 'Segunda-feira'
+        when 1 then 'Terça-feira'
+        when 2 then 'Quarta-feira'
+        when 3 then 'Quinta-feira'
+        when 4 then 'Sexta-feira'
+        when 5 then 'Sábado'
+        when 6 then 'Domingo'                 
+        END) AS DiaDaSemana, ativ_dt");
+        $this->db->from('Atividade');
+        $this->db->where('ativ_edic_cd', $codigoEdicao);
+        $this->db->distinct();
+        $this->db->order_by('ativ_dt','asc');
+        $query = $this->db->get();
+        if($query->num_rows() >0){
             return $query->result_object();
         }
             return null;
@@ -130,8 +155,10 @@ class AtividadeDAO extends CI_Model implements DAO{
         return $this->db->delete( 'Atividade' );
     }
   
-    public function totalRegistros(){
-        return $this->db->count_all("Atividade");
+    public function totalRegistros($codigoEdicao){
+        $this->db->where('ativ_edic_cd', $codigoEdicao);
+        $query = $this->db->get('Atividade');
+        return $query->num_rows();
     }
 
 }

@@ -123,7 +123,7 @@ class EdicaoControl extends PrincipalControl implements InterfaceControl{
             ,"showUpload" => true
             ,"overwriteInitial" => false
             ,"maxFileSize"=> 4096
-            ,"allowedFileExtensions" => array("pdf", "doc", "docx") 
+            ,"allowedFileExtensions" => array("pdf", "doc", "docx", "xlsx") 
             ,"allowedPreviewTypes" => array("doc", "docx", "pdf")
             ,"browseClass"=> "btn btn-success"
             ,"browseIcon" => "<i class='fa fa-file'></i>"

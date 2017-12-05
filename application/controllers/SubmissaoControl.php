@@ -115,10 +115,8 @@ class SubmissaoControl extends PrincipalControl{
     
     private function obtemLinkTempArtigo($inputLinkTemp, $inputFile){
         $linkTemp = $this->input->post($inputLinkTemp);
-        $artigoCarregado = $_FILES[$inputFile]['name'];
         
-        if(!empty($artigoCarregado)){
-            echo 'artigo carregado:'.$artigoCarregado;
+        if(!empty($inputFile)){
             return $this->upload_arquivo($inputFile, 'temp/');
         }
         

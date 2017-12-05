@@ -400,12 +400,13 @@ a.thumbnail{
 }
 a.thumbnail .balao{
     display: none;
+    z-index: 5!important;
 }
 
 a.thumbnail:hover .balao{
     display: block;
     position: absolute;
-    width: 200px;
+    width: 300px;
     top: 100%;
     text-align: justify;
     left: 3em;
@@ -415,7 +416,6 @@ a.thumbnail:hover .balao{
     background: #fff;
     color: #000;
     border-radius:5px;
-    z-index: 3;
 }
 
 a.thumbnail:hover .balao:before {
@@ -1751,13 +1751,17 @@ ul.w3agile_footer_grid_list li{
   background-color: #37BA40!important;
 }
 
-/*.select2-selection__rendered{
-  padding-top:4px!important;
-}*/
+span.select2-selection__arrow{
+  margin-top:-8px!important;
+}
 
 /*.select2-container .select2-selection--single .select2-selection__rendered {
-  padding-top: 5px!important;
+  margin-top: 5px!important;
 }*/
+
+.select2-container--default .select2-selection--single{
+    margin-top: -10px!important;
+}
 
 
 
